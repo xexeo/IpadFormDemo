@@ -9,18 +9,16 @@ var app={
 	},
 
 	login: function() {
-		var retorno = false;
 		var usuario = $("#usuario").val();
 		var senha = $("#senha").val();
 		if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
-			retorno = true;
-			//$.mobile.navigate("menu.html");
-			$(":mobile-pagecontainer").pagecontainer("change", "menu.html");
-			pages_config.menu();
-		}
+			//navega para págine e executa o script de configuração depois do carregamento
+         app.trocaPagina("menu.html", pages_config.menu)
+			
+		} else {
+         alert("usuário e senha informados não estão cadastrados no sistema");               
+      }
 		
-		alert(retorno);
-		return retorno;
 	},
 	
 /*
@@ -56,19 +54,28 @@ var app={
         $(function () { $("[data-role=panel]").panel().enhanceWithin(); });
         $("#versao").html(this.versao);
         $("#entrar").click(this.login);
-        
+   },
+
+   trocaPagina : function (pagina, configs){
+      $(":mobile-pagecontainer").on("pagecontainershow", configs);
+      $(":mobile-pagecontainer").pagecontainer("change", pagina);
    }
 
 
 };      // end of app
 
 var pages_config = {
-	menu : function(){
-		$("#menu_nova_pesquisa").click(function() {
-			//$.mobile.navigate("selecionar_tipo.html");
-			$(":mobile-pagecontainer").pagecontainer("change","selecionar_tipo.html");
-		});
+	
+   menu : function(){
+		$('#menu_nova_pesquisa').click( function(){
+         app.trocaPagina("selecionar_tipo.html");
+      });
 	},
+
+   nova_pesquisa : function(){},
+
+   
+   
 	
 	 
 };
