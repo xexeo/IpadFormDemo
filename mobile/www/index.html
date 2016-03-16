@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-        <meta charset="UTF-8">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel=stylesheet href="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
-        <script src="js/libs/jquery/jquery.js"></script>
-        <script src="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <title>Contagem de Tráfego</title>
-    </head>
-    <body>
-        <div data-role="panel" data-display="push" id="mypanel">
-            <a class="ui-btn ui-corner-all ui-btn-a" href="#initialPage" data-rel="close">Página Inicial</a>
-            <a class="ui-btn ui-corner-all ui-btn-a" href="outra.html" data-rel="close">OUTRA</a>
-            <a class="ui-btn ui-corner-all ui-btn-a" href="#" data-rel="close">Close panel</a>
-        </div><!-- panel -->
+<head>
+<!--
+	        Customize this policy to fit your own app's needs. For more guidance, see:
+	            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+	        Some notes:
+	            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+	            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+	            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+	                * Enable inline JS: add 'unsafe-inline' to default-src
+	        -->
+<meta http-equiv="Content-Security-Policy"
+	content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+<link rel=stylesheet href="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/libs/jquery/jquery.js"></script>
+<script src="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<title>Contagem de Tráfego</title>
+</head>
+<body>
+	<!-- panel: menu -->
+	<!-- 
+	<section id="panel_menu" data-role="panel" data-display="push">		
+		<a class="ui-btn ui-corner-all ui-btn-a" href="#page_login" data-rel="close">Sair</a>
+	</section>
+	-->
+ 
+	<!-- page: login -->
+	<section id="page_login" data-role="page">
+		<!-- header -->
+		<header data-role="header"> </header>
+		
+		<!-- content -->
+		<div role="main" class="ui-content">
+			 <form>
+			 	<input id="user" type= "text" />
+			 	<input id="passwd" type= "text" />
+			 </form>
+		</div>
 
-        <div data-role="page" id="initialPage">
-            <div data-role="header">
-               <a href="#mypanel" data-icon="gear" class="ui-btn-left">Controles</a>
-               <h1>Cabeçalho</h1>
-            </div><!--end header-->
-            <div role="main" class="ui-content">
-               <a href="outra.html" class="ui-btn ui-btn-inline">Outra página</a>
-            </div><!--end content-->
-            <div data-role="footer" data-position="fixed">
-               <h1>Rodapé</h1>
-            </div><!-- end footer -->
-        </div><!--end page-->
-    </body>
+		<!-- footer -->
+		<footer data-role="footer" data-position="fixed">Versão: 0.0.0</footer>
+	</section>
+
+</body>
 </html>
