@@ -20,33 +20,43 @@
 <link rel="stylesheet" href="css/style.css" />
 <script src="js/libs/jquery/jquery.js"></script>
 <script src="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
-<script type="text/javascript" src="cordova.js"></script>
+<!-- <script type="text/javascript" src="cordova.js"></script>  -->
 <script type="text/javascript" src="js/index.js"></script>
 <title>Contagem de Tráfego</title>
 </head>
 <body>
 	<!-- panel: menu -->
-	<!-- 
+	
 	<section id="panel_menu" data-role="panel" data-display="push">		
 		<a class="ui-btn ui-corner-all ui-btn-a" href="#page_login" data-rel="close">Sair</a>
 	</section>
-	-->
- 
+
 	<!-- page: login -->
 	<section id="page_login" data-role="page">
 		<!-- header -->
 		<header data-role="header"> </header>
-		
+
 		<!-- content -->
 		<div role="main" class="ui-content">
-			 <form>
-			 	<input id="user" type= "text" />
-			 	<input id="passwd" type= "text" />
-			 </form>
+			<div class="ui-grid-b">
+				<div class="ui-block-a"></div>
+				<div class="ui-block-b"></div>
+				<div class="ui-block-c">
+					<div class="ui-field-contain">
+						<label for="usuario">Usuário:</label> <input id="usuario" type="text" name="usuario" value="" />
+					</div>
+					<div class="ui-field-contain">
+						<label for="senha">Senha:</label> <input id="senha" type="password" name="senha" value="" />
+					</div>
+					<button class="ui-btn ui-corner-all" id="entrar" name="entrar">Entrar</button>
+				</div>
+			</div>
 		</div>
 
 		<!-- footer -->
-		<footer data-role="footer" data-position="fixed">Versão: 0.0.0</footer>
+		<footer data-role="footer" data-position="fixed">
+			Versão: <span id="versao"></span>
+		</footer>
 	</section>
 
 </body>
