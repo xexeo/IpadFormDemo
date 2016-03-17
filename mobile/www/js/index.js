@@ -16,9 +16,9 @@ var app={
          app.trocaPagina("menu.html", pages_config.menu)
 			
 		} else {
+			//TODO Trocar por um popup "mais elegante"
          alert("usuário e senha informados não estão cadastrados no sistema");               
       }
-		
 	},
 	
 /*
@@ -65,19 +65,37 @@ var app={
 };      // end of app
 
 var pages_config = {
-	
+
    menu : function(){
 		$('#menu_nova_pesquisa').click( function(){
-         app.trocaPagina("selecionar_tipo.html");
+         app.trocaPagina("selecionar_tipo.html", pages_config.selecionar_tipo);
       });
-	},
-
-   nova_pesquisa : function(){},
-
+   },
    
+   selecionar_tipo : function() {
+	   $(".img_sel").each(function(){
+		   $(this).click( function(){
+			   veiculo_confirmar = $(this).attr('id');
+			   app.trocaPagina("confirmar_veiculo.html",pages_config.confirmar_veiculo);
+		      })
+	   })
+
+   },
    
+   confirmar_veiculo : function() {
+	   var image_path = "img/tipoVeiculo/" + veiculo_confirmar + ".png";
+	   $("#img_confirmar_veiculo").attr('src',image_path);
+	   //$("#conf_veic_nao").click();
+   },
 	
-	 
+
+   nova_pesquisa : function(){}
+ 
 };
+
+var veiculo_confirmar = {};
+
+// Registro do momento
+var registro = {};
 
 $( document ).ready(function(){app.initialize()});
