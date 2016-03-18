@@ -26,34 +26,33 @@
 </head>
 <body>
 	<!-- panel: menu -->
-
-	<section id="panel_menu" data-role="panel" data-display="push">
+	<section data-role="panel" id="panel_menu" data-display="push">
 		<a class="ui-btn ui-corner-all ui-btn-a" href="#page_login" data-rel="close">Sair</a>
 	</section>
 
 	<!-- page: login -->
-	<section id="page_login" data-role="page">
+	<section data-role="page" id="page_login">
 		<!-- header -->
 		<header data-role="header"> </header>
 
 		<!-- content -->
-		<div role="main" class="ui-content">
+		<section role="main" class="ui-content">
 			<div class="ui-grid-b">
 				<div class="ui-block-a"></div>
 				<div class="ui-block-b"></div>
 				<div class="ui-block-c">
 					<div class="ui-field-contain">
-						<label for="usuario">Usuário:</label> <input id="usuario" type="text" name="usuario" value="" />
+						<label for="usuario">Usuário:</label>
+						<input id="usuario" type="text" name="usuario" value="" />
 					</div>
 					<div class="ui-field-contain">
-						<label for="senha">Senha:</label> <input id="senha" type="password" name="senha" value="" />
+						<label for="senha">Senha:</label>
+						<input id="senha" type="password" name="senha" value="" />
 					</div>
 					<button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-check" id="entrar" name="entrar">Entrar</button>
 				</div>
 			</div>
-		</div>
-
-
+		</section>
 
 		<!-- footer -->
 		<footer data-role="footer" data-position="fixed">
