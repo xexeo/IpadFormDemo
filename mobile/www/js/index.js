@@ -12,10 +12,10 @@ var app = {
 		var senha = $("#senha").val();
 		if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
 			// navega para págine e executa o script de configuração depois do carregamento
-			app.trocaPagina("menu.html", pages_config.menu)
+			app.trocaPagina("menu.html", controllers.menu)
 
 		} else {
-			// TODO Trocar por um popup "mais elegante"
+			//TODO: Trocar por um popup "mais elegante"
 			alert("usuário e senha informados não estão cadastrados no sistema");
 		}
 	},
@@ -57,14 +57,19 @@ var app = {
 		$("#entrar").click(this.login);
 	},
 
-	trocaPagina : function(pagina, configs) {
-		$(":mobile-pagecontainer").on("pagecontainershow", configs);
-		$(":mobile-pagecontainer").pagecontainer("change", pagina);
+	trocaPagina : function(view, controller) {
+            //only run controller one time    
+            if ($.inArray(view, pilhaViewes) == -1){
+                    $(":mobile-pagecontainer").on("pagecontainershow", controller);
+                    pilhaViewes.push(view);
+            }
+		
+            $(":mobile-pagecontainer").pagecontainer("change", view);
 	}
 
 }; // end of app
 
-var pages_config = {
+/*var pages_config = {
 
 	menu : function() {
 		$('#menu_nova_pesquisa').click(function() {
@@ -90,12 +95,15 @@ var pages_config = {
 	nova_pesquisa : function() {
 	}
 
-};
+};*/ //end configs
 
-var veiculo_confirmar = {};
+//var veiculo_confirmar = {};
+
 
 // Registro do momento
 var registro = {};
+
+var pilhaViewes = [];
 
 $(document).ready(function() {
 	app.initialize()
