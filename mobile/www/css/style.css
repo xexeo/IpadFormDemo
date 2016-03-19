@@ -39,6 +39,14 @@ and open the template in the editor.
 	background-image: url("../icons/SVG/round-arrow-1.svg");
 }
 
+.ui-content h1,h2,h3{
+    display: inline;
+}
+
+fieldset.alinhado{
+    display: inline;
+}
+
 /* Fallback */
 /*
 .ui-nosvg .ui-icon-myicon:after {
