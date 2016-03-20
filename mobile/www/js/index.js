@@ -46,7 +46,7 @@ var app = {
 	 * this runs when the device is ready for user interaction:
 	 */
 	onDeviceReady : function() {
-
+            console.log('device ready');
 	},
 	/*
 	 * appends @error to the message div:

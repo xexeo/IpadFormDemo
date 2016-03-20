@@ -6,7 +6,9 @@ var insert_controllers={
     controller_files : ['menu.js', 
                         'selecionar_tipo.js',
                         'confirmar_veiculo.js', 
-                        'identificacao_visual_simples.js'],
+                        'identificacao_visual_simples.js',
+                        'caracterizacao_simples.js'
+                    ],
     
     controller_files_path : 'controllers/',
     

@@ -5,6 +5,10 @@ controllers.identificacao_visual_simples = {
       $('#identificacao_visual_simples_back').click( function(){
             app.trocaPagina('../confirmar_veiculo.html', controllers.confirmar_veiculo);
         });
+        
+       $("#identificacao_visual_simples_avancar").click(function(){
+           app.trocaPagina('caracterizacao_simples.html', controllers.caracterizacao_simples);
+       })
       
        var insert_paises = "<option value='-1'>Selecione</option>\n"; 
        
@@ -30,7 +34,7 @@ controllers.identificacao_visual_simples = {
        if (registro.placa_estrangeira != null && registro.placa_estrangeira){
             $('#placa_estrangeira_simples_sim').prop('checked', true).checkboxradio('refresh');;
             $('#grupo_pais_simples').show();
-            $("#grupo_avancar_simples").hide();
+            $("#grupo_identificacao_visual_avancar_simples").hide();
        } else if (registro.placa_estrangeira != null && !registro.placa_estrangeira){
             $('#placa_estrangeira_simples_nao').prop('checked', true).checkboxradio('refresh');;
             $('#grupo_pais_simples').hide();
@@ -40,12 +44,14 @@ controllers.identificacao_visual_simples = {
            $('#placa_estrangeira_simples_sim').prop('checked', false).checkboxradio('refresh');;
            $('#grupo_pais_simples').hide();
            $("#pais_simples option[value='-1']").attr('selected', true);
-           $("#grupo_avancar_simples").hide();
+           $("#grupo_identificacao_visual_avancar_simples").hide();
        }
        
        if (registro.pais != null){
            $("#pais_simples option[value='" + registro.pais + "'").attr('selected', true);
-           $("#grupo_avancar_simples").show();
+           $("#grupo_identificacao_visual_avancar_simples").show();
+       } else if (registro.placa_estrangeira != null && !registro.placa_estrangeira){
+           $("#grupo_identificacao_visual_avancar_simples").show();
        }
        
        $("select#pais_simples").selectmenu("refresh", true);
@@ -67,22 +73,23 @@ controllers.identificacao_visual_simples = {
            registro.placa_estrangeira = true;
            
            if(Number($('#pais_simples').val()) == -1){
-               $("#grupo_avancar_simples").hide();
+               $("#grupo_identificacao_visual_avancar_simples").hide();
            }
            
        });
        $('#placa_estrangeira_simples_nao').click(function(){
             $('#grupo_pais_simples').hide()
             registro.placa_estrangeira = false;
-            $("#grupo_avancar_simples").show();
+            
+            $("#grupo_identificacao_visual_avancar_simples").show();
         });
         
         $('#pais_simples').change(function(){
             if(Number($(this).val()) != -1){
                 registro.pais = $(this).val();
-                $("#grupo_avancar_simples").show();
+                $("#grupo_identificacao_visual_avancar_simples").show();
             } else {
-                $("#grupo_avancar_simples").hide();
+                $("#grupo_identificacao_visual_avancar_simples").hide();
                 registro.pais = null;
             }
             
