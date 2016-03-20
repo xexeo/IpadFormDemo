@@ -59,11 +59,12 @@ var app = {
 
 	trocaPagina : function(view, controller) {
             //only run controller.config one time    
-            if ($.inArray(view, pilhaViews) == -1){
-                    $(":mobile-pagecontainer").on("pagecontainershow", controller.config);
-                    pilhaViews.push(view);
-            }
-		
+            //if ($.inArray(view, pilhaViews) == -1){
+                    $(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
+            //        pilhaViews.push(view);
+            //}
+            //$( ":mobile-pagecontainer" ).pagecontainer( "load", pageUrl, { showLoadMsg: false } );
+            
             $(":mobile-pagecontainer").pagecontainer("change", view);
 	}
 
@@ -89,4 +90,4 @@ $(document).bind("mobileinit", function(){
 });
 
 //visited views
-var pilhaViews = [];
+////var pilhaViews = [];

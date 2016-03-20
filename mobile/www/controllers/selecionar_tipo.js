@@ -1,6 +1,12 @@
 controllers.selecionar_tipo = {
     config : function() {
+        //$(".img_sel").off();
+        //console.log('unbind');
             $(".img_sel").click(function() {
+                            //console.log('clicked');
+                            //clear registro
+                            //registro = {};
+                            
                             //veiculo_confirmar = $(this).attr('id');
                             registro.codVeiculo = $(this).attr('id');
                             
