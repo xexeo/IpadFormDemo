@@ -3,7 +3,7 @@ controllers.identificacao_visual_simples = {
       //é preciso carregar o controller anterior
       //$('#identificacao_visual_simples_back').click($.mobile.back);
       $('#identificacao_visual_simples_back').click( function(){
-            app.trocaPagina('../../selecionar_tipo.html', controllers.selecionar_tipo);
+            app.trocaPagina('../confirmar_veiculo.html', controllers.confirmar_veiculo);
         });
       
        var insert_paises = "<option value='-1'>Selecione</option>\n"; 

@@ -12,13 +12,19 @@ var app = {
 		var senha = $("#senha").val();
 		if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
 			// navega para págine e executa o script de configuração depois do carregamento
-			app.trocaPagina("menu.html", controllers.menu)
+			app.trocaPagina("views/menu.html", controllers.menu)
 
 		} else {
 			//TODO: Trocar por um popup "mais elegante"
 			alert("usuário e senha informados não estão cadastrados no sistema");
 		}
 	},
+        
+        logout: function(){
+            $("#usuario").val('').textinput("refresh");
+            $("#senha").val('').textinput("refresh");
+            app.trocaPagina($('#page_login'));
+        },
 
 	/*
 	 * Application constructor
@@ -26,6 +32,7 @@ var app = {
 	initialize : function() {
 		this.bindEvents();
 		this.extraConfig();
+                
 	},
 
 	/*
@@ -55,15 +62,13 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
+                $("#btn_sair").click(this.logout);
 	},
 
 	trocaPagina : function(view, controller) {
-            //only run controller.config one time    
-            //if ($.inArray(view, pilhaViews) == -1){
-                    $(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
-            //        pilhaViews.push(view);
-            //}
-            //$( ":mobile-pagecontainer" ).pagecontainer( "load", pageUrl, { showLoadMsg: false } );
+            if (controller != null){
+                $(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
+            }
             
             $(":mobile-pagecontainer").pagecontainer("change", view);
 	}
