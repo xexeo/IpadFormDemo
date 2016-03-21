@@ -42,6 +42,11 @@ and open the template in the editor.
 	display: inline;
 }
 
+h2 {
+	text-align: center;
+	display: block;
+}
+
 .menu_separator {
 	margin-bottom: 2%;
 }
@@ -54,12 +59,21 @@ and open the template in the editor.
 	vertical-align: top;
 }
 
+section.tipo_veiculo {
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
 .tipo_veiculo ol {
 	list-style: none;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .tipo_veiculo li {
+	float: left;
 	display: inline-block;
+	margin: 0 auto;
 }
 
 fieldset.alinhado {
