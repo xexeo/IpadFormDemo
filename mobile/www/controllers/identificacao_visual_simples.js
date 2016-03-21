@@ -61,16 +61,16 @@ controllers.identificacao_visual_simples = {
        //progresso
        $('#reboque_simples_sim').click(function(){
            $('#grupo_placa_estrangeira_simples').show();
-           registro.reboque = true;
+           app.setAtributo('reboque', 'true');
        });
        $('#reboque_simples_nao').click(function(){
            $('#grupo_placa_estrangeira_simples').show();
-           registro.reboque = false;
+           app.setAtributo('reboque', 'false');
        });
        
        $('#placa_estrangeira_simples_sim').click(function(){
            $('#grupo_pais_simples').show();
-           registro.placa_estrangeira = true;
+           c
            
            if(Number($('#pais_simples').val()) == -1){
                $("#grupo_identificacao_visual_avancar_simples").hide();
@@ -79,20 +79,19 @@ controllers.identificacao_visual_simples = {
        });
        $('#placa_estrangeira_simples_nao').click(function(){
             $('#grupo_pais_simples').hide()
-            registro.placa_estrangeira = false;
+            app.setAtributo('placa_estrangeira', 'false');
             
             $("#grupo_identificacao_visual_avancar_simples").show();
         });
         
         $('#pais_simples').change(function(){
             if(Number($(this).val()) != -1){
-                registro.pais = $(this).val();
+                app.setAtributo('pais', $(this).val());
                 $("#grupo_identificacao_visual_avancar_simples").show();
             } else {
                 $("#grupo_identificacao_visual_avancar_simples").hide();
-                registro.pais = null;
+                app.setAtributo('pais', null);
             }
-            
             
         });
        

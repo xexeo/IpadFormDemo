@@ -15,16 +15,16 @@ var app = {
 			app.trocaPagina("views/menu.html", controllers.menu)
 
 		} else {
-			//TODO: Trocar por um popup "mais elegante"
+			// TODO: Trocar por um popup "mais elegante"
 			alert("usuário e senha informados não estão cadastrados no sistema");
 		}
 	},
-        
-        logout: function(){
-            $("#usuario").val('').textinput("refresh");
-            $("#senha").val('').textinput("refresh");
-            app.trocaPagina($('#page_login'));
-        },
+
+	logout : function() {
+		$("#usuario").val('').textinput("refresh");
+		$("#senha").val('').textinput("refresh");
+		app.trocaPagina($('#page_login'));
+	},
 
 	/*
 	 * Application constructor
@@ -32,7 +32,7 @@ var app = {
 	initialize : function() {
 		this.bindEvents();
 		this.extraConfig();
-                
+
 	},
 
 	/*
@@ -46,7 +46,7 @@ var app = {
 	 * this runs when the device is ready for user interaction:
 	 */
 	onDeviceReady : function() {
-            console.log('device ready');
+		console.log('device ready');
 	},
 	/*
 	 * appends @error to the message div:
@@ -62,37 +62,46 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
-                $("#btn_sair").click(this.logout);
+		$("#btn_sair").click(this.logout);
 	},
 
 	trocaPagina : function(view, controller) {
-            if (controller != null){
-                $(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
-            }
-            
-            $(":mobile-pagecontainer").pagecontainer("change", view);
+		if (controller != null) {
+			$(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
+		}
+
+		$(":mobile-pagecontainer").pagecontainer("change", view);
+	},
+	
+	setAtributo : function(nome, valor) {
+		registro[nome] = valor;
+		// TODO logar de forma dequada ao dispositivo
+		console.log(registro);
+	},
+	
+	limpaRegistro : function() {
+		registro = {};
 	}
 
 }; // end of app
 
-
 // Registro do momento
 var registro = {};
 
-
 $(document).ready(function() {
-        insert_controllers.insert();
+	insert_controllers.insert();
 	app.initialize();
-        
-});
 
+});
 
 /* all visited pages in the cache */
-$(":mobile-pagecontainer").page({ domCache: true });
-
-$(document).bind("mobileinit", function(){
-    $.mobile.page.prototype.options.domCache = true;
+$(":mobile-pagecontainer").page({
+	domCache : true
 });
 
-//visited views
-////var pilhaViews = [];
+$(document).bind("mobileinit", function() {
+	$.mobile.page.prototype.options.domCache = true;
+});
+
+// visited views
+// //var pilhaViews = [];
