@@ -1,0 +1,87 @@
+<section data-role="page" id="caracterizacao_viagem_1_simples" data-transition="slide" data-theme="a">
+	<!-- header -->
+	<header data-role="header">
+		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
+		<h1>4. Caracterização da viagem</h1>
+	</header>
+        
+        <!--content -->
+        <section role="main" class="ui-content">
+
+			<!-- TODO Incluir opções de país, estado e cidade. -->
+            <div class="ui-grid-a" id="grupo_origem_simples">
+                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
+                    <h2>Origem da viagem:</h2>
+                </div>
+                <div class="ui-block-b" style="text-align: left;">
+                    <select name="origem_simples" id="origem_simples">
+                    </select>
+                </div>
+            </div>
+           
+			<!-- TODO Incluir opções de país, estado e cidade. -->
+            <div class="ui-grid-a" id="grupo_destino_simples" > <!-- style='display: none' -->
+                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
+                    <h2>Destino da viagem:</h2>
+                </div>
+                <div class="ui-block-b" style="text-align: left;">
+                    <select name="destino_simples" id="destino_simples">
+                    </select>
+                </div>
+            </div>
+           
+             <!--separador-->
+            <div style="height: 50px">&nbsp;</div>
+            
+            <div class="ui-grid-c" id='grupo_frequencia_simples' > <!-- style='display: none' -->
+                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
+                    <h2>Frequência da viagem:</h2>
+                </div>
+                <div class="ui-block-b" margin-top: 1%">
+                	<input id="frequencia_num_simples" type="text" name="frequencia_num_simples" value="" />
+                </div>
+                <div class="ui-block-c" margin-top: 1%">
+                    <h3>por</h3>
+                </div>
+                <div class="ui-block-d" style="text-align: left;">
+                    <select name="frequencia_sel_simples" id="frequencia_sel_simples">
+                    </select>
+                </div>
+           </div>
+        
+            <!--separador-->
+            <div style="height: 50px">&nbsp;</div>
+            
+            <div class="ui-grid-a" id='grupo_motivo_simples'> <!-- style='display: none' -->
+                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
+                    <h2>Motivo da escolha da rota:</h2>
+                </div>
+                <div class="ui-block-b" style="text-align: left;">
+                    <select name="motivo_simples" id="motivo_simples">
+                    </select>
+                </div>
+           </div>
+            
+            <!-- CONTINUAR INCLUINDO DEMAIS CAMPOS -->
+            
+            
+            
+            
+        <!--separador-->
+            <div style="height: 50px">&nbsp;</div>
+            
+            <div class="ui-grid-a" id="grupo_caracterizacao_viagem_1_simples_avancar" style='display: none'>
+                <div class="ui-block-a" style="text-align: right; margin-top: 1%"> &nbsp;</div>
+                <div class="ui-block-b" style="text-align: left;">
+                    <button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right"  id='caracterizacao_viagem_1_simples_avancar'>Avançar</button>
+                </div>
+            </div>    
+        </section>
+        
+        <!-- footer -->
+        <footer data-role="footer" data-position="fixed">
+            <button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-carat-l" id='caracterizacao_viagem_1_simples_back'>Voltar</button>
+        </footer>
+        
+        
+</section>
