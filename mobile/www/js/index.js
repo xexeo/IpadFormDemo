@@ -63,6 +63,16 @@ var app = {
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
 		$("#btn_sair").click(this.logout);
+		$('#selTipoVeiculo_1').click(function() {
+			console.log(1);
+			$('#sel_tipo_veiculo_1').toggle();
+			$('#sel_tipo_veiculo_2').toggle();
+		});
+		$('#selTipoVeiculo_2').click(function() {
+			console.log(2);
+			$('#sel_tipo_veiculo_1').toggle();
+			$('#sel_tipo_veiculo_2').toggle();
+		});
 	},
 
 	trocaPagina : function(view, controller) {
@@ -72,13 +82,13 @@ var app = {
 
 		$(":mobile-pagecontainer").pagecontainer("change", view);
 	},
-	
+
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
 		// TODO logar de forma dequada ao dispositivo
 		console.log(registro);
 	},
-	
+
 	limpaRegistro : function() {
 		registro = {};
 	}

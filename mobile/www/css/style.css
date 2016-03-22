@@ -51,29 +51,104 @@ h2 {
 	margin-bottom: 2%;
 }
 
-.tipo_veiculo {
+#sel_tipo_veiculo_2 {
+	display: none
+}
+
+#section_v_simples {
+	width: 35%;
+	margin-left: 3%
+}
+
+#section_v_semireboques {
 	width: 30%;
+}
+
+#section_v_combinados {
+	width: 35%;
+}
+
+#section_v_reboques {
+	width: 35%;
+}
+
+.troca_classe_veiculo {
+	width: 20%;
+	display: inline-block;
+	vertical-align: middle;
 	padding: 0;
-	margin: 0 auto;
+	margin: 0% 3%;
+}
+
+.troca_classe_veiculo .ui-grid-a {
+	float: left;
+}
+
+.troca_classe_veiculo .ui-grid-c {
+	float: right;
+}
+
+.troca_classe_veiculo img {
+	min-height: 640px;
+	line-height: 100px;
+	vertical-align: middle;
+}
+
+.classe_veiculo {
 	display: inline-block;
 	vertical-align: top;
-}
-
-section.tipo_veiculo {
-	padding-left: 2%;
-	padding-right: 2%;
-}
-
-.tipo_veiculo ol {
-	list-style: none;
+	padding: 0;
 	margin: 0 auto;
-	text-align: center;
 }
 
-.tipo_veiculo li {
-	float: left;
+.classe_veiculo h2 {
+	font-weight: bold;
+	font-size: large;
+}
+
+.tipos_veiculos {
 	display: inline-block;
-	margin: 0 auto;
+	border: solid;
+	text-align: center;
+	width: auto;
+	padding: 0% 0%;
+	margin: 2% 5%;
+}
+
+.tipos_veiculos ol {
+	display: inherit;
+	list-style: none;
+	text-align: center;
+	width: inherit;
+	padding: 0%;
+	margin: 0%;
+	min-height: 600px;
+}
+
+.tipos_veiculos ol li {
+	display: inline;
+	vertical-align: middle;
+	margin: 0px 10px;
+}
+
+.img_sel {
+	vertical-align: middle;
+}
+
+#section_v_simples li {
+	line-height: 65px;
+}
+
+#section_v_semireboques li {
+	line-height: 100px;
+}
+
+#section_v_combinados  li {
+	line-height: 100px;
+}
+
+#section_v_reboques li {
+	line-height: 100px;
 }
 
 fieldset.alinhado {
