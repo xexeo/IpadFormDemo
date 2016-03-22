@@ -1,17 +1,17 @@
-controllers.caracterizacao_viagem_1_simples = {
+controllers.caracterizacao_viagem_simples = {
     config : function(){
-        var me = controllers.caracterizacao_viagem_1_simples;
+        var me = controllers.caracterizacao_viagem_simples;
         me.fillSelect();
         me.buttons();
     },
     
     buttons : function(){
-        $('#caracterizacao_viagem_1_simples_back').click( function(){
+        $('#caracterizacao_viagem_simples_back').click( function(){
             app.trocaPagina('caracterizacao_simples.html', controllers.identificacao_visual_simples);
         });
         
-       $("#caracterizacao_viagem_1_simples_avancar").click(function(){
-           app.trocaPagina('caracterizacao_viagem_2_simples.html', controllers.caracterizacao_viagem_1_simples);
+       $("#caracterizacao_viagem_simples_avancar").click(function(){
+           app.trocaPagina('pergunta_final_simples.html', controllers.caracterizacao_viagem_simples);
        })
     },
     

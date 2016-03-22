@@ -8,7 +8,7 @@ var insert_controllers={
                         'confirmar_veiculo.js', 
                         'identificacao_visual_simples.js',
                         'caracterizacao_simples.js',
-                        'caracterizacao_viagem_1_simples.js'
+                        'caracterizacao_viagem_simples.js'
                     ],
     
     controller_files_path : 'controllers/',

@@ -11,7 +11,7 @@ controllers.caracterizacao_simples = {
         });
         
        $("#caracterizacao_simples_avancar").click(function(){
-           app.trocaPagina('caracterizacao_viagem_1_simples.html', controllers.caracterizacao_viagem_1_simples);
+           app.trocaPagina('caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
        })
     },
     
