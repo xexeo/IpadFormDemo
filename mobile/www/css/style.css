@@ -42,9 +42,10 @@ and open the template in the editor.
 	display: inline;
 }
 
-h2 {
+#sel_tipo_veiculo_1 h2 {
 	text-align: center;
 	display: block;
+	margin: 0px;
 }
 
 .menu_separator {

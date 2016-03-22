@@ -70,7 +70,7 @@ controllers.caracterizacao_simples = {
                 $("#grupo_propriedade_simples").show();
             } else {
                 $("#grupo_propriedade_simples").hide();
-                app.setAtributo('pais', null);
+                app.setAtributo('ano', null);
             }
         });
         $('#propriedade_simples').change(function(){
