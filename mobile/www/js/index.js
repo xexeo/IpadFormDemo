@@ -63,6 +63,7 @@ var app = {
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
 		$("#btn_sair").click(this.logout);
+		// TODO: os toogles abaixo ainda não estão funcionando ....
 		$('#selTipoVeiculo_1').click(function() {
 			console.log(1);
 			$('#sel_tipo_veiculo_1').toggle();
