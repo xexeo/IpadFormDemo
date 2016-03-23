@@ -41,6 +41,13 @@ var util = {
         $("select#" + nome_campo).selectmenu("refresh", true);
 	},
 	
+	recuperaInputText : function(reg, nome_campo, nome_proximo) {
+        if (reg != null) {
+        	$("#" + nome_campo).attr('value', reg);
+        	$("#" + grupo_proximo).show();
+		}
+    },
+
 	
 	// Funções para o progresso
 	progressoRadioSimNao : function(nome_registro, nome_campo, grupo_proximo) {
@@ -54,6 +61,12 @@ var util = {
 		});
 	},
 	
+	/**
+	 * 
+	 * @param nome_registro nome do atributo da variável global registro
+	 * @param nome_campo id do componente html
+	 * @param grupo_proximo id da div que irá sofrer show/hide
+	 */
 	progressoSelect : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
 			if (Number($(this).val()) != -1) {
@@ -64,6 +77,13 @@ var util = {
 				app.setAtributo(nome_registro, null);
 			}
 		});
+	},
+	
+	progressoInputText : function(nome_registro, nome_campo, grupo_proximo) {
+        $('#' + nome_campo).keyup(function(){
+        	app.setAtributo(nome_registro, $(this).val());
+        	$("#" + grupo_proximo).show();
+        });
 	}
 
 
