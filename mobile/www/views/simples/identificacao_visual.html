@@ -4,73 +4,69 @@
 		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
 		<h1>2. Identificação visual do veículo</h1>
 	</header>
-        
-        <!--content -->
-        <section role="main" class="ui-content">
-            
-            <div class="ui-grid-a" id="grupo_reboque_simples">
-                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
-                    <h2>Possui reboque:</h2>
-                </div>
-                <div class="ui-block-b" style="text-align: left;">
-                    <fieldset data-role="controlgroup" data-type="horizontal" class="alinhado">
-                        <input type="radio" name="reboque_simples" id="reboque_simples_sim" value="sim">
-                        <label for="reboque_simples_sim">Sim</label>
-                        <input type="radio" name="reboque_simples" id="reboque_simples_nao" value="nao">
-                        <label for="reboque_simples_nao">Não</label>        
-                    </fieldset>
-                </div>
-            </div>
-            
-            <!--separador-->
-            <div style="height: 50px">&nbsp;</div>
-                        
-            <div class="ui-grid-a" id="grupo_placa_estrangeira_simples" style='display: none'>
-                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
-                    <h2>Placa estrangeira:</h2>
-                </div>
-                <div class="ui-block-b" style="text-align: left;">
-                    <fieldset data-role="controlgroup" data-type="horizontal" class="alinhado">
-                        
-                        <input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_sim" value="sim">
-                        <label for="placa_estrangeira_simples_sim">Sim</label>
-                        
-                        <input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_nao" value="nao">
-                        <label for="placa_estrangeira_simples_nao">Não</label>        
-                    </fieldset>
-                </div>
 
-            </div>    
-            
-            <!--separador-->
-            <div style="height: 50px">&nbsp;</div>
-            
-            
-            <div class="ui-grid-a" id="grupo_pais_simples" style='display: none'>
-                <div class="ui-block-a" style="text-align: right; margin-top: 1%">
-                    <h2>País:</h2>
-                </div>
-                <div class="ui-block-b" style="text-align: left;">
-                    <select name="pais_simples" id="pais_simples">
+	<!--content -->
+	<section role="main" class="ui-content">
 
-                    </select>
-                </div>
-            </div>
-            
-            <!--separador-->
-            <div style="height: 50px">&nbsp;</div>
-            
-            <div class="ui-grid-a" id="grupo_identificacao_visual_simples_avancar" style='display: none'>
-                <div class="ui-block-a" style="text-align: right; margin-top: 1%"> &nbsp;</div>
-                <div class="ui-block-b" style="text-align: left;">
-                    <button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right"  id='identificacao_visual_simples_avancar'>Avançar</button>
-                </div>
-            </div>    
-        </section>
-        
-        <!-- footer -->
-        <footer data-role="footer" data-position="fixed">
-            <button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-carat-l" id='identificacao_visual_simples_back'>Voltar</button>
-        </footer>
+		<div class="ui-grid-a" id="grupo_reboque_simples">
+			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
+				<h2>Possui reboque:</h2>
+			</div>
+			<div class="ui-block-b" style="text-align: left;">
+				<fieldset data-role="controlgroup" data-type="horizontal" class="alinhado">
+					<input type="radio" name="reboque_simples" id="reboque_simples_sim" value="sim"> <label for="reboque_simples_sim">Sim</label>
+					<input type="radio" name="reboque_simples" id="reboque_simples_nao" value="nao"> <label for="reboque_simples_nao">Não</label>
+				</fieldset>
+			</div>
+		</div>
+
+		<!--separador-->
+		<div style="height: 50px">&nbsp;</div>
+
+		<div class="ui-grid-a" id="grupo_placa_estrangeira_simples">
+			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
+				<h2>Placa estrangeira:</h2>
+			</div>
+			<div class="ui-block-b" style="text-align: left;">
+				<fieldset data-role="controlgroup" data-type="horizontal" class="alinhado">
+
+					<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_sim" value="sim"> <label
+						for="placa_estrangeira_simples_sim">Sim</label> <input type="radio" name="placa_estrangeira_simples"
+						id="placa_estrangeira_simples_nao" value="nao"> <label for="placa_estrangeira_simples_nao">Não</label>
+				</fieldset>
+			</div>
+
+		</div>
+
+		<!--separador-->
+		<div style="height: 50px">&nbsp;</div>
+
+
+		<div class="ui-grid-a" id="grupo_pais_simples">
+			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
+				<h2>País:</h2>
+			</div>
+			<div class="ui-block-b" style="text-align: left;">
+				<select name="pais_simples" id="pais_simples">
+
+				</select>
+			</div>
+		</div>
+
+		<!--separador-->
+		<div style="height: 50px">&nbsp;</div>
+
+		<div class="ui-grid-a" id="grupo_identificacao_visual_simples_avancar">
+			<div class="ui-block-a" style="text-align: right; margin-top: 1%">&nbsp;</div>
+			<div class="ui-block-b" style="text-align: left;">
+				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id='identificacao_visual_simples_avancar'>Avançar</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- footer -->
+	<footer data-role="footer" data-position="fixed">
+		<button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-carat-l" id='identificacao_visual_simples_back'>Voltar</button>
+	</footer>
 
 </section>

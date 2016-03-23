@@ -51,10 +51,6 @@ and open the template in the editor.
 	margin-bottom: 2%;
 }
 
-#sel_tipo_veiculo_2 {
-	display: none
-}
-
 #section_v_simples {
 	width: 35%;
 }
@@ -159,8 +155,59 @@ fieldset.alinhado {
 	display: inline;
 }
 
-/* Fallback */
-/*
-.ui-nosvg .ui-icon-myicon:after {
-	background-image: url("iconimg.png");
-}*/
+/* selectors with display: none */
+#sel_tipo_veiculo_2 {
+	display: none;
+}
+
+#grupo_propriedade_simples {
+	display: none;
+}
+
+#grupo_combustivel_simples {
+	display: none;
+}
+
+#grupo_caracterizacao_simples_avancar {
+	display: none;
+}
+
+#grupo_placa_estrangeira_simples {
+	display: none;
+}
+
+#grupo_pais_simples {
+	display: none;
+}
+
+#grupo_identificacao_visual_simples_avancar {
+	display: none;
+}
+
+#grupo_destino_simples {
+	display: none;
+}
+
+#grupo_frequencia_simples {
+	display: none;
+}
+
+#grupo_motivo_rota_simples {
+	display: none;
+}
+
+#grupo_pessoas_simples {
+	display: none;
+}
+
+#grupo_motivo_viagem_simples {
+	display: none;
+}
+
+#grupo_renda_simples {
+	display: none;
+}
+
+#grupo_caracterizacao_viagem_simples_avancar {
+	display: none;
+}
