@@ -42,6 +42,11 @@ and open the template in the editor.
 	display: inline;
 }
 
+.ui-content h2 {
+	font-weight: bold;
+	font-size: x-large;
+}
+
 .menu_separator {
 	margin-bottom: 2%;
 }
