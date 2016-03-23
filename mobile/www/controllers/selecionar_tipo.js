@@ -9,6 +9,7 @@ controllers.selecionar_tipo = {
 		
 		$(".img_sel").click(function() {
 
+			app.imagemPath = $(this).attr('src');
 			// veiculo_confirmar = $(this).attr('id');
 			app.setAtributo('codVeiculo', $(this).attr('id'));
 
