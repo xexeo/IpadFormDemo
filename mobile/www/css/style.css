@@ -42,12 +42,6 @@ and open the template in the editor.
 	display: inline;
 }
 
-#sel_tipo_veiculo_1 h2 {
-	text-align: center;
-	display: block;
-	margin: 0px;
-}
-
 .menu_separator {
 	margin-bottom: 2%;
 }
@@ -69,7 +63,7 @@ and open the template in the editor.
 }
 
 #section_v_reboques {
-	width: 30%;
+	width: 35%;
 }
 
 .troca_classe_veiculo {
@@ -99,11 +93,14 @@ and open the template in the editor.
 	display: inline-block;
 	vertical-align: top;
 	padding: 0;
-	margin: 0 3%;
+	margin: 0 2%;
 	max-height: 640px;
 }
 
 .classe_veiculo h2 {
+	text-align: center;
+	display: block;
+	margin: 0px;
 	font-weight: bold;
 	font-size: large;
 }
