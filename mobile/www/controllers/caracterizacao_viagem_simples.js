@@ -20,18 +20,17 @@ controllers.caracterizacao_viagem_simples = {
     	// Preenche combos
         
         // TODO Incluir opções de país, estado e cidade em origem-destino
-    	var insert_paises = "<option value='-1'>Selecione</option>\n";
+    	var insert_paises_origem = "<option value='-1'>Selecione</option>\n";
     	$.each(paises.listados(), function(index, item){
-    		insert_paises += "<option value='" + item + "'>" + item +"</option>\n";
+    		insert_paises_origem += "<option value='" + item + "'>" + item +"</option>\n";
         });
-        $("#origem_simples").html(insert_paises).selectmenu("refresh", true);
+        $("#origem_simples").html(insert_paises_origem).selectmenu("refresh", true);
         
-        var insert_paises_destino = "<option value='-1'>Selecione</option>\n";
+    	var insert_paises_destino = "<option value='-1'>Selecione</option>\n";
     	$.each(paises.listados(), function(index, item){
     		insert_paises_destino += "<option value='" + item + "'>" + item +"</option>\n";
         });
         $("#destino_simples").html(insert_paises_destino).selectmenu("refresh", true);
-        // Fim origem-destino
 
         var frequencia_sel = ['Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente'];
         var insert_frequencia = "<option value='-1'>Selecione</option>\n";
@@ -64,14 +63,20 @@ controllers.caracterizacao_viagem_simples = {
         })
         $("#renda_simples").html(insert_renda).selectmenu("refresh", true);
         
-
-        // Valores anteriores e eventos
-        controllers.caracterizacao_viagem_simples.auxPreencheElementosSel(registro.origem, "origem", "destino");
         
-        //TODO 
-        //PROBLEMA: Após avançar e voltar, a combo de destino não está abrindo a lista de países para selecionar novamente
-        controllers.caracterizacao_viagem_simples.auxPreencheElementosSel(registro.destino, "destino", "frequencia");
-
+        // Valores anteriores e eventos
+        if (registro.origem != null) {
+        	$("#origem_simples option[value='" + registro.origem + "'").attr('selected', true);
+        	$("#grupo_destino_simples").show();
+		}
+        $("select#origem_simples").selectmenu("refresh", true);
+        
+        if (registro.destino != null) {
+        	$("#destino_simples option[value='" + registro.destino + "'").attr('selected', true);
+        	$("#grupo_frequencia_simples").show();
+		}
+        $("select#destino_simples").selectmenu("refresh", true);
+        
         controllers.caracterizacao_viagem_simples.auxPreencheElementosText(registro.frequencia_num, "frequencia_num", "motivo_rota");
         controllers.caracterizacao_viagem_simples.auxPreencheElementosSel(registro.frequencia_sel, "frequencia_sel", "motivo_rota");
         
@@ -84,7 +89,7 @@ controllers.caracterizacao_viagem_simples = {
         
         controllers.caracterizacao_viagem_simples.auxPreencheElementosSelAvancar(registro.renda, "renda", "caracterizacao_viagem");
 
-        
+
         // Progresso
         $('#origem_simples').change(function(){
             if(Number($(this).val()) != -1){
@@ -163,7 +168,7 @@ controllers.caracterizacao_viagem_simples = {
         $("select#" + nome_simples).selectmenu("refresh", true);
     },
     
-    auxPreencheElementosText : function(reg, nome_campo) {
+    auxPreencheElementosText : function(reg, nome_campo, nome_proximo) {
     	var nome_simples = nome_campo + "_simples";
     	var grupo_proximo = "grupo_" + nome_proximo + "_simples";
         if (reg != null) {
