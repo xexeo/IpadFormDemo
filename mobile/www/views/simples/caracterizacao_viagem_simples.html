@@ -1,4 +1,5 @@
 <section data-role="page" id="caracterizacao_viagem_simples" data-transition="slide" data-theme="a">
+
 	<!-- header -->
 	<header data-role="header">
 		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
@@ -9,104 +10,86 @@
 	<section role="main" class="ui-content">
 
 		<!-- TODO Incluir opções de país, estado e cidade. -->
-		<div class="ui-grid-a separator" id="grupo_origem_simples">
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-				<h2>Origem da viagem:</h2>
-			</div>
-			<div class="ui-block-b" style="text-align: left;">
+		<fieldset class="ui-grid-a" id="grupo_origem_simples">
+			<legend class="ui-block-a">Origem da viagem:</legend>
+			<div class="ui-block-b">
 				<select name="origem_simples" id="origem_simples">
 				</select>
 			</div>
-		</div>
+		</fieldset>
 
 		<!-- TODO Incluir opções de país, estado e cidade. -->
-		<div class="ui-grid-a separator" id="grupo_destino_simples">
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-				<h2>Destino da viagem:</h2>
-			</div>
-			<div class="ui-block-b" style="text-align: left;">
+		<fieldset class="ui-grid-a" id="grupo_destino_simples">
+			<legend class="ui-block-a">Destino da viagem:</legend>
+			<div class="ui-block-b">
 				<select name="destino_simples" id="destino_simples">
 				</select>
 			</div>
-		</div>
+		</fieldset>
 
-		<div class="ui-grid-c separator" id='grupo_frequencia_simples'>
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-				<h2>Frequência da viagem:</h2>
-			</div>
-			<div class="ui-block-b"margin-top: 1%">
+		<fieldset class="ui-grid-c" id='grupo_frequencia_simples'>
+			<legend class="ui-block-a">Frequência da viagem:</legend>
+			<div class="ui-block-b">
 				<input id="frequencia_num_simples" type="number" name="frequencia_num_simples" value="" />
 			</div>
-			<div class="ui-block-c"margin-top: 1%">
-				<h3>por</h3>
-			</div>
-			<div class="ui-block-d" style="text-align: left;">
+			<label class="ui-block-c" for="frequencia_sel_simples">por</label>
+			<div class="ui-block-d">
 				<select name="frequencia_sel_simples" id="frequencia_sel_simples">
 				</select>
 			</div>
-		</div>
+		</fieldset>
 
-		<div class="ui-grid-a separator" id='grupo_motivo_rota_simples'>
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-				<h2>Motivo da escolha da rota:</h2>
-			</div>
-			<div class="ui-block-b" style="text-align: left;">
+		<fieldset class="ui-grid-a" id='grupo_motivo_rota_simples'>
+			<legend class="ui-block-a">Motivo da escolha da rota:</legend>
+			<div class="ui-block-b">
 				<select name="motivo_rota_simples" id="motivo_rota_simples">
 				</select>
 			</div>
-		</div>
+		</fieldset>
 
-		<div class="ui-grid-a separator" id="grupo_pessoas_ambos">
-			<div class="ui-grid-a ui-block-a" id="grupo_pessoas_simples">
-				<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-					<h2>Pessoas no veículo:</h2>
-				</div>
-				<div class="ui-block-b" style="text-align: left;">
+		<fieldset class="ui-grid-a" id="grupo_pessoas_ambos">
+			<fieldset class="ui-grid-a ui-block-a" id="grupo_pessoas_simples">
+				<label class="ui-block-a" for="pessoas_simples">Pessoas no veículo:</label>
+				<div class="ui-block-b">
 					<input id="pessoas_simples" type="number" name="pessoas_simples" value="" />
 				</div>
-			</div>
-			<div class="ui-grid-a ui-block-b" id="grupo_pessoas_trabalho_simples">
-				<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-					<h2>Pessoas a trabalho:</h2>
-				</div>
-				<div class="ui-block-b" style="text-align: left;">
+			</fieldset>
+			<fieldset class="ui-grid-a ui-block-b" id="grupo_pessoas_trabalho_simples">
+				<label class="ui-block-a" for="pessoas_trabalho_simples">Pessoas a trabalho:</label>
+				<div class="ui-block-b">
 					<input id="pessoas_trabalho_simples" type="number" name="pessoas_trabalho_simples" value="" />
 				</div>
-			</div>
-		</div>
+			</fieldset>
+		</fieldset>
 
-		<div class="ui-grid-a separator" id='grupo_motivo_viagem_simples'>
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-				<h2>Motivo da viagem:</h2>
-			</div>
-			<div class="ui-block-b" style="text-align: left;">
+		<fieldset class="ui-grid-a" id='grupo_motivo_viagem_simples'>
+			<legend class="ui-block-a">Motivo da viagem:</legend>
+			<div class="ui-block-b">
 				<select name="motivo_viagem_simples" id="motivo_viagem_simples">
 				</select>
 			</div>
-		</div>
+		</fieldset>
 
-		<div class="ui-grid-a separator" id='grupo_renda_simples'>
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">
-				<h2>Renda do condutor:</h2>
-			</div>
-			<div class="ui-block-b" style="text-align: left;">
+		<fieldset class="ui-grid-a" id='grupo_renda_simples'>
+			<legend class="ui-block-a">Renda do condutor:</legend>
+			<div class="ui-block-b">
 				<select name="renda_simples" id="renda_simples">
 				</select>
 			</div>
-		</div>
+		</fieldset>
 
-		<div class="ui-grid-a" id="grupo_caracterizacao_viagem_simples_avancar">
-			<div class="ui-block-a" style="text-align: right; margin-top: 1%">&nbsp;</div>
-			<div class="ui-block-b" style="text-align: left;">
+		<nav class="ui-grid-a" id="grupo_caracterizacao_viagem_simples_avancar">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
 				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id='caracterizacao_viagem_simples_avancar'>Avançar</button>
 			</div>
-		</div>
+		</nav>
+
 	</section>
 
 	<!-- footer -->
 	<footer data-role="footer" data-position="fixed">
 		<button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-carat-l" id='caracterizacao_viagem_simples_back'>Voltar</button>
 	</footer>
-
 
 </section>

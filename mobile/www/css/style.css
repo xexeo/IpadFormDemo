@@ -1,12 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 21, 2015, 4:42:25 PM
-    Author     : mangeli
-*/
 .noshadow {
 	-moz-box-shadow: none !important;
 	-webkit-box-shadow: none !important;
@@ -42,11 +33,6 @@ and open the template in the editor.
 	display: inline;
 }
 
-.ui-content h2 {
-	font-weight: bold;
-	font-size: x-large;
-}
-
 .center {
 	text-align: center;
 }
@@ -55,11 +41,48 @@ and open the template in the editor.
 	margin-bottom: 2%;
 }
 
-.separator {
+div.ui-block-b>h2 {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+section.ui-content>fieldset {
 	margin-bottom: 2%;
-	/*margin-top: .5em;
-	margin-bottom: .5em;
-	vertical-align: middle;*/
+	min-height: 60px;
+	line-height: 44px;
+}
+
+section.ui-content fieldset>legend, section.ui-content fieldset>label {
+	display: inline;
+	font-weight: bold;
+	font-size: x-large;
+	line-height: 60px;
+	text-align: right;
+	padding-right: .5em;
+}
+
+section.ui-content>fieldset>div.ui-block-b {
+	text-align: left;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-a {
+	text-align: right;
+	width: 30%;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-b {
+	text-align: left;
+	width: 20%;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-c {
+	text-align: center;
+	width: 20%;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-d {
+	text-align: left;
+	width: 30%;
 }
 
 #section_v_simples {
@@ -162,15 +185,10 @@ and open the template in the editor.
 	line-height: 100px;
 }
 
-fieldset.alinhado {
-	display: inline;
-}
-
 /* selectors with "display: none" on start */
 #sel_tipo_veiculo_2, #grupo_propriedade_simples, #grupo_combustivel_simples, #grupo_caracterizacao_simples_avancar,
 	#grupo_placa_estrangeira_simples, #grupo_pais_simples, #grupo_identificacao_visual_simples_avancar, #grupo_destino_simples,
 	#grupo_frequencia_simples, #grupo_motivo_rota_simples, #grupo_pessoas_simples, #grupo_pessoas_trabalho_simples,
-	#grupo_motivo_viagem_simples, #grupo_renda_simples,
-	#grupo_caracterizacao_viagem_simples_avancar {
+	#grupo_motivo_viagem_simples, #grupo_renda_simples, #grupo_caracterizacao_viagem_simples_avancar {
 	display: none;
 }
