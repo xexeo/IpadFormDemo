@@ -1,7 +1,11 @@
+/* global util, registro */
+
 controllers.caracterizacao_simples = {
     config : function(){
         var me = controllers.caracterizacao_simples;
-        me.fillSelect();
+		me.inicializaElementos();
+		me.recuperaDadosRegistro();
+		me.progressoTela();
         me.buttons();
     },
     
@@ -11,34 +15,47 @@ controllers.caracterizacao_simples = {
         });
         
        $("#caracterizacao_simples_avancar").click(function(){
-           app.trocaPagina('caracterizacao_viagem_1.html', controllers.caracterizacao_viagem_1_simples);
+           app.trocaPagina('caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
        })
     },
     
-    fillSelect : function(){
-        var anos = "<option value='-1'>Selecione</option>\n";
-        
+	//Inicializa os elementos da tela
+    inicializaElementos : function(){
+    	
+    	var lista_anos = [];
         for (var ano=2016;ano>1899;ano--){
-            anos += "<option value='" + String(ano) + "'>" + String(ano) + "</option>\n";
+        	lista_anos = lista_anos.concat(ano);
         }
+        util.inicializaSelect("ano_simples", lista_anos);
         
-        $("#ano_simples").html(anos).selectmenu("refresh", true);
-        
-        //TODO: implementar restrição a combustíveis de moto - necessita códigos veículos leves
-        
-        var combustiveis = ['Álcool/Etanol', 'Bi-Combustível/Etanol', 'Diesel',
-                            'Gasolina', 'GNV/Gás Natural', 'Híbrido'
-                            ];
-        var insert_combustiveis = "<option value='-1'>Selecione</option>\n";
-        
-        $.each(combustiveis, function(index, item){
-            insert_combustiveis += "<option value='" + item + "'>" + item + "</option>\n"; 
-        })
-        
-        $("#combustivel_simples").html(insert_combustiveis).selectmenu("refresh", true);
+        var lista_propriedades = ['Próprio', 'Alugado/Fretado', 'Empresa', 'Taxi', 'Serviços Públicos', 'Outros'];
+        util.inicializaSelect("propriedade_simples", lista_propriedades);
+
+        var lista_combustiveis = ['Álcool/Etanol', 'Bi-Combustível/Etanol', 'Diesel', 'Gasolina', 'GNV/Gás Natural', 'Híbrido'];
+        // Se o veículo leve for moto, as opções para combustível são diferentes
+        if (registro.codVeiculo == 'tpVL03') {
+        	combustiveis = ['Bi-Combustível/Etanol', 'Gasolina'];
+		}
+        util.inicializaSelect("combustivel_simples", lista_combustiveis);
+	},
+
+	
+	//Preenche os elementos da tela com os valores salvos no registro
+	recuperaDadosRegistro : function() {
+
+		util.recuperaSelect(registro.ano, "ano_simples", "grupo_propriedade_simples");
+		util.recuperaSelect(registro.propriedade, "propriedade_simples", "grupo_combustivel_simples");
+		util.recuperaSelect(registro.combustivel, "combustivel_simples", "grupo_caracterizacao_simples_avancar");
+	},
+
+
+	//Controla o show e hide dos elementos da tela
+	progressoTela : function() {
+		
+		util.progressoSelect("ano", "ano_simples", "grupo_propriedade_simples");
+		util.progressoSelect("propriedade", "propriedade_simples", "grupo_combustivel_simples");
+		util.progressoSelect("combustivel", "combustivel_simples", "grupo_caracterizacao_simples_avancar");
     }
-    
-    
     
 };
 

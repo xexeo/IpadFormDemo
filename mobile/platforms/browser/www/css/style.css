@@ -1,34 +1,24 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 21, 2015, 4:42:25 PM
-    Author     : mangeli
-*/
-
 .noshadow {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
 }
 
-.center-btn{
-    margin: 0 auto !important;
+.center-btn {
+	margin: 0 auto !important;
 }
 
-.wo-margin-btn{
-    margin: 0 !important;
+.wo-margin-btn {
+	margin: 0 !important;
 }
 
-.middle-btn:after{
-  top: 50% !important;
-  margin-top: -11px;
+.middle-btn:after {
+	top: 50% !important;
+	margin-top: -11px;
 }
 
-.small-btn{
-    background: #059 !important;
+.small-btn {
+	background: #059 !important;
 }
 
 .ui-icon-myMute:after {
@@ -39,19 +29,166 @@ and open the template in the editor.
 	background-image: url("../icons/SVG/round-arrow-1.svg");
 }
 
-.ui-content h1,h2,h3{
-    display: inline;
+.ui-content h1, h2, h3 {
+	display: inline;
 }
 
-fieldset.alinhado{
-    display: inline;
+.center {
+	text-align: center;
 }
 
-/* Fallback */
-/*
-.ui-nosvg .ui-icon-myicon:after {
-	background-image: url("iconimg.png");
-}*/
-            
+.menu_separator {
+	margin-bottom: 2%;
+}
 
-            
+div.ui-block-b>h2 {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+section.ui-content>fieldset {
+	margin-bottom: 2%;
+	min-height: 60px;
+	line-height: 44px;
+}
+
+section.ui-content fieldset>legend, section.ui-content fieldset>label {
+	display: inline;
+	font-weight: bold;
+	font-size: x-large;
+	line-height: 60px;
+	text-align: right;
+	padding-right: .5em;
+}
+
+section.ui-content>fieldset>div.ui-block-b {
+	text-align: left;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-a {
+	text-align: right;
+	width: 30%;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-b {
+	text-align: left;
+	width: 20%;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-c {
+	text-align: center;
+	width: 20%;
+}
+
+section.ui-content>fieldset.ui-grid-c>.ui-block-d {
+	text-align: left;
+	width: 30%;
+}
+
+#section_v_simples {
+	width: 35%;
+}
+
+#section_v_semireboques {
+	width: 30%;
+}
+
+#section_v_combinados {
+	width: 35%;
+}
+
+#section_v_reboques {
+	width: 35%;
+}
+
+.troca_classe_veiculo {
+	width: 15%;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0;
+	margin: 0% 3%;
+	line-height: 640px;
+}
+
+.troca_classe_veiculo .ui-grid-a {
+	float: left;
+}
+
+.troca_classe_veiculo .ui-grid-c {
+	float: right;
+}
+
+.troca_classe_veiculo img {
+	vertical-align: middle;
+	width: 80px;
+}
+
+.classe_veiculo {
+	display: inline-block;
+	vertical-align: top;
+	padding: 0;
+	margin: 0 2%;
+	max-height: 640px;
+}
+
+.classe_veiculo h2 {
+	text-align: center;
+	display: block;
+	margin: 0px;
+	font-weight: bold;
+	font-size: large;
+}
+
+.tipos_veiculos {
+	display: inline-block;
+	border: solid;
+	text-align: center;
+	width: auto;
+	padding: 0% 0%;
+	margin: 2% 5%;
+}
+
+.tipos_veiculos ol {
+	display: inherit;
+	list-style: none;
+	text-align: center;
+	width: inherit;
+	padding: 0%;
+	margin: 0%;
+	min-height: 600px;
+}
+
+.tipos_veiculos ol li {
+	display: inline;
+	vertical-align: middle;
+	margin: 0px 10px;
+}
+
+.img_sel {
+	vertical-align: middle;
+}
+
+#section_v_simples li {
+	line-height: 65px;
+}
+
+#section_v_semireboques li {
+	line-height: 100px;
+}
+
+#section_v_combinados  li {
+	line-height: 100px;
+}
+
+#section_v_reboques li {
+	line-height: 100px;
+}
+
+/* selectors with "display: none" on start */
+#sel_tipo_veiculo_2, #grupo_propriedade_simples, #grupo_combustivel_simples, #grupo_caracterizacao_simples_avancar,
+	#grupo_placa_estrangeira_simples, #grupo_pais_simples, #grupo_identificacao_visual_simples_avancar, #grupo_destino_simples,
+	#grupo_frequencia_simples, #grupo_motivo_rota_simples, #grupo_pessoas_simples, #grupo_pessoas_trabalho_simples,
+	#grupo_motivo_viagem_simples, #grupo_renda_simples, #grupo_caracterizacao_viagem_simples_avancar {
+	display: none;
+}

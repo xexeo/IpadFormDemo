@@ -1,4 +1,5 @@
 <section data-role="page" id="selecionar_tipo" data-transition="slide" data-theme="a">
+	
 	<!-- header -->
 	<header data-role="header">
 		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
@@ -6,30 +7,76 @@
 	</header>
 
 	<!-- content -->
-	<section role="main" class="ui-content">
-		<div class="ui-grid-b">
-			<div class="ui-block-a" style="width: 42%">Veículos Simples</div>
-			<div class="ui-block-b" style="width: 42%">Semi-reboques</div>
-			<div class="ui-block-c" style="width: 16%">&nbsp;</div>
-		</div>
-		<div class="ui-grid-b">
-			<div class="ui-block-a" style="width: 42%">
-				<img src="../img/tipoVeiculo/tpVL01.png" alt="VL01" class="img_sel v-simples" id="tpVL01" />
-				<img src="../img/tipoVeiculo/tpVL02.png" alt="VL02" class="img_sel v-simples" id="tpVL02" />
-				<img src="../img/tipoVeiculo/tpVL03.png" alt="VL03" class="img_sel v-simples" id="tpVL03" />
-				<img src="../img/tipoVeiculo/tpVL04.png" alt="VL04" class="img_sel v-simples" id="tpVL04" />
-				<img src="../img/tipoVeiculo/tpVL05.png" alt="VL05" class="img_sel v-simples" id="tpVL05" />
-				<img src="../img/tipoVeiculo/tp2CB.png" alt="2CB" class="img_sel v-onibus" id="tp2CB" />
-				<img src="../img/tipoVeiculo/tp3CB.png" alt="3CB" class="img_sel v-onibus" id="tp3CB" />
-				<img src="../img/tipoVeiculo/tp4CB.png" alt="4CB" class="img_sel v-onibus" id="tp4CB" />
-				<img src="../img/tipoVeiculo/tp2C.png" alt="2C" class="img_sel v-carga" id="tp2C" />
-				<img src="../img/tipoVeiculo/tp3C.png" alt="3C" class="img_sel v-carga" id="tp3C" />
-				<img src="../img/tipoVeiculo/tp4C.png" alt="4C" class="img_sel v-carga" id="tp4C" />
-				<img src="../img/tipoVeiculo/tp4CD.png" alt="4CD" class="img_sel v-carga" id="tp4CD" />
-			</div>
-			<div class="ui-block-b" style="width: 42%">Semi-reboques</div>
-			<div class="ui-block-c" style="width: 16%">Figura 1/2</div>
-		</div>
+	<section role="main" class="ui-content" id="sel_tipo_veiculo_1">
+		
+		<section class="ui-grid-a classe_veiculo" id="section_v_simples">
+			<h2>Veículos Simples</h2>
+			<nav class="tipos_veiculos">
+				<ol>
+					<li><img src="../img/tipoVeiculo/simples/tpVL01.png" alt="VL01" class="img_sel v-simples" id="tpVL01" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tpVL02.png" alt="VL02" class="img_sel v-simples" id="tpVL02" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tpVL03.png" alt="VL03" class="img_sel v-simples" id="tpVL03" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tpVL04.png" alt="VL04" class="img_sel v-simples" id="tpVL04" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tpVL05.png" alt="VL05" class="img_sel v-simples" id="tpVL05" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp2CB.png" alt="2CB" class="img_sel v-onibus" id="tp2CB" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp3CB.png" alt="3CB" class="img_sel v-onibus" id="tp3CB" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp4CB.png" alt="4CB" class="img_sel v-onibus" id="tp4CB" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp2C.png" alt="2C" class="img_sel v-carga" id="tp2C" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp3C.png" alt="3C" class="img_sel v-carga" id="tp3C" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp4C.png" alt="4C" class="img_sel v-carga" id="tp4C" /></li>
+					<li><img src="../img/tipoVeiculo/simples/tp4CD.png" alt="4CD" class="img_sel v-carga" id="tp4CD" /></li>
+				</ol>
+			</nav>
+		</section>
+
+		<section class="ui-grid-b classe_veiculo" id="section_v_semireboques">
+			<h2>Semi-reboques</h2>
+			<nav class="tipos_veiculos">
+				<ol>
+					<li><img src="../img/tipoVeiculo/semireboques/tp2S1.png" alt="2S1" class="img_sel v-semireboque" id="tp2S1" /></li>
+					<li><img src="../img/tipoVeiculo/semireboques/tp2S2.png" alt="2S2" class="img_sel v-semireboque" id="tp2S2" /></li>
+					<li><img src="../img/tipoVeiculo/semireboques/tp2S3.png" alt="2S3" class="img_sel v-semireboque" id="tp2S3" /></li>
+					<li><img src="../img/tipoVeiculo/semireboques/tp3S1.png" alt="3S1" class="img_sel v-semireboque" id="tp3S1" /></li>
+					<li><img src="../img/tipoVeiculo/semireboques/tp3S2.png" alt="3S2" class="img_sel v-semireboque" id="tp3S2" /></li>
+					<li><img src="../img/tipoVeiculo/semireboques/tp3S3.png" alt="3S3" class="img_sel v-semireboque" id="tp3S3" /></li>
+				</ol>
+			</nav>
+		</section>
+
+		<section class="ui-grid-c troca_classe_veiculo">
+			<img id="selTipoVeiculo_1" src="../icons/SVG/right-arrow.svg" class="switch_classe_veiculo" />
+		</section>
+	</section>
+
+	<section role="main" class="ui-content" id="sel_tipo_veiculo_2">
+		<section class="ui-grid-a troca_classe_veiculo">
+			<img id="selTipoVeiculo_2" src="../icons/SVG/left-arrow.svg" class="switch_classe_veiculo" />
+		</section>
+		<section class="ui-grid-b classe_veiculo" id="section_v_combinados">
+			<h2>Combinados</h2>
+			<nav class="tipos_veiculos">
+				<ol>
+					<li><img src="../img/tipoVeiculo/combinados/tp3T4.png" alt="3T4" class="img_sel v-combinado" id="tp3T4" /></li>
+					<li><img src="../img/tipoVeiculo/combinados/tp3T6.png" alt="3T6" class="img_sel v-combinado" id="tp3T6" /></li>
+					<li><img src="../img/tipoVeiculo/combinados/tp3T6B.png" alt="3T6B" class="img_sel v-combinado" id="tp3T6B" /></li>
+				</ol>
+			</nav>
+		</section>
+
+		<section class="ui-grid-c classe_veiculo" id="section_v_reboques">
+			<h2>Reboques</h2>
+			<nav class="tipos_veiculos">
+				<ol>
+					<li><img src="../img/tipoVeiculo/reboques/tp2C2.png" alt="2C2" class="img_sel v-reboque" id="tp2C2" /></li>
+					<li><img src="../img/tipoVeiculo/reboques/tp2C3.png" alt="2C3" class="img_sel v-reboque" id="tp2C3" /></li>
+					<li><img src="../img/tipoVeiculo/reboques/tp3C2.png" alt="3C2" class="img_sel v-reboque" id="tp3C2" /></li>
+					<li><img src="../img/tipoVeiculo/reboques/tp3C3.png" alt="3C3" class="img_sel v-reboque" id="tp3C3" /></li>
+					<li><img src="../img/tipoVeiculo/reboques/tp3D4.png" alt="3D4" class="img_sel v-reboque" id="tp3D4" /></li>
+					<li><img src="../img/tipoVeiculo/reboques/tp3Q4.png" alt="3Q4" class="img_sel v-reboque" id="tp3Q4" /></li>
+				</ol>
+			</nav>
+		</section>
+		
 	</section>
 
 	<!-- sem rodapé -->
