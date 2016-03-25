@@ -1,0 +1,53 @@
+<section data-role="page" id="identificacao_visual_simples" data-transition="slide" data-theme="a">
+	<!-- header -->
+	<header data-role="header">
+		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
+		<h1>2. Identificação visual do veículo</h1>
+	</header>
+
+	<!--content -->
+	<section role="main" class="ui-content">
+
+		<fieldset class="ui-grid-a" id="grupo_reboque_simples">
+			<legend class="ui-block-a">Possui reboque:</legend>
+			<div data-role="controlgroup" class="ui-block-b" data-type="horizontal">
+				<input type="radio" name="reboque_simples" id="reboque_simples_sim" value="sim">
+				<label for="reboque_simples_sim">Sim</label>
+				<input type="radio" name="reboque_simples" id="reboque_simples_nao" value="nao">
+				<label for="reboque_simples_nao">Não</label>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a" id="grupo_placa_estrangeira_simples">
+			<legend class="ui-block-a">Placa estrangeira:</legend>
+			<div data-role="controlgroup" data-type="horizontal" class="ui-block-b">
+				<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_sim" value="sim" />
+				<label for="placa_estrangeira_simples_sim">Sim</label>
+				<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_nao" value="nao" />
+				<label for="placa_estrangeira_simples_nao">Não</label>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a" id="grupo_pais_simples">
+			<legend class="ui-block-a">País:</legend>
+			<div class="ui-block-b">
+				<select name="pais_simples" id="pais_simples">
+				</select>
+			</div>
+		</fieldset>
+
+		<nav class="ui-grid-a" id="grupo_identificacao_visual_simples_avancar">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id='identificacao_visual_simples_avancar'>Avançar</button>
+			</div>
+		</nav>
+
+	</section>
+
+	<!-- footer -->
+	<footer data-role="footer" data-position="fixed">
+		<button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-carat-l" id='identificacao_visual_simples_back'>Voltar</button>
+	</footer>
+
+</section>

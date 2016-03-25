@@ -23,4 +23,11 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <preference name="Orientation" value="landscape" />
+    <preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" />
+    <preference name="AppendUserAgent" value="My Browser" />
+    <preference name="target-device" value="universal" />
+    <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
+    <preference name="SuppressesLongPressGesture" value="true" />
+    <preference name="Suppresses3DTouchGesture" value="true" />
 </widget>
