@@ -40,7 +40,8 @@ var app = {
 	 * bind any events that are required on startup to listeners:
 	 */
 	bindEvents : function() {
-            document.addEventListener("deviceready", this.onDeviceReady, false);
+            document.addEventListener('deviceready', app.onDeviceReady);
+            console.log('bindindEvents');
             
 	
 	},
@@ -49,16 +50,25 @@ var app = {
 	 * this runs when the device is ready for user interaction:
 	 */
 	onDeviceReady : function() {
-		console.log('device ready');
-                console.log(device.cordova);
-                console.log('navigator');
-                navigator.splashscreen.hide();
+            console.log('device ready');
+                
+            if(device.platform == 'iOS' || device.platform == 'browser'){
+                setTimeout(function() {
+                    navigator.splashscreen.hide();
+                    console.log("esperando" + device.platform);
+                }, 3000);
+            }
+            
+            
+               
 	},
-	/*
-	 * appends @error to the message div:
-	 */
-	showError : function(error) {
-		app.display(error);
+        
+        onFileSystemReady : function(){
+            console.log('file system ready');  
+        },
+	
+	logError : function(error) {
+		console.log(error);
 	},
 
 	extraConfig : function() {
@@ -92,19 +102,14 @@ var app = {
         
         baseUrl : null,
         
-        
-
-
 }; // end of app
 
 // Registro do momento
 var registro = {};
 
 $(document).ready(function() {
-        app.initialize();
-	insert_controllers.insert();
-	
- 
+    insert_controllers.insert();
+    app.initialize();
 });
 
 

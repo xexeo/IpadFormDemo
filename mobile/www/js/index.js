@@ -55,7 +55,7 @@ var app = {
             if(device.platform == 'iOS' || device.platform == 'browser'){
                 setTimeout(function() {
                     navigator.splashscreen.hide();
-                    console.log(device.platform);
+                    console.log("esperando" + device.platform);
                 }, 3000);
             }
             

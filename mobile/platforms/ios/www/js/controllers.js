@@ -22,6 +22,7 @@ var insert_controllers={
                         s.type = "text/javascript";
                         s.src = me.controller_files_path + item;
                         $("head").append(s);
+                        //$(document).append(s);
                 });
     }
 };

@@ -58,8 +58,14 @@ var app = {
                     console.log(device.platform);
                 }, 3000);
             }
+            
+            
                
 	},
+        
+        onFileSystemReady : function(){
+            console.log('file system ready');  
+        },
 	
 	logError : function(error) {
 		console.log(error);
