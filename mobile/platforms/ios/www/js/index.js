@@ -32,6 +32,7 @@ var app = {
 	initialize : function() {
 		this.bindEvents();
 		this.extraConfig();
+                this.baseUrl = window.location.href.replace("index.html", "");
 
 	},
 
@@ -39,7 +40,9 @@ var app = {
 	 * bind any events that are required on startup to listeners:
 	 */
 	bindEvents : function() {
-		document.addEventListener('deviceready', this.onDeviceReady, false);
+            document.addEventListener("deviceready", this.onDeviceReady, false);
+            
+	
 	},
 
 	/*
@@ -47,6 +50,9 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
+                console.log(device.cordova);
+                console.log('navigator');
+                navigator.splashscreen.hide();
 	},
 	/*
 	 * appends @error to the message div:
@@ -70,7 +76,7 @@ var app = {
 			$(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
 		}
 
-		$(":mobile-pagecontainer").pagecontainer("change", view);
+		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
 	},
 
 	setAtributo : function(nome, valor) {
@@ -84,34 +90,9 @@ var app = {
                 
 	},
         
-        /*
-                     // it will return base domain name only. e.g. yahoo.co.in
-        findBaseUrl : function() {
-            var r;
-                try {
-                    var url = location.href;
-
-                    var start = url.indexOf('//');
-                    if (start < 0)
-                        start = 0 
-                    else 
-                        start = start + 2;
-
-                    var end = url.indexOf('/', start);
-                    if (end < 0) end = url.length - start;
-
-                    var baseURL = url.substring(start, end);
-                    r = baseURL;
-                }
-                catch (arg) {
-                    r = null;
-                } finally{
-                    return r;    
-                }
-                
-            },
-       
-          */  
+        baseUrl : null,
+        
+        
 
 
 }; // end of app
@@ -120,19 +101,10 @@ var app = {
 var registro = {};
 
 $(document).ready(function() {
+        app.initialize();
 	insert_controllers.insert();
-	app.initialize();
-
+	
+ 
 });
 
-/* all visited pages in the cache */
-$(":mobile-pagecontainer").page({
-	domCache : true
-});
 
-$(document).bind("mobileinit", function() {
-	$.mobile.page.prototype.options.domCache = true;
-});
-
-// visited views
-// //var pilhaViews = [];

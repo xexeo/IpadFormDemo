@@ -9,11 +9,11 @@ controllers.caracterizacao_viagem_simples = {
     
     buttons : function(){
         $('#caracterizacao_viagem_simples_back').click( function(){
-            app.trocaPagina('caracterizacao_simples.html', controllers.caracterizacao_simples);
+            app.trocaPagina('views/simples/caracterizacao_simples.html', controllers.caracterizacao_simples);
         });
         
        $("#caracterizacao_viagem_simples_avancar").click(function(){
-           app.trocaPagina('pergunta_final_simples.html', controllers.pergunta_final_simples);
+           app.trocaPagina('views/simples/pergunta_final_simples.html', controllers.pergunta_final_simples);
        })
     },
     

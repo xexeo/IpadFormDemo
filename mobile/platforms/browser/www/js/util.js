@@ -48,7 +48,16 @@ var util = {
 	},
 
 	// Funções para o progresso
-	progressoRadioSimNao : function(nome_registro, nome_campo, grupo_proximo) {
+	/**
+	 * 
+	 * @param nome_registro
+	 *            nome do atributo da variável global registro
+	 * @param nome_campo
+	 *            id do componente html
+	 * @param grupo_proximo
+	 *            id da div que irá sofrer show/hide
+	 */
+        progressoRadioSimNao : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo + '_sim').click(function() {
 			$('#' + grupo_proximo).show();
 			app.setAtributo(nome_registro, true);
@@ -80,6 +89,15 @@ var util = {
 		});
 	},
 
+        /**
+	 * 
+	 * @param nome_registro
+	 *            nome do atributo da variável global registro
+	 * @param nome_campo
+	 *            id do componente html
+	 * @param grupo_proximo
+	 *            id da div que irá sofrer show/hide
+	 */
 	progressoInputText : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
 			app.setAtributo(nome_registro, $(this).val());

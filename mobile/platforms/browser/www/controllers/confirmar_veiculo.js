@@ -7,7 +7,7 @@ controllers.confirmar_veiculo = {
             });
             $("#conf_veic_sim").click(function(){
                 
-                app.trocaPagina(registro.classeVeiculo + '/identificacao_visual.html',
+                app.trocaPagina("views/" + registro.classeVeiculo + '/identificacao_visual.html',
                                 controllers['identificacao_visual_' + registro.classeVeiculo]);
             });
         }

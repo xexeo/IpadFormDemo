@@ -7,7 +7,7 @@ controllers.pergunta_final_simples = {
     
     buttons : function(){
         $('#pergunta_final_simples_back').click( function(){
-            app.trocaPagina('caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
+            app.trocaPagina('views/simples/caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
         });
         
        $("#pergunta_final_simples_avancar").click(function(){

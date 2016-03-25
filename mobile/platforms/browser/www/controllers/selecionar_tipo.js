@@ -21,7 +21,7 @@ controllers.selecionar_tipo = {
 				app.setAtributo('classeVeiculo', 'carga');
 			}
 
-			app.trocaPagina("confirmar_veiculo.html", controllers.confirmar_veiculo);
+			app.trocaPagina("views/confirmar_veiculo.html", controllers.confirmar_veiculo);
 		});
 
 	},
