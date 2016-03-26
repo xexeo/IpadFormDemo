@@ -48,7 +48,7 @@
         <preference name="SplashScreenWidth" value="1024"/>
         <preference name="SplashScreenHeight" value="768"/>
         <preference name="ShowSplashScreen" value="true"/>
-        <preference name="AutoHideSplashScreen" value="true"/>
+        <preference name="AutoHideSplashScreen" value="false"/>
     </platform>
     
     
