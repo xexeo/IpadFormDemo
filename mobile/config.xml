@@ -44,11 +44,11 @@
     
     <platform name="browser">
         <preference name="SplashScreen" value="res/splash_screen.png"/>
-        <preference name="SplashScreenDelay" value="5000"/> 
+        <preference name="SplashScreenDelay" value="3000"/> 
         <preference name="SplashScreenWidth" value="1024"/>
         <preference name="SplashScreenHeight" value="768"/>
         <preference name="ShowSplashScreen" value="true"/>
-        <preference name="AutoHideSplashScreen" value="false"/>
+        <preference name="AutoHideSplashScreen" value="true"/>
     </platform>
     
     

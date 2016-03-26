@@ -41,6 +41,9 @@ var app = {
 	 */
 	bindEvents : function() {
             document.addEventListener('deviceready', app.onDeviceReady);
+            //window.addEventListener('filePluginIsReady', app.onFileSystemReady, false);    
+            
+            
             console.log('bindindEvents');
             
 	
@@ -50,21 +53,57 @@ var app = {
 	 * this runs when the device is ready for user interaction:
 	 */
 	onDeviceReady : function() {
+            
             console.log('device ready');
+            
                 
-            if(device.platform == 'iOS' || device.platform == 'browser'){
+            if(device.platform == 'iOS' || (device.platform == 'browser' && device.model == 'Firefox')){
+                //alert('tô no ' + device.platform);
                 setTimeout(function() {
                     navigator.splashscreen.hide();
-                    console.log(device.platform);
+                    console.log("esperando" + device.platform);
+                    
                 }, 3000);
+                app.onFileSystemReady();
+            }
+            
+            if(device.platform == 'browser' && device.model != 'Firefox'){
+                alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
             }
             
             
+
                
 	},
         
         onFileSystemReady : function(){
-            console.log('file system ready');  
+            console.log("folder dos dados: ", cordova.file.dataDirectory);
+            alert("folder dos dados: ", cordova.file.dataDirectory);
+            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
+                console.log('file system ready: ', dir);
+                alert('file system ready: ', dir);
+                dir.getFile("log.txt", {create: true}, function(file){
+                    console.log("arquivo de log: ", file);
+                    alert("arquivo de log: ", file);
+                    app.logFile = file;
+                });    
+            }, function(err){
+                console.log("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
+                alert("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
+            });
+            clearTimeout();
+        },
+        
+        writeLog : function(str){
+            var log = str + " [" + (new Date()) + "]\n";
+            app.logFile.createWriter(function(fileWriter) {
+                fileWriter.seek(fileWriter.length);
+                var blob = new Blob([log], {type:'text/plain'});
+                fileWriter.write(blob);
+                console.log("ok, in theory i worked");
+            }, function(){
+                console.log('error writing log file');
+            });
         },
 	
 	logError : function(error) {
@@ -87,6 +126,7 @@ var app = {
 		}
 
 		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+                app.writeLog(view);
 	},
 
 	setAtributo : function(nome, valor) {
@@ -101,6 +141,8 @@ var app = {
 	},
         
         baseUrl : null,
+        
+        logFile : null,
         
 }; // end of app
 
