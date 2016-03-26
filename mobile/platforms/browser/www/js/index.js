@@ -53,9 +53,10 @@ var app = {
             console.log('device ready');
                 
             if(device.platform == 'iOS' || device.platform == 'browser'){
+                alert('tô no ' + device.platform);
                 setTimeout(function() {
                     navigator.splashscreen.hide();
-                    console.log(device.platform);
+                    console.log("esperando" + device.platform);
                 }, 3000);
             }
             
