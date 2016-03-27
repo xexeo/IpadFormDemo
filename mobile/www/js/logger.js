@@ -13,20 +13,24 @@ myLogger = {
         var me = this;
         myLogger._logWriter = writer;
         myLogger._logWriter.onwriteend = function(e){
-            me._testaFila();
+            if(myLogger._fila.length > 0){
+                myLogger._internalWrite(myLogger._fila.shift());
+            } else {
+                me._ocupado = false;
+            }
         };
         myLogger._logWriter.onerror = function(e){
-          console.log('Erro de escrita: ' + e.message);  
+            console.log('Erro de escrita: ' + e.message);  
         };
     },
     
     write: function(str){
-        myLogger._fila.push(str);
-        if (!myLogger._ocupado){
+        if(!myLogger._ocupado){
             myLogger._ocupado = true;
-            myLogger._testaFila();
+            myLogger._internalWrite(str);
+        } else {
+            myLogger._fila.push(str);
         }
-        
     },
     
     /**
@@ -45,13 +49,13 @@ myLogger = {
        });
    },
     
-    _testaFila : function(){
+    /*_testaFila : function(){
         if (myLogger._fila.length > 0){
             myLogger._internalWrite(myLogger._fila.shift());
         } else {
             myLogger._ocupado = false;
         }
-    },
+    },*/
     
     _internalWrite : function(str){
         var log = "[" + (new Date()) + "] " + str + "\n";
