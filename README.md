@@ -8,8 +8,8 @@ O ambiente de desenvolvimento precisa da instalação de `node.js`, `npm` (geren
 * [instalação `node.js`](https://nodejs.org/en/download/package-manager/)
 * [upgrade do `node.js`via `npm`] (https://davidwalsh.name/upgrade-nodejs)
 * [instalação `cordova`] (https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli)
-* [instalação SDK `android`] (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html#requirements-and-support)
-* [instalação SDK `iOS`](https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html#requirements-and-support)
+* [instalação SDK `android` (opcional)] (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html#requirements-and-support)
+* [instalação SDK `iOS` (apenas em Macs)](https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html#requirements-and-support)
 
 ### Plugins cordova necessários
 Comandos para instalação dos plugins do cordova necessários para a compilação do aplicativo. Esses comandos devem ser executados no diretório raiz do projeto. No nosso caso, no diretório `mobile`.
