@@ -46,8 +46,10 @@ var app = {
 	 */
 	bindEvents : function() {
             document.addEventListener('deviceready', app.onDeviceReady);
-            //window.addEventListener('filePluginIsReady', app.onFileSystemReady, false);    
-             console.log('bindindEvents');
+            //tentativa para chrome e opera 
+            //document.addEventListener('filePluginIsReady', app.onFileSystemReady, false);    
+            
+            console.log('bindindEvents');
     	},
 
 

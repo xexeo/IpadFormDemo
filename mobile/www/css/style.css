@@ -190,5 +190,5 @@ section.ui-content>fieldset.ui-grid-c>.ui-block-d {
 	#grupo_placa_estrangeira_simples, #grupo_pais_simples, #grupo_identificacao_visual_simples_avancar, #grupo_destino_simples,
 	#grupo_frequencia_simples, #grupo_motivo_rota_simples, #grupo_pessoas_simples, #grupo_pessoas_trabalho_simples,
 	#grupo_motivo_viagem_simples, #grupo_renda_simples, #grupo_caracterizacao_viagem_simples_avancar {
-	display: none;
+	display: none;        
 }
