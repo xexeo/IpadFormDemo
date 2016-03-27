@@ -30,4 +30,9 @@ comando:
 
 __obs:__ Chrome e Opera apresentam problemas para acesso a arquivos.
 
+### Mantendo apenas um app disponível no iOS
+Uma solicitação do cliente é impedir o uso de outro aplicativo no dispositivo.
 
+* [Guided Access] (https://support.apple.com/en-us/HT202612)
+
+[Para funcionar depois do reboot o passcode do dispositivo deve estar desabilitado.](http://stackoverflow.com/questions/20864999/make-ios-application-run-at-startup)
