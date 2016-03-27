@@ -1,8 +1,18 @@
 # ipaddnit
 Repositorio do projeto ipad para DNIT
 
-## plugins necessários
-Comandos para instalação dos plugins do cordova necessários para a compilação do aplicativo:
+## Módulo mobile 
+### Ambiente de desenvolvimento
+O ambiente de desenvolvimento precisa da instalação de `node.js`, `npm` (gerenciador de pacotes do `node.js`), `cordova`, e SDKs para as plataformas de deploy `android` e `iOS`. O deploy para a plataforma browser não precisa de um SDK.
+
+* [intalação `node.js`](https://nodejs.org/en/download/package-manager/)
+* [upgrade do `node.js`via `npm`] (https://davidwalsh.name/upgrade-nodejs)
+* [instalação `cordova`] (https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli)
+* [instalação SDK `android`] (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html#requirements-and-support)
+* [instalação SDK `iOS`](https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html#requirements-and-support)
+
+### Plugins cordova necessários
+Comandos para instalação dos plugins do cordova necessários para a compilação do aplicativo. Esses comandos devem ser executados no diretório raiz do projeto. No nosso caso, no diretório `mobile`.
 
 * `cordova plugin add cordova-plugin-device`
 * `cordova plugin add cordova-plugin-file`
@@ -12,7 +22,7 @@ A ausência dos plugins causa erros de execução, variáveis e métodos utiliza
 
 __ATENÇÃO:__ Os plugins podem ser desinstalados após um `pull` ou `checkout` do projeto. Verifique a instalação dos plugins em casos de erro de execução.
 
-## emulação do aplicativo em browser
+### Emulação do aplicativo em browser
 Devido aos plugins que dependem de informações do dispositivo, a simulação do aplicativo em um browser precisa ocorrer com o 
 comando:
 
