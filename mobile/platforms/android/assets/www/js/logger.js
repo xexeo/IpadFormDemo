@@ -6,7 +6,7 @@ myLogger = {
     _logWriter : null,
     
     setLogFile : function(arquivo){
-        myLogger._logFile = arquivo
+        myLogger._logFile = arquivo;
     },
     
     setLogWriter : function(writer){
@@ -49,14 +49,6 @@ myLogger = {
        });
    },
     
-    /*_testaFila : function(){
-        if (myLogger._fila.length > 0){
-            myLogger._internalWrite(myLogger._fila.shift());
-        } else {
-            myLogger._ocupado = false;
-        }
-    },*/
-    
     _internalWrite : function(str){
         var log = "[" + (new Date()) + "] " + str + "\n";
         var blob = new Blob([log], {type:'text/plain'});
@@ -68,8 +60,8 @@ myLogger = {
         } catch(e){
             console.log(e.message);
         }
-    },
+    }
         
-}
+};
 
 

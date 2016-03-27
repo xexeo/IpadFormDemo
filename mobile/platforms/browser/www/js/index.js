@@ -72,10 +72,9 @@ var app = {
         
         onFileSystemReady : function(){
             console.log("folder dos dados: ", cordova.file.dataDirectory);
+            
             window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
-                
                 console.log('file system ready: ', dir);
-                
                 dir.getFile("log.txt", {create: true}, function(file){
                     console.log("arquivo de log: ", file);
                     myLogger.setLogFile(file);
