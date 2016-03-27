@@ -5,7 +5,7 @@ Repositorio do projeto ipad para DNIT
 ### Ambiente de desenvolvimento
 O ambiente de desenvolvimento precisa da instalação de `node.js`, `npm` (gerenciador de pacotes do `node.js`), `cordova`, e SDKs para as plataformas de deploy `android` e `iOS`. O deploy para a plataforma browser não precisa de um SDK.
 
-* [intalação `node.js`](https://nodejs.org/en/download/package-manager/)
+* [instalação `node.js`](https://nodejs.org/en/download/package-manager/)
 * [upgrade do `node.js`via `npm`] (https://davidwalsh.name/upgrade-nodejs)
 * [instalação `cordova`] (https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli)
 * [instalação SDK `android`] (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html#requirements-and-support)
