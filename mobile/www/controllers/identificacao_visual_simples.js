@@ -2,7 +2,6 @@ controllers.identificacao_visual_simples = {
 	config : function() {
 		var me = controllers.identificacao_visual_simples;
 		me.inicializaElementos();
-		me.recuperaDadosRegistro();
 		me.progressoTela();
 		me.buttons();
 	},
@@ -23,37 +22,6 @@ controllers.identificacao_visual_simples = {
 		util.inicializaSelectPaises("pais_simples");
 	},
 
-	//Preenche os elementos da tela com os valores salvos no registro
-	recuperaDadosRegistro : function() {
-
-		util.recuperaRadioSimNao(registro.reboque, "reboque_simples", "grupo_placa_estrangeira_simples");
-		
-		if (registro.placa_estrangeira != null && registro.placa_estrangeira) {
-			$('#placa_estrangeira_simples_sim').prop('checked', true).checkboxradio('refresh');
-			$('#grupo_pais_simples').show();
-			$("#grupo_identificacao_visual_simples_avancar").hide();
-		} else if (registro.placa_estrangeira != null && !registro.placa_estrangeira) {
-			$('#placa_estrangeira_simples_nao').prop('checked', true).checkboxradio('refresh');
-			$('#grupo_pais_simples').hide();
-			$("#pais_simples option[value='-1']").attr('selected', true);
-		} else if (registro.placa_estrangeira == null) {
-			$('#placa_estrangeira_simples_nao').prop('checked', false).checkboxradio('refresh');
-			$('#placa_estrangeira_simples_sim').prop('checked', false).checkboxradio('refresh');
-			$('#grupo_pais_simples').hide();
-			$("#pais_simples option[value='-1']").attr('selected', true);
-			$("#grupo_identificacao_visual_simples_avancar").hide();
-		}
-		
-		if (registro.pais != null) {
-			$("#pais_simples option[value='" + registro.pais + "']").attr('selected', true);
-			$("#grupo_identificacao_visual_simples_avancar").show();
-		} else if (registro.placa_estrangeira != null && !registro.placa_estrangeira) {
-			$("#grupo_identificacao_visual_simples_avancar").show();
-		}
-		$("select#pais_simples").selectmenu("refresh", true);
-
-	},
-	
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		

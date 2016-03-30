@@ -4,7 +4,6 @@ controllers.caracterizacao_simples = {
     config : function(){
         var me = controllers.caracterizacao_simples;
 		me.inicializaElementos();
-		me.recuperaDadosRegistro();
 		me.progressoTela();
         me.buttons();
     },
@@ -40,15 +39,6 @@ controllers.caracterizacao_simples = {
 	},
 
 	
-	//Preenche os elementos da tela com os valores salvos no registro
-	recuperaDadosRegistro : function() {
-
-		util.recuperaSelect(registro.ano, "ano_simples", "grupo_propriedade_simples");
-		util.recuperaSelect(registro.propriedade, "propriedade_simples", "grupo_combustivel_simples");
-		util.recuperaSelect(registro.combustivel, "combustivel_simples", "grupo_caracterizacao_simples_avancar");
-	},
-
-
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		

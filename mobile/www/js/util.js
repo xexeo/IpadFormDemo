@@ -17,36 +17,6 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	// Funções para o recupera
-	recuperaRadioSimNao : function(reg, nome_campo, grupo_proximo) {
-		if (reg != null && reg) {
-			$('#' + nome_campo + '_sim').prop('checked', true).checkboxradio('refresh');
-			$('#' + grupo_proximo).show();
-		} else if (reg != null && !reg) {
-			$('#' + nome_campo + '_nao').prop('checked', true).checkboxradio('refresh');
-			$('#' + grupo_proximo).show();
-		} else if (reg == null) {
-			$('#' + nome_campo + '_sim').prop('checked', false).checkboxradio('refresh');
-			$('#' + nome_campo + '_nao').prop('checked', false).checkboxradio('refresh');
-			$('#' + grupo_proximo).hide();
-		}
-	},
-
-	recuperaSelect : function(reg, nome_campo, grupo_proximo) {
-		if (reg != null) {
-			$("#" + nome_campo + " option[value='" + reg + "']").attr('selected', true);
-			$("#" + grupo_proximo).show();
-		}
-		$("select#" + nome_campo).selectmenu("refresh", true);
-	},
-
-	recuperaInputText : function(reg, nome_campo, nome_proximo) {
-		if (reg != null) {
-			$("#" + nome_campo).attr('value', reg);
-			$("#" + grupo_proximo).show();
-		}
-	},
-
 	// Funções para o progresso
 	/**
 	 * 

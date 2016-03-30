@@ -2,7 +2,6 @@ controllers.caracterizacao_viagem_simples = {
     config : function(){
         var me = controllers.caracterizacao_viagem_simples;
 		me.inicializaElementos();
-		me.recuperaDadosRegistro();
 		me.progressoTela();
         me.buttons();
     },
@@ -13,7 +12,10 @@ controllers.caracterizacao_viagem_simples = {
         });
         
        $("#caracterizacao_viagem_simples_avancar").click(function(){
-           app.trocaPagina('views/simples/pergunta_final_simples.html', controllers.pergunta_final_simples);
+           // TODO Salvar dados do ciclo de consulta
+    	   
+    	   // Ir para tela inicial
+    	   app.trocaPagina('views/menu.html', controllers.menu);
        })
     },
     
@@ -46,26 +48,6 @@ controllers.caracterizacao_viagem_simples = {
 	},
 
 	
-	//Preenche os elementos da tela com os valores salvos no registro
-	recuperaDadosRegistro : function() {
-		util.recuperaSelect(registro.origem, "origem_simples", "grupo_destino_simples");
-		
-		util.recuperaSelect(registro.destino, "destino_simples", "grupo_frequencia_simples");
-        
-        util.recuperaInputText(registro.frequencia_num, "frequencia_num_simples", "grupo_motivo_rota_simples");
-        util.recuperaInputText(registro.frequencia_sel, "frequencia_sel_simples", "grupo_motivo_rota_simples");
-        
-        util.recuperaSelect(registro.motivo_rota, "motivo_rota_simples", "grupo_pessoas_simples");
-        
-        util.recuperaInputText(registro.pessoas, "pessoas_simples", "grupo_pessoas_trabalho_simples");
-        util.recuperaInputText(registro.pessoas_trabalho, "pessoas_trabalho_simples", "grupo_motivo_viagem_simples");
-        
-        util.recuperaSelect(registro.motivo_viagem, "motivo_viagem_simples", "grupo_renda_simples");
-        
-        util.recuperaSelect(registro.renda, "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
-	},
-
-
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		
