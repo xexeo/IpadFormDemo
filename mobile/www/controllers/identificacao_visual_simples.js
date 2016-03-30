@@ -28,7 +28,7 @@ controllers.identificacao_visual_simples = {
 			app.setAtributo('placa_estrangeira', true);
 
 			if (Number($('#pais_simples').val()) == -1) {
-				$("#grupo_identificacao_visual_simples_avancar").hide();
+				$("#grupo_placa_simples").hide();
 			}
 
 		});
@@ -42,10 +42,12 @@ controllers.identificacao_visual_simples = {
 			});
 			$("select#pais_simples").selectmenu("refresh", true);
 
-			$("#grupo_identificacao_visual_simples_avancar").show();
+			$("#grupo_placa_simples").show();
 		});
 		
-		util.progressoSelect("pais", "pais_simples", "grupo_identificacao_visual_simples_avancar");
+		util.progressoSelect("pais", "pais_simples", "grupo_placa_simples");
 		
+		util.progressoInputText("placa_letras", "placa_letras_simples", "grupo_placa_numeros_simples");
+		util.progressoInputText("placa_numeros", "placa_numeros_simples", "grupo_identificacao_visual_simples_avancar");
 	}
 };
