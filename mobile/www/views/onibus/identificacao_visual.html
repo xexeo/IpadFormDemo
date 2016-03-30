@@ -1,0 +1,56 @@
+<section data-role="page" id="identificacao_visual_onibus" data-transition="slide" data-theme="b">
+	<!-- header -->
+	<header data-role="header">
+		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
+		<h1>2. Identificação visual do veículo</h1>
+	</header>
+
+	<!--content -->
+	<section role="main" class="ui-content">
+
+		<fieldset class="ui-grid-a" id="grupo_placa_estrangeira_onibus">
+			<legend class="ui-block-a">Placa estrangeira:</legend>
+			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
+				<input type="radio" name="placa_estrangeira_onibus" id="placa_estrangeira_onibus_sim" value="sim" />
+				<label for="placa_estrangeira_onibus_sim">Sim</label>
+				<input type="radio" name="placa_estrangeira_onibus" id="placa_estrangeira_onibus_nao" value="nao" />
+				<label for="placa_estrangeira_onibus_nao">Não</label>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a" id="grupo_pais_onibus">
+			<legend class="ui-block-a">País:</legend>
+			<div class="ui-block-b">
+				<select name="pais_onibus" data-theme="a" id="pais_onibus">
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a" id="grupo_placa_onibus">
+			<legend class="ui-block-a">Placa do veículo:</legend>
+			<div class="ui-block-b">
+				<fieldset class="ui-grid-a" id="grupo_placa_dados_onibus">
+					<div class="ui-block-a">
+						<input id="placa_letras_onibus" type="text" name="placa_letras_onibus" value="" />
+					</div>
+					<div class="ui-block-b" id="grupo_placa_numeros_onibus">
+						<input id="placa_numeros_onibus" type="number" name="placa_numeros_onibus" value="" />
+					</div>
+				</fieldset>
+			</div>
+		</fieldset>
+
+		<nav class="ui-grid-a avancar" id="grupo_identificacao_visual_onibus_avancar">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-btn-a ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id='identificacao_visual_onibus_avancar'>Avançar</button>
+			</div>
+		</nav>
+
+	</section>
+
+	<!-- footer -->
+	<footer data-role="footer" data-position="fixed">
+	</footer>
+
+</section>

@@ -204,6 +204,9 @@ nav.avancar>div.ui-block-b {
 #sel_tipo_veiculo_2, #grupo_propriedade_simples, #grupo_combustivel_simples, #grupo_caracterizacao_simples_avancar,
 	#grupo_placa_estrangeira_simples, #grupo_pais_simples, #grupo_identificacao_visual_simples_avancar, #grupo_destino_simples,
 	#grupo_frequencia_simples, #grupo_motivo_rota_simples, #grupo_pessoas_simples, #grupo_pessoas_trabalho_simples,
-	#grupo_motivo_viagem_simples, #grupo_renda_simples, #grupo_caracterizacao_viagem_simples_avancar {
+	#grupo_motivo_viagem_simples, #grupo_renda_simples, #grupo_caracterizacao_viagem_simples_avancar,
+	#grupo_pais_onibus, #grupo_placa_onibus, #grupo_identificacao_visual_onibus_avancar, #grupo_placa_numeros_onibus,
+	#grupo_propriedade_onibus, #grupo_caracterizacao_onibus_avancar, #grupo_destino_onibus, #grupo_frequencia_onibus,
+	#grupo_tipo_viagem_onibus, #grupo_pessoas_onibus, #grupo_caracterizacao_viagem_onibus_avancar {
 	display: none;
 }
