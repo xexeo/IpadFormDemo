@@ -7,10 +7,6 @@ controllers.identificacao_visual_simples = {
 	},
 
 	buttons : function() {
-		$('#identificacao_visual_simples_back').click(function() {
-			app.trocaPagina('views/confirmar_veiculo.html', controllers.confirmar_veiculo);
-		});
-
 		$("#identificacao_visual_simples_avancar").click(function() {
 			app.trocaPagina('views/simples/caracterizacao_simples.html', controllers.caracterizacao_simples);
 		})

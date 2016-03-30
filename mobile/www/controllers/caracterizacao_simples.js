@@ -9,10 +9,6 @@ controllers.caracterizacao_simples = {
     },
     
     buttons : function(){
-        $('#caracterizacao_simples_back').click( function(){
-            app.trocaPagina('views/simples/identificacao_visual.html', controllers.identificacao_visual_simples);
-        });
-        
        $("#caracterizacao_simples_avancar").click(function(){
            app.trocaPagina('views/simples/caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
        })

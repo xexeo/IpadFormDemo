@@ -7,10 +7,6 @@ controllers.caracterizacao_viagem_simples = {
     },
     
     buttons : function(){
-        $('#caracterizacao_viagem_simples_back').click( function(){
-            app.trocaPagina('views/simples/caracterizacao_simples.html', controllers.caracterizacao_simples);
-        });
-        
        $("#caracterizacao_viagem_simples_avancar").click(function(){
            // TODO Salvar dados do ciclo de consulta
     	   
