@@ -20,9 +20,14 @@ controllers.caracterizacao_viagem_simples = {
 
     	// TODO Incluir opções de país, estado e cidade em origem-destino
     	
-        util.inicializaSelectPaises("origem_simples");
+        util.inicializaSelectCustom("origem_pais_simples", paises.listados(), "País");
         
-        util.inicializaSelectPaises("destino_simples");
+        util.inicializaSelectCustomValueAsIndex("origem_uf_simples", lista_estados, "UF");
+        
+        //util.inicializaSelectCustom("origem_municipio_simples", municipios_ac, "Município");
+                
+        // TODO Destino
+        util.inicializaSelectCustom("destino_pais_simples", paises.listados(), "País");
 
         //FIM PAÍSES
         
@@ -47,7 +52,20 @@ controllers.caracterizacao_viagem_simples = {
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		
-		util.progressoSelect("origem", "origem_simples", "grupo_destino_simples");
+		util.progressoSelectPais("origem_pais", "origem_pais_simples", "grupo_origem_uf_simples", "grupo_origem_municipio_simples", "grupo_destino_simples");
+		
+		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
+        $('#origem_uf_simples').change(function() {
+			if ($(this).val() != '-1') {
+				util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
+			}
+		});
+        
+		util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
+
+		
+		
+		
 		util.progressoSelect("destino", "destino_simples", "grupo_frequencia_simples");
         
         $('#frequencia_num_simples').keyup(function(){

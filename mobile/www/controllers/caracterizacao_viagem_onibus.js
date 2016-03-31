@@ -20,9 +20,9 @@ controllers.caracterizacao_viagem_onibus = {
 
     	// TODO Incluir opções de país, estado e cidade em origem-destino
     	
-        util.inicializaSelectPaises("origem_onibus");
+        util.inicializaSelect("origem_onibus", paises.listados());
         
-        util.inicializaSelectPaises("destino_onibus");
+        util.inicializaSelect("destino_onibus", paises.listados());
 
         //FIM PAÍSES
         

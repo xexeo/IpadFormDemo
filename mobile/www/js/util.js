@@ -4,15 +4,32 @@ var util = {
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + item + "'>" + item + "</option>\n";
+			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectPaises : function(nome_campo) {
-		var insert_inicial = "<option value='-1'>Selecione</option>\n";
-		$.each(paises.listados(), function(index, item) {
+	inicializaSelectCustom : function(nome_campo, lista, mensagem) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
+			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+	
+	inicializaSelectCustomValueAsIndex : function(nome_campo, lista, mensagem) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
 			insert_inicial += "<option value='" + item + "'>" + item + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+	
+	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+				
+		$.each(lista_municipios[uf_sigla], function(index, item) {
+			insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -59,7 +76,27 @@ var util = {
 		});
 	},
 
-        /**
+	progressoSelectPais : function(nome_registro, nome_campo, grupo_proximo_imediato, grupo_proximo_imediato2, grupo_proximo) {
+		$('#' + nome_campo).change(function() {
+			if (Number($(this).val()) == -1) {
+				$("#" + grupo_proximo_imediato).hide();
+				$("#" + grupo_proximo_imediato2).hide();
+				$("#" + grupo_proximo).hide();
+				app.setAtributo(nome_registro, null);
+			} else if (Number($(this).val()) != 0) { // País diferente de Brasil
+				$("#" + grupo_proximo_imediato).hide();
+				$("#" + grupo_proximo_imediato2).hide();
+				$("#" + grupo_proximo).show();
+				app.setAtributo(nome_registro, $(this).val());
+			} else { // País é Brasil
+				$("#" + grupo_proximo_imediato).show();
+				$("#" + grupo_proximo).hide();
+				app.setAtributo(nome_registro, $(this).val());
+			}
+		});
+	},
+
+	/**
 	 * 
 	 * @param nome_registro
 	 *            nome do atributo da variável global registro

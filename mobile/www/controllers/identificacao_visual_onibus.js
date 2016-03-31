@@ -15,7 +15,7 @@ controllers.identificacao_visual_onibus = {
 	//Inicializa os elementos da tela
 	inicializaElementos : function() {
 		
-		util.inicializaSelectPaises("pais_onibus");
+		util.inicializaSelect("pais_onibus", paises.listados());
 	},
 
 	//Controla o show e hide dos elementos da tela

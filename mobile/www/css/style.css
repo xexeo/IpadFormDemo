@@ -208,6 +208,10 @@ nav.avancar>div.ui-block-b {
 	line-height: 100px;
 }
 
+.escondido {
+	display: none;
+}
+
 /* selectors with "display: none" on start */
 #sel_tipo_veiculo_2, #grupo_propriedade_simples, #grupo_combustivel_simples, #grupo_caracterizacao_simples_avancar,
 	#grupo_placa_estrangeira_simples, #grupo_pais_simples, #grupo_placa_simples, #grupo_placa_numeros_simples,

@@ -15,7 +15,7 @@ controllers.identificacao_visual_simples = {
 	//Inicializa os elementos da tela
 	inicializaElementos : function() {
 		
-		util.inicializaSelectPaises("pais_simples");
+		util.inicializaSelect("pais_simples", paises.listados());
 	},
 
 	//Controla o show e hide dos elementos da tela
