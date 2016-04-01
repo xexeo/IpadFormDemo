@@ -223,6 +223,22 @@ nav.avancar>div.ui-block-b {
 	line-height: 100px;
 }
 
+#grupo_pessoas_ambos>fieldset.ui-block-a {
+	width: 45%;
+}
+
+#grupo_pessoas_ambos>fieldset.ui-block-b {
+	width: 55%;
+}
+
+#grupo_pessoas_ambos>fieldset>.ui-block-a {
+	width: 71%;
+}
+
+#grupo_pessoas_ambos>fieldset>.ui-block-b {
+	width: 27%;
+}
+
 .escondido {
 	display: none;
 }
