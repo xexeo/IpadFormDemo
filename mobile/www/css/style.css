@@ -60,12 +60,15 @@ section.ui-content>fieldset>:not(fieldset).ui-block-b {
 	width: 68%;
 }
 
-section.ui-content fieldset>legend, section.ui-content fieldset>label {
+legend, label {
+	text-align: right;
+}
+
+section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui-block"] {
 	display: inline;
 	font-weight: bold;
 	font-size: x-large;
 	line-height: 60px;
-	text-align: right;
 	padding-right: .5em;
 }
 
