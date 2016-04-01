@@ -9,7 +9,6 @@
 	<!--content -->
 	<section role="main" class="ui-content">
 
-		<!-- TODO Ordenar opções de país, estado e cidade. -->
 		<fieldset class="ui-grid-a" id="grupo_origem_simples">
 			<legend class="ui-block-a">Origem da viagem:</legend>
 			<div class="ui-block-b ui-grid-b" id="grupo_origem_simples">
@@ -28,12 +27,21 @@
 			</div>
 		</fieldset>
 
-		<!-- TODO Incluir opções de país, estado e cidade. -->
 		<fieldset class="ui-grid-a escondido" id="grupo_destino_simples">
 			<legend class="ui-block-a">Destino da viagem:</legend>
-			<div class="ui-block-b">
-				<select name="destino_simples" id="destino_simples" data-theme="a">
-				</select>
+			<div class="ui-block-b ui-grid-b" id="grupo_destino_simples">
+				<div class="ui-block-a sel_pais" id="grupo_destino_pais_simples">
+					<select name="destino_pais_simples" id="destino_pais_simples" data-theme="a">
+					</select>
+				</div>
+				<div class="ui-block-b sel_uf escondido" id="grupo_destino_uf_simples">
+					<select name="destino_uf_simples" id="destino_uf_simples" data-theme="a">
+					</select>
+				</div>
+				<div class="ui-block-c sel_municipio escondido" id="grupo_destino_municipio_simples">
+					<select name="destino_municipio_simples" id="destino_municipio_simples" data-theme="a">
+					</select>
+				</div>
 			</div>
 		</fieldset>
 

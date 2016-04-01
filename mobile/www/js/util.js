@@ -76,18 +76,24 @@ var util = {
 		});
 	},
 
-	progressoSelectPais : function(nome_registro, nome_campo, grupo_proximo_imediato, grupo_proximo_imediato2, grupo_proximo) {
+	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
+			grupo_proximo_imediato = "grupo_" + proximo_imediato;
+			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2;
 			if (Number($(this).val()) == -1) {
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).hide();
 				app.setAtributo(nome_registro, null);
+				app.setAtributo(proximo_imediato, null);
+				app.setAtributo(proximo_imediato2, null);
 			} else if (Number($(this).val()) != 0) { // País diferente de Brasil
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).show();
 				app.setAtributo(nome_registro, $(this).val());
+				app.setAtributo(proximo_imediato, null);
+				app.setAtributo(proximo_imediato2, null);
 			} else { // País é Brasil
 				$("#" + grupo_proximo_imediato).show();
 				$("#" + grupo_proximo).hide();

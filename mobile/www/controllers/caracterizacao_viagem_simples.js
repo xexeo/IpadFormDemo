@@ -18,17 +18,12 @@ controllers.caracterizacao_viagem_simples = {
 	//Inicializa os elementos da tela
     inicializaElementos : function(){
 
-    	// TODO Incluir opções de país, estado e cidade em origem-destino
-    	
+    	// INICIO PAÍSES
         util.inicializaSelectCustom("origem_pais_simples", paises.listados(), "País");
-        
         util.inicializaSelectCustomValueAsIndex("origem_uf_simples", lista_estados, "UF");
         
-        //util.inicializaSelectCustom("origem_municipio_simples", municipios_ac, "Município");
-                
-        // TODO Destino
         util.inicializaSelectCustom("destino_pais_simples", paises.listados(), "País");
-
+        util.inicializaSelectCustomValueAsIndex("destino_uf_simples", lista_estados, "UF");
         //FIM PAÍSES
         
         var lista_frequencias = ['Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente'];
@@ -52,34 +47,43 @@ controllers.caracterizacao_viagem_simples = {
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		
-		util.progressoSelectPais("origem_pais", "origem_pais_simples", "grupo_origem_uf_simples", "grupo_origem_municipio_simples", "grupo_destino_simples");
-		
+		//Origem
+		util.progressoSelectPais("origem_pais", "origem_pais_simples", "origem_uf_simples", "origem_municipio_simples", "grupo_destino_simples");
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
         $('#origem_uf_simples').change(function() {
 			if ($(this).val() != '-1') {
 				util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
 			}
 		});
-        
 		util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
-
 		
-		
-		
-		util.progressoSelect("destino", "destino_simples", "grupo_frequencia_simples");
+		//Destino
+		util.progressoSelectPais("destino_pais", "destino_pais_simples", "destino_uf_simples", "destino_municipio_simples", "grupo_frequencia_simples");
+		util.progressoSelect("destino_uf", "destino_uf_simples", "grupo_destino_municipio_simples");
+        $('#destino_uf_simples').change(function() {
+			if ($(this).val() != '-1') {
+				util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
+			}
+		});
+		util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
         
+		//Frequencia
         $('#frequencia_num_simples').keyup(function(){
         	app.setAtributo('frequencia_num', $(this).val());
         });
         util.progressoSelect("frequencia_sel", "frequencia_sel_simples", "grupo_motivo_rota_simples");
         
+        //Motivo rota
         util.progressoSelect("motivo_rota", "motivo_rota_simples", "grupo_pessoas_simples");
         
+        //Pessoas
         util.progressoInputText("pessoas", "pessoas_simples", "grupo_pessoas_trabalho_simples");
         util.progressoInputText("pessoas_trabalho", "pessoas_trabalho_simples", "grupo_motivo_viagem_simples");
         
+        //Motivo viagem
         util.progressoSelect("motivo_viagem", "motivo_viagem_simples", "grupo_renda_simples");
         
+        //Renda
         util.progressoSelect("renda", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
     }
 };
