@@ -10,19 +10,21 @@
 	<section role="main" class="ui-content">
 
 		<!-- TODO Incluir opções de país, estado e cidade. -->
-		<fieldset class="ui-grid-c" id="grupo_origem_simples">
+		<fieldset class="ui-grid-a" id="grupo_origem_simples">
 			<legend class="ui-block-a">Origem da viagem:</legend>
-			<div class="ui-block-b" id="grupo_origem_pais_simples">
-				<select name="origem_pais_simples" id="origem_pais_simples" data-theme="a">
-				</select>
-			</div>
-			<div class="ui-block-c escondido" id="grupo_origem_uf_simples">
-				<select name="origem_uf_simples" id="origem_uf_simples" data-theme="a">
-				</select>
-			</div>
-			<div class="ui-block-d escondido" id="grupo_origem_municipio_simples">
-				<select name="origem_municipio_simples" id="origem_municipio_simples" data-theme="a">
-				</select>
+			<div class="ui-block-b ui-grid-b" id="grupo_origem_pais_simples">
+				<div class="ui-block-a sel_pais" id="grupo_origem_pais_simples">
+					<select name="origem_pais_simples" id="origem_pais_simples" data-theme="a">
+					</select>
+				</div>
+				<div class="ui-block-b sel_uf escondido" id="grupo_origem_uf_simples">
+					<select name="origem_uf_simples" id="origem_uf_simples" data-theme="a">
+					</select>
+				</div>
+				<div class="ui-block-c sel_municipio escondido" id="grupo_origem_municipio_simples">
+					<select name="origem_municipio_simples" id="origem_municipio_simples" data-theme="a">
+					</select>
+				</div>
 			</div>
 		</fieldset>
 
@@ -35,15 +37,17 @@
 			</div>
 		</fieldset>
 
-		<fieldset class="ui-grid-c escondido" id="grupo_frequencia_simples">
+		<fieldset class="ui-grid-a escondido" id="grupo_frequencia_simples">
 			<legend class="ui-block-a">Frequência da viagem:</legend>
-			<div class="ui-block-b">
-				<input id="frequencia_num_simples" type="number" name="frequencia_num_simples" value="" />
-			</div>
-			<label class="ui-block-c" for="frequencia_sel_simples">por</label>
-			<div class="ui-block-d">
-				<select name="frequencia_sel_simples" id="frequencia_sel_simples" data-theme="a">
-				</select>
+			<div class="ui-block-b ui-grid-b">
+				<div class="ui-block-a">
+					<input id="frequencia_num_simples" type="number" name="frequencia_num_simples" value="" />
+				</div>
+				<label class="ui-block-b" for="frequencia_sel_simples">por</label>
+				<div class="ui-block-c">
+					<select name="frequencia_sel_simples" id="frequencia_sel_simples" data-theme="a">
+					</select>
+				</div>
 			</div>
 		</fieldset>
 
@@ -56,13 +60,13 @@
 		</fieldset>
 
 		<fieldset class="ui-grid-a" id="grupo_pessoas_ambos">
-			<fieldset class="ui-grid-a ui-block-a escondido" id="grupo_pessoas_simples">
+			<fieldset class="ui-block-a ui-grid-a escondido" id="grupo_pessoas_simples">
 				<label class="ui-block-a" for="pessoas_simples">Pessoas no veículo:</label>
 				<div class="ui-block-b">
 					<input id="pessoas_simples" type="number" pattern="\d*" name="pessoas_simples" value="" />
 				</div>
 			</fieldset>
-			<fieldset class="ui-grid-a ui-block-b escondido" id="grupo_pessoas_trabalho_simples">
+			<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_pessoas_trabalho_simples">
 				<label class="ui-block-a" for="pessoas_trabalho_simples">Pessoas a trabalho:</label>
 				<div class="ui-block-b">
 					<input id="pessoas_trabalho_simples" type="number" pattern="\d*" name="pessoas_trabalho_simples" value="" />
@@ -96,7 +100,6 @@
 	</section>
 
 	<!-- footer -->
-	<footer data-role="footer" data-position="fixed">
-	</footer>
+	<footer data-role="footer" data-position="fixed"> </footer>
 
 </section>

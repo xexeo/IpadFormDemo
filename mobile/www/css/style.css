@@ -108,6 +108,18 @@ nav.avancar>div.ui-block-b {
 	width: 15%;
 }
 
+.ui-grid-b>.sel_pais {
+	width: 30%;
+}
+
+.ui-grid-b>.sel_uf {
+	width: 20%;
+}
+
+.ui-grid-b>.sel_municipio {
+	width: 50%;
+}
+
 #section_v_simples {
 	width: 35%;
 }
