@@ -17,6 +17,8 @@ Comandos para instalação dos plugins do cordova necessários para a compilaç�
 * `cordova plugin add cordova-plugin-device`
 * `cordova plugin add cordova-plugin-file`
 * `cordova plugin add cordova-plugin-splashscreen`
+* `cordova plugin add cordova-plugin-statusbar`
+* `cordova plugin add cordova-sqlite-storage`
 
 A ausência dos plugins causa erros de execução, variáveis e métodos utilizados pelo aplicativo não estarão presentes. A lista de plugins instalados no projeto pode ser conferida com o comando `cordova plugin list`.
 
