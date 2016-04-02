@@ -11,17 +11,15 @@ myLogger = {
     
     setLogWriter : function(writer){
         var me = this;
+        
         //inicia o monitor
         setInterval(function(){
             myLogger._monitoraFila();
         }, 300);
+        
         myLogger._logWriter = writer;
         myLogger._logWriter.onwriteend = function(e){
-            //if(myLogger._fila.length > 0){
-            //    myLogger._internalWrite(myLogger._fila.shift());
-            //} else {
-                me._ocupado = false;
-            //}
+            me._ocupado = false;
         };
         myLogger._logWriter.onerror = function(e){
             console.log('Erro de escrita: ' + e.message);  

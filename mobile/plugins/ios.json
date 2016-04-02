@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
@@ -17,6 +14,15 @@
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
         "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         }
     },

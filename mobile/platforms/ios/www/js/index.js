@@ -46,8 +46,10 @@ var app = {
 	 */
 	bindEvents : function() {
             document.addEventListener('deviceready', app.onDeviceReady);
-            //window.addEventListener('filePluginIsReady', app.onFileSystemReady, false);    
-             console.log('bindindEvents');
+            //tentativa para chrome e opera 
+            //document.addEventListener('filePluginIsReady', app.onFileSystemReady, false);    
+            
+            console.log('bindindEvents');
     	},
 
 
@@ -68,6 +70,10 @@ var app = {
             if(device.platform == 'browser' && device.model != 'Firefox'){
                 alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
             }
+            
+            StatusBar.overlaysWebView(false);
+            StatusBar.backgroundColorByName("black"); //black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
+
   	},
         
         onFileSystemReady : function(){

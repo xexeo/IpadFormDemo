@@ -206,6 +206,30 @@ module.exports = [
         "id": "cordova-plugin-splashscreen.SplashScreenProxy",
         "pluginId": "cordova-plugin-splashscreen",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "pluginId": "cordova-plugin-statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/src/browser/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar.Browser",
+        "pluginId": "cordova-plugin-statusbar",
+        "merges": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -214,7 +238,9 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-plugin-device": "1.1.1",
     "cordova-plugin-file": "4.1.1",
-    "cordova-plugin-splashscreen": "3.2.1"
+    "cordova-plugin-splashscreen": "3.2.1",
+    "cordova-sqlite-storage": "0.8.5",
+    "cordova-plugin-statusbar": "2.1.2"
 }
 // BOTTOM OF METADATA
 });

@@ -255,3 +255,8 @@ div.ui-block-b>.placa_sufixo {
 .escondido {
 	display: none;
 }
+
+/* desbloqueando os inputtext no ipad */
+input[type=text]{
+   -webkit-user-select: auto;
+} 

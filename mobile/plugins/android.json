@@ -18,6 +18,12 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         }
     },
     "dependent_plugins": {}

@@ -52,12 +52,23 @@ section.ui-content>fieldset {
 	line-height: 44px;
 }
 
-section.ui-content fieldset>legend, section.ui-content fieldset>label {
+section.ui-content>fieldset>legend.ui-block-a {
+	width: 32%;
+}
+
+section.ui-content>fieldset>:not(fieldset).ui-block-b {
+	width: 68%;
+}
+
+legend, label {
+	text-align: right;
+}
+
+section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui-block"] {
 	display: inline;
 	font-weight: bold;
 	font-size: x-large;
 	line-height: 60px;
-	text-align: right;
 	padding-right: .5em;
 }
 
@@ -83,6 +94,33 @@ section.ui-content>fieldset.ui-grid-c>.ui-block-c {
 section.ui-content>fieldset.ui-grid-c>.ui-block-d {
 	text-align: left;
 	width: 30%;
+}
+
+nav.avancar {
+	width: 100%;
+	position: fixed;
+	bottom: 1%;
+	right: 1%;
+}
+
+nav.avancar>div.ui-block-a {
+	width: 85%;
+}
+
+nav.avancar>div.ui-block-b {
+	width: 15%;
+}
+
+.ui-grid-b>.sel_pais {
+	width: 30%;
+}
+
+.ui-grid-b>.sel_uf {
+	width: 20%;
+}
+
+.ui-grid-b>.sel_municipio {
+	width: 50%;
 }
 
 #section_v_simples {
@@ -169,6 +207,19 @@ section.ui-content>fieldset.ui-grid-c>.ui-block-d {
 	vertical-align: middle;
 }
 
+div.ui-block-b>.placa_prefixo, div.ui-block-b>.placa_sufixo {
+	padding-left: .3125em;
+	padding-right: .3125em;
+}
+
+div.ui-block-b>.placa_prefixo {
+	width: 15%;
+}
+
+div.ui-block-b>.placa_sufixo {
+	width: 30%;
+}
+
 #section_v_simples li {
 	line-height: 65px;
 }
@@ -185,10 +236,27 @@ section.ui-content>fieldset.ui-grid-c>.ui-block-d {
 	line-height: 100px;
 }
 
-/* selectors with "display: none" on start */
-#sel_tipo_veiculo_2, #grupo_propriedade_simples, #grupo_combustivel_simples, #grupo_caracterizacao_simples_avancar,
-	#grupo_placa_estrangeira_simples, #grupo_pais_simples, #grupo_identificacao_visual_simples_avancar, #grupo_destino_simples,
-	#grupo_frequencia_simples, #grupo_motivo_rota_simples, #grupo_pessoas_simples, #grupo_pessoas_trabalho_simples,
-	#grupo_motivo_viagem_simples, #grupo_renda_simples, #grupo_caracterizacao_viagem_simples_avancar {
+#grupo_pessoas_ambos>fieldset.ui-block-a {
+	width: 45%;
+}
+
+#grupo_pessoas_ambos>fieldset.ui-block-b {
+	width: 55%;
+}
+
+#grupo_pessoas_ambos>fieldset>.ui-block-a {
+	width: 71%;
+}
+
+#grupo_pessoas_ambos>fieldset>.ui-block-b {
+	width: 27%;
+}
+
+.escondido {
 	display: none;
 }
+
+/* desbloqueando os inputtext no ipad */
+input[type=text]{
+   -webkit-user-select: auto;
+} 

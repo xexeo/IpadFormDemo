@@ -9,7 +9,9 @@ var insert_controllers={
                         'identificacao_visual_simples.js',
                         'caracterizacao_simples.js',
                         'caracterizacao_viagem_simples.js',
-                        'pergunta_final_simples.js'
+                        'identificacao_visual_onibus.js',
+                        'caracterizacao_onibus.js',
+                        'caracterizacao_viagem_onibus.js'
                     ],
     
     controller_files_path : 'controllers/',

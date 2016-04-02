@@ -10,29 +10,29 @@
 	            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
 	                * Enable inline JS: add 'unsafe-inline' to default-src
 	        -->
-<meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+<meta http-equiv="Content-Security-Policy"
+	content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no">
 <meta name="msapplication-tap-highlight" content="no">
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-<link rel=stylesheet href="css/reset.css" />
-<link rel=stylesheet href="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 
 <title>Contagem de Tráfego</title>
 <link rel="shortcut icon" href="">
 </head>
 <body>
-	
+
 	<!-- panel: menu -->
 	<section data-role="panel" id="panel_menu" data-display="push">
-		<button class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left" id='btn_sair'>Sair</button>
+		<button class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left" id="btn_sair">Sair</button>
 	</section>
 
 	<!-- page: login -->
 	<section data-role="page" id="page_login" data-theme="b">
-		
+
 		<!-- header -->
 		<header data-role="header"></header>
 
@@ -43,12 +43,10 @@
 				<div class="ui-block-b"></div>
 				<div class="ui-block-c">
 					<div class="ui-field-contain">
-						<label for="usuario">Usuário:</label>
-						<input id="usuario" type="text" name="usuario" value="" />
+						<label for="usuario">Usuário:</label> <input id="usuario" type="text" name="usuario" data-theme="a"/>
 					</div>
 					<div class="ui-field-contain">
-						<label for="senha">Senha:</label>
-						<input id="senha" type="password" name="senha" value="" />
+						<label for="senha">Senha:</label> <input id="senha" type="password" name="senha" data-theme="a"/>
 					</div>
 					<button class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-check" id="entrar" name="entrar">Entrar</button>
 				</div>
@@ -59,13 +57,14 @@
 		<footer data-role="footer" data-position="fixed">
 			Versão: <span id="versao"></span>
 		</footer>
-		
+
 	</section>
 
 </body>
 <script src="js/libs/jquery/jquery.js"></script>
 <script src="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/myDb.js"></script>
 <script type="text/javascript" src="js/paises.js"></script>
 <script type="text/javascript" src="js/util.js"></script>
 <script type="text/javascript" src="js/controllers.js"></script>

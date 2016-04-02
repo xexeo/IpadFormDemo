@@ -169,6 +169,20 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -177,7 +191,9 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-plugin-device": "1.1.1",
     "cordova-plugin-file": "4.1.1",
-    "cordova-plugin-splashscreen": "3.2.1"
+    "cordova-plugin-splashscreen": "3.2.1",
+    "cordova-sqlite-storage": "0.8.5",
+    "cordova-plugin-statusbar": "2.1.2"
 };
 // BOTTOM OF METADATA
 });

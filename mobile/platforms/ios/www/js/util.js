@@ -4,47 +4,34 @@ var util = {
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + item + "'>" + item + "</option>\n";
+			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectPaises : function(nome_campo) {
-		var insert_inicial = "<option value='-1'>Selecione</option>\n";
-		$.each(paises.listados(), function(index, item) {
+	inicializaSelectCustom : function(nome_campo, lista, mensagem) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
+			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+	
+	inicializaSelectCustomValueAsIndex : function(nome_campo, lista, mensagem) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
 			insert_inicial += "<option value='" + item + "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
-
-	// Funções para o recupera
-	recuperaRadioSimNao : function(reg, nome_campo, grupo_proximo) {
-		if (reg != null && reg) {
-			$('#' + nome_campo + '_sim').prop('checked', true).checkboxradio('refresh');
-			$('#' + grupo_proximo).show();
-		} else if (reg != null && !reg) {
-			$('#' + nome_campo + '_nao').prop('checked', true).checkboxradio('refresh');
-			$('#' + grupo_proximo).show();
-		} else if (reg == null) {
-			$('#' + nome_campo + '_sim').prop('checked', false).checkboxradio('refresh');
-			$('#' + nome_campo + '_nao').prop('checked', false).checkboxradio('refresh');
-			$('#' + grupo_proximo).hide();
-		}
-	},
-
-	recuperaSelect : function(reg, nome_campo, grupo_proximo) {
-		if (reg != null) {
-			$("#" + nome_campo + " option[value='" + reg + "']").attr('selected', true);
-			$("#" + grupo_proximo).show();
-		}
-		$("select#" + nome_campo).selectmenu("refresh", true);
-	},
-
-	recuperaInputText : function(reg, nome_campo, nome_proximo) {
-		if (reg != null) {
-			$("#" + nome_campo).attr('value', reg);
-			$("#" + grupo_proximo).show();
-		}
+	
+	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+				
+		$.each(lista_municipios[uf_sigla], function(index, item) {
+			insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
 	// Funções para o progresso
@@ -89,7 +76,33 @@ var util = {
 		});
 	},
 
-        /**
+	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo) {
+		$('#' + nome_campo).change(function() {
+			grupo_proximo_imediato = "grupo_" + proximo_imediato;
+			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2;
+			if (Number($(this).val()) == -1) {
+				$("#" + grupo_proximo_imediato).hide();
+				$("#" + grupo_proximo_imediato2).hide();
+				$("#" + grupo_proximo).hide();
+				app.setAtributo(nome_registro, null);
+				app.setAtributo(proximo_imediato, null);
+				app.setAtributo(proximo_imediato2, null);
+			} else if (Number($(this).val()) != 0) { // País diferente de Brasil
+				$("#" + grupo_proximo_imediato).hide();
+				$("#" + grupo_proximo_imediato2).hide();
+				$("#" + grupo_proximo).show();
+				app.setAtributo(nome_registro, $(this).val());
+				app.setAtributo(proximo_imediato, null);
+				app.setAtributo(proximo_imediato2, null);
+			} else { // País é Brasil
+				$("#" + grupo_proximo_imediato).show();
+				$("#" + grupo_proximo).hide();
+				app.setAtributo(nome_registro, $(this).val());
+			}
+		});
+	},
+
+	/**
 	 * 
 	 * @param nome_registro
 	 *            nome do atributo da variável global registro

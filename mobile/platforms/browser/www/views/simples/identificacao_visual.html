@@ -18,7 +18,7 @@
 			</div>
 		</fieldset>
 
-		<fieldset class="ui-grid-a" id="grupo_placa_estrangeira_simples">
+		<fieldset class="ui-grid-a escondido" id="grupo_placa_estrangeira_simples">
 			<legend class="ui-block-a">Placa estrangeira:</legend>
 			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
 				<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_sim" value="sim" />
@@ -28,7 +28,7 @@
 			</div>
 		</fieldset>
 
-		<fieldset class="ui-grid-a" id="grupo_pais_simples">
+		<fieldset class="ui-grid-a escondido" id="grupo_pais_simples">
 			<legend class="ui-block-a">País:</legend>
 			<div class="ui-block-b">
 				<select name="pais_simples" data-theme="a" id="pais_simples">
@@ -36,18 +36,28 @@
 			</div>
 		</fieldset>
 
-		<nav class="ui-grid-a" id="grupo_identificacao_visual_simples_avancar">
+		<fieldset class="ui-grid-a escondido" id="grupo_placa_simples">
+			<legend class="ui-block-a">Placa do veículo:</legend>
+			<div class="ui-block-b ui-grid-a" id="grupo_placa_dados_simples">
+				<div class="ui-block-a placa_prefixo">
+					<input id="placa_letras_simples" type="text" name="placa_letras_simples" value="" />
+				</div>
+				<div class="ui-block-b placa_sufixo escondido" id="grupo_placa_numeros_simples">
+					<input id="placa_numeros_simples" type="number" name="placa_numeros_simples" value="" />
+				</div>
+			</div>
+		</fieldset>
+
+		<nav class="ui-grid-a avancar escondido" id="grupo_identificacao_visual_simples_avancar">
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
-				<button class="ui-btn ui-btn-a ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id='identificacao_visual_simples_avancar'>Avançar</button>
+				<button class="ui-btn ui-btn-a ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id="identificacao_visual_simples_avancar">Avançar</button>
 			</div>
 		</nav>
 
 	</section>
 
 	<!-- footer -->
-	<footer data-role="footer" data-position="fixed">
-		<button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-carat-l" id='identificacao_visual_simples_back'>Voltar</button>
-	</footer>
+	<footer data-role="footer" data-position="fixed"> </footer>
 
 </section>

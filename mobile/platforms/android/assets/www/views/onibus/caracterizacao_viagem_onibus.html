@@ -1,0 +1,70 @@
+<section data-role="page" id="caracterizacao_viagem_onibus" data-transition="slide" data-theme="b">
+
+	<!-- header -->
+	<header data-role="header">
+		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
+		<h1>4. Caracterização da viagem</h1>
+	</header>
+
+	<!--content -->
+	<section role="main" class="ui-content">
+
+		<!-- TODO Incluir opções de país, estado e cidade. -->
+		<fieldset class="ui-grid-a" id="grupo_origem_onibus">
+			<legend class="ui-block-a">Origem da viagem:</legend>
+			<div class="ui-block-b">
+				<select name="origem_onibus" id="origem_onibus" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<!-- TODO Incluir opções de país, estado e cidade. -->
+		<fieldset class="ui-grid-a escondido" id="grupo_destino_onibus">
+			<legend class="ui-block-a">Destino da viagem:</legend>
+			<div class="ui-block-b">
+				<select name="destino_onibus" id="destino_onibus" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-c escondido" id="grupo_frequencia_onibus">
+			<legend class="ui-block-a">Frequência da viagem:</legend>
+			<div class="ui-block-b">
+				<input id="frequencia_num_onibus" type="number" name="frequencia_num_onibus" value="" />
+			</div>
+			<label class="ui-block-c" for="frequencia_sel_onibus">por</label>
+			<div class="ui-block-d">
+				<select name="frequencia_sel_onibus" id="frequencia_sel_onibus" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a escondido" id="grupo_tipo_viagem_onibus">
+			<legend class="ui-block-a">Tipo de viagem/serviço:</legend>
+			<div class="ui-block-b">
+				<select name="tipo_viagem_onibus" id="tipo_viagem_onibus" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a escondido" id="grupo_pessoas_onibus">
+			<legend class="ui-block-a">Pessoas no veículo:</legend>
+			<div class="ui-block-b">
+				<input id="pessoas_onibus" type="number" pattern="\d*" name="pessoas_onibus" value="" />
+			</div>
+		</fieldset>
+
+		<nav class="ui-grid-a avancar escondido" id="grupo_caracterizacao_viagem_onibus_avancar">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right ui-btn-a" id="caracterizacao_viagem_onibus_avancar">Finalizar</button>
+			</div>
+		</nav>
+
+	</section>
+
+	<!-- footer -->
+	<footer data-role="footer" data-position="fixed">
+	</footer>
+
+</section>
