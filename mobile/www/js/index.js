@@ -71,6 +71,7 @@ var app = {
                 alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
             }
             
+            //configurando a statusBar
             StatusBar.overlaysWebView(false);
             StatusBar.backgroundColorByName("black"); //black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
 
