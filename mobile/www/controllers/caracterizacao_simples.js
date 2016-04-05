@@ -10,7 +10,10 @@ controllers.caracterizacao_simples = {
     
     buttons : function(){
        $("#caracterizacao_simples_avancar").click(function(){
-           app.trocaPagina('views/simples/caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
+			var ok = controllers.caracterizacao_simples.validar_componentes();
+			if(ok) {
+				app.trocaPagina('views/simples/caracterizacao_viagem_simples.html', controllers.caracterizacao_viagem_simples);
+			}
        })
     },
     
@@ -41,7 +44,17 @@ controllers.caracterizacao_simples = {
 		util.progressoSelect("ano", "ano_simples", "grupo_propriedade_simples");
 		util.progressoSelect("propriedade", "propriedade_simples", "grupo_combustivel_simples");
 		util.progressoSelect("combustivel", "combustivel_simples", "grupo_caracterizacao_simples_avancar");
-    }
-    
+    },
+
+	// Controla as validações dos componentes de tela após clicas em AVANÇAR
+	validar_componentes : function(id_avancar) {
+		if(util.validaSelect("ano_simples", "Ano do veículo") && 
+				util.validaSelect("propriedade_simples", "Propriedade") &&
+				util.validaSelect("combustivel_simples", "Combustível")) {
+			return true;
+		}
+		return false;
+	}
+
 };
 
