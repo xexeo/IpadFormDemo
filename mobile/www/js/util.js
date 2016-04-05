@@ -1,5 +1,5 @@
 var util = {
-
+		
 	// Funções para o inicializa
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
@@ -120,6 +120,41 @@ var util = {
 			app.setAtributo(nome_registro, $(this).val());
 			$("#" + grupo_proximo).show();
 		});
-	}
+	},
+	
+	
+	// Funções para validação dos componentes
+	validaSelect : function(nome_campo, campo_aviso) {
+		if(Number($('#' + nome_campo).val()) != -1) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+	
+	validaRadioSimNao : function(nome_campo, campo_aviso) {
+		var option = $('input[name=' + nome_campo +']:checked').val();
+		if(option != null) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+	
+	validaInputText : function(nome_campo, campo_aviso) {
+		var value = $.trim($('#' + nome_campo).val())
+		if(value.length > 0) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+	
+	alerta_msg : function(campo_aviso) {
+		alert("Campo " + campo_aviso + " não foi preenchido");
+	}	
 
 };

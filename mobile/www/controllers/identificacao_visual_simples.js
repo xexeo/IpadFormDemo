@@ -8,7 +8,10 @@ controllers.identificacao_visual_simples = {
 
 	buttons : function() {
 		$("#identificacao_visual_simples_avancar").click(function() {
-			app.trocaPagina('views/simples/caracterizacao_simples.html', controllers.caracterizacao_simples);
+			var ok = controllers.identificacao_visual_simples.validar_componentes();
+			if(ok) {
+				app.trocaPagina('views/simples/caracterizacao_simples.html', controllers.caracterizacao_simples);
+			}
 		})
 	},
 	
@@ -49,5 +52,24 @@ controllers.identificacao_visual_simples = {
 		
 		util.progressoInputText("placa_letras", "placa_letras_simples", "grupo_placa_numeros_simples");
 		util.progressoInputText("placa_numeros", "placa_numeros_simples", "grupo_identificacao_visual_simples_avancar");
+	},
+	
+	// Controla as validações dos componentes de tela após clicas em AVANÇAR
+	validar_componentes : function(id_avancar) {
+		
+		if(util.validaRadioSimNao("reboque_simples", "Reboque") && 
+				util.validaRadioSimNao("placa_estrangeira_simples", "Placa estrangeira") &&
+				util.validaInputText("placa_letras_simples", "Placa do veículo") &&
+				util.validaInputText("placa_numeros_simples", "Placa do veículo")) {
+			
+			var option = $('input[name=placa_estrangeira_simples]:checked').val();
+			if(option == 'sim') {
+				return util.validaSelect("pais_simples", "País");
+			}
+			
+			return true;
+		}
+		return false;
 	}
+	
 };
