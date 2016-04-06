@@ -24,7 +24,7 @@ controllers.caracterizacao_onibus = {
         for (var ano=2016;ano>1899;ano--){
         	lista_anos = lista_anos.concat(ano);
         }
-        util.inicializaSelect("ano_onibus", lista_anos);
+        util.inicializaSelectCustomValueAsIndex("ano_onibus", lista_anos, "Selecione");
         
         var lista_propriedades = ['Próprio', 'Alugado/Fretado', 'Empresa', 'Serviços Públicos', 'Outros'];
         util.inicializaSelect("propriedade_onibus", lista_propriedades);
