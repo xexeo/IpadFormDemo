@@ -76,10 +76,10 @@ var util = {
 		});
 	},
 
-	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo) {
+	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo, fluxo) {
 		$('#' + nome_campo).change(function() {
-			grupo_proximo_imediato = "grupo_" + proximo_imediato;
-			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2;
+			grupo_proximo_imediato = "grupo_" + proximo_imediato + "_" + fluxo;
+			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2 + "_" + fluxo;
 			if (Number($(this).val()) == -1) {
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();

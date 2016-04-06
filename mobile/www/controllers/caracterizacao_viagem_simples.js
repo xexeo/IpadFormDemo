@@ -48,7 +48,7 @@ controllers.caracterizacao_viagem_simples = {
 	progressoTela : function() {
 		
 		//Origem
-		util.progressoSelectPais("origem_pais", "origem_pais_simples", "origem_uf_simples", "origem_municipio_simples", "grupo_destino_simples");
+		util.progressoSelectPais("origem_pais", "origem_pais_simples", "origem_uf", "origem_municipio", "grupo_destino_simples", "simples");
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
         $('#origem_uf_simples').change(function() {
 			if ($(this).val() != '-1') {
@@ -58,7 +58,7 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
 		
 		//Destino
-		util.progressoSelectPais("destino_pais", "destino_pais_simples", "destino_uf_simples", "destino_municipio_simples", "grupo_frequencia_simples");
+		util.progressoSelectPais("destino_pais", "destino_pais_simples", "destino_uf", "destino_municipio", "grupo_frequencia_simples", "simples");
 		util.progressoSelect("destino_uf", "destino_uf_simples", "grupo_destino_municipio_simples");
         $('#destino_uf_simples').change(function() {
 			if ($(this).val() != '-1') {
