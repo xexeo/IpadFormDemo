@@ -7,12 +7,12 @@ controllers.caracterizacao_viagem_simples = {
     },
     
     buttons : function(){
-       $("#caracterizacao_viagem_simples_avancar").click(function(){
-           // TODO Salvar dados do ciclo de consulta
-    	   
-    	   // Ir para tela inicial
-    	   app.trocaPagina('views/menu.html', controllers.menu);
-       })
+		$("#caracterizacao_viagem_simples_avancar").click(function() {
+			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
+			if(ok) {
+				app.trocaPagina('views/menu.html', controllers.menu);
+			}
+		})
     },
     
 	//Inicializa os elementos da tela
@@ -85,6 +85,43 @@ controllers.caracterizacao_viagem_simples = {
         
         //Renda
         util.progressoSelect("renda", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
-    }
+    },
+    
+	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	validar_componentes : function(id_avancar) {
+		
+		if(util.validaSelect("origem_pais_simples", "Origem da viagem") &&
+				util.validaSelect("destino_pais_simples", "Destino da viagem") &&
+				util.validaInputText("frequencia_num_simples", "Frequência da viagem") &&
+				util.validaSelect("frequencia_sel_simples", "Frequência da viagem") &&
+				util.validaSelect("motivo_rota_simples", "Motivo da escolha da rota") &&
+				util.validaInputText("pessoas_simples", "Pessoas no veículo") &&
+				util.validaInputText("pessoas_trabalho_simples", "Pessoas a trabalho") &&
+				util.validaSelect("motivo_viagem_simples", "Motivo da viagem") &&
+				util.validaSelect("renda_simples", "Renda do condutor")) {
+			
+			var ok_origem_bra = true;
+			if((Number($("#origem_pais_simples").val())) == 0) { // Brasil
+				ok_origem_bra = (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") &&
+						  util.validaSelect("origem_municipio_simples", "Origem da viagem - município"));
+			}
+			
+			var ok_destino_bra = true; 
+			if((Number($("#destino_pais_simples").val())) == 0) { // Brasil
+				ok_destino_bra = (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") &&
+						  util.validaSelect("destino_municipio_simples", "Destino da viagem - município"));
+			}
+			
+			var qtd_pessoas = true;
+			if((Number($("#pessoas_trabalho_simples").val())) > (Number($("#pessoas_simples").val()))) {
+				alert("O número de pessoas no veículo deve ser maior que o número de pessoas a trabalho");
+				qtd_pessoas = false;
+			}
+			
+			return (ok_origem_bra && ok_destino_bra && qtd_pessoas);
+		}
+		return false;
+	}
+    
 };
 

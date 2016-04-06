@@ -24,7 +24,7 @@ controllers.caracterizacao_simples = {
         for (var ano=2016;ano>1899;ano--){
         	lista_anos = lista_anos.concat(ano);
         }
-        util.inicializaSelect("ano_simples", lista_anos);
+        util.inicializaSelectCustomValueAsIndex("ano_simples", lista_anos, "Selecione");
         
         var lista_propriedades = ['Próprio', 'Alugado/Fretado', 'Empresa', 'Taxi', 'Serviços Públicos', 'Outros'];
         util.inicializaSelect("propriedade_simples", lista_propriedades);
@@ -46,7 +46,7 @@ controllers.caracterizacao_simples = {
 		util.progressoSelect("combustivel", "combustivel_simples", "grupo_caracterizacao_simples_avancar");
     },
 
-	// Controla as validações dos componentes de tela após clicas em AVANÇAR
+	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 		if(util.validaSelect("ano_simples", "Ano do veículo") && 
 				util.validaSelect("propriedade_simples", "Propriedade") &&

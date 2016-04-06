@@ -54,7 +54,7 @@ controllers.identificacao_visual_simples = {
 		util.progressoInputText("placa_numeros", "placa_numeros_simples", "grupo_identificacao_visual_simples_avancar");
 	},
 	
-	// Controla as validações dos componentes de tela após clicas em AVANÇAR
+	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 		
 		if(util.validaRadioSimNao("reboque_simples", "Reboque") && 
@@ -64,7 +64,14 @@ controllers.identificacao_visual_simples = {
 			
 			var option = $('input[name=placa_estrangeira_simples]:checked').val();
 			if(option == 'sim') {
-				return util.validaSelect("pais_simples", "País");
+				
+				var ok_placa_estrangeira = true;
+				if((Number($("#pais_simples").val())) == 0) { // Brasil
+					alert("O país do veículo de placa estrangeira não pode ser Brasil");
+					ok_placa_estrangeira = false;
+				}
+				
+				return ok_placa_estrangeira && util.validaSelect("pais_simples", "País");
 			}
 			
 			return true;
