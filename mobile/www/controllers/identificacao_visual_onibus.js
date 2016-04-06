@@ -8,7 +8,10 @@ controllers.identificacao_visual_onibus = {
 
 	buttons : function() {
 		$("#identificacao_visual_onibus_avancar").click(function() {
-			app.trocaPagina('views/onibus/caracterizacao_onibus.html', controllers.caracterizacao_onibus);
+			var ok = controllers.identificacao_visual_onibus.validar_componentes();
+			if(ok) {
+				app.trocaPagina('views/onibus/caracterizacao_onibus.html', controllers.caracterizacao_onibus);
+			}
 		})
 	},
 	
@@ -47,6 +50,28 @@ controllers.identificacao_visual_onibus = {
 		
 		util.progressoInputText("placa_letras", "placa_letras_onibus", "grupo_placa_numeros_onibus");
 		util.progressoInputText("placa_numeros", "placa_numeros_onibus", "grupo_identificacao_visual_onibus_avancar");
+	},
+	
+	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	validar_componentes : function(id_avancar) {
 		
+		if(util.validaRadioSimNao("placa_estrangeira_onibus", "Placa estrangeira") &&
+				util.validaInputText("placa_letras_onibus", "Placa do veículo") &&
+				util.validaInputText("placa_numeros_onibus", "Placa do veículo")) {
+			
+			var option = $('input[name=placa_estrangeira_onibus]:checked').val();
+			if(option == 'sim') {
+				
+				var ok_placa_estrangeira = true;
+				if((Number($("#pais_onibus").val())) == 1) { // Brasil
+					alert("O país do veículo de placa estrangeira não pode ser Brasil");
+					ok_placa_estrangeira = false;
+				}
+				
+				return ok_placa_estrangeira && util.validaSelect("pais_onibus", "País");
+			}
+			return true;
+		}
+		return false;
 	}
 };

@@ -10,6 +10,7 @@ controllers.caracterizacao_viagem_simples = {
 		$("#caracterizacao_viagem_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
 			if(ok) {
+				// TODO Salvar no registro dados do ciclo de consulta
 				app.trocaPagina('views/menu.html', controllers.menu);
 			}
 		})
