@@ -4,7 +4,7 @@ var util = {
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
+			insert_inicial += "<option value='" + (index + 1)+ "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -12,7 +12,7 @@ var util = {
 	inicializaSelectCustom : function(nome_campo, lista, mensagem) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
+			insert_inicial += "<option value='" + (index + 1) + "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -29,7 +29,7 @@ var util = {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 				
 		$.each(lista_municipios[uf_sigla], function(index, item) {
-			insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			insert_inicial += "<option value='" + item.id + "|" + item.geocod + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -87,7 +87,7 @@ var util = {
 				app.setAtributo(nome_registro, null);
 				app.setAtributo(proximo_imediato, null);
 				app.setAtributo(proximo_imediato2, null);
-			} else if (Number($(this).val()) != 0) { // País diferente de Brasil
+			} else if (Number($(this).val()) != 1) { // País diferente de Brasil
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).show();

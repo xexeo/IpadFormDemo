@@ -66,7 +66,7 @@ controllers.identificacao_visual_simples = {
 			if(option == 'sim') {
 				
 				var ok_placa_estrangeira = true;
-				if((Number($("#pais_simples").val())) == 0) { // Brasil
+				if((Number($("#pais_simples").val())) == 1) { // Brasil
 					alert("O país do veículo de placa estrangeira não pode ser Brasil");
 					ok_placa_estrangeira = false;
 				}

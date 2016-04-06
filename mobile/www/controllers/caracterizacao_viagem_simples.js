@@ -101,13 +101,13 @@ controllers.caracterizacao_viagem_simples = {
 				util.validaSelect("renda_simples", "Renda do condutor")) {
 			
 			var ok_origem_bra = true;
-			if((Number($("#origem_pais_simples").val())) == 0) { // Brasil
+			if((Number($("#origem_pais_simples").val())) == 1) { // Brasil
 				ok_origem_bra = (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") &&
 						  util.validaSelect("origem_municipio_simples", "Origem da viagem - município"));
 			}
 			
 			var ok_destino_bra = true; 
-			if((Number($("#destino_pais_simples").val())) == 0) { // Brasil
+			if((Number($("#destino_pais_simples").val())) == 1) { // Brasil
 				ok_destino_bra = (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") &&
 						  util.validaSelect("destino_municipio_simples", "Destino da viagem - município"));
 			}
