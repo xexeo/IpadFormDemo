@@ -71,6 +71,7 @@ var app = {
                 alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
             }
             
+            //configurando a statusBar
             StatusBar.overlaysWebView(false);
             StatusBar.backgroundColorByName("black"); //black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
 
@@ -79,9 +80,11 @@ var app = {
         onFileSystemReady : function(){
             console.log("folder dos dados: ", cordova.file.dataDirectory);
             
+            
+            //setting logger writer
             window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
                 console.log('file system ready: ', dir);
-                dir.getFile("log.txt", {create: true}, function(file){
+                dir.getFile(app.logFileName, {create: true}, function(file){
                     console.log("arquivo de log: ", file);
                     myLogger.setLogFile(file);
                     file.createWriter(function(fileWriter){
@@ -106,6 +109,7 @@ var app = {
             $("#versao").html(this.versao);
             $("#entrar").click(this.login);
             $("#btn_sair").click(this.logout);
+            
         },
 
 	trocaPagina : function(view, controller) {
@@ -141,6 +145,8 @@ var app = {
 	},
         
         baseUrl : null,
+        
+        logFileName : "log.txt",
         
         
         

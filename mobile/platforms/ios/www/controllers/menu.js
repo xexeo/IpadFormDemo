@@ -5,6 +5,11 @@ controllers.menu = {
                     app.limpaRegistro();
                     app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
                 });
+                
+                $("#duplica_log").click(function(){
+                    myLogger.copyLog();
+                });
             },  
+            
 };
 
