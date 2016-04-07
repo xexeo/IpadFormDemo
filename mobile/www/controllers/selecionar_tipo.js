@@ -11,7 +11,7 @@ controllers.selecionar_tipo = {
 
 			app.imagemPath = $(this).attr('src');
 			// veiculo_confirmar = $(this).attr('id');
-			app.setAtributo('codVeiculo', $(this).attr('id'));
+			app.setAtributo('tipo', $(this).attr('id'));
 
 			if ($(this).hasClass('v-simples')) {
 				app.setAtributo('classeVeiculo', 'simples');

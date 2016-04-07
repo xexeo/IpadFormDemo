@@ -24,11 +24,11 @@ controllers.identificacao_visual_simples = {
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		
-		util.progressoRadioSimNao("reboque", "reboque_simples", "grupo_placa_estrangeira_simples");
+		util.progressoRadioSimNao("possuiReboque", "reboque_simples", "grupo_placa_estrangeira_simples");
 		
 		$('#placa_estrangeira_simples_sim').click(function() {
 			$('#grupo_pais_simples').show();
-			app.setAtributo('placa_estrangeira', true);
+			app.setAtributo('placaEstrangeira', true);
 
 			if (Number($('#pais_simples').val()) == -1) {
 				$("#grupo_placa_simples").hide();
@@ -37,8 +37,8 @@ controllers.identificacao_visual_simples = {
 		});
 		$('#placa_estrangeira_simples_nao').click(function() {
 			$('#grupo_pais_simples').hide()
-			app.setAtributo('pais', null);
-			app.setAtributo('placa_estrangeira', false);
+			app.setAtributo('idPaisPlacaEstrangeira', null);
+			app.setAtributo('placaEstrangeira', false);
 
 			$("#pais_simples option:contains('Selecione')").prop({
 				selected : true
@@ -48,7 +48,7 @@ controllers.identificacao_visual_simples = {
 			$("#grupo_placa_simples").show();
 		});
 		
-		util.progressoSelect("pais", "pais_simples", "grupo_placa_simples");
+		util.progressoSelect("idPaisPlacaEstrangeira", "pais_simples", "grupo_placa_simples");
 		
 		util.progressoInputText("placa_letras", "placa_letras_simples", "grupo_placa_numeros_simples");
 		util.progressoInputText("placa_numeros", "placa_numeros_simples", "grupo_identificacao_visual_simples_avancar");

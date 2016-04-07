@@ -49,7 +49,7 @@ controllers.caracterizacao_viagem_simples = {
 	progressoTela : function() {
 		
 		//Origem
-		util.progressoSelectPais("origem_pais", "origem_pais_simples", "origem_uf", "origem_municipio", "grupo_destino_simples", "simples");
+		util.progressoSelectPais("idOrigemPais", "origem_pais_simples", "origem_uf", "origem_municipio", "grupo_destino_simples", "simples");
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
         $('#origem_uf_simples').change(function() {
 			if ($(this).val() != '-1') {
@@ -59,7 +59,7 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
 		
 		//Destino
-		util.progressoSelectPais("destino_pais", "destino_pais_simples", "destino_uf", "destino_municipio", "grupo_frequencia_simples", "simples");
+		util.progressoSelectPais("idDestinoPais", "destino_pais_simples", "destino_uf", "destino_municipio", "grupo_frequencia_simples", "simples");
 		util.progressoSelect("destino_uf", "destino_uf_simples", "grupo_destino_municipio_simples");
         $('#destino_uf_simples').change(function() {
 			if ($(this).val() != '-1') {
@@ -75,14 +75,14 @@ controllers.caracterizacao_viagem_simples = {
         util.progressoSelect("frequencia_sel", "frequencia_sel_simples", "grupo_motivo_rota_simples");
         
         //Motivo rota
-        util.progressoSelect("motivo_rota", "motivo_rota_simples", "grupo_pessoas_simples");
+        util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_simples", "grupo_pessoas_simples");
         
         //Pessoas
-        util.progressoInputText("pessoas", "pessoas_simples", "grupo_pessoas_trabalho_simples");
+        util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_simples", "grupo_pessoas_trabalho_simples");
         util.progressoInputText("pessoas_trabalho", "pessoas_trabalho_simples", "grupo_motivo_viagem_simples");
         
         //Motivo viagem
-        util.progressoSelect("motivo_viagem", "motivo_viagem_simples", "grupo_renda_simples");
+        util.progressoSelect("idMotivoDaViagem", "motivo_viagem_simples", "grupo_renda_simples");
         
         //Renda
         util.progressoSelect("renda", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");

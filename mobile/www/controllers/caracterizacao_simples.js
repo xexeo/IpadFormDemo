@@ -31,7 +31,7 @@ controllers.caracterizacao_simples = {
 
         var lista_combustiveis = ['Álcool/Etanol', 'Bi-Combustível/Etanol', 'Diesel', 'Gasolina', 'GNV/Gás Natural', 'Híbrido'];
         // Se o veículo leve for moto, as opções para combustível são diferentes
-        if (registro.codVeiculo == 'tpVL03') {
+        if (registro.tipo == 'tpVL03') {
         	lista_combustiveis = ['Bi-Combustível/Etanol', 'Gasolina'];
 		}
         util.inicializaSelect("combustivel_simples", lista_combustiveis);
@@ -41,9 +41,9 @@ controllers.caracterizacao_simples = {
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		
-		util.progressoSelect("ano", "ano_simples", "grupo_propriedade_simples");
-		util.progressoSelect("propriedade", "propriedade_simples", "grupo_combustivel_simples");
-		util.progressoSelect("combustivel", "combustivel_simples", "grupo_caracterizacao_simples_avancar");
+		util.progressoSelect("anoDeFabricacao", "ano_simples", "grupo_propriedade_simples");
+		util.progressoSelect("idPropriedadesDoVeiculo", "propriedade_simples", "grupo_combustivel_simples");
+		util.progressoSelect("idCombustivel", "combustivel_simples", "grupo_caracterizacao_simples_avancar");
     },
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR

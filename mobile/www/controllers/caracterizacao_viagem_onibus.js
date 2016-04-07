@@ -39,7 +39,7 @@ controllers.caracterizacao_viagem_onibus = {
 	progressoTela : function() {
 		
 		//Origem
-		util.progressoSelectPais("origem_pais", "origem_pais_onibus", "origem_uf", "origem_municipio", "grupo_destino_onibus", "onibus");
+		util.progressoSelectPais("idOrigemPais", "origem_pais_onibus", "origem_uf", "origem_municipio", "grupo_destino_onibus", "onibus");
 		util.progressoSelect("origem_uf", "origem_uf_onibus", "grupo_origem_municipio_onibus");
         $('#origem_uf_onibus').change(function() {
 			if ($(this).val() != '-1') {
@@ -49,7 +49,7 @@ controllers.caracterizacao_viagem_onibus = {
 		util.progressoSelect("origem_municipio", "origem_municipio_onibus", "grupo_destino_onibus");
 		
 		//Destino
-		util.progressoSelectPais("destino_pais", "destino_pais_onibus", "destino_uf", "destino_municipio", "grupo_frequencia_onibus", "onibus");
+		util.progressoSelectPais("idDestinoPais", "destino_pais_onibus", "destino_uf", "destino_municipio", "grupo_frequencia_onibus", "onibus");
 		util.progressoSelect("destino_uf", "destino_uf_onibus", "grupo_destino_municipio_onibus");
         $('#destino_uf_onibus').change(function() {
 			if ($(this).val() != '-1') {
@@ -66,7 +66,7 @@ controllers.caracterizacao_viagem_onibus = {
         
         util.progressoSelect("tipo_viagem", "tipo_viagem_onibus", "grupo_pessoas_onibus");
         
-        util.progressoInputText("pessoas", "pessoas_onibus", "grupo_caracterizacao_viagem_onibus_avancar");
+        util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_onibus", "grupo_caracterizacao_viagem_onibus_avancar");
     },
     
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR

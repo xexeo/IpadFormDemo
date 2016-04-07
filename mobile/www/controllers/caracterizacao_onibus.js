@@ -34,8 +34,8 @@ controllers.caracterizacao_onibus = {
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 		
-		util.progressoSelect("ano", "ano_onibus", "grupo_propriedade_onibus");
-		util.progressoSelect("propriedade", "propriedade_onibus", "grupo_caracterizacao_onibus_avancar");
+		util.progressoSelect("anoDeFabricacao", "ano_onibus", "grupo_propriedade_onibus");
+		util.progressoSelect("idPropriedadesDoVeiculo", "propriedade_onibus", "grupo_caracterizacao_onibus_avancar");
     },
     
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
