@@ -205,6 +205,11 @@ nav.avancar>div.ui-block-b {
 
 .img_sel {
 	vertical-align: middle;
+	max-width: 90%;
+}
+
+#section_v_simples .img_sel {
+	max-width: 42%;
 }
 
 div.ui-block-b>.placa_prefixo, div.ui-block-b>.placa_sufixo {
@@ -257,6 +262,6 @@ div.ui-block-b>.placa_sufixo {
 }
 
 /* desbloqueando os inputtext no ipad */
-input[type=text]{
-   -webkit-user-select: auto;
-} 
+input[type=text] {
+	-webkit-user-select: auto;
+}
