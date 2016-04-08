@@ -155,6 +155,10 @@ var util = {
 	
 	alerta_msg : function(campo_aviso) {
 		alert("Campo " + campo_aviso + " não foi preenchido");
+	},
+	
+	isEmpty : function(valor) {
+		return (valor == undefined) || (valor == null) || (valor.trim().length == 0);
 	}
 
 };
