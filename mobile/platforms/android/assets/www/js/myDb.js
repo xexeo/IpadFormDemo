@@ -23,7 +23,7 @@ myDb = {
         {field : 'idMotivoDaViagem', type :'text'},
         {field : 'ocupantes', type : 'integer'},
         {field : 'ocupantes_trabalho', type : 'integer'},
-        {field : 'renda_condutor', type :'text'},
+        {field : 'idRendaMedia', type :'text'},
     ],
     
     fieldExists : function(str){

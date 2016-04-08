@@ -97,7 +97,7 @@ myLogger = {
    },
     
     _internalWrite : function(str){
-        var log = "[" + device.serial + "] [" + (new Date()) + "] " + str + "\n";
+        var log = "[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n";
         var blob = new Blob([log], {type:'text/plain'});
         var me = this;
         try{

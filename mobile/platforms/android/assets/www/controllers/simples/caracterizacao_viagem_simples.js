@@ -85,7 +85,7 @@ controllers.caracterizacao_viagem_simples = {
         util.progressoSelect("idMotivoDaViagem", "motivo_viagem_simples", "grupo_renda_simples");
         
         //Renda
-        util.progressoSelect("renda", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
+        util.progressoSelect("idRendaMedia", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
     },
     
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
