@@ -2,7 +2,7 @@ controllers.confirmar_veiculo = {
 	config : function() {
 		$("#img_confirmar_veiculo").attr('src', app.imagemPath);
 		$("#conf_veic_nao").click(function() {
-			app.limpaRegistro();
+			app.limpaRegistro(); // TODO: aqui não deve limpar o registro, e sim apenas remover as caracteristicas setados até o momento, e não todos os atributos
 			app.trocaPagina('views/selecionar_tipo.html', controllers.selecionar_tipo);
 		});
 		$("#conf_veic_sim").click(
