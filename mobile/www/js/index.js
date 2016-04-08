@@ -3,8 +3,8 @@ var app = {
 	versao : "2.0.0",
 
 	user_admin : {
-            usuario : 'admin',
-            senha : "123"
+		usuario : 'admin',
+		senha : "123"
 	},
 
 	login : function() {
@@ -18,142 +18,139 @@ var app = {
                     //inicia o registro
                     app.iniciaRegistro();
 
-            } else {
-                    // TODO: Trocar por um popup "mais elegante"
-                    var msg = "usuário e senha informados não estão cadastrados no sistema"; 
-                    alert(msg);
-                    myLogger.write(msg);
-            }
+		} else {
+			// TODO: Trocar por um popup "mais elegante"
+			var msg = "usuário e senha informados não estão cadastrados no sistema";
+			alert(msg);
+			myLogger.write(msg);
+		}
 	},
-        
 
 	logout : function() {
-            $("#usuario").val('').textinput("refresh");
-            $("#senha").val('').textinput("refresh");
-            $(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
+		$("#usuario").val('').textinput("refresh");
+		$("#senha").val('').textinput("refresh");
+		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 	},
 
 	/*
 	 * Application constructor
 	 */
 	initialize : function() {
-            this.bindEvents();
-            this.extraConfig();
-            this.baseUrl = window.location.href.replace("index.html", "");
+		this.bindEvents();
+		this.extraConfig();
+		this.baseUrl = window.location.href.replace("index.html", "");
 
 	},
-
-
 
 	/*
 	 * bind any events that are required on startup to listeners:
 	 */
 	bindEvents : function() {
-            document.addEventListener('deviceready', app.onDeviceReady);
-            //tentativa para chrome e opera 
-            //document.addEventListener('filePluginIsReady', app.onFileSystemReady, false);    
-            
-            console.log('bindindEvents');
-    	},
+		document.addEventListener('deviceready', app.onDeviceReady);
+		// tentativa para chrome e opera
+		// document.addEventListener('filePluginIsReady', app.onFileSystemReady, false);
 
+		console.log('bindindEvents');
+	},
 
 	/*
 	 * this runs when the device is ready for user interaction:
 	 */
 	onDeviceReady : function() {
-            console.log('device ready');
-            if(device.platform == 'iOS' || (device.platform == 'browser' && device.model == 'Firefox')){
-                //alert('tô no ' + device.platform);
-                setTimeout(function() {
-                    navigator.splashscreen.hide();
-                    console.log("esperando" + device.platform);
-                }, 3000);
-                app.onFileSystemReady();
-            }
-            
-            if(device.platform == 'browser' && device.model != 'Firefox'){
-                alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
-            }
-            
-            //configurando a statusBar
-            StatusBar.overlaysWebView(false);
-            StatusBar.backgroundColorByName("black"); //black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
-            
-            //alert sem a página como título
-            window.alert = function(txt, cb){
-                navigator.notification.alert(txt, cb, "Aviso", "Fechar");
-            }
+		console.log('device ready');
+		if (device.platform == 'iOS' || (device.platform == 'browser' && device.model == 'Firefox')) {
+			// alert('tô no ' + device.platform);
+			setTimeout(function() {
+				navigator.splashscreen.hide();
+				console.log("esperando" + device.platform);
+			}, 3000);
+			app.onFileSystemReady();
+		}
 
-  	},
-        
-        onFileSystemReady : function(){
-            console.log("folder dos dados: ", cordova.file.dataDirectory);
-            
-            
-            //setting logger writer
-            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
-                console.log('file system ready: ', dir);
-                dir.getFile(app.logFileName, {create: true}, function(file){
-                    console.log("arquivo de log: ", file);
-                    myLogger.setLogFile(file);
-                    file.createWriter(function(fileWriter){
-                        myLogger.setLogWriter(fileWriter);
-                    }, function(){
-                        console.log('erro criando o escritor do log');
-                    });
-                });    
-            }, function(err){
-                console.log("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
-                alert("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
-            });
-            
-        },
-        
-        
-        extraConfig : function() {
-            // initialize panel
-            $(function() {
-                $("[data-role=panel]").panel().enhanceWithin();
-            });
-            $("#versao").html(this.versao);
-            $("#entrar").click(this.login);
-            $("#btn_sair").click(this.logout);
-            
-        },
+		if (device.platform == 'browser' && device.model != 'Firefox') {
+			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
+		}
+
+		// configurando a statusBar
+		StatusBar.overlaysWebView(false);
+		StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow,
+													// magenta, orange, purple, brown
+
+		// alert sem a página como título
+		window.alert = function(txt, cb) {
+			navigator.notification.alert(txt, cb, "Aviso", "Fechar");
+		}
+
+	},
+
+	onFileSystemReady : function() {
+		console.log("folder dos dados: ", cordova.file.dataDirectory);
+
+		// setting logger writer
+		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
+			console.log('file system ready: ', dir);
+			dir.getFile(app.logFileName, {
+				create : true
+			}, function(file) {
+				console.log("arquivo de log: ", file);
+				myLogger.setLogFile(file);
+				file.createWriter(function(fileWriter) {
+					myLogger.setLogWriter(fileWriter);
+				}, function() {
+					console.log('erro criando o escritor do log');
+				});
+			});
+		}, function(err) {
+			console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+			alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+		});
+
+	},
+
+	extraConfig : function() {
+		// initialize panel
+		$(function() {
+			$("[data-role=panel]").panel().enhanceWithin();
+		});
+		$("#versao").html(this.versao);
+		$("#entrar").click(this.login);
+		$("#btn_sair").click(this.logout);
+
+	},
 
 	trocaPagina : function(view, controller) {
-            if (controller != null) {
-                $(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
-            }
+		if (controller != null) {
+			$(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
+		}
 
-            $(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
-            myLogger.write(view);
+		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+		myLogger.write(view);
 	},
 
 	setAtributo : function(nome, valor) {
-            registro[nome] = valor;
-            // TODO logar de forma dequada ao dispositivo
-            try{
-                myLogger.write(JSON.stringify(registro));
-            } catch(e){
-                console.log(e.message);
-            }
-            
+		registro[nome] = valor;
+		// TODO logar de forma dequada ao dispositivo
+		try {
+                    myLogger.write(JSON.stringify(registro));
+		} catch (e) {
+                    console.log(e.message);
+		}
+
 	},
 
 	iniciaRegistro : function() {
             try{
                 myLogger.write('Iniciando registro');
                 registro = {
-                    login : app.user_login,
+                    id = device.uuid + String(Math.floor(Date.now() / 1000))
+                    login : app.user_login, //idPosto e sentido
                     uuid : device.uuid,
+                    timestamp : Math.floor(Date.now() / 1000),
                 };
                 myLogger.write(JSON.stringify(registro));
             } catch(e){
                 myLogger.write(e.message);
             }
-            
-                
 	},
         
         baseUrl : null,
@@ -161,17 +158,54 @@ var app = {
         logFileName : "log.txt",
         
         user_login : null,
-        
-        
-        
+       
+        finalizaRegistro : function() {
+
+		try {
+			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
+				app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
+			} else if (!util.isEmpty(registro.placa_letras)) {
+				app.setAtributo('placa', registro.placa_letras);
+			} else if (!util.isEmpty(registro.placa_numeros)) {
+				app.setAtributo('placa', registro.placa_numeros);
+			}
+
+			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
+
+			var municipioSplit;
+			municipioSplit = registro.origem_municipio.split("|");
+			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
+			app.setAtributo('geocod_origem', municipioSplit[1]);
+
+			municipioSplit = registro.destino_municipio.split("|");
+			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
+			app.setAtributo('geocod_destino', municipioSplit[1]);
+
+			// TODO: setar os seguintes atributos:
+			// dataFimPesq
+
+			// TODO Salvar no registro dados do ciclo de consulta
+
+			// TODO: em outro momento salvar os demais atributos
+			// dataEnvNote (no iPad e Note)
+			// dataEnvioServidor (no Note)
+
+		} catch (e) {
+			console.log(e.message);
+		}
+
+	},
+
+	baseUrl : null,
+
+	logFileName : "log.txt",
+
 }; // end of app
 
 // Registro do momento
 var registro;
 
 $(document).ready(function() {
-    insert_controllers.insert();
-    app.initialize();
+	insert_controllers.insert();
+	app.initialize();
 });
-
-
