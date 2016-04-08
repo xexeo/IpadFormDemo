@@ -26,7 +26,7 @@ var app = {
 	logout : function() {
             $("#usuario").val('').textinput("refresh");
             $("#senha").val('').textinput("refresh");
-            app.trocaPagina($('#page_login'));
+            $(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 	},
 
 	/*
