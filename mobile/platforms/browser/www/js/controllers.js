@@ -6,12 +6,14 @@ var insert_controllers={
     controller_files : ['menu.js', 
                         'selecionar_tipo.js',
                         'confirmar_veiculo.js', 
-                        'identificacao_visual_simples.js',
-                        'caracterizacao_simples.js',
-                        'caracterizacao_viagem_simples.js',
-                        'identificacao_visual_onibus.js',
-                        'caracterizacao_onibus.js',
-                        'caracterizacao_viagem_onibus.js'
+                        'simples/identificacao_visual_simples.js',
+                        'simples/caracterizacao_simples.js',
+                        'simples/caracterizacao_viagem_simples.js',
+                        'onibus/identificacao_visual_onibus.js',
+                        'onibus/caracterizacao_onibus.js',
+                        'onibus/caracterizacao_viagem_onibus.js',
+						'carga/identificacao_visual_carga.js',
+                        'carga/caracterizacao_carga.js'
                     ],
     
     controller_files_path : 'controllers/',

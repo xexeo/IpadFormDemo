@@ -26,6 +26,43 @@ myLogger = {
         };
     },
     
+    copyLog : function(){
+        console.log("folder de transferência de dados: ", cordova.file.documentsDirectory);
+        
+        window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dir){
+           console.log('file system ready to copy:', dir);
+           
+           //testa se o arquivo de destino já existe, e o apaga se for o caso
+           dir.getFile(app.logFileName, {}, 
+           //arquivo existe
+            function(file){
+               file.remove(function(){
+                   console.log("arquivo antigo do log removido.");
+                   realCopier();
+               }, function(error){
+                   console.log(error, "erro removendo arquivo antigo do log.");
+               });
+           }, function(){
+              //arquivo não existe
+              console.log("não existia um arquivo antigo de lob")
+              realCopier();
+           });
+           
+           
+           function realCopier(){
+                myLogger._logFile.copyTo(dir, app.logFileName, function(){
+                    console.log("arquivo de log copiado");
+                }, function(error){
+                    console.log(error, "erro copiando arquivo do log.");
+                });
+           };
+           
+           
+        }, function(err){
+            console.log("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
+        });
+    },
+    
     _monitoraFila : function(){
         if (myLogger._fila.length > 0  && !myLogger._ocupado){
             myLogger._ocupado = true;
@@ -60,7 +97,7 @@ myLogger = {
    },
     
     _internalWrite : function(str){
-        var log = "[" + (new Date()) + "] " + str + "\n";
+        var log = "[" + device.serial + "] [" + (new Date()) + "] " + str + "\n";
         var blob = new Blob([log], {type:'text/plain'});
         var me = this;
         try{

@@ -38,6 +38,16 @@
                         }
                     ]
                 }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "UIFileSharingEnabled": [
+                        {
+                            "xml": "<true />",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -58,6 +68,9 @@
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
         "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "io.phasr.cordova.plugin.itunesfilesharing": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         }
     },
@@ -275,6 +288,7 @@
         "cordova-plugin-splashscreen": "3.2.1",
         "cordova-plugin-whitelist": "1.2.1",
         "cordova-sqlite-storage": "0.8.5",
-        "cordova-plugin-statusbar": "2.1.2"
+        "cordova-plugin-statusbar": "2.1.2",
+        "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1"
     }
 }

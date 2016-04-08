@@ -1,10 +1,10 @@
 var util = {
-
+		
 	// Funções para o inicializa
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
+			insert_inicial += "<option value='" + (index + 1)+ "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -12,7 +12,7 @@ var util = {
 	inicializaSelectCustom : function(nome_campo, lista, mensagem) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + index + "'>" + item + "</option>\n";
+			insert_inicial += "<option value='" + (index + 1) + "'>" + item + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -29,7 +29,7 @@ var util = {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 				
 		$.each(lista_municipios[uf_sigla], function(index, item) {
-			insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			insert_inicial += "<option value='" + item.id + "|" + item.geocod + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -76,10 +76,10 @@ var util = {
 		});
 	},
 
-	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo) {
+	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo, fluxo) {
 		$('#' + nome_campo).change(function() {
-			grupo_proximo_imediato = "grupo_" + proximo_imediato;
-			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2;
+			grupo_proximo_imediato = "grupo_" + proximo_imediato + "_" + fluxo;
+			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2 + "_" + fluxo;
 			if (Number($(this).val()) == -1) {
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
@@ -87,7 +87,7 @@ var util = {
 				app.setAtributo(nome_registro, null);
 				app.setAtributo(proximo_imediato, null);
 				app.setAtributo(proximo_imediato2, null);
-			} else if (Number($(this).val()) != 0) { // País diferente de Brasil
+			} else if (Number($(this).val()) != 1) { // País diferente de Brasil
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).show();
@@ -120,6 +120,41 @@ var util = {
 			app.setAtributo(nome_registro, $(this).val());
 			$("#" + grupo_proximo).show();
 		});
+	},
+	
+	
+	// Funções para validação dos componentes
+	validaSelect : function(nome_campo, campo_aviso) {
+		if(Number($('#' + nome_campo).val()) != -1) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+	
+	validaRadioSimNao : function(nome_campo, campo_aviso) {
+		var option = $('input[name=' + nome_campo +']:checked').val();
+		if(option != null) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+	
+	validaInputText : function(nome_campo, campo_aviso) {
+		var value = $.trim($('#' + nome_campo).val())
+		if(value.length > 0) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+	
+	alerta_msg : function(campo_aviso) {
+		alert("Campo " + campo_aviso + " não foi preenchido");
 	}
 
 };

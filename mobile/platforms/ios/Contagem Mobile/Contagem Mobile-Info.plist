@@ -53,5 +53,7 @@
     <array>
       <string>UIInterfaceOrientationLandscapeLeft</string>
     </array>
+    <key>UIFileSharingEnabled</key>
+    <true/>
   </dict>
 </plist>

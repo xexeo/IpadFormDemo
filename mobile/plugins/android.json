@@ -24,6 +24,9 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "io.phasr.cordova.plugin.itunesfilesharing": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         }
     },
     "dependent_plugins": {}
