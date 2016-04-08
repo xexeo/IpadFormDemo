@@ -30,6 +30,7 @@ var app = {
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
+                myLogger.write('Logout');
 	},
 
 	/*
@@ -142,7 +143,7 @@ var app = {
             try{
                 myLogger.write('Iniciando registro');
                 registro = {
-                    id = device.uuid + String(Math.floor(Date.now() / 1000))
+                    id : device.uuid + String(Math.floor(Date.now() / 1000)),
                     login : app.user_login, //idPosto e sentido
                     uuid : device.uuid,
                     timestamp : Math.floor(Date.now() / 1000),
