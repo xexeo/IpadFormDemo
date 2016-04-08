@@ -75,7 +75,7 @@ var app = {
             StatusBar.overlaysWebView(false);
             StatusBar.backgroundColorByName("black"); //black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
             
-            //alert sem a página
+            //alert sem a página como título
             window.alert = function(txt, cb){
                 navigator.notification.alert(txt, cb, "Aviso", "Fechar");
             }
