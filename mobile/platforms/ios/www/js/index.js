@@ -13,6 +13,10 @@ var app = {
             if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
                     // navega para págine e executa o script de configuração depois do carregamento
                     app.trocaPagina("views/menu.html", controllers.menu)
+                    //set user_login
+                    app.user_login = usuario;
+                    //inicia o registro
+                    app.iniciaRegistro();
 
             } else {
                     // TODO: Trocar por um popup "mais elegante"
@@ -137,13 +141,16 @@ var app = {
             
 	},
 
-	limpaRegistro : function() {
+	iniciaRegistro : function() {
             try{
                 myLogger.write('reiniciando registro');
-                registro = {};
+                registro = {
+                    login : app.user_login,
+                    uuid : device.uuid,
+                };
                 myLogger.write(JSON.stringify(registro));
             } catch(e){
-                console.log(e.message);
+                myLogger.write(e.message);
             }
             
                 
@@ -153,12 +160,14 @@ var app = {
         
         logFileName : "log.txt",
         
+        user_login : null,
+        
         
         
 }; // end of app
 
 // Registro do momento
-var registro = {};
+var registro;
 
 $(document).ready(function() {
     insert_controllers.insert();
