@@ -62,7 +62,7 @@ var app = {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
-				console.log("esperando" + device.platform);
+				console.log("esperando " + device.platform);
 			}, 3000);
 			app.onFileSystemReady();
 		}
