@@ -31,7 +31,7 @@ controllers.caracterizacao_simples = {
 
         var lista_combustiveis = ['Álcool/Etanol', 'Bi-Combustível/Etanol', 'Diesel', 'Gasolina', 'GNV/Gás Natural', 'Híbrido'];
         // Se o veículo leve for moto, as opções para combustível são diferentes
-        if (registro.tipo == 'tpVL03') {
+        if (registro.tipo == 'm') {
         	lista_combustiveis = ['Bi-Combustível/Etanol', 'Gasolina'];
 		}
         util.inicializaSelect("combustivel_simples", lista_combustiveis);
