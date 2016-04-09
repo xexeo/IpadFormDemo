@@ -9,6 +9,14 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+        "id": "cordova-plugin-dialogs.notification",
+        "pluginId": "cordova-plugin-dialogs",
+        "merges": [
+            "navigator.notification"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
         "id": "cordova-plugin-file.DirectoryEntry",
         "pluginId": "cordova-plugin-file",
@@ -190,14 +198,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "pluginId": "cordova-sqlite-storage",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
         "id": "cordova-plugin-statusbar.statusbar",
         "pluginId": "cordova-plugin-statusbar",
@@ -206,11 +206,11 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-        "id": "cordova-plugin-dialogs.notification",
-        "pluginId": "cordova-plugin-dialogs",
-        "merges": [
-            "navigator.notification"
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
         ]
     }
 ];
@@ -218,13 +218,13 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-device": "1.1.1",
+    "cordova-plugin-dialogs": "1.2.0",
     "cordova-plugin-file": "4.1.1",
     "cordova-plugin-splashscreen": "3.2.1",
+    "cordova-plugin-statusbar": "2.1.2",
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-sqlite-storage": "0.8.5",
-    "cordova-plugin-statusbar": "2.1.2",
-    "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1",
-    "cordova-plugin-dialogs": "1.2.0"
+    "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1"
 }
 // BOTTOM OF METADATA
 });

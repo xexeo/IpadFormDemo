@@ -159,6 +159,11 @@ var util = {
 	
 	isEmpty : function(valor) {
 		return (valor == undefined) || (valor == null) || (valor.trim().length == 0);
-	}
+	},
+        
+        isFunction : function(functionToCheck) {
+            var getType = {};
+            return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+       },
 
 };

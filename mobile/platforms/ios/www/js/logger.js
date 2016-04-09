@@ -26,7 +26,7 @@ myLogger = {
         };
     },
     
-    copyLog : function(){
+    /*copyLog : function(){
         console.log("folder de transferência de dados: ", cordova.file.documentsDirectory);
         
         window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dir){
@@ -44,7 +44,7 @@ myLogger = {
                });
            }, function(){
               //arquivo não existe
-              console.log("não existia um arquivo antigo de lob")
+              console.log("não existia um arquivo antigo de log")
               realCopier();
            });
            
@@ -61,7 +61,7 @@ myLogger = {
         }, function(err){
             console.log("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
         });
-    },
+    },*/
     
     _monitoraFila : function(){
         if (myLogger._fila.length > 0  && !myLogger._ocupado){

@@ -44,7 +44,7 @@ myLogger = {
                });
            }, function(){
               //arquivo não existe
-              console.log("não existia um arquivo antigo de lob")
+              console.log("não existia um arquivo antigo de log")
               realCopier();
            });
            

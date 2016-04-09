@@ -35,5 +35,43 @@ myDb = {
         });
         return found;
     },
+    
+    exportDB : function(){
+        //close db
+        app.database.close(
+            //success
+            function(){
+                //get FileEntry of original db file
+                window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
+                    dir.getFile(app.dbName, {create : false}, function(file){
+                        window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dest_dir){
+                            file.copyTo(dest_dir, app.dbName, function(){
+                               window.sqlitePlugin.openDatabase(
+                                    {name : app.dbName, iosDatabaseLocation : 'Library/LocalDatabase'},null,
+                                    function(err){
+                                        myLogger.write(JSON.stringify(err));
+                                    }
+                               );
+                               myLogger.write('Banco de dados exportado.');
+                            }, function(err){
+                                myLogger.write(JSON.stringify(err));
+                            });
+                        }, function(err){
+                            myLogger.write(JSON.stringify(err));
+                        }); 
+                    }, function(err){
+                        myLogger.write(JSON.stringify(err));
+                    }); 
+                }, function(err){
+                    myLogger.write(JSON.stringify(err));
+                });
+            },
+            //fail
+            function(err){
+                myLogger.write(JSON.stringify(err));
+            }
+        );
+        
+    },
 };
 

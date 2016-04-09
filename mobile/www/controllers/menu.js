@@ -7,7 +7,23 @@ controllers.menu = {
                 });
                 
                 $("#duplica_log").click(function(){
-                    myLogger.copyLog();
+                    app.copyFile(app.logFileName, 
+                        cordova.file.dataDirectory, 
+                        cordova.file.documentsDirectory
+                        );
+                });
+                
+                $("#duplica_db").click(function(){
+                    app.database.close(
+                        function(){
+                            app.copyFile(app.dbName,
+                            'cdvfile://localhost/library/LocalDatabase',
+                            cordova.file.documentsDirectory,
+                            app.openDB);
+                        },
+                        function(err){
+                            myLogger.write(JSON.stringify(err));
+                    });
                 });
             },  
             
