@@ -8,16 +8,15 @@ var app = {
 	},
 
 	login : function() {
-            var usuario = $("#usuario").val();
-            var senha = $("#senha").val();
-            if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
-                    // navega para págine e executa o script de configuração depois do carregamento
-                    app.trocaPagina("views/menu.html", controllers.menu)
-                    //set user_login
-                    app.user_login = usuario;
-                    //inicia o registro
-                    app.iniciaRegistro();
-
+		var usuario = $("#usuario").val();
+		var senha = $("#senha").val();
+		if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
+			// navega para págine e executa o script de configuração depois do carregamento
+			app.trocaPagina("views/menu.html", controllers.menu)
+			// set user_login
+			app.user_login = usuario;
+			// inicia o registro
+			app.iniciaRegistro();
 		} else {
 			// TODO: Trocar por um popup "mais elegante"
 			var msg = "usuário e senha informados não estão cadastrados no sistema";
@@ -30,7 +29,7 @@ var app = {
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
-                myLogger.write('Logout');
+		myLogger.write('Logout');
 	},
 
 	/*
@@ -63,7 +62,7 @@ var app = {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
-				console.log("esperando" + device.platform);
+				console.log("esperando " + device.platform);
 			}, 3000);
                         //fordebug
                         navigator.notification.alert(
@@ -83,7 +82,7 @@ var app = {
 		// configurando a statusBar
 		StatusBar.overlaysWebView(false);
 		StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow,
-													// magenta, orange, purple, brown
+		// magenta, orange, purple, brown
 
 		// alert sem a página como título
 		window.alert = function(txt, cb) {
@@ -159,26 +158,26 @@ var app = {
 		registro[nome] = valor;
 		// TODO logar de forma dequada ao dispositivo
 		try {
-                    myLogger.write(JSON.stringify(registro));
+			myLogger.write(JSON.stringify(registro));
 		} catch (e) {
-                    console.log(e.message);
+			myLogger.write(e.message);
 		}
 
 	},
 
 	iniciaRegistro : function() {
-            try{
-                myLogger.write('Iniciando registro');
-                registro = {
-                    id : device.uuid + String(Math.floor(Date.now() / 1000)),
-                    login : app.user_login, //idPosto e sentido
-                    uuid : device.uuid,
-                    timestamp : Math.floor(Date.now() / 1000),
-                };
-                myLogger.write(JSON.stringify(registro));
-            } catch(e){
-                myLogger.write(e.message);
-            }
+		try {
+			myLogger.write('Iniciando registro');
+			registro = {
+				id : device.uuid + String(Math.floor(Date.now() / 1000)),
+				login : app.user_login, // idPosto e sentido
+				uuid : device.uuid,
+				timestamp : Math.floor(Date.now() / 1000),
+			};
+			myLogger.write(JSON.stringify(registro));
+		} catch (e) {
+			myLogger.write(e.message);
+		}
 	},
         
        finalizaRegistro : function() {
@@ -213,7 +212,7 @@ var app = {
 			// dataEnvioServidor (no Note)
 
 		} catch (e) {
-			console.log(e.message);
+			myLogger.write(e.message);
 		}
 
 	},
@@ -315,6 +314,8 @@ var app = {
         user_login : null,
         
         dbName : "dados.db",
+
+	user_login : null,
 
 }; // end of app
 
