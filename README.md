@@ -34,6 +34,29 @@ comando:
 
 __obs:__ Chrome e Opera apresentam problemas para acesso a arquivos.
 
+### Emulação do aplicativo no Simulator (apenas em Macs)
+Todas as funcionalidades do app podem ser testadas no Simulator. Para executar o app no Simulator basta usar o seguinte comando, no diretório do projeto (o Xcode precisa estar instalado):
+
+`cordova run ios --debug --emulator --targe=iPad-2`
+
+#### Visualizando arquivos de dados no Simulator (apenas em Macs)
+Apesar do Simulator não aparecer no iTunes, a exportação dos arquivos pode ser testada acessando-se diretamente os folders do dispositivo emulado no sistema de arquivos do computador. O caminho fica desponível nas primeiras linhas do log no debugger, como no exemplo abaixo:
+
+```
+folder dos dados:  – "file:///Users/ludes/Library/Developer/CoreSimulator/Devices/B3E97709-7AF9-4898-BBEE-C9B6B19F563B/data/Containers/Data/Application/BFA5C1FB-C6B1-4595-99F9-4C0F960FDB07/Library/NoCloud/"
+````
+
+Para acessar o folder, abra o finder, use a combinção de teclas `command + shift + G` para entrar com o endereço sem o protocolo e as duas primeiras barras. Para o endereço do exemplo acima, seria assim:
+
+```
+/Users/ludes/Library/Developer/CoreSimulator/Devices/B3E97709-7AF9-4898-BBEE-C9B6B19F563B/data/Containers/Data/Application/BFA5C1FB-C6B1-4595-99F9-4C0F960FDB07/Library/NoCloud/
+````
+O arquivo do banco de dados fica no folder `Library/LocalDatabase` os arquivos exportados e visíveis pelo iTunes ficam no folder `Documents`, no mesmo nível do folder `Library`.
+
+Para visualizar os dados no arquivo sqlite, uma sugestão é usar o add-on do firefox [SQLite Manager] (https://addons.mozilla.org/pt-br/firefox/addon/sqlite-manager/).
+
+Para visualizar os dados no formato JSON, pode-se usar o visualizador [Online JSON Viewer] (http://jsonviewer.stack.hu/).
+
 ### Mantendo apenas um app disponível no iOS
 Uma solicitação do cliente é impedir o uso de outro aplicativo no dispositivo.
 
