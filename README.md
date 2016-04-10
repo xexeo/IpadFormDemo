@@ -53,7 +53,7 @@ Para acessar o folder, abra o finder, use a combinção de teclas `command + shi
 ````
 O arquivo do banco de dados fica no folder `Library/LocalDatabase` os arquivos exportados e visíveis pelo iTunes ficam no folder `Documents`, no mesmo nível do folder `Library`.
 
-Para visualizar os dados no arquivo sqlite, uma sugestão é usar o add-on do firefox [SQLite Manager] (https://addons.mozilla.org/pt-br/firefox/addon/sqlite-manager/).
+Para visualizar os dados no arquivo sqlite, uma sugestão é usar o add-on do firefox [SQLite Manager] (https://addons.mozilla.org/pt-br/firefox/addon/sqlite-manager/), ou o software [DB Browser for SQLite] (http://sqlitebrowser.org/). 
 
 Para visualizar os dados no formato JSON, pode-se usar o visualizador [Online JSON Viewer] (http://jsonviewer.stack.hu/).
 
