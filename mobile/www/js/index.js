@@ -110,6 +110,7 @@ var app = {
 					console.log('erro criando o escritor do log');
 				});
                                 app.openDB();
+                                
 			});
 		}, function(err) {
 			console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
@@ -125,6 +126,7 @@ var app = {
                 //sucsess
                 function(){
                     myLogger.write('Conexão com o banco de dados criada com sucesso.');
+                    myDb.cretateTblDados();
                 },
                 //fail
                 function(err){
@@ -193,14 +195,21 @@ var app = {
 
 			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
 
-			var municipioSplit;
-			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_origem', municipioSplit[1]);
+                        var municipioSplit;
+                        if (registro.origem_municipio != null){
+                            
+                            municipioSplit = registro.origem_municipio.split("|");
+                            app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
+                            app.setAtributo('geocod_origem', municipioSplit[1]);
+                        }
+			
+                        if (registro.destino_municipio != null){
+                            municipioSplit = registro.destino_municipio.split("|");
+                            app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
+                            app.setAtributo('geocod_destino', municipioSplit[1]);
+                        }
 
-			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_destino', municipioSplit[1]);
+			
 
 			// TODO: setar os seguintes atributos:
 			// dataFimPesq
@@ -210,6 +219,8 @@ var app = {
 			// TODO: em outro momento salvar os demais atributos
 			// dataEnvNote (no iPad e Note)
 			// dataEnvioServidor (no Note)
+                        
+                        myDb.insertRegistro(registro);
 
 		} catch (e) {
 			myLogger.write(e.message);

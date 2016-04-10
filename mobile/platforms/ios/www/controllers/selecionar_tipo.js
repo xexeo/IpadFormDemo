@@ -2,7 +2,6 @@ controllers.selecionar_tipo = {
 	config : function() {
 		
 		$(".switch_classe_veiculo").click(function() {
-			console.log(1);
 			$('#sel_tipo_veiculo_1').toggle();
 			$('#sel_tipo_veiculo_2').toggle();
 		});
@@ -11,7 +10,7 @@ controllers.selecionar_tipo = {
 
 			app.imagemPath = $(this).attr('src');
 			// veiculo_confirmar = $(this).attr('id');
-			app.setAtributo('tipo', $(this).attr('id'));
+			app.setAtributo('tipo', $(this).attr('id').split("_")[0]);
 
 			if ($(this).hasClass('v-simples')) {
 				app.setAtributo('classeVeiculo', 'simples');

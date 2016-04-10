@@ -124,7 +124,7 @@ nav.avancar>div.ui-block-b {
 }
 
 #section_v_simples {
-	width: 35%;
+	width: 45%;
 }
 
 #section_v_semireboques {
@@ -132,7 +132,7 @@ nav.avancar>div.ui-block-b {
 }
 
 #section_v_combinados {
-	width: 35%;
+	width: 40%;
 }
 
 #section_v_reboques {
@@ -140,7 +140,7 @@ nav.avancar>div.ui-block-b {
 }
 
 .troca_classe_veiculo {
-	width: 15%;
+	width: 10%;
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
@@ -182,7 +182,7 @@ nav.avancar>div.ui-block-b {
 	display: inline-block;
 	border: solid;
 	text-align: center;
-	width: auto;
+	width: 90%;
 	padding: 0% 0%;
 	margin: 2% 5%;
 }
