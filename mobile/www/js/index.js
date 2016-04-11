@@ -163,13 +163,13 @@ var app = {
 
 	iniciaRegistro : function() {
 		try {
-			myLogger.write('Iniciando registro');
 			var now = new Date();
+			myLogger.write('Iniciando registro');
 			registro = {
 				id : device.uuid + String(util.getTimeInSeconds(now)),
 				login : app.user_login, // idPosto e sentido
 				uuid : device.uuid,
-				timestamp : util.getTimeInSeconds(now),
+				timestampIniPesq : util.getTimeInSeconds(now),
 			};
 			// TODO: setar os seguintes atributos:
 			// id (possível que este attr seja setato só no SQLite)
@@ -212,7 +212,7 @@ var app = {
 				app.setAtributo('geocod_destino', municipioSplit[1]);
 			}
 
-			app.setAtributo('dataFimPesq', moment().format('DD/MM/YYYY HH:mm'));
+			app.setAtributo('timestampIniPesq', new Date());
 			myDb.insertRegistro(registro);
 
 			// TODO: em outro momento salvar os demais atributos
