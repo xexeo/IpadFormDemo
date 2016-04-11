@@ -8,8 +8,8 @@ myDb = {
         {field : 'sentido' , type : 'text'},
         {field : 'idIpad' , type : 'text'},
         {field : 'login' , type : 'text'}, // idPost + sentido (redundante?)
-        {field : 'dataIniPesq' , type : 'text'},
-        {field : 'dataFimPesq' , type : 'text'},
+        {field : 'timestampIniPesq' , type : 'text'},
+        {field : 'timestampFimPesq' , type : 'text'},
         {field : 'tipo' , type : 'text'},
         {field : 'classeVeiculo' , type : 'text'},
         {field : 'possuiReboque' , type : 'text'},
