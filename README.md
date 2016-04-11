@@ -63,3 +63,14 @@ Uma solicitação do cliente é impedir o uso de outro aplicativo no dispositivo
 * [Guided Access] (https://support.apple.com/en-us/HT202612)
 
 [Para funcionar depois do reboot o passcode do dispositivo deve estar desabilitado.](http://stackoverflow.com/questions/20864999/make-ios-application-run-at-startup)
+
+---
+## Módulo concentrador
+### Ambiente de Desenvolvimento
+O projeto foi iniciado no NetBeans usando java 8.
+
+### Biblioteca server http
+As classes da biblioteca [Simple] (http://www.simpleframework.org/) já estão configuradas no projeto. 
+
+* [Tutorial] (http://www.simpleframework.org/doc/tutorial/tutorial.php)
+* [Javadocs] (http://www.simpleframework.org/doc/javadoc/index.html)
