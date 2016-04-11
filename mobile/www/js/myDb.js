@@ -2,8 +2,8 @@ myDb = {
     
     tabelaOD : [
         {field : 'id', type : 'text'}, // TODO (redundante? id + idIpad) Number(String(device.serial) + String(Math.floor(Date.now() / 1000)) that is the device serial concats with unix timestamp
-        {field : 'estaNoNote', type : 'integer'}, //TODO enviado p/ ond? (note ou web)? se for note o nome correto é 'estaNoNote' //Boolean 1->true||false, otherwise; // TODO realmente tem esse campo?
-        {field : 'cancelado', type : 'integer'}, //TODO enviado p/ ond? (note ou web)? se for note o nome correto é 'estaNoNote' //Boolean 1->true||false, otherwise; // TODO realmente tem esse campo?
+        {field : 'estaNoNote', type : 'integer'}, //Boolean 1->true||false, otherwise;
+        {field : 'cancelado', type : 'integer'},
         {field : 'idPosto' , type : 'integer'},
         {field : 'sentido' , type : 'text'},
         {field : 'idIpad' , type : 'text'},
