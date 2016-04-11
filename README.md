@@ -1,7 +1,7 @@
 # ipaddnit
 Repositorio do projeto ipad para DNIT
 
-* [Módulo mobile](#M&oacute;dulo-mobile)
+* [Módulo mobile](#módulo-mobile)
 * [Módulo concentrador](#Módulo-concentrador)
 
 ---
