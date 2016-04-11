@@ -116,7 +116,7 @@ controllers.caracterizacao_viagem_simples = {
 
 			var qtd_pessoas = true;
 			if ((Number($("#pessoas_trabalho_simples").val())) > (Number($("#pessoas_simples").val()))) {
-				alert("O número de pessoas no veículo deve ser maior que o número de pessoas a trabalho");
+				alert("O número de pessoas a trabalho não deve exceder o número de pessoas no veículo");
 				qtd_pessoas = false;
 			}
 
