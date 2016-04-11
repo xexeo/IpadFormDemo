@@ -167,18 +167,14 @@ var app = {
 			myLogger.write('Iniciando registro');
 			registro = {
 				id : device.uuid + String(util.getTimeInSeconds(now)),
-				login : app.user_login, // idPosto e sentido
+				login : app.user_login, // TODO idPosto + sentido?
 				uuid : device.uuid,
 				timestampIniPesq : util.getTimeInSeconds(now),
 			};
-			// TODO: setar os seguintes atributos:
-			// id (possível que este attr seja setato só no SQLite)
+			// TODO: falta setar os seguintes atributos:
 			// idPosto
 			// sentido
 			// idIpad
-			// login
-			// dataIniPesq // formato "dd/MM/yyyy HH:mm"
-			// moment(now).format('DD/MM/YYYY HH:mm')
 			myLogger.write(JSON.stringify(registro));
 		} catch (e) {
 			myLogger.write(e.message);
