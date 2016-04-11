@@ -21,6 +21,9 @@ controllers.identificacao_visual_carga = {
 		//TODO inicializar tipo de carroceria
 		
 		util.inicializaSelect("pais_carga", paises.listados());
+		
+        var lista_rntrc = ['TAC', 'ETC', 'CTC'];
+        util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");
 	},
 
 	//Controla o show e hide dos elementos da tela
@@ -53,8 +56,10 @@ controllers.identificacao_visual_carga = {
 		util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
 		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
 		
+		//TODO modificar progresso ao selecionar SIM
 		util.progressoRadioSimNao("placa_vermelha", "placa_vermelha_carga", "grupo_carga_perigosa_carga");
 		
+		//TODO modificar progresso ao selecionar SIM
 		util.progressoRadioSimNao("carga_perigosa", "carga_perigosa_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 	

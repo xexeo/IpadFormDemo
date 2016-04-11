@@ -18,16 +18,12 @@ controllers.selecionar_tipo = {
 				app.setAtributo('classeVeiculo', 'onibus');
 			} else if ($(this).hasClass('v-carga')) {
 				app.setAtributo('classeVeiculo', 'carga');
-				//TODO setar tipo de carga
 			} else if ($(this).hasClass('v-semireboque')) {
 				app.setAtributo('classeVeiculo', 'carga');
-				//TODO setar tipo de carga
 			} else if ($(this).hasClass('v-combinado')) {
 				app.setAtributo('classeVeiculo', 'carga');
-				//TODO setar tipo de carga
 			} else if ($(this).hasClass('v-reboque')) {
 				app.setAtributo('classeVeiculo', 'carga');
-				//TODO setar tipo de carga
 			}
 
 			app.trocaPagina("views/confirmar_veiculo.html", controllers.confirmar_veiculo);

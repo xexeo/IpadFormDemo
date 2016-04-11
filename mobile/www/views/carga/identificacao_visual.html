@@ -60,18 +60,27 @@
 					<input id="placa_letras_carga" type="text" name="placa_letras_carga" value="" data-theme="a" />
 				</div>
 				<div class="ui-block-b placa_sufixo escondido" id="grupo_placa_numeros_carga">
-					<input id="placa_numeros_carga" type="number" name="placa_numeros_carga" value="" data-theme="a" />
+					<input id="placa_numeros_carga" type="text" name="placa_numeros_carga" value="" data-theme="a" />
 				</div>
 			</div>
 		</fieldset>
 
 		<fieldset class="ui-grid-a escondido" id="grupo_placa_vermelha_carga">
 			<legend class="ui-block-a">Placa vermelha:</legend>
-			<div data-role="controlgroup" data-theme="a" class="ui-block-b" data-type="horizontal">
-				<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_sim" value="sim"> <label
-					for="placa_vermelha_carga_sim">Sim</label> <input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_nao"
-					value="nao"> <label for="placa_vermelha_carga_nao">Não</label>
-			</div>
+			<div class="ui-block-b ui-grid-b" id="grupo_placa_vermelha_carga">
+				<div data-role="controlgroup" data-theme="a" class="ui-block-b" data-type="horizontal">
+					<input type="radio" name="placa_vermelha_radio_carga" id="placa_vermelha_radio_carga" value="sim"> <label
+						for="placa_vermelha_carga_sim">Sim</label> <input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_nao"
+						value="nao"> <label for="placa_vermelha_carga_nao">Não</label>
+				</div>
+				<div class="ui-block-b escondido" id="grupo_placa_vermelha_rntrc_sel_carga">
+					<select name="placa_vermelha_rntrc_sel_carga" id="placa_vermelha_rntrc_sel_carga" data-theme="a">
+					</select>
+				</div>
+				<div class="ui-block-c escondido" id="grupo_placa_vermelha_rntrc_num_carga">
+					<input id="placa_vermelha_rntrc_num_carga" type="text" name="placa_vermelha_rntrc_num_carga" value="" data-theme="a" />
+				</div>
+			</div>			
 		</fieldset>
 
 		<fieldset class="ui-grid-a escondido" id="grupo_carga_perigosa_carga">

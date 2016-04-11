@@ -16,9 +16,23 @@ controllers.confirmar_veiculo = {
 						catVeiculo = 'Leve';
 					} else if (imgFileName.match(/(o)[_0-9]*\.png/g) != null) {
 						catVeiculo = 'Onibus';
-					} else // if (imgFileName.match(/(r|s|se)[_0-9]*\.png/g) != null)
+					} else // if (imgFileName.match(/(c|r|s|se)[_0-9]*\.png/g) != null)
 					{
 						catVeiculo = 'Pesado';
+						var tipoCaminhao;
+						if (imgFileName.match(/(c)[_0-9]*\.png/g) != null) {
+							tipoCaminhao = 'Leve';
+						}
+						if (imgFileName.match(/(s)[_0-9]*\.png/g) != null) {
+							tipoCaminhao = 'Semirreboque';
+						}
+						if (imgFileName.match(/(se)[_0-9]*\.png/g) != null) {
+							tipoCaminhao = 'Semirreboque Especial';
+						}
+						if (imgFileName.match(/(r)[_0-9]*\.png/g) != null) {
+							tipoCaminhao = 'Reboque';
+						}
+						app.setAtributo('tipoCaminhao', tipoCaminhao);
 					}
 					app.setAtributo('categoria', catVeiculo);
 					app.trocaPagina("views/" + registro.classeVeiculo + '/identificacao_visual.html',
