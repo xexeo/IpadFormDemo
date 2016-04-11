@@ -211,20 +211,15 @@ var app = {
 	},
 	
 	finalizaRegistro : function() {
-
 		try {
 			setCamposDerivados();
-
 			myDb.insertRegistro(registro);
-
 			// TODO: em outro momento salvar os demais atributos
 			// dataEnvNote (no iPad e Note)
 			// dataEnvioServidor (no Note)
-
 		} catch (e) {
 			myLogger.write(e.message);
 		}
-
 	},
 
 	cancelaRegistro : function() {
