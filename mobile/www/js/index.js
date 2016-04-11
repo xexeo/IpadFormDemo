@@ -181,34 +181,40 @@ var app = {
 		}
 	},
 
+	setCamposDerivados : function() {
+		if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
+			app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
+		} else if (!util.isEmpty(registro.placa_letras)) {
+			app.setAtributo('placa', registro.placa_letras);
+		} else if (!util.isEmpty(registro.placa_numeros)) {
+			app.setAtributo('placa', registro.placa_numeros);
+		}
+
+		if (!util.isEmpty(registro.frequencia_num) || !util.isEmpty(registro.frequencia_sel)) {
+			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
+		}
+
+		var municipioSplit;
+		if (registro.origem_municipio != null) {
+			municipioSplit = registro.origem_municipio.split("|");
+			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
+			app.setAtributo('geocod_origem', municipioSplit[1]);
+		}
+
+		if (registro.destino_municipio != null) {
+			municipioSplit = registro.destino_municipio.split("|");
+			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
+			app.setAtributo('geocod_destino', municipioSplit[1]);
+		}
+
+		app.setAtributo('timestampIniPesq', new Date());
+	},
+	
 	finalizaRegistro : function() {
 
 		try {
-			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
-				app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
-			} else if (!util.isEmpty(registro.placa_letras)) {
-				app.setAtributo('placa', registro.placa_letras);
-			} else if (!util.isEmpty(registro.placa_numeros)) {
-				app.setAtributo('placa', registro.placa_numeros);
-			}
+			setCamposDerivados();
 
-			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
-
-			var municipioSplit;
-			if (registro.origem_municipio != null) {
-
-				municipioSplit = registro.origem_municipio.split("|");
-				app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-				app.setAtributo('geocod_origem', municipioSplit[1]);
-			}
-
-			if (registro.destino_municipio != null) {
-				municipioSplit = registro.destino_municipio.split("|");
-				app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-				app.setAtributo('geocod_destino', municipioSplit[1]);
-			}
-
-			app.setAtributo('timestampIniPesq', new Date());
 			myDb.insertRegistro(registro);
 
 			// TODO: em outro momento salvar os demais atributos
@@ -219,6 +225,16 @@ var app = {
 			myLogger.write(e.message);
 		}
 
+	},
+
+	cancelaRegistro : function() {
+		try {
+			setCamposDerivados();
+			app.setAtributo('cacelado', 1);
+			myDb.insertRegistro(registro);
+		} catch (e) {
+			myLogger.write(e.message);
+		}
 	},
 
 	/**
