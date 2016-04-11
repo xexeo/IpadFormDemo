@@ -16,6 +16,7 @@ public class Concentrador {
      */
     public static void main(String[] args) {
         System.out.println("br.ufrj.coppetec.concentrador.Concentrador.main()");
+        
         Janela janela = new Janela();
         janela.setVisible(true);
     }
