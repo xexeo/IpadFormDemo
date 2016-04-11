@@ -64,15 +64,11 @@ var app = {
 				navigator.splashscreen.hide();
 				console.log("esperando " + device.platform);
 			}, 3000);
-                        //fordebug
-                        navigator.notification.alert(
-                            'conecte o debugger',
-                            app.onFileSystemReady,
-                            'Alerta de desenvolvimento',
-                            'OK' 
-                             
-                        );
-			//app.onFileSystemReady();
+			// fordebug
+			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK'
+
+			);
+			// app.onFileSystemReady();
 		}
 
 		if (device.platform == 'browser' && device.model != 'Firefox') {
@@ -88,8 +84,6 @@ var app = {
 		window.alert = function(txt, cb) {
 			navigator.notification.alert(txt, cb, "Aviso", "Fechar");
 		}
-                
-                
 
 	},
 
@@ -109,32 +103,32 @@ var app = {
 				}, function() {
 					console.log('erro criando o escritor do log');
 				});
-                                app.openDB();
-                                
+				app.openDB();
+
 			});
 		}, function(err) {
 			console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
 			alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
 		});
-                
-                
+
 	},
-        
-        openDB : function(){
-            app.database = sqlitePlugin.openDatabase(
-                { name : app.dbName, iosDatabaseLocation: 'default'},
-                //sucsess
-                function(){
-                    myLogger.write('Conexão com o banco de dados criada com sucesso.');
-                    myDb.cretateTblDados();
-                },
-                //fail
-                function(err){
-                    myLogger.write(JSON.stringify(err));
-                }
-            );
-            
-        },
+
+	openDB : function() {
+		app.database = sqlitePlugin.openDatabase({
+			name : app.dbName,
+			iosDatabaseLocation : 'default'
+		},
+		// sucsess
+		function() {
+			myLogger.write('Conexão com o banco de dados criada com sucesso.');
+			myDb.cretateTblDados();
+		},
+		// fail
+		function(err) {
+			myLogger.write(JSON.stringify(err));
+		});
+
+	},
 
 	extraConfig : function() {
 		// initialize panel
@@ -170,19 +164,28 @@ var app = {
 	iniciaRegistro : function() {
 		try {
 			myLogger.write('Iniciando registro');
+			var now = new Date();
 			registro = {
-				id : device.uuid + String(Math.floor(Date.now() / 1000)),
+				id : device.uuid + String(util.getTimeInSeconds(now)),
 				login : app.user_login, // idPosto e sentido
 				uuid : device.uuid,
-				timestamp : Math.floor(Date.now() / 1000),
+				timestamp : util.getTimeInSeconds(now),
 			};
+			// TODO: setar os seguintes atributos:
+			// id (possível que este attr seja setato só no SQLite)
+			// idPosto
+			// sentido
+			// idIpad
+			// login
+			// dataIniPesq // formato "dd/MM/yyyy HH:mm"
+			// moment(now).format('DD/MM/YYYY HH:mm')
 			myLogger.write(JSON.stringify(registro));
 		} catch (e) {
 			myLogger.write(e.message);
 		}
 	},
-        
-       finalizaRegistro : function() {
+
+	finalizaRegistro : function() {
 
 		try {
 			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
@@ -195,136 +198,134 @@ var app = {
 
 			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
 
-                        var municipioSplit;
-                        if (registro.origem_municipio != null){
-                            
-                            municipioSplit = registro.origem_municipio.split("|");
-                            app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-                            app.setAtributo('geocod_origem', municipioSplit[1]);
-                        }
-			
-                        if (registro.destino_municipio != null){
-                            municipioSplit = registro.destino_municipio.split("|");
-                            app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-                            app.setAtributo('geocod_destino', municipioSplit[1]);
-                        }
+			var municipioSplit;
+			if (registro.origem_municipio != null) {
 
-			
+				municipioSplit = registro.origem_municipio.split("|");
+				app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
+				app.setAtributo('geocod_origem', municipioSplit[1]);
+			}
 
-			// TODO: setar os seguintes atributos:
-			// dataFimPesq
+			if (registro.destino_municipio != null) {
+				municipioSplit = registro.destino_municipio.split("|");
+				app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
+				app.setAtributo('geocod_destino', municipioSplit[1]);
+			}
 
-			// TODO Salvar no registro dados do ciclo de consulta
+			app.setAtributo('dataFimPesq', moment().format('DD/MM/YYYY HH:mm'));
+			myDb.insertRegistro(registro);
 
 			// TODO: em outro momento salvar os demais atributos
 			// dataEnvNote (no iPad e Note)
 			// dataEnvioServidor (no Note)
-                        
-                        myDb.insertRegistro(registro);
 
 		} catch (e) {
 			myLogger.write(e.message);
 		}
 
 	},
-        
-       /**
-        * Remove a file from fs, if it exists
-        * @param String fileName
-        * @param String dir -> prefers cordova.file.{dir}
-        * @param function cbSuccess success callback
-        * @param function cbFail error callback
-        */
-        removeFile : function(fileName, dirURI, cbSuccess, cbFail){
-            window.resolveLocalFileSystemURL(dirURI,
-                //success
-                function(folder){
-                    myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
-                    folder.getFile(fileName, {create : false}, 
-                        function(arquivo){
-                            arquivo.remove(function(){
-                                myLogger.write('Arquivo ' + fileName + ' removido');
-                                cbSuccess();
-                            });
-                        },
-                        function(err){
-                            myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
-                            cbFail();
-                    });
-                },
-                //fail
-                function(err){
-                    myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
-                }
-            );
-        },
-        
-        /**
-         * Copy a file overwriting the destination file, if it exists
-         * @param String fileName
-         * @param String originDir
-         * @param String destDir
-         * @param Function cb success callback function 
-         */
-        copyFile : function(fileName, originDirURI, destDirURI, cb){
-            //get original dir
-            resolveLocalFileSystemURL(originDirURI, 
-            //success
-            function(dir){
-                //get original file
-                dir.getFile(fileName,{},
-                //success getting original file
-                function(file){
-                    //resolving destination
-                    resolveLocalFileSystemURL(destDirURI,
-                    //success resolving destination
-                    function(destDir){
-                        myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder ' + destDir.nativeURL);
-                        //removing destination file
-                        app.removeFile(fileName, destDirURI,
-                        function(){
-                            realCopier(file, fileName, destDir);
-                        },
-                        //mesmo se não conseguir remover
-                        function(){
-                            realCopier(file, fileName, destDir);
-                        });
-                    },
-                    function(err){
-                        myLogger.write('Erro acessando o folder de destino '+ destDir + ' ' + JSON.stringify(err));
-                    });
-                            
-                },
-                function (err){
-                    myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
-                });
-                
-            },
-            function(err){
-                myLogger.write('Erro acessando o folder original ' + originDir+ ' ' + JSON.stringify(err));
-            });
-            //internal function
-            function realCopier(f, name, d){
-                f.copyTo(d, name, function(){
-                    //success
-                    myLogger.write('Arquivo ' + name + ' copiado.');
-                    if (util.isFunction(cb)){
-                        cb();
-                    }
-                },
-                function(err){
-                   myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err)); 
-                });
-            };
-        },
-        
-        baseUrl : null,
-        
-        logFileName : "log.txt",
-        
-        user_login : null,
-        
-        dbName : "dados.db",
+
+	/**
+	 * Remove a file from fs, if it exists
+	 * 
+	 * @param String
+	 *            fileName
+	 * @param String
+	 *            dir -> prefers cordova.file.{dir}
+	 * @param function
+	 *            cbSuccess success callback
+	 * @param function
+	 *            cbFail error callback
+	 */
+	removeFile : function(fileName, dirURI, cbSuccess, cbFail) {
+		window.resolveLocalFileSystemURL(dirURI,
+		// success
+		function(folder) {
+			myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
+			folder.getFile(fileName, {
+				create : false
+			}, function(arquivo) {
+				arquivo.remove(function() {
+					myLogger.write('Arquivo ' + fileName + ' removido');
+					cbSuccess();
+				});
+			}, function(err) {
+				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
+				cbFail();
+			});
+		},
+		// fail
+		function(err) {
+			myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
+		});
+	},
+
+	/**
+	 * Copy a file overwriting the destination file, if it exists
+	 * 
+	 * @param String
+	 *            fileName
+	 * @param String
+	 *            originDir
+	 * @param String
+	 *            destDir
+	 * @param Function
+	 *            cb success callback function
+	 */
+	copyFile : function(fileName, originDirURI, destDirURI, cb) {
+		// get original dir
+		resolveLocalFileSystemURL(originDirURI,
+		// success
+		function(dir) {
+			// get original file
+			dir.getFile(fileName, {},
+			// success getting original file
+			function(file) {
+				// resolving destination
+				resolveLocalFileSystemURL(destDirURI,
+				// success resolving destination
+				function(destDir) {
+					myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder '
+							+ destDir.nativeURL);
+					// removing destination file
+					app.removeFile(fileName, destDirURI, function() {
+						realCopier(file, fileName, destDir);
+					},
+					// mesmo se não conseguir remover
+					function() {
+						realCopier(file, fileName, destDir);
+					});
+				}, function(err) {
+					myLogger.write('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
+				});
+
+			}, function(err) {
+				myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
+			});
+
+		}, function(err) {
+			myLogger.write('Erro acessando o folder original ' + originDir + ' ' + JSON.stringify(err));
+		});
+		// internal function
+		function realCopier(f, name, d) {
+			f.copyTo(d, name, function() {
+				// success
+				myLogger.write('Arquivo ' + name + ' copiado.');
+				if (util.isFunction(cb)) {
+					cb();
+				}
+			}, function(err) {
+				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+			});
+		}
+		;
+	},
+
+	baseUrl : null,
+
+	logFileName : "log.txt",
+
+	dbName : "dados.db",
 
 	user_login : null,
 
