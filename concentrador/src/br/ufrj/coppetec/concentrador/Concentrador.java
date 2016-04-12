@@ -15,8 +15,8 @@ public class Concentrador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("br.ufrj.coppetec.concentrador.Concentrador.main()");
-        
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
         Janela janela = new Janela();
         janela.setVisible(true);
     }
