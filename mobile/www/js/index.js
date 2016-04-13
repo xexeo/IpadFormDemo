@@ -1,5 +1,8 @@
 var app = {
 
+	debugOnBrowser: true, // sem o cordova
+	//debugOnBrowser: false, // com o cordova
+	
 	versao : "2.0.0",
 
 	user_admin : {
@@ -162,7 +165,7 @@ var app = {
 	},
 
 	limpaRegistro : function() {
-		myLogger.write('Limpando registro');
+		myLogger.write('Limpando registro', true);
 		registro = {};
 	},
 
@@ -171,8 +174,10 @@ var app = {
 			var now = new Date();
 			myLogger.write('Iniciando registro');
 			app.limpaRegistro();
-			var uuid_device;
-			uuid_device = device.uuid; // Comentar essa linha ao testar sem o cordova.
+			var uuid_device = "browser";
+			if (!app.debugOnBrowser) {
+				uuid_device = device.uuid;
+			}
 			app.setAtributo('id', uuid_device + String(util.getTimeInSeconds(now)));
 			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
 			app.setAtributo('uuid', uuid_device);
