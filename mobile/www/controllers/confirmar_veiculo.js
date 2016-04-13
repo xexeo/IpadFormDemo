@@ -1,8 +1,6 @@
 controllers.confirmar_veiculo = {
 	config : function() {
 
-		$("#btn_cancelar").click(app.cancelar);
-		
 		$("#img_confirmar_veiculo").attr('src', app.imagemPath);
 		$("#conf_veic_nao").click(function() {
                         //clear

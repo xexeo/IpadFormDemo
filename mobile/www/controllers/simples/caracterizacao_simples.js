@@ -9,7 +9,6 @@ controllers.caracterizacao_simples = {
 	},
 
 	buttons : function() {
-		$("#btn_cancelar").click(app.cancelar);
 		$("#caracterizacao_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_simples.validar_componentes();
 			if (ok) {

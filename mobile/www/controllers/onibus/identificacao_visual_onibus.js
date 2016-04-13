@@ -7,7 +7,6 @@ controllers.identificacao_visual_onibus = {
 	},
 
 	buttons : function() {
-		$("#btn_cancelar").click(app.cancelar);
 		$("#identificacao_visual_onibus_avancar").click(function() {
 			var ok = controllers.identificacao_visual_onibus.validar_componentes();
 			if (ok) {

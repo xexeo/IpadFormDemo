@@ -9,7 +9,6 @@ controllers.caracterizacao_onibus = {
 	},
 
 	buttons : function() {
-		$("#btn_cancelar").click(app.cancelar);
 		$("#caracterizacao_onibus_avancar").click(function() {
 			var ok = controllers.caracterizacao_onibus.validar_componentes();
 			if (ok) {

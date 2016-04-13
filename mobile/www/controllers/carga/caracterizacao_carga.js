@@ -9,7 +9,6 @@ controllers.caracterizacao_carga = {
 	},
 
 	buttons : function() {
-		$("#btn_cancelar").click(app.cancelar);
 		// TODO
 	},
 
