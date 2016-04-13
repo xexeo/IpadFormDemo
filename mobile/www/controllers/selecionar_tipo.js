@@ -8,7 +8,7 @@ controllers.selecionar_tipo = {
 			$('#sel_tipo_veiculo_2').toggle();
 		});
 
-		$(".img_sel").click(function() {
+		$(".img_sel_veiculo").click(function() {
 
 			app.imagemPath = $(this).attr('src');
 			// veiculo_confirmar = $(this).attr('id');
