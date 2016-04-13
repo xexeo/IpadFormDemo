@@ -1,7 +1,7 @@
 var app = {
 
-	debugOnBrowser : true, // sem o cordova
-	// debugOnBrowser: false, // com o cordova
+	// debugOnBrowser : true, // sem o cordova
+	debugOnBrowser: false, // com o cordova
 
 	versao : "2.0.0",
 
@@ -236,7 +236,7 @@ var app = {
 
 	finalizaRegistro : function() {
 		try {
-			setCamposDerivados();
+			app.setCamposDerivados();
 			myDb.insertRegistro(registro);
 			// TODO: em outro momento salvar os demais atributos
 			// dataEnvNote (no iPad e Note)
@@ -248,7 +248,7 @@ var app = {
 
 	cancelaRegistro : function() {
 		try {
-			setCamposDerivados();
+			app.setCamposDerivados();
 			app.setAtributo('cacelado', 1);
 			myDb.insertRegistro(registro);
 		} catch (e) {
