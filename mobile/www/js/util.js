@@ -34,6 +34,15 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+
+		$.each(lista, function(index, item) {
+			insert_inicial += "<option value='" + item.id + "'>" + item.numeroid + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
 	// Funções para o progresso
 	/**
 	 * 

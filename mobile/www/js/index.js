@@ -1,7 +1,7 @@
 var app = {
 
-	// debugOnBrowser : true, // sem o cordova
-	debugOnBrowser : false, // com o cordova
+	debugOnBrowser : true, // sem o cordova
+	//debugOnBrowser : false, // com o cordova
 
 	versao : "2.0.0",
 

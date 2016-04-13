@@ -25,10 +25,10 @@ controllers.identificacao_visual_carga = {
         util.inicializaSelect("pais_carga", paises.listados());
 		
         var lista_rntrc = ['TAC', 'ETC', 'CTC'];
-        util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");
+        util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "RNTRC");
         
-        //TODO inicializa carga perigosa
-        
+        util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
+        util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
 	},
 
 	//Controla o show e hide dos elementos da tela
@@ -89,7 +89,7 @@ controllers.identificacao_visual_carga = {
 			app.setAtributo('placa_vermelha_rntrc_sel_carga', null);
 			app.setAtributo('placa_vermelha_rntrc_num_carga', null);
 			
-			$("#placa_vermelha_rntrc_sel_carga option:contains('Selecione')").prop({
+			$("#placa_vermelha_rntrc_sel_carga option:contains('RNTRC')").prop({
 				selected : true
 			});
 			$("select#placa_vermelha_rntrc_sel_carga").selectmenu("refresh", true);
@@ -98,14 +98,38 @@ controllers.identificacao_visual_carga = {
 		util.progressoSelect("placa_vermelha_rntrc_sel", "placa_vermelha_rntrc_sel_carga", "grupo_placa_vermelha_rntrc_num_carga");
 		util.progressoInputText("placa_vermelha_rntrc_num", "placa_vermelha_rntrc_num_carga", "grupo_carga_perigosa_carga");
 				
-		//TODO modificar progresso ao selecionar SIM OU NÃO
-		util.progressoRadioSimNao("carga_perigosa", "carga_perigosa_carga", "grupo_identificacao_visual_carga_avancar");
+		$('#carga_perigosa_carga_sim').click(function() {
+			$('#grupo_carga_perigosa_numeros_carga').show();
+			$('#grupo_identificacao_visual_carga_avancar').hide();
+			app.setAtributo('carga_perigosa', true);
+		});
+		$('#carga_perigosa_carga_nao').click(function() {
+			$('#grupo_carga_perigosa_numeros_carga').hide();
+			$('#grupo_identificacao_visual_carga_avancar').show();
+			app.setAtributo('carga_perigosa', false);
+			app.setAtributo('carga_perigosa_risco', null);
+			app.setAtributo('carga_perigosa_onu', null);
+			
+			$("#carga_perigosa_risco_carga option:contains('Número de Risco')").prop({
+				selected : true
+			});
+			$("select#carga_perigosa_risco_carga").selectmenu("refresh", true);
+
+			$("#carga_perigosa_onu_carga option:contains('Número da ONU')").prop({
+				selected : true
+			});
+			$("select#carga_perigosa_onu_carga").selectmenu("refresh", true);
+		});
+		
+		util.progressoSelect("carga_perigosa_risco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
+		util.progressoInputText("carga_perigosa_onu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 	
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 		
-		//TODO acrescentar validação tipo de carroceria
+		//TODO CONTINUAR AS VALIDAÇÕES QUE FALTAM
+		
 		if(util.validaRadioSimNao("placa_estrangeira_carga", "Placa estrangeira") &&
 				util.validaInputText("placa_letras_carga", "Placa do veículo") &&
 				util.validaInputText("placa_numeros_carga", "Placa do veículo") &&
