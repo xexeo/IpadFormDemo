@@ -7,6 +7,7 @@ controllers.identificacao_visual_simples = {
 	},
 
 	buttons : function() {
+		$("#btn_cancelar").click(app.cancelar);
 		$("#identificacao_visual_simples_avancar").click(function() {
 			var ok = controllers.identificacao_visual_simples.validar_componentes();
 			if(ok) {

@@ -1,11 +1,13 @@
 controllers.selecionar_tipo = {
 	config : function() {
-		
+
+		$("#btn_cancelar").click(app.cancelar);
+
 		$(".switch_classe_veiculo").click(function() {
 			$('#sel_tipo_veiculo_1').toggle();
 			$('#sel_tipo_veiculo_2').toggle();
 		});
-		
+
 		$(".img_sel").click(function() {
 
 			app.imagemPath = $(this).attr('src');
@@ -28,7 +30,7 @@ controllers.selecionar_tipo = {
 
 			app.trocaPagina("views/confirmar_veiculo.html", controllers.confirmar_veiculo);
 		});
-
+		
 	},
 
 }

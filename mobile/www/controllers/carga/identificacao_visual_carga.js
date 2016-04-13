@@ -7,6 +7,7 @@ controllers.identificacao_visual_carga = {
 	},
 
 	buttons : function() {
+		$("#btn_cancelar").click(app.cancelar);
 		$("#identificacao_visual_carga_avancar").click(function() {
 			var ok = controllers.identificacao_visual_carga.validar_componentes();
 			if(ok) {

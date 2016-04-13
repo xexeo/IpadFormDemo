@@ -7,6 +7,7 @@ controllers.caracterizacao_viagem_simples = {
 	},
 
 	buttons : function() {
+		$("#btn_cancelar").click(app.cancelar);
 		$("#caracterizacao_viagem_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
 			if (ok) {

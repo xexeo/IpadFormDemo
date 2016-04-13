@@ -1,8 +1,8 @@
 var app = {
 
-	debugOnBrowser: true, // sem o cordova
-	//debugOnBrowser: false, // com o cordova
-	
+	debugOnBrowser : true, // sem o cordova
+	// debugOnBrowser: false, // com o cordova
+
 	versao : "2.0.0",
 
 	user_admin : {
@@ -33,6 +33,11 @@ var app = {
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		myLogger.write('Logout');
+	},
+
+	validaSenha : function() {
+		// TODO: implementar popup pedindo a senha
+		return true;
 	},
 
 	/*
@@ -141,7 +146,15 @@ var app = {
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
 		$("#btn_sair").click(this.logout);
+	},
 
+	cancelar : function() {
+		console.log("CANCELAR ......")
+		var ok = app.validaSenha();
+		if (ok) {
+			app.cancelaRegistro();
+			app.trocaPagina('views/menu.html', controllers.menu);
+		}
 	},
 
 	trocaPagina : function(view, controller) {
