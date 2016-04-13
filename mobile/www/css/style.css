@@ -203,12 +203,34 @@ nav.avancar>div.ui-block-b {
 	margin: 0px 10px;
 }
 
-.img_sel {
+.img_sel_veiculo {
 	vertical-align: middle;
 	max-width: 90%;
 }
 
-#section_v_simples .img_sel {
+ol.tipos_carrocerias {
+	display: inline-block;
+	list-style: none;
+	text-align: center;
+	width: 100%;
+	padding: 0%;
+	margin: 0%;
+	background-color: white;
+	border-radius: 2%;
+}
+
+ol.tipos_carrocerias li {
+	display: inline;
+	vertical-align: middle;
+	margin: 0px 10px;
+}
+
+.img_carroceria {
+	vertical-align: middle;
+	max-width: 275px;
+}
+
+#section_v_simples .img_sel_veiculo {
 	max-width: 42%;
 }
 
