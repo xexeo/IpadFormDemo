@@ -30,8 +30,6 @@ var app = {
 			app.user_login = usuario;
 			// set senha_login
 			app.senha_login = senha;
-			// inicia o registro
-			app.iniciaRegistro();
 		} else {
 			// TODO: Trocar por um popup "mais elegante"
 			var msg = "usuário e senha informados não estão cadastrados no sistema";
