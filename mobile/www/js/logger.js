@@ -71,6 +71,7 @@ myLogger = {
     },
     
     write: function(str){
+    	// console.log(str); // Descomentar essa linha ao testar sem o cordova.
         /*if(!myLogger._ocupado){
             myLogger._ocupado = true;
             myLogger._internalWrite(str);

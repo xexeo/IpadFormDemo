@@ -161,16 +161,22 @@ var app = {
 
 	},
 
+	limpaRegistro : function() {
+		myLogger.write('Limpando registro');
+		registro = {};
+	},
+
 	iniciaRegistro : function() {
 		try {
 			var now = new Date();
 			myLogger.write('Iniciando registro');
-			registro = {
-				id : device.uuid + String(util.getTimeInSeconds(now)),
-				login : app.user_login, // TODO idPosto + sentido?
-				uuid : device.uuid,
-				timestampIniPesq : util.getTimeInSeconds(now),
-			};
+			app.limpaRegistro();
+			var uuid_device;
+			uuid_device = device.uuid; // Comentar essa linha ao testar sem o cordova.
+			app.setAtributo('id', uuid_device + String(util.getTimeInSeconds(now)));
+			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
+			app.setAtributo('uuid', uuid_device);
+			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
 			// TODO: falta setar os seguintes atributos:
 			// idPosto
 			// sentido
@@ -209,7 +215,7 @@ var app = {
 
 		app.setAtributo('timestampIniPesq', new Date());
 	},
-	
+
 	finalizaRegistro : function() {
 		try {
 			setCamposDerivados();
