@@ -11,8 +11,12 @@ var app = {
 	},
 
 	autentica : function(usuario, senha) {
-		// TODO: além do usuario/senha mestre, recuperar tb dos logins cadastrados
-		return ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha));
+		if ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha)) {
+			return true;
+		} else {
+			// TODO: recuperar tb dos logins cadastrados
+		}
+		return false;
 	},
 
 	login : function() {
