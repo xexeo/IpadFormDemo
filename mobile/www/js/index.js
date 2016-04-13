@@ -1,23 +1,31 @@
 var app = {
 
 	// debugOnBrowser : true, // sem o cordova
-	debugOnBrowser: false, // com o cordova
+	debugOnBrowser : false, // com o cordova
 
 	versao : "2.0.0",
 
 	user_admin : {
-		usuario : 'admin',
-		senha : "123"
+		usuario : 'admin', // usuario mestre
+		senha : "123" // senha mestra
+	},
+
+	autentica : function(usuario, senha) {
+		// TODO: além do usuario/senha mestre, recuperar tb dos logins cadastrados
+		return ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha));
 	},
 
 	login : function() {
-		var usuario = $("#usuario").val();
-		var senha = $("#senha").val();
-		if (usuario == app.user_admin.usuario && senha == app.user_admin.senha) {
+		var usuario = $("#usuario").val().trim();
+		var senha = $("#senha").val().trim();
+		if (app.autentica(usuario, senha)) {
+			myLogger.write("Login efetuado pelo usuário: " + usuario);
 			// navega para págine e executa o script de configuração depois do carregamento
 			app.trocaPagina("views/menu.html", controllers.menu)
 			// set user_login
 			app.user_login = usuario;
+			// set senha_login
+			app.senha_login = senha;
 			// inicia o registro
 			app.iniciaRegistro();
 		} else {
@@ -35,9 +43,15 @@ var app = {
 		myLogger.write('Logout');
 	},
 
-	validaSenha : function() {
-		// TODO: implementar popup pedindo a senha
-		return true;
+	validaSenhaSupervisor : function() {
+		do {
+			var senha = prompt("Insira a senha para cancelar a entrevista.", "senha");
+			if ((!util.isEmpty(senha)) && (senha == app.senha_login)) {
+				return true;
+			}
+			var repeat = confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?");
+		} while (repeat);
+		return false;
 	},
 
 	/*
@@ -159,7 +173,6 @@ var app = {
 
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
-		// TODO logar de forma dequada ao dispositivo
 		try {
 			myLogger.write(JSON.stringify(registro));
 		} catch (e) {
@@ -169,8 +182,7 @@ var app = {
 	},
 
 	cancelar : function() {
-		console.log("CANCELAR ......")
-		var ok = app.validaSenha();
+		var ok = app.validaSenhaSupervisor();
 		if (ok) {
 			app.cancelaRegistro();
 			app.trocaPagina('views/menu.html', controllers.menu);
@@ -200,6 +212,7 @@ var app = {
 			// sentido
 			// idIpad
 			myLogger.write(JSON.stringify(registro));
+			myLogger.write('Registro iniciado: ' + registro.id);
 		} catch (e) {
 			myLogger.write(e.message);
 		}
@@ -236,11 +249,14 @@ var app = {
 
 	finalizaRegistro : function() {
 		try {
+			myLogger.write('Finalizando registro: ' + registro.id);
 			app.setCamposDerivados();
 			myDb.insertRegistro(registro);
 			// TODO: em outro momento salvar os demais atributos
 			// dataEnvNote (no iPad e Note)
 			// dataEnvioServidor (no Note)
+			myLogger.write('Registro finalizado: ' + registro.id);
+			app.limpaRegistro();
 		} catch (e) {
 			myLogger.write(e.message);
 		}
@@ -248,9 +264,12 @@ var app = {
 
 	cancelaRegistro : function() {
 		try {
+			myLogger.write('Cancelando registro: ' + registro.id);
 			app.setCamposDerivados();
-			app.setAtributo('cacelado', 1);
+			app.setAtributo('cancelado', 1);
 			myDb.insertRegistro(registro);
+			myLogger.write('Registro cancelado: ' + registro.id);
+			app.limpaRegistro();
 		} catch (e) {
 			myLogger.write(e.message);
 		}
@@ -359,6 +378,8 @@ var app = {
 	dbName : "dados.db",
 
 	user_login : null,
+
+	senha_login : null
 
 }; // end of app
 
