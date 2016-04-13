@@ -151,7 +151,8 @@ var util = {
 			return false;
 		}
 	},
-
+	
+	// Outras funções
 	alerta_msg : function(campo_aviso) {
 		alert("Campo " + campo_aviso + " não foi preenchido");
 	},
