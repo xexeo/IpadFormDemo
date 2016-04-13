@@ -30,6 +30,8 @@ var app = {
 			app.user_login = usuario;
 			// set senha_login
 			app.senha_login = senha;
+			// limpa o registro
+			app.limpaRegistro();
 		} else {
 			// TODO: Trocar por um popup "mais elegante"
 			var msg = "usuário e senha informados não estão cadastrados no sistema";
@@ -39,6 +41,9 @@ var app = {
 	},
 
 	logout : function() {
+		// limpa o registro
+		app.limpaRegistro();
+		// realiza logout
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
