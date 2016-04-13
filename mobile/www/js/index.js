@@ -43,7 +43,7 @@ var app = {
 		myLogger.write('Logout');
 	},
 
-	validaSenhaSupervisor : function() {
+	validaCancelamento : function() {
 		do {
 			var senha = prompt("Insira a senha para cancelar a entrevista.", "senha");
 			if ((!util.isEmpty(senha)) && (senha == app.senha_login)) {
@@ -182,9 +182,10 @@ var app = {
 	},
 
 	cancelar : function() {
-		var ok = app.validaSenhaSupervisor();
+		var ok = app.validaCancelamento();
 		if (ok) {
 			app.cancelaRegistro();
+			alert("Entrevista cancelada.");
 			app.trocaPagina('views/menu.html', controllers.menu);
 		}
 	},
