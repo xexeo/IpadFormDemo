@@ -148,15 +148,6 @@ var app = {
 		$("#btn_sair").click(this.logout);
 	},
 
-	cancelar : function() {
-		console.log("CANCELAR ......")
-		var ok = app.validaSenha();
-		if (ok) {
-			app.cancelaRegistro();
-			app.trocaPagina('views/menu.html', controllers.menu);
-		}
-	},
-
 	trocaPagina : function(view, controller) {
 		if (controller != null) {
 			$(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
@@ -175,6 +166,15 @@ var app = {
 			myLogger.write(e.message);
 		}
 
+	},
+
+	cancelar : function() {
+		console.log("CANCELAR ......")
+		var ok = app.validaSenha();
+		if (ok) {
+			app.cancelaRegistro();
+			app.trocaPagina('views/menu.html', controllers.menu);
+		}
 	},
 
 	limpaRegistro : function() {
