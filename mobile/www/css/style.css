@@ -219,15 +219,47 @@ ol.tipos_carrocerias {
 	border-radius: 2%;
 }
 
-ol.tipos_carrocerias li {
-	display: inline;
+ol.tipos_carrocerias>div {
+	max-width: 33%;
+	max-height: 560px;
 	vertical-align: middle;
-	margin: 0px 10px;
+	display: inherit;
+	text-align: inherit;
+	padding: inherit;
+	margin: inherit;
+	display: inherit;
+}
+
+ol.tipos_carrocerias li {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+	padding: 0px 10%;
+}
+
+ol.tipos_carrocerias div:nth-child(1) li {
+	margin: 2%;
+}
+
+ol.tipos_carrocerias div:nth-child(2) li {
+	margin: 0% 8%;
+}
+
+ol.tipos_carrocerias div:nth-child(3)  li {
+	margin: 0% 6%;
 }
 
 .img_carroceria {
-	vertical-align: middle;
-	max-width: 275px;
+	display: inline-block;
+	text-align: center;
+	max-width: 100%;
+}
+
+.img_carroceria ~ span {
+	display: inline-block;
+	text-align: center;
+	max-width: 100%;
+	color: black;
 }
 
 #section_v_simples .img_sel_veiculo {
