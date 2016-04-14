@@ -221,7 +221,7 @@ ol.tipos_carrocerias {
 
 ol.tipos_carrocerias>div {
 	max-width: 33%;
-	max-height: 560px;
+	height: 100%;
 	vertical-align: middle;
 	display: inherit;
 	text-align: inherit;
@@ -234,7 +234,7 @@ ol.tipos_carrocerias li {
 	display: inline-block;
 	vertical-align: middle;
 	max-width: 100%;
-	padding: 0px 10%;
+	padding: 0px 7%;
 }
 
 ol.tipos_carrocerias div:nth-child(1) li {
