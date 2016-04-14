@@ -320,11 +320,11 @@ var app = {
         
         baseUrl : null,
         
-        logFileName : "log.txt",
+        logFileName : "log.txt", //TODO: uuid no nome do arquivo
         
         user_login : null,
         
-        dbName : "dados.db",
+        dbName : "dados.db", //TODO: uuid no nome do arquivo
 
 	user_login : null,
 

@@ -49,6 +49,7 @@ myDb = {
     },
     
     insertRegistro : function(reg){
+        //TODO: permitir a gravaçao do cancelamento do registro
         app.database.transaction(function(tx){
             var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
             tx.executeSql(sql, [reg.id, JSON.stringify(reg), 'não enviado'], function(tx, res){
