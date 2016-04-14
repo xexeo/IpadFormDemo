@@ -13,7 +13,8 @@ var insert_controllers={
                         'onibus/caracterizacao_onibus.js',
                         'onibus/caracterizacao_viagem_onibus.js',
 						'carga/identificacao_visual_carga.js',
-                        'carga/caracterizacao_carga.js'
+                        'carga/caracterizacao_carga.js',
+                        'carga/caracterizacao_viagem_carga.js'
                     ],
     
     controller_files_path : 'controllers/',
