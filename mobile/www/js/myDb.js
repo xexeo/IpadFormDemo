@@ -46,7 +46,6 @@ myDb = {
 
 	cretateTblDados : function() {
 		myLogger.write("criando tabela: tblDados");
-<<<<<<< HEAD
 		app.database.transaction(function(tx) {
                     var sql = "CREATE TABLE IF NOT EXISTS tblDados \
                     (id text primary key, \
@@ -56,26 +55,12 @@ myDb = {
                     }, function(e) {
                     myLogger.write('ERRO: ' + e.message);
                     });
-=======
-		app.database
-				.transaction(
-						function(tx) {
-							var sql = "CREATE TABLE IF NOT EXISTS tblDados \
-                     (id text primary key, \
-                      registro text, \
-                      estado text) ";
-							tx.executeSql(sql);
-						}, function(e) {
-							myLogger.write('ERRO: ' + e.message);
-						});
->>>>>>> 32bc85dff69090fa888d4194d2757f19604896eb
 		myLogger.write("tabela criada: tblDados");
 	},
 
 	insertRegistro : function(reg) {
 		myLogger.write("inserindo registro: " + reg.id);
 		app.database.transaction(function(tx) {
-<<<<<<< HEAD
                     var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
                     tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
                         myLogger.write('id inserido no banco de dados: ' + res.insertId);
@@ -85,16 +70,6 @@ myDb = {
                     });
 		});
 		
-=======
-			var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
-			tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
-				myLogger.write('id inserido no banco de dados: ' + res.insertId);
-			}, function(e) {
-				myLogger.write('ERRO: ' + e.message);
-			});
-		});
-		myLogger.write("registro inserido: " + reg.id);
->>>>>>> 32bc85dff69090fa888d4194d2757f19604896eb
 	}
 
 };
