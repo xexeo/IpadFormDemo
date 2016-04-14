@@ -283,104 +283,95 @@ var app = {
 		}
 	},
 
-	/**
-	 * Remove a file from fs, if it exists
-	 * 
-	 * @param String
-	 *            fileName
-	 * @param String
-	 *            dir -> prefers cordova.file.{dir}
-	 * @param function
-	 *            cbSuccess success callback
-	 * @param function
-	 *            cbFail error callback
-	 */
-	removeFile : function(fileName, dirURI, cbSuccess, cbFail) {
-		window.resolveLocalFileSystemURL(dirURI,
-		// success
-		function(folder) {
-			myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
-			folder.getFile(fileName, {
-				create : false
-			}, function(arquivo) {
-				arquivo.remove(function() {
-					myLogger.write('Arquivo ' + fileName + ' removido');
-					cbSuccess();
-				});
-			}, function(err) {
-				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
-				cbFail();
-			});
-		},
-		// fail
-		function(err) {
-			myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
-		});
-	},
-
-	/**
-	 * Copy a file overwriting the destination file, if it exists
-	 * 
-	 * @param String
-	 *            fileName
-	 * @param String
-	 *            originDir
-	 * @param String
-	 *            destDir
-	 * @param Function
-	 *            cb success callback function
-	 */
-	copyFile : function(fileName, originDirURI, destDirURI, cb) {
-		// get original dir
-		resolveLocalFileSystemURL(originDirURI,
-		// success
-		function(dir) {
-			// get original file
-			dir.getFile(fileName, {},
-			// success getting original file
-			function(file) {
-				// resolving destination
-				resolveLocalFileSystemURL(destDirURI,
-				// success resolving destination
-				function(destDir) {
-					myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder '
-							+ destDir.nativeURL);
-					// removing destination file
-					app.removeFile(fileName, destDirURI, function() {
-						realCopier(file, fileName, destDir);
-					},
-					// mesmo se não conseguir remover
-					function() {
-						realCopier(file, fileName, destDir);
-					});
-				}, function(err) {
-					myLogger.write('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
-				});
-
-			}, function(err) {
-				myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
-			});
-
-		}, function(err) {
-			myLogger.write('Erro acessando o folder original ' + originDir + ' ' + JSON.stringify(err));
-		});
-		// internal function
-		function realCopier(f, name, d) {
-			f.copyTo(d, name, function() {
-				// success
-				myLogger.write('Arquivo ' + name + ' copiado.');
-				if (util.isFunction(cb)) {
-					cb();
-				}
-			}, function(err) {
-				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
-			});
-		}
-		;
-	},
-<<<<<<< HEAD
+        /**
+        * Remove a file from fs, if it exists
+        * @param String fileName
+        * @param String dir -> prefers cordova.file.{dir}
+        * @param function cbSuccess success callback
+        * @param function cbFail error callback
+        */
+        removeFile : function(fileName, dirURI, cbSuccess, cbFail){
+            window.resolveLocalFileSystemURL(dirURI,
+                //success
+                function(folder){
+                    myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
+                    folder.getFile(fileName, {create : false}, 
+                        function(arquivo){
+                            arquivo.remove(function(){
+                                myLogger.write('Arquivo ' + fileName + ' removido');
+                                cbSuccess();
+                            });
+                        },
+                        function(err){
+                            myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
+                            cbFail();
+                    });
+                },
+                //fail
+                function(err){
+                    myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
+                }
+            );
+        },
         
-       
+        /**
+         * Copy a file overwriting the destination file, if it exists
+         * @param String fileName
+         * @param String originDir
+         * @param String destDir
+         * @param Function cb success callback function 
+         */
+        copyFile : function(fileName, originDirURI, destDirURI, cb){
+            //get original dir
+            resolveLocalFileSystemURL(originDirURI, 
+            //success
+            function(dir){
+                //get original file
+                dir.getFile(fileName,{},
+                //success getting original file
+                function(file){
+                    //resolving destination
+                    resolveLocalFileSystemURL(destDirURI,
+                    //success resolving destination
+                    function(destDir){
+                        myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder ' + destDir.nativeURL);
+                        //removing destination file
+                        app.removeFile(fileName, destDirURI,
+                        function(){
+                            realCopier(file, fileName, destDir);
+                        },
+                        //mesmo se não conseguir remover
+                        function(){
+                            realCopier(file, fileName, destDir);
+                        });
+                    },
+                    function(err){
+                        myLogger.write('Erro acessando o folder de destino '+ destDir + ' ' + JSON.stringify(err));
+                    });
+                            
+                },
+                function (err){
+                    myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
+                });
+                
+            },
+            function(err){
+                myLogger.write('Erro acessando o folder original ' + originDir+ ' ' + JSON.stringify(err));
+            });
+            //internal function
+            function realCopier(f, name, d){
+                f.copyTo(d, name, function(){
+                    //success
+                    myLogger.write('Arquivo ' + name + ' copiado.');
+                    if (util.isFunction(cb)){
+                        cb();
+                    }
+                },
+                function(err){
+                   myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err)); 
+                });
+            };
+        },
         
         baseUrl : null,
         
@@ -389,16 +380,6 @@ var app = {
         user_login : null,
         
         dbName : "dados.db", //TODO: uuid no nome do arquivo
-=======
-
-	baseUrl : null,
-
-	logFileName : "log.txt",
-
-	dbName : "dados.db",
-
-	user_login : null,
->>>>>>> 32bc85dff69090fa888d4194d2757f19604896eb
 
 	senha_login : null
 
