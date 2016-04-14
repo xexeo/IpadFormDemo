@@ -27,8 +27,8 @@ controllers.identificacao_visual_carga = {
 		var lista_rntrc = [ 'TAC', 'ETC', 'CTC' ];
 		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "RNTRC");
 
-		// util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
-		// util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
+		util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
+		util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
 
 		$("img:not([src*='outros']).img_carroceria").each(function(key, value) {
 			console.info(key + "" + value);
