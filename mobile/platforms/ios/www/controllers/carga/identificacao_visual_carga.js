@@ -18,15 +18,39 @@ controllers.identificacao_visual_carga = {
 	//Inicializa os elementos da tela
 	inicializaElementos : function() {
 		
-		//TODO inicializar tipo de carroceria
+        var lista_tipo_conteiner = ['1 Conteiner de 20 pés', '1 Conteiner de 20 pés e 1 Conteiner de 40 pés',
+                                    '1 Conteiner de 40 pés', '2 Conteineres de 20 pés'];
+        util.inicializaSelect("tipo_conteiner_carga", lista_tipo_conteiner)
+        
+        util.inicializaSelect("pais_carga", paises.listados());
 		
-		util.inicializaSelect("pais_carga", paises.listados());
+        var lista_rntrc = ['TAC', 'ETC', 'CTC'];
+        util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "RNTRC");
+        
+        util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
+        util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
 	},
 
 	//Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 
-		//TODO tipo de carroceria
+		$(".img_carroceria").click(function() {
+			var imgAlt = $(this).attr('alt');
+			$('#tipo_carroceria_carga').val(imgAlt);
+
+			app.setAtributo('tipo_carroceria', $(this).attr('id').split("_")[1]);
+		});
+		
+		$(".tipo_porta_conteiner").click(function() {
+			$("#grupo_tipo_conteiner_carga").show();
+		});
+		$(".img_carroceria:not(.tipo_porta_conteiner)").click(function() {
+			$("#grupo_tipo_conteiner_carga").hide();
+			$("#grupo_placa_estrangeira_carga").show();
+			app.setAtributo("tipo_conteiner", null);
+		});
+		
+		util.progressoSelect("tipo_conteiner", "tipo_conteiner_carga", "grupo_placa_estrangeira_carga");
 		
 		$('#placa_estrangeira_carga_sim').click(function() {
 			$('#grupo_pais_carga').show();
@@ -35,12 +59,11 @@ controllers.identificacao_visual_carga = {
 			if (Number($('#pais_carga').val()) == -1) {
 				$("#grupo_placa_carga").hide();
 			}
-
 		});
 		$('#placa_estrangeira_carga_nao').click(function() {
 			$('#grupo_pais_carga').hide()
-			app.setAtributo('pais', null);
 			app.setAtributo('placa_estrangeira', false);
+			app.setAtributo('idPaisPlacaEstrangeira', null);
 
 			$("#pais_carga option:contains('Selecione')").prop({
 				selected : true
@@ -49,19 +72,64 @@ controllers.identificacao_visual_carga = {
 
 			$("#grupo_placa_carga").show();
 		});
+		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_carga");
 		
 		util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
 		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
 		
-		util.progressoRadioSimNao("placa_vermelha", "placa_vermelha_carga", "grupo_carga_perigosa_carga");
+		$('#placa_vermelha_carga_sim').click(function() {
+			$('#grupo_placa_vermelha_rntrc_carga').show();
+			$('#grupo_carga_perigosa_carga').hide();
+			app.setAtributo('placa_vermelha', true);
+		});
+		$('#placa_vermelha_carga_nao').click(function() {
+			$('#grupo_placa_vermelha_rntrc_carga').hide();
+			$('#grupo_carga_perigosa_carga').show();
+			app.setAtributo('placa_vermelha', false);
+			app.setAtributo('placa_vermelha_rntrc_sel_carga', null);
+			app.setAtributo('placa_vermelha_rntrc_num_carga', null);
+			
+			$("#placa_vermelha_rntrc_sel_carga option:contains('RNTRC')").prop({
+				selected : true
+			});
+			$("select#placa_vermelha_rntrc_sel_carga").selectmenu("refresh", true);
+			$("#placa_vermelha_rntrc_num_carga").val(null);
+		});
+		util.progressoSelect("placa_vermelha_rntrc_sel", "placa_vermelha_rntrc_sel_carga", "grupo_placa_vermelha_rntrc_num_carga");
+		util.progressoInputText("placa_vermelha_rntrc_num", "placa_vermelha_rntrc_num_carga", "grupo_carga_perigosa_carga");
+				
+		$('#carga_perigosa_carga_sim').click(function() {
+			$('#grupo_carga_perigosa_numeros_carga').show();
+			$('#grupo_identificacao_visual_carga_avancar').hide();
+			app.setAtributo('carga_perigosa', true);
+		});
+		$('#carga_perigosa_carga_nao').click(function() {
+			$('#grupo_carga_perigosa_numeros_carga').hide();
+			$('#grupo_identificacao_visual_carga_avancar').show();
+			app.setAtributo('carga_perigosa', false);
+			app.setAtributo('carga_perigosa_risco', null);
+			app.setAtributo('carga_perigosa_onu', null);
+			
+			$("#carga_perigosa_risco_carga option:contains('Número de Risco')").prop({
+				selected : true
+			});
+			$("select#carga_perigosa_risco_carga").selectmenu("refresh", true);
+
+			$("#carga_perigosa_onu_carga option:contains('Número da ONU')").prop({
+				selected : true
+			});
+			$("select#carga_perigosa_onu_carga").selectmenu("refresh", true);
+		});
 		
-		util.progressoRadioSimNao("carga_perigosa", "carga_perigosa_carga", "grupo_identificacao_visual_carga_avancar");
+		util.progressoSelect("carga_perigosa_risco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
+		util.progressoInputText("carga_perigosa_onu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 	
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 		
-		//TODO acrescentar validação tipo de carroceria
+		//TODO CONTINUAR AS VALIDAÇÕES QUE FALTAM
+		
 		if(util.validaRadioSimNao("placa_estrangeira_carga", "Placa estrangeira") &&
 				util.validaInputText("placa_letras_carga", "Placa do veículo") &&
 				util.validaInputText("placa_numeros_carga", "Placa do veículo") &&

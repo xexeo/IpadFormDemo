@@ -50,17 +50,33 @@ var app = {
 		myLogger.write('Logout');
 	},
 
-	validaCancelamento : function() {
-		do {
-			var senha = prompt("Insira a senha para cancelar a entrevista.", "senha");
-			if ((!util.isEmpty(senha)) && (senha == app.senha_login)) {
-				return true;
-			}
-			var repeat = confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?");
-		} while (repeat);
-		return false;
-	},
-
+        
+	validaCancelamento : function(cb) {
+            navigator.notification.prompt("Insira a senha para cancelar a entrevista.",
+                function(results){
+                    //botão cancelar
+                    if (results.buttonIndex == 1){
+                        if (!util.isEmpty(results.input1) && results.input1==app.senha_login){
+                            cb(true);
+                        } else {
+                            navigator.notification.confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?",
+                            function(results){
+                                //button ok
+                                if(results == 1){
+                                    app.validaCancelamento(cb);
+                                }
+                            },
+                            "Senha incorreta.");
+                        }
+                    } else {
+                        cb(false);
+                    }
+                },
+				"Cancelamento de entrevista",
+                ["Cancelar entrevista", "Continuar entrevista"]
+            );
+        },
+    
 	/*
 	 * Application constructor
 	 */
@@ -94,9 +110,8 @@ var app = {
 				console.log("esperando " + device.platform);
 			}, 3000);
 			// fordebug
-			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK'
-
-			);
+			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
+			app.debugOnBrowser = false;
 			// app.onFileSystemReady();
 		}
 
@@ -189,12 +204,13 @@ var app = {
 	},
 
 	cancelar : function() {
-		var ok = app.validaCancelamento();
-		if (ok) {
-			app.cancelaRegistro();
-			alert("Entrevista cancelada.");
-			app.trocaPagina('views/menu.html', controllers.menu);
-		}
+            app.validaCancelamento(function(result){
+                if (result) {
+                    app.cancelaRegistro();
+                    alert("Entrevista cancelada.");
+                    app.trocaPagina('views/menu.html', controllers.menu);
+                }
+            });
 	},
 
 	limpaRegistro : function() {
