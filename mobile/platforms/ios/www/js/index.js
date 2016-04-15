@@ -49,9 +49,12 @@ var app = {
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		myLogger.write('Logout');
 	},
-
-        
-	validaCancelamento : function(cb) {
+	
+	/**
+	 * Validates interview's cancellation 
+	 * @param Function cb receives a Boolean representing the success in validation
+	 */
+    validaCancelamento : function(cb) {
             navigator.notification.prompt("Insira a senha para cancelar a entrevista.",
                 function(results){
                     //botão cancelar
@@ -77,6 +80,7 @@ var app = {
             );
         },
     
+	
 	/*
 	 * Application constructor
 	 */
