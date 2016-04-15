@@ -68,6 +68,31 @@ Uma solicitação do cliente é impedir o uso de outro aplicativo no dispositivo
 
 [Para funcionar depois do reboot o passcode do dispositivo deve estar desabilitado.](http://stackoverflow.com/questions/20864999/make-ios-application-run-at-startup)
 
+Configurar o acesso guiado: `Ajustes -> Geral -> Acessibilidade -> Acesso Guiado`
+
+#### Setup das opções
++ Acesso Guiado = `On`
++ Ajustes de Código -> Definir Código do Acesso Guiado = `9393`
++ Limite de Tempo -> `[Som = Nenhum, Falar = Off]`
++ Atalho de Acessibilidade = `Off`
+
+#### Ativar o acesso guiado:
++ Iniciar o app
++ Triplo clique no botão Home
+
+#### Setup das opções
+Após ativar o acesso guiado
++ executar triplo clique no botão home
++ entrar com a senha `9393`
++ Botões de hardware: 
+  + Botão Repousar/Despertar = `On`
+  + Botões de Volume = `Off`
+  + Movimento = `Off`
+  + Teclados = `On`
++ Toque = `On`
++ Limite de Tempo:
+  + Limite de Tempo = `Off`
+
 ---
 ## Módulo concentrador
 ### Ambiente de Desenvolvimento
