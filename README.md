@@ -82,7 +82,7 @@ Configurar o acesso guiado: `Ajustes -> Geral -> Acessibilidade -> Acesso Guiado
 
 #### Setup das opções
 Após ativar o acesso guiado
-+ executar triplo clique no botão home
++ executar triplo clique no botão `home`
 + entrar com a senha `9393`
 + Botões de hardware: 
   + Botão Repousar/Despertar = `On`
