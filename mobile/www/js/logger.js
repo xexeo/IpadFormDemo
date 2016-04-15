@@ -71,9 +71,9 @@ myLogger = {
 	},
 
 	write : function(str) {
-		if (app.debugOnBrowser) {
+		//if (app.debugOnBrowser) {
 			console.log(str);
-		}
+		//}
 		// if(!myLogger._ocupado){
 		// myLogger._ocupado = true;
 		// myLogger._internalWrite(str);

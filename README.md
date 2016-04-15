@@ -18,13 +18,13 @@ O ambiente de desenvolvimento precisa da instalação de `node.js`, `npm` (geren
 ### Plugins cordova necessários
 Comandos para instalação dos plugins do cordova necessários para a compilação do aplicativo. Esses comandos devem ser executados no diretório raiz do projeto. No nosso caso, no diretório `mobile`.
 
+* `cordova plugin add cordova-plugin-dialogs`
 * `cordova plugin add cordova-plugin-device`
 * `cordova plugin add cordova-plugin-file`
+* `cordova plugin add cordova-plugin-itunesfilesharing`
 * `cordova plugin add cordova-plugin-splashscreen`
 * `cordova plugin add cordova-plugin-statusbar`
 * `cordova plugin add cordova-sqlite-storage`
-* `cordova plugin add cordova-plugin-itunesfilesharing`
-* `cordova plugin add cordova-plugin-dialogs`
 
 A ausência dos plugins causa erros de execução, variáveis e métodos utilizados pelo aplicativo não estarão presentes. A lista de plugins instalados no projeto pode ser conferida com o comando `cordova plugin list`.
 

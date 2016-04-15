@@ -1,7 +1,7 @@
 var app = {
 
 	debugOnBrowser : true, // sem o cordova
-	//debugOnBrowser : false, // com o cordova
+	// debugOnBrowser : false, // com o cordova
 
 	versao : "2.0.0",
 
@@ -49,38 +49,34 @@ var app = {
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		myLogger.write('Logout');
 	},
-	
+
 	/**
-	 * Validates interview's cancellation 
-	 * @param Function cb receives a Boolean representing the success in validation
+	 * Validates interview's cancellation
+	 * 
+	 * @param Function
+	 *            cb receives a Boolean representing the success in validation
 	 */
-    validaCancelamento : function(cb) {
-            navigator.notification.prompt("Insira a senha para cancelar a entrevista.",
-                function(results){
-                    //botão cancelar
-                    if (results.buttonIndex == 1){
-                        if (!util.isEmpty(results.input1) && results.input1==app.senha_login){
-                            cb(true);
-                        } else {
-                            navigator.notification.confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?",
-                            function(results){
-                                //button ok
-                                if(results == 1){
-                                    app.validaCancelamento(cb);
-                                }
-                            },
-                            "Senha incorreta.");
-                        }
-                    } else {
-                        cb(false);
-                    }
-                },
-				"Cancelamento de entrevista",
-                ["Cancelar entrevista", "Continuar entrevista"]
-            );
-        },
-    
-	
+	validaCancelamento : function(cb) {
+		navigator.notification.prompt("Insira a senha para cancelar a entrevista.", function(results) {
+			// botão cancelar
+			if (results.buttonIndex == 1) {
+				if (!util.isEmpty(results.input1) && results.input1 == app.senha_login) {
+					cb(true);
+				} else {
+					navigator.notification.confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?", function(
+							results) {
+						// button ok
+						if (results == 1) {
+							app.validaCancelamento(cb);
+						}
+					}, "Senha incorreta.");
+				}
+			} else {
+				cb(false);
+			}
+		}, "Cancelamento de entrevista", [ "Cancelar entrevista", "Continuar entrevista" ]);
+	},
+
 	/*
 	 * Application constructor
 	 */
@@ -173,6 +169,7 @@ var app = {
 		},
 		// fail
 		function(err) {
+			myLogger.write('ERRO ao tentar conectar com o banco de dados.');
 			myLogger.write(JSON.stringify(err));
 		});
 
@@ -208,13 +205,12 @@ var app = {
 	},
 
 	cancelar : function() {
-            app.validaCancelamento(function(result){
-                if (result) {
-                    app.cancelaRegistro();
-                    alert("Entrevista cancelada.");
-                    app.trocaPagina('views/menu.html', controllers.menu);
-                }
-            });
+		app.validaCancelamento(function(result) {
+			if (result) {
+				app.cancelaRegistro();
+				app.trocaPagina('views/menu.html', controllers.menu);
+			}
+		});
 	},
 
 	limpaRegistro : function() {
@@ -276,130 +272,157 @@ var app = {
 	},
 
 	finalizaRegistro : function() {
-		try {
-			myLogger.write('Finalizando registro: ' + registro.id);
-			app.setCamposDerivados();
-			myDb.insertRegistro(registro);
-			// TODO: em outro momento salvar os demais atributos
-			// dataEnvNote (no iPad e Note)
-			// dataEnvioServidor (no Note)
-			myLogger.write('Registro finalizado: ' + registro.id);
-			app.limpaRegistro();
-		} catch (e) {
-			myLogger.write(e.message);
-		}
+		var tentarNovamente;
+		var saved;
+		do {
+			tentarNovamente = false;
+			saved = false;
+			try {
+				myLogger.write('Finalizando registro: ' + registro.id);
+				app.setCamposDerivados();
+				saved = myDb.insertRegistro(registro);
+			} catch (e) {
+				myLogger.write(e.message);
+			}
+			if (saved) {
+				myLogger.write('Registro finalizado: ' + registro.id);
+				app.limpaRegistro();
+				alert("Entrevista registrada.");
+			} else {
+				// TITLE: "Falha ao gravar informações."
+				var tentarNovamente = confirm("Houve uma falha ao finalizar a entrevista.\nDeseja tentar novamente?");
+			}
+		} while (tentarNovamente);
 	},
 
 	cancelaRegistro : function() {
-		try {
-			myLogger.write('Cancelando registro: ' + registro.id);
-			app.setCamposDerivados();
-			app.setAtributo('cancelado', 1);
-			myDb.insertRegistro(registro);
-			myLogger.write('Registro cancelado: ' + registro.id);
-			app.limpaRegistro();
-		} catch (e) {
-			myLogger.write(e.message);
-		}
+		var tentarNovamente;
+		var saved;
+		do {
+			tentarNovamente = false;
+			saved = false;
+			try {
+				myLogger.write('Cancelando registro: ' + registro.id);
+				app.setCamposDerivados();
+				app.setAtributo('cancelado', 1);
+				saved = myDb.insertRegistro(registro);
+			} catch (e) {
+				myLogger.write(e.message);
+			}
+			if (saved) {
+				myLogger.write('Registro cancelado: ' + registro.id);
+				app.limpaRegistro();
+				alert("Entrevista cancelada.");
+			} else {
+				// TITLE: "Falha ao gravar informações."
+				var tentarNovamente = confirm("Houve uma falha ao cancelar a entrevista.\nDeseja tentar novamente?");
+			}
+		} while (tentarNovamente);
 	},
 
-        /**
-        * Remove a file from fs, if it exists
-        * @param String fileName
-        * @param String dir -> prefers cordova.file.{dir}
-        * @param function cbSuccess success callback
-        * @param function cbFail error callback
-        */
-        removeFile : function(fileName, dirURI, cbSuccess, cbFail){
-            window.resolveLocalFileSystemURL(dirURI,
-                //success
-                function(folder){
-                    myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
-                    folder.getFile(fileName, {create : false}, 
-                        function(arquivo){
-                            arquivo.remove(function(){
-                                myLogger.write('Arquivo ' + fileName + ' removido');
-                                cbSuccess();
-                            });
-                        },
-                        function(err){
-                            myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
-                            cbFail();
-                    });
-                },
-                //fail
-                function(err){
-                    myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
-                }
-            );
-        },
-        
-        /**
-         * Copy a file overwriting the destination file, if it exists
-         * @param String fileName
-         * @param String originDir
-         * @param String destDir
-         * @param Function cb success callback function 
-         */
-        copyFile : function(fileName, originDirURI, destDirURI, cb){
-            //get original dir
-            resolveLocalFileSystemURL(originDirURI, 
-            //success
-            function(dir){
-                //get original file
-                dir.getFile(fileName,{},
-                //success getting original file
-                function(file){
-                    //resolving destination
-                    resolveLocalFileSystemURL(destDirURI,
-                    //success resolving destination
-                    function(destDir){
-                        myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder ' + destDir.nativeURL);
-                        //removing destination file
-                        app.removeFile(fileName, destDirURI,
-                        function(){
-                            realCopier(file, fileName, destDir);
-                        },
-                        //mesmo se não conseguir remover
-                        function(){
-                            realCopier(file, fileName, destDir);
-                        });
-                    },
-                    function(err){
-                        myLogger.write('Erro acessando o folder de destino '+ destDir + ' ' + JSON.stringify(err));
-                    });
-                            
-                },
-                function (err){
-                    myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
-                });
-                
-            },
-            function(err){
-                myLogger.write('Erro acessando o folder original ' + originDir+ ' ' + JSON.stringify(err));
-            });
-            //internal function
-            function realCopier(f, name, d){
-                f.copyTo(d, name, function(){
-                    //success
-                    myLogger.write('Arquivo ' + name + ' copiado.');
-                    if (util.isFunction(cb)){
-                        cb();
-                    }
-                },
-                function(err){
-                   myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err)); 
-                });
-            };
-        },
-        
-        baseUrl : null,
-        
-        logFileName : "log.txt", //TODO: uuid no nome do arquivo
-        
-        user_login : null,
-        
-        dbName : "dados.db", //TODO: uuid no nome do arquivo
+	/**
+	 * Remove a file from fs, if it exists
+	 * 
+	 * @param String
+	 *            fileName
+	 * @param String
+	 *            dir -> prefers cordova.file.{dir}
+	 * @param function
+	 *            cbSuccess success callback
+	 * @param function
+	 *            cbFail error callback
+	 */
+	removeFile : function(fileName, dirURI, cbSuccess, cbFail) {
+		window.resolveLocalFileSystemURL(dirURI,
+		// success
+		function(folder) {
+			myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
+			folder.getFile(fileName, {
+				create : false
+			}, function(arquivo) {
+				arquivo.remove(function() {
+					myLogger.write('Arquivo ' + fileName + ' removido');
+					cbSuccess();
+				});
+			}, function(err) {
+				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
+				cbFail();
+			});
+		},
+		// fail
+		function(err) {
+			myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
+		});
+	},
+
+	/**
+	 * Copy a file overwriting the destination file, if it exists
+	 * 
+	 * @param String
+	 *            fileName
+	 * @param String
+	 *            originDir
+	 * @param String
+	 *            destDir
+	 * @param Function
+	 *            cb success callback function
+	 */
+	copyFile : function(fileName, originDirURI, destDirURI, cb) {
+		// get original dir
+		resolveLocalFileSystemURL(originDirURI,
+		// success
+		function(dir) {
+			// get original file
+			dir.getFile(fileName, {},
+			// success getting original file
+			function(file) {
+				// resolving destination
+				resolveLocalFileSystemURL(destDirURI,
+				// success resolving destination
+				function(destDir) {
+					myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder '
+							+ destDir.nativeURL);
+					// removing destination file
+					app.removeFile(fileName, destDirURI, function() {
+						realCopier(file, fileName, destDir);
+					},
+					// mesmo se não conseguir remover
+					function() {
+						realCopier(file, fileName, destDir);
+					});
+				}, function(err) {
+					myLogger.write('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
+				});
+
+			}, function(err) {
+				myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
+			});
+
+		}, function(err) {
+			myLogger.write('Erro acessando o folder original ' + originDir + ' ' + JSON.stringify(err));
+		});
+		// internal function
+		function realCopier(f, name, d) {
+			f.copyTo(d, name, function() {
+				// success
+				myLogger.write('Arquivo ' + name + ' copiado.');
+				if (util.isFunction(cb)) {
+					cb();
+				}
+			}, function(err) {
+				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+			});
+		}
+		;
+	},
+
+	baseUrl : null,
+
+	logFileName : "log.txt", // TODO: uuid no nome do arquivo
+
+	user_login : null,
+
+	dbName : "dados.db", // TODO: uuid no nome do arquivo
 
 	senha_login : null
 

@@ -29,8 +29,8 @@ controllers.caracterizacao_viagem_carga = {
 
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
 		util.inicializaSelect("frequencia_sel_carga", lista_frequencias);
-		
-		//TODO Acertar lista motivos
+
+		// TODO Acertar lista motivos
 		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido',
 				'Proximidade hotéis/postos', 'Segurança', 'Turismo/Paisagem', 'Ausência de pedágio',
 				'Ponto obrigatório de passagem', 'Outros' ];
@@ -68,14 +68,14 @@ controllers.caracterizacao_viagem_carga = {
 			app.setAtributo('frequencia_num', $(this).val());
 		});
 		util.progressoSelect("frequencia_sel", "frequencia_sel_carga", "grupo_motivo_rota_carga");
-		
-		//TODO Motivo rota
+
+		// TODO Motivo rota
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
-		
-		//TODO
+
+		// TODO
 		return true;
 	}
 
