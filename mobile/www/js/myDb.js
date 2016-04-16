@@ -46,18 +46,19 @@ myDb = {
 
 	cretateTblDados : function() {
 		myLogger.write("criando tabela: tblDados");
-		app.database
-				.transaction(
-						function(tx) {
-							var sql = "CREATE TABLE IF NOT EXISTS tblDados \
-                    (id text primary key, \
-                    registro text, \
-                    estado text) ";
-							tx.executeSql(sql);
-						}, function(e) {
-							myLogger.write('ERRO: ' + e.message);
-						});
-		myLogger.write("tabela criada: tblDados");
+		app.database.transaction(
+            function(tx) {
+                var sql = "CREATE TABLE IF NOT EXISTS tblDados \
+                        (id text primary key, \
+                        registro text, \
+                        estado text) ";
+                tx.executeSql(sql);
+            }, function(e) {
+                myLogger.write('ERRO: ' + e.message);
+            }, function(){
+                myLogger.write("tabela criada: tblDados");
+        });
+		
 	},
 
     /**

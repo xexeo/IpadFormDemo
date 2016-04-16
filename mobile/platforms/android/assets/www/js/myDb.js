@@ -46,18 +46,19 @@ myDb = {
 
 	cretateTblDados : function() {
 		myLogger.write("criando tabela: tblDados");
-		app.database
-				.transaction(
-						function(tx) {
-							var sql = "CREATE TABLE IF NOT EXISTS tblDados \
-                    (id text primary key, \
-                    registro text, \
-                    estado text) ";
-							tx.executeSql(sql);
-						}, function(e) {
-							myLogger.write('ERRO: ' + e.message);
-						});
-		myLogger.write("tabela criada: tblDados");
+		app.database.transaction(
+            function(tx) {
+                var sql = "CREATE TABLE IF NOT EXISTS tblDados \
+                        (id text primary key, \
+                        registro text, \
+                        estado text) ";
+                tx.executeSql(sql);
+            }, function(e) {
+                myLogger.write('ERRO: ' + e.message);
+            }, function(){
+                myLogger.write("tabela criada: tblDados");
+        });
+		
 	},
 
     /**
@@ -69,25 +70,28 @@ myDb = {
 	insertRegistro : function(reg, fail, success) {
 		//var inseriu = false;
 		myLogger.write("inserindo registro: " + reg.id);
-		app.database.transaction(function(tx) {
-			var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
-			tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
-				myLogger.write('id inserido no banco de dados: ' + res.insertId);
-			});
-		},
-		// transaction fail
-		function(e) {
-			//inseriu = false;
-			myLogger.write('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+		try{
+            app.database.transaction(function(tx) {
+                var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
+                tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
+                    myLogger.write('id inserido no banco de dados: ' + res.insertId);
+                });
+            },
+            // transaction fail
+            function(e) {
+                //inseriu = false;
+                myLogger.write('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+                fail(e);
+            },
+            // transaction success
+            function() {
+                //inseriu = true;
+                myLogger.write("registro inserido: " + reg.id);
+                success();
+            });
+        } catch(e){
             fail(e);
-		},
-		// transaction success
-		function() {
-			//inseriu = true;
-			myLogger.write("registro inserido: " + reg.id);
-            success();
-		});
-        //return inseriu;
+        }
 	}
 
 };

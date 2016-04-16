@@ -1,5 +1,16 @@
 controllers.menu = {
 	config : function() {
+        var _externalFolder;
+        var _dbFolder;
+        
+        if (device.platform == 'iOS'){
+            _externalFolder = cordova.file.documentsDirectory;
+            _dbFolder = 'cdvfile://localhost/library/LocalDatabase';
+        }else if(device.platform == 'Android'){
+            _externalFolder = cordova.file.externalDataDirectory;
+            _dbFolder = cordova.file.applicationStorageDirectory + "databases";
+        }
+        
 		$('#menu_nova_pesquisa').click(function() {
 			// clear registro
 			app.iniciaRegistro();
@@ -7,18 +18,29 @@ controllers.menu = {
 		});
 
 		$("#duplica_log").click(function() {
-			app.copyFile(app.logFileName, cordova.file.dataDirectory, cordova.file.documentsDirectory);
+			app.copyFile(app.logFileName,
+                cordova.file.dataDirectory,
+                _externalFolder,
+                function(){
+                    alert('Arquivo de log ' + app.logFileName + ' exportado com sucesso.');
+                });
 		});
 
-		$("#duplica_db").click(
-				function() {
-					app.database.close(function() {
-						app.copyFile(app.dbName, 'cdvfile://localhost/library/LocalDatabase', cordova.file.documentsDirectory,
-								app.openDB);
-					}, function(err) {
-						myLogger.write(JSON.stringify(err));
-					});
-				});
+		$("#duplica_db").click(function() {
+            
+            app.database.close(function() {
+                app.copyFile(app.dbName, 
+                    _dbFolder,
+                    _externalFolder,
+                    function(){
+                        alert('Banco de dados ' + app.dbName + ' exportado com sucesso.');
+                        app.openDB();
+                    });
+            }, function(err) {
+                myLogger.write(JSON.stringify(err));
+            });
+        
+        });
 
 	},
 

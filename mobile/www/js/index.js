@@ -121,11 +121,14 @@ var app = {
 			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
 		}
 
-		if (device.platform == 'iOS' || device.platform == 'Android'){
+		if (device.platform == 'iOS'){
             // configurando a statusBar
             StatusBar.overlaysWebView(false);
             StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
-		}
+		} else if (device.platform == 'Android'){
+            StatusBar.hide();
+        }
+        
         
 		// alert sem a página como título
 		window.alert = function(txt, cb) {
@@ -349,7 +352,10 @@ var app = {
             myLogger.write('Registro cancelado: ' + registro.id);
             app.limpaRegistro();
             alert("Entrevista cancelada.");
-            cb();
+            if (cb != null){
+                cb();
+            }
+        
         });
         
 		/*var tentarNovamente;
@@ -398,11 +404,16 @@ var app = {
 			}, function(arquivo) {
 				arquivo.remove(function() {
 					myLogger.write('Arquivo ' + fileName + ' removido');
-					cbSuccess();
+					if(util.isFunction(cbSuccess)){
+                        cbSuccess();
+                    }
 				});
 			}, function(err) {
 				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
-				cbFail();
+				if(util.isFunction(cbFail)){
+                    cbFail();
+                }
+            
 			});
 		},
 		// fail
@@ -455,18 +466,19 @@ var app = {
 			});
 
 		}, function(err) {
-			myLogger.write('Erro acessando o folder original ' + originDir + ' ' + JSON.stringify(err));
+			myLogger.write('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));
 		});
 		// internal function
 		function realCopier(f, name, d) {
 			f.copyTo(d, name, function() {
 				// success
 				myLogger.write('Arquivo ' + name + ' copiado.');
-				if (util.isFunction(cb)) {
+                if (util.isFunction(cb)) {
 					cb();
 				}
 			}, function(err) {
 				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+                
 			});
 		}
 		;

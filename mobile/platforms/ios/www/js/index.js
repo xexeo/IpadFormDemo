@@ -209,8 +209,9 @@ var app = {
 	cancelar : function() {
 		app.validaCancelamento(function(result) {
 			if (result) {
-				app.cancelaRegistro();
-				app.trocaPagina('views/menu.html', controllers.menu);
+				app.cancelaRegistro(function(){
+                    app.trocaPagina('views/menu.html', controllers.menu);
+                });
 			}
 		});
 	},
@@ -326,7 +327,7 @@ var app = {
 		} while (tentarNovamente);*/
 	},
 
-	cancelaRegistro : function() {
+	cancelaRegistro : function(cb) {
         myLogger.write('Cancelando registro: ' + registro.id);
         app.setCamposDerivados();
         app.setAtributo('cancelado', 1);
@@ -348,6 +349,10 @@ var app = {
             myLogger.write('Registro cancelado: ' + registro.id);
             app.limpaRegistro();
             alert("Entrevista cancelada.");
+            if (cb != null){
+                cb();
+            }
+        
         });
         
 		/*var tentarNovamente;
@@ -396,11 +401,16 @@ var app = {
 			}, function(arquivo) {
 				arquivo.remove(function() {
 					myLogger.write('Arquivo ' + fileName + ' removido');
-					cbSuccess();
+					if(util.isFunction(cbSuccess)){
+                        cbSuccess();
+                    }
 				});
 			}, function(err) {
 				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
-				cbFail();
+				if(util.isFunction(cbFail)){
+                    cbFail();
+                }
+            
 			});
 		},
 		// fail
@@ -460,11 +470,12 @@ var app = {
 			f.copyTo(d, name, function() {
 				// success
 				myLogger.write('Arquivo ' + name + ' copiado.');
-				if (util.isFunction(cb)) {
+                if (util.isFunction(cb)) {
 					cb();
 				}
 			}, function(err) {
 				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+                
 			});
 		}
 		;
