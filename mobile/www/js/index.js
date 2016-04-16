@@ -291,7 +291,7 @@ var app = {
 				if (results == 1) {
 					app.finalizaRegistro(cb);
 				} else if (cb != null) {
-					cb(); // ainda sim não está funcionando corretamente
+					cb();
 				}
 			}, "Falha na gravação.", // título
 			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
@@ -345,7 +345,7 @@ var app = {
 				if (results == 1) {
 					app.cancelaRegistro(cb);
 				} else if (cb != null) {
-					cb(); // ainda sim não está funcionando corretamente
+					cb();
 				}
 			}, "Falha na gravação.", // título
 			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no

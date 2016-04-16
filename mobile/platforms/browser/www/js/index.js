@@ -103,7 +103,8 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
-		if (device.platform == 'iOS' || device.platform == 'Android' || (device.platform == 'browser' && device.model == 'Firefox')) {
+		if (device.platform == 'iOS' || device.platform == 'Android'
+				|| (device.platform == 'browser' && device.model == 'Firefox')) {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -121,12 +122,15 @@ var app = {
 			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
 		}
 
-		if (device.platform == 'iOS' || device.platform == 'Android'){
-            // configurando a statusBar
-            StatusBar.overlaysWebView(false);
-            StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
+		if (device.platform == 'iOS') {
+			// configurando a statusBar
+			StatusBar.overlaysWebView(false);
+			StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan,
+			// yellow, magenta, orange, purple, brown
+		} else if (device.platform == 'Android') {
+			StatusBar.hide();
 		}
-        
+
 		// alert sem a página como título
 		window.alert = function(txt, cb) {
 			navigator.notification.alert(txt, cb, "Aviso", "Fechar");
@@ -161,20 +165,20 @@ var app = {
 	},
 
 	openDB : function() {
-        app.database = sqlitePlugin.openDatabase({
-            name : app.dbName,
-            iosDatabaseLocation : 'default'
-        },
-        // sucsess
-        function() {
-            myLogger.write('Conexão com o banco de dados criada com sucesso.');
-            myDb.cretateTblDados();
-        },
-        // fail
-        function(err) {
-            myLogger.write('ERRO ao tentar conectar com o banco de dados.');
-            myLogger.write(JSON.stringify(err));
-        });
+		app.database = sqlitePlugin.openDatabase({
+			name : app.dbName,
+			iosDatabaseLocation : 'default'
+		},
+		// sucsess
+		function() {
+			myLogger.write('Conexão com o banco de dados criada com sucesso.');
+			myDb.cretateTblDados();
+		},
+		// fail
+		function(err) {
+			myLogger.write('ERRO ao tentar conectar com o banco de dados.');
+			myLogger.write(JSON.stringify(err));
+		});
 	},
 
 	extraConfig : function() {
@@ -209,9 +213,9 @@ var app = {
 	cancelar : function() {
 		app.validaCancelamento(function(result) {
 			if (result) {
-				app.cancelaRegistro(function(){
-                    app.trocaPagina('views/menu.html', controllers.menu);
-                });
+				app.cancelaRegistro(function() {
+					app.trocaPagina('views/menu.html', controllers.menu);
+				});
 			}
 		});
 	},
@@ -274,106 +278,110 @@ var app = {
 		app.setAtributo('timestampIniPesq', new Date());
 	},
 
-	finalizaRegistro : function() {
-        myLogger.write('Finalizando registro: ' + registro.id);
-        app.setCamposDerivados();
-        myDb.insertRegistro(registro,
-            //erro
-            function(error){
-                myLogger.write('Erro inserindo registro: ' + error.message);
-                //confirma se tenta outra vez
-                navigator.notification.confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?", 
-                    function(results) {
-						// button Sim
-						if (results == 1) {
-							app.finalizaRegistro(); 
-						}
-					},
-                    "Falha na gravação.", //título
-                    ["Sim", "Não"] //botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no results
-                );
-            },
-            //ok
-            function(){
-                myLogger.write('Registro finalizado: ' + registro.id);
-				app.limpaRegistro();
-				alert("Entrevista registrada.");
-        });
-        
-        
-		/*
-         * aqui eu vou reescrever a função aqui em cima mantendo a lógica mas trocando o paradigma
-         * 
-         * var tentarNovamente;
-		var saved;
-		do {
-			tentarNovamente = false;
-			saved = false;
-			try {
-				myLogger.write('Finalizando registro: ' + registro.id);
-				app.setCamposDerivados();
-				saved = myDb.insertRegistro(registro);
-			} catch (e) {
-				myLogger.write(e.message);
+	finalizaRegistro : function(cb) {
+		myLogger.write('Finalizando registro: ' + registro.id);
+		app.setCamposDerivados();
+		myDb.insertRegistro(registro,
+		// erro
+		function(error) {
+			myLogger.write('Erro inserindo registro: ' + error.message);
+			// confirma se tenta outra vez
+			navigator.notification.confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?", function(results) {
+				// button Sim
+				if (results == 1) {
+					app.finalizaRegistro(cb);
+				} else if (cb != null) {
+					cb();
+				}
+			}, "Falha na gravação.", // título
+			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
+			// results
+			);
+		},
+		// ok
+		function() {
+			myLogger.write('Registro finalizado: ' + registro.id);
+			app.limpaRegistro();
+			alert("Entrevista registrada.");
+			if (cb != null) {
+				cb();
 			}
-			if (saved) {
-				myLogger.write('Registro finalizado: ' + registro.id);
-				app.limpaRegistro();
-				alert("Entrevista registrada.");
-			} else {
-				// TITLE: "Falha ao gravar informações."
-				var tentarNovamente = confirm("Houve uma falha ao finalizar a entrevista.\nDeseja tentar novamente?");
-			}
-		} while (tentarNovamente);*/
+		});
+
+		// aqui eu vou reescrever a função aqui em cima mantendo a lógica mas trocando o paradigma
+		// var tentarNovamente;
+		// var saved;
+		// do {
+		// tentarNovamente = false;
+		// saved = false;
+		// try {
+		// myLogger.write('Finalizando registro: ' + registro.id);
+		// app.setCamposDerivados();
+		// saved = myDb.insertRegistro(registro);
+		// } catch (e) {
+		// myLogger.write(e.message);
+		// }
+		// if (saved) {
+		// myLogger.write('Registro finalizado: ' + registro.id);
+		// app.limpaRegistro();
+		// alert("Entrevista registrada.");
+		// } else { // TITLE: "Falha ao gravar informações."
+		// var tentarNovamente = confirm("Houve uma falha ao finalizar a entrevista.\nDeseja tentar novamente?");
+		// }
+		// } while (tentarNovamente);
+
 	},
 
 	cancelaRegistro : function(cb) {
-        myLogger.write('Cancelando registro: ' + registro.id);
-        app.setCamposDerivados();
-        app.setAtributo('cancelado', 1);
-        myDb.insertRegistro(registro,
-        function(error){
-            myLogger.write(error.message);
-            //confirma se tenta outra vez
-            navigator.notification.confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?", 
-                function(results) {
-                    // button Sim
-                    if (results == 1) {
-                        app.finalizaRegistro(); 
-                    }
-                },
-                "Falha na gravação.", //título
-                ["Sim", "Não"] //botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no results
-            );
-        }, function(){
-            myLogger.write('Registro cancelado: ' + registro.id);
-            app.limpaRegistro();
-            alert("Entrevista cancelada.");
-            cb();
-        });
-        
-		/*var tentarNovamente;
-		var saved;
-		do {
-			tentarNovamente = false;
-			saved = false;
-			try {
-				myLogger.write('Cancelando registro: ' + registro.id);
-				app.setCamposDerivados();
-				app.setAtributo('cancelado', 1);
-				saved = myDb.insertRegistro(registro);
-			} catch (e) {
-				myLogger.write(e.message);
+		myLogger.write('Cancelando registro: ' + registro.id);
+		app.setCamposDerivados();
+		app.setAtributo('cancelado', 1);
+		myDb.insertRegistro(registro, function(error) {
+			myLogger.write(error.message);
+			// confirma se tenta outra vez
+			navigator.notification.confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?", function(
+					results) {
+				// button Sim
+				if (results == 1) {
+					app.cancelaRegistro(cb);
+				} else if (cb != null) {
+					cb();
+				}
+			}, "Falha na gravação.", // título
+			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
+			// results
+			);
+		}, function() {
+			myLogger.write('Registro cancelado: ' + registro.id);
+			app.limpaRegistro();
+			alert("Entrevista cancelada.");
+			if (cb != null) {
+				cb();
 			}
-			if (saved) {
-				myLogger.write('Registro cancelado: ' + registro.id);
-				app.limpaRegistro();
-				alert("Entrevista cancelada.");
-			} else {
-				// TITLE: "Falha ao gravar informações."
-				var tentarNovamente = confirm("Houve uma falha o registro.\nDeseja tentar novamente?");
-			}
-		} while (tentarNovamente);*/
+		});
+
+		// var tentarNovamente;
+		// var saved;
+		// do {
+		// tentarNovamente = false;
+		// saved = false;
+		// try {
+		// myLogger.write('Cancelando registro: ' + registro.id);
+		// app.setCamposDerivados();
+		// app.setAtributo('cancelado', 1);
+		// saved = myDb.insertRegistro(registro);
+		// } catch (e) {
+		// myLogger.write(e.message);
+		// }
+		// if (saved) {
+		// myLogger.write('Registro cancelado: ' + registro.id);
+		// app.limpaRegistro();
+		// alert("Entrevista cancelada.");
+		// } else { // TITLE: "Falha ao gravar informações." var
+		// tentarNovamente = confirm("Houve uma falha o registro.\nDeseja tentar novamente?");
+		// }
+		// } while (tentarNovamente);
+
 	},
 
 	/**
@@ -398,11 +406,16 @@ var app = {
 			}, function(arquivo) {
 				arquivo.remove(function() {
 					myLogger.write('Arquivo ' + fileName + ' removido');
-					cbSuccess();
+					if (util.isFunction(cbSuccess)) {
+						cbSuccess();
+					}
 				});
 			}, function(err) {
 				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
-				cbFail();
+				if (util.isFunction(cbFail)) {
+					cbFail();
+				}
+
 			});
 		},
 		// fail
@@ -455,7 +468,7 @@ var app = {
 			});
 
 		}, function(err) {
-			myLogger.write('Erro acessando o folder original ' + originDir + ' ' + JSON.stringify(err));
+			myLogger.write('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));
 		});
 		// internal function
 		function realCopier(f, name, d) {
@@ -467,6 +480,7 @@ var app = {
 				}
 			}, function(err) {
 				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+
 			});
 		}
 		;
