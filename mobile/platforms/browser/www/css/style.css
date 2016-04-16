@@ -124,7 +124,7 @@ nav.avancar>div.ui-block-b {
 }
 
 #section_v_simples {
-	width: 35%;
+	width: 45%;
 }
 
 #section_v_semireboques {
@@ -132,7 +132,7 @@ nav.avancar>div.ui-block-b {
 }
 
 #section_v_combinados {
-	width: 35%;
+	width: 40%;
 }
 
 #section_v_reboques {
@@ -140,7 +140,7 @@ nav.avancar>div.ui-block-b {
 }
 
 .troca_classe_veiculo {
-	width: 15%;
+	width: 10%;
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
@@ -182,7 +182,7 @@ nav.avancar>div.ui-block-b {
 	display: inline-block;
 	border: solid;
 	text-align: center;
-	width: auto;
+	width: 90%;
 	padding: 0% 0%;
 	margin: 2% 5%;
 }
@@ -203,12 +203,66 @@ nav.avancar>div.ui-block-b {
 	margin: 0px 10px;
 }
 
-.img_sel {
+.img_sel_veiculo {
 	vertical-align: middle;
 	max-width: 90%;
 }
 
-#section_v_simples .img_sel {
+ol.tipos_carrocerias {
+	display: inline-block;
+	list-style: none;
+	text-align: center;
+	width: 100%;
+	padding: 0%;
+	margin: 0%;
+	background-color: white;
+	border-radius: 2%;
+}
+
+ol.tipos_carrocerias>div {
+	max-width: 33%;
+	height: 100%;
+	vertical-align: middle;
+	display: inherit;
+	text-align: inherit;
+	padding: inherit;
+	margin: inherit;
+	display: inherit;
+}
+
+ol.tipos_carrocerias li {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+	padding: 0px 7%;
+}
+
+ol.tipos_carrocerias div:nth-child(1) li {
+	margin: 2%;
+}
+
+ol.tipos_carrocerias div:nth-child(2) li {
+	margin: 0% 8%;
+}
+
+ol.tipos_carrocerias div:nth-child(3)  li {
+	margin: 0% 6%;
+}
+
+.img_carroceria {
+	display: inline-block;
+	text-align: center;
+	max-width: 100%;
+}
+
+.img_carroceria ~ span {
+	display: inline-block;
+	text-align: center;
+	max-width: 100%;
+	color: black;
+}
+
+#section_v_simples .img_sel_veiculo {
 	max-width: 42%;
 }
 

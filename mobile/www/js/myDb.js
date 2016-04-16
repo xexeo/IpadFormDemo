@@ -60,8 +60,14 @@ myDb = {
 		myLogger.write("tabela criada: tblDados");
 	},
 
-	insertRegistro : function(reg) {
-		var inseriu = false;
+    /**
+     * Inserts a registro variable into database
+     * @param Registro reg registro to be inserted into database
+     * @param Function fail error callback
+     * @param Function success callback
+     */
+	insertRegistro : function(reg, fail, success) {
+		//var inseriu = false;
 		myLogger.write("inserindo registro: " + reg.id);
 		app.database.transaction(function(tx) {
 			var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
@@ -71,15 +77,17 @@ myDb = {
 		},
 		// transaction fail
 		function(e) {
-			inseriu = false;
-			myLogger.write('ERRO ao inserir registro (' + reg.id + '):\n' + e.message);
+			//inseriu = false;
+			myLogger.write('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+            fail(e);
 		},
-		// transaction sucsess
+		// transaction success
 		function() {
-			inseriu = true;
+			//inseriu = true;
 			myLogger.write("registro inserido: " + reg.id);
+            success();
 		});
-		return inseriu;
+        //return inseriu;
 	}
 
 };
