@@ -161,7 +161,6 @@ var app = {
 	},
 
 	openDB : function() {
-<<<<<<< HEAD
         app.database = sqlitePlugin.openDatabase({
             name : app.dbName,
             iosDatabaseLocation : 'default'
@@ -176,29 +175,6 @@ var app = {
             myLogger.write('ERRO ao tentar conectar com o banco de dados.');
             myLogger.write(JSON.stringify(err));
         });
-=======
-		var varEnironment;
-		if (app.debugOnBrowser) {
-			varEnvironment = window;
-		} else {
-			varEnvironment = sqlitePlugin;
-		}
-		app.database = varEnvironment.openDatabase({
-			name : app.dbName,
-			iosDatabaseLocation : 'default'
-		},
-		// sucsess
-		function() {
-			myLogger.write('Conexão com o banco de dados criada com sucesso.');
-			myDb.cretateTblDados();
-		},
-		// fail
-		function(err) {
-			myLogger.write('ERRO ao tentar conectar com o banco de dados.');
-			myLogger.write(JSON.stringify(err));
-		});
-
->>>>>>> origin/master
 	},
 
 	extraConfig : function() {
