@@ -111,7 +111,9 @@ var app = {
 			}, 3000);
 			// fordebug
 			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-			app.debugOnBrowser = false;
+			if (device.platform != 'browser') {
+				app.debugOnBrowser = false;
+			}
 			// app.onFileSystemReady();
 		}
 
@@ -158,7 +160,13 @@ var app = {
 	},
 
 	openDB : function() {
-		app.database = sqlitePlugin.openDatabase({
+		var varEnironment;
+		if (app.debugOnBrowser) {
+			varEnvironment = window;
+		} else {
+			varEnvironment = sqlitePlugin;
+		}
+		app.database = varEnvironment.openDatabase({
 			name : app.dbName,
 			iosDatabaseLocation : 'default'
 		},
