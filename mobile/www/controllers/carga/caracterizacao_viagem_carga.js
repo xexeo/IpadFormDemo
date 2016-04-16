@@ -10,8 +10,9 @@ controllers.caracterizacao_viagem_carga = {
 		$("#caracterizacao_viagem_carga_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_carga.validar_componentes();
 			if (ok) {
-				app.finalizaRegistro();
-				app.trocaPagina('views/menu.html', controllers.menu);
+				app.finalizaRegistro(function() {
+					app.trocaPagina('views/menu.html', controllers.menu);
+				});
 			}
 		})
 	},
