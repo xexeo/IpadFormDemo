@@ -12,7 +12,11 @@ controllers.identificacao_visual_carga = {
 			if (ok) {
 				app.trocaPagina('views/carga/caracterizacao_carga.html', controllers.caracterizacao_carga);
 			}
-		})
+		});
+		$('#tipo_carroceria_carga').click(function() {
+			$("#grupo_tipo_carroceria_imagens_carga").show();
+			$("#grupo_tipo_carroceria_imagens_carga").next().hide();
+		});
 	},
 
 	// Inicializa os elementos da tela
@@ -42,10 +46,11 @@ controllers.identificacao_visual_carga = {
 		$(".img_carroceria").click(function() {
 			var imgAlt = $(this).attr('alt');
 			$('#tipo_carroceria_carga').val(imgAlt);
+			$('#tipo_carroceria_carga').siblings('label').text(imgAlt);
 
 			app.setAtributo('tipo_carroceria', $(this).attr('id').split("_")[1]);
-			$("#grupo_tipo_carroceria_imagens_carga").toggle();
-			$("#grupo_tipo_carroceria_imagens_carga").next().toggle();
+			$("#grupo_tipo_carroceria_imagens_carga").hide();
+			$("#grupo_tipo_carroceria_imagens_carga").next().show();
 		});
 
 		$(".tipo_porta_conteiner").click(function() {

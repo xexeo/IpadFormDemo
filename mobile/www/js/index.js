@@ -294,7 +294,8 @@ var app = {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
+			[ "Sim", "Não (irá descartar o registro)" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que
+														// quiz assim) volta no
 			// results
 			);
 		},
@@ -348,7 +349,8 @@ var app = {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
+			[ "Sim", "Não (irá descartar o registro)" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que
+														// quiz assim) volta no
 			// results
 			);
 		}, function() {
