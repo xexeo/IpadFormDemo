@@ -103,7 +103,7 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
-		if (device.platform == 'iOS' || (device.platform == 'browser' && device.model == 'Firefox')) {
+		if (device.platform == 'iOS' || device.platform == 'Android' || (device.platform == 'browser' && device.model == 'Firefox')) {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -111,7 +111,9 @@ var app = {
 			}, 3000);
 			// fordebug
 			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-			app.debugOnBrowser = false;
+			if (device.platform != 'browser') {
+				app.debugOnBrowser = false;
+			}
 			// app.onFileSystemReady();
 		}
 
@@ -119,7 +121,7 @@ var app = {
 			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
 		}
 
-		if (device.platform == 'iOS'){
+		if (device.platform == 'iOS' || device.platform == 'Android'){
             // configurando a statusBar
             StatusBar.overlaysWebView(false);
             StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
@@ -159,27 +161,20 @@ var app = {
 	},
 
 	openDB : function() {
-       
-        if (device.platform == 'browser'){
-            app.database = window.openDatabase('dados.db', '1.0', 'dados', 2*1024*1024);
-        } else {
-            app.database = sqlitePlugin.openDatabase({
-                name : app.dbName,
-                iosDatabaseLocation : 'default'
-            },
-            // sucsess
-            function() {
-                myLogger.write('Conexão com o banco de dados criada com sucesso.');
-                myDb.cretateTblDados();
-            },
-            // fail
-            function(err) {
-                myLogger.write('ERRO ao tentar conectar com o banco de dados.');
-                myLogger.write(JSON.stringify(err));
-            });
-;
-        }
-		
+        app.database = sqlitePlugin.openDatabase({
+            name : app.dbName,
+            iosDatabaseLocation : 'default'
+        },
+        // sucsess
+        function() {
+            myLogger.write('Conexão com o banco de dados criada com sucesso.');
+            myDb.cretateTblDados();
+        },
+        // fail
+        function(err) {
+            myLogger.write('ERRO ao tentar conectar com o banco de dados.');
+            myLogger.write(JSON.stringify(err));
+        });
 	},
 
 	extraConfig : function() {
@@ -214,8 +209,9 @@ var app = {
 	cancelar : function() {
 		app.validaCancelamento(function(result) {
 			if (result) {
-				app.cancelaRegistro();
-				app.trocaPagina('views/menu.html', controllers.menu);
+				app.cancelaRegistro(function(){
+                    app.trocaPagina('views/menu.html', controllers.menu);
+                });
 			}
 		});
 	},
@@ -294,7 +290,7 @@ var app = {
 						}
 					},
                     "Falha na gravação.", //título
-                    ["Sim", "Não"] //botões -> o índice do botão escolhido, começando em 1, (não fui eu que escolhi) volta no results
+                    ["Sim", "Não"] //botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no results
                 );
             },
             //ok
@@ -331,8 +327,32 @@ var app = {
 		} while (tentarNovamente);*/
 	},
 
-	cancelaRegistro : function() {
-		var tentarNovamente;
+	cancelaRegistro : function(cb) {
+        myLogger.write('Cancelando registro: ' + registro.id);
+        app.setCamposDerivados();
+        app.setAtributo('cancelado', 1);
+        myDb.insertRegistro(registro,
+        function(error){
+            myLogger.write(error.message);
+            //confirma se tenta outra vez
+            navigator.notification.confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?", 
+                function(results) {
+                    // button Sim
+                    if (results == 1) {
+                        app.finalizaRegistro(); 
+                    }
+                },
+                "Falha na gravação.", //título
+                ["Sim", "Não"] //botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no results
+            );
+        }, function(){
+            myLogger.write('Registro cancelado: ' + registro.id);
+            app.limpaRegistro();
+            alert("Entrevista cancelada.");
+            cb();
+        });
+        
+		/*var tentarNovamente;
 		var saved;
 		do {
 			tentarNovamente = false;
@@ -351,9 +371,9 @@ var app = {
 				alert("Entrevista cancelada.");
 			} else {
 				// TITLE: "Falha ao gravar informações."
-				var tentarNovamente = confirm("Houve uma falha ao cancelar a entrevista.\nDeseja tentar novamente?");
+				var tentarNovamente = confirm("Houve uma falha o registro.\nDeseja tentar novamente?");
 			}
-		} while (tentarNovamente);
+		} while (tentarNovamente);*/
 	},
 
 	/**

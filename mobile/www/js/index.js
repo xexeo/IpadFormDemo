@@ -103,7 +103,7 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
-		if (device.platform == 'iOS' || device.platform == 'android' || (device.platform == 'browser' && device.model == 'Firefox')) {
+		if (device.platform == 'iOS' || device.platform == 'Android' || (device.platform == 'browser' && device.model == 'Firefox')) {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -121,7 +121,7 @@ var app = {
 			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
 		}
 
-		if (device.platform == 'iOS'){
+		if (device.platform == 'iOS' || device.platform == 'Android'){
             // configurando a statusBar
             StatusBar.overlaysWebView(false);
             StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
@@ -209,8 +209,9 @@ var app = {
 	cancelar : function() {
 		app.validaCancelamento(function(result) {
 			if (result) {
-				app.cancelaRegistro();
-				app.trocaPagina('views/menu.html', controllers.menu);
+				app.cancelaRegistro(function(){
+                    app.trocaPagina('views/menu.html', controllers.menu);
+                });
 			}
 		});
 	},
@@ -326,7 +327,7 @@ var app = {
 		} while (tentarNovamente);*/
 	},
 
-	cancelaRegistro : function() {
+	cancelaRegistro : function(cb) {
         myLogger.write('Cancelando registro: ' + registro.id);
         app.setCamposDerivados();
         app.setAtributo('cancelado', 1);
@@ -348,6 +349,7 @@ var app = {
             myLogger.write('Registro cancelado: ' + registro.id);
             app.limpaRegistro();
             alert("Entrevista cancelada.");
+            cb();
         });
         
 		/*var tentarNovamente;
