@@ -102,7 +102,7 @@ O projeto foi iniciado no NetBeans usando java 8.
 ### Biblioteca server http
 As classes da biblioteca [Simple] (http://www.simpleframework.org/) já estão configuradas no projeto. 
 
-* ˜˜[Tutorial]˜˜ (http://www.simpleframework.org/doc/tutorial/tutorial.php)
+* <del>[Tutorial] (http://www.simpleframework.org/doc/tutorial/tutorial.php)</del>
 * [Javadocs] (http://www.simpleframework.org/doc/javadoc/index.html)
 
 O Tutorial está desatualizado e faz uso de classes que não existem na versão atual da biblioteca. Para facilitar, fiz um programinha de exemplo, adaptando o material do tutorial com o exemplo da página do código no github [SimpleFramework] (https://github.com/ngallagher/simpleframework/blob/master/simple-demo/simple-demo/src/main/java/org/simpleframework/demo/http/WebServer.java).
