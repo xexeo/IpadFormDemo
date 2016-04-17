@@ -10,8 +10,9 @@ controllers.caracterizacao_viagem_simples = {
 		$("#caracterizacao_viagem_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
 			if (ok) {
-				app.finalizaRegistro();
-				app.trocaPagina('views/menu.html', controllers.menu);
+				app.finalizaRegistro(function() {
+					app.trocaPagina('views/menu.html', controllers.menu);
+				});
 			}
 		})
 	},

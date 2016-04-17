@@ -140,7 +140,7 @@ nav.avancar>div.ui-block-b {
 }
 
 .troca_classe_veiculo {
-	width: 10%;
+	width: /*10%*/15%;
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
@@ -157,16 +157,18 @@ nav.avancar>div.ui-block-b {
 	float: right;
 }
 
-.troca_classe_veiculo img {
-	vertical-align: middle;
-	width: 80px;
+.troca_classe_veiculo /*img*/ button {
+    /*vertical-align: middle;*/
+	/*margin: auto;*/
+    margin-top: 340px;
+    /*width: 80px;*/
 }
 
 .classe_veiculo {
 	display: inline-block;
 	vertical-align: top;
 	padding: 0;
-	margin: 0 2%;
+	margin: 0 /*2%*/;
 	max-height: 640px;
 }
 

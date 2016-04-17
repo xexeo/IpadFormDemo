@@ -1,10 +1,14 @@
 controllers.menu = {
 	config : function() {
-        var externalFolder;
+        var _externalFolder;
+        var _dbFolder;
+        
         if (device.platform == 'iOS'){
-            externalFolder = cordova.file.documentsDirectory;
+            _externalFolder = cordova.file.documentsDirectory;
+            _dbFolder = 'cdvfile://localhost/library/LocalDatabase';
         }else if(device.platform == 'Android'){
-            externalFolder = cordova.file.externalDataDirectory;
+            _externalFolder = cordova.file.externalDataDirectory;
+            _dbFolder = cordova.file.applicationStorageDirectory + "databases";
         }
         
 		$('#menu_nova_pesquisa').click(function() {
@@ -16,7 +20,7 @@ controllers.menu = {
 		$("#duplica_log").click(function() {
 			app.copyFile(app.logFileName,
                 cordova.file.dataDirectory,
-                externalFolder,
+                _externalFolder,
                 function(){
                     alert('Arquivo de log ' + app.logFileName + ' exportado com sucesso.');
                 });
@@ -26,8 +30,8 @@ controllers.menu = {
             
             app.database.close(function() {
                 app.copyFile(app.dbName, 
-                    'cdvfile://localhost/library/LocalDatabase',
-                    externalFolder,
+                    _dbFolder,
+                    _externalFolder,
                     function(){
                         alert('Banco de dados ' + app.dbName + ' exportado com sucesso.');
                         app.openDB();
