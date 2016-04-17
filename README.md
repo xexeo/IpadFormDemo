@@ -68,7 +68,8 @@ Uma solicitação do cliente é impedir o uso de outro aplicativo no dispositivo
 
 [Para funcionar depois do reboot o passcode do dispositivo deve estar desabilitado.](http://stackoverflow.com/questions/20864999/make-ios-application-run-at-startup)
 
-Configurar o acesso guiado: `Ajustes -> Geral -> Acessibilidade -> Acesso Guiado`
+#### Configurar o acesso guiado:
++ `Ajustes -> Geral -> Acessibilidade -> Acesso Guiado`
 
 #### Setup das opções
 + Acesso Guiado = `On`
@@ -103,3 +104,9 @@ As classes da biblioteca [Simple] (http://www.simpleframework.org/) já estão c
 
 * [Tutorial] (http://www.simpleframework.org/doc/tutorial/tutorial.php)
 * [Javadocs] (http://www.simpleframework.org/doc/javadoc/index.html)
+
+### Biblioteca SQLite
+
+* [sqlite-jdbc] (https://bitbucket.org/xerial/sqlite-jdbc/downloads)
+  * [descrição e tutorial] (https://bitbucket.org/xerial/sqlite-jdbc) 
+  * [Exemplos de uso] (https://bitbucket.org/xerial/sqlite-jdbc/wiki/Usage)
