@@ -125,51 +125,51 @@ import org.simpleframework.transport.connect.Connection;
 import org.simpleframework.transport.connect.SocketConnection;
 
 public class SimpleServer implements Container{
-    @Override
-    public void handle(Request req, Response resp) {
-	try{
-	    PrintStream body = resp.getPrintStream();
-	    Query query = req.getQuery();
+	@Override
+	public void handle(Request req, Response resp) {
+		try{
+			PrintStream body = resp.getPrintStream();
+			Query query = req.getQuery();
 	    
-	    long time = System.currentTimeMillis();
+			long time = System.currentTimeMillis();
 	    
-	    resp.setValue("Content-Type", "text/plain");
-	    resp.setValue("Server", "SimpleServer/1.0 (concentrador)");
-	    resp.setDate("Date", time);
-	    resp.setDate("Last-Modified", time);
+			resp.setValue("Content-Type", "text/plain");
+			resp.setValue("Server", "SimpleServer/1.0 (concentrador)");
+			resp.setDate("Date", time);
+			resp.setDate("Last-Modified", time);
 
-	    body.println("Hello World!");
+			body.println("Hello World!");
 	    
-	    //echo POST/GET field:value
-	    for (String q : query.keySet()){
-		body.println(q + " : " + query.get(q));
-	    }
+			//echo POST/GET field:value
+			for (String q : query.keySet()){
+				body.println(q + " : " + query.get(q));
+			}
 	    
-	    body.close();
-	} catch(Exception e){
-	    e.printStackTrace();
-	}
+			body.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		
-    }
+	}
 	
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws Exception{
+	/**
+	* @param args the command line arguments
+	*/
+	public static void main(String[] args) throws Exception{
 	
-	Container container = new SimpleServer();
-	SocketProcessor server = new ContainerSocketProcessor(container);
-	Connection conn = new SocketConnection(server);
-	SocketAddress address = new InetSocketAddress(8080);
-	System.out.println("Server running...");
-	System.out.println("Press ENTER to stop it.");
-	conn.connect(address);
-
-	System.in.read();
-
-	conn.close();
-	System.out.println("Server stoped!");
-    }
+		Container container = new SimpleServer();
+		SocketProcessor server = new ContainerSocketProcessor(container);
+		Connection conn = new SocketConnection(server);
+		SocketAddress address = new InetSocketAddress(8080);
+		System.out.println("Server running...");
+		System.out.println("Press ENTER to stop it.");
+		conn.connect(address);
+		
+		System.in.read();
+		
+		conn.close();
+		System.out.println("Server stoped!");
+	}
 	
 }
 ```
