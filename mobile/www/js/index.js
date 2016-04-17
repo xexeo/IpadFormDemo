@@ -275,7 +275,7 @@ var app = {
 			app.setAtributo('geocod_destino', municipioSplit[1]);
 		}
 
-		app.setAtributo('timestampIniPesq', new Date());
+		//app.setAtributo('timestampIniPesq', new Date()); isso estava sobrescrevendo o atributo da criação do registro com um valor errado que não é um timestamp
 	},
 
 	finalizaRegistro : function(cb) {
