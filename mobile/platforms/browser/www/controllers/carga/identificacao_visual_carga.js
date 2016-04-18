@@ -15,7 +15,9 @@ controllers.identificacao_visual_carga = {
 		});
 		$('#tipo_carroceria_carga').click(function() {
 			$("#grupo_tipo_carroceria_imagens_carga").show();
-			$("#grupo_tipo_carroceria_imagens_carga").next().hide();
+			$("#grupo_tipo_carroceria_imagens_carga").siblings(":not(#grupo_tipo_carroceria_carga)").each(function(key, value) {
+				$(value).hide();
+			});
 		});
 	},
 
@@ -35,7 +37,6 @@ controllers.identificacao_visual_carga = {
 		util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
 
 		$("img:not([src*='outros']).img_carroceria").each(function(key, value) {
-			console.info(key + "" + value);
 			$(value).after("<span>" + $(value).attr('alt') + "</span>");
 		});
 	},
@@ -45,8 +46,9 @@ controllers.identificacao_visual_carga = {
 
 		$(".img_carroceria").click(function() {
 			var imgAlt = $(this).attr('alt');
-			$('#tipo_carroceria_carga').val(imgAlt);
-			$('#tipo_carroceria_carga').siblings('label').text(imgAlt);
+			var elemTipoCarroceria = $('#tipo_carroceria_carga');
+			elemTipoCarroceria.val(imgAlt);
+			$('label[for="' + elemTipoCarroceria.attr('id') + '"]').text(imgAlt);
 
 			app.setAtributo('tipo_carroceria', $(this).attr('id').split("_")[1]);
 			$("#grupo_tipo_carroceria_imagens_carga").hide();
