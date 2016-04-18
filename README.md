@@ -102,21 +102,20 @@ O projeto foi iniciado no NetBeans usando java 8.
 ### Biblioteca server http
 As classes da biblioteca [Simple] (http://www.simpleframework.org/) já estão configuradas no projeto. 
 
-* ˜˜[Tutorial]˜˜ (http://www.simpleframework.org/doc/tutorial/tutorial.php)
+* <del>[Tutorial] (http://www.simpleframework.org/doc/tutorial/tutorial.php)</del>
 * [Javadocs] (http://www.simpleframework.org/doc/javadoc/index.html)
 
 O Tutorial está desatualizado e faz uso de classes que não existem na versão atual da biblioteca. Para facilitar, fiz um programinha de exemplo, adaptando o material do tutorial com o exemplo da página do código no github [SimpleFramework] (https://github.com/ngallagher/simpleframework/blob/master/simple-demo/simple-demo/src/main/java/org/simpleframework/demo/http/WebServer.java).
 
 ```java
 package simpleserver;
-
 /**
  * @author mangeli
  */
-
 import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.core.Container;
@@ -130,14 +129,22 @@ public class SimpleServer implements Container{
 	public void handle(Request req, Response resp) {
 		try{
 			PrintStream body = resp.getPrintStream();
+			Query query = req.getQuery();
+	    
 			long time = System.currentTimeMillis();
-			
+	    
 			resp.setValue("Content-Type", "text/plain");
 			resp.setValue("Server", "SimpleServer/1.0 (concentrador)");
 			resp.setDate("Date", time);
 			resp.setDate("Last-Modified", time);
-			
+
 			body.println("Hello World!");
+	    
+			//echo POST/GET field:value
+			for (String q : query.keySet()){
+				body.println(q + " : " + query.get(q));
+			}
+	    
 			body.close();
 		} catch(Exception e){
 			e.printStackTrace();
@@ -146,21 +153,22 @@ public class SimpleServer implements Container{
 	}
 	
 	/**
-	 * @param args the command line arguments
-	 */
+	* @param args the command line arguments
+	*/
 	public static void main(String[] args) throws Exception{
-		System.out.println("oi");
+	
 		Container container = new SimpleServer();
 		SocketProcessor server = new ContainerSocketProcessor(container);
 		Connection conn = new SocketConnection(server);
 		SocketAddress address = new InetSocketAddress(8080);
-		
+		System.out.println("Server running...");
+		System.out.println("Press ENTER to stop it.");
 		conn.connect(address);
 		
 		System.in.read();
 		
 		conn.close();
-		
+		System.out.println("Server stoped!");
 	}
 	
 }
