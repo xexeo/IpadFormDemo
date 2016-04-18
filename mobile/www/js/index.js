@@ -18,7 +18,7 @@ var app = {
 		}
 		return false;
 	},
-
+	
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
@@ -107,8 +107,7 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
-		if (device.platform == 'iOS' || device.platform == 'Android'
-				|| (device.platform == 'browser' && device.model == 'Firefox')) {
+		if (device.platform == 'iOS' || device.platform == 'Android' || (device.platform == 'browser' && device.model == 'Firefox')) {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -301,7 +300,7 @@ var app = {
 			app.setAtributo('geocod_destino', municipioSplit[1]);
 		}
 
-		app.setAtributo('timestampFimFimPesq', new Date());
+		//app.setAtributo('timestampIniPesq', new Date()); isso estava sobrescrevendo o atributo da criação do registro com um valor errado que não é um timestamp
 	},
 
 	finalizaRegistro : function(cb) {
@@ -320,7 +319,7 @@ var app = {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não (irá descartar o registro)" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
+			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
 			// results
 			);
 		},
@@ -374,7 +373,7 @@ var app = {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não (irá descartar o registro)" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
+			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
 			// results
 			);
 		}, function() {
