@@ -21,8 +21,8 @@ controllers.menu = {
 			app.copyFile(app.logFileName,
                 cordova.file.dataDirectory,
                 _externalFolder,
-                function(){
-                    alert('Arquivo de log ' + app.logFileName + ' exportado com sucesso.');
+                function(newName){
+                    alert('Arquivo de log ' + newName + ' exportado com sucesso.');
                 });
 		});
 
@@ -32,8 +32,8 @@ controllers.menu = {
                 app.copyFile(app.dbName, 
                     _dbFolder,
                     _externalFolder,
-                    function(){
-                        alert('Banco de dados ' + app.dbName + ' exportado com sucesso.');
+                    function(newName){
+                        alert('Banco de dados ' + newName + ' exportado com sucesso.');
                         app.openDB();
                     });
             }, function(err) {

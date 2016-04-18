@@ -18,11 +18,15 @@ var app = {
 		}
 		return false;
 	},
-
+	
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
-		if (app.autentica(usuario, senha)) {
+		
+		//configura identificador do ipad, para executar uma única vez(durante a instalação)
+		if(usuario=='Master' && senha=='Aaa'){
+			ipadID.requestID(function(id){$("#ipadID").html(id);});
+		} else if (app.autentica(usuario, senha)) {
 			myLogger.write("Login efetuado pelo usuário: " + usuario);
 			// navega para págine e executa o script de configuração depois do carregamento
 			app.trocaPagina("views/menu.html", controllers.menu)
@@ -58,7 +62,7 @@ var app = {
 	 */
 	validaCancelamento : function(cb) {
 		navigator.notification.prompt("Insira a senha para cancelar a entrevista.", function(results) {
-			// botão cancelar
+			// botão prosseguir cancelamento
 			if (results.buttonIndex == 1) {
 				if (!util.isEmpty(results.input1) && results.input1 == app.senha_login) {
 					cb(true);
@@ -103,8 +107,7 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
-		if (device.platform == 'iOS' || device.platform == 'Android'
-				|| (device.platform == 'browser' && device.model == 'Firefox')) {
+		if (device.platform == 'iOS' || device.platform == 'Android' || (device.platform == 'browser' && device.model == 'Firefox')) {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -125,8 +128,7 @@ var app = {
 		if (device.platform == 'iOS') {
 			// configurando a statusBar
 			StatusBar.overlaysWebView(false);
-			StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan,
-			// yellow, magenta, orange, purple, brown
+			StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
 		}
@@ -141,34 +143,55 @@ var app = {
 	onFileSystemReady : function() {
 		console.log("folder dos dados: ", cordova.file.dataDirectory);
 
-		// setting logger writer
-		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
-			console.log('file system ready: ', dir);
-			dir.getFile(app.logFileName, {
-				create : true
-			}, function(file) {
-				console.log("arquivo de log: ", file);
-				myLogger.setLogFile(file);
-				file.createWriter(function(fileWriter) {
-					myLogger.setLogWriter(fileWriter);
-				}, function() {
-					console.log('erro criando o escritor do log');
-				});
-				app.openDB();
-
-			});
-		}, function(err) {
-			console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
-			alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+		// setting ipadID file and value
+		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, 
+			//success resolving dir
+			function(dir) {
+				console.log('file system ready: ', dir);
+				//reading ipadID file
+				dir.getFile(ipadID.ipadIDFileName, {create : false},
+					function(file){
+						ipadID.readId(file, function(id){
+							$("#ipadID").html(id);
+							afterIpadID(id, dir);
+						});
+					},
+					function(e){
+						ipadID.requestID(function(id){
+							$("#ipadID").html(id);
+							afterIpadID(id, dir);
+						});
+					});
+			}, 
+			//error resolving dir
+			function(err) {
+				console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+				alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
 		});
+		
+		//internal function
+		function afterIpadID(id, dir){
+			
+			dir.getFile(app.logFileName, {create : true},
+				//success getting file
+				function(file) {
+					console.log("arquivo de log: ", file);
+					myLogger.setLogFile(file);
+					file.createWriter(function(fileWriter) {
+						myLogger.setLogWriter(fileWriter);
+						app.openDB(); //if successfully create fileWriter, open database
+					},
+					//error creating fileWriter
+					function() {
+						console.log('erro criando o escritor do log');
+				});
+			});
+		};
 
 	},
 
 	openDB : function() {
-		app.database = sqlitePlugin.openDatabase({
-			name : app.dbName,
-			iosDatabaseLocation : 'default'
-		},
+		app.database = sqlitePlugin.openDatabase({name : app.dbName, iosDatabaseLocation : 'default'},
 		// sucsess
 		function() {
 			myLogger.write('Conexão com o banco de dados criada com sucesso.');
@@ -238,10 +261,12 @@ var app = {
 			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
 			app.setAtributo('uuid', uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
+			app.setAtributo('idIpad', ipadID.id); //se vocë estiver testando num browser, sem sistema de arquivos, isso vai ser sempre nulo.
 			// TODO: falta setar os seguintes atributos:
 			// idPosto
 			// sentido
-			// idIpad
+			// idIpad -> idpadID está sendo escrito no registro. Isso só funciona quando existe um sistema de arquivos
+						
 			myLogger.write(JSON.stringify(registro));
 			myLogger.write('Registro iniciado: ' + registro.id);
 		} catch (e) {
@@ -275,7 +300,7 @@ var app = {
 			app.setAtributo('geocod_destino', municipioSplit[1]);
 		}
 
-		app.setAtributo('timestampIniPesq', new Date());
+		//app.setAtributo('timestampIniPesq', new Date()); isso estava sobrescrevendo o atributo da criação do registro com um valor errado que não é um timestamp
 	},
 
 	finalizaRegistro : function(cb) {
@@ -437,6 +462,7 @@ var app = {
 	 *            cb success callback function
 	 */
 	copyFile : function(fileName, originDirURI, destDirURI, cb) {
+		var newName = ipadID.id + "_" + fileName;
 		// get original dir
 		resolveLocalFileSystemURL(originDirURI,
 		// success
@@ -449,15 +475,15 @@ var app = {
 				resolveLocalFileSystemURL(destDirURI,
 				// success resolving destination
 				function(destDir) {
-					myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder '
+					myLogger.write('Copiando o arquivo ' + newName + ' do folder ' + dir.nativeURL + ' para o folder '
 							+ destDir.nativeURL);
 					// removing destination file
-					app.removeFile(fileName, destDirURI, function() {
-						realCopier(file, fileName, destDir);
+					app.removeFile(newName, destDirURI, function() {
+						realCopier(file, newName, destDir);
 					},
 					// mesmo se não conseguir remover
 					function() {
-						realCopier(file, fileName, destDir);
+						realCopier(file, newName, destDir);
 					});
 				}, function(err) {
 					myLogger.write('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
@@ -471,15 +497,15 @@ var app = {
 			myLogger.write('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));
 		});
 		// internal function
-		function realCopier(f, name, d) {
-			f.copyTo(d, name, function() {
+		function realCopier(f, newName, d) {
+			f.copyTo(d, newName, function() {
 				// success
-				myLogger.write('Arquivo ' + name + ' copiado.');
+				myLogger.write('Arquivo ' + newName + ' copiado.');
 				if (util.isFunction(cb)) {
-					cb();
+					cb(newName);
 				}
 			}, function(err) {
-				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+				myLogger.write('Erro copiando arquivo ' + newName + ' ' + JSON.stringify(err));
 
 			});
 		}
@@ -488,13 +514,13 @@ var app = {
 
 	baseUrl : null,
 
-	logFileName : "log.txt", // TODO: uuid no nome do arquivo
-
+	logFileName : "log.txt",
+	
 	user_login : null,
 
-	dbName : "dados.db", // TODO: uuid no nome do arquivo
+	dbName : "dados.db",
 
-	senha_login : null
+	senha_login : null,
 
 }; // end of app
 
