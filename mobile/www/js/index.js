@@ -18,14 +18,17 @@ var app = {
 		}
 		return false;
 	},
-	
+
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
-		
-		//configura identificador do ipad, para executar uma única vez(durante a instalação)
-		if(usuario=='Master' && senha=='Aaa'){
-			ipadID.requestID(function(id){$("#ipadID").html(id);});
+
+		// configura identificador do ipad, para executar uma única vez(durante a instalação)
+		// TODO: dúvida - isso não deveria estar dentro do 'if' da função 'autentica' de acordo com o 'user_admin'?
+		if (usuario == 'Master' && senha == 'Aaa') {
+			ipadID.requestID(function(id) {
+				$("#ipadID").html(id);
+			});
 		} else if (app.autentica(usuario, senha)) {
 			myLogger.write("Login efetuado pelo usuário: " + usuario);
 			// navega para págine e executa o script de configuração depois do carregamento
@@ -107,7 +110,8 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		console.log('device ready');
-		if (device.platform == 'iOS' || device.platform == 'Android' || (device.platform == 'browser' && device.model == 'Firefox')) {
+		if (device.platform == 'iOS' || device.platform == 'Android'
+				|| (device.platform == 'browser' && device.model == 'Firefox')) {
 			// alert('tô no ' + device.platform);
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -128,7 +132,8 @@ var app = {
 		if (device.platform == 'iOS') {
 			// configurando a statusBar
 			StatusBar.overlaysWebView(false);
-			StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
+			StatusBar.backgroundColorByName("black");
+			// black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
 		}
@@ -144,54 +149,60 @@ var app = {
 		console.log("folder dos dados: ", cordova.file.dataDirectory);
 
 		// setting ipadID file and value
-		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, 
-			//success resolving dir
-			function(dir) {
-				console.log('file system ready: ', dir);
-				//reading ipadID file
-				dir.getFile(ipadID.ipadIDFileName, {create : false},
-					function(file){
-						ipadID.readId(file, function(id){
-							$("#ipadID").html(id);
-							afterIpadID(id, dir);
-						});
-					},
-					function(e){
-						ipadID.requestID(function(id){
-							$("#ipadID").html(id);
-							afterIpadID(id, dir);
-						});
-					});
-			}, 
-			//error resolving dir
-			function(err) {
-				console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
-				alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
-		});
-		
-		//internal function
-		function afterIpadID(id, dir){
-			
-			dir.getFile(app.logFileName, {create : true},
-				//success getting file
-				function(file) {
-					console.log("arquivo de log: ", file);
-					myLogger.setLogFile(file);
-					file.createWriter(function(fileWriter) {
-						myLogger.setLogWriter(fileWriter);
-						app.openDB(); //if successfully create fileWriter, open database
-					},
-					//error creating fileWriter
-					function() {
-						console.log('erro criando o escritor do log');
+		window.resolveLocalFileSystemURL(cordova.file.dataDirectory,
+		// success resolving dir
+		function(dir) {
+			console.log('file system ready: ', dir);
+			// reading ipadID file
+			dir.getFile(ipadID.ipadIDFileName, {
+				create : false
+			}, function(file) {
+				ipadID.readId(file, function(id) {
+					$("#ipadID").html(id);
+					afterIpadID(id, dir);
+				});
+			}, function(e) {
+				ipadID.requestID(function(id) {
+					$("#ipadID").html(id);
+					afterIpadID(id, dir);
 				});
 			});
-		};
+		},
+		// error resolving dir
+		function(err) {
+			console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+			alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+		});
+
+		// internal function
+		function afterIpadID(id, dir) {
+
+			dir.getFile(app.logFileName, {
+				create : true
+			},
+			// success getting file
+			function(file) {
+				console.log("arquivo de log: ", file);
+				myLogger.setLogFile(file);
+				file.createWriter(function(fileWriter) {
+					myLogger.setLogWriter(fileWriter);
+					app.openDB(); // if successfully create fileWriter, open database
+				},
+				// error creating fileWriter
+				function() {
+					console.log('erro criando o escritor do log');
+				});
+			});
+		}
+		;
 
 	},
 
 	openDB : function() {
-		app.database = sqlitePlugin.openDatabase({name : app.dbName, iosDatabaseLocation : 'default'},
+		app.database = sqlitePlugin.openDatabase({
+			name : app.dbName,
+			iosDatabaseLocation : 'default'
+		},
 		// sucsess
 		function() {
 			myLogger.write('Conexão com o banco de dados criada com sucesso.');
@@ -261,12 +272,11 @@ var app = {
 			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
 			app.setAtributo('uuid', uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
-			app.setAtributo('idIpad', ipadID.id); //se vocë estiver testando num browser, sem sistema de arquivos, isso vai ser sempre nulo.
+			app.setAtributo('idIpad', ipadID.id);
+			// idIpad: se vocë estiver testando num browser, sem sistema de arquivos, isso vai ser sempre nulo.
 			// TODO: falta setar os seguintes atributos:
 			// idPosto
 			// sentido
-			// idIpad -> idpadID está sendo escrito no registro. Isso só funciona quando existe um sistema de arquivos
-						
 			myLogger.write(JSON.stringify(registro));
 			myLogger.write('Registro iniciado: ' + registro.id);
 		} catch (e) {
@@ -300,7 +310,7 @@ var app = {
 			app.setAtributo('geocod_destino', municipioSplit[1]);
 		}
 
-		//app.setAtributo('timestampIniPesq', new Date()); isso estava sobrescrevendo o atributo da criação do registro com um valor errado que não é um timestamp
+		app.setAtributo('timestampFimPesq', new Date());
 	},
 
 	finalizaRegistro : function(cb) {
@@ -319,8 +329,8 @@ var app = {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
-			// results
+			[ "Sim", "Não (irá descartar o registro)" ]
+			// botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no results
 			);
 		},
 		// ok
@@ -373,8 +383,8 @@ var app = {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
-			// results
+			[ "Sim", "Não (irá descartar o registro)" ]
+			// botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no results
 			);
 		}, function() {
 			myLogger.write('Registro cancelado: ' + registro.id);
@@ -515,7 +525,7 @@ var app = {
 	baseUrl : null,
 
 	logFileName : "log.txt",
-	
+
 	user_login : null,
 
 	dbName : "dados.db",
