@@ -30,6 +30,20 @@ A ausência dos plugins causa erros de execução, variáveis e métodos utiliza
 
 __ATENÇÃO:__ Os plugins podem ser desinstalados após um `pull` ou `checkout` do projeto. Verifique a instalação dos plugins em casos de erro de execução.
 
+### Execução do aplicativo no browser sem utilizar o cordova
+Esta forma de execução não tem suporte a gravação de registro. Utilizar somente para desenvolvimento das telas.
+Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de código a seguir:
+
+```
+        if (device.platform == 'iOS'){
+            _externalFolder = cordova.file.documentsDirectory;
+            _dbFolder = 'cdvfile://localhost/library/LocalDatabase';
+        }else if(device.platform == 'Android'){
+            _externalFolder = cordova.file.externalDataDirectory;
+            _dbFolder = cordova.file.applicationStorageDirectory + "databases";
+        }
+```
+
 ### Emulação do aplicativo em browser
 Devido aos plugins que dependem de informações do dispositivo, a simulação do aplicativo em um browser precisa ocorrer com o 
 comando:
