@@ -32,7 +32,7 @@ __ATENÇÃO:__ Os plugins podem ser desinstalados após um `pull` ou `checkout` 
 
 ### Execução do aplicativo no browser sem utilizar o cordova
 Esta forma de execução não tem suporte a gravação de registro. Utilizar somente para desenvolvimento das telas.
-Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de código a seguir:
+<del>Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de código a seguir:
 
 ```
         if (device.platform == 'iOS'){
@@ -43,6 +43,9 @@ Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de có
             _dbFolder = cordova.file.applicationStorageDirectory + "databases";
         }
 ```
+</del>
+
+Os comentários não são mais necessários. A atual versão de desenvolvimento é capaz de detectar esse tipo de execução e fazer os tratamentos adequados (em teste).
 
 ### Emulação do aplicativo em browser
 Devido aos plugins que dependem de informações do dispositivo, a simulação do aplicativo em um browser precisa ocorrer com o 
