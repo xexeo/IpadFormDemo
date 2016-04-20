@@ -110,7 +110,14 @@ var util = {
 			}
 		});
 	},
-
+	
+	progressoRestartSelect : function(nome_campo,mensagem) {
+		$("#" + nome_campo + " option:contains('" + mensagem + "')").prop({
+			selected : true
+		});
+		$("select#" + nome_campo).selectmenu("refresh", true);		
+	},
+	
 	/**
 	 * 
 	 * @param nome_registro
@@ -151,6 +158,16 @@ var util = {
 		}
 	},
 
+	validaRadioChecked : function(nome_campo, campo_aviso) {
+		var option = $('input[name=' + nome_campo + ']').val();
+		if (option != null) {
+			return true;
+		} else {
+			util.alerta_msg(campo_aviso);
+			return false;
+		}
+	},
+
 	validaInputText : function(nome_campo, campo_aviso) {
 		var value = $.trim($('#' + nome_campo).val())
 		if (value.length > 0) {
@@ -160,7 +177,7 @@ var util = {
 			return false;
 		}
 	},
-
+	
 	validaInputNumberRange : function(nome_campo, campo_aviso, min, max) {
 		var value = $.trim($('#' + nome_campo).val())
 		if ((!util.isEmpty(min) && !util.isEmpty(max) && Number(value) >= min && Number(value) <= max)
@@ -208,5 +225,5 @@ var util = {
 	getTimeInSeconds : function(date) {
 		return Math.floor(date / 1000);
 	}
-
+	
 };

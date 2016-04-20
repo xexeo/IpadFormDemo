@@ -255,6 +255,10 @@ var app = {
 		app.logger.log(view);
 	},
 
+	getAtributo : function(nome) {
+		return registro[nome];
+	},
+	
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
 		app.logger.log(JSON.stringify(registro));
