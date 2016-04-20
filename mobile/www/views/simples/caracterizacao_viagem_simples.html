@@ -68,27 +68,28 @@
 			</div>
 		</fieldset>
 
-		<fieldset class="ui-grid-a" id="grupo_pessoas_ambos">
-			<fieldset class="ui-block-a ui-grid-a escondido" id="grupo_pessoas_simples">
-				<label class="ui-block-a" for="pessoas_simples">Pessoas no veículo:</label>
-				<div class="ui-block-b">
-					<input id="pessoas_simples" type="number" pattern="\d*" name="pessoas_simples" value="" data-theme="a" />
-				</div>
-			</fieldset>
-			<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_pessoas_trabalho_simples">
-				<label class="ui-block-a" for="pessoas_trabalho_simples">Pessoas a trabalho:</label>
-				<div class="ui-block-b">
-					<input id="pessoas_trabalho_simples" type="number" pattern="\d*" name="pessoas_trabalho_simples" value="" data-theme="a" />
-				</div>
-			</fieldset>
-		</fieldset>
-
 		<fieldset class="ui-grid-a escondido" id="grupo_motivo_viagem_simples">
 			<legend class="ui-block-a">Motivo da viagem:</legend>
 			<div class="ui-block-b">
 				<select name="motivo_viagem_simples" id="motivo_viagem_simples" data-theme="a">
 				</select>
 			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a" id="grupo_pessoas_ambos">
+			<fieldset class="ui-block-a ui-grid-a escondido" id="grupo_pessoas_simples">
+				<label class="ui-block-a" for="pessoas_simples">Pessoas no veículo:</label>
+				<div class="ui-block-b">
+					<input id="pessoas_simples" type="number" min="0" pattern="\d*" name="pessoas_simples" value="" data-theme="a" />
+				</div>
+			</fieldset>
+			<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_pessoas_trabalho_simples">
+				<label class="ui-block-a" for="pessoas_trabalho_simples">Pessoas a trabalho:</label>
+				<div class="ui-block-b">
+					<input id="pessoas_trabalho_simples" type="number" min="0" pattern="\d*" name="pessoas_trabalho_simples" value=""
+						data-theme="a" />
+				</div>
+			</fieldset>
 		</fieldset>
 
 		<fieldset class="ui-grid-a escondido" id="grupo_renda_simples">

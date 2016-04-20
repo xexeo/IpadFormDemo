@@ -13,10 +13,10 @@ var ipadID = {
 		function _realStore(dir){
 			dir.getFile(ipadID.ipadIDFileName, {create:true},
 				function(file){
-					myLogger.write("Creating ipadIDFile " +  file.nativeURL);
+					app.logger.log("Creating ipadIDFile " +  file.nativeURL);
 					file.createWriter(function(idWriter){
 						idWriter.onerror = function(e){
-							console.log("Erro escrevendo arquivo " + ipadID.ipadIDFileName);
+							app.logger.log("Erro escrevendo arquivo " + ipadID.ipadIDFileName);
 						}
 						var blob = new Blob([ id ], {
 							type : 'text/plain'
@@ -24,7 +24,7 @@ var ipadID = {
 						try {
 							idWriter.seek(idWriter.length);
 							idWriter.write(blob);
-							console.log("Arquivo " +  ipadID.ipadIDFileName + " criado.");
+							app.logger.log("Arquivo " +  ipadID.ipadIDFileName + " criado.");
 							if (util.isFunction(cb)){
 								cb();
 							}
@@ -32,7 +32,7 @@ var ipadID = {
 							if (util.isFunction(cb)){
 								cb(e);
 							}
-							console.log(e.message);
+							app.logger.log(e.message);
 						}
 					});
 			});
@@ -51,13 +51,13 @@ var ipadID = {
 			reader.readAsText(file);
 			reader.onloadend = function(e){
 				ipadID.id = reader.result.toString().trim();
-				console.log("Lendo ipadID " + ipadID.id);
+				app.logger.log("Lendo ipadID " + ipadID.id);
 				if (util.isFunction(success)){
 					success(ipadID.id);
 				}
 			};
 			reader.onerror = function(e){
-				console.log("Erro lendo arquivo " + ipadID.ipadIDFileName + " ERRO: " + JSON.stringify(e));
+				app.logger.log("Erro lendo arquivo " + ipadID.ipadIDFileName + " ERRO: " + JSON.stringify(e));
 				if(util.isFunction(fail)){
 					fail();
 				}
