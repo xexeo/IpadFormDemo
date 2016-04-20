@@ -81,18 +81,36 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Motivo viagem
 		util.progressoSelect("idMotivoDaViagem", "motivo_viagem_simples", "grupo_pessoas_simples");
-		/*
-		 * TODO: deve conficionar o 'show' do componente 'grupo_pessoas_trabalho_simples' se o motivo for a 'trabalho'. De qq
-		 * forma, o 'show' do componente 'grupo_pessoas_trabalho_simples' só deve ocorrer se o número de pessoas no veiculo
-		 * (''show' do componente 'grupo_pessoas_trabalho_simples'') já tiver sido informado.
-		 */
+		$('#motivo_viagem_simples').change(this.progressoInput_PessoasTrabalho);
 
 		// Pessoas
-		util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_simples", "grupo_pessoas_trabalho_simples");
+		// util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_simples", "grupo_pessoas_trabalho_simples");
+		$('#pessoas_simples').change(this.progressoInput_PessoasTrabalho);
+		$('#pessoas_simples').keypress(this.progressoInput_PessoasTrabalho);
+		// TODO testar mais o show/hide do campo 'pessoas_trabalho_simples'
+
+		// Pessoas a Trabalho
 		util.progressoInputText("numeroDePessoasATrabalho", "pessoas_trabalho_simples", "grupo_renda_simples");
 
 		// Renda
 		util.progressoSelect("idRendaMedia", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
+	},
+
+	progressoInput_PessoasTrabalho : function() {
+		app.logger.log("===PessoasTrabalho===");
+		var valor = $('#pessoas_simples').val();
+		if (!util.isEmpty(valor)) {
+			app.setAtributo("numeroDePessoasNoVeiculo", valor);
+		}
+		var pessoasTrabalho = $('#grupo_pessoas_trabalho_simples');
+		if ((Number($("#motivo_viagem_simples").val()) == 5) && (Number($("#pessoas_simples").val()) > 0)) {
+			pessoasTrabalho.show();
+		} else {
+			pessoasTrabalho.hide();
+			if (!util.isEmpty(pessoasTrabalho.val())) {
+				pessoasTrabalho.val("");
+			}
+		}
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR

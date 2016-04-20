@@ -54,7 +54,7 @@ var app = {
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
-		myLogger.write('Logout');
+		app.logger.log('Logout');
 	},
 
 	/**
@@ -69,19 +69,17 @@ var app = {
 			if (result == app.senha_login) {
 				cb(true);
 			} else {
-					confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?", 
-					//ok button pressed
-					function() {
-						app.validaCancelamento(cb);
-						
-					},
-					function(){
-						cb(false);
-					},
-					"Senha incorreta.");
-				
+				confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?",
+				// ok button pressed
+				function() {
+					app.validaCancelamento(cb);
+
+				}, function() {
+					cb(false);
+				}, "Senha incorreta.");
+
 			}
-		}, "Cancelamento de entrevista",  "Cancelar entrevista", "Continuar entrevista", "Senha", 'password' );
+		}, "Cancelamento de entrevista", "Cancelar entrevista", "Continuar entrevista", "Senha", 'password');
 	},
 
 	/*
@@ -91,7 +89,7 @@ var app = {
 		this.bindEvents();
 		this.extraConfig();
 		this.baseUrl = window.location.href.replace("index.html", "");
-		//configuring dialogs
+		// configuring dialogs
 		window.alert = myDialogs.alert;
 		window.prompt = myDialogs.prompt;
 		window.confirm = myDialogs.confirm;
@@ -111,59 +109,56 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		app.logger.log('device ready');
-		
-		//a plataforma Browser não permite o desenvolvimento das escritas em arquivo
+
+		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
 		if (device.platform == 'iOS' || device.platform == 'Android') {
-			
+
 			setTimeout(function() {
 				navigator.splashscreen.hide();
 				console.log("esperando " + device.platform);
 			}, 3000);
-			
-			
-			
+
 			// durante o debug, inicia o sistema de arquivos
 			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-		
+
 		}
 
-		//nessa altura do desenvolvimento não faz sentido
-		/*if (device.platform == 'browser' && device.model != 'Firefox') {
-			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
-		}*/ 
+		// nessa altura do desenvolvimento não faz sentido
+		/*
+		 * if (device.platform == 'browser' && device.model != 'Firefox') { alert('ATENÇÃO!!! \n Use o Firefox para fazer a
+		 * simulação (cordova run browser --target=firefox)'); }
+		 */
 
-		
 		if (device.platform == 'iOS') {
 			// configurando a statusBar
 			StatusBar.overlaysWebView(false);
 			StatusBar.backgroundColorByName("black");
 			// black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
-			
-			//ajusta os caminhos para o iOS
+
+			// ajusta os caminhos para o iOS
 			app.filePaths.externalFolder = cordova.file.documentsDirectory;
 			app.filePaths.dbFolder = 'cdvfile://localhost/library/LocalDatabase';
-			
+
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
-			
-			//ajusta os caminhos para o Android
+
+			// ajusta os caminhos para o Android
 			app.filePaths.externalFolder = cordova.file.externalDataDirectory;
 			app.filePaths.dbFolder = cordova.file.applicationStorageDirectory + "databases";
 		}
 
 		// alert sem a página como título
-		/*window.alert = function(txt, cb) {
-			navigator.notification.alert(txt, cb, "Aviso", "Fechar");
-		}*/
-		
-		
-		//novo valor para variavel criada no extraConfig()
+		/*
+		 * window.alert = function(txt, cb) { navigator.notification.alert(txt, cb, "Aviso", "Fechar"); }
+		 */
+
+		// novo valor para variavel criada no extraConfig()
 		app.uuid_device = device.uuid;
 
 	},
 
 	onFileSystemReady : function() {
-		
+
 		app.logger.log("folder dos dados: ", cordova.file.dataDirectory);
 
 		// setting ipadID file and value
@@ -171,7 +166,7 @@ var app = {
 		// success resolving dir
 		function(dir) {
 			app.logger.log('file system ready: ', dir);
-			//modifica o atributo ipadId.id que havia sido configurado no extraConfig() como 'browser'
+			// modifica o atributo ipadId.id que havia sido configurado no extraConfig() como 'browser'
 			// reading ipadID file
 			dir.getFile(ipadID.ipadIDFileName, {
 				create : false
@@ -206,7 +201,7 @@ var app = {
 				file.createWriter(function(fileWriter) {
 					myLogger.setLogWriter(fileWriter);
 					app.openDB(); // if successfully create fileWriter, open database
-					//novo valor para variável criada no extraConfig
+					// novo valor para variável criada no extraConfig
 					app.logger = myLogger;
 				},
 				// error creating fileWriter
@@ -244,8 +239,8 @@ var app = {
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
 		$("#btn_sair").click(this.logout);
-		
-		//valores iniciais (vão ficar assim se estiver usando o browser)
+
+		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
@@ -338,20 +333,18 @@ var app = {
 		function(error) {
 			app.logger.log('Erro inserindo registro: ' + error.message);
 			// confirma se tenta outra vez
-			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?", 
-				//button ok
-				function() {
-					app.finalizaRegistro(cb);
-				},
-				//button cancel
-				function(){
-					if (cb != null) {
-						cb();
-					}
-				},
-				"Falha na gravação.", // título
-				"Sim", "Não (irá descartar o registro)"
-			);
+			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.finalizaRegistro(cb);
+			},
+			// button cancel
+			function() {
+				if (cb != null) {
+					cb();
+				}
+			}, "Falha na gravação.", // título
+			"Sim", "Não (irá descartar o registro)");
 		},
 		// ok
 		function() {
@@ -370,14 +363,14 @@ var app = {
 		// tentarNovamente = false;
 		// saved = false;
 		// try {
-		// myLogger.write('Finalizando registro: ' + registro.id);
+		// app.logger.log('Finalizando registro: ' + registro.id);
 		// app.setCamposDerivados();
 		// saved = myDb.insertRegistro(registro);
 		// } catch (e) {
-		// myLogger.write(e.message);
+		// app.logger.log(e.message);
 		// }
 		// if (saved) {
-		// myLogger.write('Registro finalizado: ' + registro.id);
+		// app.logger.log('Registro finalizado: ' + registro.id);
 		// app.limpaRegistro();
 		// alert("Entrevista registrada.");
 		// } else { // TITLE: "Falha ao gravar informações."
@@ -394,20 +387,19 @@ var app = {
 		myDb.insertRegistro(registro, function(error) {
 			app.logger.log(error.message);
 			// confirma se tenta outra vez
-			confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?", 
-				//button ok
-				function() {
-					app.cancelaRegistro(cb);
-				},
-				//button cancel
-				function(){
-					if (cb != null) {
-						cb();
-					}	
-				 
-				}, "Falha na gravação.", // título
-				"Sim", "Não (irá descartar o registro)"
-			);
+			confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.cancelaRegistro(cb);
+			},
+			// button cancel
+			function() {
+				if (cb != null) {
+					cb();
+				}
+
+			}, "Falha na gravação.", // título
+			"Sim", "Não (irá descartar o registro)");
 		}, function() {
 			app.logger.log('Registro cancelado: ' + registro.id);
 			app.limpaRegistro();
@@ -423,15 +415,15 @@ var app = {
 		// tentarNovamente = false;
 		// saved = false;
 		// try {
-		// myLogger.write('Cancelando registro: ' + registro.id);
+		// app.logger.log('Cancelando registro: ' + registro.id);
 		// app.setCamposDerivados();
 		// app.setAtributo('cancelado', 1);
 		// saved = myDb.insertRegistro(registro);
 		// } catch (e) {
-		// myLogger.write(e.message);
+		// app.logger.log(e.message);
 		// }
 		// if (saved) {
-		// myLogger.write('Registro cancelado: ' + registro.id);
+		// app.logger.log('Registro cancelado: ' + registro.id);
 		// app.limpaRegistro();
 		// alert("Entrevista cancelada.");
 		// } else { // TITLE: "Falha ao gravar informações." var
