@@ -45,7 +45,7 @@ myDb = {
 	},
 
 	cretateTblDados : function() {
-		myLogger.write("criando tabela: tblDados");
+		app.logger.log("criando tabela: tblDados");
 		app.database.transaction(
             function(tx) {
                 var sql = "CREATE TABLE IF NOT EXISTS tblDados \
@@ -54,9 +54,9 @@ myDb = {
                         estado text) ";
                 tx.executeSql(sql);
             }, function(e) {
-                myLogger.write('ERRO: ' + e.message);
+                app.logger.log('ERRO: ' + e.message);
             }, function(){
-                myLogger.write("tabela criada: tblDados");
+                app.logger.log("tabela criada: tblDados");
         });
 		
 	},
@@ -69,24 +69,24 @@ myDb = {
      */
 	insertRegistro : function(reg, fail, success) {
 		//var inseriu = false;
-		myLogger.write("inserindo registro: " + reg.id);
+		app.logger.log("inserindo registro: " + reg.id);
 		try{
             app.database.transaction(function(tx) {
                 var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
                 tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
-                    myLogger.write('id inserido no banco de dados: ' + res.insertId);
+                    app.logger.log('id inserido no banco de dados: ' + res.insertId);
                 });
             },
             // transaction fail
             function(e) {
                 //inseriu = false;
-                myLogger.write('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+                app.logger.log('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
                 fail(e);
             },
             // transaction success
             function() {
                 //inseriu = true;
-                myLogger.write("registro inserido: " + reg.id);
+                app.logger.log("registro inserido: " + reg.id);
                 success();
             });
         } catch(e){
