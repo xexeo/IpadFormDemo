@@ -34,8 +34,8 @@ __ATENÇÃO:__ Os plugins podem ser desinstalados após um `pull` ou `checkout` 
 Esta forma de execução não tem suporte a gravação de registro. Utilizar somente para desenvolvimento das telas.
 <del>Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de código a seguir:</del>
 
+__ATENÇÃO:__ Os comentários não são mais necessários. A atual versão de desenvolvimento é capaz de detectar esse tipo de execução e fazer os tratamentos adequados para permitir o desenvolvimento da interface (em teste).
 
-<del>
 ```
         if (device.platform == 'iOS'){
             _externalFolder = cordova.file.documentsDirectory;
@@ -45,10 +45,7 @@ Esta forma de execução não tem suporte a gravação de registro. Utilizar som
             _dbFolder = cordova.file.applicationStorageDirectory + "databases";
         }
 ```
-</del>
-
-
-Os comentários não são mais necessários. A atual versão de desenvolvimento é capaz de detectar esse tipo de execução e fazer os tratamentos adequados (em teste).
+ 
 
 ### Emulação do aplicativo em browser
 Devido aos plugins que dependem de informações do dispositivo, a simulação do aplicativo em um browser precisa ocorrer com o 
