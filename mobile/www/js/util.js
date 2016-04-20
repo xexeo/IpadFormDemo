@@ -160,14 +160,44 @@ var util = {
 			return false;
 		}
 	},
-	
+
+	validaInputNumberRange : function(nome_campo, campo_aviso, min, max) {
+		var value = $.trim($('#' + nome_campo).val())
+		if ((!util.isEmpty(min) && !util.isEmpty(max) && Number(value) >= min && Number(value) <= max)
+				|| (!util.isEmpty(min) && util.isEmpty(max) && Number(value) >= min)
+				|| (!util.isEmpty(max) && util.isEmpty(min) && Number(value) <= max)) {
+			return true;
+		} else if (!util.isEmpty(min) || !util.isEmpty(max)) {
+			var msgComplemento;
+			if (!util.isEmpty(min) && !util.isEmpty(max)) {
+				if (min >= max) {
+					msgComplemento = "O valor do campo não deve ser diferente de " + min;
+				} else {
+					msgComplemento = "O valor do campo deve estar entre " + min + " e " + max;
+				}
+			} else if (!util.isEmpty(min)) {
+				msgComplemento = "O menor valor posível para o campo é " + min;
+			} else if (!util.isEmpty(max)) {
+				msgComplemento = "O maior valor posível para o campo é " + max;
+			}
+			util.alerta_msg(campo_aviso, msgComplemento);
+			return false;
+		} else {
+			return validaInputText(nome_campo, campo_aviso);
+		}
+	},
+
 	// Outras funções
-	alerta_msg : function(campo_aviso) {
-		alert("Campo " + campo_aviso + " não foi preenchido");
+	alerta_msg : function(campo_aviso, msgComplemento) {
+		if (util.isEmpty(msgComplemento)) {
+			alert("O campo " + campo_aviso + " não foi preenchido.");
+		} else {
+			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento);
+		}
 	},
 
 	isEmpty : function(valor) {
-		return (valor == undefined) || (valor == null) || (valor.trim().length == 0);
+		return (valor == undefined) || (valor == null) || (String(valor).trim().length == 0);
 	},
 
 	isFunction : function(functionToCheck) {
@@ -178,5 +208,5 @@ var util = {
 	getTimeInSeconds : function(date) {
 		return Math.floor(date / 1000);
 	}
-	
+
 };

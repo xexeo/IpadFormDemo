@@ -1,0 +1,102 @@
+var myDialogs = {
+
+	/**
+	 * Shows an alert dialog
+	 * @param String txt Message
+	 * @param Strint title Dialog Title
+	 * @param Function cb callback function
+	 */
+	alert : function (txt, title, cb){
+		title = (title == null)? "Aviso!" : title;
+		var d = $.alert({
+			title : title,
+			content : txt,
+			confirmButton : "Ok",
+			confirmButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			confirm : function(){
+				if(util.isFunction(cb)){
+					cb();
+				}
+			},
+			
+		});
+		d.$body.addClass("ui-page-theme-a");
+		
+	},
+	
+	/**
+	 * Shows a confirmation dialog
+	 * @param String txt Message
+	 * @param Function cbOK Ok button click callback
+	 * @param Function cbCancel Cancel button click callback
+	 * @param String title Dialog title
+	 * @param String btnOK Ok button text
+	 * @param String btnCancel Cancel button text
+	 */
+	confirm : function(txt, cbOK, cbCancel, title, btnOK, btnCancel){
+		title = (title == null)? "Confirmação." : title;
+		btnOK = (btnOK == null)? "Confirmar" : btnOK;
+		btnCancel = (btnCancel == null)? "Cancelar" : btnCancel;
+		$.confirm({
+			title : title,
+			content: txt,
+			confirmButton : btnOK,
+			confirmButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			cancelButton : btnCancel,
+			cancelButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			confirm : function(){
+				if(util.isFunction(cbOK)){
+					cbOK();
+				}
+			},
+			cancel: function(){
+				if(util.isFunction(cbCancel)){
+					cbCancel();
+				}
+			}
+		}).$body.addClass("ui-page-theme-a").children(".buttons").css("width","100%");;
+	},
+	
+	/**
+	 * Shows a prompt dialog
+	 * @param String txt Message
+	 * @param Function cb Callback function that receives the entered data
+	 * @param String title Dialog title
+	 * @param String btnOK Ok button text
+	 * @param String btnCancel Cancel button text
+	 * @param String placeholder Placeholder text for the input box
+	 * @param String inputType Type of the input -> ['text', 'password', 'number']
+	 */
+	prompt : function(txt, cb, title, btnOK, btnCancel, placeholder, inputType){
+		title = (title == null)? "Entrada de dados." : title;
+		btnOK = (btnOK == null)? "Entrar" : btnOK;
+		btnCancel = (btnCancel == null)? "Cancelar" : btnCancel;
+		placeholder = (placeholder == null)? "Entre com os dados" : placeholder;
+		if (inputType != 'text' && inputType != 'password' && inputType != 'number'){ 
+			inputType = 'text';
+		}
+		var dialog = $.confirm({
+			title : title,
+			content : txt,
+			confirmButton : btnOK,
+			confirmButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			cancelButton : btnCancel,
+			cancelButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			confirm : function(){
+				var enteredVal = this.$content.find('input').val(); // get the input value.
+				if (enteredVal.trim() == '') { // validate it.
+					return false; // dont close the dialog. (and maybe show some error.)
+				}
+				if(util.isFunction(cb)){
+					cb(enteredVal);
+				}
+			},
+		});
+		dialog.$content.append('<p><input style="width:100%; margin-top:10px;" id="prompt_input" autofocus type="'+ inputType +'" placeholder="' + placeholder + '" data-theme="a"></p>');
+		dialog.$body.addClass("ui-page-theme-a");
+		dialog.$body.children(".buttons").css("width","100%");
+	},
+	
+};
+
+
