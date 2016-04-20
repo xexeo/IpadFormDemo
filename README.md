@@ -32,8 +32,10 @@ __ATENÇÃO:__ Os plugins podem ser desinstalados após um `pull` ou `checkout` 
 
 ### Execução do aplicativo no browser sem utilizar o cordova
 Esta forma de execução não tem suporte a gravação de registro. Utilizar somente para desenvolvimento das telas.
-<del>Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de código a seguir:
+<del>Para funcionar abra o arquivo www/controllers/menu.js e comente as linhas de código a seguir:</del>
 
+
+<del>
 ```
         if (device.platform == 'iOS'){
             _externalFolder = cordova.file.documentsDirectory;
@@ -44,6 +46,7 @@ Esta forma de execução não tem suporte a gravação de registro. Utilizar som
         }
 ```
 </del>
+
 
 Os comentários não são mais necessários. A atual versão de desenvolvimento é capaz de detectar esse tipo de execução e fazer os tratamentos adequados (em teste).
 
