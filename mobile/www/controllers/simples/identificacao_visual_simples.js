@@ -39,11 +39,7 @@ controllers.identificacao_visual_simples = {
 			$('#grupo_pais_simples').hide()
 			app.setAtributo('idPaisPlacaEstrangeira', null);
 			app.setAtributo('placaEstrangeira', false);
-
-			$("#pais_simples option:contains('Selecione')").prop({
-				selected : true
-			});
-			$("select#pais_simples").selectmenu("refresh", true);
+			util.progressoRestartSelect("pais_simples", "Selecione");
 
 			$("#grupo_placa_simples").show();
 		});
