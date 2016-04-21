@@ -28,46 +28,57 @@ controllers.identificacao_visual_simples = {
 		
 		$('#placa_estrangeira_simples_sim').click(function() {
 			$('#grupo_pais_simples').show();
+			$('#grupo_placa_simples').hide();
+			app.setAtributo("placa_letras", null);
+			app.setAtributo("placa_numeros", null);
 			app.setAtributo('placaEstrangeira', true);
 
 			if (Number($('#pais_simples').val()) == -1) {
-				$("#grupo_placa_simples").hide();
+				$("#grupo_placa_unica_simples").hide();
 			}
-
 		});
 		$('#placa_estrangeira_simples_nao').click(function() {
 			$('#grupo_pais_simples').hide()
+			$('#grupo_placa_unica_simples').hide()
 			app.setAtributo('idPaisPlacaEstrangeira', null);
+			app.setAtributo('placa_unica', null);
 			app.setAtributo('placaEstrangeira', false);
 			util.progressoRestartSelect("pais_simples", "Selecione");
 
 			$("#grupo_placa_simples").show();
 		});
 		
-		util.progressoSelect("idPaisPlacaEstrangeira", "pais_simples", "grupo_placa_simples");
+		// País (somente placa estrangeira)
+		util.progressoSelect("idPaisPlacaEstrangeira", "pais_simples", "grupo_placa_unica_simples");
 		
+		// Placa Brasil
 		util.progressoInputText("placa_letras", "placa_letras_simples", "grupo_placa_numeros_simples");
 		util.progressoInputText("placa_numeros", "placa_numeros_simples", "grupo_identificacao_visual_simples_avancar");
+		
+		// Placa única
+		util.progressoInputText("placa_unica", "placa_unica_simples", "grupo_identificacao_visual_simples_avancar");
 	},
 	
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 		
 		if(util.validaRadioSimNao("reboque_simples", "Reboque") && 
-				util.validaRadioSimNao("placa_estrangeira_simples", "Placa estrangeira") &&
-				util.validaInputText("placa_letras_simples", "Placa do veículo") &&
-				util.validaInputText("placa_numeros_simples", "Placa do veículo")) {
+				util.validaRadioSimNao("placa_estrangeira_simples", "Placa estrangeira")) {
 			
 			var option = $('input[name=placa_estrangeira_simples]:checked').val();
 			if(option == 'sim') {
-				
 				var ok_placa_estrangeira = true;
 				if((Number($("#pais_simples").val())) == 1) { // Brasil
 					alert("O país do veículo de placa estrangeira não pode ser Brasil");
 					ok_placa_estrangeira = false;
 				}
 				
-				return ok_placa_estrangeira && util.validaSelect("pais_simples", "País");
+				return ok_placa_estrangeira && util.validaSelect("pais_simples", "País") && 
+					util.validaInputText("placa_unica_simples", "Placa do veículo");
+			}
+			else if(option == 'nao') {
+				return util.validaInputText("placa_letras_simples", "Placa do veículo") && 
+					util.validaInputText("placa_numeros_simples", "Placa do veículo")
 			}
 			
 			return true;
