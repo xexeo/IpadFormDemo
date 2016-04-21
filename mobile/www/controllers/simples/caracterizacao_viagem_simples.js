@@ -99,6 +99,9 @@ controllers.caracterizacao_viagem_simples = {
 					$("#grupo_pessoas_trabalho_simples").hide();
 					app.setAtributo("numeroDePessoasATrabalho", null);
 					$("#pessoas_trabalho_simples").val(null);
+					if (Number($("#pessoas_simples").val()) > 0) {
+						$("#grupo_renda_simples").show();
+					}
 				}
 			}
 		});
