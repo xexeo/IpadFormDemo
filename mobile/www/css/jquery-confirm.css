@@ -101,7 +101,7 @@ body.jconfirm-noscroll {
 }
 .jconfirm .jconfirm-box div.title-c {
   display: block;
-  font-size: 22px;
+  font-size: 25px;
   line-height: 20px;
 }
 .jconfirm .jconfirm-box div.title-c .icon-c {
@@ -137,8 +137,9 @@ body.jconfirm-noscroll {
   position: relative;
 }
 .jconfirm .jconfirm-box div.content-pane .content {
+    font-size: 20px;
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 0;
   -webkit-transition: all 0.2s ease-in;
           transition: all 0.2s ease-in;
@@ -208,12 +209,13 @@ body.jconfirm-noscroll {
   border: none;
   background-image: none;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   text-shadow: none;
   -webkit-transition: background .1s;
           transition: background .1s;
   color: white;
+  padding: 20px;
 }
 .jconfirm.jconfirm-white .jconfirm-box .buttons button.btn-default {
   box-shadow: none;
@@ -238,7 +240,7 @@ body.jconfirm-noscroll {
   border: none;
   background-image: none;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   text-shadow: none;
   -webkit-transition: background .1s;
@@ -434,6 +436,7 @@ body.jconfirm-noscroll {
 }
 .jconfirm.jconfirm-supervan .jconfirm-box div.content-pane {
   margin-bottom: 25px;
+ 
 }
 .jconfirm.jconfirm-supervan .jconfirm-box div.content {
   text-align: center;

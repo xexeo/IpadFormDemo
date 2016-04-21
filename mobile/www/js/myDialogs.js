@@ -12,7 +12,7 @@ var myDialogs = {
 			title : title,
 			content : txt,
 			confirmButton : "Ok",
-			confirmButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			confirmButtonClass : "btn-primary",//"ui-btn ui-corner-all ui-btn-b",
 			confirm : function(){
 				if(util.isFunction(cb)){
 					cb();
@@ -41,9 +41,9 @@ var myDialogs = {
 			title : title,
 			content: txt,
 			confirmButton : btnOK,
-			confirmButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			confirmButtonClass : "btn-primary",//"ui-btn ui-corner-all ui-btn-b",
 			cancelButton : btnCancel,
-			cancelButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			cancelButtonClass : "btn-info",//"ui-btn ui-corner-all ui-btn-b",
 			confirm : function(){
 				if(util.isFunction(cbOK)){
 					cbOK();
@@ -54,7 +54,7 @@ var myDialogs = {
 					cbCancel();
 				}
 			}
-		}).$body.addClass("ui-page-theme-a").children(".buttons").css("width","100%");;
+		}).$body.addClass("ui-page-theme-a")/*8.children(".buttons").css("width","100%")*/;
 	},
 	
 	/**
@@ -79,9 +79,9 @@ var myDialogs = {
 			title : title,
 			content : txt,
 			confirmButton : btnOK,
-			confirmButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			confirmButtonClass : "btn-primary",//"ui-btn ui-corner-all ui-btn-b",
 			cancelButton : btnCancel,
-			cancelButtonClass : "ui-btn ui-corner-all ui-btn-b",
+			cancelButtonClass : "btn-info",//"ui-btn ui-corner-all ui-btn-b",
 			confirm : function(){
 				var enteredVal = this.$content.find('input').val(); // get the input value.
 				if (enteredVal.trim() == '') { // validate it.
@@ -92,9 +92,12 @@ var myDialogs = {
 				}
 			},
 		});
-		dialog.$content.append('<p><input style="width:100%; margin-top:10px;" id="prompt_input" autofocus type="'+ inputType +'" placeholder="' + placeholder + '" data-theme="a"></p>');
+		dialog.$content.append('<p><input style="width:100%;" id="prompt_input" autofocus type="'+ 
+                                inputType +'" placeholder="' + placeholder + '" data-theme="a"></p>');
+        dialog.$content.find("#prompt_input").textinput();//textinput({theme: "a"});
 		dialog.$body.addClass("ui-page-theme-a");
-		dialog.$body.children(".buttons").css("width","100%");
+		//dialog.$body.children(".buttons").css("width","100%");
+        
 	},
 	
 };

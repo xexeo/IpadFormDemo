@@ -141,7 +141,8 @@ var app = {
 
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
-
+            StatusBar.backgroundColorByName("darkGray");
+            
 			// ajusta os caminhos para o Android
 			app.filePaths.externalFolder = cordova.file.externalDataDirectory;
 			app.filePaths.dbFolder = cordova.file.applicationStorageDirectory + "databases";
@@ -248,12 +249,31 @@ var app = {
 
 	trocaPagina : function(view, controller) {
 		if (controller != null) {
-			$(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
+            app.onChangeHandler.controller = controller.config;
+			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow", app.onChangeHandler.handler);
 		}
 
 		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
 		app.logger.log(view);
 	},
+    
+    //para apendar coisas aos controllers
+    onChangeHandler : {
+        handler : function(){
+            try{
+                app.onChangeHandler.controller();
+                $("#btn_cancelar").click(app.cancelar); //não estava funcionando em todas as páginas
+                if (typeof device != 'undefined' && device.platform == "Android"){
+                    StatusBar.hide();
+                }
+            }catch(e){
+                app.logger.log(e);
+                alert(e.message);
+            }
+        },
+        
+        controller : null,
+    },
 
 	getAtributo : function(nome) {
 		return registro[nome];
@@ -549,6 +569,11 @@ var app = {
 	dbName : "dados.db",
 
 	senha_login : null,
+    
+    filePaths : {
+        externalFolder : null,
+        dbFolder : null,
+    },
 
 }; // end of app
 
