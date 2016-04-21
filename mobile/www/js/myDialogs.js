@@ -5,14 +5,35 @@ var myDialogs = {
 	 * @param String txt Message
 	 * @param Strint title Dialog Title
 	 * @param Function cb callback function
+	 * @param String type optional dialog type ['info', 'error']
 	 */
-	alert : function (txt, title, cb){
+	alert : function (txt, title, cb, type){
 		title = (title == null)? "Aviso!" : title;
+		var icon;
+		var btn;
+		switch (type){
+			case 'info' :
+				icon = 'fa fa-info-circle';
+				btn = 'btn-warning';
+				break;
+			case 'error' :
+				icon = 'fa fa-exclamation-triangle';
+				btn = 'btn-danger';
+				break;
+			default:
+				icon = null;
+				btn = 'btn-info';
+				
+		}
 		var d = $.alert({
 			title : title,
 			content : txt,
+			icon : icon,
 			confirmButton : "Ok",
-			confirmButtonClass : "btn-primary",//"ui-btn ui-corner-all ui-btn-b",
+			confirmButtonClass : btn,
+			animation : 'none',
+			closeAnimation: 'none',
+			animationBounce : 1, //1 is none
 			confirm : function(){
 				if(util.isFunction(cb)){
 					cb();
@@ -44,6 +65,9 @@ var myDialogs = {
 			confirmButtonClass : "btn-primary",//"ui-btn ui-corner-all ui-btn-b",
 			cancelButton : btnCancel,
 			cancelButtonClass : "btn-info",//"ui-btn ui-corner-all ui-btn-b",
+			animation : 'none',
+			closeAnimation: 'none',
+			animationBounce : 1, //1 is none
 			confirm : function(){
 				if(util.isFunction(cbOK)){
 					cbOK();
@@ -82,6 +106,9 @@ var myDialogs = {
 			confirmButtonClass : "btn-primary",//"ui-btn ui-corner-all ui-btn-b",
 			cancelButton : btnCancel,
 			cancelButtonClass : "btn-info",//"ui-btn ui-corner-all ui-btn-b",
+			animation : 'none',
+			closeAnimation: 'none',
+			animationBounce : 1, //1 is none
 			confirm : function(){
 				var enteredVal = this.$content.find('input').val(); // get the input value.
 				if (enteredVal.trim() == '') { // validate it.

@@ -209,9 +209,9 @@ var util = {
 	// Outras funções
 	alerta_msg : function(campo_aviso, msgComplemento) {
 		if (util.isEmpty(msgComplemento)) {
-			alert("O campo " + campo_aviso + " não foi preenchido.");
+			alert("O campo " + campo_aviso + " não foi preenchido.", "Erro no preenchimento!", null, 'error');
 		} else {
-			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento);
+			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento, 'Erro no preenchimento!',null, 'error');
 		}
 	},
 
