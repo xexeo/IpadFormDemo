@@ -5,7 +5,7 @@ controllers.caracterizacao_viagem_simples = {
 		me.progressoTela();
 		me.buttons();
 	},
-	
+
 	buttons : function() {
 		$("#caracterizacao_viagem_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
@@ -81,20 +81,21 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Motivo viagem
 		$('#motivo_viagem_simples').change(function() {
+			app.logger.log("====change: MOTIVO A TRABALHO====");
 			if (Number($(this).val()) == -1) {
 				$("#grupo_pessoas_ambos").hide();
 				$("#grupo_pessoas_trabalho_simples").hide();
 				app.setAtributo("idMotivoDaViagem", null);
 				app.setAtributo("numeroDePessoasATrabalho", null);
 				$("#pessoas_trabalho_simples").val(null);
-			}
-			else {
+			} else {
 				app.setAtributo("idMotivoDaViagem", $(this).val());
 				$("#grupo_pessoas_ambos").show();
-				if (Number($(this).val()) == 5) { // TODO Trabalho. Ajustar se id mudar. 
-					$("#grupo_pessoas_trabalho_simples").show();
-				}
-				else {
+				if (Number($(this).val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
+					if (Number($("#pessoas_simples").val()) > 0) {
+						$("#grupo_pessoas_trabalho_simples").show();
+					}
+				} else {
 					$("#grupo_pessoas_trabalho_simples").hide();
 					app.setAtributo("numeroDePessoasATrabalho", null);
 					$("#pessoas_trabalho_simples").val(null);
@@ -106,12 +107,17 @@ controllers.caracterizacao_viagem_simples = {
 		$('#pessoas_simples').change(function() {
 			app.setAtributo("numeroDePessoasNoVeiculo", $(this).val());
 		});
-		$('#pessoas_simples').keypress(function() {
-			if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
-				$("#grupo_pessoas_trabalho_simples").show();
-			}
-			else {
-				$("#grupo_renda_simples").show();
+		$('#pessoas_simples').keyup(function() {
+			app.logger.log("====keyup: PESSOAS A TRABALHO====");
+			if (Number($("#pessoas_simples").val()) > 0) {
+				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+					$("#grupo_pessoas_trabalho_simples").show();
+				} else {
+					$("#grupo_renda_simples").show();
+				}
+			} else {
+				$("#grupo_pessoas_trabalho_simples").hide();
+				$("#grupo_renda_simples").hide();
 			}
 		});
 
@@ -122,25 +128,6 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("idRendaMedia", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
 	},
 
-	/*
-	progressoInput_PessoasTrabalho : function() {
-		app.logger.log("===PessoasTrabalho===");
-		var valor = $('#pessoas_simples').val();
-		if (!util.isEmpty(valor)) {
-			app.setAtributo("numeroDePessoasNoVeiculo", valor);
-		}
-		var pessoasTrabalho = $('#grupo_pessoas_trabalho_simples');
-		if ((Number($("#motivo_viagem_simples").val()) == 5) && (Number($("#pessoas_simples").val()) > 0)) {
-			pessoasTrabalho.show();
-		} else {
-			pessoasTrabalho.hide();
-			if (!util.isEmpty(pessoasTrabalho.val())) {
-				pessoasTrabalho.val("");
-			}
-		}
-	},
-	*/
-	
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 

@@ -75,7 +75,7 @@ var util = {
 	 */
 	progressoSelect : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
-			if (Number($(this).val()) != -1) {
+			if (Number($(this).val()) > -1) {
 				app.setAtributo(nome_registro, $(this).val());
 				$("#" + grupo_proximo).show();
 			} else {
@@ -110,14 +110,14 @@ var util = {
 			}
 		});
 	},
-	
-	progressoRestartSelect : function(nome_campo,mensagem) {
+
+	progressoRestartSelect : function(nome_campo, mensagem) {
 		$("#" + nome_campo + " option:contains('" + mensagem + "')").prop({
 			selected : true
 		});
-		$("select#" + nome_campo).selectmenu("refresh", true);		
+		$("select#" + nome_campo).selectmenu("refresh", true);
 	},
-	
+
 	/**
 	 * 
 	 * @param nome_registro
@@ -128,11 +128,15 @@ var util = {
 	 *            id da div que irá sofrer show/hide
 	 */
 	progressoInputText : function(nome_registro, nome_campo, grupo_proximo) {
+		$('#' + nome_campo).keyup(function() {
+			if (util.isEmpty($(this).val())) {
+				$("#" + grupo_proximo).hide();
+			} else {
+				$("#" + grupo_proximo).show();
+			}
+		});
 		$('#' + nome_campo).change(function() {
 			app.setAtributo(nome_registro, $(this).val());
-		});
-		$('#' + nome_campo).keypress(function() {
-			$("#" + grupo_proximo).show();
 		});
 	},
 
@@ -175,7 +179,7 @@ var util = {
 			return false;
 		}
 	},
-	
+
 	validaInputNumberRange : function(nome_campo, campo_aviso, min, max) {
 		var value = $.trim($('#' + nome_campo).val())
 		if ((!util.isEmpty(min) && !util.isEmpty(max) && Number(value) >= min && Number(value) <= max)
@@ -223,5 +227,5 @@ var util = {
 	getTimeInSeconds : function(date) {
 		return Math.floor(date / 1000);
 	}
-	
+
 };
