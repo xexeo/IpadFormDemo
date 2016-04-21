@@ -130,10 +130,8 @@ var util = {
 	progressoInputText : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
 			app.setAtributo(nome_registro, $(this).val());
-			$("#" + grupo_proximo).show();
 		});
 		$('#' + nome_campo).keypress(function() {
-			app.setAtributo(nome_registro, $(this).val());
 			$("#" + grupo_proximo).show();
 		});
 	},
