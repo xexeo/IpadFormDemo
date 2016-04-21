@@ -210,6 +210,10 @@ nav.avancar>div.ui-block-b {
 	max-width: 90%;
 }
 
+.input_placa {
+	text-transform: uppercase;
+}
+
 ol.tipos_carrocerias {
 	display: inline-block;
 	list-style: none;
