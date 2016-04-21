@@ -141,8 +141,8 @@ var app = {
 
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
-            StatusBar.backgroundColorByName("darkGray");
-            
+			StatusBar.backgroundColorByName("darkGray");
+
 			// ajusta os caminhos para o Android
 			app.filePaths.externalFolder = cordova.file.externalDataDirectory;
 			app.filePaths.dbFolder = cordova.file.applicationStorageDirectory + "databases";
@@ -249,36 +249,37 @@ var app = {
 
 	trocaPagina : function(view, controller) {
 		if (controller != null) {
-            app.onChangeHandler.controller = controller.config;
-			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow", app.onChangeHandler.handler);
+			app.onChangeHandler.controller = controller.config;
+			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
+					app.onChangeHandler.handler);
 		}
 
 		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
 		app.logger.log(view);
 	},
-    
-    //para apendar coisas aos controllers
-    onChangeHandler : {
-        handler : function(){
-            try{
-                app.onChangeHandler.controller();
-                $("#btn_cancelar").click(app.cancelar); //não estava funcionando em todas as páginas
-                if (typeof device != 'undefined' && device.platform == "Android"){
-                    StatusBar.hide();
-                }
-            }catch(e){
-                app.logger.log(e);
-                alert(e.message);
-            }
-        },
-        
-        controller : null,
-    },
+
+	// para apendar coisas aos controllers
+	onChangeHandler : {
+		handler : function() {
+			try {
+				app.onChangeHandler.controller();
+				$("#btn_cancelar").click(app.cancelar); // não estava funcionando em todas as páginas
+				if (typeof device != 'undefined' && device.platform == "Android") {
+					StatusBar.hide();
+				}
+			} catch (e) {
+				app.logger.log(e);
+				alert(e.message);
+			}
+		},
+
+		controller : null,
+	},
 
 	getAtributo : function(nome) {
 		return registro[nome];
 	},
-	
+
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
 		app.logger.log(JSON.stringify(registro));
@@ -355,7 +356,7 @@ var app = {
 		myDb.insertRegistro(registro,
 		// erro
 		function(error) {
-			app.logger.log('Erro inserindo registro: ' + error.message);
+			app.logger.log('Erro ao inserir registro: ' + error.message);
 			// confirma se tenta outra vez
 			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?",
 			// button ok
@@ -364,6 +365,7 @@ var app = {
 			},
 			// button cancel
 			function() {
+				app.logger.log("Descartando registro: " + registro.id);
 				if (cb != null) {
 					cb();
 				}
@@ -418,6 +420,7 @@ var app = {
 			},
 			// button cancel
 			function() {
+				app.logger.log("Descartando registro: " + registro.id);
 				if (cb != null) {
 					cb();
 				}
@@ -569,11 +572,11 @@ var app = {
 	dbName : "dados.db",
 
 	senha_login : null,
-    
-    filePaths : {
-        externalFolder : null,
-        dbFolder : null,
-    },
+
+	filePaths : {
+		externalFolder : null,
+		dbFolder : null,
+	},
 
 }; // end of app
 
