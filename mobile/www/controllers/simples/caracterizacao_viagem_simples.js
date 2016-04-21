@@ -80,37 +80,55 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_simples", "grupo_motivo_viagem_simples");
 
 		// Motivo viagem
-		util.progressoSelect("idMotivoDaViagem", "motivo_viagem_simples", "grupo_pessoas_simples");
-		$('#motivo_viagem_simples').change(this.progressoInput_PessoasTrabalho);
+		$('#motivo_viagem_simples').change(function() {
+			app.logger.log("====change: MOTIVO A TRABALHO====");
+			if (Number($(this).val()) == -1) {
+				$("#grupo_pessoas_ambos").hide();
+				$("#grupo_pessoas_trabalho_simples").hide();
+				app.setAtributo("idMotivoDaViagem", null);
+				app.setAtributo("numeroDePessoasATrabalho", null);
+				$("#pessoas_trabalho_simples").val(null);
+			} else {
+				app.setAtributo("idMotivoDaViagem", $(this).val());
+				$("#grupo_pessoas_ambos").show();
+				if (Number($(this).val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
+					if (Number($("#pessoas_simples").val()) > 0) {
+						$("#grupo_pessoas_trabalho_simples").show();
+					}
+				} else {
+					$("#grupo_pessoas_trabalho_simples").hide();
+					app.setAtributo("numeroDePessoasATrabalho", null);
+					$("#pessoas_trabalho_simples").val(null);
+					if (Number($("#pessoas_simples").val()) > 0) {
+						$("#grupo_renda_simples").show();
+					}
+				}
+			}
+		});
 
-		// Pessoas
-		// util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_simples", "grupo_pessoas_trabalho_simples");
-		$('#pessoas_simples').change(this.progressoInput_PessoasTrabalho);
-		$('#pessoas_simples').keypress(this.progressoInput_PessoasTrabalho);
-		// TODO testar mais o show/hide do campo 'pessoas_trabalho_simples'
+		// Pessoas no veículo
+		$('#pessoas_simples').change(function() {
+			app.setAtributo("numeroDePessoasNoVeiculo", $(this).val());
+		});
+		$('#pessoas_simples').keyup(function() {
+			app.logger.log("====keyup: PESSOAS A TRABALHO====");
+			if (Number($("#pessoas_simples").val()) > 0) {
+				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+					$("#grupo_pessoas_trabalho_simples").show();
+				} else {
+					$("#grupo_renda_simples").show();
+				}
+			} else {
+				$("#grupo_pessoas_trabalho_simples").hide();
+				$("#grupo_renda_simples").hide();
+			}
+		});
 
 		// Pessoas a Trabalho
 		util.progressoInputText("numeroDePessoasATrabalho", "pessoas_trabalho_simples", "grupo_renda_simples");
 
 		// Renda
 		util.progressoSelect("idRendaMedia", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
-	},
-
-	progressoInput_PessoasTrabalho : function() {
-		app.logger.log("===PessoasTrabalho===");
-		var valor = $('#pessoas_simples').val();
-		if (!util.isEmpty(valor)) {
-			app.setAtributo("numeroDePessoasNoVeiculo", valor);
-		}
-		var pessoasTrabalho = $('#grupo_pessoas_trabalho_simples');
-		if ((Number($("#motivo_viagem_simples").val()) == 5) && (Number($("#pessoas_simples").val()) > 0)) {
-			pessoasTrabalho.show();
-		} else {
-			pessoasTrabalho.hide();
-			if (!util.isEmpty(pessoasTrabalho.val())) {
-				pessoasTrabalho.val("");
-			}
-		}
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
@@ -123,7 +141,6 @@ controllers.caracterizacao_viagem_simples = {
 				&& util.validaSelect("motivo_rota_simples", "Motivo da escolha da rota")
 				&& util.validaSelect("motivo_viagem_simples", "Motivo da viagem")
 				&& util.validaInputText("pessoas_simples", "Pessoas no veículo")
-				&& util.validaInputText("pessoas_trabalho_simples", "Pessoas a trabalho")
 				&& util.validaSelect("renda_simples", "Renda do condutor")) {
 
 			var ok_origem_bra = true;
@@ -138,21 +155,15 @@ controllers.caracterizacao_viagem_simples = {
 						"destino_municipio_simples", "Destino da viagem - município"));
 			}
 
-			var qtd_pessoas = true;
-			if ((Number($("#pessoas_trabalho_simples").val())) > (Number($("#pessoas_simples").val()))) {
-				alert("O número de pessoas a trabalho não deve exceder o número de pessoas no veículo");
-				qtd_pessoas = false;
-			}
-
 			var qtd_pessoas_trabalho = true;
-			if ((Number($("#motivo_viagem_simples").val())) == 5) { // Trabalho
+			if ((Number($("#motivo_viagem_simples").val())) == 5) { // TODO Trabalho. Ajustar se id mudar.
 				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
 						"#pessoas_simples").val()));
 			} else {
 				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0);
 			}
 
-			return (ok_origem_bra && ok_destino_bra && qtd_pessoas && qtd_pessoas_trabalho);
+			return (ok_origem_bra && ok_destino_bra && qtd_pessoas_trabalho);
 		}
 		return false;
 	}

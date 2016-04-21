@@ -52,6 +52,8 @@ public class Janela extends javax.swing.JFrame {
         jRadioButton6 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TabelaVolSimples = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -135,13 +137,43 @@ public class Janela extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        TabelaVolSimples.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "15", "30", "45", "60", "15", "30", "45", "60"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TabelaVolSimples);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jRadioButton1)
                         .addGap(32, 32, 32)
@@ -211,7 +243,9 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(jRadioButton6)
                     .addComponent(jLabel11)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(475, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Formulário de pesquisa volumétrica", jPanel2);
@@ -300,6 +334,7 @@ public class Janela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaVolSimples;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -325,6 +360,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
