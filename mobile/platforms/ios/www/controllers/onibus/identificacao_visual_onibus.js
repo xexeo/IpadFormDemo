@@ -37,11 +37,7 @@ controllers.identificacao_visual_onibus = {
 			$('#grupo_pais_onibus').hide()
 			app.setAtributo('idPaisPlacaEstrangeira', null);
 			app.setAtributo('placaEstrangeira', false);
-
-			$("#pais_onibus option:contains('Selecione')").prop({
-				selected : true
-			});
-			$("select#pais_onibus").selectmenu("refresh", true);
+			util.progressoRestartSelect("pais_onibus", "Selecione");
 
 			$("#grupo_placa_onibus").show();
 		});

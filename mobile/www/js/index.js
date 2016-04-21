@@ -112,6 +112,7 @@ var app = {
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
 		if (device.platform == 'iOS' || device.platform == 'Android') {
+			app.filePaths = {}; //inicia a variável
 
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -136,16 +137,16 @@ var app = {
 			// black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
 
 			// ajusta os caminhos para o iOS
-			app.filePaths.externalFolder = cordova.file.documentsDirectory;
-			app.filePaths.dbFolder = 'cdvfile://localhost/library/LocalDatabase';
+			app.filePaths['externalFolder'] = cordova.file.documentsDirectory;
+			app.filePaths['dbFolder'] = 'cdvfile://localhost/library/LocalDatabase';
 
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
             StatusBar.backgroundColorByName("darkGray");
             
 			// ajusta os caminhos para o Android
-			app.filePaths.externalFolder = cordova.file.externalDataDirectory;
-			app.filePaths.dbFolder = cordova.file.applicationStorageDirectory + "databases";
+			app.filePaths['externalFolder'] = cordova.file.externalDataDirectory;
+			app.filePaths['dbFolder'] = cordova.file.applicationStorageDirectory + "databases";
 		}
 
 		// alert sem a página como título
@@ -570,10 +571,10 @@ var app = {
 
 	senha_login : null,
     
-    filePaths : {
+    filePaths : null /*{
         externalFolder : null,
         dbFolder : null,
-    },
+    }*/,
 
 }; // end of app
 

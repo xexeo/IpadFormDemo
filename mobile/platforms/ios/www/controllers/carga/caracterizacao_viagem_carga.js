@@ -27,16 +27,13 @@ controllers.caracterizacao_viagem_carga = {
 		util.inicializaSelectCustom("destino_pais_carga", paises.listados(), "País");
 		util.inicializaSelectCustomValueAsIndex("destino_uf_carga", lista_estados, "UF");
 		// FIM PAÍSES
-
+		
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
 		util.inicializaSelect("frequencia_sel_carga", lista_frequencias);
 
-		// TODO Acertar lista motivos
-		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido',
-				'Proximidade hotéis/postos', 'Segurança', 'Turismo/Paisagem', 'Ausência de pedágio',
-				'Ponto obrigatório de passagem', 'Outros' ];
+		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
+		                           'Ausência de pedágio', 'Próximo a hotéis e postos', 'Segurança', 'Outros' ];
 		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
-
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -70,14 +67,33 @@ controllers.caracterizacao_viagem_carga = {
 		});
 		util.progressoSelect("frequencia_sel", "frequencia_sel_carga", "grupo_motivo_rota_carga");
 
-		// TODO Motivo rota
+		// Motivo rota
+		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_carga", "grupo_caracterizacao_viagem_carga_avancar");
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
+		if (util.validaSelect("origem_pais_carga", "Origem da viagem")
+				&& util.validaSelect("destino_pais_carga", "Destino da viagem")
+				&& util.validaInputText("frequencia_num_carga", "Frequência da viagem")
+				&& util.validaSelect("frequencia_sel_carga", "Frequência da viagem")
+				&& util.validaSelect("motivo_rota_carga", "Motivo da escolha da rota")) {
 
-		// TODO
-		return true;
+			var ok_origem_bra = true;
+			if ((Number($("#origem_pais_carga").val())) == 1) { // Brasil
+				ok_origem_bra = (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaSelect(
+						"origem_municipio_carga", "Origem da viagem - município"));
+			}
+
+			var ok_destino_bra = true;
+			if ((Number($("#destino_pais_carga").val())) == 1) { // Brasil
+				ok_destino_bra = (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaSelect(
+						"destino_municipio_carga", "Destino da viagem - município"));
+			}
+			
+			return (ok_origem_bra && ok_destino_bra);
+		}
+		return false;
 	}
 
 };

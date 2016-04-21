@@ -11,8 +11,9 @@
 
 		<fieldset class="ui-grid-a" id="grupo_tipo_carroceria_carga">
 			<legend class="ui-block-a">Tipo de carroceria:</legend>
-			<div class="ui-block-b">
-				<input id="tipo_carroceria_carga" type ="text" disabled="disabled" name="tipo_carroceria_carga" value="" data-theme="a" />
+			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
+				<input type ="radio" id="tipo_carroceria_carga" name="tipo_carroceria_carga" value=""/>
+				<label for="tipo_carroceria_carga">Selecione</label>
 			</div>
 		</fieldset>
 
@@ -80,13 +81,13 @@
 
 		<fieldset class="ui-grid-a escondido" id="grupo_placa_vermelha_carga">
 			<legend class="ui-block-a">Placa vermelha:</legend>
-			<div class="ui-block-b ui-grid-b" id="grupo_placa_vermelha_dados_carga">
+			<fieldset class="ui-block-b ui-grid-b" id="grupo_placa_vermelha_dados_carga">
 				<div data-role="controlgroup" data-theme="a" class="ui-block-a" data-type="horizontal">
 					<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_sim" value="sim"> <label
 						for="placa_vermelha_carga_sim">Sim</label> <input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_nao"
 						value="nao"> <label for="placa_vermelha_carga_nao">Não</label>
 				</div>
-				<div class="ui-block-b ui-grid-a escondido" id="grupo_placa_vermelha_rntrc_carga">
+				<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_placa_vermelha_rntrc_carga">
 					<div class="ui-block-a" id="grupo_placa_vermelha_rntrc_sel_carga">
 						<select name="placa_vermelha_rntrc_sel_carga" id="placa_vermelha_rntrc_sel_carga" data-theme="a">
 						</select>
@@ -94,8 +95,8 @@
 					<div class="ui-block-b escondido" id="grupo_placa_vermelha_rntrc_num_carga">
 						<input id="placa_vermelha_rntrc_num_carga" type="text" name="placa_vermelha_rntrc_num_carga" value="" data-theme="a" />
 					</div>
-				</div>
-			</div>
+				</fieldset>
+			</fieldset>
 		</fieldset>
 
 

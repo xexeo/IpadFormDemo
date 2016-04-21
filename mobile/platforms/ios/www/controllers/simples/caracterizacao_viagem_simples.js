@@ -77,17 +77,40 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("frequencia_sel", "frequencia_sel_simples", "grupo_motivo_rota_simples");
 
 		// Motivo rota
-		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_simples", "grupo_pessoas_simples");
-
-		// Pessoas
-		util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_simples", "grupo_pessoas_trabalho_simples");
-		util.progressoInputText("numeroDePessoasATrabalho", "pessoas_trabalho_simples", "grupo_motivo_viagem_simples");
+		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_simples", "grupo_motivo_viagem_simples");
 
 		// Motivo viagem
-		util.progressoSelect("idMotivoDaViagem", "motivo_viagem_simples", "grupo_renda_simples");
+		util.progressoSelect("idMotivoDaViagem", "motivo_viagem_simples", "grupo_pessoas_simples");
+		$('#motivo_viagem_simples').change(this.progressoInput_PessoasTrabalho);
+
+		// Pessoas
+		// util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_simples", "grupo_pessoas_trabalho_simples");
+		$('#pessoas_simples').change(this.progressoInput_PessoasTrabalho);
+		$('#pessoas_simples').keypress(this.progressoInput_PessoasTrabalho);
+		// TODO testar mais o show/hide do campo 'pessoas_trabalho_simples'
+
+		// Pessoas a Trabalho
+		util.progressoInputText("numeroDePessoasATrabalho", "pessoas_trabalho_simples", "grupo_renda_simples");
 
 		// Renda
 		util.progressoSelect("idRendaMedia", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
+	},
+
+	progressoInput_PessoasTrabalho : function() {
+		app.logger.log("===PessoasTrabalho===");
+		var valor = $('#pessoas_simples').val();
+		if (!util.isEmpty(valor)) {
+			app.setAtributo("numeroDePessoasNoVeiculo", valor);
+		}
+		var pessoasTrabalho = $('#grupo_pessoas_trabalho_simples');
+		if ((Number($("#motivo_viagem_simples").val()) == 5) && (Number($("#pessoas_simples").val()) > 0)) {
+			pessoasTrabalho.show();
+		} else {
+			pessoasTrabalho.hide();
+			if (!util.isEmpty(pessoasTrabalho.val())) {
+				pessoasTrabalho.val("");
+			}
+		}
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
@@ -98,9 +121,9 @@ controllers.caracterizacao_viagem_simples = {
 				&& util.validaInputText("frequencia_num_simples", "Frequência da viagem")
 				&& util.validaSelect("frequencia_sel_simples", "Frequência da viagem")
 				&& util.validaSelect("motivo_rota_simples", "Motivo da escolha da rota")
+				&& util.validaSelect("motivo_viagem_simples", "Motivo da viagem")
 				&& util.validaInputText("pessoas_simples", "Pessoas no veículo")
 				&& util.validaInputText("pessoas_trabalho_simples", "Pessoas a trabalho")
-				&& util.validaSelect("motivo_viagem_simples", "Motivo da viagem")
 				&& util.validaSelect("renda_simples", "Renda do condutor")) {
 
 			var ok_origem_bra = true;
@@ -121,7 +144,15 @@ controllers.caracterizacao_viagem_simples = {
 				qtd_pessoas = false;
 			}
 
-			return (ok_origem_bra && ok_destino_bra && qtd_pessoas);
+			var qtd_pessoas_trabalho = true;
+			if ((Number($("#motivo_viagem_simples").val())) == 5) { // Trabalho
+				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
+						"#pessoas_simples").val()));
+			} else {
+				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0);
+			}
+
+			return (ok_origem_bra && ok_destino_bra && qtd_pessoas && qtd_pessoas_trabalho);
 		}
 		return false;
 	}

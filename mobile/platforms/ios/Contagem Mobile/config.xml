@@ -67,7 +67,7 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="landscape" />
     <preference name="FadeSplashScreen" value="false" />
-    <preference name="Fullscreen" value="true" />
+    <preference name="FullScreen" value="false" />
     <preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" />
     <preference name="AppendUserAgent" value="My Browser" />
     <preference name="target-device" value="universal" />
