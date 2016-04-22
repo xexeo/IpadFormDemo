@@ -24,7 +24,7 @@ controllers.identificacao_visual_carga = {
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
 		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_carga", false);
-		util.inicializaPlacaLetras("carga");
+		util.inicializaPlacas("carga");
 
 		var lista_tipo_conteiner = [ '1 Conteiner de 20 pés', '1 Conteiner de 20 pés e 1 Conteiner de 40 pés',
 				'1 Conteiner de 40 pés', '2 Conteineres de 20 pés' ];

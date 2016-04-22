@@ -18,7 +18,7 @@ controllers.identificacao_visual_onibus = {
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
 		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_onibus", false);
-		util.inicializaPlacaLetras("onibus");
+		util.inicializaPlacas("onibus");
 	},
 
 	// Controla o show e hide dos elementos da tela

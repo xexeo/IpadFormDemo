@@ -18,7 +18,7 @@ controllers.identificacao_visual_simples = {
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
 		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_simples", false);
-		util.inicializaPlacaLetras("simples");
+		util.inicializaPlacas("simples");
 	},
 
 	// Controla o show e hide dos elementos da tela

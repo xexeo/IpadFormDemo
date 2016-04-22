@@ -66,13 +66,23 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaPlacaLetras : function(tipo_fluxo) {
+	inicializaPlacas : function(tipo_fluxo) {
 		$('.input_placa').keyup(function() {
 			var input_placa = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
-			input_placa.val(input_placa.val().replace(regex, '').toUpperCase());
-			if (input_placa.val().length >= 3) {
+			input_placa.val(input_placa.val().replace(regex, ''));
+			if (input_placa.val().length >= Number(input_placa.attr("maxlength"))) {
+				input_placa.val(input_placa.val().toUpperCase());
 				$('#placa_numeros_' + tipo_fluxo).focus();
+			}
+		});
+		$('#placa_numeros_' + tipo_fluxo).keyup(function() {
+			var input_placa_numeros = $(this);
+			var regex = new RegExp("[^0-9]+");
+			input_placa_numeros.val(input_placa_numeros.val().replace(regex, ''));
+			var max_len = Number(input_placa_numeros.attr("maxlength"));
+			if (input_placa_numeros.val().length >= max_len) {
+				input_placa_numeros.val(input_placa_numeros.val().substring(0, max_len));
 			}
 		});
 	},
