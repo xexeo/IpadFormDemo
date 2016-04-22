@@ -79,9 +79,13 @@ controllers.identificacao_visual_carga = {
 		// Placa única
 		util.progressoInputText("placa_unica", "placa_unica_carga", "grupo_placa_vermelha_carga");
 
+		// Placa Vermelha
 		$('#placa_vermelha_carga_sim').click(function() {
 			$('#grupo_placa_vermelha_rntrc_carga').show();
-			$('#grupo_carga_perigosa_carga').hide();
+			if ((registro.placa_vermelha == undefined) || (!registro.placa_vermelha)) {
+				$('#grupo_carga_perigosa_carga').hide();
+				$('#grupo_placa_vermelha_rntrc_num_carga').hide();
+			}
 			app.setAtributo('placa_vermelha', true);
 		});
 		$('#placa_vermelha_carga_nao').click(function() {
@@ -90,8 +94,6 @@ controllers.identificacao_visual_carga = {
 			app.setAtributo('placa_vermelha', false);
 			app.setAtributo('placa_vermelha_rntrc_sel', null);
 			app.setAtributo('placa_vermelha_rntrc_num', null);
-
-			$("#placa_vermelha_rntrc_sel_carga").val(-1);
 			$("#placa_vermelha_rntrc_num_carga").val(null);
 			util.progressoRestartSelect("placa_vermelha_rntrc_sel_carga", "Selecione");
 		});
@@ -111,17 +113,13 @@ controllers.identificacao_visual_carga = {
 			}
 		});
 		util.progressoInputText("placa_vermelha_rntrc_num", "placa_vermelha_rntrc_num_carga", "grupo_carga_perigosa_carga");
-		$('#placa_vermelha_rntrc_sel_carga').change(function() {
-			if ($('#placa_vermelha_rntrc_sel_carga').val() == -1) {
-				app.setAtributo('placa_vermelha_rntrc_num', null);
-				$("#placa_vermelha_rntrc_num_carga").val(null);
-				$('#grupo_carga_perigosa_carga').hide();
-			}
-		});
 
+		// Carga Perigosa
 		$('#carga_perigosa_carga_sim').click(function() {
 			$('#grupo_carga_perigosa_numeros_carga').show();
-			$('#grupo_identificacao_visual_carga_avancar').hide();
+			if ((registro.carga_perigosa == undefined) || (!registro.carga_perigosa)) {
+				$('#grupo_identificacao_visual_carga_avancar').hide();
+			}
 			app.setAtributo('carga_perigosa', true);
 		});
 		$('#carga_perigosa_carga_nao').click(function() {
@@ -130,12 +128,23 @@ controllers.identificacao_visual_carga = {
 			app.setAtributo('carga_perigosa', false);
 			app.setAtributo('carga_perigosa_risco', null);
 			app.setAtributo('carga_perigosa_onu', null);
-
 			util.progressoRestartSelect("carga_perigosa_risco_carga", "Número de Risco");
 			util.progressoRestartSelect("carga_perigosa_onu_carga", "Número da ONU");
 		});
-
-		util.progressoSelect("carga_perigosa_risco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
+		// util.progressoSelect("carga_perigosa_risco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
+		$("#carga_perigosa_risco_carga").change(function() {
+			var nome_registro = "carga_perigosa_risco";
+			if (Number($(this).val()) != -1) {
+				app.setAtributo(nome_registro, $(this).val());
+				$("#grupo_carga_perigosa_onu_carga").show();
+			} else {
+				app.setAtributo(nome_registro, null);
+				app.setAtributo("carga_perigosa_onu", null);
+				$("#grupo_carga_perigosa_onu_carga").hide();
+				$("#grupo_identificacao_visual_carga_avancar").hide();
+				util.progressoRestartSelect("carga_perigosa_onu_carga", "Número da ONU");
+			}
+		});
 		util.progressoSelect("carga_perigosa_onu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 

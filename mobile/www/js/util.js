@@ -63,7 +63,7 @@ var util = {
 			app.setAtributo(nome_registro, false);
 		});
 	},
-	
+
 	progressoRadioPlacaEstrangeira : function(tipo_fluxo) {
 		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).show();
@@ -79,18 +79,20 @@ var util = {
 			}
 		});
 		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
-			$('#grupo_pais_' + tipo_fluxo).hide()
-			$('#grupo_placa_unica_' + tipo_fluxo).hide()
+			$('#grupo_pais_' + tipo_fluxo).hide();
+			$('#grupo_placa_unica_' + tipo_fluxo).hide();
+			if ((registro.placaEstrangeira == undefined) || (registro.placaEstrangeira)) {
+				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
+			}
 			app.setAtributo('idPaisPlacaEstrangeira', null);
 			app.setAtributo('placaEstrangeira', false);
 			app.setAtributo('placa_unica', null);
 			$('#placa_unica_' + tipo_fluxo).val(null);
 			util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");
-
 			$("#grupo_placa_" + tipo_fluxo).show();
 		});
 	},
-	
+
 	/**
 	 * 
 	 * @param nome_registro
@@ -238,7 +240,8 @@ var util = {
 		if (util.isEmpty(msgComplemento)) {
 			alert("O campo " + campo_aviso + " não foi preenchido.", "Erro no preenchimento!", null, 'error');
 		} else {
-			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento, 'Erro no preenchimento!',null, 'error');
+			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento,
+					'Erro no preenchimento!', null, 'error');
 		}
 	},
 
