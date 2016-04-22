@@ -114,7 +114,7 @@ controllers.identificacao_visual_carga = {
 		});
 
 		util.progressoSelect("carga_perigosa_risco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
-		util.progressoInputText("carga_perigosa_onu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
+		util.progressoSelect("carga_perigosa_onu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
