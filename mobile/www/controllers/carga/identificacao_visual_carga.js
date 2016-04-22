@@ -23,12 +23,12 @@ controllers.identificacao_visual_carga = {
 
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
+		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_carga", false);
+		util.inicializaPlacaLetras("carga");
 
 		var lista_tipo_conteiner = [ '1 Conteiner de 20 pés', '1 Conteiner de 20 pés e 1 Conteiner de 40 pés',
 				'1 Conteiner de 40 pés', '2 Conteineres de 20 pés' ];
 		util.inicializaSelect("tipo_conteiner_carga", lista_tipo_conteiner)
-
-		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_carga", false);
 
 		var lista_rntrc = [ 'TAC', 'ETC', 'CTC' ];
 		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");

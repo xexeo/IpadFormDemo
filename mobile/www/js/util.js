@@ -66,6 +66,17 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	inicializaPlacaLetras : function(tipo_fluxo) {
+		$('.input_placa').keyup(function() {
+			var input_placa = $(this);
+			var regex = new RegExp("[^a-zA-Z]+");
+			input_placa.val(input_placa.val().replace(regex, '').toUpperCase());
+			if (input_placa.val().length >= 3) {
+				$('#placa_numeros_' + tipo_fluxo).focus();
+			}
+		});
+	},
+
 	// Funções para o progresso
 	/**
 	 * 
