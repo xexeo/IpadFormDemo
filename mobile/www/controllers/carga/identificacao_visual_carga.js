@@ -67,26 +67,17 @@ controllers.identificacao_visual_carga = {
 
 		util.progressoSelect("tipo_conteiner", "tipo_conteiner_carga", "grupo_placa_estrangeira_carga");
 
-		$('#placa_estrangeira_carga_sim').click(function() {
-			$('#grupo_pais_carga').show();
-			app.setAtributo('placa_estrangeira', true);
-
-			if (Number($('#pais_carga').val()) == -1) {
-				$("#grupo_placa_carga").hide();
-			}
-		});
-		$('#placa_estrangeira_carga_nao').click(function() {
-			$('#grupo_pais_carga').hide()
-			app.setAtributo('placa_estrangeira', false);
-			app.setAtributo('idPaisPlacaEstrangeira', null);
-			util.progressoRestartSelect("pais_carga", "Selecione");
-
-			$("#grupo_placa_carga").show();
-		});
-		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_carga");
-
+		util.progressoRadioPlacaEstrangeira("carga");
+		
+		// País (somente placa estrangeira)
+		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_unica_carga");
+		
+		// Placa Brasil
 		util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
 		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
+		
+		// Placa única
+		util.progressoInputText("placa_unica", "placa_unica_carga", "grupo_placa_vermelha_carga");
 
 		$('#placa_vermelha_carga_sim').click(function() {
 			$('#grupo_placa_vermelha_rntrc_carga').show();
@@ -131,8 +122,6 @@ controllers.identificacao_visual_carga = {
 		
 		if (util.validaRadioChecked("tipo_carroceria_carga", "Tipo de carroceria")
 				&& util.validaRadioSimNao("placa_estrangeira_carga", "Placa estrangeira")
-				&& util.validaInputText("placa_letras_carga", "Placa do veículo")
-				&& util.validaInputText("placa_numeros_carga", "Placa do veículo")
 				&& util.validaRadioSimNao("placa_vermelha_carga", "Placa vermelha")
 				&& util.validaRadioSimNao("carga_perigosa_carga", "Carga perigosa")) {
 
@@ -152,7 +141,28 @@ controllers.identificacao_visual_carga = {
 					ok_placa_estrangeira = false;
 				}
 			}
-			
+
+			var ok_placa_estrangeira = true;
+			var ok_placa_veiculo = true;
+			var option = $('input[name=placa_estrangeira_carga]:checked').val();
+			if(option == 'sim') {
+				if((Number($("#pais_carga").val())) == 1) { // Brasil
+					alert("O país do veículo de placa estrangeira não pode ser Brasil");
+					ok_placa_estrangeira = false;
+				}
+				
+				if (!util.validaSelect("pais_carga", "País") || 
+						!util.validaInputText("placa_unica_carga", "Placa do veículo")) {
+					ok_placa_veiculo = false;
+				}
+			}
+			else if(option == 'nao') {
+				if (!util.validaInputText("placa_letras_carga", "Placa do veículo") ||
+						!util.validaInputText("placa_numeros_carga", "Placa do veículo")) {
+					ok_placa_veiculo = false;
+				}
+			}
+
 			var ok_placa_vermelha = true;
 			var opt_vermelha = $('input[name=placa_vermelha_carga]:checked').val();
 			if ( opt_vermelha == 'sim') {
@@ -175,7 +185,7 @@ controllers.identificacao_visual_carga = {
 				}
 			}
 			
-			return ok_tipo_conteiner && ok_placa_estrangeira && ok_placa_vermelha && ok_carga_perigosa;
+			return ok_tipo_conteiner && ok_placa_estrangeira && ok_placa_veiculo && ok_placa_vermelha && ok_carga_perigosa;
 		}
 		
 		return false;

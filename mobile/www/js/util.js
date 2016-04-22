@@ -63,7 +63,34 @@ var util = {
 			app.setAtributo(nome_registro, false);
 		});
 	},
+	
+	progressoRadioPlacaEstrangeira : function(tipo_fluxo) {
+		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
+			$('#grupo_pais_' + tipo_fluxo).show();
+			$('#grupo_placa_' + tipo_fluxo).hide();
+			app.setAtributo('placaEstrangeira', true);
+			app.setAtributo("placa_letras", null);
+			app.setAtributo("placa_numeros", null);
+			$('#placa_letras_' + tipo_fluxo).val(null);
+			$('#placa_numeros_' + tipo_fluxo).val(null);
 
+			if (Number($('#pais_' + tipo_fluxo).val()) == -1) {
+				$("#grupo_placa_unica_" + tipo_fluxo).hide();
+			}
+		});
+		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
+			$('#grupo_pais_' + tipo_fluxo).hide()
+			$('#grupo_placa_unica_' + tipo_fluxo).hide()
+			app.setAtributo('idPaisPlacaEstrangeira', null);
+			app.setAtributo('placaEstrangeira', false);
+			app.setAtributo('placa_unica', null);
+			$('#placa_unica_' + tipo_fluxo).val(null);
+			util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");
+
+			$("#grupo_placa_" + tipo_fluxo).show();
+		});
+	},
+	
 	/**
 	 * 
 	 * @param nome_registro
