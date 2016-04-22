@@ -24,48 +24,39 @@ controllers.identificacao_visual_onibus = {
 	// Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 
-		$('#placa_estrangeira_onibus_sim').click(function() {
-			$('#grupo_pais_onibus').show();
-			app.setAtributo('placaEstrangeira', true);
+		util.progressoRadioPlacaEstrangeira("onibus");
 
-			if (Number($('#pais_onibus').val()) == -1) {
-				$("#grupo_placa_onibus").hide();
-			}
-
-		});
-		$('#placa_estrangeira_onibus_nao').click(function() {
-			$('#grupo_pais_onibus').hide()
-			app.setAtributo('idPaisPlacaEstrangeira', null);
-			app.setAtributo('placaEstrangeira', false);
-			util.progressoRestartSelect("pais_onibus", "Selecione");
-
-			$("#grupo_placa_onibus").show();
-		});
-
-		util.progressoSelect("idPaisPlacaEstrangeira", "pais_onibus", "grupo_placa_onibus");
-
+		// País (somente placa estrangeira)
+		util.progressoSelect("idPaisPlacaEstrangeira", "pais_onibus", "grupo_placa_unica_onibus");
+		
+		// Placa Brasil
 		util.progressoInputText("placa_letras", "placa_letras_onibus", "grupo_placa_numeros_onibus");
 		util.progressoInputText("placa_numeros", "placa_numeros_onibus", "grupo_identificacao_visual_onibus_avancar");
+		
+		// Placa única
+		util.progressoInputText("placa_unica", "placa_unica_onibus", "grupo_identificacao_visual_onibus_avancar");
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 
-		if (util.validaRadioSimNao("placa_estrangeira_onibus", "Placa estrangeira")
-				&& util.validaInputText("placa_letras_onibus", "Placa do veículo")
-				&& util.validaInputText("placa_numeros_onibus", "Placa do veículo")) {
-
+		if(util.validaRadioSimNao("placa_estrangeira_onibus", "Placa estrangeira")) {
 			var option = $('input[name=placa_estrangeira_onibus]:checked').val();
-			if (option == 'sim') {
-
+			if(option == 'sim') {
 				var ok_placa_estrangeira = true;
-				if ((Number($("#pais_onibus").val())) == 1) { // Brasil
+				if((Number($("#pais_onibus").val())) == 1) { // Brasil
 					alert("O país do veículo de placa estrangeira não pode ser Brasil");
 					ok_placa_estrangeira = false;
 				}
-
-				return ok_placa_estrangeira && util.validaSelect("pais_onibus", "País");
+				
+				return ok_placa_estrangeira && util.validaSelect("pais_onibus", "País") && 
+					util.validaInputText("placa_unica_onibus", "Placa do veículo");
 			}
+			else if(option == 'nao') {
+				return util.validaInputText("placa_letras_onibus", "Placa do veículo") && 
+					util.validaInputText("placa_numeros_onibus", "Placa do veículo")
+			}
+			
 			return true;
 		}
 		return false;
