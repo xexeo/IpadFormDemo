@@ -323,12 +323,15 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
-		if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
-		} else if (!util.isEmpty(registro.placa_letras)) {
-			app.setAtributo('placa', registro.placa_letras);
-		} else if (!util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_numeros);
+		if(!util.isEmpty(registro.placaEstrangeira) && !registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
+				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
+			}	
+		}
+		else if(!util.isEmpty(registro.placaEstrangeira) && registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_unica)) {
+				app.setAtributo('placa', registro.placa_unica.toUpperCase());
+			}	
 		}
 
 		if (!util.isEmpty(registro.frequencia_num) || !util.isEmpty(registro.frequencia_sel)) {
