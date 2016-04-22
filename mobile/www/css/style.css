@@ -336,6 +336,16 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 	width: 27%;
 }
 
+#grupo_placa_vermelha_carga fieldset.ui-block-a,
+	#grupo_carga_perigosa_carga fieldset.ui-block-a {
+	width: 25%;
+}
+
+#grupo_placa_vermelha_carga fieldset.ui-block-b,
+	#grupo_carga_perigosa_carga fieldset.ui-block-b {
+	width: 75%;
+}
+
 .escondido {
 	display: none;
 }

@@ -31,7 +31,7 @@ controllers.identificacao_visual_carga = {
 		util.inicializaSelect("pais_carga", paises.listados());
 
 		var lista_rntrc = [ 'TAC', 'ETC', 'CTC' ];
-		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "RNTRC");
+		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");
 
 		util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
 		util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
@@ -68,14 +68,14 @@ controllers.identificacao_visual_carga = {
 		util.progressoSelect("tipo_conteiner", "tipo_conteiner_carga", "grupo_placa_estrangeira_carga");
 
 		util.progressoRadioPlacaEstrangeira("carga");
-		
+
 		// País (somente placa estrangeira)
 		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_unica_carga");
-		
+
 		// Placa Brasil
 		util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
 		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
-		
+
 		// Placa única
 		util.progressoInputText("placa_unica", "placa_unica_carga", "grupo_placa_vermelha_carga");
 
@@ -91,11 +91,33 @@ controllers.identificacao_visual_carga = {
 			app.setAtributo('placa_vermelha_rntrc_sel', null);
 			app.setAtributo('placa_vermelha_rntrc_num', null);
 
-			util.progressoRestartSelect("placa_vermelha_rntrc_sel_carga", "Selecione");
+			$("#placa_vermelha_rntrc_sel_carga").val(-1);
 			$("#placa_vermelha_rntrc_num_carga").val(null);
+			util.progressoRestartSelect("placa_vermelha_rntrc_sel_carga", "Selecione");
 		});
-		util.progressoSelect("placa_vermelha_rntrc_sel", "placa_vermelha_rntrc_sel_carga","grupo_placa_vermelha_rntrc_num_carga");
+		// util.progressoSelect("placa_vermelha_rntrc_sel", "placa_vermelha_rntrc_sel_carga",
+		// "grupo_placa_vermelha_rntrc_num_carga");
+		$("#placa_vermelha_rntrc_sel_carga").change(function() {
+			var nome_registro = "placa_vermelha_rntrc_sel";
+			if (Number($(this).val()) != -1) {
+				app.setAtributo(nome_registro, $(this).val());
+				$("#grupo_placa_vermelha_rntrc_num_carga").show();
+			} else {
+				app.setAtributo(nome_registro, null);
+				app.setAtributo('placa_vermelha_rntrc_num', null);
+				$("#placa_vermelha_rntrc_num_carga").val(null);
+				$("#grupo_placa_vermelha_rntrc_num_carga").hide();
+				$("#grupo_carga_perigosa_carga").hide();
+			}
+		});
 		util.progressoInputText("placa_vermelha_rntrc_num", "placa_vermelha_rntrc_num_carga", "grupo_carga_perigosa_carga");
+		$('#placa_vermelha_rntrc_sel_carga').change(function() {
+			if ($('#placa_vermelha_rntrc_sel_carga').val() == -1) {
+				app.setAtributo('placa_vermelha_rntrc_num', null);
+				$("#placa_vermelha_rntrc_num_carga").val(null);
+				$('#grupo_carga_perigosa_carga').hide();
+			}
+		});
 
 		$('#carga_perigosa_carga_sim').click(function() {
 			$('#grupo_carga_perigosa_numeros_carga').show();
@@ -119,7 +141,7 @@ controllers.identificacao_visual_carga = {
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
-		
+
 		if (util.validaRadioChecked("tipo_carroceria_carga", "Tipo de carroceria")
 				&& util.validaRadioSimNao("placa_estrangeira_carga", "Placa estrangeira")
 				&& util.validaRadioSimNao("placa_vermelha_carga", "Placa vermelha")
@@ -132,7 +154,7 @@ controllers.identificacao_visual_carga = {
 					ok_tipo_conteiner = false;
 				}
 			}
-			
+
 			var ok_placa_estrangeira = true;
 			var opt_estrangeira = $('input[name=placa_estrangeira_carga]:checked').val();
 			if (opt_estrangeira == 'sim' && util.validaSelect("pais_carga", "País")) {
@@ -145,27 +167,25 @@ controllers.identificacao_visual_carga = {
 			var ok_placa_estrangeira = true;
 			var ok_placa_veiculo = true;
 			var option = $('input[name=placa_estrangeira_carga]:checked').val();
-			if(option == 'sim') {
-				if((Number($("#pais_carga").val())) == 1) { // Brasil
+			if (option == 'sim') {
+				if ((Number($("#pais_carga").val())) == 1) { // Brasil
 					alert("O país do veículo de placa estrangeira não pode ser Brasil");
 					ok_placa_estrangeira = false;
 				}
-				
-				if (!util.validaSelect("pais_carga", "País") || 
-						!util.validaInputText("placa_unica_carga", "Placa do veículo")) {
+
+				if (!util.validaSelect("pais_carga", "País") || !util.validaInputText("placa_unica_carga", "Placa do veículo")) {
 					ok_placa_veiculo = false;
 				}
-			}
-			else if(option == 'nao') {
-				if (!util.validaInputText("placa_letras_carga", "Placa do veículo") ||
-						!util.validaInputText("placa_numeros_carga", "Placa do veículo")) {
+			} else if (option == 'nao') {
+				if (!util.validaInputText("placa_letras_carga", "Placa do veículo")
+						|| !util.validaInputText("placa_numeros_carga", "Placa do veículo")) {
 					ok_placa_veiculo = false;
 				}
 			}
 
 			var ok_placa_vermelha = true;
 			var opt_vermelha = $('input[name=placa_vermelha_carga]:checked').val();
-			if ( opt_vermelha == 'sim') {
+			if (opt_vermelha == 'sim') {
 				if (!util.validaSelect("placa_vermelha_rntrc_sel_carga", "RNTRC")) {
 					ok_placa_vermelha = false;
 				}
@@ -173,10 +193,10 @@ controllers.identificacao_visual_carga = {
 					ok_placa_vermelha = false;
 				}
 			}
-			
+
 			var ok_carga_perigosa = true;
 			var opt_perigosa = $('input[name=carga_perigosa_carga]:checked').val();
-			if ( opt_perigosa == 'sim') {
+			if (opt_perigosa == 'sim') {
 				if (!util.validaSelect("carga_perigosa_risco_carga", "Número de risco")) {
 					ok_carga_perigosa = false;
 				}
@@ -184,10 +204,10 @@ controllers.identificacao_visual_carga = {
 					ok_carga_perigosa = false;
 				}
 			}
-			
+
 			return ok_tipo_conteiner && ok_placa_estrangeira && ok_placa_veiculo && ok_placa_vermelha && ok_carga_perigosa;
 		}
-		
+
 		return false;
 	}
 };
