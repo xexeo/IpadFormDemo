@@ -64,7 +64,8 @@ legend, label {
 	text-align: right;
 }
 
-section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui-block"] {
+section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui-block"]
+	{
 	display: inline;
 	font-weight: bold;
 	font-size: x-large;
@@ -269,7 +270,10 @@ ol.tipos_carrocerias div:nth-child(3)  li {
 	max-width: 42%;
 }
 
-#grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b {
+#grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b,
+	#grupo_placa_dados_onibus, #grupo_placa_unica_onibus>.ui-block-b,
+	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b
+	{
 	width: 15%;
 }
 
@@ -292,7 +296,10 @@ div.ui-block-b>.placa_sufixo>.ui-block-b {
 	display: inline-block;
 }
 
-div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input, #grupo_placa_unica_simples>.ui-block-b input {
+div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
+	#grupo_placa_unica_simples>.ui-block-b input,
+	#grupo_placa_unica_onibus>.ui-block-b input,
+	#grupo_placa_unica_carga>.ui-block-b input {
 	width: 100%;
 	text-align: center;
 }
