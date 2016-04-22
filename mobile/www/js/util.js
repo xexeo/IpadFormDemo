@@ -25,11 +25,16 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil) {
+	inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil, mensagem) {
 		var lista = paises.listados();
 		var insert_inicial = "";
 		if (!inclui_Brasil) {
-			insert_inicial = "<option value='-1'>Selecione</option>\n";
+			if (util.isEmpty(mensagem)) {
+				msgSelecione = "Selecione";
+			} else {
+				msgSelecione = mensagem;
+			}
+			insert_inicial = "<option value='-1'>" + msgSelecione + "</option>\n";
 		}
 		$.each(lista, function(index, item) {
 			if (inclui_Brasil || (item != "Brasil")) {
