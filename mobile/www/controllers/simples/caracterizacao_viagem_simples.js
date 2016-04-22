@@ -81,7 +81,6 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Motivo viagem
 		$('#motivo_viagem_simples').change(function() {
-			app.logger.log("====change: MOTIVO A TRABALHO====");
 			if (Number($(this).val()) == -1) {
 				$("#grupo_pessoas_ambos").hide();
 				$("#grupo_pessoas_trabalho_simples").hide();
@@ -111,9 +110,8 @@ controllers.caracterizacao_viagem_simples = {
 			app.setAtributo("numeroDePessoasNoVeiculo", $(this).val());
 		});
 		$('#pessoas_simples').keyup(function() {
-			app.logger.log("====keyup: PESSOAS A TRABALHO====");
 			if (Number($("#pessoas_simples").val()) > 0) {
-				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
 					$("#grupo_pessoas_trabalho_simples").show();
 				} else {
 					$("#grupo_renda_simples").show();

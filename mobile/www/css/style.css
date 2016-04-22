@@ -140,7 +140,7 @@ nav.avancar>div.ui-block-b {
 }
 
 .troca_classe_veiculo {
-	width: /*10%*/15%;
+	width: /*10%*/ 15%;
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
@@ -158,10 +158,10 @@ nav.avancar>div.ui-block-b {
 }
 
 .troca_classe_veiculo /*img*/ button {
-    /*vertical-align: middle;*/
+	/*vertical-align: middle;*/
 	/*margin: auto;*/
-    margin-top: 340px;
-    /*width: 80px;*/
+	margin-top: 340px;
+	/*width: 80px;*/
 }
 
 .classe_veiculo {
@@ -285,6 +285,16 @@ div.ui-block-b>.placa_sufixo {
 	width: 30%;
 }
 
+div.ui-block-b>.placa_sufixo>.ui-block-a {
+	width: 5%;
+	display: inline;
+}
+
+div.ui-block-b>.placa_sufixo>.ui-block-b {
+	width: 40%;
+	display: inline-block;
+}
+
 #section_v_simples li {
 	line-height: 65px;
 }
@@ -321,18 +331,16 @@ div.ui-block-b>.placa_sufixo {
 	display: none;
 }
 
-
 /* bloqueando copiar no ipad */
-*{
+* {
 	-webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 /* permitindo acessar os inputs*/
-input
-{
+input {
 	-webkit-user-select: auto !important;
 	-khtml-user-select: auto !important;
 	-moz-user-select: auto !important;
