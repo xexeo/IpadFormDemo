@@ -140,7 +140,7 @@ nav.avancar>div.ui-block-b {
 }
 
 .troca_classe_veiculo {
-	width: /*10%*/ 15%;
+	width: 15%;
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
@@ -157,18 +157,15 @@ nav.avancar>div.ui-block-b {
 	float: right;
 }
 
-.troca_classe_veiculo /*img*/ button {
-	/*vertical-align: middle;*/
-	/*margin: auto;*/
+.troca_classe_veiculo button {
 	margin-top: 340px;
-	/*width: 80px;*/
 }
 
 .classe_veiculo {
 	display: inline-block;
 	vertical-align: top;
 	padding: 0;
-	margin: 0 /*2%*/;
+	margin: 0;
 	max-height: 640px;
 }
 
@@ -272,27 +269,32 @@ ol.tipos_carrocerias div:nth-child(3)  li {
 	max-width: 42%;
 }
 
-div.ui-block-b>.placa_prefixo, div.ui-block-b>.placa_sufixo {
-	padding-left: .3125em;
-	padding-right: .3125em;
-}
-
-div.ui-block-b>.placa_prefixo {
+#grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b {
 	width: 15%;
 }
 
+div.ui-block-b>.placa_prefixo {
+	width: 40%;
+}
+
 div.ui-block-b>.placa_sufixo {
-	width: 30%;
+	width: 60%;
 }
 
 div.ui-block-b>.placa_sufixo>.ui-block-a {
-	width: 5%;
 	display: inline;
+	text-align: center;
+	width: 10%;
 }
 
 div.ui-block-b>.placa_sufixo>.ui-block-b {
-	width: 40%;
+	width: 90%;
 	display: inline-block;
+}
+
+div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input, #grupo_placa_unica_simples>.ui-block-b input {
+	width: 100%;
+	text-align: center;
 }
 
 #section_v_simples li {
