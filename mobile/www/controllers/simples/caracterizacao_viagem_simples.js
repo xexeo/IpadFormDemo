@@ -43,6 +43,8 @@ controllers.caracterizacao_viagem_simples = {
 				'De R$ 4.501,00 a R$ 6.500,00', 'De R$ 6.501,00 a R$ 10.500,00', 'Acima de R$ 10.501,00', 'Não informada',
 				'Sem renda própria' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
+		
+		
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -53,8 +55,15 @@ controllers.caracterizacao_viagem_simples = {
 				"simples");
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
 		$('#origem_uf_simples').change(function() {
-			if ($(this).val() != '-1') {
-				util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
+			var estado = $(this).val();
+			if ( estado != '-1') {
+				//util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
+				
+				$('#grupo_origem_municipio_simples').show();
+				
+				$('#origem_municipio_simples').off("click").click(function(){
+						util.autocomplete("origem_municipio_simples", lista_municipios[estado]);
+				});
 			}
 		});
 		util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");

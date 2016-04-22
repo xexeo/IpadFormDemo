@@ -41,7 +41,7 @@ var myDialogs = {
 			},
 			
 		});
-		d.$body.addClass("ui-page-theme-a");
+		d.$body.addClass("ui-page-theme-a").css('margin-top', '0px');
 		
 	},
 	

@@ -246,6 +246,9 @@ var app = {
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
+		
+		//remove o filtro original do autocomplete para poder filtrar acentos
+		$.mobile.filterable.prototype.options.filterCallback = function (index, value){return false};
 	},
 
 	trocaPagina : function(view, controller) {

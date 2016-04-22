@@ -22,8 +22,9 @@
 					</select>
 				</div>
 				<div class="ui-block-c sel_municipio escondido" id="grupo_origem_municipio_simples">
-					<select name="origem_municipio_simples" id="origem_municipio_simples" data-theme="a">
-					</select>
+					<!--<select name="origem_municipio_simples" id="origem_municipio_simples" data-theme="a">
+					</select>-->
+					<input data-role='search' name="origem_municipio_simples" id="origem_municipio_simples" data-theme="a">
 				</div>
 			</div>
 		</fieldset>
@@ -76,8 +77,8 @@
 			</div>
 		</fieldset>
 
-		<fieldset class="ui-grid-a" id="grupo_pessoas_ambos">
-			<fieldset class="ui-block-a ui-grid-a escondido" id="grupo_pessoas_simples">
+		<fieldset class="ui-grid-a escondido" id="grupo_pessoas_ambos">
+			<fieldset class="ui-block-a ui-grid-a" id="grupo_pessoas_simples">
 				<label class="ui-block-a" for="pessoas_simples">Pessoas no veículo:</label>
 				<div class="ui-block-b">
 					<input id="pessoas_simples" type="number" min="0" pattern="\d*" name="pessoas_simples" value="" data-theme="a" />
