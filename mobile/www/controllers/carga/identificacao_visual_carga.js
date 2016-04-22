@@ -28,7 +28,7 @@ controllers.identificacao_visual_carga = {
 				'1 Conteiner de 40 pés', '2 Conteineres de 20 pés' ];
 		util.inicializaSelect("tipo_conteiner_carga", lista_tipo_conteiner)
 
-		util.inicializaSelect("pais_carga", paises.listados());
+		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_carga", false);
 
 		var lista_rntrc = [ 'TAC', 'ETC', 'CTC' ];
 		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");

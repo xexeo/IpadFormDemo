@@ -25,10 +25,29 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
-		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+	inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil) {
+		var lista = paises.listados();
+		var insert_inicial = "";
+		if (!inclui_Brasil) {
+			insert_inicial = "<option value='-1'>Selecione</option>\n";
+		}
+		$.each(lista, function(index, item) {
+			if (inclui_Brasil || (item != "Brasil")) {
+				var select_Brasil = "";
+				if (item == "Brasil") {
+					select_Brasil = " selected";
+					app.setAtributo(nome_registro, index + 1);
+				}
+				insert_inicial += "<option value='" + (index + 1) + "'" + select_Brasil + ">" + item + "</option>\n";
+			}
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
 
-		$.each(lista_municipios[uf_sigla], function(index, item) {
+	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
+		var lista = lista_municipios[uf_sigla];
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
 			insert_inicial += "<option value='" + item.id + "|" + item.geocod + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
@@ -36,7 +55,6 @@ var util = {
 
 	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
-
 		$.each(lista, function(index, item) {
 			insert_inicial += "<option value='" + item.id + "'>" + item.numeroid + "</option>\n";
 		});
