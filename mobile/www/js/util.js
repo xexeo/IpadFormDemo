@@ -102,7 +102,7 @@ var util = {
 	 */
 	progressoSelect : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
-			if (Number($(this).val()) > -1) {
+			if (Number($(this).val()) != -1) {
 				app.setAtributo(nome_registro, $(this).val());
 				$("#" + grupo_proximo).show();
 			} else {
