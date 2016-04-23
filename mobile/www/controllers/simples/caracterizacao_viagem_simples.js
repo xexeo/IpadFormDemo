@@ -23,10 +23,10 @@ controllers.caracterizacao_viagem_simples = {
 	inicializaElementos : function() {
 
 		// INICIO PAÍSES
-		util.inicializaSelectCustom("origem_pais_simples", paises.listados(), "País");
+		util.inicializaSelectPais("idOrigemPais", "origem_pais_simples", true, "País");
 		util.inicializaSelectCustomValueAsIndex("origem_uf_simples", lista_estados, "UF");
 
-		util.inicializaSelectCustom("destino_pais_simples", paises.listados(), "País");
+		util.inicializaSelectPais("idDestinoPais", "destino_pais_simples", true, "País");
 		util.inicializaSelectCustomValueAsIndex("destino_uf_simples", lista_estados, "UF");
 		// FIM PAÍSES
 

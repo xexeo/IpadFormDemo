@@ -21,18 +21,18 @@ controllers.caracterizacao_viagem_carga = {
 	inicializaElementos : function() {
 
 		// INICIO PAÍSES
-		util.inicializaSelectCustom("origem_pais_carga", paises.listados(), "País");
+		util.inicializaSelectPais("idOrigemPais", "origem_pais_carga", true, "País");
 		util.inicializaSelectCustomValueAsIndex("origem_uf_carga", lista_estados, "UF");
 
-		util.inicializaSelectCustom("destino_pais_carga", paises.listados(), "País");
+		util.inicializaSelectPais("idDestinoPais", "destino_pais_carga", true, "País");
 		util.inicializaSelectCustomValueAsIndex("destino_uf_carga", lista_estados, "UF");
 		// FIM PAÍSES
-		
+
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
 		util.inicializaSelect("frequencia_sel_carga", lista_frequencias);
 
 		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
-		                           'Ausência de pedágio', 'Próximo a hotéis e postos', 'Segurança', 'Outros' ];
+				'Ausência de pedágio', 'Próximo a hotéis e postos', 'Segurança', 'Outros' ];
 		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
 	},
 
@@ -100,7 +100,7 @@ controllers.caracterizacao_viagem_carga = {
 				ok_destino_bra = (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaSelect(
 						"destino_municipio_carga", "Destino da viagem - município"));
 			}
-			
+
 			return (ok_origem_bra && ok_destino_bra);
 		}
 		return false;
