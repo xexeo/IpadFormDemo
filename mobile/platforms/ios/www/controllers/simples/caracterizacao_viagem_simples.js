@@ -1,3 +1,5 @@
+/* global util */
+
 controllers.caracterizacao_viagem_simples = {
 	config : function() {
 		var me = controllers.caracterizacao_viagem_simples;
@@ -55,26 +57,36 @@ controllers.caracterizacao_viagem_simples = {
 				"simples");
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
 		$('#origem_uf_simples').change(function() {
-			if ($(this).val() != '-1') {
+			var estado = $(this).val();
+			if ( estado != '-1') {
 				//util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
 				
-				$('#origem_minicipio_simples').show().click(function(){
-						util.autocomplete("origem_municipio_simples", lista_municipios[$(this).val()]);
-				}).textinput();
+				//$('#grupo_origem_municipio_simples').show();
+				
+				$('#origem_municipio_simples').off("click").click(function(){
+						util.autocomplete("origem_municipio_simples", lista_municipios[estado]);
+				}).trigger('click');
 			}
 		});
-		util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
-
+		//util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
+		util.progressoInputText("origem_municipio", "origem_municipio_simples", "grupo_destino_simples", true);
+		
+		
 		// Destino
 		util.progressoSelectPais("idDestinoPais", "destino_pais_simples", "destino_uf", "destino_municipio",
 				"grupo_frequencia_simples", "simples");
 		util.progressoSelect("destino_uf", "destino_uf_simples", "grupo_destino_municipio_simples");
 		$('#destino_uf_simples').change(function() {
-			if ($(this).val() != '-1') {
-				util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
+			var estado = $(this).val();
+			if (estado != '-1') {
+				//util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
+				$('#destino_municipio_simples').off("click").click(function(){
+						util.autocomplete("destino_municipio_simples", lista_municipios[estado]);
+				}).trigger('click');
 			}
 		});
-		util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
+		//util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
+		util.progressoInputText("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples", true);
 
 		// Frequencia
 		$('#frequencia_num_simples').keyup(function() {
@@ -87,7 +99,6 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Motivo viagem
 		$('#motivo_viagem_simples').change(function() {
-			app.logger.log("====change: MOTIVO A TRABALHO====");
 			if (Number($(this).val()) == -1) {
 				$("#grupo_pessoas_ambos").hide();
 				$("#grupo_pessoas_trabalho_simples").hide();
@@ -117,9 +128,8 @@ controllers.caracterizacao_viagem_simples = {
 			app.setAtributo("numeroDePessoasNoVeiculo", $(this).val());
 		});
 		$('#pessoas_simples').keyup(function() {
-			app.logger.log("====keyup: PESSOAS A TRABALHO====");
 			if (Number($("#pessoas_simples").val()) > 0) {
-				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
 					$("#grupo_pessoas_trabalho_simples").show();
 				} else {
 					$("#grupo_renda_simples").show();

@@ -43,23 +43,33 @@ controllers.caracterizacao_viagem_onibus = {
 				"onibus");
 		util.progressoSelect("origem_uf", "origem_uf_onibus", "grupo_origem_municipio_onibus");
 		$('#origem_uf_onibus').change(function() {
-			if ($(this).val() != '-1') {
-				util.inicializaSelectMunicipio("origem_municipio_onibus", $(this).val(), "Município");
+			var estado = $(this).val();
+			if (estado != '-1') {
+				//util.inicializaSelectMunicipio("origem_municipio_onibus", $(this).val(), "Município");
+				$('#origem_municipio_onibus').off("click").click(function(){
+						util.autocomplete("origem_municipio_onibus", lista_municipios[estado]);
+				}).trigger('click')
 			}
 		});
-		util.progressoSelect("origem_municipio", "origem_municipio_onibus", "grupo_destino_onibus");
-
+		//util.progressoSelect("origem_municipio", "origem_municipio_onibus", "grupo_destino_onibus");
+		util.progressoInputText("origem_municipio", "origem_municipio_onibus", "grupo_destino_onibus", true);
+		
 		// Destino
 		util.progressoSelectPais("idDestinoPais", "destino_pais_onibus", "destino_uf", "destino_municipio",
 				"grupo_frequencia_onibus", "onibus");
 		util.progressoSelect("destino_uf", "destino_uf_onibus", "grupo_destino_municipio_onibus");
 		$('#destino_uf_onibus').change(function() {
-			if ($(this).val() != '-1') {
-				util.inicializaSelectMunicipio("destino_municipio_onibus", $(this).val(), "Município");
+			var estado = $(this).val();
+			if (estado != '-1') {
+				//util.inicializaSelectMunicipio("destino_municipio_onibus", $(this).val(), "Município");
+				$('#destino_municipio_onibus').off("click").click(function(){
+						util.autocomplete("destino_municipio_onibus", lista_municipios[estado]);
+				}).trigger('click');
 			}
 		});
-		util.progressoSelect("destino_municipio", "destino_municipio_onibus", "grupo_frequencia_onibus");
-
+		//util.progressoSelect("destino_municipio", "destino_municipio_onibus", "grupo_frequencia_onibus");
+		util.progressoInputText("destino_municipio", "destino_municipio_onibus", "grupo_frequencia_onibus", true);
+		
 		// Frequencia
 		$('#frequencia_num_onibus').keyup(function() {
 			app.setAtributo('frequencia_num', $(this).val());

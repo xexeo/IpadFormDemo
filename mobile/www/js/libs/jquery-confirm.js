@@ -118,10 +118,11 @@ var jconfirm, Jconfirm;
             this._rand = Math.round(Math.random() * 99999);
             this._buildHTML();
             this._bindEvents();
+			
             setTimeout(function () {
                 that.open();
                 that._watchContent();
-            }, 0);
+			}, 0);
         },
         _buildHTML: function () {
             var that = this;
@@ -197,7 +198,11 @@ var jconfirm, Jconfirm;
                 var now = that._hash(that.$content.html());
                 if (that._contentHash != now) {
                     that._contentHash = now;
-                    that.setDialogCenter();
+					if (that.isCentered){
+						that.setDialogCenter();
+					}else{
+						that.setDialogDimension();
+					}
                     that._imagesLoaded();
                 }
             }, this.watchInterval);
@@ -443,6 +448,32 @@ var jconfirm, Jconfirm;
                 }
             }
         },
+		setDialogDimension : function(){
+			if (this.$contentPane.css('display') == 'none') {
+                var contentHeight = 0;
+                var paneHeight = 0;
+            } else {
+                var contentHeight = this.$content.outerHeight();
+                var paneHeight = this.$contentPane.height();
+                if (paneHeight == 0)
+                    paneHeight = contentHeight;
+            }
+            var off = 100;
+            var w = this.$content.outerWidth();
+
+            //var s = '-clip-path: inset(0px 0px '+contentHeight+'px 0px);' +
+            //    'clip-path: inset(0px 0px '+contentHeight+'px 0px)';
+
+            this.$content.css({
+                'clip': 'rect(0px ' + (off + w) + 'px ' + contentHeight + 'px -' + off + 'px)'
+            });
+
+            this.$contentPane.css({
+                'height': contentHeight
+            });
+			
+			
+		},
         setDialogCenter: function () {
             if (this.$contentPane.css('display') == 'none') {
                 var contentHeight = 0;
@@ -495,7 +526,7 @@ var jconfirm, Jconfirm;
                 this.onClose();
 
             this._unwatchContent();
-            that._lastFocused.focus();
+            //that._lastFocused.focus();
 
             //this.observer.disconnect();
             /*
@@ -584,6 +615,7 @@ var jconfirm, Jconfirm;
         closeIconClass: false,
         watchInterval: 100,
         columnClass: 'col-md-6 col-md-offset-3', //'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1' ,
+		isCentered: true,
         onOpen: function () {
         },
         onClose: function () {

@@ -12,17 +12,20 @@
 		<fieldset class="ui-grid-a" id="grupo_reboque_simples">
 			<legend class="ui-block-a">Possui reboque:</legend>
 			<div data-role="controlgroup" data-theme="a" class="ui-block-b" data-type="horizontal">
-				<input type="radio" name="reboque_simples" id="reboque_simples_sim" value="sim"> <label for="reboque_simples_sim">Sim</label>
-				<input type="radio" name="reboque_simples" id="reboque_simples_nao" value="nao"> <label for="reboque_simples_nao">Não</label>
+				<input type="radio" name="reboque_simples" id="reboque_simples_sim" value="sim">
+				<label for="reboque_simples_sim">Sim</label>
+				<input type="radio" name="reboque_simples" id="reboque_simples_nao" value="nao">
+				<label for="reboque_simples_nao">Não</label>
 			</div>
 		</fieldset>
 
 		<fieldset class="ui-grid-a escondido" id="grupo_placa_estrangeira_simples">
 			<legend class="ui-block-a">Placa estrangeira:</legend>
 			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
-				<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_sim" value="sim" /> <label
-					for="placa_estrangeira_simples_sim">Sim</label> <input type="radio" name="placa_estrangeira_simples"
-					id="placa_estrangeira_simples_nao" value="nao" /> <label for="placa_estrangeira_simples_nao">Não</label>
+				<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_sim" value="sim" />
+				<label for="placa_estrangeira_simples_sim">Sim</label>
+				<input type="radio" name="placa_estrangeira_simples" id="placa_estrangeira_simples_nao" value="nao" />
+				<label for="placa_estrangeira_simples_nao">Não</label>
 			</div>
 		</fieldset>
 
@@ -40,9 +43,19 @@
 				<div class="ui-block-a placa_prefixo">
 					<input id="placa_letras_simples" class="input_placa" type="text" name="placa_letras_simples" value="" data-theme="a" />
 				</div>
-				<div class="ui-block-b placa_sufixo escondido" id="grupo_placa_numeros_simples">
-					<input id="placa_numeros_simples" type="text" name="placa_numeros_simples" value="" data-theme="a" />
+				<div class="ui-block-b ui-grid-a placa_sufixo escondido" id="grupo_placa_numeros_simples">
+					<span class="ui-block-a">-</span>
+					<div class="ui-block-b">
+						<input id="placa_numeros_simples" type="text" name="placa_numeros_simples" value="" data-theme="a" />
+					</div>
 				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a escondido" id="grupo_placa_unica_simples">
+			<legend class="ui-block-a">Placa do veículo:</legend>
+			<div class="ui-block-b">
+				<input id="placa_unica_simples" class="input_placa" type="text" name="placa_unica_simples" value="" data-theme="a" />
 			</div>
 		</fieldset>
 

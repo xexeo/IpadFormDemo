@@ -63,7 +63,34 @@ var util = {
 			app.setAtributo(nome_registro, false);
 		});
 	},
+	
+	progressoRadioPlacaEstrangeira : function(tipo_fluxo) {
+		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
+			$('#grupo_pais_' + tipo_fluxo).show();
+			$('#grupo_placa_' + tipo_fluxo).hide();
+			app.setAtributo('placaEstrangeira', true);
+			app.setAtributo("placa_letras", null);
+			app.setAtributo("placa_numeros", null);
+			$('#placa_letras_' + tipo_fluxo).val(null);
+			$('#placa_numeros_' + tipo_fluxo).val(null);
 
+			if (Number($('#pais_' + tipo_fluxo).val()) == -1) {
+				$("#grupo_placa_unica_" + tipo_fluxo).hide();
+			}
+		});
+		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
+			$('#grupo_pais_' + tipo_fluxo).hide()
+			$('#grupo_placa_unica_' + tipo_fluxo).hide()
+			app.setAtributo('idPaisPlacaEstrangeira', null);
+			app.setAtributo('placaEstrangeira', false);
+			app.setAtributo('placa_unica', null);
+			$('#placa_unica_' + tipo_fluxo).val(null);
+			util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");
+
+			$("#grupo_placa_" + tipo_fluxo).show();
+		});
+	},
+	
 	/**
 	 * 
 	 * @param nome_registro
@@ -75,7 +102,7 @@ var util = {
 	 */
 	progressoSelect : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
-			if (Number($(this).val()) > -1) {
+			if (Number($(this).val()) != -1) {
 				app.setAtributo(nome_registro, $(this).val());
 				$("#" + grupo_proximo).show();
 			} else {
@@ -126,18 +153,32 @@ var util = {
 	 *            id do componente html
 	 * @param grupo_proximo
 	 *            id da div que irá sofrer show/hide
+	 * @param autocomplete
+	 *			  bool para indicar se é um campo autocomplete
 	 */
-	progressoInputText : function(nome_registro, nome_campo, grupo_proximo) {
-		$('#' + nome_campo).keyup(function() {
-			if (util.isEmpty($(this).val())) {
+	progressoInputText : function(nome_registro, nome_campo, grupo_proximo, autocomplete) {
+		
+		if(autocomplete){ //autocomplete
+			$('#' + nome_campo).change(function(){
+				progride($(this).val());
+				app.setAtributo(nome_registro, $(this).val());
+			}); 
+		}else { //textinput comum
+			$('#' + nome_campo).keyup(function(){
+				progride($(this).val());
+				$('#' + nome_campo).change(function() {
+					app.setAtributo(nome_registro, $(this).val());
+				});
+			}); 
+		}
+		
+		function progride(value){
+			if (util.isEmpty(value)) {
 				$("#" + grupo_proximo).hide();
 			} else {
 				$("#" + grupo_proximo).show();
 			}
-		});
-		$('#' + nome_campo).change(function() {
-			app.setAtributo(nome_registro, $(this).val());
-		});
+		};
 	},
 
 	// Funções para validação dos componentes
@@ -206,53 +247,108 @@ var util = {
 		}
 	},
 	
+	isFilterRunning : false, //controla se o filtro já terminou
+	
 	autocomplete : function(nome_do_campo, lista){
-		
-		$("#" + nome_campo).click(function(){
-			var campo = $(this);
-			var overlayInput = $.confirm({
-				title : 'Busca',
-				content : 'Entre com o início da palavra.',
-				confirmButton : null,
-				cancelButton : null,
-				animation : 'none',
-				closeAnimation : 'none',
-				animationBounce : 1,
-				icon : 'fa fa-search'
-			}).$body.addClass("ui-page-theme-a");
-		
-			var extraHtml = '<form class="ui-filterable" > \
-							<label for="filtro" style="padding-top: 15px">mobile from function</label> \
-							<input id="filtro" data-type="search"> \
-						</form> \
-						<ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro2" data-inset="true"></ul>';	
-			overlay.$content.append(extraHtml);
-			
-			$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data){
-				var ul_list = $( this );
-				var auto_input = $(data.input);
-				var auto_value = auto_input.val();
-				var html = "";
-				var minLength = 2;//só pesquisa quando a entrada for maior
-				ul_list.html("");
-				if (auto_value && auto_value.length > minLength){
-					ul_list.html("<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>");
-					ul_list.listview("refresh");
-					var matcher = new RegExp(escapeRegex(auto_value), "i");
-					var res = $.grep(lista, function(value){
-						value = value.label || value.value || value.nome || value;
-						return matcher.test(value) || matcher.test(util.replaceDiacritics(value));
-					});
-					console.log(res);
-					$.each(res, function (i, val){
-						html +="<li onclick=\"javascript:alert('" + val.nome + "')\">" + val.nome + "</li>";
-					});
-					ul_list.html(html);
-					ul_list.listview("refresh");
-					ul_list.trigger("updatelayout");
-				}
-			});
+		var field = $('#' + nome_do_campo);
+		var overlayInput = $.confirm({
+			title : 'Busca',
+			content : 'Entre com o início da palavra.',
+			confirmButton : null,
+			cancelButton : null,
+			animation : 'none',
+			closeAnimation : 'none',
+			animationBounce : 1,
+			icon : 'fa fa-search',
+			closeIcon : true,
+			onClose : function(){
+				util.isFilterRunning = false;
+			},
+			isCentered:false,
 		});
+		overlayInput.$body.addClass("ui-page-theme-a");
+
+		var extraHtml = '<form class="ui-filterable" > \
+							<input id="filtro" type="text" data-type="search"> \
+						</form> \
+						<ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro" data-inset="true"></ul>';	
+		overlayInput.$content.append(extraHtml);
+		var txtInput = overlayInput.$content.find('#filtro');
+		txtInput.textinput();
+		txtInput.focus();
+		overlayInput.$content.find('#filtro_autocomplete').listview();
+		//overlayInput.setDialogDimension();
+		overlayInput.$b.css('margin-top', '0px');
+		//overlayInput.$content.find('.ui-filterable').filterable();
+
+		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data){
+			console.log('entrou no filtro');
+			var ul_list = $( this );
+			var auto_input = $(data.input);
+			var auto_value = auto_input.val();
+			var html = "";
+			var minLength = 2;//só pesquisa quando a entrada for maior
+			var newText = "";
+			var waitCicle = false;
+			ul_list.html("");
+
+
+			if (auto_value && auto_value.length > minLength){
+				if (!util.isFilterRunning){
+					util.isFilterRunning = true;
+					doFilter(auto_value);
+					util.isFilterRunning = false;
+				} else {
+					newText = auto_value;
+					if(!waitCicle){
+						waitCicle = setInterval(function(){
+							if(!util.isFilterRunning){
+								util.isFilterRunning = true;
+								clearInterval(waitCicle);
+								waitCicle = false;
+								doFilter(newText);
+								util.isFilterRunning = false;
+							}
+						}, 300);
+					}
+				}
+			}
+
+			function doFilter(inputedTxt){
+
+				ul_list.html("<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>");
+				ul_list.listview("refresh");
+				var matcher = new RegExp(util.escapeRegex(inputedTxt), "i");
+				var res = $.grep(lista, function(value){
+					value = value.label || value.value || value.nome || value;
+					return matcher.test(value) || matcher.test(util.replaceDiacritics(value));
+				});
+				console.log(JSON.stringify(res),null,'\t');
+				$.each(res, function (i, val){
+					if (val.geocod != null){ //municipio
+						html +="<li li_id='"+ val.id + "' li_geocod='" + val.geocod +"' >" + val.nome + "</li>";
+					} else {
+						html +="<li>" + val.nome + "</li>";
+					}
+					//overlayInput.setDialogDimension();
+				});
+				ul_list.html(html);
+				ul_list.children("li").click(function(){
+					var txt;
+					if ($(this).attr('li_geocod') != null){ //municipio
+						txt = $(this).html() + " | " + $(this).attr('li_id') + " | " + $(this).attr('li_geocod');
+					} else {
+						txt = $(this).html();
+					}
+					field.val(txt).trigger('change').focus(); //scrollLeft(0)
+					overlayInput.close();
+				});
+				ul_list.listview("refresh");
+				ul_list.trigger("updatelayout");
+			}
+
+		});
+
 	},
 
 	// Outras funções

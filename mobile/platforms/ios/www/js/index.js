@@ -326,12 +326,15 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
-		if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
-		} else if (!util.isEmpty(registro.placa_letras)) {
-			app.setAtributo('placa', registro.placa_letras);
-		} else if (!util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_numeros);
+		if(!util.isEmpty(registro.placaEstrangeira) && !registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
+				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
+			}	
+		}
+		else if(!util.isEmpty(registro.placaEstrangeira) && registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_unica)) {
+				app.setAtributo('placa', registro.placa_unica.toUpperCase());
+			}	
 		}
 
 		if (!util.isEmpty(registro.frequencia_num) || !util.isEmpty(registro.frequencia_sel)) {
@@ -341,14 +344,14 @@ var app = {
 		var municipioSplit;
 		if (registro.origem_municipio != null) {
 			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_origem', municipioSplit[1]);
+			app.setAtributo('idOrigemMunicipio', municipioSplit[1].trim());
+			app.setAtributo('geocod_origem', municipioSplit[2].trim());
 		}
 
 		if (registro.destino_municipio != null) {
 			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_destino', municipioSplit[1]);
+			app.setAtributo('idDestinoMunicipio', municipioSplit[1].trim());
+			app.setAtributo('geocod_destino', municipioSplit[2].trim());
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));

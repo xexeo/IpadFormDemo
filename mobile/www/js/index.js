@@ -344,14 +344,14 @@ var app = {
 		var municipioSplit;
 		if (registro.origem_municipio != null) {
 			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_origem', municipioSplit[1]);
+			app.setAtributo('idOrigemMunicipio', municipioSplit[1].trim());
+			app.setAtributo('geocod_origem', municipioSplit[2].trim());
 		}
 
 		if (registro.destino_municipio != null) {
 			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_destino', municipioSplit[1]);
+			app.setAtributo('idDestinoMunicipio', municipioSplit[1].trim());
+			app.setAtributo('geocod_destino', municipioSplit[2].trim());
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));

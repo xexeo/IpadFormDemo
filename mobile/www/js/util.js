@@ -153,18 +153,32 @@ var util = {
 	 *            id do componente html
 	 * @param grupo_proximo
 	 *            id da div que irá sofrer show/hide
+	 * @param autocomplete
+	 *			  bool para indicar se é um campo autocomplete
 	 */
-	progressoInputText : function(nome_registro, nome_campo, grupo_proximo) {
-		$('#' + nome_campo).keyup(function() {
-			if (util.isEmpty($(this).val())) {
+	progressoInputText : function(nome_registro, nome_campo, grupo_proximo, autocomplete) {
+		
+		if(autocomplete){ //autocomplete
+			$('#' + nome_campo).change(function(){
+				progride($(this).val());
+				app.setAtributo(nome_registro, $(this).val());
+			}); 
+		}else { //textinput comum
+			$('#' + nome_campo).keyup(function(){
+				progride($(this).val());
+				$('#' + nome_campo).change(function() {
+					app.setAtributo(nome_registro, $(this).val());
+				});
+			}); 
+		}
+		
+		function progride(value){
+			if (util.isEmpty(value)) {
 				$("#" + grupo_proximo).hide();
 			} else {
 				$("#" + grupo_proximo).show();
 			}
-		});
-		$('#' + nome_campo).change(function() {
-			app.setAtributo(nome_registro, $(this).val());
-		});
+		};
 	},
 
 	// Funções para validação dos componentes
@@ -233,10 +247,10 @@ var util = {
 		}
 	},
 	
-	isFilterRunning : false; //controla se o filtro já terminou
+	isFilterRunning : false, //controla se o filtro já terminou
 	
 	autocomplete : function(nome_do_campo, lista){
-		var campo = $('#' + nome_do_campo);
+		var field = $('#' + nome_do_campo);
 		var overlayInput = $.confirm({
 			title : 'Busca',
 			content : 'Entre com o início da palavra.',
@@ -246,10 +260,11 @@ var util = {
 			closeAnimation : 'none',
 			animationBounce : 1,
 			icon : 'fa fa-search',
-			closeIcon : true;
+			closeIcon : true,
 			onClose : function(){
 				util.isFilterRunning = false;
-			}
+			},
+			isCentered:false,
 		});
 		overlayInput.$body.addClass("ui-page-theme-a");
 
@@ -262,6 +277,8 @@ var util = {
 		txtInput.textinput();
 		txtInput.focus();
 		overlayInput.$content.find('#filtro_autocomplete').listview();
+		//overlayInput.setDialogDimension();
+		overlayInput.$b.css('margin-top', '0px');
 		//overlayInput.$content.find('.ui-filterable').filterable();
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data){
@@ -274,8 +291,8 @@ var util = {
 			var newText = "";
 			var waitCicle = false;
 			ul_list.html("");
-			
-			
+
+
 			if (auto_value && auto_value.length > minLength){
 				if (!util.isFilterRunning){
 					util.isFilterRunning = true;
@@ -296,9 +313,9 @@ var util = {
 					}
 				}
 			}
-			
+
 			function doFilter(inputedTxt){
-				
+
 				ul_list.html("<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>");
 				ul_list.listview("refresh");
 				var matcher = new RegExp(util.escapeRegex(inputedTxt), "i");
@@ -308,13 +325,22 @@ var util = {
 				});
 				console.log(JSON.stringify(res),null,'\t');
 				$.each(res, function (i, val){
-					html +="<li>" + val.nome + "</li>";
+					if (val.geocod != null){ //municipio
+						html +="<li li_id='"+ val.id + "' li_geocod='" + val.geocod +"' >" + val.nome + "</li>";
+					} else {
+						html +="<li>" + val.nome + "</li>";
+					}
+					//overlayInput.setDialogDimension();
 				});
 				ul_list.html(html);
 				ul_list.children("li").click(function(){
-					var txt = $(this).html();
-					alert(txt);
-					campo.val(txt);
+					var txt;
+					if ($(this).attr('li_geocod') != null){ //municipio
+						txt = $(this).html() + " | " + $(this).attr('li_id') + " | " + $(this).attr('li_geocod');
+					} else {
+						txt = $(this).html();
+					}
+					field.val(txt).trigger('change').focus(); //scrollLeft(0)
 					overlayInput.close();
 				});
 				ul_list.listview("refresh");
@@ -322,7 +348,7 @@ var util = {
 			}
 
 		});
-		
+
 	},
 
 	// Outras funções
