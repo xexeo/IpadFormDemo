@@ -30,7 +30,7 @@ controllers.identificacao_visual_onibus = {
 		util.progressoSelect("idPaisPlacaEstrangeira", "pais_onibus", "grupo_placa_unica_onibus");
 
 		// Placa Brasil
-		util.progressoInputText("placa_letras", "placa_letras_onibus", "grupo_placa_numeros_onibus");
+		// util.progressoInputText("placa_letras", "placa_letras_onibus", "grupo_placa_numeros_onibus");
 		util.progressoInputText("placa_numeros", "placa_numeros_onibus", "grupo_identificacao_visual_onibus_avancar");
 
 		// Placa única

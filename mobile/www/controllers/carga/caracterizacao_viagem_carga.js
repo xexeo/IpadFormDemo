@@ -44,22 +44,32 @@ controllers.caracterizacao_viagem_carga = {
 				"carga");
 		util.progressoSelect("origem_uf", "origem_uf_carga", "grupo_origem_municipio_carga");
 		$('#origem_uf_carga').change(function() {
-			if ($(this).val() != '-1') {
-				util.inicializaSelectMunicipio("origem_municipio_carga", $(this).val(), "Município");
+			var estado = $(this).val();
+			if (estado != '-1') {
+				//util.inicializaSelectMunicipio("origem_municipio_carga", $(this).val(), "Município");
+				$('#origem_municipio_carga').off("click").click(function(){
+						util.autocomplete("origem_municipio_carga", lista_municipios[estado]);
+				}).trigger('click');
 			}
 		});
-		util.progressoSelect("origem_municipio", "origem_municipio_carga", "grupo_destino_carga");
-
+		//util.progressoSelect("origem_municipio", "origem_municipio_carga", "grupo_destino_carga");
+		util.progressoInputText("origem_municipio", "origem_municipio_carga", "grupo_destino_carga", true);
+		
 		// Destino
 		util.progressoSelectPais("idDestinoPais", "destino_pais_carga", "destino_uf", "destino_municipio",
 				"grupo_frequencia_carga", "carga");
 		util.progressoSelect("destino_uf", "destino_uf_carga", "grupo_destino_municipio_carga");
 		$('#destino_uf_carga').change(function() {
-			if ($(this).val() != '-1') {
-				util.inicializaSelectMunicipio("destino_municipio_carga", $(this).val(), "Município");
+			var estado = $(this).val();
+			if (estado != '-1') {
+				//util.inicializaSelectMunicipio("destino_municipio_carga", $(this).val(), "Município");
+				$('#destino_municipio_carga').off("click").click(function(){
+						util.autocomplete("destino_municipio_carga", lista_municipios[estado]);
+				}).trigger('click');
 			}
 		});
-		util.progressoSelect("destino_municipio", "destino_municipio_carga", "grupo_frequencia_carga");
+		//util.progressoSelect("destino_municipio", "destino_municipio_carga", "grupo_frequencia_carga");
+		util.progressoInputText("destino_municipio", "destino_municipio_carga", "grupo_frequencia_carga", true);
 
 		// Frequencia
 		$('#frequencia_num_carga').keyup(function() {

@@ -73,7 +73,7 @@ controllers.identificacao_visual_carga = {
 		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_unica_carga");
 
 		// Placa Brasil
-		util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
+		// util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
 		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
 
 		// Placa única
