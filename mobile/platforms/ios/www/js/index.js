@@ -142,8 +142,8 @@ var app = {
 
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
-            StatusBar.backgroundColorByName("darkGray");
-            
+			StatusBar.backgroundColorByName("darkGray");
+
 			// ajusta os caminhos para o Android
 			app.filePaths['externalFolder'] = cordova.file.externalDataDirectory;
 			app.filePaths['dbFolder'] = cordova.file.applicationStorageDirectory + "databases";
@@ -246,40 +246,44 @@ var app = {
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
+		
+		//remove o filtro original do autocomplete para poder filtrar acentos
+		$.mobile.filterable.prototype.options.filterCallback = function (index, value){return false};
 	},
 
 	trocaPagina : function(view, controller) {
 		if (controller != null) {
-            app.onChangeHandler.controller = controller.config;
-			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow", app.onChangeHandler.handler);
+			app.onChangeHandler.controller = controller.config;
+			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
+					app.onChangeHandler.handler);
 		}
 
 		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
 		app.logger.log(view);
 	},
-    
-    //para apendar coisas aos controllers
-    onChangeHandler : {
-        handler : function(){
-            try{
-                app.onChangeHandler.controller();
-                $("#btn_cancelar").click(app.cancelar); //não estava funcionando em todas as páginas
-                if (typeof device != 'undefined' && device.platform == "Android"){
-                    StatusBar.hide();
-                }
-            }catch(e){
-                app.logger.log(e);
-                alert(e.message);
-            }
-        },
-        
-        controller : null,
-    },
+
+	// para apendar coisas aos controllers
+	onChangeHandler : {
+		handler : function() {
+			try {
+				app.onChangeHandler.controller();
+				$("#btn_cancelar").click(app.cancelar); // não estava funcionando em todas as páginas
+				if (typeof device != 'undefined' && device.platform == "Android") {
+					StatusBar.hide();
+				}
+			} catch (e) {
+				app.logger.log(e);
+				alert(e.message);
+			}
+		},
+
+		controller : null,
+	},
 
 	getAtributo : function(nome) {
 		return registro[nome];
 	},
-	
+
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
 		app.logger.log(JSON.stringify(registro));
@@ -322,12 +326,15 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
-		if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
-		} else if (!util.isEmpty(registro.placa_letras)) {
-			app.setAtributo('placa', registro.placa_letras);
-		} else if (!util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_numeros);
+		if(!util.isEmpty(registro.placaEstrangeira) && !registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
+				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
+			}	
+		}
+		else if(!util.isEmpty(registro.placaEstrangeira) && registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_unica)) {
+				app.setAtributo('placa', registro.placa_unica.toUpperCase());
+			}	
 		}
 
 		if (!util.isEmpty(registro.frequencia_num) || !util.isEmpty(registro.frequencia_sel)) {
@@ -337,14 +344,14 @@ var app = {
 		var municipioSplit;
 		if (registro.origem_municipio != null) {
 			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_origem', municipioSplit[1]);
+			app.setAtributo('idOrigemMunicipio', municipioSplit[1].trim());
+			app.setAtributo('geocod_origem', municipioSplit[2].trim());
 		}
 
 		if (registro.destino_municipio != null) {
 			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_destino', municipioSplit[1]);
+			app.setAtributo('idDestinoMunicipio', municipioSplit[1].trim());
+			app.setAtributo('geocod_destino', municipioSplit[2].trim());
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
@@ -356,7 +363,7 @@ var app = {
 		myDb.insertRegistro(registro,
 		// erro
 		function(error) {
-			app.logger.log('Erro inserindo registro: ' + error.message);
+			app.logger.log('Erro ao inserir registro: ' + error.message);
 			// confirma se tenta outra vez
 			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?",
 			// button ok
@@ -365,6 +372,7 @@ var app = {
 			},
 			// button cancel
 			function() {
+				app.logger.log("Descartando registro: " + registro.id);
 				if (cb != null) {
 					cb();
 				}
@@ -419,6 +427,7 @@ var app = {
 			},
 			// button cancel
 			function() {
+				app.logger.log("Descartando registro: " + registro.id);
 				if (cb != null) {
 					cb();
 				}

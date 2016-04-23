@@ -45,6 +45,8 @@ controllers.caracterizacao_viagem_simples = {
 				'De R$ 4.501,00 a R$ 6.500,00', 'De R$ 6.501,00 a R$ 10.500,00', 'Acima de R$ 10.501,00', 'Não informada',
 				'Sem renda própria' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
+		
+		
 	},
 
 	// Controla o show e hide dos elementos da tela

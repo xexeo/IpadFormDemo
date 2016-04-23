@@ -12,7 +12,7 @@
 		<fieldset class="ui-grid-a" id="grupo_tipo_carroceria_carga">
 			<legend class="ui-block-a">Tipo de carroceria:</legend>
 			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
-				<input type ="radio" id="tipo_carroceria_carga" name="tipo_carroceria_carga" value=""/>
+				<input type="radio" id="tipo_carroceria_carga" name="tipo_carroceria_carga" value="" />
 				<label for="tipo_carroceria_carga">Selecione</label>
 			</div>
 		</fieldset>
@@ -23,7 +23,8 @@
 					<li><img src="../../img/carroceria/aberta.png" class="img_carroceria" alt="Aberta" id="carroceria_1" /></li>
 					<li><img src="../../img/carroceria/cegonha.png" class="img_carroceria" alt="Cegonha" id="carroceria_7" /></li>
 					<li><img src="../../img/carroceria/graneleiro.png" class="img_carroceria" alt="Graneleiro" id="carroceria_9" /></li>
-					<li><img src="../../img/carroceria/porta_conteiner.png" class="img_carroceria tipo_porta_conteiner" alt="Porta-Conteiner" id="carroceria_10" /></li>
+					<li><img src="../../img/carroceria/porta_conteiner.png" class="img_carroceria tipo_porta_conteiner"
+						alt="Porta-Conteiner" id="carroceria_10" /></li>
 				</div>
 				<div>
 					<li><img src="../../img/carroceria/bau_simples.png" class="img_carroceria" alt="Baú Simples" id="carroceria_4" /></li>
@@ -38,24 +39,25 @@
 					<li><img src="../../img/carroceria/canavieiro.png" class="img_carroceria" alt="Canavieiro" id="carroceria_6" /></li>
 					<li><img src="../../img/carroceria/florestal.png" class="img_carroceria" alt="Florestal" id="carroceria_8" /></li>
 					<li><img src="../../img/carroceria/outros.png" class="img_carroceria" alt="Outros" id="carroceria_14" /></li>
-				</div> 
+				</div>
 			</ol>
 		</section>
-		
+
 		<fieldset class="ui-grid-a escondido" id="grupo_tipo_conteiner_carga">
 			<legend class="ui-block-a">Porta-Conteiner:</legend>
 			<div class="ui-block-b">
 				<select name="tipo_conteiner_carga" data-theme="a" id="tipo_conteiner_carga">
 				</select>
 			</div>
-		</fieldset>		
+		</fieldset>
 
 		<fieldset class="ui-grid-a escondido" id="grupo_placa_estrangeira_carga">
 			<legend class="ui-block-a">Placa estrangeira:</legend>
 			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
-				<input type="radio" name="placa_estrangeira_carga" id="placa_estrangeira_carga_sim" value="sim" /> <label
-					for="placa_estrangeira_carga_sim">Sim</label> <input type="radio" name="placa_estrangeira_carga"
-					id="placa_estrangeira_carga_nao" value="nao" /> <label for="placa_estrangeira_carga_nao">Não</label>
+				<input type="radio" name="placa_estrangeira_carga" id="placa_estrangeira_carga_sim" value="sim" />
+				<label for="placa_estrangeira_carga_sim">Sim</label>
+				<input type="radio" name="placa_estrangeira_carga" id="placa_estrangeira_carga_nao" value="nao" />
+				<label for="placa_estrangeira_carga_nao">Não</label>
 			</div>
 		</fieldset>
 
@@ -71,44 +73,57 @@
 			<legend class="ui-block-a">Placa do veículo:</legend>
 			<div class="ui-block-b ui-grid-a" id="grupo_placa_dados_carga">
 				<div class="ui-block-a placa_prefixo">
-					<input id="placa_letras_carga" type="text" name="placa_letras_carga" value="" data-theme="a" />
+					<input id="placa_letras_carga" class="input_placa" type="text" name="placa_letras_carga" value="" data-theme="a" />
 				</div>
-				<div class="ui-block-b placa_sufixo escondido" id="grupo_placa_numeros_carga">
-					<input id="placa_numeros_carga" type="text" name="placa_numeros_carga" value="" data-theme="a" />
+				<div class="ui-block-b ui-grid-a placa_sufixo escondido" id="grupo_placa_numeros_carga">
+					<span class="ui-block-a">-</span>
+					<div class="ui-block-b">
+						<input id="placa_numeros_carga" type="text" name="placa_numeros_carga" value="" data-theme="a" />
+					</div>
 				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="ui-grid-a escondido" id="grupo_placa_unica_carga">
+			<legend class="ui-block-a">Placa do veículo:</legend>
+			<div class="ui-block-b">
+				<input id="placa_unica_carga" class="input_placa" type="text" name="placa_unica_carga" value="" data-theme="a" />
 			</div>
 		</fieldset>
 
 		<fieldset class="ui-grid-a escondido" id="grupo_placa_vermelha_carga">
 			<legend class="ui-block-a">Placa vermelha:</legend>
-			<fieldset class="ui-block-b ui-grid-b" id="grupo_placa_vermelha_dados_carga">
-				<div data-role="controlgroup" data-theme="a" class="ui-block-a" data-type="horizontal">
-					<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_sim" value="sim"> <label
-						for="placa_vermelha_carga_sim">Sim</label> <input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_nao"
-						value="nao"> <label for="placa_vermelha_carga_nao">Não</label>
-				</div>
-				<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_placa_vermelha_rntrc_carga">
-					<div class="ui-block-a" id="grupo_placa_vermelha_rntrc_sel_carga">
+			<div class="ui-block-b ui-grid-a" id="grupo_placa_vermelha_dados_carga">
+				<fieldset data-role="controlgroup" data-theme="a" class="ui-block-a" data-type="horizontal">
+					<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_sim" value="sim">
+					<label for="placa_vermelha_carga_sim">Sim</label>
+					<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_nao" value="nao">
+					<label for="placa_vermelha_carga_nao">Não</label>
+				</fieldset>
+				<fieldset class="ui-block-b ui-grid-b escondido" id="grupo_placa_vermelha_rntrc_carga">
+					<legend class="ui-block-a">RNTRC:</legend>
+					<div class="ui-block-b" id="grupo_placa_vermelha_rntrc_sel_carga">
 						<select name="placa_vermelha_rntrc_sel_carga" id="placa_vermelha_rntrc_sel_carga" data-theme="a">
 						</select>
 					</div>
-					<div class="ui-block-b escondido" id="grupo_placa_vermelha_rntrc_num_carga">
+					<div class="ui-block-c escondido" id="grupo_placa_vermelha_rntrc_num_carga">
 						<input id="placa_vermelha_rntrc_num_carga" type="text" name="placa_vermelha_rntrc_num_carga" value="" data-theme="a" />
 					</div>
 				</fieldset>
-			</fieldset>
+			</div>
 		</fieldset>
 
 
 		<fieldset class="ui-grid-a escondido" id="grupo_carga_perigosa_carga">
 			<legend class="ui-block-a">Carga perigosa:</legend>
-			<div class="ui-block-b ui-grid-b" id="grupo_carga_perigosa_dados_carga">
-				<div data-role="controlgroup" data-theme="a" class="ui-block-a" data-type="horizontal">
-					<input type="radio" name="carga_perigosa_carga" id="carga_perigosa_carga_sim" value="sim"> <label
-						for="carga_perigosa_carga_sim">Sim</label> <input type="radio" name="carga_perigosa_carga" id="carga_perigosa_carga_nao"
-						value="nao"> <label for="carga_perigosa_carga_nao">Não</label>
-				</div>
-				<div class="ui-block-b ui-grid-a escondido" id="grupo_carga_perigosa_numeros_carga">
+			<div class="ui-block-b ui-grid-a" id="grupo_carga_perigosa_dados_carga">
+				<fieldset data-role="controlgroup" data-theme="a" class="ui-block-a" data-type="horizontal">
+					<input type="radio" name="carga_perigosa_carga" id="carga_perigosa_carga_sim" value="sim">
+					<label for="carga_perigosa_carga_sim">Sim</label>
+					<input type="radio" name="carga_perigosa_carga" id="carga_perigosa_carga_nao" value="nao">
+					<label for="carga_perigosa_carga_nao">Não</label>
+				</fieldset>
+				<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_carga_perigosa_numeros_carga">
 					<div class="ui-block-a" id="grupo_carga_perigosa_risco_carga">
 						<select name="carga_perigosa_risco_carga" id="carga_perigosa_risco_carga" data-theme="a">
 						</select>
@@ -117,7 +132,7 @@
 						<select name="carga_perigosa_onu_carga" id="carga_perigosa_onu_carga" data-theme="a">
 						</select>
 					</div>
-				</div>
+				</fieldset>
 			</div>
 		</fieldset>
 
