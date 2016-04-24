@@ -45,8 +45,7 @@ controllers.caracterizacao_viagem_simples = {
 				'De R$ 4.501,00 a R$ 6.500,00', 'De R$ 6.501,00 a R$ 10.500,00', 'Acima de R$ 10.501,00', 'Não informada',
 				'Sem renda própria' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
-		
-		
+
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -58,20 +57,19 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
 		$('#origem_uf_simples').change(function() {
 			var estado = $(this).val();
-			if ( estado != '-1') {
-				//util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
-				
-				//$('#grupo_origem_municipio_simples').show();
-				
-				$('#origem_municipio_simples').off("click").click(function(){
-						util.autocomplete("origem_municipio_simples", lista_municipios[estado]);
+			if (estado != '-1') {
+				// util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
+
+				// $('#grupo_origem_municipio_simples').show();
+
+				$('#origem_municipio_simples').off("click").click(function() {
+					util.autocomplete("origem_municipio_simples", lista_municipios[estado]);
 				}).trigger('click');
 			}
 		});
-		//util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
+		// util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
 		util.progressoInputText("origem_municipio", "origem_municipio_simples", "grupo_destino_simples", true);
-		
-		
+
 		// Destino
 		util.progressoSelectPais("idDestinoPais", "destino_pais_simples", "destino_uf", "destino_municipio",
 				"grupo_frequencia_simples", "simples");
@@ -79,13 +77,13 @@ controllers.caracterizacao_viagem_simples = {
 		$('#destino_uf_simples').change(function() {
 			var estado = $(this).val();
 			if (estado != '-1') {
-				//util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
-				$('#destino_municipio_simples').off("click").click(function(){
-						util.autocomplete("destino_municipio_simples", lista_municipios[estado]);
+				// util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
+				$('#destino_municipio_simples').off("click").click(function() {
+					util.autocomplete("destino_municipio_simples", lista_municipios[estado]);
 				}).trigger('click');
 			}
 		});
-		//util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
+		// util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
 		util.progressoInputText("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples", true);
 
 		// Frequencia
@@ -102,11 +100,11 @@ controllers.caracterizacao_viagem_simples = {
 			if (Number($(this).val()) == -1) {
 				$("#grupo_pessoas_ambos").hide();
 				$("#grupo_pessoas_trabalho_simples").hide();
-				app.setAtributo("idMotivoDaViagem", null);
-				app.setAtributo("numeroDePessoasATrabalho", null);
+				app.setAtributo('idMotivoDaViagem', null);
+				app.setAtributo('numeroDePessoasATrabalho', null);
 				$("#pessoas_trabalho_simples").val(null);
 			} else {
-				app.setAtributo("idMotivoDaViagem", $(this).val());
+				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
 				if (Number($(this).val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
@@ -114,7 +112,7 @@ controllers.caracterizacao_viagem_simples = {
 					}
 				} else {
 					$("#grupo_pessoas_trabalho_simples").hide();
-					app.setAtributo("numeroDePessoasATrabalho", null);
+					app.setAtributo('numeroDePessoasATrabalho', null);
 					$("#pessoas_trabalho_simples").val(null);
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_renda_simples").show();
@@ -125,7 +123,7 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Pessoas no veículo
 		$('#pessoas_simples').change(function() {
-			app.setAtributo("numeroDePessoasNoVeiculo", $(this).val());
+			app.setAtributo('numeroDePessoasNoVeiculo', $(this).val());
 		});
 		$('#pessoas_simples').keyup(function() {
 			if (Number($("#pessoas_simples").val()) > 0) {

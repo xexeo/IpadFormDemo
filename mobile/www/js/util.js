@@ -78,14 +78,14 @@ var util = {
 			if (util.isEmpty(input.val()) || input.val().length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");
-				app.setAtributo("placa_numeros", null);
+				app.setAtributo('placa_numeros', null);
 			} else {
-				app.setAtributo("placa_letras", input.val());
+				app.setAtributo('placa_letras', input.val());
 				$('#grupo_placa_numeros_' + tipo_fluxo).show();
 				$('#placa_numeros_' + tipo_fluxo).focus();
 			}
 			$('#placa_letras_' + tipo_fluxo).change(function() {
-				app.setAtributo("placa_letras", $(this).val());
+				app.setAtributo('placa_letras', $(this).val());
 			});
 		});
 		$('#placa_numeros_' + tipo_fluxo).keyup(function() {
@@ -95,7 +95,7 @@ var util = {
 			var max_len = Number(input.attr("maxlength"));
 			if (input.val().length >= max_len) {
 				input.val(input.val().substring(0, max_len));
-				app.setAtributo("placa_numeros", input.val());
+				app.setAtributo('placa_numeros', input.val());
 			}
 		});
 	},
@@ -126,8 +126,8 @@ var util = {
 			$('#grupo_pais_' + tipo_fluxo).show();
 			$('#grupo_placa_' + tipo_fluxo).hide();
 			app.setAtributo('placaEstrangeira', true);
-			app.setAtributo("placa_letras", null);
-			app.setAtributo("placa_numeros", null);
+			app.setAtributo('placa_letras', null);
+			app.setAtributo('placa_numeros', null);
 			$('#placa_letras_' + tipo_fluxo).val(null);
 			$('#placa_numeros_' + tipo_fluxo).val(null);
 
