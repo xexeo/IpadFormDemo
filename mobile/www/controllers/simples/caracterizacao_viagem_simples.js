@@ -30,8 +30,7 @@ controllers.caracterizacao_viagem_simples = {
 		util.inicializaSelectCustomValueAsIndex("destino_uf_simples", lista_estados, "UF");
 		// FIM PAÍSES
 
-		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
-		util.inicializaSelect("frequencia_sel_simples", lista_frequencias);
+		util.inicializaSelectFrequencia('simples');
 
 		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido',
 				'Proximidade hotéis/postos', 'Segurança', 'Turismo/Paisagem', 'Ausência de pedágio',
@@ -157,27 +156,32 @@ controllers.caracterizacao_viagem_simples = {
 				&& util.validaInputText("pessoas_simples", "Pessoas no veículo")
 				&& util.validaSelect("renda_simples", "Renda do condutor")) {
 
-			var ok_origem_bra = true;
-			if ((Number($("#origem_pais_simples").val())) == 1) { // Brasil
-				ok_origem_bra = (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") && util.validaSelect(
-						"origem_municipio_simples", "Origem da viagem - município"));
+			var validacoes = true;
+			if (Number($("#origem_pais_simples").val()) == 1) { // Brasil
+				validacoes = validacoes
+						&& (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") && util.validaSelect(
+								"origem_municipio_simples", "Origem da viagem - município"));
 			}
 
-			var ok_destino_bra = true;
-			if ((Number($("#destino_pais_simples").val())) == 1) { // Brasil
-				ok_destino_bra = (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") && util.validaSelect(
-						"destino_municipio_simples", "Destino da viagem - município"));
+			if (Number($("#destino_pais_simples").val()) == 1) { // Brasil
+				validacoes = validacoes
+						&& (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") && util.validaSelect(
+								"destino_municipio_simples", "Destino da viagem - município"));
 			}
 
-			var qtd_pessoas_trabalho = true;
-			if ((Number($("#motivo_viagem_simples").val())) == 5) { // TODO Trabalho. Ajustar se id mudar.
-				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
-						"#pessoas_simples").val()));
+			if (Number($("#frequencia_num_simples").val()) < 1) {
+				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1));
+			}
+
+			if (Number($("#motivo_viagem_simples").val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+				validacoes = validacoes
+						&& (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
+								"#pessoas_simples").val())));
 			} else {
-				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0);
+				validacoes = validacoes && (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0));
 			}
 
-			return (ok_origem_bra && ok_destino_bra && qtd_pessoas_trabalho);
+			return validacoes;
 		}
 		return false;
 	}

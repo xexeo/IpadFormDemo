@@ -28,8 +28,7 @@ controllers.caracterizacao_viagem_carga = {
 		util.inicializaSelectCustomValueAsIndex("destino_uf_carga", lista_estados, "UF");
 		// FIM PAÍSES
 
-		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
-		util.inicializaSelect("frequencia_sel_carga", lista_frequencias);
+		util.inicializaSelectFrequencia('carga');
 
 		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
 				'Ausência de pedágio', 'Próximo a hotéis e postos', 'Segurança', 'Outros' ];
@@ -46,15 +45,15 @@ controllers.caracterizacao_viagem_carga = {
 		$('#origem_uf_carga').change(function() {
 			var estado = $(this).val();
 			if (estado != '-1') {
-				//util.inicializaSelectMunicipio("origem_municipio_carga", $(this).val(), "Município");
-				$('#origem_municipio_carga').off("click").click(function(){
-						util.autocomplete("origem_municipio_carga", lista_municipios[estado]);
+				// util.inicializaSelectMunicipio("origem_municipio_carga", $(this).val(), "Município");
+				$('#origem_municipio_carga').off("click").click(function() {
+					util.autocomplete("origem_municipio_carga", lista_municipios[estado]);
 				}).trigger('click');
 			}
 		});
-		//util.progressoSelect("origem_municipio", "origem_municipio_carga", "grupo_destino_carga");
+		// util.progressoSelect("origem_municipio", "origem_municipio_carga", "grupo_destino_carga");
 		util.progressoInputText("origem_municipio", "origem_municipio_carga", "grupo_destino_carga", true);
-		
+
 		// Destino
 		util.progressoSelectPais("idDestinoPais", "destino_pais_carga", "destino_uf", "destino_municipio",
 				"grupo_frequencia_carga", "carga");
@@ -62,13 +61,13 @@ controllers.caracterizacao_viagem_carga = {
 		$('#destino_uf_carga').change(function() {
 			var estado = $(this).val();
 			if (estado != '-1') {
-				//util.inicializaSelectMunicipio("destino_municipio_carga", $(this).val(), "Município");
-				$('#destino_municipio_carga').off("click").click(function(){
-						util.autocomplete("destino_municipio_carga", lista_municipios[estado]);
+				// util.inicializaSelectMunicipio("destino_municipio_carga", $(this).val(), "Município");
+				$('#destino_municipio_carga').off("click").click(function() {
+					util.autocomplete("destino_municipio_carga", lista_municipios[estado]);
 				}).trigger('click');
 			}
 		});
-		//util.progressoSelect("destino_municipio", "destino_municipio_carga", "grupo_frequencia_carga");
+		// util.progressoSelect("destino_municipio", "destino_municipio_carga", "grupo_frequencia_carga");
 		util.progressoInputText("destino_municipio", "destino_municipio_carga", "grupo_frequencia_carga", true);
 
 		// Frequencia
@@ -89,19 +88,24 @@ controllers.caracterizacao_viagem_carga = {
 				&& util.validaSelect("frequencia_sel_carga", "Frequência da viagem")
 				&& util.validaSelect("motivo_rota_carga", "Motivo da escolha da rota")) {
 
-			var ok_origem_bra = true;
+			var validacoes = true;
 			if ((Number($("#origem_pais_carga").val())) == 1) { // Brasil
-				ok_origem_bra = (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaSelect(
-						"origem_municipio_carga", "Origem da viagem - município"));
+				validacoes = validacoes
+						&& (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaSelect(
+								"origem_municipio_carga", "Origem da viagem - município"));
 			}
 
-			var ok_destino_bra = true;
 			if ((Number($("#destino_pais_carga").val())) == 1) { // Brasil
-				ok_destino_bra = (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaSelect(
-						"destino_municipio_carga", "Destino da viagem - município"));
+				validacoes = validacoes
+						&& (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaSelect(
+								"destino_municipio_carga", "Destino da viagem - município"));
 			}
 
-			return (ok_origem_bra && ok_destino_bra);
+			if (Number($("#frequencia_num_carga").val()) < 1) {
+				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_carga", "Frequência da viagem", 1));
+			}
+
+			return validacoes;
 		}
 		return false;
 	}

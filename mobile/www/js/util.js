@@ -58,6 +58,21 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	inicializaSelectFrequencia : function(tipo_fluxo) {
+		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
+		var nome_campo = 'frequencia_sel_' + tipo_fluxo;
+		util.inicializaSelect(nome_campo, lista_frequencias);
+		$("#" + nome_campo).change(
+				function() {
+					var freq_num = $('#frequencia_num_' + tipo_fluxo);
+					if (($(this).val() == (jQuery.inArray('Eventualmente', lista_frequencias) + 1))
+							&& (util.isEmpty(freq_num.val()) || (Number(freq_num.val()) < 1))) {
+						freq_num.val(1);
+						app.setAtributo('frequencia_num', 1);
+					}
+				});
+	},
+
 	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
@@ -299,9 +314,9 @@ var util = {
 					msgComplemento = "O valor do campo deve estar entre " + min + " e " + max;
 				}
 			} else if (!util.isEmpty(min)) {
-				msgComplemento = "O menor valor posível para o campo é " + min;
+				msgComplemento = "O menor valor possível do campo é " + min;
 			} else if (!util.isEmpty(max)) {
-				msgComplemento = "O maior valor posível para o campo é " + max;
+				msgComplemento = "O maior valor possível do campo é " + max;
 			}
 			util.alerta_msg(campo_aviso, msgComplemento);
 			return false;
