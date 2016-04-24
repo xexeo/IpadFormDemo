@@ -73,8 +73,7 @@ controllers.identificacao_visual_carga = {
 		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_unica_carga");
 
 		// Placa Brasil
-		// util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
-		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
+		util.progressoPlacaNumeros("carga", "grupo_placa_vermelha_carga");
 
 		// Placa única
 		util.progressoInputText("placa_unica", "placa_unica_carga", "grupo_placa_vermelha_carga");
@@ -186,8 +185,10 @@ controllers.identificacao_visual_carga = {
 					ok_placa_veiculo = false;
 				}
 			} else if (option == 'nao') {
-				if (!util.validaInputText("placa_letras_carga", "Placa do veículo")
-						|| !util.validaInputText("placa_numeros_carga", "Placa do veículo")) {
+				if (!util.validaInputText("placa_letras_carga", "Placa do veículo (letras)")
+						|| !util.validaInputText("placa_numeros_carga", "Placa do veículo (números)")
+						|| !util.validaLenInputText("placa_letras_carga", "Placa do veículo (letras)")
+						|| !util.validaLenInputText("placa_numeros_carga", "Placa do veículo (números)")) {
 					ok_placa_veiculo = false;
 				}
 			}

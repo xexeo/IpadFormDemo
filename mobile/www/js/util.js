@@ -165,6 +165,29 @@ var util = {
 		});
 	},
 
+	progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) {
+		var nome_registro = "placa_numeros";
+		var nome_campo = "placa_numeros_" + tipo_fluxo;
+
+		$('#' + nome_campo).keyup(function() {
+			progride($(this).val(), Number($(this).attr("maxlength")));
+			// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
+			// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
+			app.setAtributo(nome_registro, $(this).val());
+			$('#' + nome_campo).change(function() {
+				app.setAtributo(nome_registro, $(this).val());
+			});
+		});
+
+		function progride(value, min_len) {
+			if (util.isEmpty(value) || (String(value).trim().length < min_len)) {
+				$("#" + grupo_proximo).hide();
+			} else {
+				$("#" + grupo_proximo).show();
+			}
+		}
+	},
+
 	/**
 	 * 
 	 * @param nome_registro
@@ -256,7 +279,6 @@ var util = {
 				$("#" + grupo_proximo).show();
 			}
 		}
-		;
 	},
 
 	// Funções para validação dos componentes
@@ -290,13 +312,31 @@ var util = {
 	},
 
 	validaInputText : function(nome_campo, campo_aviso) {
-		var value = $.trim($('#' + nome_campo).val())
+		var value = $.trim($('#' + nome_campo).val());
+		var max_len = Number($.trim($('#' + nome_campo).attr("maxlength")))
 		if (value.length > 0) {
-			return true;
+			if ((max_len > 0) && (value.length > max_len)) {
+				util.alerta_msg(campo_aviso, "O campo deve ter no máximo " + max_len + " caracteres.");
+				return false;
+			} else {
+				return true;
+			}
 		} else {
 			util.alerta_msg(campo_aviso);
 			return false;
 		}
+	},
+
+	validaLenInputText : function(nome_campo, campo_aviso) {
+		var value = $.trim($('#' + nome_campo).val());
+		var len = Number($.trim($('#' + nome_campo).attr("maxlength")));
+		if (len > 0) {
+			if (value.length != len) {
+				util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");
+				return false;
+			}
+		}
+		return true;
 	},
 
 	validaInputNumberRange : function(nome_campo, campo_aviso, min, max) {
