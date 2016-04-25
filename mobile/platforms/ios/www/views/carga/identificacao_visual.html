@@ -73,12 +73,14 @@
 			<legend class="ui-block-a">Placa do veículo:</legend>
 			<div class="ui-block-b ui-grid-a" id="grupo_placa_dados_carga">
 				<div class="ui-block-a placa_prefixo">
-					<input id="placa_letras_carga" class="input_placa" type="text" name="placa_letras_carga" value="" data-theme="a" />
+					<input id="placa_letras_carga" class="input_placa" type="text" name="placa_letras_carga" value="" data-theme="a"
+						maxlength="3" pattern="[A-Z]{3}" />
 				</div>
 				<div class="ui-block-b ui-grid-a placa_sufixo escondido" id="grupo_placa_numeros_carga">
 					<span class="ui-block-a">-</span>
 					<div class="ui-block-b">
-						<input id="placa_numeros_carga" type="text" name="placa_numeros_carga" value="" data-theme="a" />
+						<input id="placa_numeros_carga" type="number" name="placa_numeros_carga" value="" data-theme="a" max="9999" maxlength="4"
+							pattern="[0-9]{4}" />
 					</div>
 				</div>
 			</div>
@@ -112,7 +114,6 @@
 				</fieldset>
 			</div>
 		</fieldset>
-
 
 		<fieldset class="ui-grid-a escondido" id="grupo_carga_perigosa_carga">
 			<legend class="ui-block-a">Carga perigosa:</legend>

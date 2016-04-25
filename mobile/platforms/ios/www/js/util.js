@@ -25,10 +25,34 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
-		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+	inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil, mensagem) {
+		var lista = paises.listados();
+		var insert_inicial = "";
+		if (!inclui_Brasil) {
+			if (util.isEmpty(mensagem)) {
+				msgSelecione = "Selecione";
+			} else {
+				msgSelecione = mensagem;
+			}
+			insert_inicial = "<option value='-1'>" + msgSelecione + "</option>\n";
+		}
+		$.each(lista, function(index, item) {
+			if (inclui_Brasil || (item != "Brasil")) {
+				var select_Brasil = "";
+				if (item == "Brasil") {
+					select_Brasil = " selected";
+					app.setAtributo(nome_registro, index + 1);
+				}
+				insert_inicial += "<option value='" + (index + 1) + "'" + select_Brasil + ">" + item + "</option>\n";
+			}
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
 
-		$.each(lista_municipios[uf_sigla], function(index, item) {
+	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
+		var lista = lista_municipios[uf_sigla];
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
 			insert_inicial += "<option value='" + item.id + "|" + item.geocod + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
@@ -36,11 +60,31 @@ var util = {
 
 	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
-
 		$.each(lista, function(index, item) {
 			insert_inicial += "<option value='" + item.id + "'>" + item.numeroid + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
+	inicializaPlacas : function(tipo_fluxo) {
+		$('.input_placa').keyup(function() {
+			var input_placa = $(this);
+			var regex = new RegExp("[^a-zA-Z]+");
+			input_placa.val(input_placa.val().replace(regex, ''));
+			if (input_placa.val().length >= Number(input_placa.attr("maxlength"))) {
+				input_placa.val(input_placa.val().toUpperCase());
+				$('#placa_numeros_' + tipo_fluxo).focus();
+			}
+		});
+		$('#placa_numeros_' + tipo_fluxo).keyup(function() {
+			var input_placa_numeros = $(this);
+			var regex = new RegExp("[^0-9]+");
+			input_placa_numeros.val(input_placa_numeros.val().replace(regex, ''));
+			var max_len = Number(input_placa_numeros.attr("maxlength"));
+			if (input_placa_numeros.val().length >= max_len) {
+				input_placa_numeros.val(input_placa_numeros.val().substring(0, max_len));
+			}
+		});
 	},
 
 	// Funções para o progresso
@@ -63,7 +107,7 @@ var util = {
 			app.setAtributo(nome_registro, false);
 		});
 	},
-	
+
 	progressoRadioPlacaEstrangeira : function(tipo_fluxo) {
 		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).show();
@@ -79,18 +123,20 @@ var util = {
 			}
 		});
 		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
-			$('#grupo_pais_' + tipo_fluxo).hide()
-			$('#grupo_placa_unica_' + tipo_fluxo).hide()
+			$('#grupo_pais_' + tipo_fluxo).hide();
+			$('#grupo_placa_unica_' + tipo_fluxo).hide();
+			if ((registro.placaEstrangeira == undefined) || (registro.placaEstrangeira)) {
+				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
+			}
 			app.setAtributo('idPaisPlacaEstrangeira', null);
 			app.setAtributo('placaEstrangeira', false);
 			app.setAtributo('placa_unica', null);
 			$('#placa_unica_' + tipo_fluxo).val(null);
 			util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");
-
 			$("#grupo_placa_" + tipo_fluxo).show();
 		});
 	},
-	
+
 	/**
 	 * 
 	 * @param nome_registro
@@ -340,7 +386,7 @@ var util = {
 					} else {
 						txt = $(this).html();
 					}
-					field.val(txt).trigger('change').focus(); //scrollLeft(0)
+					field.val(txt).trigger('change').scrollLeft(0);
 					overlayInput.close();
 				});
 				ul_list.listview("refresh");
@@ -356,7 +402,8 @@ var util = {
 		if (util.isEmpty(msgComplemento)) {
 			alert("O campo " + campo_aviso + " não foi preenchido.", "Erro no preenchimento!", null, 'error');
 		} else {
-			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento, 'Erro no preenchimento!',null, 'error');
+			alert("O campo " + campo_aviso + " não foi preenchido corretamente.<br />" + msgComplemento,
+					'Erro no preenchimento!', null, 'error');
 		}
 	},
 

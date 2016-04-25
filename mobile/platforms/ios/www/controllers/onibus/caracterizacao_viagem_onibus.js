@@ -21,10 +21,10 @@ controllers.caracterizacao_viagem_onibus = {
 	inicializaElementos : function() {
 
 		// INICIO PAÍSES
-		util.inicializaSelectCustom("origem_pais_onibus", paises.listados(), "País");
+		util.inicializaSelectPais("idOrigemPais", "origem_pais_onibus", true, "País");
 		util.inicializaSelectCustomValueAsIndex("origem_uf_onibus", lista_estados, "UF");
 
-		util.inicializaSelectCustom("destino_pais_onibus", paises.listados(), "País");
+		util.inicializaSelectPais("idDestinoPais", "destino_pais_onibus", true, "País");
 		util.inicializaSelectCustomValueAsIndex("destino_uf_onibus", lista_estados, "UF");
 		// FIM PAÍSES
 
