@@ -386,7 +386,7 @@ var util = {
 					} else {
 						txt = $(this).html();
 					}
-					field.val(txt).trigger('change').focus(); //scrollLeft(0)
+					field.val(txt).trigger('change').scrollLeft(0);
 					overlayInput.close();
 				});
 				ul_list.listview("refresh");
