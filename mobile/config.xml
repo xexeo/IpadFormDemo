@@ -49,5 +49,6 @@
 	<preference name="Orientation" value="landscape" />
 	<preference name="FadeSplashScreen" value="false" />
     <preference name="FullScreen" value="false" />
+	<preference name="KeyboardDisplayRequiresUserAction" value="false" /> 
 
 </widget>

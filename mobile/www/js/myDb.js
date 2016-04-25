@@ -50,6 +50,7 @@ myDb = {
 		$.each(myDb.tabelaOD, function(index, item) {
 			if (item.field == str) {
 				found = true;
+				return false; //breaks $.each
 			}
 		});
 		return found;

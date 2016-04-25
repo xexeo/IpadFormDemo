@@ -50,7 +50,7 @@ controllers.identificacao_visual_carga = {
 			elemTipoCarroceria.val(imgAlt);
 			$('label[for="' + elemTipoCarroceria.attr('id') + '"]').text(imgAlt);
 
-			app.setAtributo('tipo_carroceria', $(this).attr('id').split("_")[1]);
+			app.setAtributo('idTipoCarroceria', $(this).attr('id').split("_")[1]);
 			$("#grupo_tipo_carroceria_imagens_carga").hide();
 			$("#grupo_tipo_carroceria_imagens_carga").next().show();
 		});
@@ -61,11 +61,11 @@ controllers.identificacao_visual_carga = {
 		$(".img_carroceria:not(.tipo_porta_conteiner)").click(function() {
 			$("#grupo_tipo_conteiner_carga").hide();
 			$("#grupo_placa_estrangeira_carga").show();
-			app.setAtributo("tipo_conteiner", null);
+			app.setAtributo('idTipoDeContainer', null);
 			util.progressoRestartSelect("tipo_conteiner_carga", "Selecione");
 		});
 
-		util.progressoSelect("tipo_conteiner", "tipo_conteiner_carga", "grupo_placa_estrangeira_carga");
+		util.progressoSelect('idTipoDeContainer', "tipo_conteiner_carga", "grupo_placa_estrangeira_carga");
 
 		util.progressoRadioPlacaEstrangeira("carga");
 
@@ -73,8 +73,7 @@ controllers.identificacao_visual_carga = {
 		util.progressoSelect("idPaisPlacaEstrangeira", "pais_carga", "grupo_placa_unica_carga");
 
 		// Placa Brasil
-		util.progressoInputText("placa_letras", "placa_letras_carga", "grupo_placa_numeros_carga");
-		util.progressoInputText("placa_numeros", "placa_numeros_carga", "grupo_placa_vermelha_carga");
+		util.progressoPlacaNumeros("carga", "grupo_placa_vermelha_carga");
 
 		// Placa única
 		util.progressoInputText("placa_unica", "placa_unica_carga", "grupo_placa_vermelha_carga");
@@ -86,12 +85,12 @@ controllers.identificacao_visual_carga = {
 				$('#grupo_carga_perigosa_carga').hide();
 				$('#grupo_placa_vermelha_rntrc_num_carga').hide();
 			}
-			app.setAtributo('placa_vermelha', true);
+			app.setAtributo('placaVermelha', true);
 		});
 		$('#placa_vermelha_carga_nao').click(function() {
 			$('#grupo_placa_vermelha_rntrc_carga').hide();
 			$('#grupo_carga_perigosa_carga').show();
-			app.setAtributo('placa_vermelha', false);
+			app.setAtributo('placaVermelha', false);
 			app.setAtributo('placa_vermelha_rntrc_sel', null);
 			app.setAtributo('placa_vermelha_rntrc_num', null);
 			$("#placa_vermelha_rntrc_num_carga").val(null);
@@ -120,32 +119,32 @@ controllers.identificacao_visual_carga = {
 			if ((registro.carga_perigosa == undefined) || (!registro.carga_perigosa)) {
 				$('#grupo_identificacao_visual_carga_avancar').hide();
 			}
-			app.setAtributo('carga_perigosa', true);
+			app.setAtributo('possuiCargaPerigosa', true);
 		});
 		$('#carga_perigosa_carga_nao').click(function() {
 			$('#grupo_carga_perigosa_numeros_carga').hide();
 			$('#grupo_identificacao_visual_carga_avancar').show();
-			app.setAtributo('carga_perigosa', false);
-			app.setAtributo('carga_perigosa_risco', null);
-			app.setAtributo('carga_perigosa_onu', null);
+			app.setAtributo('possuiCargaPerigosa', false);
+			app.setAtributo('idNumeroDeRisco', null);
+			app.setAtributo('idNumeroDaOnu', null);
 			util.progressoRestartSelect("carga_perigosa_risco_carga", "Número de Risco");
 			util.progressoRestartSelect("carga_perigosa_onu_carga", "Número da ONU");
 		});
-		// util.progressoSelect("carga_perigosa_risco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
+		// util.progressoSelect('idNumeroDeRisco', "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
 		$("#carga_perigosa_risco_carga").change(function() {
-			var nome_registro = "carga_perigosa_risco";
+			var nome_registro = 'idNumeroDeRisco';
 			if (Number($(this).val()) != -1) {
 				app.setAtributo(nome_registro, $(this).val());
 				$("#grupo_carga_perigosa_onu_carga").show();
 			} else {
 				app.setAtributo(nome_registro, null);
-				app.setAtributo("carga_perigosa_onu", null);
+				app.setAtributo('idNumeroDaOnu', null);
 				$("#grupo_carga_perigosa_onu_carga").hide();
 				$("#grupo_identificacao_visual_carga_avancar").hide();
 				util.progressoRestartSelect("carga_perigosa_onu_carga", "Número da ONU");
 			}
 		});
-		util.progressoSelect("carga_perigosa_onu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
+		util.progressoSelect('idNumeroDaOnu', "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
@@ -186,8 +185,10 @@ controllers.identificacao_visual_carga = {
 					ok_placa_veiculo = false;
 				}
 			} else if (option == 'nao') {
-				if (!util.validaInputText("placa_letras_carga", "Placa do veículo")
-						|| !util.validaInputText("placa_numeros_carga", "Placa do veículo")) {
+				if (!util.validaInputText("placa_letras_carga", "Placa do veículo (letras)")
+						|| !util.validaInputText("placa_numeros_carga", "Placa do veículo (números)")
+						|| !util.validaLenInputText("placa_letras_carga", "Placa do veículo (letras)")
+						|| !util.validaLenInputText("placa_numeros_carga", "Placa do veículo (números)")) {
 					ok_placa_veiculo = false;
 				}
 			}

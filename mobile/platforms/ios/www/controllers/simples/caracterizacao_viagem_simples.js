@@ -30,8 +30,7 @@ controllers.caracterizacao_viagem_simples = {
 		util.inicializaSelectCustomValueAsIndex("destino_uf_simples", lista_estados, "UF");
 		// FIM PAÍSES
 
-		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
-		util.inicializaSelect("frequencia_sel_simples", lista_frequencias);
+		util.inicializaSelectFrequencia('simples');
 
 		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido',
 				'Proximidade hotéis/postos', 'Segurança', 'Turismo/Paisagem', 'Ausência de pedágio',
@@ -45,8 +44,7 @@ controllers.caracterizacao_viagem_simples = {
 				'De R$ 4.501,00 a R$ 6.500,00', 'De R$ 6.501,00 a R$ 10.500,00', 'Acima de R$ 10.501,00', 'Não informada',
 				'Sem renda própria' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
-		
-		
+
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -58,20 +56,19 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
 		$('#origem_uf_simples').change(function() {
 			var estado = $(this).val();
-			if ( estado != '-1') {
-				//util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
-				
-				//$('#grupo_origem_municipio_simples').show();
-				
-				$('#origem_municipio_simples').off("click").click(function(){
-						util.autocomplete("origem_municipio_simples", lista_municipios[estado]);
+			if (estado != '-1') {
+				// util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
+
+				// $('#grupo_origem_municipio_simples').show();
+
+				$('#origem_municipio_simples').off("click").click(function() {
+					util.autocomplete("origem_municipio_simples", lista_municipios[estado], "Município de origem", "Entre com o município de origem.");
 				}).trigger('click');
 			}
 		});
-		//util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
+		// util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
 		util.progressoInputText("origem_municipio", "origem_municipio_simples", "grupo_destino_simples", true);
-		
-		
+
 		// Destino
 		util.progressoSelectPais("idDestinoPais", "destino_pais_simples", "destino_uf", "destino_municipio",
 				"grupo_frequencia_simples", "simples");
@@ -79,13 +76,13 @@ controllers.caracterizacao_viagem_simples = {
 		$('#destino_uf_simples').change(function() {
 			var estado = $(this).val();
 			if (estado != '-1') {
-				//util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
-				$('#destino_municipio_simples').off("click").click(function(){
-						util.autocomplete("destino_municipio_simples", lista_municipios[estado]);
+				// util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
+				$('#destino_municipio_simples').off("click").click(function() {
+					util.autocomplete("destino_municipio_simples", lista_municipios[estado],"Município de destino", "Entre com o município de destino.");
 				}).trigger('click');
 			}
 		});
-		//util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
+		// util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
 		util.progressoInputText("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples", true);
 
 		// Frequencia
@@ -102,11 +99,11 @@ controllers.caracterizacao_viagem_simples = {
 			if (Number($(this).val()) == -1) {
 				$("#grupo_pessoas_ambos").hide();
 				$("#grupo_pessoas_trabalho_simples").hide();
-				app.setAtributo("idMotivoDaViagem", null);
-				app.setAtributo("numeroDePessoasATrabalho", null);
+				app.setAtributo('idMotivoDaViagem', null);
+				app.setAtributo('numeroDePessoasATrabalho', null);
 				$("#pessoas_trabalho_simples").val(null);
 			} else {
-				app.setAtributo("idMotivoDaViagem", $(this).val());
+				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
 				if (Number($(this).val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
@@ -114,7 +111,7 @@ controllers.caracterizacao_viagem_simples = {
 					}
 				} else {
 					$("#grupo_pessoas_trabalho_simples").hide();
-					app.setAtributo("numeroDePessoasATrabalho", null);
+					app.setAtributo('numeroDePessoasATrabalho', null);
 					$("#pessoas_trabalho_simples").val(null);
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_renda_simples").show();
@@ -125,7 +122,7 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Pessoas no veículo
 		$('#pessoas_simples').change(function() {
-			app.setAtributo("numeroDePessoasNoVeiculo", $(this).val());
+			app.setAtributo('numeroDePessoasNoVeiculo', $(this).val());
 		});
 		$('#pessoas_simples').keyup(function() {
 			if (Number($("#pessoas_simples").val()) > 0) {
@@ -159,27 +156,32 @@ controllers.caracterizacao_viagem_simples = {
 				&& util.validaInputText("pessoas_simples", "Pessoas no veículo")
 				&& util.validaSelect("renda_simples", "Renda do condutor")) {
 
-			var ok_origem_bra = true;
-			if ((Number($("#origem_pais_simples").val())) == 1) { // Brasil
-				ok_origem_bra = (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") && util.validaSelect(
-						"origem_municipio_simples", "Origem da viagem - município"));
+			var validacoes = true;
+			if (Number($("#origem_pais_simples").val()) == 1) { // Brasil
+				validacoes = validacoes
+						&& (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") && util.validaSelect(
+								"origem_municipio_simples", "Origem da viagem - município"));
 			}
 
-			var ok_destino_bra = true;
-			if ((Number($("#destino_pais_simples").val())) == 1) { // Brasil
-				ok_destino_bra = (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") && util.validaSelect(
-						"destino_municipio_simples", "Destino da viagem - município"));
+			if (Number($("#destino_pais_simples").val()) == 1) { // Brasil
+				validacoes = validacoes
+						&& (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") && util.validaSelect(
+								"destino_municipio_simples", "Destino da viagem - município"));
 			}
 
-			var qtd_pessoas_trabalho = true;
-			if ((Number($("#motivo_viagem_simples").val())) == 5) { // TODO Trabalho. Ajustar se id mudar.
-				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
-						"#pessoas_simples").val()));
+			if (Number($("#frequencia_num_simples").val()) < 1) {
+				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1));
+			}
+
+			if (Number($("#motivo_viagem_simples").val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+				validacoes = validacoes
+						&& (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
+								"#pessoas_simples").val())));
 			} else {
-				qtd_pessoas_trabalho = util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0);
+				validacoes = validacoes && (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0));
 			}
 
-			return (ok_origem_bra && ok_destino_bra && qtd_pessoas_trabalho);
+			return validacoes;
 		}
 		return false;
 	}

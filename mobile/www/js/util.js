@@ -367,11 +367,13 @@ var util = {
 
 	isFilterRunning : false, // controla se o filtro já terminou
 
-	autocomplete : function(nome_do_campo, lista) {
+	autocomplete : function(nome_do_campo, lista, title, txt_content) {
+		title = (title == null)? "Busca" : title;
+		txt_content = (txt_content == null) ? "Entre com o início da palavra." : txt_content;
 		var field = $('#' + nome_do_campo);
 		var overlayInput = $.confirm({
-			title : 'Busca',
-			content : 'Entre com o início da palavra.',
+			title : title,
+			content : txt_content,
 			confirmButton : null,
 			cancelButton : null,
 			animation : 'none',
@@ -382,22 +384,26 @@ var util = {
 			onClose : function() {
 				util.isFilterRunning = false;
 			},
+			
 			isCentered : false,
 		});
 		overlayInput.$body.addClass("ui-page-theme-a");
 
 		var extraHtml = '<form class="ui-filterable" > \
-							<input id="filtro" type="text" data-type="search"> \
+							<input id="filtro" type="text" autofocus data-type="search"> \
 						</form> \
 						<ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro" data-inset="true"></ul>';
 		overlayInput.$content.append(extraHtml);
 		var txtInput = overlayInput.$content.find('#filtro');
+		console.log(txtInput);
 		txtInput.textinput();
-		txtInput.focus();
+		/*txtInput.one('load', function(){
+			$(this).focus();
+			alert('tentou focar');
+		});*/
 		overlayInput.$content.find('#filtro_autocomplete').listview();
-		// overlayInput.setDialogDimension();
 		overlayInput.$b.css('margin-top', '0px');
-		// overlayInput.$content.find('.ui-filterable').filterable();
+		
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
 			console.log('entrou no filtro');
@@ -458,6 +464,7 @@ var util = {
 						txt = $(this).html();
 					}
 					field.val(txt).trigger('change').scrollLeft(0);
+					//overlayInput.$content.find('#filtro').focus();
 					overlayInput.close();
 				});
 				ul_list.listview("refresh");

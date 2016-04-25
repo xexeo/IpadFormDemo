@@ -32,8 +32,7 @@ controllers.identificacao_visual_simples = {
 		util.progressoSelect("idPaisPlacaEstrangeira", "pais_simples", "grupo_placa_unica_simples");
 
 		// Placa Brasil
-		util.progressoInputText("placa_letras", "placa_letras_simples", "grupo_placa_numeros_simples");
-		util.progressoInputText("placa_numeros", "placa_numeros_simples", "grupo_identificacao_visual_simples_avancar");
+		util.progressoPlacaNumeros("simples", "grupo_identificacao_visual_simples_avancar");
 
 		// Placa única
 		util.progressoInputText("placa_unica", "placa_unica_simples", "grupo_identificacao_visual_simples_avancar");
@@ -56,8 +55,10 @@ controllers.identificacao_visual_simples = {
 				return ok_placa_estrangeira && util.validaSelect("pais_simples", "País")
 						&& util.validaInputText("placa_unica_simples", "Placa do veículo");
 			} else if (option == 'nao') {
-				return util.validaInputText("placa_letras_simples", "Placa do veículo")
-						&& util.validaInputText("placa_numeros_simples", "Placa do veículo")
+				return util.validaInputText("placa_letras_simples", "Placa do veículo (letras)")
+						&& util.validaInputText("placa_numeros_simples", "Placa do veículo (números)")
+						&& util.validaLenInputText("placa_letras_simples", "Placa do veículo (letras)")
+						&& util.validaLenInputText("placa_numeros_simples", "Placa do veículo (números)");
 			}
 
 			return true;

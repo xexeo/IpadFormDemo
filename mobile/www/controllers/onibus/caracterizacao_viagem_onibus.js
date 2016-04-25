@@ -46,7 +46,7 @@ controllers.caracterizacao_viagem_onibus = {
 			if (estado != '-1') {
 				// util.inicializaSelectMunicipio("origem_municipio_onibus", $(this).val(), "Município");
 				$('#origem_municipio_onibus').off("click").click(function() {
-					util.autocomplete("origem_municipio_onibus", lista_municipios[estado]);
+					util.autocomplete("origem_municipio_onibus", lista_municipios[estado],"Município de origem", "Entre com o município de origem.");
 				}).trigger('click')
 			}
 		});
@@ -62,7 +62,7 @@ controllers.caracterizacao_viagem_onibus = {
 			if (estado != '-1') {
 				// util.inicializaSelectMunicipio("destino_municipio_onibus", $(this).val(), "Município");
 				$('#destino_municipio_onibus').off("click").click(function() {
-					util.autocomplete("destino_municipio_onibus", lista_municipios[estado]);
+					util.autocomplete("destino_municipio_onibus", lista_municipios[estado],"Município de destino", "Entre com o município de destino.");
 				}).trigger('click');
 			}
 		});

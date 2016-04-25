@@ -564,7 +564,7 @@ var jconfirm, Jconfirm;
                 this.onOpen();
 
             var jcr = 'jconfirm-box' + this._rand;
-            this.$b.attr('aria-labelledby', jcr).attr('tabindex', -1).focus();
+            //this.$b.attr('aria-labelledby', jcr).attr('tabindex', -1).focus();
             if (this.$title)
                 this.$title.attr('id', jcr); else if (this.$content)
                 this.$content.attr('id', jcr);

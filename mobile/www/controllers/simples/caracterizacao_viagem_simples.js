@@ -62,7 +62,7 @@ controllers.caracterizacao_viagem_simples = {
 				// $('#grupo_origem_municipio_simples').show();
 
 				$('#origem_municipio_simples').off("click").click(function() {
-					util.autocomplete("origem_municipio_simples", lista_municipios[estado]);
+					util.autocomplete("origem_municipio_simples", lista_municipios[estado], "Município de origem", "Entre com o município de origem.");
 				}).trigger('click');
 			}
 		});
@@ -78,7 +78,7 @@ controllers.caracterizacao_viagem_simples = {
 			if (estado != '-1') {
 				// util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
 				$('#destino_municipio_simples').off("click").click(function() {
-					util.autocomplete("destino_municipio_simples", lista_municipios[estado]);
+					util.autocomplete("destino_municipio_simples", lista_municipios[estado],"Município de destino", "Entre com o município de destino.");
 				}).trigger('click');
 			}
 		});

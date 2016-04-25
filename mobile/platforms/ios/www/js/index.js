@@ -112,7 +112,7 @@ var app = {
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
 		if (device.platform == 'iOS' || device.platform == 'Android') {
-			app.filePaths = {}; //inicia a variável
+			app.filePaths = {}; // inicia a variável
 
 			setTimeout(function() {
 				navigator.splashscreen.hide();
@@ -246,9 +246,11 @@ var app = {
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
-		
-		//remove o filtro original do autocomplete para poder filtrar acentos
-		$.mobile.filterable.prototype.options.filterCallback = function (index, value){return false};
+
+		// remove o filtro original do autocomplete para poder filtrar acentos
+		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
+			return false
+		};
 	},
 
 	trocaPagina : function(view, controller) {
@@ -326,32 +328,63 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
-		if(!util.isEmpty(registro.placaEstrangeira) && !registro.placaEstrangeira) {
-			if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
+		// PLACA
+		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
+			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
 				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
-			}	
-		}
-		else if(!util.isEmpty(registro.placaEstrangeira) && registro.placaEstrangeira) {
+			}
+		} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
 			if (!util.isEmpty(registro.placa_unica)) {
 				app.setAtributo('placa', registro.placa_unica.toUpperCase());
-			}	
+			}
+		}
+		if (util.isEmpty(registro.placa)) {
+			// TODO: ERRO (placa vazia)
+			app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
 		}
 
-		if (!util.isEmpty(registro.frequencia_num) || !util.isEmpty(registro.frequencia_sel)) {
+		// FRENQUENCIA
+		if ((util.isEmpty(registro.frequencia_num) || (registro.frequencia_num < 1)) && (registro.frequencia_sel == 5)) { // Eventualmente
+			app.setAtributo('frequencia_num', 1);
+		}
+		if ((!util.isEmpty(registro.frequencia_num)) && (!util.isEmpty(registro.frequencia_sel))) {
 			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
+		} else {
+			// TODO: ERRO (frequencia vazia)
+			app.logger.log("ERRO (frequencia vazia) no registro: ", registro.id);
 		}
 
+		// ORIGEM: MUNICÍPIO E GEOCOD
 		var municipioSplit;
-		if (registro.origem_municipio != null) {
+		if (!util.isEmpty(registro.origem_municipio)) {
 			municipioSplit = registro.origem_municipio.split("|");
 			app.setAtributo('idOrigemMunicipio', municipioSplit[1].trim());
 			app.setAtributo('geocod_origem', municipioSplit[2].trim());
 		}
+		if ((util.isEmpty(registro.idOrigemMunicipio) || util.isEmpty(registro.geocod_origem)) && (registro.idOrigemPais == 1)) { // Brasil
+			// TODO: ERRO (destino vazio)
+			app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+		}
 
-		if (registro.destino_municipio != null) {
+		// DESTINO: MUNICÍPIO E GEOCOD
+		if (!util.isEmpty(registro.destino_municipio)) {
 			municipioSplit = registro.destino_municipio.split("|");
 			app.setAtributo('idDestinoMunicipio', municipioSplit[1].trim());
 			app.setAtributo('geocod_destino', municipioSplit[2].trim());
+		}
+		if ((util.isEmpty(registro.idDestinoMunicipio) || util.isEmpty(registro.geocod_destino)) && (registro.idDestinoPais == 1)) { // Brasil
+			// TODO: ERRO (destino vazio)
+			app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+		}
+
+		// RNTRC
+		if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
+			if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
+				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
+			} else {
+				// TODO: ERRO (rntrc vazio)
+				app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+			}
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
@@ -579,11 +612,9 @@ var app = {
 	dbName : "dados.db",
 
 	senha_login : null,
-    
-    filePaths : null /*{
-        externalFolder : null,
-        dbFolder : null,
-    }*/,
+
+	filePaths : null // { externalFolder : null, dbFolder : null, }
+	,
 
 }; // end of app
 
