@@ -3,5 +3,6 @@
 /concentrador/build/
 /concentrador/dist/
 .DS_Store
-/mobile/nbproject/
 /mobile/platforms/
+/mobile/.settings/
+/mobile/nbproject/
