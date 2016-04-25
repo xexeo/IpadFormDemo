@@ -79,7 +79,7 @@ var app = {
 				}, "Senha incorreta.");
 
 			}
-		}, "Cancelamento de entrevista", "Cancelar entrevista", "Continuar entrevista", "Senha", 'password');
+		}, "Cancelamento de entrevista", "Cancelar entrevista", "Voltar", "Senha", 'password');
 	},
 
 	/*
