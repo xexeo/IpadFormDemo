@@ -82,10 +82,10 @@ var util = {
 	},
 
 	inicializaPlacas : function(tipo_fluxo) {
-		$('.input_placa').keyup(function() {
-			var input = $(this);
-			input.val(input.val().toUpperCase());
-		});
+//		$('.input_placa').keyup(function() {
+//			var input = $(this);
+//			input.val(input.val().toUpperCase());
+//		});
 		$('#placa_letras_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
@@ -93,15 +93,16 @@ var util = {
 			if (util.isEmpty(input.val()) || input.val().length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");
-				app.setAtributo('placa_numeros', null);
+//				app.setAtributo('placa_numeros', null);
 			} else {
 				app.setAtributo('placa_letras', input.val());
 				$('#grupo_placa_numeros_' + tipo_fluxo).show();
+				$('#placa_letras' + tipo_fluxo).trigger('change');
 				$('#placa_numeros_' + tipo_fluxo).focus();
 			}
-			$('#placa_letras_' + tipo_fluxo).change(function() {
-				app.setAtributo('placa_letras', $(this).val());
-			});
+//			$('#placa_letras_' + tipo_fluxo).change(function() {
+//				app.setAtributo('placa_letras', $(this).val());
+//			});
 		});
 		$('#placa_numeros_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
@@ -110,7 +111,8 @@ var util = {
 			var max_len = Number(input.attr("maxlength"));
 			if (input.val().length >= max_len) {
 				input.val(input.val().substring(0, max_len));
-				app.setAtributo('placa_numeros', input.val());
+				$('#placa_numeros_' + tipo_fluxo).trigger('change');
+//				app.setAtributo('placa_numeros', input.val());
 			}
 		});
 	},
@@ -173,12 +175,13 @@ var util = {
 			progride($(this).val(), Number($(this).attr("maxlength")));
 			// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
 			// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-			app.setAtributo(nome_registro, $(this).val());
-			$('#' + nome_campo).change(function() {
-				app.setAtributo(nome_registro, $(this).val());
-			});
-		});
+			//app.setAtributo(nome_registro, $(this).val());
 
+		});
+		$('#' + nome_campo).change(function() {
+			app.setAtributo(nome_registro, $(this).val());
+		});
+		
 		function progride(value, min_len) {
 			if (util.isEmpty(value) || (String(value).trim().length < min_len)) {
 				$("#" + grupo_proximo).hide();
@@ -265,12 +268,14 @@ var util = {
 				progride($(this).val());
 				// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
 				// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
+//				app.setAtributo(nome_registro, $(this).val());
+				
+			});
+			$('#' + nome_campo).change(function() {
 				app.setAtributo(nome_registro, $(this).val());
-				$('#' + nome_campo).change(function() {
-					app.setAtributo(nome_registro, $(this).val());
-				});
 			});
 		}
+		
 
 		function progride(value) {
 			if (util.isEmpty(value)) {
