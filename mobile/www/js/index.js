@@ -270,6 +270,9 @@ var app = {
 			try {
 				app.onChangeHandler.controller();
 				$("#btn_cancelar").click(app.cancelar); // não estava funcionando em todas as páginas
+				$('input[type="radio"]').click(function() {
+					$(this).focus();
+				});
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
 				}
