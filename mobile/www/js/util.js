@@ -82,10 +82,10 @@ var util = {
 	},
 
 	inicializaPlacas : function(tipo_fluxo) {
-//		$('.input_placa').keyup(function() {
-//			var input = $(this);
-//			input.val(input.val().toUpperCase());
-//		});
+		// $('.input_placa').keyup(function() {
+		// var input = $(this);
+		// input.val(input.val().toUpperCase());
+		// });
 		$('#placa_letras_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
@@ -93,16 +93,16 @@ var util = {
 			if (util.isEmpty(input.val()) || input.val().length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");
-//				app.setAtributo('placa_numeros', null);
+				// app.setAtributo('placa_numeros', null);
 			} else {
 				app.setAtributo('placa_letras', input.val());
 				$('#grupo_placa_numeros_' + tipo_fluxo).show();
 				$('#placa_letras' + tipo_fluxo).trigger('change');
 				$('#placa_numeros_' + tipo_fluxo).focus();
 			}
-//			$('#placa_letras_' + tipo_fluxo).change(function() {
-//				app.setAtributo('placa_letras', $(this).val());
-//			});
+			// $('#placa_letras_' + tipo_fluxo).change(function() {
+			// app.setAtributo('placa_letras', $(this).val());
+			// });
 		});
 		$('#placa_numeros_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
@@ -112,7 +112,7 @@ var util = {
 			if (input.val().length >= max_len) {
 				input.val(input.val().substring(0, max_len));
 				$('#placa_numeros_' + tipo_fluxo).trigger('change');
-//				app.setAtributo('placa_numeros', input.val());
+				// app.setAtributo('placa_numeros', input.val());
 			}
 		});
 	},
@@ -165,30 +165,6 @@ var util = {
 			util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");
 			$("#grupo_placa_" + tipo_fluxo).show();
 		});
-	},
-
-	progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) {
-		var nome_registro = "placa_numeros";
-		var nome_campo = "placa_numeros_" + tipo_fluxo;
-
-		$('#' + nome_campo).keyup(function() {
-			progride($(this).val(), Number($(this).attr("maxlength")));
-			// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
-			// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-			//app.setAtributo(nome_registro, $(this).val());
-
-		});
-		$('#' + nome_campo).change(function() {
-			app.setAtributo(nome_registro, $(this).val());
-		});
-		
-		function progride(value, min_len) {
-			if (util.isEmpty(value) || (String(value).trim().length < min_len)) {
-				$("#" + grupo_proximo).hide();
-			} else {
-				$("#" + grupo_proximo).show();
-			}
-		}
 	},
 
 	/**
@@ -268,14 +244,13 @@ var util = {
 				progride($(this).val());
 				// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
 				// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-//				app.setAtributo(nome_registro, $(this).val());
-				
+				// app.setAtributo(nome_registro, $(this).val());
+
 			});
 			$('#' + nome_campo).change(function() {
 				app.setAtributo(nome_registro, $(this).val());
 			});
 		}
-		
 
 		function progride(value) {
 			if (util.isEmpty(value)) {
@@ -284,6 +259,34 @@ var util = {
 				$("#" + grupo_proximo).show();
 			}
 		}
+	},
+
+	progressoInputTextLen : function(nome_registro, nome_campo, grupo_proximo) {
+		$('#' + nome_campo).keyup(function() {
+			var input = $(this);
+			var max_len = Number(input.attr("maxlength"));
+			if (progride(input.val(), max_len)) {
+				input.val(String(input.val()).trim().substring(0, max_len));
+				input.trigger('change');
+			}
+		});
+		$('#' + nome_campo).change(function() {
+			app.setAtributo(nome_registro, $(this).val());
+		});
+
+		function progride(value, min_len) {
+			if (util.isEmpty(value) || (String(value).trim().length < min_len)) {
+				$("#" + grupo_proximo).hide();
+			} else {
+				$("#" + grupo_proximo).show();
+				return true;
+			}
+			return false;
+		}
+	},
+
+	progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) {
+		util.progressoInputTextLen("placa_numeros", "placa_numeros_" + tipo_fluxo, grupo_proximo);
 	},
 
 	// Funções para validação dos componentes
@@ -373,7 +376,7 @@ var util = {
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {
-		title = (title == null)? "Busca" : title;
+		title = (title == null) ? "Busca" : title;
 		txt_content = (txt_content == null) ? "Entre com o início da palavra." : txt_content;
 		var field = $('#' + nome_do_campo);
 		var overlayInput = $.confirm({
@@ -389,7 +392,7 @@ var util = {
 			onClose : function() {
 				util.isFilterRunning = false;
 			},
-			
+
 			isCentered : false,
 		});
 		overlayInput.$body.addClass("ui-page-theme-a");
@@ -402,13 +405,11 @@ var util = {
 		var txtInput = overlayInput.$content.find('#filtro');
 		console.log(txtInput);
 		txtInput.textinput();
-		/*txtInput.one('load', function(){
-			$(this).focus();
-			alert('tentou focar');
-		});*/
+		/*
+		 * txtInput.one('load', function(){ $(this).focus(); alert('tentou focar'); });
+		 */
 		overlayInput.$content.find('#filtro_autocomplete').listview();
 		overlayInput.$b.css('margin-top', '0px');
-		
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
 			console.log('entrou no filtro');
@@ -469,7 +470,7 @@ var util = {
 						txt = $(this).html();
 					}
 					field.val(txt).trigger('change').scrollLeft(0);
-					//overlayInput.$content.find('#filtro').focus();
+					// overlayInput.$content.find('#filtro').focus();
 					overlayInput.close();
 				});
 				ul_list.listview("refresh");

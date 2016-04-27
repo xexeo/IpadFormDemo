@@ -111,7 +111,7 @@ controllers.identificacao_visual_carga = {
 				$("#grupo_carga_perigosa_carga").hide();
 			}
 		});
-		util.progressoInputText("placa_vermelha_rntrc_num", "placa_vermelha_rntrc_num_carga", "grupo_carga_perigosa_carga");
+		util.progressoInputTextLen("placa_vermelha_rntrc_num", "placa_vermelha_rntrc_num_carga", "grupo_carga_perigosa_carga");
 
 		// Carga Perigosa
 		$('#carga_perigosa_carga_sim').click(function() {
@@ -199,7 +199,8 @@ controllers.identificacao_visual_carga = {
 				if (!util.validaSelect("placa_vermelha_rntrc_sel_carga", "RNTRC")) {
 					ok_placa_vermelha = false;
 				}
-				if (!util.validaInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")) {
+				if (!util.validaInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")
+						|| !util.validaLenInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")) {
 					ok_placa_vermelha = false;
 				}
 			}

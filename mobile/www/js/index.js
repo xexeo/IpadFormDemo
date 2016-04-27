@@ -269,10 +269,21 @@ var app = {
 		handler : function() {
 			try {
 				app.onChangeHandler.controller();
-				$("#btn_cancelar").click(app.cancelar); // não estava funcionando em todas as páginas
+
+				// Botão "Cancelar"
+				$("#btn_cancelar").click(app.cancelar);
+
+				// Input radio
 				$('input[type="radio"]').click(function() {
 					$(this).focus();
 				});
+
+				// Input number
+				$('input[type="number"]').keyup(function() {
+					var regex = new RegExp("[^0-9]+");
+					$(this).val($(this).val().replace(regex, ''));
+				});
+
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
 				}
