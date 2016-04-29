@@ -1,13 +1,15 @@
 myDb = {
 
+		
+	// TODO colocar todos os campos, inclusive os nao definidos (com null)
 	tabelaOD : [
-		{field : 'id', type : 'text'}, // TODO (redundante? id + idIpad) Number(String(device.serial) + String(Math.floor(Date.now() / 1000)) that is the device serial concats with unix timestamp
+		{field : 'id', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
 		{field : 'estaNoNote', type : 'integer'}, //Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
 		{field : 'idPosto' , type : 'integer'},
 		{field : 'sentido' , type : 'text'},
 		{field : 'idIpad' , type : 'text'},
-		{field : 'uuid' , type : 'text'},
+		{field : 'uuid' , type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
 		{field : 'login' , type : 'text'}, // idPost + sentido (redundante?)
 		{field : 'timestampIniPesq' , type : 'text'},
 		{field : 'timestampFimPesq' , type : 'text'},

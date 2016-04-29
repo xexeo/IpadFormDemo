@@ -18,11 +18,12 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 <link rel="stylesheet" href="css/reset.css" />
 <link rel="stylesheet" href="js/libs/jquery-mobile/jquery.mobile-1.4.5.min.css" />
-<link rel="stylesheet" href="css/jquery-confirm.css"/>
-<link rel="stylesheet" href="css/bootstrap_grid.css"/>
-<link rel="stylesheet" href="css/bootstrap_buttons.css"/>
-<link rel="stylesheet" href="css/font-awesome.min.css"/>
+<link rel="stylesheet" href="css/jquery-confirm.css" />
+<link rel="stylesheet" href="css/bootstrap_grid.css" />
+<link rel="stylesheet" href="css/bootstrap_buttons.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/login.css" />
 
 <title>Contagem de Tráfego</title>
 <link rel="shortcut icon" href="">
@@ -42,25 +43,25 @@
 
 		<!-- content -->
 		<section role="main" class="ui-content">
-			<div class="ui-grid-b">
-				<div class="ui-block-a"></div>
-				<div class="ui-block-b"></div>
-				<div class="ui-block-c">
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
 					<div class="ui-field-contain">
-						<label for="usuario">Usuário:</label> <input id="usuario" type="text" name="usuario" data-theme="a"/>
+						<label for="usuario">Usuário:</label>
+						<input id="usuario" type="text" name="usuario" data-theme="a" />
 					</div>
 					<div class="ui-field-contain">
-						<label for="senha">Senha:</label> <input id="senha" type="password" name="senha" data-theme="a"/>
+						<label for="senha">Senha:</label>
+						<input id="senha" type="password" name="senha" data-theme="a" />
 					</div>
 					<button class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-check" id="entrar" name="entrar">Entrar</button>
 				</div>
+				<div class="ui-block-b"></div>
 			</div>
 		</section>
 
 		<!-- footer -->
 		<footer data-role="footer" data-position="fixed">
-		    <span>Versão: <span id="versao"></span></span>
-		    <span style="float: right;">ipadID: <span id="ipadID"></span></span>
+			<span>Versão: <span id="versao"></span></span> <span style="float: right;">ipadID: <span id="ipadID"></span></span>
 		</footer>
 
 	</section>

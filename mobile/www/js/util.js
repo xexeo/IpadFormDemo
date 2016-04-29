@@ -37,9 +37,9 @@ var util = {
 			insert_inicial = "<option value='-1'>" + msgSelecione + "</option>\n";
 		}
 		$.each(lista, function(index, item) {
-			if (inclui_Brasil || (item != "Brasil")) {
+			if (inclui_Brasil || (item != 'Brasil')) {
 				var select_Brasil = "";
-				if (item == "Brasil") {
+				if (item == 'Brasil') {
 					select_Brasil = " selected";
 					app.setAtributo(nome_registro, index + 1);
 				}
@@ -58,14 +58,23 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectFrequencia : function(tipo_fluxo) {
+	getIdxArray : function(elem, array) {
+		return jQuery.inArray(elem, array) + 1;
+	},
+
+	getListaFrequencias : function() {
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
+		return lista_frequencias;
+	},
+
+	inicializaSelectFrequencia : function(tipo_fluxo) {
+		var lista_frequencias = util.getListaFrequencias();
 		var nome_campo = 'frequencia_sel_' + tipo_fluxo;
 		util.inicializaSelect(nome_campo, lista_frequencias);
 		$("#" + nome_campo).change(
 				function() {
 					var freq_num = $('#frequencia_num_' + tipo_fluxo);
-					if (($(this).val() == (jQuery.inArray('Eventualmente', lista_frequencias) + 1))
+					if (($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias))
 							&& (util.isEmpty(freq_num.val()) || (Number(freq_num.val()) < 1))) {
 						freq_num.val(1);
 						app.setAtributo('frequencia_num', 1);
