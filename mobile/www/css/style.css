@@ -253,6 +253,17 @@ nav.avancar>div.ui-block-b {
 	max-width: 90%;
 }
 
+/*
+TODO: ainda não está confirmando, pq tem q pegar apenas o 1º e o 2º de cada um dos seletores abaixo
+
+#confirmar_veiculo.ui-grid-b>.ui-block-a, #confirmar_veiculo.ui-grid-b>.ui-block-c {
+	width: 10%;
+}
+
+#confirmar_veiculo.ui-grid-b>.ui-block-b {
+	width: 80%;
+}
+*/
 .input_placa {
 	text-transform: uppercase;
 }
