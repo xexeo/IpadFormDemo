@@ -5,6 +5,17 @@
  */
 package br.ufrj.coppetec.concentrador;
 
+import java.awt.Color;
+import java.net.URL;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+
+
+
 /**
  *
  * @author ludes
@@ -15,7 +26,45 @@ public class Janela extends javax.swing.JFrame {
      * Creates new form Janela
      */
     public Janela() {
+        numeros = new DefaultTableCellRenderer();
+        numeros.setHorizontalAlignment(SwingConstants.CENTER);
+        numeros.setVerticalAlignment(SwingConstants.CENTER);
+        
+        imagens = new ImagemRenderer();
+        imagens.setHorizontalAlignment(SwingConstants.CENTER);
+        
         initComponents();
+        centeringValues();
+        puttingImages();
+    }
+    
+    private void centeringValues(){
+        for (int i=1;i<tbl_leves.getColumnCount();i++){
+            tbl_leves.getColumnModel().getColumn(i).setCellRenderer(numeros);
+        }
+        for (int i=1;i<tbl_pesados.getColumnCount();i++){
+            tbl_pesados.getColumnModel().getColumn(i).setCellRenderer(numeros);
+        }
+    }
+    
+    private void puttingImages(){
+        TableColumn coluna_figuras = tbl_leves.getColumnModel().getColumn(0);
+        coluna_figuras.setCellRenderer(imagens);
+        tbl_leves.setRowHeight(60);
+        coluna_figuras.setMinWidth(200);
+        
+        String[] simples = /*{"tpVL01", "tpVL02", "tpVL03", "tpVL04", "tpVL05", "tp2CB", "tp3CB", "tp4CB", "tp2C", "tp3C", "tp4C", "tp4CD"};*/
+                            { "p1_01", "p3", /*"p1_02",*/ "p2", "m", "o1", "o2", "o3" ,"c1", "c2", "c3", "c4", "c5"};
+        
+        int line = 0;
+        ImageIcon ico;
+        for (String s : simples){
+            ico = new ImageIcon(getClass().getResource("/images/simples/" + s + ".png"));
+            ico.setImage(ico.getImage().getScaledInstance(-1, 50, 0));
+            tbl_leves.setValueAt(ico, line++, 0);
+        }
+        tbl_leves.doLayout();
+                
     }
 
     /**
@@ -88,6 +137,7 @@ public class Janela extends javax.swing.JFrame {
         txtAreaLog.setColumns(20);
         txtAreaLog.setRows(5);
         jScrollPane1.setViewportView(txtAreaLog);
+        txtAreaLog.setEditable(false);
 
         javax.swing.GroupLayout pnl_servidorLayout = new javax.swing.GroupLayout(pnl_servidor);
         pnl_servidor.setLayout(pnl_servidorLayout);
@@ -194,9 +244,10 @@ public class Janela extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_leves.getTableHeader().setResizingAllowed(false);
+        tbl_leves.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tbl_leves);
         if (tbl_leves.getColumnModel().getColumnCount() > 0) {
-            tbl_leves.getColumnModel().getColumn(0).setResizable(false);
             tbl_leves.getColumnModel().getColumn(1).setResizable(false);
             tbl_leves.getColumnModel().getColumn(2).setResizable(false);
             tbl_leves.getColumnModel().getColumn(3).setResizable(false);
@@ -270,6 +321,8 @@ public class Janela extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_pesados.getTableHeader().setResizingAllowed(false);
+        tbl_pesados.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tbl_pesados);
 
         txt_pesados_Hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -410,14 +463,14 @@ public class Janela extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2)
+                .addGap(12, 12, 12))
         );
 
         jTabbedPane2.getAccessibleContext().setAccessibleName("tabna1");
@@ -459,6 +512,11 @@ public class Janela extends javax.swing.JFrame {
             }
         });
     }
+    
+    private DefaultTableCellRenderer numeros;
+    private ImagemRenderer imagens;
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbData;
@@ -504,3 +562,20 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField txt_pesados_Hora2;
     // End of variables declaration//GEN-END:variables
 }
+
+class ImagemRenderer extends DefaultTableCellRenderer{
+    public ImagemRenderer(){
+        super();
+        setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+        //setBackground(new Color(178,178,178));
+    }
+
+    public void setValue(Object value){
+        if (value == null){
+            setText("");
+        } else {
+            setIcon((ImageIcon)value);
+        }
+
+    }
+    }
