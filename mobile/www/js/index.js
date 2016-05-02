@@ -355,11 +355,7 @@ var app = {
 		// FRENQUENCIA
 		if (registro.frequencia_sel == util.getIdxArray('Eventualmente', util.getListaFrequencias())) {
 			app.setAtributo('frequencia_num', 1);
-			app.setAtributo('frequencia', 'Eventualmente');
-		} else if ((!util.isEmpty(registro.frequencia_num)) && (!util.isEmpty(registro.frequencia_sel))) {
-			app.setAtributo('frequencia', registro.frequencia_num + " por "
-					+ util.getListaFrequencias()[Number(registro.frequencia_sel) - 1]);
-		} else {
+		} else if ((util.isEmpty(registro.frequencia_num)) || (util.isEmpty(registro.frequencia_sel))) {
 			if (registro.cancelado != 1) {
 				// TODO: ERRO (frequencia vazia)
 				app.logger.log("ERRO (frequencia vazia) no registro: ", registro.id);

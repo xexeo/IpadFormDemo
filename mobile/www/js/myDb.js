@@ -23,7 +23,8 @@ myDb = {
 		{field : 'idDestinoMunicipio', type : 'integer'},
 		{field : 'geocod_destino', type : 'integer'},
 		{field : 'idMotivoDeEscolhaDaRota', type : 'text'},
-		{field : 'frequencia', type : 'text'}, 
+		{field : 'frequencia_num', type : 'integer'}, 
+		{field : 'frequencia_sel', type : 'integer'}, 
 		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
 		{field : 'placaEstrangeira' , type : 'integer'}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
 		{field : 'idPaisPlacaEstrangeira' , type : 'integer'},
