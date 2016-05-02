@@ -280,11 +280,11 @@ nav.avancar>div.ui-block-b {
 	padding-right: 10%;
 }
 
-#confirmar_veiculo button {
+#confirmar_veiculo section button  {
 	background-color: #EEE;
 }
 
-#confirmar_veiculo button.ui-btn-icon-left:after {
+#confirmar_veiculo section button.ui-btn-icon-left:after {
     left: 5em;
 }
 

@@ -40,9 +40,8 @@ controllers.caracterizacao_viagem_simples = {
 		var lista_motivos_viagem = [ 'Compra', 'Estudo', 'Lazer', 'Saúde', 'Trabalho', 'Negócios', 'Outros' ];
 		util.inicializaSelect("motivo_viagem_simples", lista_motivos_viagem);
 
-		var lista_rendas = [ 'Até R$ 1.500,00', 'De R$ 1.501,00 a R$ 3.000,00', 'De R$ 3.001,00 a R$ 4.500,00',
-				'De R$ 4.501,00 a R$ 6.500,00', 'De R$ 6.501,00 a R$ 10.500,00', 'Acima de R$ 10.501,00', 'Não informada',
-				'Sem renda própria' ];
+		var lista_rendas = [ 'Sem renda', 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
+				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
 
 	},
@@ -54,18 +53,21 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelectPais("idOrigemPais", "origem_pais_simples", "origem_uf", "origem_municipio", "grupo_destino_simples",
 				"simples");
 		util.progressoSelect("origem_uf", "origem_uf_simples", "grupo_origem_municipio_simples");
-		$('#origem_uf_simples').change(function() {
-			var estado = $(this).val();
-			if (estado != '-1') {
-				// util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
+		$('#origem_uf_simples').change(
+				function() {
+					var estado = $(this).val();
+					if (estado != '-1') {
+						// util.inicializaSelectMunicipio("origem_municipio_simples", $(this).val(), "Município");
 
-				// $('#grupo_origem_municipio_simples').show();
+						// $('#grupo_origem_municipio_simples').show();
 
-				$('#origem_municipio_simples').off("click").click(function() {
-					util.autocomplete("origem_municipio_simples", lista_municipios[estado], "Município de origem", "Entre com o município de origem.");
-				}).trigger('click');
-			}
-		});
+						$('#origem_municipio_simples').off("click").click(
+								function() {
+									util.autocomplete("origem_municipio_simples", lista_municipios[estado],
+											"Município de origem", "Entre com o município de origem.");
+								}).trigger('click');
+					}
+				});
 		// util.progressoSelect("origem_municipio", "origem_municipio_simples", "grupo_destino_simples");
 		util.progressoInputText("origem_municipio", "origem_municipio_simples", "grupo_destino_simples", true);
 
@@ -73,15 +75,18 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelectPais("idDestinoPais", "destino_pais_simples", "destino_uf", "destino_municipio",
 				"grupo_frequencia_simples", "simples");
 		util.progressoSelect("destino_uf", "destino_uf_simples", "grupo_destino_municipio_simples");
-		$('#destino_uf_simples').change(function() {
-			var estado = $(this).val();
-			if (estado != '-1') {
-				// util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
-				$('#destino_municipio_simples').off("click").click(function() {
-					util.autocomplete("destino_municipio_simples", lista_municipios[estado],"Município de destino", "Entre com o município de destino.");
-				}).trigger('click');
-			}
-		});
+		$('#destino_uf_simples').change(
+				function() {
+					var estado = $(this).val();
+					if (estado != '-1') {
+						// util.inicializaSelectMunicipio("destino_municipio_simples", $(this).val(), "Município");
+						$('#destino_municipio_simples').off("click").click(
+								function() {
+									util.autocomplete("destino_municipio_simples", lista_municipios[estado],
+											"Município de destino", "Entre com o município de destino.");
+								}).trigger('click');
+					}
+				});
 		// util.progressoSelect("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples");
 		util.progressoInputText("destino_municipio", "destino_municipio_simples", "grupo_frequencia_simples", true);
 

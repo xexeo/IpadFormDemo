@@ -5,16 +5,29 @@ var app = {
 
 	versao : "2.0.0",
 
-	user_admin : {
-		usuario : 'admin', // usuario mestre
-		senha : "123" // senha mestra
+	user_master : { // Usuário exclusivo para configurar o idIpad na instalação, ele não faz login no aplicativo.
+		usuario : 'Master', // usuário mestre
+		senha : "Aaa" // senha mestra
+	},
+
+	user_admin : { // Usuário destinado aos testes do aplicativo. TODO: iremos removê-lo ao ir para produção?
+		usuario : 'admin', // usuário admin
+		senha : "123" // senha admin
+	},
+
+	autenticaMaster : function(usuario, senha) {
+		if ((usuario == app.user_master.usuario) && (senha == app.user_master.senha)) {
+			return true;
+		}
+		return false;
 	},
 
 	autentica : function(usuario, senha) {
-		if ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha)) {
+		if ((app.user_admin != undefined) && (app.user_admin.usuario != undefined) && (usuario == app.user_admin.usuario)
+				&& (senha == app.user_admin.senha)) {
 			return true;
 		} else {
-			// TODO: recuperar tb dos logins cadastrados
+			// TODO: aqui será realizada a autenticação a partir dos logins cadastrados
 		}
 		return false;
 	},
@@ -24,8 +37,7 @@ var app = {
 		var senha = $("#senha").val().trim();
 
 		// configura identificador do ipad, para executar uma única vez(durante a instalação)
-		// TODO: dúvida - isso não deveria estar dentro do 'if' da função 'autentica' de acordo com o 'user_admin'?
-		if (usuario == 'Master' && senha == 'Aaa') {
+		if (app.autenticaMaster(usuario, senha)) {
 			ipadID.requestID(function(id) {
 				$("#ipadID").html(id);
 			});
@@ -330,7 +342,6 @@ var app = {
 			app.setAtributo('uuid', app.uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
 			app.setAtributo('idIpad', ipadID.id);
-			// idIpad: se vocë estiver testando num browser, sem sistema de arquivos, isso vai ser sempre nulo.
 			// TODO: falta setar os seguintes atributos:
 			// idPosto
 			// sentido
@@ -353,8 +364,10 @@ var app = {
 			}
 		}
 		if (util.isEmpty(registro.placa)) {
-			// TODO: ERRO (placa vazia)
-			app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (placa vazia)
+				app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+			}
 		}
 
 		// FRENQUENCIA
@@ -367,8 +380,10 @@ var app = {
 			app.setAtributo('frequencia', registro.frequencia_num + " por "
 					+ util.getListaFrequencias()[Number(registro.frequencia_sel) - 1]);
 		} else {
-			// TODO: ERRO (frequencia vazia)
-			app.logger.log("ERRO (frequencia vazia) no registro: ", registro.id);
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (frequencia vazia)
+				app.logger.log("ERRO (frequencia vazia) no registro: ", registro.id);
+			}
 		}
 
 		// ORIGEM: MUNICÍPIO E GEOCOD
@@ -379,8 +394,10 @@ var app = {
 			app.setAtributo('geocod_origem', municipioSplit[2].trim());
 		}
 		if ((util.isEmpty(registro.idOrigemMunicipio) || util.isEmpty(registro.geocod_origem)) && (registro.idOrigemPais == 1)) { // Brasil
-			// TODO: ERRO (destino vazio)
-			app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (destino vazio)
+				app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+			}
 		}
 
 		// DESTINO: MUNICÍPIO E GEOCOD
@@ -390,8 +407,10 @@ var app = {
 			app.setAtributo('geocod_destino', municipioSplit[2].trim());
 		}
 		if ((util.isEmpty(registro.idDestinoMunicipio) || util.isEmpty(registro.geocod_destino)) && (registro.idDestinoPais == 1)) { // Brasil
-			// TODO: ERRO (destino vazio)
-			app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (destino vazio)
+				app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+			}
 		}
 
 		// RNTRC
@@ -399,8 +418,10 @@ var app = {
 			if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
 				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
 			} else {
-				// TODO: ERRO (rntrc vazio)
-				app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+				if (registro.cancelado != 1) {
+					// TODO: ERRO (rntrc vazio)
+					app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+				}
 			}
 		}
 
@@ -438,35 +459,12 @@ var app = {
 				cb();
 			}
 		});
-
-		// aqui eu vou reescrever a função aqui em cima mantendo a lógica mas trocando o paradigma
-		// var tentarNovamente;
-		// var saved;
-		// do {
-		// tentarNovamente = false;
-		// saved = false;
-		// try {
-		// app.logger.log('Finalizando registro: ' + registro.id);
-		// app.setCamposDerivados();
-		// saved = myDb.insertRegistro(registro);
-		// } catch (e) {
-		// app.logger.log(e.message);
-		// }
-		// if (saved) {
-		// app.logger.log('Registro finalizado: ' + registro.id);
-		// app.limpaRegistro();
-		// alert("Entrevista registrada.");
-		// } else { // TITLE: "Falha ao gravar informações."
-		// var tentarNovamente = confirm("Houve uma falha ao finalizar a entrevista.\nDeseja tentar novamente?");
-		// }
-		// } while (tentarNovamente);
-
 	},
 
 	cancelaRegistro : function(cb) {
 		app.logger.log('Cancelando registro: ' + registro.id);
-		app.setCamposDerivados();
 		app.setAtributo('cancelado', 1);
+		app.setCamposDerivados();
 		myDb.insertRegistro(registro, function(error) {
 			app.logger.log(error.message);
 			// confirma se tenta outra vez
@@ -492,29 +490,6 @@ var app = {
 				cb();
 			}
 		});
-
-		// var tentarNovamente;
-		// var saved;
-		// do {
-		// tentarNovamente = false;
-		// saved = false;
-		// try {
-		// app.logger.log('Cancelando registro: ' + registro.id);
-		// app.setCamposDerivados();
-		// app.setAtributo('cancelado', 1);
-		// saved = myDb.insertRegistro(registro);
-		// } catch (e) {
-		// app.logger.log(e.message);
-		// }
-		// if (saved) {
-		// app.logger.log('Registro cancelado: ' + registro.id);
-		// app.limpaRegistro();
-		// alert("Entrevista cancelada.");
-		// } else { // TITLE: "Falha ao gravar informações." var
-		// tentarNovamente = confirm("Houve uma falha o registro.\nDeseja tentar novamente?");
-		// }
-		// } while (tentarNovamente);
-
 	},
 
 	/**
