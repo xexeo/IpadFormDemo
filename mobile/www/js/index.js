@@ -5,16 +5,29 @@ var app = {
 
 	versao : "2.0.0",
 
-	user_admin : {
-		usuario : 'admin', // usuario mestre
-		senha : "123" // senha mestra
+	user_master : { // Usuário exclusivo para configurar o idIpad na instalação, ele não faz login no aplicativo.
+		usuario : 'Master', // usuário mestre
+		senha : "Aaa" // senha mestra
+	},
+
+	user_admin : { // Usuário destinado aos testes do aplicativo. TODO: iremos removê-lo ao ir para produção?
+		usuario : 'admin', // usuário admin
+		senha : "123" // senha admin
+	},
+
+	autenticaMaster : function(usuario, senha) {
+		if ((usuario == app.user_master.usuario) && (senha == app.user_master.senha)) {
+			return true;
+		}
+		return false;
 	},
 
 	autentica : function(usuario, senha) {
-		if ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha)) {
+		if ((app.user_admin != undefined) && (app.user_admin.usuario != undefined) && (usuario == app.user_admin.usuario)
+				&& (senha == app.user_admin.senha)) {
 			return true;
 		} else {
-			// TODO: recuperar tb dos logins cadastrados
+			// TODO: aqui será realizada a autenticação a partir dos logins cadastrados
 		}
 		return false;
 	},
@@ -24,8 +37,7 @@ var app = {
 		var senha = $("#senha").val().trim();
 
 		// configura identificador do ipad, para executar uma única vez(durante a instalação)
-		// TODO: dúvida - isso não deveria estar dentro do 'if' da função 'autentica' de acordo com o 'user_admin'?
-		if (usuario == 'Master' && senha == 'Aaa') {
+		if (app.autenticaMaster(usuario, senha)) {
 			ipadID.requestID(function(id) {
 				$("#ipadID").html(id);
 			});
@@ -330,7 +342,6 @@ var app = {
 			app.setAtributo('uuid', app.uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
 			app.setAtributo('idIpad', ipadID.id);
-			// idIpad: se vocë estiver testando num browser, sem sistema de arquivos, isso vai ser sempre nulo.
 			// TODO: falta setar os seguintes atributos:
 			// idPosto
 			// sentido
