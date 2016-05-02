@@ -6,6 +6,7 @@ import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -22,16 +23,38 @@ import org.simpleframework.transport.connect.SocketConnection;
  */
 public class WebServer implements Container{
     private JTextArea observer;
+	private JTextField txtPort;
     private SocketProcessor realServer;
     private SocketAddress address;
     private Connection conn;
+	private int listeningPort;
     
-    public WebServer(JTextArea observer, int serverPort) throws IOException{
+    public WebServer(JTextArea observer, JTextField txtPort) throws IOException{
         this.observer = observer;
+		this.txtPort = txtPort;
         this.realServer = new ContainerSocketProcessor(this);
         this.conn = new SocketConnection(this.realServer);
-        this.address = new InetSocketAddress(serverPort);
-        this.conn.connect(address);
+		
+		int initialPort = 8000;
+		int finalPort = 8090;
+        this.listeningPort = 0;
+		
+		for(int port = initialPort; port <= finalPort; port++){
+			try{
+				this.address = new InetSocketAddress(port);
+				this.conn.connect(address);
+				this.listeningPort = port;
+				break;
+			}catch(Exception e){
+				observer.append("Erro tentando escutar a porta " + port + ": " + e.getMessage() + "\n");
+				txtPort.setText("");
+			}
+		}
+		if(listeningPort != 0){
+			observer.append("Servidor escutando a porta " + this.listeningPort + "\n");
+			txtPort.setText(Integer.toString(listeningPort));
+		}
+		
     }
     
     

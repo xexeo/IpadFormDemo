@@ -6,9 +6,13 @@
 package br.ufrj.coppetec.concentrador;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -26,6 +30,7 @@ public class Janela extends javax.swing.JFrame {
      * Creates new form Janela
      */
     public Janela() {
+		//quando estava usando tabelas
         numeros = new DefaultTableCellRenderer();
         numeros.setHorizontalAlignment(SwingConstants.CENTER);
         numeros.setVerticalAlignment(SwingConstants.CENTER);
@@ -39,32 +44,18 @@ public class Janela extends javax.swing.JFrame {
     }
     
     private void centeringValues(){
-        for (int i=1;i<tbl_leves.getColumnCount();i++){
-            tbl_leves.getColumnModel().getColumn(i).setCellRenderer(numeros);
-        }
-        for (int i=1;i<tbl_pesados.getColumnCount();i++){
-            tbl_pesados.getColumnModel().getColumn(i).setCellRenderer(numeros);
-        }
+        
     }
     
     private void puttingImages(){
-        TableColumn coluna_figuras = tbl_leves.getColumnModel().getColumn(0);
-        coluna_figuras.setCellRenderer(imagens);
-        tbl_leves.setRowHeight(60);
-        coluna_figuras.setMinWidth(200);
-        
-        String[] simples = /*{"tpVL01", "tpVL02", "tpVL03", "tpVL04", "tpVL05", "tp2CB", "tp3CB", "tp4CB", "tp2C", "tp3C", "tp4C", "tp4CD"};*/
-                            { "p1_01", "p3", /*"p1_02",*/ "p2", "m", "o1", "o2", "o3" ,"c1", "c2", "c3", "c4", "c5"};
-        
-        int line = 0;
-        ImageIcon ico;
-        for (String s : simples){
-            ico = new ImageIcon(getClass().getResource("/images/simples/" + s + ".png"));
-            ico.setImage(ico.getImage().getScaledInstance(-1, 50, 0));
-            tbl_leves.setValueAt(ico, line++, 0);
-        }
-        tbl_leves.doLayout();
-                
+        HashMap lablesPesadosMap = new HashMap<String, Component>();
+		Component[] labelsPesados = panelPesados.getComponents();
+		for (int i=0; i< labelsPesados.length;i++){
+			lablesPesadosMap.put(labelsPesados[i].getName(), labelsPesados[i]);
+		}
+		
+		
+		        
     }
 
     /**
@@ -75,17 +66,20 @@ public class Janela extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         grpSentido = new javax.swing.ButtonGroup();
         grpPista = new javax.swing.ButtonGroup();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField41 = new javax.swing.JTextField();
+        jTextField42 = new javax.swing.JTextField();
+        jTextField43 = new javax.swing.JTextField();
+        jTextField44 = new javax.swing.JTextField();
+        jTextField45 = new javax.swing.JTextField();
+        jTextField46 = new javax.swing.JTextField();
+        jTextField47 = new javax.swing.JTextField();
+        jTextField48 = new javax.swing.JTextField();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        pnl_servidor = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaLog = new javax.swing.JTextArea();
         pnl_volumetrica = new javax.swing.JPanel();
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
@@ -102,79 +96,336 @@ public class Janela extends javax.swing.JFrame {
         rdo_PistaSimples = new javax.swing.JRadioButton();
         rdo_PistaDupla = new javax.swing.JRadioButton();
         lblData = new javax.swing.JLabel();
-        cmbData = new javax.swing.JComboBox<String>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         tab_leves = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_leves = new javax.swing.JTable();
-        txt_leves_Hora2 = new javax.swing.JTextField();
-        txt_leves_Hora1 = new javax.swing.JTextField();
+        panelLeves = new javax.swing.JPanel();
+        leves_hora1 = new javax.swing.JTextField();
+        lev15_1 = new javax.swing.JTextField();
+        lev30_1 = new javax.swing.JTextField();
+        lev45_1 = new javax.swing.JTextField();
+        lev60_1 = new javax.swing.JTextField();
+        leves_hora2 = new javax.swing.JTextField();
+        lev15_2 = new javax.swing.JTextField();
+        lev30_2 = new javax.swing.JTextField();
+        lev45_2 = new javax.swing.JTextField();
+        lev60_2 = new javax.swing.JTextField();
+        lblP1 = new javax.swing.JLabel();
+        tl0 = new javax.swing.JTextField();
+        tl1 = new javax.swing.JTextField();
+        tl2 = new javax.swing.JTextField();
+        tl3 = new javax.swing.JTextField();
+        tl4 = new javax.swing.JTextField();
+        tl5 = new javax.swing.JTextField();
+        tl6 = new javax.swing.JTextField();
+        tl7 = new javax.swing.JTextField();
+        lblP3 = new javax.swing.JLabel();
+        tl8 = new javax.swing.JTextField();
+        tl9 = new javax.swing.JTextField();
+        tl10 = new javax.swing.JTextField();
+        tl11 = new javax.swing.JTextField();
+        tl12 = new javax.swing.JTextField();
+        tl13 = new javax.swing.JTextField();
+        tl14 = new javax.swing.JTextField();
+        tl15 = new javax.swing.JTextField();
+        lblP2 = new javax.swing.JLabel();
+        tl16 = new javax.swing.JTextField();
+        tl17 = new javax.swing.JTextField();
+        tl18 = new javax.swing.JTextField();
+        tl19 = new javax.swing.JTextField();
+        tl20 = new javax.swing.JTextField();
+        tl21 = new javax.swing.JTextField();
+        tl22 = new javax.swing.JTextField();
+        tl23 = new javax.swing.JTextField();
+        lblM = new javax.swing.JLabel();
+        tl24 = new javax.swing.JTextField();
+        tl25 = new javax.swing.JTextField();
+        tl26 = new javax.swing.JTextField();
+        tl27 = new javax.swing.JTextField();
+        tl28 = new javax.swing.JTextField();
+        tl29 = new javax.swing.JTextField();
+        tl30 = new javax.swing.JTextField();
+        tl31 = new javax.swing.JTextField();
+        lbl2CB = new javax.swing.JLabel();
+        tl32 = new javax.swing.JTextField();
+        tl33 = new javax.swing.JTextField();
+        tl34 = new javax.swing.JTextField();
+        tl35 = new javax.swing.JTextField();
+        tl36 = new javax.swing.JTextField();
+        tl37 = new javax.swing.JTextField();
+        tl38 = new javax.swing.JTextField();
+        tl39 = new javax.swing.JTextField();
+        lbl3CB = new javax.swing.JLabel();
+        tl40 = new javax.swing.JTextField();
+        tl41 = new javax.swing.JTextField();
+        tl42 = new javax.swing.JTextField();
+        tl43 = new javax.swing.JTextField();
+        tl44 = new javax.swing.JTextField();
+        tl45 = new javax.swing.JTextField();
+        tl46 = new javax.swing.JTextField();
+        tl47 = new javax.swing.JTextField();
+        lbl4CB = new javax.swing.JLabel();
+        tl48 = new javax.swing.JTextField();
+        tl49 = new javax.swing.JTextField();
+        tl50 = new javax.swing.JTextField();
+        tl51 = new javax.swing.JTextField();
+        tl52 = new javax.swing.JTextField();
+        tl53 = new javax.swing.JTextField();
+        tl54 = new javax.swing.JTextField();
+        tl55 = new javax.swing.JTextField();
+        lbl2C = new javax.swing.JLabel();
+        tl56 = new javax.swing.JTextField();
+        tl57 = new javax.swing.JTextField();
+        tl58 = new javax.swing.JTextField();
+        tl59 = new javax.swing.JTextField();
+        tl60 = new javax.swing.JTextField();
+        tl61 = new javax.swing.JTextField();
+        tl62 = new javax.swing.JTextField();
+        tl63 = new javax.swing.JTextField();
+        lbl3C = new javax.swing.JLabel();
+        tl64 = new javax.swing.JTextField();
+        tl65 = new javax.swing.JTextField();
+        tl66 = new javax.swing.JTextField();
+        tl67 = new javax.swing.JTextField();
+        tl68 = new javax.swing.JTextField();
+        tl69 = new javax.swing.JTextField();
+        tl70 = new javax.swing.JTextField();
+        tl71 = new javax.swing.JTextField();
+        lbl4C = new javax.swing.JLabel();
+        tl72 = new javax.swing.JTextField();
+        tl73 = new javax.swing.JTextField();
+        tl74 = new javax.swing.JTextField();
+        tl75 = new javax.swing.JTextField();
+        tl76 = new javax.swing.JTextField();
+        tl77 = new javax.swing.JTextField();
+        tl78 = new javax.swing.JTextField();
+        tl79 = new javax.swing.JTextField();
+        lbl4CD = new javax.swing.JLabel();
+        tl80 = new javax.swing.JTextField();
+        tl81 = new javax.swing.JTextField();
+        tl82 = new javax.swing.JTextField();
+        tl83 = new javax.swing.JTextField();
+        tl84 = new javax.swing.JTextField();
+        tl85 = new javax.swing.JTextField();
+        tl86 = new javax.swing.JTextField();
+        tl87 = new javax.swing.JTextField();
+        lbl3D = new javax.swing.JLabel();
+        tl88 = new javax.swing.JTextField();
+        tl89 = new javax.swing.JTextField();
+        tl90 = new javax.swing.JTextField();
+        tl91 = new javax.swing.JTextField();
+        tl92 = new javax.swing.JTextField();
+        tl93 = new javax.swing.JTextField();
+        tl94 = new javax.swing.JTextField();
+        tl95 = new javax.swing.JTextField();
         tab_pesados = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbl_pesados = new javax.swing.JTable();
-        txt_pesados_Hora2 = new javax.swing.JTextField();
-        txt_pesados_Hora1 = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        panelPesados = new javax.swing.JPanel();
+        pesados_hora1 = new javax.swing.JTextField();
+        pes15_1 = new javax.swing.JTextField();
+        pes30_1 = new javax.swing.JTextField();
+        pes45_1 = new javax.swing.JTextField();
+        pes60_1 = new javax.swing.JTextField();
+        pesados_hora2 = new javax.swing.JTextField();
+        pes15_2 = new javax.swing.JTextField();
+        pes30_2 = new javax.swing.JTextField();
+        peso45_2 = new javax.swing.JTextField();
+        peso60_2 = new javax.swing.JTextField();
+        lbl2S1 = new javax.swing.JLabel();
+        tp0 = new javax.swing.JTextField();
+        tp1 = new javax.swing.JTextField();
+        tp2 = new javax.swing.JTextField();
+        tp3 = new javax.swing.JTextField();
+        tp4 = new javax.swing.JTextField();
+        tp5 = new javax.swing.JTextField();
+        tp6 = new javax.swing.JTextField();
+        tp7 = new javax.swing.JTextField();
+        lbl2S2 = new javax.swing.JLabel();
+        tp8 = new javax.swing.JTextField();
+        tp9 = new javax.swing.JTextField();
+        tp10 = new javax.swing.JTextField();
+        tp11 = new javax.swing.JTextField();
+        tp12 = new javax.swing.JTextField();
+        tp13 = new javax.swing.JTextField();
+        tp14 = new javax.swing.JTextField();
+        tp15 = new javax.swing.JTextField();
+        lbl2S3 = new javax.swing.JLabel();
+        tp16 = new javax.swing.JTextField();
+        tp17 = new javax.swing.JTextField();
+        tp18 = new javax.swing.JTextField();
+        tp19 = new javax.swing.JTextField();
+        tp20 = new javax.swing.JTextField();
+        tp21 = new javax.swing.JTextField();
+        tp22 = new javax.swing.JTextField();
+        tp23 = new javax.swing.JTextField();
+        lbl3S1 = new javax.swing.JLabel();
+        tp24 = new javax.swing.JTextField();
+        tp25 = new javax.swing.JTextField();
+        tp26 = new javax.swing.JTextField();
+        tp27 = new javax.swing.JTextField();
+        tp28 = new javax.swing.JTextField();
+        tp29 = new javax.swing.JTextField();
+        tp30 = new javax.swing.JTextField();
+        tp31 = new javax.swing.JTextField();
+        lbl3S2 = new javax.swing.JLabel();
+        tp32 = new javax.swing.JTextField();
+        tp33 = new javax.swing.JTextField();
+        tp34 = new javax.swing.JTextField();
+        tp35 = new javax.swing.JTextField();
+        tp36 = new javax.swing.JTextField();
+        tp37 = new javax.swing.JTextField();
+        tp38 = new javax.swing.JTextField();
+        tp39 = new javax.swing.JTextField();
+        lbl3S3 = new javax.swing.JLabel();
+        tp40 = new javax.swing.JTextField();
+        tp41 = new javax.swing.JTextField();
+        tp42 = new javax.swing.JTextField();
+        tp43 = new javax.swing.JTextField();
+        tp44 = new javax.swing.JTextField();
+        tp45 = new javax.swing.JTextField();
+        tp46 = new javax.swing.JTextField();
+        tp47 = new javax.swing.JTextField();
+        lbl3T4 = new javax.swing.JLabel();
+        tp48 = new javax.swing.JTextField();
+        tp49 = new javax.swing.JTextField();
+        tp50 = new javax.swing.JTextField();
+        tp51 = new javax.swing.JTextField();
+        tp52 = new javax.swing.JTextField();
+        tp53 = new javax.swing.JTextField();
+        tp54 = new javax.swing.JTextField();
+        tp55 = new javax.swing.JTextField();
+        lbl3T6 = new javax.swing.JLabel();
+        tp56 = new javax.swing.JTextField();
+        tp57 = new javax.swing.JTextField();
+        tp58 = new javax.swing.JTextField();
+        tp59 = new javax.swing.JTextField();
+        tp60 = new javax.swing.JTextField();
+        tp61 = new javax.swing.JTextField();
+        tp62 = new javax.swing.JTextField();
+        tp63 = new javax.swing.JTextField();
+        lbl3T6B = new javax.swing.JLabel();
+        tp64 = new javax.swing.JTextField();
+        tp65 = new javax.swing.JTextField();
+        tp66 = new javax.swing.JTextField();
+        tp67 = new javax.swing.JTextField();
+        tp68 = new javax.swing.JTextField();
+        tp69 = new javax.swing.JTextField();
+        tp70 = new javax.swing.JTextField();
+        tp71 = new javax.swing.JTextField();
+        lbl3V5 = new javax.swing.JLabel();
+        tp72 = new javax.swing.JTextField();
+        tp73 = new javax.swing.JTextField();
+        tp74 = new javax.swing.JTextField();
+        tp75 = new javax.swing.JTextField();
+        tp76 = new javax.swing.JTextField();
+        tp77 = new javax.swing.JTextField();
+        tp78 = new javax.swing.JTextField();
+        tp79 = new javax.swing.JTextField();
+        lbl3M6 = new javax.swing.JLabel();
+        tp80 = new javax.swing.JTextField();
+        tp81 = new javax.swing.JTextField();
+        tp82 = new javax.swing.JTextField();
+        tp83 = new javax.swing.JTextField();
+        tp84 = new javax.swing.JTextField();
+        tp85 = new javax.swing.JTextField();
+        tp86 = new javax.swing.JTextField();
+        tp87 = new javax.swing.JTextField();
+        lbl3Q4 = new javax.swing.JLabel();
+        tp88 = new javax.swing.JTextField();
+        tp89 = new javax.swing.JTextField();
+        tp90 = new javax.swing.JTextField();
+        tp91 = new javax.swing.JTextField();
+        tp92 = new javax.swing.JTextField();
+        tp93 = new javax.swing.JTextField();
+        tp94 = new javax.swing.JTextField();
+        tp95 = new javax.swing.JTextField();
+        lbl2C2 = new javax.swing.JLabel();
+        tp96 = new javax.swing.JTextField();
+        tp97 = new javax.swing.JTextField();
+        tp98 = new javax.swing.JTextField();
+        tp99 = new javax.swing.JTextField();
+        tp100 = new javax.swing.JTextField();
+        tp101 = new javax.swing.JTextField();
+        tp102 = new javax.swing.JTextField();
+        tp103 = new javax.swing.JTextField();
+        lbl2C3 = new javax.swing.JLabel();
+        tp104 = new javax.swing.JTextField();
+        tp105 = new javax.swing.JTextField();
+        tp106 = new javax.swing.JTextField();
+        tp107 = new javax.swing.JTextField();
+        tp108 = new javax.swing.JTextField();
+        tp109 = new javax.swing.JTextField();
+        tp110 = new javax.swing.JTextField();
+        tp111 = new javax.swing.JTextField();
+        lbl3C2 = new javax.swing.JLabel();
+        tp112 = new javax.swing.JTextField();
+        tp113 = new javax.swing.JTextField();
+        tp114 = new javax.swing.JTextField();
+        tp115 = new javax.swing.JTextField();
+        tp116 = new javax.swing.JTextField();
+        tp117 = new javax.swing.JTextField();
+        tp118 = new javax.swing.JTextField();
+        tp119 = new javax.swing.JTextField();
+        lbl3C3 = new javax.swing.JLabel();
+        tp120 = new javax.swing.JTextField();
+        tp121 = new javax.swing.JTextField();
+        tp122 = new javax.swing.JTextField();
+        tp123 = new javax.swing.JTextField();
+        tp124 = new javax.swing.JTextField();
+        tp125 = new javax.swing.JTextField();
+        tp126 = new javax.swing.JTextField();
+        tp127 = new javax.swing.JTextField();
+        lbl3D4 = new javax.swing.JLabel();
+        tp128 = new javax.swing.JTextField();
+        tp129 = new javax.swing.JTextField();
+        tp130 = new javax.swing.JTextField();
+        tp131 = new javax.swing.JTextField();
+        tp132 = new javax.swing.JTextField();
+        tp133 = new javax.swing.JTextField();
+        tp134 = new javax.swing.JTextField();
+        tp135 = new javax.swing.JTextField();
+        data = new org.jdesktop.swingx.JXDatePicker();
+        data.setLocale(new Locale("pt", "BR"));
         pnl_envio = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        pnl_servidor = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaLog = new javax.swing.JTextArea();
+        txtPorta = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel7.setText("jLabel5");
+
+        jTextField41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField41.setText("jTextField1");
+
+        jTextField42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField42.setText("jTextField2");
+
+        jTextField43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField43.setText("jTextField3");
+
+        jTextField44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField44.setText("jTextField4");
+
+        jTextField45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField45.setText("jTextField5");
+
+        jTextField46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField46.setText("jTextField6");
+
+        jTextField47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField47.setText("jTextField7");
+
+        jTextField48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField48.setText("jTextField8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Concentrador de dados");
 
         jTabbedPane2.setDoubleBuffered(true);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8080", "8000", "8888" }));
-
-        jLabel1.setText("Porta");
-
-        jLabel2.setText("Estado Atual");
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 48)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("OK");
-
-        txtAreaLog.setColumns(20);
-        txtAreaLog.setRows(5);
-        jScrollPane1.setViewportView(txtAreaLog);
-        txtAreaLog.setEditable(false);
-
-        javax.swing.GroupLayout pnl_servidorLayout = new javax.swing.GroupLayout(pnl_servidor);
-        pnl_servidor.setLayout(pnl_servidorLayout);
-        pnl_servidorLayout.setHorizontalGroup(
-            pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_servidorLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addGroup(pnl_servidorLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(382, 382, 382)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnl_servidorLayout.setVerticalGroup(
-            pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_servidorLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
-            .addGroup(pnl_servidorLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-
-        jTabbedPane2.addTab("Servidor Web", pnl_servidor);
 
         lblPosto.setText("Posto");
 
@@ -182,7 +433,14 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setSelectedIndex(-1);
+        cmbHora.setToolTipText("");
+        cmbHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbHoraActionPerformed(evt);
+            }
+        });
 
         lblLocal.setText("Local:");
 
@@ -206,150 +464,3323 @@ public class Janela extends javax.swing.JFrame {
 
         lblData.setText("Data:");
 
-        cmbData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jTabbedPane1.setName(""); // NOI18N
 
-        tbl_leves.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Tipo", "15", "30", "45", "60", "15", "30", "45", "60"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true
-            };
+        panelLeves.setBackground(new java.awt.Color(255, 255, 255));
+        panelLeves.setMinimumSize(new java.awt.Dimension(200, 76));
+        panelLeves.setLayout(new java.awt.GridBagLayout());
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        leves_hora1.setEditable(false);
+        leves_hora1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        leves_hora1.setText("Hora 1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(leves_hora1, gridBagConstraints);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        lev15_1.setEditable(false);
+        lev15_1.setBackground(new java.awt.Color(204, 204, 204));
+        lev15_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev15_1.setText("15");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev15_1, gridBagConstraints);
+
+        lev30_1.setEditable(false);
+        lev30_1.setBackground(new java.awt.Color(204, 204, 204));
+        lev30_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev30_1.setText("30");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev30_1, gridBagConstraints);
+
+        lev45_1.setEditable(false);
+        lev45_1.setBackground(new java.awt.Color(204, 204, 204));
+        lev45_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev45_1.setText("45");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev45_1, gridBagConstraints);
+
+        lev60_1.setEditable(false);
+        lev60_1.setBackground(new java.awt.Color(204, 204, 204));
+        lev60_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev60_1.setText("60");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev60_1, gridBagConstraints);
+
+        leves_hora2.setEditable(false);
+        leves_hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        leves_hora2.setText("Hora 2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(leves_hora2, gridBagConstraints);
+
+        lev15_2.setEditable(false);
+        lev15_2.setBackground(new java.awt.Color(204, 204, 204));
+        lev15_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev15_2.setText("15");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev15_2, gridBagConstraints);
+
+        lev30_2.setEditable(false);
+        lev30_2.setBackground(new java.awt.Color(204, 204, 204));
+        lev30_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev30_2.setText("30");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev30_2, gridBagConstraints);
+
+        lev45_2.setEditable(false);
+        lev45_2.setBackground(new java.awt.Color(204, 204, 204));
+        lev45_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev45_2.setText("45");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev45_2, gridBagConstraints);
+
+        lev60_2.setEditable(false);
+        lev60_2.setBackground(new java.awt.Color(204, 204, 204));
+        lev60_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lev60_2.setText("60");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelLeves.add(lev60_2, gridBagConstraints);
+
+        lblP1.setBackground(new java.awt.Color(255, 255, 255));
+        lblP1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/p1_01.png"))); // NOI18N
+        lblP1.setText("P1");
+        lblP1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lblP1.setFocusable(false);
+        lblP1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblP1.setMinimumSize(new java.awt.Dimension(200, 76));
+        lblP1.setName(""); // NOI18N
+        lblP1.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lblP1, gridBagConstraints);
+
+        tl0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl0.setToolTipText("");
+        tl0.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl0.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl0, gridBagConstraints);
+
+        tl1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl1.setText(" ");
+        tl1.setToolTipText("");
+        tl1.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl1.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl1, gridBagConstraints);
+
+        tl2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl2.setText(" ");
+        tl2.setToolTipText("");
+        tl2.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl2.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl2, gridBagConstraints);
+
+        tl3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl3.setText(" ");
+        tl3.setToolTipText("");
+        tl3.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl3.setName(""); // NOI18N
+        tl3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tl3ActionPerformed(evt);
             }
         });
-        tbl_leves.getTableHeader().setResizingAllowed(false);
-        tbl_leves.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tbl_leves);
-        if (tbl_leves.getColumnModel().getColumnCount() > 0) {
-            tbl_leves.getColumnModel().getColumn(1).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(2).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(3).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(4).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(5).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(6).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(7).setResizable(false);
-            tbl_leves.getColumnModel().getColumn(8).setResizable(false);
-        }
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl3, gridBagConstraints);
 
-        txt_leves_Hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl4.setText(" ");
+        tl4.setToolTipText("");
+        tl4.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl4.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl4, gridBagConstraints);
 
-        txt_leves_Hora1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl5.setText(" ");
+        tl5.setToolTipText("");
+        tl5.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl5.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl5, gridBagConstraints);
+
+        tl6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl6.setText(" ");
+        tl6.setToolTipText("");
+        tl6.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl6.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl6, gridBagConstraints);
+
+        tl7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl7.setText(" ");
+        tl7.setToolTipText("");
+        tl7.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl7.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl7, gridBagConstraints);
+
+        lblP3.setBackground(new java.awt.Color(255, 255, 255));
+        lblP3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblP3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/p3.png"))); // NOI18N
+        lblP3.setText("P3");
+        lblP3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lblP3.setFocusable(false);
+        lblP3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblP3.setMinimumSize(new java.awt.Dimension(200, 76));
+        lblP3.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lblP3, gridBagConstraints);
+
+        tl8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl8.setText(" ");
+        tl8.setToolTipText("");
+        tl8.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl8.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl8, gridBagConstraints);
+
+        tl9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl9.setText(" ");
+        tl9.setToolTipText("");
+        tl9.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl9.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl9, gridBagConstraints);
+
+        tl10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl10.setText(" ");
+        tl10.setToolTipText("");
+        tl10.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl10.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl10, gridBagConstraints);
+
+        tl11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl11.setText(" ");
+        tl11.setToolTipText("");
+        tl11.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl11.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl11, gridBagConstraints);
+
+        tl12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl12.setText(" ");
+        tl12.setToolTipText("");
+        tl12.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl12.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl12, gridBagConstraints);
+
+        tl13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl13.setText(" ");
+        tl13.setToolTipText("");
+        tl13.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl13.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl13, gridBagConstraints);
+
+        tl14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl14.setText(" ");
+        tl14.setToolTipText("");
+        tl14.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl14.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl14, gridBagConstraints);
+
+        tl15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl15.setText(" ");
+        tl15.setToolTipText("");
+        tl15.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl15.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl15, gridBagConstraints);
+
+        lblP2.setBackground(new java.awt.Color(255, 255, 255));
+        lblP2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblP2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/p2.png"))); // NOI18N
+        lblP2.setText("P2");
+        lblP2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lblP2.setFocusable(false);
+        lblP2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblP2.setMinimumSize(new java.awt.Dimension(200, 76));
+        lblP2.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lblP2, gridBagConstraints);
+
+        tl16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl16.setText(" ");
+        tl16.setToolTipText("");
+        tl16.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl16.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl16, gridBagConstraints);
+
+        tl17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl17.setText(" ");
+        tl17.setToolTipText("");
+        tl17.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl17.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl17, gridBagConstraints);
+
+        tl18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl18.setText(" ");
+        tl18.setToolTipText("");
+        tl18.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl18.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl18, gridBagConstraints);
+
+        tl19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl19.setText(" ");
+        tl19.setToolTipText("");
+        tl19.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl19.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl19, gridBagConstraints);
+
+        tl20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl20.setText(" ");
+        tl20.setToolTipText("");
+        tl20.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl20.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl20, gridBagConstraints);
+
+        tl21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl21.setText(" ");
+        tl21.setToolTipText("");
+        tl21.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl21.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl21, gridBagConstraints);
+
+        tl22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl22.setText(" ");
+        tl22.setToolTipText("");
+        tl22.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl22.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl22, gridBagConstraints);
+
+        tl23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl23.setText(" ");
+        tl23.setToolTipText("");
+        tl23.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl23.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl23, gridBagConstraints);
+
+        lblM.setBackground(new java.awt.Color(255, 255, 255));
+        lblM.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/m.png"))); // NOI18N
+        lblM.setText("M");
+        lblM.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lblM.setFocusable(false);
+        lblM.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lblM.setMinimumSize(new java.awt.Dimension(200, 76));
+        lblM.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lblM, gridBagConstraints);
+
+        tl24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl24.setText(" ");
+        tl24.setToolTipText("");
+        tl24.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl24.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl24, gridBagConstraints);
+
+        tl25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl25.setText(" ");
+        tl25.setToolTipText("");
+        tl25.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl25.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl25, gridBagConstraints);
+
+        tl26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl26.setText(" ");
+        tl26.setToolTipText("");
+        tl26.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl26.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl26, gridBagConstraints);
+
+        tl27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl27.setText(" ");
+        tl27.setToolTipText("");
+        tl27.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl27.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl27, gridBagConstraints);
+
+        tl28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl28.setText(" ");
+        tl28.setToolTipText("");
+        tl28.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl28.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl28, gridBagConstraints);
+
+        tl29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl29.setText(" ");
+        tl29.setToolTipText("");
+        tl29.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl29.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl29, gridBagConstraints);
+
+        tl30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl30.setText(" ");
+        tl30.setToolTipText("");
+        tl30.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl30.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl30, gridBagConstraints);
+
+        tl31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl31.setText(" ");
+        tl31.setToolTipText("");
+        tl31.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl31.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(tl31, gridBagConstraints);
+
+        lbl2CB.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2CB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2CB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/o1.png"))); // NOI18N
+        lbl2CB.setText("2CB");
+        lbl2CB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2CB.setFocusable(false);
+        lbl2CB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2CB.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2CB.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl2CB, gridBagConstraints);
+
+        tl32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl32.setText(" ");
+        tl32.setToolTipText("");
+        tl32.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl32.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl32, gridBagConstraints);
+
+        tl33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl33.setText(" ");
+        tl33.setToolTipText("");
+        tl33.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl33.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl33, gridBagConstraints);
+
+        tl34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl34.setText(" ");
+        tl34.setToolTipText("");
+        tl34.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl34.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl34, gridBagConstraints);
+
+        tl35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl35.setText(" ");
+        tl35.setToolTipText("");
+        tl35.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl35.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl35, gridBagConstraints);
+
+        tl36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl36.setText(" ");
+        tl36.setToolTipText("");
+        tl36.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl36.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl36, gridBagConstraints);
+
+        tl37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl37.setText(" ");
+        tl37.setToolTipText("");
+        tl37.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl37.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl37, gridBagConstraints);
+
+        tl38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl38.setText(" ");
+        tl38.setToolTipText("");
+        tl38.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl38.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl38, gridBagConstraints);
+
+        tl39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl39.setText(" ");
+        tl39.setToolTipText("");
+        tl39.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl39.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl39, gridBagConstraints);
+
+        lbl3CB.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3CB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3CB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/o2.png"))); // NOI18N
+        lbl3CB.setText("3CB");
+        lbl3CB.setToolTipText("");
+        lbl3CB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3CB.setFocusable(false);
+        lbl3CB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3CB.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3CB.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl3CB, gridBagConstraints);
+
+        tl40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl40.setText(" ");
+        tl40.setToolTipText("");
+        tl40.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl40.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl40, gridBagConstraints);
+
+        tl41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl41.setText(" ");
+        tl41.setToolTipText("");
+        tl41.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl41.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl41, gridBagConstraints);
+
+        tl42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl42.setText(" ");
+        tl42.setToolTipText("");
+        tl42.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl42.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl42, gridBagConstraints);
+
+        tl43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl43.setText(" ");
+        tl43.setToolTipText("");
+        tl43.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl43.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl43, gridBagConstraints);
+
+        tl44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl44.setText(" ");
+        tl44.setToolTipText("");
+        tl44.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl44.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl44, gridBagConstraints);
+
+        tl45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl45.setText(" ");
+        tl45.setToolTipText("");
+        tl45.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl45.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl45, gridBagConstraints);
+
+        tl46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl46.setText(" ");
+        tl46.setToolTipText("");
+        tl46.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl46.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl46, gridBagConstraints);
+
+        tl47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl47.setText(" ");
+        tl47.setToolTipText("");
+        tl47.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl47.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl47, gridBagConstraints);
+
+        lbl4CB.setBackground(new java.awt.Color(255, 255, 255));
+        lbl4CB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl4CB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/o3.png"))); // NOI18N
+        lbl4CB.setText("4CB");
+        lbl4CB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl4CB.setFocusable(false);
+        lbl4CB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl4CB.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl4CB.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl4CB, gridBagConstraints);
+
+        tl48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl48.setText(" ");
+        tl48.setToolTipText("");
+        tl48.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl48.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl48, gridBagConstraints);
+
+        tl49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl49.setText(" ");
+        tl49.setToolTipText("");
+        tl49.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl49.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl49, gridBagConstraints);
+
+        tl50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl50.setText(" ");
+        tl50.setToolTipText("");
+        tl50.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl50.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl50, gridBagConstraints);
+
+        tl51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl51.setText(" ");
+        tl51.setToolTipText("");
+        tl51.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl51.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl51, gridBagConstraints);
+
+        tl52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl52.setText(" ");
+        tl52.setToolTipText("");
+        tl52.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl52.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl52, gridBagConstraints);
+
+        tl53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl53.setText(" ");
+        tl53.setToolTipText("");
+        tl53.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl53.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl53, gridBagConstraints);
+
+        tl54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl54.setText(" ");
+        tl54.setToolTipText("");
+        tl54.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl54.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl54, gridBagConstraints);
+
+        tl55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl55.setText(" ");
+        tl55.setToolTipText("");
+        tl55.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl55.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl55, gridBagConstraints);
+
+        lbl2C.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2C.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c1.png"))); // NOI18N
+        lbl2C.setText("2C");
+        lbl2C.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2C.setFocusable(false);
+        lbl2C.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2C.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2C.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl2C, gridBagConstraints);
+
+        tl56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl56.setText(" ");
+        tl56.setToolTipText("");
+        tl56.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl56.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl56, gridBagConstraints);
+
+        tl57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl57.setText(" ");
+        tl57.setToolTipText("");
+        tl57.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl57.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl57, gridBagConstraints);
+
+        tl58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl58.setText(" ");
+        tl58.setToolTipText("");
+        tl58.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl58.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl58, gridBagConstraints);
+
+        tl59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl59.setText(" ");
+        tl59.setToolTipText("");
+        tl59.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl59.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl59, gridBagConstraints);
+
+        tl60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl60.setText(" ");
+        tl60.setToolTipText("");
+        tl60.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl60.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl60, gridBagConstraints);
+
+        tl61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl61.setText(" ");
+        tl61.setToolTipText("");
+        tl61.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl61.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl61, gridBagConstraints);
+
+        tl62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl62.setText(" ");
+        tl62.setToolTipText("");
+        tl62.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl62.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl62, gridBagConstraints);
+
+        tl63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl63.setText(" ");
+        tl63.setToolTipText("");
+        tl63.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl63.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl63, gridBagConstraints);
+
+        lbl3C.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3C.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c2.png"))); // NOI18N
+        lbl3C.setText("3C");
+        lbl3C.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3C.setFocusable(false);
+        lbl3C.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3C.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3C.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl3C, gridBagConstraints);
+
+        tl64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl64.setText(" ");
+        tl64.setToolTipText("");
+        tl64.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl64.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl64, gridBagConstraints);
+
+        tl65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl65.setText(" ");
+        tl65.setToolTipText("");
+        tl65.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl65.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl65, gridBagConstraints);
+
+        tl66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl66.setText(" ");
+        tl66.setToolTipText("");
+        tl66.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl66.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl66, gridBagConstraints);
+
+        tl67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl67.setText(" ");
+        tl67.setToolTipText("");
+        tl67.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl67.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl67, gridBagConstraints);
+
+        tl68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl68.setText(" ");
+        tl68.setToolTipText("");
+        tl68.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl68.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl68, gridBagConstraints);
+
+        tl69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl69.setText(" ");
+        tl69.setToolTipText("");
+        tl69.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl69.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl69, gridBagConstraints);
+
+        tl70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl70.setText(" ");
+        tl70.setToolTipText("");
+        tl70.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl70.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl70, gridBagConstraints);
+
+        tl71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl71.setText(" ");
+        tl71.setToolTipText("");
+        tl71.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl71.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl71, gridBagConstraints);
+
+        lbl4C.setBackground(new java.awt.Color(255, 255, 255));
+        lbl4C.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl4C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c3.png"))); // NOI18N
+        lbl4C.setText("4C");
+        lbl4C.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl4C.setFocusable(false);
+        lbl4C.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl4C.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl4C.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl4C, gridBagConstraints);
+
+        tl72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl72.setText(" ");
+        tl72.setToolTipText("");
+        tl72.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl72.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl72, gridBagConstraints);
+
+        tl73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl73.setText(" ");
+        tl73.setToolTipText("");
+        tl73.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl73.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl73, gridBagConstraints);
+
+        tl74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl74.setText(" ");
+        tl74.setToolTipText("");
+        tl74.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl74.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl74, gridBagConstraints);
+
+        tl75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl75.setText(" ");
+        tl75.setToolTipText("");
+        tl75.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl75.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl75, gridBagConstraints);
+
+        tl76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl76.setText(" ");
+        tl76.setToolTipText("");
+        tl76.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl76.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl76, gridBagConstraints);
+
+        tl77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl77.setText(" ");
+        tl77.setToolTipText("");
+        tl77.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl77.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl77, gridBagConstraints);
+
+        tl78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl78.setText(" ");
+        tl78.setToolTipText("");
+        tl78.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl78.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl78, gridBagConstraints);
+
+        tl79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl79.setText(" ");
+        tl79.setToolTipText("");
+        tl79.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl79.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl79, gridBagConstraints);
+
+        lbl4CD.setBackground(new java.awt.Color(255, 255, 255));
+        lbl4CD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl4CD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c4.png"))); // NOI18N
+        lbl4CD.setText("4CD");
+        lbl4CD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl4CD.setFocusable(false);
+        lbl4CD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl4CD.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl4CD.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl4CD, gridBagConstraints);
+
+        tl80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl80.setText(" ");
+        tl80.setToolTipText("");
+        tl80.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl80.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl80, gridBagConstraints);
+
+        tl81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl81.setText(" ");
+        tl81.setToolTipText("");
+        tl81.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl81.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl81, gridBagConstraints);
+
+        tl82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl82.setText(" ");
+        tl82.setToolTipText("");
+        tl82.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl82.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl82, gridBagConstraints);
+
+        tl83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl83.setText(" ");
+        tl83.setToolTipText("");
+        tl83.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl83.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl83, gridBagConstraints);
+
+        tl84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl84.setText(" ");
+        tl84.setToolTipText("");
+        tl84.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl84.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl84, gridBagConstraints);
+
+        tl85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl85.setText(" ");
+        tl85.setToolTipText("");
+        tl85.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl85.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl85, gridBagConstraints);
+
+        tl86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl86.setText(" ");
+        tl86.setToolTipText("");
+        tl86.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl86.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl86, gridBagConstraints);
+
+        tl87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl87.setText(" ");
+        tl87.setToolTipText("");
+        tl87.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl87.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl87, gridBagConstraints);
+
+        lbl3D.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3D.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3D.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c5.png"))); // NOI18N
+        lbl3D.setText("3D");
+        lbl3D.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3D.setFocusable(false);
+        lbl3D.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3D.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3D.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(lbl3D, gridBagConstraints);
+
+        tl88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl88.setText(" ");
+        tl88.setToolTipText("");
+        tl88.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl88.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl88, gridBagConstraints);
+
+        tl89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl89.setText(" ");
+        tl89.setToolTipText("");
+        tl89.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl89.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl89, gridBagConstraints);
+
+        tl90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl90.setText(" ");
+        tl90.setToolTipText("");
+        tl90.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl90.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl90, gridBagConstraints);
+
+        tl91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl91.setText(" ");
+        tl91.setToolTipText("");
+        tl91.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl91.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl91, gridBagConstraints);
+
+        tl92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl92.setText(" ");
+        tl92.setToolTipText("");
+        tl92.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl92.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl92, gridBagConstraints);
+
+        tl93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl93.setText(" ");
+        tl93.setToolTipText("");
+        tl93.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl93.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl93, gridBagConstraints);
+
+        tl94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl94.setText(" ");
+        tl94.setToolTipText("");
+        tl94.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl94.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl94, gridBagConstraints);
+
+        tl95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl95.setText(" ");
+        tl95.setToolTipText("");
+        tl95.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl95.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelLeves.add(tl95, gridBagConstraints);
+
+        jScrollPane2.setViewportView(panelLeves);
 
         javax.swing.GroupLayout tab_levesLayout = new javax.swing.GroupLayout(tab_leves);
         tab_leves.setLayout(tab_levesLayout);
         tab_levesLayout.setHorizontalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tab_levesLayout.createSequentialGroup()
-                .addGap(0, 130, Short.MAX_VALUE)
-                .addComponent(txt_leves_Hora1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_leves_Hora2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1522, Short.MAX_VALUE)
         );
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab_levesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_leves_Hora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_leves_Hora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 61, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Veículos e Caminhões Leves", tab_leves);
 
-        tbl_pesados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Tipo", "15", "30", "45", "60", "15", "30", "45", "60"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true
-            };
+        panelPesados.setBackground(new java.awt.Color(255, 255, 255));
+        panelPesados.setMinimumSize(new java.awt.Dimension(200, 76));
+        panelPesados.setLayout(new java.awt.GridBagLayout());
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        pesados_hora1.setEditable(false);
+        pesados_hora1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pesados_hora1.setText("Hora 1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pesados_hora1, gridBagConstraints);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbl_pesados.getTableHeader().setResizingAllowed(false);
-        tbl_pesados.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(tbl_pesados);
+        pes15_1.setEditable(false);
+        pes15_1.setBackground(new java.awt.Color(204, 204, 204));
+        pes15_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes15_1.setText("15");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pes15_1, gridBagConstraints);
 
-        txt_pesados_Hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes30_1.setEditable(false);
+        pes30_1.setBackground(new java.awt.Color(204, 204, 204));
+        pes30_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes30_1.setText("30");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pes30_1, gridBagConstraints);
 
-        txt_pesados_Hora1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes45_1.setEditable(false);
+        pes45_1.setBackground(new java.awt.Color(204, 204, 204));
+        pes45_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes45_1.setText("45");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pes45_1, gridBagConstraints);
+
+        pes60_1.setEditable(false);
+        pes60_1.setBackground(new java.awt.Color(204, 204, 204));
+        pes60_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes60_1.setText("60");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pes60_1, gridBagConstraints);
+
+        pesados_hora2.setEditable(false);
+        pesados_hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pesados_hora2.setText("Hora 2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pesados_hora2, gridBagConstraints);
+
+        pes15_2.setEditable(false);
+        pes15_2.setBackground(new java.awt.Color(204, 204, 204));
+        pes15_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes15_2.setText("15");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pes15_2, gridBagConstraints);
+
+        pes30_2.setEditable(false);
+        pes30_2.setBackground(new java.awt.Color(204, 204, 204));
+        pes30_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pes30_2.setText("30");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(pes30_2, gridBagConstraints);
+
+        peso45_2.setEditable(false);
+        peso45_2.setBackground(new java.awt.Color(204, 204, 204));
+        peso45_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        peso45_2.setText("45");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(peso45_2, gridBagConstraints);
+
+        peso60_2.setEditable(false);
+        peso60_2.setBackground(new java.awt.Color(204, 204, 204));
+        peso60_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        peso60_2.setText("60");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelPesados.add(peso60_2, gridBagConstraints);
+
+        lbl2S1.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2S1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2S1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s1.png"))); // NOI18N
+        lbl2S1.setText("2S1");
+        lbl2S1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2S1.setFocusable(false);
+        lbl2S1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2S1.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2S1.setName(""); // NOI18N
+        lbl2S1.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl2S1, gridBagConstraints);
+        lbl2S1.getAccessibleContext().setAccessibleDescription("");
+
+        tp0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp0.setToolTipText("");
+        tp0.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp0.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp0, gridBagConstraints);
+
+        tp1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp1.setText(" ");
+        tp1.setToolTipText("");
+        tp1.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp1.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp1, gridBagConstraints);
+
+        tp2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp2.setText(" ");
+        tp2.setToolTipText("");
+        tp2.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp2.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp2, gridBagConstraints);
+
+        tp3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp3.setText(" ");
+        tp3.setToolTipText("");
+        tp3.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp3.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp3, gridBagConstraints);
+
+        tp4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp4.setText(" ");
+        tp4.setToolTipText("");
+        tp4.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp4.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp4, gridBagConstraints);
+
+        tp5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp5.setText(" ");
+        tp5.setToolTipText("");
+        tp5.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp5.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp5, gridBagConstraints);
+
+        tp6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp6.setText(" ");
+        tp6.setToolTipText("");
+        tp6.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp6.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp6, gridBagConstraints);
+
+        tp7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp7.setText(" ");
+        tp7.setToolTipText("");
+        tp7.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp7.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp7, gridBagConstraints);
+
+        lbl2S2.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2S2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2S2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s2.png"))); // NOI18N
+        lbl2S2.setText("2S2");
+        lbl2S2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2S2.setFocusable(false);
+        lbl2S2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2S2.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2S2.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl2S2, gridBagConstraints);
+
+        tp8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp8.setText(" ");
+        tp8.setToolTipText("");
+        tp8.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp8.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp8, gridBagConstraints);
+
+        tp9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp9.setText(" ");
+        tp9.setToolTipText("");
+        tp9.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp9.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp9, gridBagConstraints);
+
+        tp10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp10.setText(" ");
+        tp10.setToolTipText("");
+        tp10.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp10.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp10, gridBagConstraints);
+
+        tp11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp11.setText(" ");
+        tp11.setToolTipText("");
+        tp11.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp11.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp11, gridBagConstraints);
+
+        tp12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp12.setText(" ");
+        tp12.setToolTipText("");
+        tp12.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp12.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp12, gridBagConstraints);
+
+        tp13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp13.setText(" ");
+        tp13.setToolTipText("");
+        tp13.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp13.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp13, gridBagConstraints);
+
+        tp14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp14.setText(" ");
+        tp14.setToolTipText("");
+        tp14.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp14.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp14, gridBagConstraints);
+
+        tp15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp15.setText(" ");
+        tp15.setToolTipText("");
+        tp15.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp15.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp15, gridBagConstraints);
+
+        lbl2S3.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2S3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2S3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s3.png"))); // NOI18N
+        lbl2S3.setText("2S3");
+        lbl2S3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2S3.setFocusable(false);
+        lbl2S3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2S3.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2S3.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl2S3, gridBagConstraints);
+
+        tp16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp16.setText(" ");
+        tp16.setToolTipText("");
+        tp16.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp16.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp16, gridBagConstraints);
+
+        tp17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp17.setText(" ");
+        tp17.setToolTipText("");
+        tp17.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp17.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp17, gridBagConstraints);
+
+        tp18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp18.setText(" ");
+        tp18.setToolTipText("");
+        tp18.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp18.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp18, gridBagConstraints);
+
+        tp19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp19.setText(" ");
+        tp19.setToolTipText("");
+        tp19.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp19.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp19, gridBagConstraints);
+
+        tp20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp20.setText(" ");
+        tp20.setToolTipText("");
+        tp20.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp20.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp20, gridBagConstraints);
+
+        tp21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp21.setText(" ");
+        tp21.setToolTipText("");
+        tp21.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp21.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp21, gridBagConstraints);
+
+        tp22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp22.setText(" ");
+        tp22.setToolTipText("");
+        tp22.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp22.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp22, gridBagConstraints);
+
+        tp23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp23.setText(" ");
+        tp23.setToolTipText("");
+        tp23.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp23.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp23, gridBagConstraints);
+
+        lbl3S1.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3S1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3S1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s4.png"))); // NOI18N
+        lbl3S1.setText("3S1");
+        lbl3S1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3S1.setFocusable(false);
+        lbl3S1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3S1.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3S1.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3S1, gridBagConstraints);
+
+        tp24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp24.setText(" ");
+        tp24.setToolTipText("");
+        tp24.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp24.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp24, gridBagConstraints);
+
+        tp25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp25.setText(" ");
+        tp25.setToolTipText("");
+        tp25.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp25.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp25, gridBagConstraints);
+
+        tp26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp26.setText(" ");
+        tp26.setToolTipText("");
+        tp26.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp26.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp26, gridBagConstraints);
+
+        tp27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp27.setText(" ");
+        tp27.setToolTipText("");
+        tp27.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp27.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp27, gridBagConstraints);
+
+        tp28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp28.setText(" ");
+        tp28.setToolTipText("");
+        tp28.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp28.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp28, gridBagConstraints);
+
+        tp29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp29.setText(" ");
+        tp29.setToolTipText("");
+        tp29.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp29.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp29, gridBagConstraints);
+
+        tp30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp30.setText(" ");
+        tp30.setToolTipText("");
+        tp30.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp30.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp30, gridBagConstraints);
+
+        tp31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp31.setText(" ");
+        tp31.setToolTipText("");
+        tp31.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp31.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(tp31, gridBagConstraints);
+
+        lbl3S2.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3S2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3S2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s5.png"))); // NOI18N
+        lbl3S2.setText("3S2");
+        lbl3S2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3S2.setFocusable(false);
+        lbl3S2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3S2.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3S2.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3S2, gridBagConstraints);
+
+        tp32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp32.setText(" ");
+        tp32.setToolTipText("");
+        tp32.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp32.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp32, gridBagConstraints);
+
+        tp33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp33.setText(" ");
+        tp33.setToolTipText("");
+        tp33.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp33.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp33, gridBagConstraints);
+
+        tp34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp34.setText(" ");
+        tp34.setToolTipText("");
+        tp34.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp34.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp34, gridBagConstraints);
+
+        tp35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp35.setText(" ");
+        tp35.setToolTipText("");
+        tp35.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp35.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp35, gridBagConstraints);
+
+        tp36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp36.setText(" ");
+        tp36.setToolTipText("");
+        tp36.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp36.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp36, gridBagConstraints);
+
+        tp37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp37.setText(" ");
+        tp37.setToolTipText("");
+        tp37.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp37.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp37, gridBagConstraints);
+
+        tp38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp38.setText(" ");
+        tp38.setToolTipText("");
+        tp38.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp38.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp38, gridBagConstraints);
+
+        tp39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp39.setText(" ");
+        tp39.setToolTipText("");
+        tp39.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp39.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp39, gridBagConstraints);
+
+        lbl3S3.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3S3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3S3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s6.png"))); // NOI18N
+        lbl3S3.setText("3S3");
+        lbl3S3.setToolTipText("");
+        lbl3S3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3S3.setFocusable(false);
+        lbl3S3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3S3.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3S3.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3S3, gridBagConstraints);
+
+        tp40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp40.setText(" ");
+        tp40.setToolTipText("");
+        tp40.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp40.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp40, gridBagConstraints);
+
+        tp41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp41.setText(" ");
+        tp41.setToolTipText("");
+        tp41.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp41.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp41, gridBagConstraints);
+
+        tp42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp42.setText(" ");
+        tp42.setToolTipText("");
+        tp42.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp42.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp42, gridBagConstraints);
+
+        tp43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp43.setText(" ");
+        tp43.setToolTipText("");
+        tp43.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp43.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp43, gridBagConstraints);
+
+        tp44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp44.setText(" ");
+        tp44.setToolTipText("");
+        tp44.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp44.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp44, gridBagConstraints);
+
+        tp45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp45.setText(" ");
+        tp45.setToolTipText("");
+        tp45.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp45.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp45, gridBagConstraints);
+
+        tp46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp46.setText(" ");
+        tp46.setToolTipText("");
+        tp46.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp46.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp46, gridBagConstraints);
+
+        tp47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp47.setText(" ");
+        tp47.setToolTipText("");
+        tp47.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp47.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp47, gridBagConstraints);
+
+        lbl3T4.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3T4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3T4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se1.png"))); // NOI18N
+        lbl3T4.setText("3T4");
+        lbl3T4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3T4.setFocusable(false);
+        lbl3T4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3T4.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3T4.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3T4, gridBagConstraints);
+
+        tp48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp48.setText(" ");
+        tp48.setToolTipText("");
+        tp48.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp48.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp48, gridBagConstraints);
+
+        tp49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp49.setText(" ");
+        tp49.setToolTipText("");
+        tp49.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp49.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp49, gridBagConstraints);
+
+        tp50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp50.setText(" ");
+        tp50.setToolTipText("");
+        tp50.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp50.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp50, gridBagConstraints);
+
+        tp51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp51.setText(" ");
+        tp51.setToolTipText("");
+        tp51.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp51.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp51, gridBagConstraints);
+
+        tp52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp52.setText(" ");
+        tp52.setToolTipText("");
+        tp52.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp52.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp52, gridBagConstraints);
+
+        tp53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp53.setText(" ");
+        tp53.setToolTipText("");
+        tp53.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp53.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp53, gridBagConstraints);
+
+        tp54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp54.setText(" ");
+        tp54.setToolTipText("");
+        tp54.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp54.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp54, gridBagConstraints);
+
+        tp55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp55.setText(" ");
+        tp55.setToolTipText("");
+        tp55.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp55.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp55, gridBagConstraints);
+
+        lbl3T6.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3T6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3T6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se2.png"))); // NOI18N
+        lbl3T6.setText("3T6");
+        lbl3T6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3T6.setFocusable(false);
+        lbl3T6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3T6.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3T6.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3T6, gridBagConstraints);
+
+        tp56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp56.setText(" ");
+        tp56.setToolTipText("");
+        tp56.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp56.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp56, gridBagConstraints);
+
+        tp57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp57.setText(" ");
+        tp57.setToolTipText("");
+        tp57.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp57.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp57, gridBagConstraints);
+
+        tp58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp58.setText(" ");
+        tp58.setToolTipText("");
+        tp58.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp58.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp58, gridBagConstraints);
+
+        tp59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp59.setText(" ");
+        tp59.setToolTipText("");
+        tp59.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp59.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp59, gridBagConstraints);
+
+        tp60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp60.setText(" ");
+        tp60.setToolTipText("");
+        tp60.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp60.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp60, gridBagConstraints);
+
+        tp61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp61.setText(" ");
+        tp61.setToolTipText("");
+        tp61.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp61.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp61, gridBagConstraints);
+
+        tp62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp62.setText(" ");
+        tp62.setToolTipText("");
+        tp62.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp62.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp62, gridBagConstraints);
+
+        tp63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp63.setText(" ");
+        tp63.setToolTipText("");
+        tp63.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp63.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp63, gridBagConstraints);
+
+        lbl3T6B.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3T6B.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3T6B.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se3.png"))); // NOI18N
+        lbl3T6B.setText("3R6");
+        lbl3T6B.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3T6B.setFocusable(false);
+        lbl3T6B.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3T6B.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3T6B.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3T6B, gridBagConstraints);
+
+        tp64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp64.setText(" ");
+        tp64.setToolTipText("");
+        tp64.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp64.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp64, gridBagConstraints);
+
+        tp65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp65.setText(" ");
+        tp65.setToolTipText("");
+        tp65.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp65.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp65, gridBagConstraints);
+
+        tp66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp66.setText(" ");
+        tp66.setToolTipText("");
+        tp66.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp66.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp66, gridBagConstraints);
+
+        tp67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp67.setText(" ");
+        tp67.setToolTipText("");
+        tp67.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp67.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp67, gridBagConstraints);
+
+        tp68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp68.setText(" ");
+        tp68.setToolTipText("");
+        tp68.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp68.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp68, gridBagConstraints);
+
+        tp69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp69.setText(" ");
+        tp69.setToolTipText("");
+        tp69.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp69.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp69, gridBagConstraints);
+
+        tp70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp70.setText(" ");
+        tp70.setToolTipText("");
+        tp70.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp70.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp70, gridBagConstraints);
+
+        tp71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp71.setText(" ");
+        tp71.setToolTipText("");
+        tp71.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp71.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp71, gridBagConstraints);
+
+        lbl3V5.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3V5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3V5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se4.png"))); // NOI18N
+        lbl3V5.setText("3V5");
+        lbl3V5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3V5.setFocusable(false);
+        lbl3V5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3V5.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3V5.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3V5, gridBagConstraints);
+
+        tp72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp72.setText(" ");
+        tp72.setToolTipText("");
+        tp72.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp72.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp72, gridBagConstraints);
+
+        tp73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp73.setText(" ");
+        tp73.setToolTipText("");
+        tp73.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp73.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp73, gridBagConstraints);
+
+        tp74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp74.setText(" ");
+        tp74.setToolTipText("");
+        tp74.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp74.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp74, gridBagConstraints);
+
+        tp75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp75.setText(" ");
+        tp75.setToolTipText("");
+        tp75.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp75.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp75, gridBagConstraints);
+
+        tp76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp76.setText(" ");
+        tp76.setToolTipText("");
+        tp76.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp76.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp76, gridBagConstraints);
+
+        tp77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp77.setText(" ");
+        tp77.setToolTipText("");
+        tp77.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp77.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp77, gridBagConstraints);
+
+        tp78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp78.setText(" ");
+        tp78.setToolTipText("");
+        tp78.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp78.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp78, gridBagConstraints);
+
+        tp79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp79.setText(" ");
+        tp79.setToolTipText("");
+        tp79.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp79.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp79, gridBagConstraints);
+
+        lbl3M6.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3M6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3M6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se5.png"))); // NOI18N
+        lbl3M6.setText("3M6");
+        lbl3M6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3M6.setFocusable(false);
+        lbl3M6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3M6.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3M6.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3M6, gridBagConstraints);
+
+        tp80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp80.setText(" ");
+        tp80.setToolTipText("");
+        tp80.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp80.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp80, gridBagConstraints);
+
+        tp81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp81.setText(" ");
+        tp81.setToolTipText("");
+        tp81.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp81.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp81, gridBagConstraints);
+
+        tp82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp82.setText(" ");
+        tp82.setToolTipText("");
+        tp82.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp82.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp82, gridBagConstraints);
+
+        tp83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp83.setText(" ");
+        tp83.setToolTipText("");
+        tp83.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp83.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp83, gridBagConstraints);
+
+        tp84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp84.setText(" ");
+        tp84.setToolTipText("");
+        tp84.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp84.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp84, gridBagConstraints);
+
+        tp85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp85.setText(" ");
+        tp85.setToolTipText("");
+        tp85.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp85.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp85, gridBagConstraints);
+
+        tp86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp86.setText(" ");
+        tp86.setToolTipText("");
+        tp86.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp86.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp86, gridBagConstraints);
+
+        tp87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp87.setText(" ");
+        tp87.setToolTipText("");
+        tp87.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp87.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp87, gridBagConstraints);
+
+        lbl3Q4.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3Q4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3Q4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r1.png"))); // NOI18N
+        lbl3Q4.setText("3Q4");
+        lbl3Q4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3Q4.setFocusable(false);
+        lbl3Q4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3Q4.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3Q4.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3Q4, gridBagConstraints);
+
+        tp88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp88.setText(" ");
+        tp88.setToolTipText("");
+        tp88.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp88.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp88, gridBagConstraints);
+
+        tp89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp89.setText(" ");
+        tp89.setToolTipText("");
+        tp89.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp89.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp89, gridBagConstraints);
+
+        tp90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp90.setText(" ");
+        tp90.setToolTipText("");
+        tp90.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp90.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp90, gridBagConstraints);
+
+        tp91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp91.setText(" ");
+        tp91.setToolTipText("");
+        tp91.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp91.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp91, gridBagConstraints);
+
+        tp92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp92.setText(" ");
+        tp92.setToolTipText("");
+        tp92.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp92.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp92, gridBagConstraints);
+
+        tp93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp93.setText(" ");
+        tp93.setToolTipText("");
+        tp93.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp93.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp93, gridBagConstraints);
+
+        tp94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp94.setText(" ");
+        tp94.setToolTipText("");
+        tp94.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp94.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp94, gridBagConstraints);
+
+        tp95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp95.setText(" ");
+        tp95.setToolTipText("");
+        tp95.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp95.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp95, gridBagConstraints);
+
+        lbl2C2.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2C2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r2.png"))); // NOI18N
+        lbl2C2.setText("2C2");
+        lbl2C2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2C2.setFocusable(false);
+        lbl2C2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2C2.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2C2.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl2C2, gridBagConstraints);
+
+        tp96.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp96.setText(" ");
+        tp96.setToolTipText("");
+        tp96.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp96.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp96, gridBagConstraints);
+
+        tp97.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp97.setText(" ");
+        tp97.setToolTipText("");
+        tp97.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp97.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp97, gridBagConstraints);
+
+        tp98.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp98.setText(" ");
+        tp98.setToolTipText("");
+        tp98.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp98.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp98, gridBagConstraints);
+
+        tp99.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp99.setText(" ");
+        tp99.setToolTipText("");
+        tp99.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp99.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp99, gridBagConstraints);
+
+        tp100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp100.setText(" ");
+        tp100.setToolTipText("");
+        tp100.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp100.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp100, gridBagConstraints);
+
+        tp101.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp101.setText(" ");
+        tp101.setToolTipText("");
+        tp101.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp101.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp101, gridBagConstraints);
+
+        tp102.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp102.setText(" ");
+        tp102.setToolTipText("");
+        tp102.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp102.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp102, gridBagConstraints);
+
+        tp103.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp103.setText(" ");
+        tp103.setToolTipText("");
+        tp103.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp103.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp103, gridBagConstraints);
+
+        lbl2C3.setBackground(new java.awt.Color(255, 255, 255));
+        lbl2C3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r3.png"))); // NOI18N
+        lbl2C3.setText("2C3");
+        lbl2C3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl2C3.setFocusable(false);
+        lbl2C3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl2C3.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl2C3.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl2C3, gridBagConstraints);
+
+        tp104.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp104.setText(" ");
+        tp104.setToolTipText("");
+        tp104.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp104.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp104, gridBagConstraints);
+
+        tp105.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp105.setText(" ");
+        tp105.setToolTipText("");
+        tp105.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp105.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp105, gridBagConstraints);
+
+        tp106.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp106.setText(" ");
+        tp106.setToolTipText("");
+        tp106.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp106.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp106, gridBagConstraints);
+
+        tp107.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp107.setText(" ");
+        tp107.setToolTipText("");
+        tp107.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp107.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp107, gridBagConstraints);
+
+        tp108.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp108.setText(" ");
+        tp108.setToolTipText("");
+        tp108.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp108.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp108, gridBagConstraints);
+
+        tp109.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp109.setText(" ");
+        tp109.setToolTipText("");
+        tp109.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp109.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp109, gridBagConstraints);
+
+        tp110.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp110.setText(" ");
+        tp110.setToolTipText("");
+        tp110.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp110.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp110, gridBagConstraints);
+
+        tp111.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp111.setText(" ");
+        tp111.setToolTipText("");
+        tp111.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp111.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp111, gridBagConstraints);
+
+        lbl3C2.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3C2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r4.png"))); // NOI18N
+        lbl3C2.setText("3C2");
+        lbl3C2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3C2.setFocusable(false);
+        lbl3C2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3C2.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3C2.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3C2, gridBagConstraints);
+
+        tp112.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp112.setText(" ");
+        tp112.setToolTipText("");
+        tp112.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp112.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp112, gridBagConstraints);
+
+        tp113.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp113.setText(" ");
+        tp113.setToolTipText("");
+        tp113.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp113.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp113, gridBagConstraints);
+
+        tp114.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp114.setText(" ");
+        tp114.setToolTipText("");
+        tp114.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp114.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp114, gridBagConstraints);
+
+        tp115.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp115.setText(" ");
+        tp115.setToolTipText("");
+        tp115.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp115.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp115, gridBagConstraints);
+
+        tp116.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp116.setText(" ");
+        tp116.setToolTipText("");
+        tp116.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp116.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp116, gridBagConstraints);
+
+        tp117.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp117.setText(" ");
+        tp117.setToolTipText("");
+        tp117.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp117.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp117, gridBagConstraints);
+
+        tp118.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp118.setText(" ");
+        tp118.setToolTipText("");
+        tp118.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp118.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp118, gridBagConstraints);
+
+        tp119.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp119.setText(" ");
+        tp119.setToolTipText("");
+        tp119.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp119.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp119, gridBagConstraints);
+
+        lbl3C3.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3C3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r5.png"))); // NOI18N
+        lbl3C3.setText("3C3");
+        lbl3C3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3C3.setFocusable(false);
+        lbl3C3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3C3.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3C3.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3C3, gridBagConstraints);
+
+        tp120.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp120.setText(" ");
+        tp120.setToolTipText("");
+        tp120.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp120.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp120, gridBagConstraints);
+
+        tp121.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp121.setText(" ");
+        tp121.setToolTipText("");
+        tp121.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp121.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp121, gridBagConstraints);
+
+        tp122.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp122.setText(" ");
+        tp122.setToolTipText("");
+        tp122.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp122.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp122, gridBagConstraints);
+
+        tp123.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp123.setText(" ");
+        tp123.setToolTipText("");
+        tp123.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp123.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp123, gridBagConstraints);
+
+        tp124.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp124.setText(" ");
+        tp124.setToolTipText("");
+        tp124.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp124.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp124, gridBagConstraints);
+
+        tp125.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp125.setText(" ");
+        tp125.setToolTipText("");
+        tp125.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp125.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp125, gridBagConstraints);
+
+        tp126.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp126.setText(" ");
+        tp126.setToolTipText("");
+        tp126.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp126.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp126, gridBagConstraints);
+
+        tp127.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp127.setText(" ");
+        tp127.setToolTipText("");
+        tp127.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp127.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp127, gridBagConstraints);
+
+        lbl3D4.setBackground(new java.awt.Color(255, 255, 255));
+        lbl3D4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3D4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r6.png"))); // NOI18N
+        lbl3D4.setText("3D4");
+        lbl3D4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
+        lbl3D4.setFocusable(false);
+        lbl3D4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        lbl3D4.setMinimumSize(new java.awt.Dimension(200, 76));
+        lbl3D4.setOpaque(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(lbl3D4, gridBagConstraints);
+
+        tp128.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp128.setText(" ");
+        tp128.setToolTipText("");
+        tp128.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp128.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp128, gridBagConstraints);
+
+        tp129.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp129.setText(" ");
+        tp129.setToolTipText("");
+        tp129.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp129.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp129, gridBagConstraints);
+
+        tp130.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp130.setText(" ");
+        tp130.setToolTipText("");
+        tp130.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp130.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp130, gridBagConstraints);
+
+        tp131.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp131.setText(" ");
+        tp131.setToolTipText("");
+        tp131.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp131.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp131, gridBagConstraints);
+
+        tp132.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp132.setText(" ");
+        tp132.setToolTipText("");
+        tp132.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp132.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp132, gridBagConstraints);
+
+        tp133.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp133.setText(" ");
+        tp133.setToolTipText("");
+        tp133.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp133.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp133, gridBagConstraints);
+
+        tp134.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp134.setText(" ");
+        tp134.setToolTipText("");
+        tp134.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp134.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp134, gridBagConstraints);
+
+        tp135.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp135.setText(" ");
+        tp135.setToolTipText("");
+        tp135.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp135.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        panelPesados.add(tp135, gridBagConstraints);
+
+        jScrollPane4.setViewportView(panelPesados);
 
         javax.swing.GroupLayout tab_pesadosLayout = new javax.swing.GroupLayout(tab_pesados);
         tab_pesados.setLayout(tab_pesadosLayout);
         tab_pesadosLayout.setHorizontalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tab_pesadosLayout.createSequentialGroup()
-                .addGap(0, 130, Short.MAX_VALUE)
-                .addComponent(txt_pesados_Hora1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_pesados_Hora2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1522, Short.MAX_VALUE)
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tab_pesadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_pesados_Hora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_pesados_Hora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
@@ -392,9 +3823,9 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblPesquisador)
                     .addComponent(lblData, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbData, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPesquisador, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                    .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jTabbedPane1)
         );
@@ -411,7 +3842,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(txtLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPesquisador)
                     .addComponent(txtPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(10, 10, 10)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSentido)
                     .addComponent(rdo_SentidoBA)
@@ -420,7 +3851,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(rdo_PistaSimples)
                     .addComponent(rdo_PistaDupla)
                     .addComponent(lblData)
-                    .addComponent(cmbData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1))
         );
@@ -443,7 +3874,7 @@ public class Janela extends javax.swing.JFrame {
                 .addGroup(pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(863, Short.MAX_VALUE))
+                .addContainerGap(1189, Short.MAX_VALUE))
         );
         pnl_envioLayout.setVerticalGroup(
             pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,31 +3883,92 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(480, Short.MAX_VALUE))
+                .addContainerGap(545, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("envio dos dados", pnl_envio);
+
+        jLabel1.setText("Porta");
+
+        txtAreaLog.setEditable(false);
+        txtAreaLog.setColumns(20);
+        txtAreaLog.setLineWrap(true);
+        txtAreaLog.setRows(5);
+        txtAreaLog.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txtAreaLog);
+        txtAreaLog.setEditable(false);
+
+        txtPorta.setEditable(false);
+
+        jLabel2.setText("Registro das operações do servidor");
+
+        javax.swing.GroupLayout pnl_servidorLayout = new javax.swing.GroupLayout(pnl_servidor);
+        pnl_servidor.setLayout(pnl_servidorLayout);
+        pnl_servidorLayout.setHorizontalGroup(
+            pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(pnl_servidorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnl_servidorLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtPorta))
+                    .addComponent(jLabel2))
+                .addContainerGap(1262, Short.MAX_VALUE))
+        );
+        pnl_servidorLayout.setVerticalGroup(
+            pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_servidorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Servidor Web", pnl_servidor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+            .addComponent(jTabbedPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2)
-                .addGap(12, 12, 12))
+            .addComponent(jTabbedPane2)
         );
 
         jTabbedPane2.getAccessibleContext().setAccessibleName("tabna1");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraActionPerformed
+        int hora_inicial;
+		try{
+			hora_inicial = Integer.parseInt((String) cmbHora.getSelectedItem());
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Erro configurando a hora inicial da pesquisa: \n" + e.getMessage());
+			return;
+		}
+		
+		String hora1 = String.valueOf(hora_inicial) + ":00 a " + String.valueOf(hora_inicial+1) + ":00";
+		String hora2 = String.valueOf(hora_inicial+1) + ":00 a " + String.valueOf(hora_inicial+2) + ":00";		
+		
+		pesados_hora1.setText(hora1);
+		leves_hora1.setText(hora1);
+		pesados_hora2.setText(hora2);
+		leves_hora2.setText(hora2);
+    }//GEN-LAST:event_cmbHoraActionPerformed
+
+    private void tl3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tl3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tl3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -519,29 +4011,87 @@ public class Janela extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbData;
     private javax.swing.JComboBox<String> cmbHora;
+    private org.jdesktop.swingx.JXDatePicker data;
     private javax.swing.ButtonGroup grpPista;
     private javax.swing.ButtonGroup grpSentido;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextField jTextField41;
+    private javax.swing.JTextField jTextField42;
+    private javax.swing.JTextField jTextField43;
+    private javax.swing.JTextField jTextField44;
+    private javax.swing.JTextField jTextField45;
+    private javax.swing.JTextField jTextField46;
+    private javax.swing.JTextField jTextField47;
+    private javax.swing.JTextField jTextField48;
+    private javax.swing.JLabel lbl2C;
+    private javax.swing.JLabel lbl2C2;
+    private javax.swing.JLabel lbl2C3;
+    private javax.swing.JLabel lbl2CB;
+    private javax.swing.JLabel lbl2S1;
+    private javax.swing.JLabel lbl2S2;
+    private javax.swing.JLabel lbl2S3;
+    private javax.swing.JLabel lbl3C;
+    private javax.swing.JLabel lbl3C2;
+    private javax.swing.JLabel lbl3C3;
+    private javax.swing.JLabel lbl3CB;
+    private javax.swing.JLabel lbl3D;
+    private javax.swing.JLabel lbl3D4;
+    private javax.swing.JLabel lbl3M6;
+    private javax.swing.JLabel lbl3Q4;
+    private javax.swing.JLabel lbl3S1;
+    private javax.swing.JLabel lbl3S2;
+    private javax.swing.JLabel lbl3S3;
+    private javax.swing.JLabel lbl3T4;
+    private javax.swing.JLabel lbl3T6;
+    private javax.swing.JLabel lbl3T6B;
+    private javax.swing.JLabel lbl3V5;
+    private javax.swing.JLabel lbl4C;
+    private javax.swing.JLabel lbl4CB;
+    private javax.swing.JLabel lbl4CD;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblLocal;
+    private javax.swing.JLabel lblM;
+    private javax.swing.JLabel lblP1;
+    private javax.swing.JLabel lblP2;
+    private javax.swing.JLabel lblP3;
     private javax.swing.JLabel lblPesquisador;
     private javax.swing.JLabel lblPista;
     private javax.swing.JLabel lblPosto;
     private javax.swing.JLabel lblPosto_dados;
     private javax.swing.JLabel lblSentido;
+    private javax.swing.JTextField lev15_1;
+    private javax.swing.JTextField lev15_2;
+    private javax.swing.JTextField lev30_1;
+    private javax.swing.JTextField lev30_2;
+    private javax.swing.JTextField lev45_1;
+    private javax.swing.JTextField lev45_2;
+    private javax.swing.JTextField lev60_1;
+    private javax.swing.JTextField lev60_2;
+    private javax.swing.JTextField leves_hora1;
+    private javax.swing.JTextField leves_hora2;
+    private javax.swing.JPanel panelLeves;
+    private javax.swing.JPanel panelPesados;
+    private javax.swing.JTextField pes15_1;
+    private javax.swing.JTextField pes15_2;
+    private javax.swing.JTextField pes30_1;
+    private javax.swing.JTextField pes30_2;
+    private javax.swing.JTextField pes45_1;
+    private javax.swing.JTextField pes60_1;
+    private javax.swing.JTextField pesados_hora1;
+    private javax.swing.JTextField pesados_hora2;
+    private javax.swing.JTextField peso45_2;
+    private javax.swing.JTextField peso60_2;
     private javax.swing.JPanel pnl_envio;
     private javax.swing.JPanel pnl_servidor;
     private javax.swing.JPanel pnl_volumetrica;
@@ -551,15 +4101,242 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_SentidoBA;
     private javax.swing.JPanel tab_leves;
     private javax.swing.JPanel tab_pesados;
-    private javax.swing.JTable tbl_leves;
-    private javax.swing.JTable tbl_pesados;
+    private javax.swing.JTextField tl0;
+    private javax.swing.JTextField tl1;
+    private javax.swing.JTextField tl10;
+    private javax.swing.JTextField tl11;
+    private javax.swing.JTextField tl12;
+    private javax.swing.JTextField tl13;
+    private javax.swing.JTextField tl14;
+    private javax.swing.JTextField tl15;
+    private javax.swing.JTextField tl16;
+    private javax.swing.JTextField tl17;
+    private javax.swing.JTextField tl18;
+    private javax.swing.JTextField tl19;
+    private javax.swing.JTextField tl2;
+    private javax.swing.JTextField tl20;
+    private javax.swing.JTextField tl21;
+    private javax.swing.JTextField tl22;
+    private javax.swing.JTextField tl23;
+    private javax.swing.JTextField tl24;
+    private javax.swing.JTextField tl25;
+    private javax.swing.JTextField tl26;
+    private javax.swing.JTextField tl27;
+    private javax.swing.JTextField tl28;
+    private javax.swing.JTextField tl29;
+    private javax.swing.JTextField tl3;
+    private javax.swing.JTextField tl30;
+    private javax.swing.JTextField tl31;
+    private javax.swing.JTextField tl32;
+    private javax.swing.JTextField tl33;
+    private javax.swing.JTextField tl34;
+    private javax.swing.JTextField tl35;
+    private javax.swing.JTextField tl36;
+    private javax.swing.JTextField tl37;
+    private javax.swing.JTextField tl38;
+    private javax.swing.JTextField tl39;
+    private javax.swing.JTextField tl4;
+    private javax.swing.JTextField tl40;
+    private javax.swing.JTextField tl41;
+    private javax.swing.JTextField tl42;
+    private javax.swing.JTextField tl43;
+    private javax.swing.JTextField tl44;
+    private javax.swing.JTextField tl45;
+    private javax.swing.JTextField tl46;
+    private javax.swing.JTextField tl47;
+    private javax.swing.JTextField tl48;
+    private javax.swing.JTextField tl49;
+    private javax.swing.JTextField tl5;
+    private javax.swing.JTextField tl50;
+    private javax.swing.JTextField tl51;
+    private javax.swing.JTextField tl52;
+    private javax.swing.JTextField tl53;
+    private javax.swing.JTextField tl54;
+    private javax.swing.JTextField tl55;
+    private javax.swing.JTextField tl56;
+    private javax.swing.JTextField tl57;
+    private javax.swing.JTextField tl58;
+    private javax.swing.JTextField tl59;
+    private javax.swing.JTextField tl6;
+    private javax.swing.JTextField tl60;
+    private javax.swing.JTextField tl61;
+    private javax.swing.JTextField tl62;
+    private javax.swing.JTextField tl63;
+    private javax.swing.JTextField tl64;
+    private javax.swing.JTextField tl65;
+    private javax.swing.JTextField tl66;
+    private javax.swing.JTextField tl67;
+    private javax.swing.JTextField tl68;
+    private javax.swing.JTextField tl69;
+    private javax.swing.JTextField tl7;
+    private javax.swing.JTextField tl70;
+    private javax.swing.JTextField tl71;
+    private javax.swing.JTextField tl72;
+    private javax.swing.JTextField tl73;
+    private javax.swing.JTextField tl74;
+    private javax.swing.JTextField tl75;
+    private javax.swing.JTextField tl76;
+    private javax.swing.JTextField tl77;
+    private javax.swing.JTextField tl78;
+    private javax.swing.JTextField tl79;
+    private javax.swing.JTextField tl8;
+    private javax.swing.JTextField tl80;
+    private javax.swing.JTextField tl81;
+    private javax.swing.JTextField tl82;
+    private javax.swing.JTextField tl83;
+    private javax.swing.JTextField tl84;
+    private javax.swing.JTextField tl85;
+    private javax.swing.JTextField tl86;
+    private javax.swing.JTextField tl87;
+    private javax.swing.JTextField tl88;
+    private javax.swing.JTextField tl89;
+    private javax.swing.JTextField tl9;
+    private javax.swing.JTextField tl90;
+    private javax.swing.JTextField tl91;
+    private javax.swing.JTextField tl92;
+    private javax.swing.JTextField tl93;
+    private javax.swing.JTextField tl94;
+    private javax.swing.JTextField tl95;
+    private javax.swing.JTextField tp0;
+    private javax.swing.JTextField tp1;
+    private javax.swing.JTextField tp10;
+    private javax.swing.JTextField tp100;
+    private javax.swing.JTextField tp101;
+    private javax.swing.JTextField tp102;
+    private javax.swing.JTextField tp103;
+    private javax.swing.JTextField tp104;
+    private javax.swing.JTextField tp105;
+    private javax.swing.JTextField tp106;
+    private javax.swing.JTextField tp107;
+    private javax.swing.JTextField tp108;
+    private javax.swing.JTextField tp109;
+    private javax.swing.JTextField tp11;
+    private javax.swing.JTextField tp110;
+    private javax.swing.JTextField tp111;
+    private javax.swing.JTextField tp112;
+    private javax.swing.JTextField tp113;
+    private javax.swing.JTextField tp114;
+    private javax.swing.JTextField tp115;
+    private javax.swing.JTextField tp116;
+    private javax.swing.JTextField tp117;
+    private javax.swing.JTextField tp118;
+    private javax.swing.JTextField tp119;
+    private javax.swing.JTextField tp12;
+    private javax.swing.JTextField tp120;
+    private javax.swing.JTextField tp121;
+    private javax.swing.JTextField tp122;
+    private javax.swing.JTextField tp123;
+    private javax.swing.JTextField tp124;
+    private javax.swing.JTextField tp125;
+    private javax.swing.JTextField tp126;
+    private javax.swing.JTextField tp127;
+    private javax.swing.JTextField tp128;
+    private javax.swing.JTextField tp129;
+    private javax.swing.JTextField tp13;
+    private javax.swing.JTextField tp130;
+    private javax.swing.JTextField tp131;
+    private javax.swing.JTextField tp132;
+    private javax.swing.JTextField tp133;
+    private javax.swing.JTextField tp134;
+    private javax.swing.JTextField tp135;
+    private javax.swing.JTextField tp14;
+    private javax.swing.JTextField tp15;
+    private javax.swing.JTextField tp16;
+    private javax.swing.JTextField tp17;
+    private javax.swing.JTextField tp18;
+    private javax.swing.JTextField tp19;
+    private javax.swing.JTextField tp2;
+    private javax.swing.JTextField tp20;
+    private javax.swing.JTextField tp21;
+    private javax.swing.JTextField tp22;
+    private javax.swing.JTextField tp23;
+    private javax.swing.JTextField tp24;
+    private javax.swing.JTextField tp25;
+    private javax.swing.JTextField tp26;
+    private javax.swing.JTextField tp27;
+    private javax.swing.JTextField tp28;
+    private javax.swing.JTextField tp29;
+    private javax.swing.JTextField tp3;
+    private javax.swing.JTextField tp30;
+    private javax.swing.JTextField tp31;
+    private javax.swing.JTextField tp32;
+    private javax.swing.JTextField tp33;
+    private javax.swing.JTextField tp34;
+    private javax.swing.JTextField tp35;
+    private javax.swing.JTextField tp36;
+    private javax.swing.JTextField tp37;
+    private javax.swing.JTextField tp38;
+    private javax.swing.JTextField tp39;
+    private javax.swing.JTextField tp4;
+    private javax.swing.JTextField tp40;
+    private javax.swing.JTextField tp41;
+    private javax.swing.JTextField tp42;
+    private javax.swing.JTextField tp43;
+    private javax.swing.JTextField tp44;
+    private javax.swing.JTextField tp45;
+    private javax.swing.JTextField tp46;
+    private javax.swing.JTextField tp47;
+    private javax.swing.JTextField tp48;
+    private javax.swing.JTextField tp49;
+    private javax.swing.JTextField tp5;
+    private javax.swing.JTextField tp50;
+    private javax.swing.JTextField tp51;
+    private javax.swing.JTextField tp52;
+    private javax.swing.JTextField tp53;
+    private javax.swing.JTextField tp54;
+    private javax.swing.JTextField tp55;
+    private javax.swing.JTextField tp56;
+    private javax.swing.JTextField tp57;
+    private javax.swing.JTextField tp58;
+    private javax.swing.JTextField tp59;
+    private javax.swing.JTextField tp6;
+    private javax.swing.JTextField tp60;
+    private javax.swing.JTextField tp61;
+    private javax.swing.JTextField tp62;
+    private javax.swing.JTextField tp63;
+    private javax.swing.JTextField tp64;
+    private javax.swing.JTextField tp65;
+    private javax.swing.JTextField tp66;
+    private javax.swing.JTextField tp67;
+    private javax.swing.JTextField tp68;
+    private javax.swing.JTextField tp69;
+    private javax.swing.JTextField tp7;
+    private javax.swing.JTextField tp70;
+    private javax.swing.JTextField tp71;
+    private javax.swing.JTextField tp72;
+    private javax.swing.JTextField tp73;
+    private javax.swing.JTextField tp74;
+    private javax.swing.JTextField tp75;
+    private javax.swing.JTextField tp76;
+    private javax.swing.JTextField tp77;
+    private javax.swing.JTextField tp78;
+    private javax.swing.JTextField tp79;
+    private javax.swing.JTextField tp8;
+    private javax.swing.JTextField tp80;
+    private javax.swing.JTextField tp81;
+    private javax.swing.JTextField tp82;
+    private javax.swing.JTextField tp83;
+    private javax.swing.JTextField tp84;
+    private javax.swing.JTextField tp85;
+    private javax.swing.JTextField tp86;
+    private javax.swing.JTextField tp87;
+    private javax.swing.JTextField tp88;
+    private javax.swing.JTextField tp89;
+    private javax.swing.JTextField tp9;
+    private javax.swing.JTextField tp90;
+    private javax.swing.JTextField tp91;
+    private javax.swing.JTextField tp92;
+    private javax.swing.JTextField tp93;
+    private javax.swing.JTextField tp94;
+    private javax.swing.JTextField tp95;
+    private javax.swing.JTextField tp96;
+    private javax.swing.JTextField tp97;
+    private javax.swing.JTextField tp98;
+    private javax.swing.JTextField tp99;
     public javax.swing.JTextArea txtAreaLog;
     private javax.swing.JTextField txtLocal;
     private javax.swing.JTextField txtPesquisador;
-    private javax.swing.JTextField txt_leves_Hora1;
-    private javax.swing.JTextField txt_leves_Hora2;
-    private javax.swing.JTextField txt_pesados_Hora1;
-    private javax.swing.JTextField txt_pesados_Hora2;
+    public javax.swing.JTextField txtPorta;
     // End of variables declaration//GEN-END:variables
 }
 
