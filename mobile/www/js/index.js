@@ -353,13 +353,19 @@ var app = {
 		}
 
 		// FRENQUENCIA
-		if (registro.frequencia_sel == util.getIdxArray('Eventualmente', util.getListaFrequencias())) {
-			app.setAtributo('frequencia_num', 1);
-		} else if ((util.isEmpty(registro.frequencia_num)) || (util.isEmpty(registro.frequencia_sel))) {
-			if (registro.cancelado != 1) {
-				// TODO: ERRO (frequencia vazia)
-				app.logger.log("ERRO (frequencia vazia) no registro: ", registro.id);
+		if (!util.isEmpty(registro.frequenciaPeriodo)) {
+			app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
+			if (registro.frequenciaPeriodo == 'Eventualmente') {
+				app.setAtributo('frequenciaQtd', 1);
+			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
+				if (registro.cancelado != 1) {
+					// TODO: ERRO (frequencia vazia)
+					app.logger.log("ERRO (frequenciaQtd vazia) no registro: ", registro.id);
+				}
 			}
+		} else if (registro.cancelado != 1) {
+			// TODO: ERRO (frequencia vazia)
+			app.logger.log("ERRO (frequenciaPeriodo vazio) no registro: ", registro.id);
 		}
 
 		// ORIGEM: MUNICÍPIO

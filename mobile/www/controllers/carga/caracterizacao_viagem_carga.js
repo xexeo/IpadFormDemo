@@ -74,9 +74,9 @@ controllers.caracterizacao_viagem_carga = {
 
 		// Frequencia
 		$('#frequencia_num_carga').keyup(function() {
-			app.setAtributo('frequencia_num', $(this).val());
+			app.setAtributo('frequenciaQtd', $(this).val());
 		});
-		util.progressoSelect("frequencia_sel", "frequencia_sel_carga", "grupo_motivo_rota_carga");
+		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_carga", "grupo_motivo_rota_carga");
 
 		// Motivo rota
 		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_carga", "grupo_caracterizacao_viagem_carga_avancar");

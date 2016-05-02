@@ -75,7 +75,7 @@ var util = {
 			var freq_num = $('#frequencia_num_' + tipo_fluxo);
 			if ($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias)) {
 				freq_num.val(1);
-				app.setAtributo('frequencia_num', 1);
+				app.setAtributo('frequenciaQtd', 1);
 			}
 		});
 	},

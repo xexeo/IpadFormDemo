@@ -73,9 +73,9 @@ controllers.caracterizacao_viagem_onibus = {
 
 		// Frequencia
 		$('#frequencia_num_onibus').keyup(function() {
-			app.setAtributo('frequencia_num', $(this).val());
+			app.setAtributo('frequenciaQtd', $(this).val());
 		});
-		util.progressoSelect("frequencia_sel", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
+		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
 
 		util.progressoSelect("idTipoDeViagemOuServico", "tipo_viagem_onibus", "grupo_pessoas_onibus");
 

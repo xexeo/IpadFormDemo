@@ -86,9 +86,9 @@ controllers.caracterizacao_viagem_simples = {
 
 		// Frequencia
 		$('#frequencia_num_simples').keyup(function() {
-			app.setAtributo('frequencia_num', $(this).val());
+			app.setAtributo('frequenciaQtd', $(this).val());
 		});
-		util.progressoSelect("frequencia_sel", "frequencia_sel_simples", "grupo_motivo_rota_simples");
+		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_simples", "grupo_motivo_rota_simples");
 
 		// Motivo rota
 		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_simples", "grupo_motivo_viagem_simples");
