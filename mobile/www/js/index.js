@@ -274,6 +274,11 @@ var app = {
 					$(this).val($(this).val().replace(regex, ''));
 				});
 
+				$("#versao").html(app.versao);
+				$("#ipadID").html(ipadID.id);
+				$("#posto").html(app.posto);
+				$("#sentido").html(app.sentido);
+
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
 				}

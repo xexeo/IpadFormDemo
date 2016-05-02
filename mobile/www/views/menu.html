@@ -1,5 +1,5 @@
 <section data-role="page" id="menu" data-transition="slide" data-theme="b">
-	
+
 	<!-- header -->
 	<header data-role="header">
 		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
@@ -8,7 +8,7 @@
 
 	<!-- content -->
 	<section role="main" class="ui-content">
-		
+
 		<div class="ui-grid-b menu_separator">
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
@@ -18,29 +18,30 @@
 		</div>
 
 		<div class="ui-grid-b menu_separator">
- 
-                        <div class="ui-block-a">&nbsp;</div>
+
+			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
 				<button class="ui-btn ui-btn-a ui-corner-all" id="duplica_log" name="duplica_log">Exportar log de operação</button>
 			</div>
 			<div class="ui-block-c">&nbsp;</div>
 
-                        <div class="ui-block-a">&nbsp;</div>
-			<div class="ui-block-b">
-				<button class="ui-btn ui-btn-a ui-corner-all" id="duplica_db" name="duplica_db">Exportar Banco de Dados</button>
-			</div>
-			<div class="ui-block-c">&nbsp;</div>
-                    
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
-				<button class="ui-btn ui-btn-a ui-corner-all" id="menu_enviar_dados" name="menu_enviar_dados">Enviar dados ainda não enviados</button>
+				<button class="ui-btn ui-btn-a ui-corner-all" id="duplica_db" name="duplica_db">Exportar Banco de Dados</button>
 			</div>
 			<div class="ui-block-c">&nbsp;</div>
 
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
-				<button class="ui-btn ui-btn-a ui-corner-all" id="menu_enviar_todos_dados" name="menu_enviar_todos_dados">Enviar todos os
-					dados</button>
+				<button class="ui-btn ui-btn-a ui-corner-all" id="menu_enviar_dados" name="menu_enviar_dados">Enviar dados ainda não
+					enviados</button>
+			</div>
+			<div class="ui-block-c">&nbsp;</div>
+
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-btn-a ui-corner-all" id="menu_enviar_todos_dados" name="menu_enviar_todos_dados">Enviar
+					todos os dados</button>
 			</div>
 			<div class="ui-block-c">&nbsp;</div>
 		</div>
@@ -55,5 +56,12 @@
 		</div>
 	</section>
 
-	<!-- sem rodapé -->
+	<!-- footer -->
+	<footer data-role="footer" data-position="fixed">
+		<span class="versao">Versão: <span id="versao"></span></span>
+		<span class="posto">Posto: <span id="posto"></span></span>
+		<span class="sentido">Sentido: <span id="sentido"></span></span>
+		<span class="ipad">id-iPad: <span id="ipadID"></span></span>
+	</footer>
+
 </section>

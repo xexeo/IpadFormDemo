@@ -41,6 +41,31 @@
 	margin-bottom: 2%;
 }
 
+footer span.versao {
+	display: inline-block;
+	text-align: left;
+	width: 24%;
+}
+
+footer span.posto {
+	display: inline-block;
+	text-align: center;
+	width: 24%;
+}
+
+footer span.sentido {
+	display: inline-block;
+	text-align: center;
+	width: 24%;
+}
+
+footer span.ipad {
+	display: inline-block;
+	float: right;
+	text-align: right;
+	width: 24%;
+}
+
 div.ui-block-b>h2 {
 	font-weight: bold;
 	font-size: x-large;
@@ -280,12 +305,12 @@ nav.avancar>div.ui-block-b {
 	padding-right: 10%;
 }
 
-#confirmar_veiculo section button  {
+#confirmar_veiculo section button {
 	background-color: #EEE;
 }
 
 #confirmar_veiculo section button.ui-btn-icon-left:after {
-    left: 5em;
+	left: 5em;
 }
 
 .input_placa {
