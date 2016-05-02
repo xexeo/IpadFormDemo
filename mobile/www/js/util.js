@@ -53,7 +53,7 @@ var util = {
 		var lista = lista_municipios[uf_sigla];
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + item.id + "|" + item.geocod + "'>" + item.nome + "</option>\n";
+			insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
@@ -71,15 +71,13 @@ var util = {
 		var lista_frequencias = util.getListaFrequencias();
 		var nome_campo = 'frequencia_sel_' + tipo_fluxo;
 		util.inicializaSelect(nome_campo, lista_frequencias);
-		$("#" + nome_campo).change(
-				function() {
-					var freq_num = $('#frequencia_num_' + tipo_fluxo);
-					if (($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias))
-							&& (util.isEmpty(freq_num.val()) || (Number(freq_num.val()) < 1))) {
-						freq_num.val(1);
-						app.setAtributo('frequencia_num', 1);
-					}
-				});
+		$("#" + nome_campo).change(function() {
+			var freq_num = $('#frequencia_num_' + tipo_fluxo);
+			if ($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias)) {
+				freq_num.val(1);
+				app.setAtributo('frequencia_num', 1);
+			}
+		});
 	},
 
 	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
@@ -197,7 +195,8 @@ var util = {
 		});
 	},
 
-	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo, fluxo) {
+	progressoSelectPais : function(nome_registro_pais, nome_registro_municipio, nome_campo, proximo_imediato, proximo_imediato2,
+			grupo_proximo, fluxo) {
 		$('#' + nome_campo).change(function() {
 			grupo_proximo_imediato = "grupo_" + proximo_imediato + "_" + fluxo;
 			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2 + "_" + fluxo;
@@ -205,20 +204,20 @@ var util = {
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).hide();
-				app.setAtributo(nome_registro, null);
+				app.setAtributo(nome_registro_pais, null);
 				app.setAtributo(proximo_imediato, null);
-				app.setAtributo(proximo_imediato2, null);
+				app.setAtributo(nome_registro_municipio, null);
 			} else if (Number($(this).val()) != 1) { // País diferente de Brasil
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).show();
-				app.setAtributo(nome_registro, $(this).val());
+				app.setAtributo(nome_registro_pais, $(this).val());
 				app.setAtributo(proximo_imediato, null);
-				app.setAtributo(proximo_imediato2, null);
+				app.setAtributo(nome_registro_municipio, null);
 			} else { // País é Brasil
 				$("#" + grupo_proximo_imediato).show();
 				$("#" + grupo_proximo).hide();
-				app.setAtributo(nome_registro, $(this).val());
+				app.setAtributo(nome_registro_pais, $(this).val());
 			}
 		});
 	},
@@ -463,8 +462,8 @@ var util = {
 				});
 				console.log(JSON.stringify(res), null, '\t');
 				$.each(res, function(i, val) {
-					if (val.geocod != null) { // municipio
-						html += "<li li_id='" + val.id + "' li_geocod='" + val.geocod + "' >" + val.nome + "</li>";
+					if (val.id != null) { // municipio
+						html += "<li li_id='" + val.id + "' >" + val.nome + "</li>";
 					} else {
 						html += "<li>" + val.nome + "</li>";
 					}
@@ -473,8 +472,8 @@ var util = {
 				ul_list.html(html);
 				ul_list.children("li").click(function() {
 					var txt;
-					if ($(this).attr('li_geocod') != null) { // municipio
-						txt = $(this).html() + " | " + $(this).attr('li_id') + " | " + $(this).attr('li_geocod');
+					if ($(this).attr('li_id') != null) { // municipio
+						txt = $(this).html() + " | " + $(this).attr('li_id');
 					} else {
 						txt = $(this).html();
 					}

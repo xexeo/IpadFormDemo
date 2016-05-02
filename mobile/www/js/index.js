@@ -362,30 +362,25 @@ var app = {
 			}
 		}
 
-		// ORIGEM: MUNICÍPIO E GEOCOD
-		var municipioSplit;
-		if (!util.isEmpty(registro.origem_municipio)) {
-			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[1].trim());
-			app.setAtributo('geocod_origem', municipioSplit[2].trim());
+		// ORIGEM: MUNICÍPIO
+		if (!util.isEmpty(registro.idOrigemMunicipio)) {
+			app.setAtributo('idOrigemMunicipio', registro.idOrigemMunicipio.split("|")[1].trim());
 		}
-		if ((util.isEmpty(registro.idOrigemMunicipio) || util.isEmpty(registro.geocod_origem)) && (registro.idOrigemPais == 1)) { // Brasil
+		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
 				// TODO: ERRO (destino vazio)
-				app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+				app.logger.log("ERRO (idOrigemMunicipio vazio) no registro: ", registro.id);
 			}
 		}
 
-		// DESTINO: MUNICÍPIO E GEOCOD
-		if (!util.isEmpty(registro.destino_municipio)) {
-			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[1].trim());
-			app.setAtributo('geocod_destino', municipioSplit[2].trim());
+		// DESTINO: MUNICÍPIO
+		if (!util.isEmpty(registro.idDestinoMunicipio)) {
+			app.setAtributo('idDestinoMunicipio', registro.idDestinoMunicipio.split("|")[1].trim());
 		}
-		if ((util.isEmpty(registro.idDestinoMunicipio) || util.isEmpty(registro.geocod_destino)) && (registro.idDestinoPais == 1)) { // Brasil
+		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
 				// TODO: ERRO (destino vazio)
-				app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+				app.logger.log("ERRO (idDestinoMunicipio vazio) no registro: ", registro.id);
 			}
 		}
 
