@@ -325,7 +325,7 @@ ol.tipos_carrocerias {
 	padding: 0%;
 	margin: 0%;
 	background-color: white;
-	border-radius: 2%;
+	border-radius: 1.5em;
 }
 
 ol.tipos_carrocerias>div {
@@ -344,6 +344,15 @@ ol.tipos_carrocerias li {
 	vertical-align: middle;
 	max-width: 100%;
 	padding: 0px 7%;
+	border-radius: 15px;
+}
+
+ol.tipos_carrocerias div:nth-child(2n+1) li:nth-child(2n) {
+	background-color: #DDD;
+}
+
+ol.tipos_carrocerias div:nth-child(2n) li:nth-child(2n+1) {
+	background-color: #DDD;
 }
 
 ol.tipos_carrocerias div:nth-child(1) li {
