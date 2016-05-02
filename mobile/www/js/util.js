@@ -570,4 +570,11 @@ var util = {
 		return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 	},
 
+	reverse : function(s) {
+		var o = [];
+		for (var i = 0, len = s.length; i <= len; i++)
+			o.push(s.charAt(len - i));
+		return o.join('');
+	}
+
 };

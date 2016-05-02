@@ -5,50 +5,24 @@ var app = {
 
 	versao : "2.0.0",
 
-	user_master : { // Usuário exclusivo para configurar o idIpad na instalação, ele não faz login no aplicativo.
-		usuario : 'Master', // usuário mestre
-		senha : "Aaa" // senha mestra
-	},
-
-	user_admin : { // Usuário destinado aos testes do aplicativo. TODO: iremos removê-lo ao ir para produção?
-		usuario : 'admin', // usuário admin
-		senha : "123" // senha admin
-	},
-
-	autenticaMaster : function(usuario, senha) {
-		if ((usuario == app.user_master.usuario) && (senha == app.user_master.senha)) {
-			return true;
-		}
-		return false;
-	},
-
-	autentica : function(usuario, senha) {
-		if ((app.user_admin != undefined) && (app.user_admin.usuario != undefined) && (usuario == app.user_admin.usuario)
-				&& (senha == app.user_admin.senha)) {
-			return true;
-		} else {
-			// TODO: aqui será realizada a autenticação a partir dos logins cadastrados
-		}
-		return false;
-	},
-
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
 
 		// configura identificador do ipad, para executar uma única vez(durante a instalação)
-		if (app.autenticaMaster(usuario, senha)) {
+		if (logins.autenticaMaster(usuario, senha)) {
 			ipadID.requestID(function(id) {
 				$("#ipadID").html(id);
 			});
-		} else if (app.autentica(usuario, senha)) {
+		} else if (logins.autentica(usuario, senha)) {
 			app.logger.log("Login efetuado pelo usuário: " + usuario);
 			// navega para págine e executa o script de configuração depois do carregamento
 			app.trocaPagina("views/menu.html", controllers.menu)
-			// set user_login
+			// set: user_login, senha_login, posto e sentido
 			app.user_login = usuario;
-			// set senha_login
 			app.senha_login = senha;
+			app.posto = String(usuario).substr(0, 3);
+			app.sentido = String(usuario).substr(3, 2).toUpperCase();
 			// limpa o registro
 			app.limpaRegistro();
 		} else {
@@ -67,6 +41,10 @@ var app = {
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		app.logger.log('Logout');
+		app.user_login = null;
+		app.senha_login = null;
+		app.posto = null;
+		app.sentido = null;
 	},
 
 	/**
@@ -338,13 +316,12 @@ var app = {
 			app.logger.log('Iniciando registro');
 			app.limpaRegistro();
 			app.setAtributo('id', ipadID.id + String(util.getTimeInSeconds(now)));
-			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
+			app.setAtributo('login', app.user_login);
+			app.setAtributo('idPosto', app.posto);
+			app.setAtributo('sentido', app.sentido);
 			app.setAtributo('uuid', app.uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
 			app.setAtributo('idIpad', ipadID.id);
-			// TODO: falta setar os seguintes atributos:
-			// idPosto
-			// sentido
 			app.logger.log(JSON.stringify(registro));
 			app.logger.log('Registro iniciado: ' + registro.id);
 		} catch (e) {
@@ -599,11 +576,15 @@ var app = {
 
 	logFileName : "log.txt",
 
-	user_login : null,
-
 	dbName : "dados.db",
 
+	user_login : null,
+
 	senha_login : null,
+
+	posto : null,
+
+	sentido : null,
 
 	filePaths : null // { externalFolder : null, dbFolder : null, }
 	,
