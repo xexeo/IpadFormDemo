@@ -84,7 +84,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<String>();
+        cmbHora = new javax.swing.JComboBox<>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblPesquisador = new javax.swing.JLabel();
@@ -386,6 +386,7 @@ public class Janela extends javax.swing.JFrame {
         tp135 = new javax.swing.JTextField();
         data = new org.jdesktop.swingx.JXDatePicker();
         data.setLocale(new Locale("pt", "BR"));
+        btnSalvarForms = new javax.swing.JButton();
         pnl_envio = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -433,7 +434,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -636,11 +637,6 @@ public class Janela extends javax.swing.JFrame {
         tl3.setToolTipText("");
         tl3.setMinimumSize(new java.awt.Dimension(50, 19));
         tl3.setName(""); // NOI18N
-        tl3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tl3ActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -1866,7 +1862,7 @@ public class Janela extends javax.swing.JFrame {
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab_levesLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addGap(0, 53, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Veículos e Caminhões Leves", tab_leves);
@@ -3780,10 +3776,12 @@ public class Janela extends javax.swing.JFrame {
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
+
+        btnSalvarForms.setText("Gravar Formulários");
 
         javax.swing.GroupLayout pnl_volumetricaLayout = new javax.swing.GroupLayout(pnl_volumetrica);
         pnl_volumetrica.setLayout(pnl_volumetricaLayout);
@@ -3826,7 +3824,9 @@ public class Janela extends javax.swing.JFrame {
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPesquisador, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvarForms)
+                .addContainerGap())
             .addComponent(jTabbedPane1)
         );
         pnl_volumetricaLayout.setVerticalGroup(
@@ -3851,8 +3851,9 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(rdo_PistaSimples)
                     .addComponent(rdo_PistaDupla)
                     .addComponent(lblData)
-                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvarForms))
+                .addGap(23, 23, 23)
                 .addComponent(jTabbedPane1))
         );
 
@@ -3966,10 +3967,6 @@ public class Janela extends javax.swing.JFrame {
 		leves_hora2.setText(hora2);
     }//GEN-LAST:event_cmbHoraActionPerformed
 
-    private void tl3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tl3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tl3ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -4011,6 +4008,7 @@ public class Janela extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvarForms;
     private javax.swing.JComboBox<String> cmbHora;
     private org.jdesktop.swingx.JXDatePicker data;
     private javax.swing.ButtonGroup grpPista;
