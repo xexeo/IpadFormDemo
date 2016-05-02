@@ -36,8 +36,11 @@ controllers.menu = {
 			} else {
 				alert('Operação não realizada, o sistema de arquivos não foi definido');
 			}
-                    
         });
+		
+		$("#menu_logout").click(function () {
+			app.logout();
+		});
 
 	},
 
