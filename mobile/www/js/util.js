@@ -88,6 +88,14 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	inicializaSelectTipoDeCarga : function(nome_campo, mensagem, lista) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
+			insert_inicial += "<option value='" + item.id + "'>" + item.nomeProduto + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
 	inicializaPlacas : function(tipo_fluxo) {
 		// $('.input_placa').keyup(function() {
 		// var input = $(this);
