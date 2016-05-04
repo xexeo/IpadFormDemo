@@ -19,12 +19,13 @@ var logins = {
 				if (sentido == 'BA') {
 					senha = util.reverse(senha);
 				}
-				var i = Number(posto) - 1;
-				// 'for' desnecessário já que o posto é um número sequencial e corresponde à posição-1 de cada login em 'users'
-				// for (i = 0; i < logins.users.length; i++) {
-				login = logins.users[i];
-				if ((posto == login.usr) && (senha == login.pwd)) {
-					return true;
+				// var i = Number(posto) - 1;
+				for (i = 0; i < logins.users.length; i++) {
+					/* comentar o 'for' se o sequencial do posto for igual ao posicionamento dele na lista. */
+					var login = logins.users[i];
+					if ((posto == login.usr) && (senha == login.pwd)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -38,917 +39,373 @@ var logins = {
 
 	user_admin : { // Usuário destinado aos testes do aplicativo. TODO: iremos removê-lo ao ir para produção?
 		usr : 'admin', // usuário admin
-		pwd : "123" // senha admin
+		pwd : "123", // senha admin
+		perguntaExtra : true
 	},
 
 	users : [
 	// usr = número do posto
 	// pwd = 4 últimos números do SNV
 	{
-		usr : '001',
-		pwd : '1590',
-	}, {
 		usr : '002',
 		pwd : '0808',
-	}, {
-		usr : '003',
-		pwd : '0834',
-	}, {
-		usr : '004',
-		pwd : '0852',
-	}, {
-		usr : '005',
-		pwd : '0670',
-	}, {
-		usr : '006',
-		pwd : '0790',
-	}, {
-		usr : '007',
-		pwd : '0890',
-	}, {
-		usr : '008',
-		pwd : '0950',
-	}, {
-		usr : '009',
-		pwd : '0260',
-	}, {
-		usr : '010',
-		pwd : '0090',
-	}, {
-		usr : '011',
-		pwd : '0750',
-	}, {
-		usr : '012',
-		pwd : '1810',
-	}, {
-		usr : '013',
-		pwd : '0690',
-	}, {
-		usr : '014',
-		pwd : '1695',
-	}, {
-		usr : '015',
-		pwd : '0790',
-	}, {
-		usr : '016',
-		pwd : '0334',
-	}, {
-		usr : '017',
-		pwd : '0270',
-	}, {
-		usr : '018',
-		pwd : '0934',
-	}, {
-		usr : '019',
-		pwd : '1010',
-	}, {
-		usr : '020',
-		pwd : '0138',
-	}, {
-		usr : '021',
-		pwd : '0290',
-	}, {
-		usr : '022',
-		pwd : '0300',
-	}, {
-		usr : '023',
-		pwd : '0245',
-	}, {
-		usr : '024',
-		pwd : '0550',
-	}, {
-		usr : '025',
-		pwd : '0530',
-	}, {
-		usr : '026',
-		pwd : '0690',
-	}, {
-		usr : '027',
-		pwd : '0190',
-	}, {
-		usr : '028',
-		pwd : '0610',
-	}, {
-		usr : '029',
-		pwd : '0090',
-	}, {
-		usr : '030',
-		pwd : '0050',
-	}, {
-		usr : '031',
-		pwd : '0606',
-	}, {
-		usr : '032',
-		pwd : '0070',
-	}, {
-		usr : '033',
-		pwd : '0155',
-	}, {
-		usr : '034',
-		pwd : '0250',
-	}, {
-		usr : '035',
-		pwd : '2195',
-	}, {
-		usr : '036',
-		pwd : '2130',
-	}, {
-		usr : '037',
-		pwd : '0300',
-	}, {
-		usr : '038',
-		pwd : '1990',
-	}, {
-		usr : '039',
-		pwd : '2470',
-	}, {
-		usr : '040',
-		pwd : '0030',
-	}, {
-		usr : '041',
-		pwd : '0070',
-	}, {
-		usr : '042',
-		pwd : '0015',
-	}, {
-		usr : '043',
-		pwd : '0130',
-	}, {
-		usr : '044',
-		pwd : '0110',
-	}, {
-		usr : '045',
-		pwd : '0125',
-	}, {
-		usr : '046',
-		pwd : '0160',
-	}, {
-		usr : '047',
-		pwd : '0470',
+		fase : '1',
+		ladoA : 'LUCAS DO RIO VERDE',
+		ladoB : 'INÍCIO DA TRAVESSIA URBANA DE SORRISO'
 	}, {
 		usr : '048',
-		pwd : '0090',
+		pwd : '0324',
+		fase : '1',
+		ladoA : 'VILA SÃO PEDRO',
+		ladoB : 'ACESSO COLÔNIA AGRÍCOLA SEXTA LINHA'
 	}, {
 		usr : '049',
-		pwd : '0050',
-	}, {
-		usr : '050',
-		pwd : '0080',
-	}, {
-		usr : '051',
-		pwd : '0112',
+		pwd : '0450',
+		fase : '1',
+		ladoA : 'ENTR MS-441(B) (P/BANDEIRANTES)',
+		ladoB : 'ENTR MS-244 (P/BONFIM)'
 	}, {
 		usr : '052',
-		pwd : '0550',
+		pwd : '0030',
+		fase : '1',
+		ladoA : 'ENTR BR-070(B)',
+		ladoB : 'ENTR MT-170 (CARAMÚJO)'
 	}, {
 		usr : '053',
-		pwd : '0340',
-	}, {
-		usr : '054',
-		pwd : '0190',
-	}, {
-		usr : '055',
-		pwd : '0770',
-	}, {
-		usr : '056',
-		pwd : '0750',
-	}, {
-		usr : '057',
-		pwd : '0050',
-	}, {
-		usr : '058',
-		pwd : '0510',
-	}, {
-		usr : '059',
-		pwd : '0570',
-	}, {
-		usr : '060',
-		pwd : '0440',
-	}, {
-		usr : '061',
-		pwd : '0050',
-	}, {
-		usr : '062',
-		pwd : '0280',
-	}, {
-		usr : '063',
-		pwd : '0150',
-	}, {
-		usr : '064',
-		pwd : '0860',
-	}, {
-		usr : '065',
-		pwd : '0300',
+		pwd : '0592',
+		fase : '1',
+		ladoA : 'ENTR MT-270(B)',
+		ladoB : 'ENTR MT-469(A)'
 	}, {
 		usr : '066',
-		pwd : '0680',
+		pwd : '2710',
+		fase : '1',
+		ladoA : 'DIV SP/PR (CAB NORTE PONTE S/ RIO PARDINHO)',
+		ladoB : 'INÍCIO VARIANTE DO ALPINO(PISTA DIREITA)'
 	}, {
 		usr : '067',
-		pwd : '0730',
+		pwd : '2810',
+		fase : '1',
+		ladoA : 'ENTR PR-427 (CAMPO DO TENENTE)',
+		ladoB : 'DIV PR/SC (RIO NEGRO/MAFRA)'
 	}, {
 		usr : '068',
-		pwd : '0670',
+		pwd : '0205',
+		fase : '1',
+		ladoA : 'ACESSO GUARAPUAVA',
+		ladoB : 'ENTR BR-466 (P/GUARAPUAVA)'
 	}, {
 		usr : '069',
-		pwd : '0750',
-	}, {
-		usr : '070',
-		pwd : '0240',
+		pwd : '0310',
+		fase : '1',
+		ladoA : 'ENTR PR-182 (P/CAPITÃO LEÔNIDAS MARQUES)',
+		ladoB : 'ENTR BR-163'
 	}, {
 		usr : '071',
-		pwd : '0360',
+		pwd : '0490',
+		fase : '1',
+		ladoA : 'ENTR PR-281 (P/TIJUCAS DO SUL)',
+		ladoB : 'DIV PR/SC (ENTR BR-101)'
 	}, {
 		usr : '072',
-		pwd : '0290',
-	}, {
-		usr : '073',
-		pwd : '0130',
-	}, {
-		usr : '074',
-		pwd : '0970',
-	}, {
-		usr : '075',
-		pwd : '0040',
-	}, {
-		usr : '076',
-		pwd : '0030',
-	}, {
-		usr : '077',
-		pwd : '0335',
-	}, {
-		usr : '078',
-		pwd : '0570',
-	}, {
-		usr : '079',
-		pwd : '0510',
-	}, {
-		usr : '080',
-		pwd : '0130',
-	}, {
-		usr : '081',
-		pwd : '0250',
-	}, {
-		usr : '082',
-		pwd : '0250',
-	}, {
-		usr : '083',
-		pwd : '0152',
+		pwd : '0095',
+		fase : '1',
+		ladoA : 'ENTR PR-510/511 (P/CONTENDA)',
+		ladoB : 'ENTR PR-428 (LAPA)'
 	}, {
 		usr : '084',
-		pwd : '0010',
+		pwd : '1150',
+		fase : '1',
+		ladoA : 'ENTR BR-472 (P/PALMITINHO)',
+		ladoB : 'ENTR RS-585/587 (SEBERI)'
 	}, {
 		usr : '085',
-		pwd : '0310',
+		pwd : '1310',
+		fase : '1',
+		ladoA : 'ENTR RS-348 (VAL DE SERRA)',
+		ladoB : 'ENTR RS-509 (P/SANTA MARIA)'
 	}, {
 		usr : '086',
-		pwd : '0230',
+		pwd : '0180',
+		fase : '1',
+		ladoA : 'ACESSO A MINAS DO LEÃO',
+		ladoB : 'ENTR BR-471 (PANTANO GRANDE)'
 	}, {
 		usr : '087',
-		pwd : '1130',
+		pwd : '1840',
+		fase : '1',
+		ladoA : 'ENTR RS-705 (P/GERIBA)',
+		ladoB : 'ENTR BR-290(B)'
 	}, {
 		usr : '088',
-		pwd : '0110',
+		pwd : '0410',
+		fase : '1',
+		ladoA : 'ENTR BR-293(A)',
+		ladoB : 'ENTR BR-472(A)'
 	}, {
 		usr : '089',
-		pwd : '0110',
+		pwd : '0130',
+		fase : '1',
+		ladoA : 'ENTR BR-473 (P/BAGÉ)',
+		ladoB : 'ENTR RS-630 (P/DOM PEDRITO)'
 	}, {
 		usr : '090',
-		pwd : '1280',
+		pwd : '0070',
+		fase : '1',
+		ladoA : 'ENTR BR-471(A) (QUINTA)',
+		ladoB : 'ACESSO PELOTAS'
 	}, {
 		usr : '091',
-		pwd : '1310',
+		pwd : '0210',
+		fase : '1',
+		ladoA : 'ACESSO LESTE A  ITAQUI',
+		ladoB : 'ENTR BR-290(A)/293(A) (URUGUAIANA)'
 	}, {
 		usr : '092',
-		pwd : '0210',
+		pwd : '3830',
+		fase : '1',
+		ladoA : 'GARUVA',
+		ladoB : 'ENTR SC-430 (PIRABEIRABA)'
 	}, {
 		usr : '093',
-		pwd : '1195',
+		pwd : '4010',
+		fase : '1',
+		ladoA : 'BALNEÁRIO DE CAMBORIÚ',
+		ladoB : 'P/PORTO BELO'
 	}, {
 		usr : '094',
-		pwd : '0010',
+		pwd : '4125',
+		fase : '1',
+		ladoA : 'PONTE SOBRE O RIO DA MADRE',
+		ladoB : 'PONTE SOBRE O RIO ARAÇATUBA'
 	}, {
 		usr : '095',
-		pwd : '0030',
-	}, {
-		usr : '096',
-		pwd : '1370',
-	}, {
-		usr : '097',
-		pwd : '0850',
-	}, {
-		usr : '098',
-		pwd : '0315',
+		pwd : '4240',
+		fase : '1',
+		ladoA : 'ENTR BR-285(A) (ARARANGUÁ)',
+		ladoB : 'ENTR BR-285(B)/SC-285 (SANGA DA TOCA)'
 	}, {
 		usr : '099',
-		pwd : '0195',
-	}, {
-		usr : '100',
-		pwd : '0330',
-	}, {
-		usr : '101',
-		pwd : '0870',
-	}, {
-		usr : '102',
-		pwd : '0910',
-	}, {
-		usr : '103',
-		pwd : '0890',
-	}, {
-		usr : '104',
-		pwd : '0250',
-	}, {
-		usr : '105',
-		pwd : '0930',
-	}, {
-		usr : '106',
-		pwd : '0230',
-	}, {
-		usr : '107',
-		pwd : '0070',
-	}, {
-		usr : '108',
-		pwd : '0030',
-	}, {
-		usr : '109',
-		pwd : '0190',
-	}, {
-		usr : '110',
-		pwd : '0670',
-	}, {
-		usr : '111',
-		pwd : '0350',
+		pwd : '0377',
+		fase : '1',
+		ladoA : 'ENTR SC-157(B) (P/MODELO)',
+		ladoB : 'ENTR BR-158(A) (P/CUNHA PORÃ)'
 	}, {
 		usr : '112',
-		pwd : '0590',
+		pwd : '0025',
+		fase : '1',
+		ladoA : 'ENTR PR-508 (P/MATINHOS)',
+		ladoB : 'ENTR BR-101/PR-408 (P/MORRETES)'
 	}, {
 		usr : '113',
-		pwd : '0220',
+		pwd : '0075',
+		fase : '1',
+		ladoA : 'ACESSO SANTA',
+		ladoB : 'ENTR BR-376(B)/PR-428 (SÃO LUIS PURUNÃ)'
 	}, {
 		usr : '114',
-		pwd : '0830',
+		pwd : '0950',
+		fase : '1',
+		ladoA : 'ENTR MS-375 (ZUZU)',
+		ladoB : 'ENTR BR-163(A) (NOVA ALVORADA DO SUL)'
 	}, {
 		usr : '115',
-		pwd : '0100',
-	}, {
-		usr : '116',
-		pwd : '0205',
-	}, {
-		usr : '117',
-		pwd : '0090',
+		pwd : '0440',
+		fase : '0',
+		ladoA : 'ENTR MS-434 (RAIMUNDO)',
+		ladoB : 'ENTR BR-483/497 (INÍCIO DA PISTA DUPLA)'
 	}, {
 		usr : '118',
-		pwd : '0150',
+		pwd : '0040',
+		fase : '0',
+		ladoA : 'ENTR BR-101',
+		ladoB : 'ENTR SC-108(A) (NEUDOR)'
 	}, {
 		usr : '119',
-		pwd : '0370',
-	}, {
-		usr : '120',
-		pwd : '0410',
+		pwd : '1490',
+		fase : '0',
+		ladoA : 'ENTR BR-280(A)/PR-446',
+		ladoB : 'ENTR PR-170'
 	}, {
 		usr : '121',
-		pwd : '0830',
-	}, {
-		usr : '122',
-		pwd : '0230',
-	}, {
-		usr : '123',
-		pwd : '0170',
-	}, {
-		usr : '124',
-		pwd : '0370',
-	}, {
-		usr : '125',
-		pwd : '0170',
-	}, {
-		usr : '126',
-		pwd : '0490',
-	}, {
-		usr : '127',
-		pwd : '0685',
-	}, {
-		usr : '128',
-		pwd : '0050',
-	}, {
-		usr : '129',
-		pwd : '0750',
-	}, {
-		usr : '130',
-		pwd : '0270',
-	}, {
-		usr : '131',
-		pwd : '0023',
-	}, {
-		usr : '132',
-		pwd : '0270',
-	}, {
-		usr : '133',
-		pwd : '0325',
-	}, {
-		usr : '134',
-		pwd : '0212',
-	}, {
-		usr : '135',
-		pwd : '0612',
-	}, {
-		usr : '136',
-		pwd : '0090',
-	}, {
-		usr : '137',
-		pwd : '0450',
-	}, {
-		usr : '138',
-		pwd : '1390',
-	}, {
-		usr : '139',
-		pwd : '0058',
-	}, {
-		usr : '140',
-		pwd : '0390',
-	}, {
-		usr : '141',
-		pwd : '1290',
-	}, {
-		usr : '142',
-		pwd : '0880',
-	}, {
-		usr : '143',
-		pwd : '0180',
-	}, {
-		usr : '144',
-		pwd : '0050',
-	}, {
-		usr : '145',
-		pwd : '0030',
-	}, {
-		usr : '146',
-		pwd : '0592',
-	}, {
-		usr : '147',
-		pwd : '0330',
-	}, {
-		usr : '148',
-		pwd : '0755',
-	}, {
-		usr : '149',
-		pwd : '0414',
-	}, {
-		usr : '150',
-		pwd : '0510',
-	}, {
-		usr : '151',
-		pwd : '0150',
-	}, {
-		usr : '152',
-		pwd : '0335',
-	}, {
-		usr : '153',
-		pwd : '0215',
-	}, {
-		usr : '154',
-		pwd : '0270',
-	}, {
-		usr : '155',
-		pwd : '0322',
-	}, {
-		usr : '156',
-		pwd : '0280',
-	}, {
-		usr : '157',
-		pwd : '0510',
-	}, {
-		usr : '158',
-		pwd : '0410',
-	}, {
-		usr : '159',
-		pwd : '0460',
-	}, {
-		usr : '160',
-		pwd : '0530',
-	}, {
-		usr : '161',
-		pwd : '0140',
-	}, {
-		usr : '162',
-		pwd : '0420',
-	}, {
-		usr : '163',
-		pwd : '0630',
-	}, {
-		usr : '164',
-		pwd : '0250',
-	}, {
-		usr : '165',
-		pwd : '0300',
-	}, {
-		usr : '166',
-		pwd : '0370',
-	}, {
-		usr : '167',
-		pwd : '0250',
-	}, {
-		usr : '168',
-		pwd : '0480',
-	}, {
-		usr : '169',
-		pwd : '0115',
-	}, {
-		usr : '170',
-		pwd : '0130',
-	}, {
-		usr : '171',
-		pwd : '0070',
-	}, {
-		usr : '172',
-		pwd : '0190',
-	}, {
-		usr : '173',
-		pwd : '0398',
-	}, {
-		usr : '174',
-		pwd : '0330',
-	}, {
-		usr : '175',
-		pwd : '0290',
-	}, {
-		usr : '176',
-		pwd : '2710',
-	}, {
-		usr : '177',
-		pwd : '0210',
-	}, {
-		usr : '178',
-		pwd : '2810',
-	}, {
-		usr : '179',
-		pwd : '0205',
-	}, {
-		usr : '180',
-		pwd : '0180',
-	}, {
-		usr : '181',
-		pwd : '0080',
-	}, {
-		usr : '182',
-		pwd : '0250',
-	}, {
-		usr : '183',
-		pwd : '0455',
-	}, {
-		usr : '184',
-		pwd : '0310',
-	}, {
-		usr : '185',
-		pwd : '0500',
-	}, {
-		usr : '186',
-		pwd : '0480',
-	}, {
-		usr : '187',
-		pwd : '1230',
-	}, {
-		usr : '188',
-		pwd : '1140',
-	}, {
-		usr : '189',
-		pwd : '0230',
-	}, {
-		usr : '190',
-		pwd : '0010',
-	}, {
-		usr : '191',
-		pwd : '0490',
-	}, {
-		usr : '192',
-		pwd : '0095',
-	}, {
-		usr : '193',
-		pwd : '0730',
-	}, {
-		usr : '194',
-		pwd : '0410',
-	}, {
-		usr : '195',
-		pwd : '2930',
-	}, {
-		usr : '196',
-		pwd : '2850',
-	}, {
-		usr : '197',
-		pwd : '2130',
-	}, {
-		usr : '198',
-		pwd : '0590',
-	}, {
-		usr : '199',
-		pwd : '3350',
-	}, {
-		usr : '200',
-		pwd : '0530',
-	}, {
-		usr : '201',
-		pwd : '0170',
-	}, {
-		usr : '202',
-		pwd : '0190',
-	}, {
-		usr : '203',
-		pwd : '0170',
-	}, {
-		usr : '204',
-		pwd : '0350',
-	}, {
-		usr : '205',
-		pwd : '0150',
-	}, {
-		usr : '206',
-		pwd : '0210',
+		pwd : '0834',
+		fase : '0',
+		ladoA : 'ENTR MT-423',
+		ladoB : 'ITAUBA'
 	}, {
 		usr : '207',
-		pwd : '0330',
-	}, {
-		usr : '208',
-		pwd : '1530',
+		pwd : '0612',
+		fase : '0',
+		ladoA : 'ENTR BR-267(A)',
+		ladoB : 'INÍCIO DUPLICAÇÃO'
 	}, {
 		usr : '209',
-		pwd : '0167',
+		pwd : '1390',
+		fase : '0',
+		ladoA : 'ENTR MS-339/446/448 (MIRANDA)',
+		ladoB : 'ENTR MS-185/243 (GUAICURUS)'
 	}, {
 		usr : '210',
-		pwd : '0065',
+		pwd : '0058',
+		fase : '0',
+		ladoA : 'BURITIZINHO',
+		ladoB : 'ENTR MS-223(A) (SILVOLÂNDIA)'
 	}, {
 		usr : '211',
-		pwd : '0070',
-	}, {
-		usr : '212',
-		pwd : '0110',
-	}, {
-		usr : '213',
-		pwd : '0270',
+		pwd : '0390',
+		fase : '0',
+		ladoA : 'ENTR MS-316 (PARAÍSO DAS ÁGUAS)',
+		ladoB : 'ENTR MS-324(A)',
+		perguntaExtra : true
 	}, {
 		usr : '214',
-		pwd : '0070',
-	}, {
-		usr : '215',
-		pwd : '0055',
-	}, {
-		usr : '216',
-		pwd : '0210',
-	}, {
-		usr : '217',
-		pwd : '1210',
-	}, {
-		usr : '218',
-		pwd : '1375',
-	}, {
-		usr : '219',
-		pwd : '1510',
-	}, {
-		usr : '220',
-		pwd : '1300',
-	}, {
-		usr : '221',
-		pwd : '0031',
-	}, {
-		usr : '222',
-		pwd : '1148',
-	}, {
-		usr : '223',
-		pwd : '1090',
-	}, {
-		usr : '224',
-		pwd : '0132',
-	}, {
-		usr : '225',
-		pwd : '3275',
-	}, {
-		usr : '226',
-		pwd : '4425',
-	}, {
-		usr : '227',
 		pwd : '0330',
-	}, {
-		usr : '228',
-		pwd : '1150',
-	}, {
-		usr : '229',
-		pwd : '0210',
-	}, {
-		usr : '230',
-		pwd : '0470',
-	}, {
-		usr : '231',
-		pwd : '1310',
+		fase : '0',
+		ladoA : 'ENTR MT-373',
+		ladoB : 'ENTR MT-130(A) (PRIMAVERA DO LESTE)'
 	}, {
 		usr : '232',
-		pwd : '0140',
-	}, {
-		usr : '233',
 		pwd : '0180',
+		fase : '0',
+		ladoA : 'ENTR PR-549 (P/LUIZIANA)',
+		ladoB : 'ENTR PR-462 (P/IRETAMA)'
 	}, {
 		usr : '234',
-		pwd : '0220',
+		pwd : '0250',
+		fase : '0',
+		ladoA : 'ENTR BR-158(B) (LARANJEIRAS DO SUL)',
+		ladoB : 'ENTR PR-473'
 	}, {
 		usr : '235',
-		pwd : '1850',
+		pwd : '0455',
+		fase : '0',
+		ladoA : 'ACESSO ÁGUA MINERAL SANTA CLARA',
+		ladoB : 'ENTR PR-281(A) (P/CHOPINZINHO)'
 	}, {
 		usr : '236',
-		pwd : '0410',
+		pwd : '0500',
+		fase : '0',
+		ladoA : 'ENTR PR-468(B)',
+		ladoB : 'ENTR PR-180 (GOIO ERÊ)'
 	}, {
 		usr : '237',
-		pwd : '0130',
-	}, {
-		usr : '238',
-		pwd : '0310',
-	}, {
-		usr : '239',
-		pwd : '0070',
+		pwd : '1230',
+		fase : '0',
+		ladoA : 'ENTR PR-431(B)',
+		ladoB : 'ENTR PR-092(A) (P/BARRA DO JACARÉ)'
 	}, {
 		usr : '240',
-		pwd : '0230',
-	}, {
-		usr : '241',
-		pwd : '0210',
-	}, {
-		usr : '242',
-		pwd : '3830',
-	}, {
-		usr : '243',
-		pwd : '4010',
-	}, {
-		usr : '244',
-		pwd : '4125',
-	}, {
-		usr : '245',
-		pwd : '4270',
-	}, {
-		usr : '246',
-		pwd : '0310',
-	}, {
-		usr : '247',
-		pwd : '2910',
-	}, {
-		usr : '248',
-		pwd : '1590',
-	}, {
-		usr : '249',
-		pwd : '0015',
-	}, {
-		usr : '250',
-		pwd : '0180',
-	}, {
-		usr : '251',
-		pwd : '3010',
-	}, {
-		usr : '252',
-		pwd : '0110',
-	}, {
-		usr : '253',
-		pwd : '0377',
-	}, {
-		usr : '254',
-		pwd : '0027',
-	}, {
-		usr : '255',
-		pwd : '1010',
-	}, {
-		usr : '256',
-		pwd : '0190',
-	}, {
-		usr : '257',
-		pwd : '1250',
-	}, {
-		usr : '258',
-		pwd : '0060',
-	}, {
-		usr : '259',
-		pwd : '0612',
-	}, {
-		usr : '260',
-		pwd : '2410',
-	}, {
-		usr : '261',
-		pwd : '0190',
+		pwd : '0710',
+		fase : '0',
+		ladoA : 'ACESSO PIRAPÓ',
+		ladoB : 'ACESSO CAMBIRA'
 	}, {
 		usr : '262',
-		pwd : '2360',
+		pwd : '0132',
+		fase : '0',
+		ladoA : 'PADRONAL',
+		ladoB : 'RIO 12 DE OUTUBRO'
 	}, {
 		usr : '263',
-		pwd : '2470',
+		pwd : '4425',
+		fase : '0',
+		ladoA : 'ENTR ACESSO SUL DE CAPÃO DA CANOA',
+		ladoB : 'ENTR BR-290(A) (OSÓRIO)'
 	}, {
 		usr : '264',
-		pwd : '2570',
+		pwd : '0330',
+		fase : '0',
+		ladoA : 'ENTR BR-470',
+		ladoB : 'ENTR BR-470/116(A) (CANOAS)'
 	}, {
 		usr : '265',
-		pwd : '0170',
+		pwd : '0210',
+		fase : '0',
+		ladoA : 'ENTR BR-153(B)/RS-324 (P/PONTÃO)',
+		ladoB : 'ENTR BR-377(A)/386 (CARAZINHO)'
 	}, {
 		usr : '266',
-		pwd : '0130',
+		pwd : '0470',
+		fase : '0',
+		ladoA : 'ENTR RS-168 (P/SÃO PAULO DAS MISSÕES)',
+		ladoB : 'ENTR BR-472 (FRONT BRASIL/ARGENTINA) (PORTO XAVIER)'
 	}, {
 		usr : '267',
-		pwd : '1043',
+		pwd : '0140',
+		fase : '0',
+		ladoA : 'A. BELTRÃO',
+		ladoB : 'ENTR BR-287 (SANTIAGO)'
 	}, {
 		usr : '268',
-		pwd : '1077',
+		pwd : '1850',
+		fase : '0',
+		ladoA : 'ENTR BR-290(B)',
+		ladoB : 'ENTR BR-392'
 	}, {
 		usr : '269',
-		pwd : '1010',
+		pwd : '1350',
+		fase : '0',
+		ladoA : 'ENTR BR-290(A) (P/ROSÁRIO DO SUL)',
+		ladoB : 'ENTR RS-640 (P/CACEQUI)'
 	}, {
 		usr : '270',
-		pwd : '0610',
+		pwd : '0230',
+		fase : '0',
+		ladoA : 'ENTR BR-473 (SARANDI)',
+		ladoB : 'CURRAL ALTO'
 	}, {
 		usr : '271',
-		pwd : '0783',
+		pwd : '0310',
+		fase : '0',
+		ladoA : 'ENTR RS-476 (LAJEADO GRANDE)',
+		ladoB : 'ENTR RS-110 (VÁRZEA DO CEDRO)'
 	}, {
 		usr : '272',
-		pwd : '0810',
+		pwd : '0015',
+		fase : '0',
+		ladoA : 'ENTR BR-282(B)/470(A)',
+		ladoB : 'ENTR SC-455 (P/IBICUÍ)'
 	}, {
 		usr : '273',
-		pwd : '0850',
+		pwd : '3010',
+		fase : '0',
+		ladoA : 'DIV SC/RS (RIO PELOTAS)',
+		ladoB : 'ENTR BR-285(A) (P/VACARIA)'
 	}, {
 		usr : '274',
-		pwd : '0105',
+		pwd : '0110',
+		fase : '0',
+		ladoA : 'ENTR BR-486 (BOM RETIRO)',
+		ladoB : 'ENTR SC-345(B) (P/URUBICI)'
 	}, {
 		usr : '275',
-		pwd : '0010',
-	}, {
-		usr : '276',
-		pwd : '0930',
-	}, {
-		usr : '277',
-		pwd : '1010',
-	}, {
-		usr : '278',
-		pwd : '0210',
-	}, {
-		usr : '279',
-		pwd : '0300',
-	}, {
-		usr : '280',
-		pwd : '0290',
-	}, {
-		usr : '281',
-		pwd : '0495',
-	}, {
-		usr : '282',
-		pwd : '0330',
-	}, {
-		usr : '283',
-		pwd : '0150',
-	}, {
-		usr : '284',
-		pwd : '0272',
-	}, {
-		usr : '285',
-		pwd : '0210',
-	}, {
-		usr : '286',
-		pwd : '0025',
-	}, {
-		usr : '287',
-		pwd : '0075',
-	}, {
-		usr : '288',
-		pwd : '0370',
-	}, {
-		usr : '289',
-		pwd : '0950',
-	}, {
-		usr : '290',
-		pwd : '0390',
-	}, {
-		usr : '291',
-		pwd : '0440',
-	}, {
-		usr : '292',
-		pwd : '0434',
-	}, {
-		usr : '293',
-		pwd : '0810',
-	}, {
-		usr : '294',
-		pwd : '1670',
+		pwd : '0027',
+		fase : '0',
+		ladoA : 'ENTR SC-473 (P/ANCHIETA)',
+		ladoB : 'SÃO JOSÉ DO CEDRO'
 	}, {
 		usr : '295',
-		pwd : '0930',
+		pwd : '0370',
+		fase : '0',
+		ladoA : 'ENTR BR-153 (P/TIBAGI/IPIRANGA)',
+		ladoB : 'ENTR BR-373(A)/487(A) (CAETANO)'
 	}, {
 		usr : '296',
-		pwd : '0040',
-	}, {
-		usr : '297',
-		pwd : '0110',
-	}, {
-		usr : '298',
-		pwd : '0180',
+		pwd : '0390',
+		fase : '0',
+		ladoA : 'RIO ANHANDUÍ',
+		ladoB : 'ENTR BR-262(A) (CAMPO GRANDE)'
 	}, {
 		usr : '299',
 		pwd : '0110',
+		fase : '0',
+		ladoA : 'ENTR SC-418 (P/POMERODE)',
+		ladoB : 'ENTR BR-477(B) (P/TIMBÓ)'
 	}, {
 		usr : '300',
-		pwd : '0060',
-	}, {
-		usr : '000',
-		pwd : '0150',
-	}, {
-		usr : '000',
-		pwd : '0440',
+		pwd : '0110',
+		fase : '0',
+		ladoA : 'ENTR BR-116(B)',
+		ladoB : 'P/TRES BARRAS'
 	} ]
 };
