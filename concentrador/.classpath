@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="simple-6/0/1/simple-common/src/main/java/|simple-6.0.1/simple-common/src/main/java/|simple-6/0/1/simple-http/src/main/java/|simple-6.0.1/simple-http/src/main/java/|simple-6/0/1/simple-transport/src/main/java/|simple-6.0.1/simple-transport/src/main/java/" kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="src/simple-6.0.1/simple-common/src/main/java"/>
+	<classpathentry kind="src" path="src/simple-6.0.1/simple-http/src/main/java"/>
+	<classpathentry kind="src" path="src/simple-6.0.1/simple-transport/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib"/>
 	<classpathentry kind="output" path="build/classes"/>
