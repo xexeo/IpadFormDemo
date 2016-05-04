@@ -19,7 +19,8 @@
 				<label for="possui_carga_nao">Não</label>
 			</div>
 		</fieldset>
-
+		
+		<!-- POSSUI CARGA: SIM -->
 		<div class="escondido" id="div_possui_carga_sim">
 			<fieldset class="ui-grid-a" id="grupo_produto_carga">
 				<legend class="ui-block-a">Tipo de carga:</legend>
@@ -28,14 +29,14 @@
 				</div>
 			</fieldset>
 
-			<fieldset class="ui-grid-a escondido" id="grupo_peso_carga">
+			<fieldset class="ui-grid-a" id="grupo_peso_carga">
 				<legend class="ui-block-a">Peso da carga:</legend>
 				<div class="ui-block-b ui-grid-a">
 					<div class="ui-block-a">
 						<input id="peso_carga" type="number" name="peso_carga" value="" data-theme="a" min="0" step="0.1" lang="pt" />
 					</div>
 					<div class="ui-block-b" data-role="controlgroup" data-theme="a" data-type="horizontal">
-						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_ton" value="ton" />
+						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_ton" value="ton" checked="checked"/>
 						<label for="unidade_peso_carga_ton">Ton</label>
 						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_kg" value="kg" />
 						<label for="unidade_peso_carga_kg">Kg</label>
@@ -51,7 +52,7 @@
 				</div>
 			</fieldset>
 
-			<fieldset class="ui-grid-a " id="grupo_valor_nota_carga">
+			<fieldset class="ui-grid-a escondido" id="grupo_valor_nota_carga">
 				<legend class="ui-block-a">Valor da carga/nota fiscal:</legend>
 				<div class="ui-block-b">
 					<input id="valor_nota_carga" type="text" name="valor_nota_carga" value="" data-theme="a" />
@@ -59,12 +60,16 @@
 			</fieldset>
 
 			<!-- EMBARQUE DA CARGA -->
-			<fieldset class="ui-grid-a" id="grupo_embarque_carga">
-				<legend class="ui-block-a">Embarque da carga:</legend>
-				<div class="ui-block-b">
-					<input id="embarque_nao_sei_carga" type="checkbox" name="embarque_nao_sei_carga" data-theme="a" />
-					<label for="embarque_nao_sei_carga">Não sabe o local</label>
+			<fieldset class="ui-grid-a escondido" id="grupo_sabe_embarque_carga">
+				<legend class="ui-block-a">Sabe local de embarque da carga:</legend>
+				<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
+					<input type="radio" name="sabe_embarque_carga" id="sabe_embarque_carga_sim" value="sim" />
+					<label for="sabe_embarque_carga_sim">Sim</label>
+					<input type="radio" name="sabe_embarque_carga" id="sabe_embarque_carga_nao" value="nao" />
+					<label for="sabe_embarque_carga_nao">Não</label>
 				</div>
+			</fieldset>
+			<div class="escondido" id="div_sabe_embarque_sim">
 				<legend class="ui-block-a">&nbsp;</legend>
 				<div class="ui-block-b ui-grid-a">
 					<div class="ui-block-a sel_uf" id="grupo_embarque_uf_carga">
@@ -75,21 +80,23 @@
 						<input data-type='search' type="text" name="embarque_mun_carga" id="embarque_mun_carga" data-theme="a" readonly="readonly">
 					</div>
 				</div>
-				<legend class="ui-block-a">&nbsp;</legend>
+				<legend class="ui-block-a escondido">&nbsp;</legend>
 				<div class="ui-block-b">
 					<select name="embarque_local_carga" id="embarque_local_carga" data-theme="a">
 					</select>
 				</div>
-			</fieldset>
+			</div>
 
-
-			<!-- DESEMBARQUE DA CARGA -->
-			<fieldset class="ui-grid-a" id="grupo_desembarque_carga">
-				<legend class="ui-block-a">Desembarque da carga:</legend>
-				<div class="ui-block-b">
-					<input id="desembarque_nao_sei_carga" type="checkbox" name="desembarque_nao_sei_carga" data-theme="a" />
-					<label for="desembarque_nao_sei_carga">Não sabe o local</label>
+			<fieldset class="ui-grid-a escondido" id="grupo_sabe_desembarque_carga">
+				<legend class="ui-block-a">Sabe local de desembarque da carga:</legend>
+				<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
+					<input type="radio" name="sabe_desembarque_carga" id="sabe_desembarque_carga_sim" value="sim" />
+					<label for="sabe_desembarque_carga_sim">Sim</label>
+					<input type="radio" name="sabe_desembarque_carga" id="sabe_desembarque_carga_nao" value="nao" />
+					<label for="sabe_desembarque_carga_nao">Não</label>
 				</div>
+			</fieldset>
+			<div class="escondido" id="div_sabe_desembarque_sim">
 				<legend class="ui-block-a">&nbsp;</legend>
 				<div class="ui-block-b ui-grid-a">
 					<div class="ui-block-a sel_uf" id="grupo_desembarque_uf_carga">
@@ -106,9 +113,10 @@
 					<select name="desembarque_local_carga" id="desembarque_local_carga" data-theme="a">
 					</select>
 				</div>
-			</fieldset>
+			</div>
 		</div>
 
+		<!-- POSSUI CARGA: NAO -->
 		<div class="escondido" id="div_possui_carga_nao">
 			<fieldset class="ui-grid-a" id="grupo_carga_anterior_carga">
 				<legend class="ui-block-a">Carga anterior:</legend>
@@ -119,8 +127,7 @@
 					<label for="carga_anterior_carga_nao">Não</label>
 				</div>
 			</fieldset>
-
-			<fieldset class="ui-grid-a " id="grupo_produto_anterior_carga">
+			<fieldset class="ui-grid-a escondido" id="grupo_produto_anterior_carga">
 				<legend class="ui-block-a">Tipo de carga:</legend>
 				<div class="ui-block-b">
 					<input data-type='search' type="text" name="produto_anterior_carga" id="produto_anterior_carga" data-theme="a"
@@ -128,7 +135,7 @@
 				</div>
 			</fieldset>
 
-			<fieldset class="ui-grid-a" id="grupo_indo_pegar_carga">
+			<fieldset class="ui-grid-a escondido" id="grupo_indo_pegar_carga">
 				<legend class="ui-block-a">Indo pegar uma carga:</legend>
 				<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
 					<input type="radio" name="indo_pegar_carga" id="indo_pegar_carga_sim" value="sim" />
@@ -139,7 +146,8 @@
 			</fieldset>
 		</div>
 
-		<fieldset class="ui-grid-a" id="grupo_parada_especial_carga">
+
+		<fieldset class="ui-grid-a escondido" id="grupo_parada_especial_carga">
 			<legend class="ui-block-a">Utiliza parada especial:</legend>
 			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
 				<input type="radio" name="parada_especial_carga" id="parada_especial_carga_sim" value="sim" />
@@ -149,7 +157,7 @@
 			</div>
 		</fieldset>
 
-		<fieldset class="ui-grid-a " id="grupo_municipios_parada_carga">
+		<fieldset class="ui-grid-a escondido" id="grupo_municipios_parada_carga">
 			<legend class="ui-block-a">Na sua rota de viagem, quais seriam os melhores municípios para que houvesse um local de
 				parada obrigatória de descanso:</legend>
 			<div class="ui-block-b">

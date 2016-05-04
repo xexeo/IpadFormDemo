@@ -153,6 +153,19 @@ var util = {
 		});
 	},
 
+	progressoRadioSimNaoAlternado : function(nome_registro, nome_campo, grupo_proximo_sim, grupo_proximo_nao) {
+		$('#' + nome_campo + '_sim').click(function() {
+			$('#' + grupo_proximo_sim).show();
+			$('#' + grupo_proximo_nao).hide();
+			app.setAtributo(nome_registro, true);
+		});
+		$('#' + nome_campo + '_nao').click(function() {
+			$('#' + grupo_proximo_sim).hide();
+			$('#' + grupo_proximo_nao).show();
+			app.setAtributo(nome_registro, false);
+		});
+	},
+
 	progressoRadioPlacaEstrangeira : function(tipo_fluxo) {
 		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).show();
