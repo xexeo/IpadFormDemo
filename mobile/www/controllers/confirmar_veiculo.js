@@ -3,7 +3,7 @@ controllers.confirmar_veiculo = {
 
 		$("#img_confirmar_veiculo").attr('src', app.imagemPath);
 		$("#conf_veic_nao").click(function() {
-                        //clear
+			// clear
 			app.iniciaRegistro();
 			app.trocaPagina('views/selecionar_tipo.html', controllers.selecionar_tipo);
 		});

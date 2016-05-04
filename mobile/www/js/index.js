@@ -271,7 +271,14 @@ var app = {
 				// Input number
 				$('input[type="number"]').keyup(function() {
 					var regex = new RegExp("[^0-9]+");
-					$(this).val($(this).val().replace(regex, ''));
+					// TODO ainda não está funcionando o código comentado abaixo (deveria funcionar para o peso da carga)
+					// var step = Number($(this).attr('step'));
+					// if ((!util.isEmpty(step)) && (String(step).split(".").length > 0)) {
+					// regex = new RegExp("[^,0-9]+");
+					// }
+					if (regex.test($(this).val())) {
+						$(this).val($(this).val().replace(regex, ''));
+					}
 				});
 
 				$("#versao").html(app.versao);

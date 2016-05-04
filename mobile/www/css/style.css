@@ -436,6 +436,9 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input, #grupo_
 	width: 75%;
 }
 
+#grupo_peso_carga>.ui-block-b>.ui-block-a {
+	width: 15%;
+}
 .escondido {
 	display: none;
 }
