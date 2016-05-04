@@ -81,11 +81,11 @@ section.ui-content>fieldset {
 	line-height: 44px;
 }
 
-section.ui-content>fieldset>legend.ui-block-a {
+section.ui-content>fieldset>legend.ui-block-a, section.ui-content>div>fieldset>legend.ui-block-a {
 	width: 32%;
 }
 
-section.ui-content>fieldset>:not(fieldset).ui-block-b {
+section.ui-content>fieldset>:not(fieldset).ui-block-b, section.ui-content>div>fieldset>:not(fieldset).ui-block-b {
 	width: 68%;
 }
 
@@ -439,6 +439,7 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input, #grupo_
 #grupo_peso_carga>.ui-block-b>.ui-block-a {
 	width: 15%;
 }
+
 .escondido {
 	display: none;
 }
