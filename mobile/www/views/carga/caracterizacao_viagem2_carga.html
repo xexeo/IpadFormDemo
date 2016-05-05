@@ -19,7 +19,7 @@
 				<label for="possui_carga_nao">Não</label>
 			</div>
 		</fieldset>
-		
+
 		<!-- POSSUI CARGA: SIM -->
 		<div class="escondido" id="div_possui_carga_sim">
 			<fieldset class="ui-grid-a" id="grupo_produto_carga">
@@ -33,12 +33,12 @@
 				<legend class="ui-block-a">Peso da carga:</legend>
 				<div class="ui-block-b ui-grid-a">
 					<div class="ui-block-a">
-						<input id="peso_carga" type="number" name="peso_carga" value="" data-theme="a" min="0" step="0.1" lang="pt" />
+						<input id="peso_carga" type="text" mask="9{+}[,9]" name="peso_carga" value="" data-theme="a" />
 					</div>
 					<div class="ui-block-b" data-role="controlgroup" data-theme="a" data-type="horizontal">
-						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_ton" value="ton" checked="checked"/>
+						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_ton" value="ton" checked="checked" />
 						<label for="unidade_peso_carga_ton">Ton</label>
-						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_kg" value="kg" />
+						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_kg" value="kg" mask="#,99" />
 						<label for="unidade_peso_carga_kg">Kg</label>
 					</div>
 				</div>
@@ -48,14 +48,14 @@
 			<fieldset class="ui-grid-a escondido" id="grupo_valor_frete_carga">
 				<legend class="ui-block-a">Valor do frete:</legend>
 				<div class="ui-block-b">
-					<input id="valor_frete_carga" type="text" name="valor_frete_carga" value="" data-theme="a" />
+					<input id="valor_frete_carga" type="text" typeMask="money-BRL" name="valor_frete_carga" value="" data-theme="a" />
 				</div>
 			</fieldset>
 
 			<fieldset class="ui-grid-a escondido" id="grupo_valor_nota_carga">
 				<legend class="ui-block-a">Valor da carga/nota fiscal:</legend>
 				<div class="ui-block-b">
-					<input id="valor_nota_carga" type="text" name="valor_nota_carga" value="" data-theme="a" />
+					<input id="valor_nota_carga" type="text" typeMask="money-BRL" name="valor_nota_carga" value="" data-theme="a" />
 				</div>
 			</fieldset>
 

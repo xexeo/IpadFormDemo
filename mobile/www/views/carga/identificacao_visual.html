@@ -23,7 +23,8 @@
 					<li><img src="../../img/carroceria/aberta.png" class="img_carroceria" alt="Aberta" id="carroceria_1" /></li>
 					<li><img src="../../img/carroceria/cegonha.png" class="img_carroceria" alt="Cegonha" id="carroceria_7" /></li>
 					<li><img src="../../img/carroceria/graneleiro.png" class="img_carroceria" alt="Graneleiro" id="carroceria_9" /></li>
-					<li><img src="../../img/carroceria/porta_conteiner.png" class="img_carroceria tipo_porta_conteiner" alt="Porta-Conteiner" id="carroceria_10" /></li>
+					<li><img src="../../img/carroceria/porta_conteiner.png" class="img_carroceria tipo_porta_conteiner"
+						alt="Porta-Conteiner" id="carroceria_10" /></li>
 				</div>
 				<div>
 					<li><img src="../../img/carroceria/bau_simples.png" class="img_carroceria" alt="Baú Simples" id="carroceria_4" /></li>
@@ -73,13 +74,12 @@
 			<div class="ui-block-b ui-grid-a" id="grupo_placa_dados_carga">
 				<div class="ui-block-a placa_prefixo">
 					<input id="placa_letras_carga" class="input_placa" type="text" name="placa_letras_carga" value="" data-theme="a"
-						maxlength="3" pattern="[A-Z]{3}" />
+						maxlength="3" mask="a{3}" />
 				</div>
 				<div class="ui-block-b ui-grid-a placa_sufixo escondido" id="grupo_placa_numeros_carga">
 					<span class="ui-block-a">-</span>
 					<div class="ui-block-b">
-						<input id="placa_numeros_carga" type="number" name="placa_numeros_carga" value="" data-theme="a" max="9999" maxlength="4"
-							pattern="[0-9]{4}" />
+						<input id="placa_numeros_carga" type="text" name="placa_numeros_carga" value="" data-theme="a" maxlength="4" mask="9{4}" />
 					</div>
 				</div>
 			</div>
@@ -108,8 +108,8 @@
 						</select>
 					</div>
 					<div class="ui-block-c escondido" id="grupo_placa_vermelha_rntrc_num_carga">
-						<input id="placa_vermelha_rntrc_num_carga" type="number" name="placa_vermelha_rntrc_num_carga" value="" data-theme="a"
-							max="99999999" maxlength="8" pattern="[0-9]{8}" />
+						<input id="placa_vermelha_rntrc_num_carga" type="text" name="placa_vermelha_rntrc_num_carga" value="" data-theme="a"
+							maxlength="8" mask="9{8}" />
 					</div>
 				</fieldset>
 			</div>

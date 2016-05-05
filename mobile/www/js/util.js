@@ -105,7 +105,13 @@ var util = {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
 			input.val(input.val().replace(regex, ''));
-			if (util.isEmpty(input.val()) || input.val().length < Number(input.attr("maxlength"))) {
+			var value;
+			if (input.inputmask) {
+				value = input.inputmask('unmaskedvalue');
+			} else {
+				value = input.val();
+			}
+			if (util.isEmpty(value) || value.length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");
 				// app.setAtributo('placa_numeros', null);
@@ -294,7 +300,13 @@ var util = {
 		$('#' + nome_campo).keyup(function() {
 			var input = $(this);
 			var max_len = Number(input.attr("maxlength"));
-			if (progride(input.val(), max_len)) {
+			var value;
+			if (input.inputmask) {
+				value = input.inputmask('unmaskedvalue');
+			} else {
+				value = input.val();
+			}
+			if (progride(value, max_len)) {
 				input.val(String(input.val()).trim().substring(0, max_len));
 				input.trigger('change');
 			}

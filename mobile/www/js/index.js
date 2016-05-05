@@ -268,17 +268,18 @@ var app = {
 					$(this).focus();
 				});
 
-				// Input number
-				$('input[type="number"]').keyup(function() {
-					var regex = new RegExp("[^0-9]+");
-					// TODO ainda não está funcionando o código comentado abaixo (deveria funcionar para o peso da carga)
-					// var step = Number($(this).attr('step'));
-					// if ((!util.isEmpty(step)) && (String(step).split(".").length > 0)) {
-					// regex = new RegExp("[^,0-9]+");
-					// }
-					if (regex.test($(this).val())) {
-						$(this).val($(this).val().replace(regex, ''));
-					}
+				// Input money
+				$('input[typeMask="money-BRL"]').each(function(key, input) {
+					$(input).maskMoney({
+						prefix : "R$ ",
+						affixesStay : "true",
+						thousands : ".",
+						decimal : ","
+					});
+				});
+
+				$('input[mask]').each(function(key, input) {
+					$(input).inputmask($(input).attr('mask'));
 				});
 
 				$("#versao").html(app.versao);
