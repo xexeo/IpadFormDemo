@@ -201,6 +201,21 @@ var util = {
 		});
 	},
 
+	progressoCheckboxAlternado : function(nome_registro, nome_campo, grupo_proximo_check, grupo_proximo_uncheck) {
+		$('#' + nome_campo).click(function() {
+			  if($(this).is(':checked')){
+				  $('#' + grupo_proximo_check).show();
+				  $('#' + grupo_proximo_uncheck).hide();
+				  app.setAtributo(nome_registro, true);
+			   }
+			   else{
+				   $('#' + grupo_proximo_check).hide();
+				   $('#' + grupo_proximo_uncheck).show();
+				   app.setAtributo(nome_registro, false);
+			   }
+		});
+	},
+
 	/**
 	 * 
 	 * @param nome_registro

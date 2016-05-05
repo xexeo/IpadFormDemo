@@ -39,17 +39,6 @@ controllers.caracterizacao_viagem2_carga = {
 	// Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 
-		// $('#possui_carga_sim').click(function() {
-		// $('#div_possui_carga_sim').show();
-		// $('#div_possui_carga_nao').hide();
-		// app.setAtributo(nome_registro, true);
-		// });
-		// $('#possui_carga_nao').click(function() {
-		// $('#div_possui_carga_sim').hide();
-		// $('#div_possui_carga_nao').show();
-		// app.setAtributo(nome_registro, false);
-		// });
-
 		util.progressoRadioSimNaoAlternado("possui_carga", "possui_carga", "div_possui_carga_sim", "div_possui_carga_nao");
 
 		$('#produto_carga').click(function() {
@@ -115,11 +104,17 @@ controllers.caracterizacao_viagem2_carga = {
 		})
 		util.progressoInputText("idCargaAnterior", "produto_anterior_carga", "grupo_indo_pegar_carga", true);
 
-		// TODO indo pegar carga
-
+		// TODO Show do componente abaixo depende se eh carga especial. Se nao, faz show no seguinte.
+		util.progressoRadioSimNao("indoPegarCarga", "indo_pegar_carga", "grupo_parada_especial_carga")
+		
 		util.progressoRadioSimNao("utilizaParadaEspecial", "parada_especial_carga", "grupo_municipios_parada_carga");
 
-		// TODO componentes sugestao parada obrigatoria
+		util.progressoCheckboxAlternado("municipiosParadaNaoSabe", "municipios_parada_nao_sei_carga", "grupo_caracterizacao_viagem2_carga_avancar", "div_municipios_parada_carga");
+		
+		// TODO parada obrigatoria uf1 mun1
+
+		// TODO parada obrigatoria uf2 mun2
+		
 
 		// TODO Usar checkbox para desabilitar as opções e marcar não sabe -->
 
