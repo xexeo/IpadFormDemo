@@ -279,7 +279,18 @@ var app = {
 				});
 
 				$('input[mask]').each(function(key, input) {
-					$(input).inputmask($(input).attr('mask'));
+					var decimalSeparator = $(input).attr('mask-decimal-separator');
+					if (util.isEmpty(decimalSeparator)) {
+						$(input).inputmask($(input).attr('mask'), {
+							'autoUnmask' : true
+						});
+					} else {
+						$(input).inputmask($(input).attr('mask'), {
+							'autoUnmask' : true,
+							numericInput : true,
+							radixPoint : decimalSeparator
+						});
+					}
 				});
 
 				$("#versao").html(app.versao);
@@ -408,6 +419,20 @@ var app = {
 					app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
 				}
 			}
+		}
+
+		// PESO DA CARGA ('ton' -> 'kg')
+		if (!util.isEmpty(registro.pesoDaCarga)) {
+			var peso = Number(registro.pesoDaCarga);
+			if (registro.unidadePesoDaCarga == 'kg') {
+				peso = peso / 10;
+			} else {
+				peso = peso * 100;
+			}
+			app.setAtributo('pesoDaCarga', peso)
+		} else if (registro.cancelado != 1) {
+			// TODO: ERRO (peso da carga vazio)
+			app.logger.log("ERRO (peso da carga vazio) no registro: ", registro.id);
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));

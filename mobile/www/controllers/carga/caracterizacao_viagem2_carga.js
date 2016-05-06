@@ -49,6 +49,12 @@ controllers.caracterizacao_viagem2_carga = {
 
 		util.progressoInputText("pesoDaCarga", "peso_carga", "grupo_valor_frete_carga");
 
+		// UNIDADE DO PESO DA CARGA
+		app.setAtributo("unidadePesoDaCarga", $('input[name="unidade_peso_carga"]:checked').val());
+		$('input[name=unidade_peso_carga]').change(function() {
+			app.setAtributo("unidadePesoDaCarga", $('input[name="unidade_peso_carga"]:checked').val());
+		});
+
 		util.progressoInputText("valorDoFrete", "valor_frete_carga", "grupo_valor_nota_carga");
 
 		util.progressoInputText("valorDaCarga", "valor_nota_carga", "grupo_sabe_embarque_carga");
@@ -71,13 +77,8 @@ controllers.caracterizacao_viagem2_carga = {
 		util.progressoSelect("idLocalEmbarqueCarga", "embarque_local_carga", "grupo_sabe_desembarque_carga");
 
 		// TODO Show do componente abaixo depende se eh carga especial. Se nao, faz show no seguinte.
-		util.progressoRadioSimNaoAlternado("sabe_desembarque", "sabe_desembarque_carga", "div_sabe_desembarque_sim", /*
-																														 * TODO
-																														 * verificar
-																														 * se eh
-																														 * carga
-																														 * especial
-																														 */
+		util.progressoRadioSimNaoAlternado("sabe_desembarque", "sabe_desembarque_carga", "div_sabe_desembarque_sim",
+		/* TODO verificar se eh carga especial */
 		"grupo_parada_especial_carga");
 		util.progressoSelect("desembarque_uf", "desembarque_uf_carga", "grupo_desembarque_mun_carga");
 		$('#desembarque_uf_carga').change(
@@ -106,15 +107,15 @@ controllers.caracterizacao_viagem2_carga = {
 
 		// TODO Show do componente abaixo depende se eh carga especial. Se nao, faz show no seguinte.
 		util.progressoRadioSimNao("indoPegarCarga", "indo_pegar_carga", "grupo_parada_especial_carga")
-		
+
 		util.progressoRadioSimNao("utilizaParadaEspecial", "parada_especial_carga", "grupo_municipios_parada_carga");
 
-		util.progressoCheckboxAlternado("municipiosParadaNaoSabe", "municipios_parada_nao_sei_carga", "grupo_caracterizacao_viagem2_carga_avancar", "div_municipios_parada_carga");
-		
+		util.progressoCheckboxAlternado("municipiosParadaNaoSabe", "municipios_parada_nao_sei_carga",
+				"grupo_caracterizacao_viagem2_carga_avancar", "div_municipios_parada_carga");
+
 		// TODO parada obrigatoria uf1 mun1
 
 		// TODO parada obrigatoria uf2 mun2
-		
 
 		// TODO Usar checkbox para desabilitar as opções e marcar não sabe -->
 

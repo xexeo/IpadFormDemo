@@ -33,16 +33,15 @@
 				<legend class="ui-block-a">Peso da carga:</legend>
 				<div class="ui-block-b ui-grid-a">
 					<div class="ui-block-a">
-						<input id="peso_carga" type="text" mask="9{+}[,9]" name="peso_carga" value="" data-theme="a" />
+						<input id="peso_carga" type="text" mask="9{+}[,9]" mask-decimal-separator="," name="peso_carga" value="" data-theme="a" />
 					</div>
 					<div class="ui-block-b" data-role="controlgroup" data-theme="a" data-type="horizontal">
 						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_ton" value="ton" checked="checked" />
 						<label for="unidade_peso_carga_ton">Ton</label>
-						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_kg" value="kg" mask="#,99" />
+						<input type="radio" name="unidade_peso_carga" id="unidade_peso_carga_kg" value="kg" />
 						<label for="unidade_peso_carga_kg">Kg</label>
 					</div>
 				</div>
-
 			</fieldset>
 
 			<fieldset class="ui-grid-a escondido" id="grupo_valor_frete_carga">
@@ -160,7 +159,7 @@
 				<label for="parada_especial_carga_nao">Não</label>
 			</div>
 		</fieldset>
-		
+
 		<div class="escondido" id="grupo_municipios_parada_carga">
 			<fieldset class="ui-grid-a">
 				<legend class="ui-block-a">Na sua rota de viagem, quais seriam os melhores municípios para que houvesse um local de

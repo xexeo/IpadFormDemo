@@ -105,12 +105,7 @@ var util = {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
 			input.val(input.val().replace(regex, ''));
-			var value;
-			if (input.inputmask) {
-				value = input.inputmask('unmaskedvalue');
-			} else {
-				value = input.val();
-			}
+			var value = input.val();
 			if (util.isEmpty(value) || value.length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");
@@ -203,16 +198,15 @@ var util = {
 
 	progressoCheckboxAlternado : function(nome_registro, nome_campo, grupo_proximo_check, grupo_proximo_uncheck) {
 		$('#' + nome_campo).click(function() {
-			  if($(this).is(':checked')){
-				  $('#' + grupo_proximo_check).show();
-				  $('#' + grupo_proximo_uncheck).hide();
-				  app.setAtributo(nome_registro, true);
-			   }
-			   else{
-				   $('#' + grupo_proximo_check).hide();
-				   $('#' + grupo_proximo_uncheck).show();
-				   app.setAtributo(nome_registro, false);
-			   }
+			if ($(this).is(':checked')) {
+				$('#' + grupo_proximo_check).show();
+				$('#' + grupo_proximo_uncheck).hide();
+				app.setAtributo(nome_registro, true);
+			} else {
+				$('#' + grupo_proximo_check).hide();
+				$('#' + grupo_proximo_uncheck).show();
+				app.setAtributo(nome_registro, false);
+			}
 		});
 	},
 
@@ -295,7 +289,6 @@ var util = {
 				// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
 				// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
 				// app.setAtributo(nome_registro, $(this).val());
-
 			});
 			$('#' + nome_campo).change(function() {
 				app.setAtributo(nome_registro, $(this).val());
@@ -315,13 +308,7 @@ var util = {
 		$('#' + nome_campo).keyup(function() {
 			var input = $(this);
 			var max_len = Number(input.attr("maxlength"));
-			var value;
-			if (input.inputmask) {
-				value = input.inputmask('unmaskedvalue');
-			} else {
-				value = input.val();
-			}
-			if (progride(value, max_len)) {
+			if (progride(input.val(), max_len)) {
 				input.val(String(input.val()).trim().substring(0, max_len));
 				input.trigger('change');
 			}
@@ -459,7 +446,7 @@ var util = {
 						<ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro" data-inset="true"></ul>';
 		overlayInput.$content.append(extraHtml);
 		var txtInput = overlayInput.$content.find('#filtro');
-		console.log(txtInput);
+		app.logger.log(txtInput);
 		txtInput.textinput();
 		/*
 		 * txtInput.one('load', function(){ $(this).focus(); alert('tentou focar'); });
@@ -468,7 +455,7 @@ var util = {
 		overlayInput.$b.css('margin-top', '0px');
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
-			console.log('entrou no filtro');
+			app.logger.log('entrou no filtro');
 			var ul_list = $(this);
 			var auto_input = $(data.input);
 			var auto_value = auto_input.val();
@@ -508,7 +495,7 @@ var util = {
 					value = value.label || value.value || value.nome || value;
 					return matcher.test(value) || matcher.test(util.replaceDiacritics(value));
 				});
-				console.log(JSON.stringify(res), null, '\t');
+				app.logger.log(JSON.stringify(res), null, '\t');
 				$.each(res, function(i, val) {
 					if (val.id != null) { // municipio
 						html += "<li li_id='" + val.id + "' >" + val.nome + "</li>";
