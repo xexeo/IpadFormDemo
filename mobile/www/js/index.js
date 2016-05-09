@@ -46,31 +46,25 @@ var app = {
 		app.posto = null;
 		app.sentido = null;
 	},
-	
-	duplicaDb : function(){
-		if(app.filePaths){
+
+	duplicaDb : function() {
+		if (app.filePaths) {
 			app.database.close(function() {
-			app.copyFile(app.dbName, 
-				app.filePaths.dbFolder,
-				app.filePaths.externalFolder,
-				function(newName){
+				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, function(newName) {
 					alert('Banco de dados ' + newName + ' exportado com sucesso.');
 					app.openDB();
 				});
 			}, function(err) {
-			app.logger.log(JSON.stringify(err));
+				app.logger.log(JSON.stringify(err));
 			});
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
 	},
-	
-	duplicaLog : function(){
-		if (app.filePaths){
-				app.copyFile(app.logFileName,
-			cordova.file.dataDirectory,
-			app.filePaths.externalFolder,
-			function(newName){
+
+	duplicaLog : function() {
+		if (app.filePaths) {
+			app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, function(newName) {
 				alert('Arquivo de log ' + newName + ' exportado com sucesso.');
 			});
 		} else {
@@ -102,15 +96,17 @@ var app = {
 			}
 		}, "Cancelamento de entrevista", "Cancelar entrevista", "Voltar", "Senha", 'password');
 	},
-	
-	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt){
-		prompt(txtPrompt, function(result){
-			if (result == app.senha_login){
+
+	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt) {
+		prompt(txtPrompt, function(result) {
+			if (result == app.senha_login) {
 				operacao();
 			} else {
-				confirm(txtConfirm, function(){
-					app.validaOperacoes(operacao,txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt); //try again
-				}, null, titleConfirm);
+				confirm(txtConfirm,
+						function() {
+							app.validaOperacoes(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt,
+									btnCancelPrompt); // try again
+						}, null, titleConfirm);
 			}
 		}, titlePrompt, btnOKPrompt, btnCancelPrompt, "Senha", 'password');
 	},
@@ -273,38 +269,34 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
-		//$("#btn_sair").click(this.logout);
+		// $("#btn_sair").click(this.logout);
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
-		
-		//botões do menu
-		$("#btn_sair").click(function(){
-			app.validaOperacoes(app.logout,
-			"Insira a senha para realizar o logout.",
-			"Logout",
-			"Senha incorreta.\nDeseja tentar novamente?",
-			"Senha Incorreta", "Logout", "Voltar" );
-		});
-		
-		$("#duplica_log").click(function() {
-			app.validaOperacoes(app.duplicaLog, 
-			"Insira a senha para exportar o Log de operações.",
-			"Exportar log de operações",
-			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
-			"Senha Incorreta", "Exportar", "Voltar");
-		});
-		
-		$("#duplica_db").click(function() {
-			app.validaOperacoes(app.duplicaDb, 
-			"Insira a senha para exportar o banco de dados.",
-			"Exportar banco de dados",
-			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
-			"Senha Incorreta", "Exportar", "Voltar");
-		});
-		
+
+		// botões do menu
+		$("#btn_sair").click(
+				function() {
+					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout",
+							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
+				});
+
+		$("#duplica_log").click(
+				function() {
+					app.validaOperacoes(app.duplicaLog, "Insira a senha para exportar o Log de operações.",
+							"Exportar log de operações", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
+							"Senha Incorreta", "Exportar", "Voltar");
+				});
+
+		$("#duplica_db").click(
+				function() {
+					app.validaOperacoes(app.duplicaDb, "Insira a senha para exportar o banco de dados.",
+							"Exportar banco de dados", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
+							"Senha Incorreta", "Exportar", "Voltar");
+				});
+
 		// remove o filtro original do autocomplete para poder filtrar acentos
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
@@ -497,9 +489,9 @@ var app = {
 			} else {
 				peso = peso * 100;
 			}
-			app.setAtributo('pesoDaCarga', peso)
-		} 
-		if(util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
+			app.setAtributo('pesoDaCarga', peso);
+		}
+		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
 			// TODO: ERRO (peso da carga vazio)
 			app.logger.log("ERRO (pesoDaCarga vazio) no registro: ", registro.id);
 		}
@@ -550,7 +542,8 @@ var app = {
 		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
 			if (!registro.municipiosParadaNaoSabe && registro.cancelado != 1) {
 				// TODO: ERRO (paradaObrigatoriaMunicipios vazio)
-				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ", registro.id);
+				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ",
+						registro.id);
 			}
 		}
 

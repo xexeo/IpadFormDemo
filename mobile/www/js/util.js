@@ -286,9 +286,6 @@ var util = {
 		} else { // textinput comum
 			$('#' + nome_campo).keyup(function() {
 				progride($(this).val());
-				// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
-				// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-				// app.setAtributo(nome_registro, $(this).val());
 			});
 			$('#' + nome_campo).change(function() {
 				app.setAtributo(nome_registro, $(this).val());
@@ -325,6 +322,23 @@ var util = {
 				return true;
 			}
 			return false;
+		}
+	},
+
+	progressoInputMoney : function(nome_registro, nome_campo, grupo_proximo, autocomplete) {
+		$('#' + nome_campo).keyup(function() {
+			progride($(this).maskMoney('unmasked')[0]);
+		});
+		$('#' + nome_campo).change(function() {
+			app.setAtributo(nome_registro, $(this).maskMoney('unmasked')[0]);
+		});
+
+		function progride(value) {
+			if (util.isEmpty(value) || (Number(value) == 0)) {
+				$("#" + grupo_proximo).hide();
+			} else {
+				$("#" + grupo_proximo).show();
+			}
 		}
 	},
 

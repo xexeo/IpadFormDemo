@@ -55,15 +55,15 @@ controllers.caracterizacao_viagem2_carga = {
 			app.setAtributo("unidadePesoDaCarga", $('input[name="unidade_peso_carga"]:checked').val());
 		});
 
-		util.progressoInputText("valorDoFrete", "valor_frete_carga", "grupo_valor_nota_carga");
+		util.progressoInputMoney("valorDoFrete", "valor_frete_carga", "grupo_valor_nota_carga");
 
-		util.progressoInputText("valorDaCarga", "valor_nota_carga", "grupo_sabe_embarque_carga");
+		util.progressoInputMoney("valorDaCarga", "valor_nota_carga", "grupo_sabe_embarque_carga");
 
 		util.progressoRadioSimNaoAlternado("sabe_embarque", "sabe_embarque_carga", "div_sabe_embarque_sim",
 				"grupo_sabe_desembarque_carga");
 		$('#sabe_embarque_carga_nao').click(function() {
-			util.progressoRestartSelect("embarque_uf_carga","UF");
-			util.progressoRestartSelect("embarque_local_carga","Selecione");
+			util.progressoRestartSelect("embarque_uf_carga", "UF");
+			util.progressoRestartSelect("embarque_local_carga", "Selecione");
 			$('#embarque_mun_carga').val("");
 			app.setAtributo("embarque_uf", null);
 			app.setAtributo("municipioEmbarqueCarga", null);
@@ -83,20 +83,19 @@ controllers.caracterizacao_viagem2_carga = {
 				});
 		util.progressoInputText("municipioEmbarqueCarga", "embarque_mun_carga", "embarque_local_carga", true);
 		util.progressoSelect("idLocalEmbarqueCarga", "embarque_local_carga", "grupo_sabe_desembarque_carga");
-		
+
 		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
-		if (cargaPerigosa == true) { 
+		if (cargaPerigosa == true) {
 			util.progressoRadioSimNaoAlternado("sabe_desembarque", "sabe_desembarque_carga", "div_sabe_desembarque_sim",
 					"grupo_parada_especial_carga");
-		}
-		else {
+		} else {
 			util.progressoRadioSimNaoAlternado("sabe_desembarque", "sabe_desembarque_carga", "div_sabe_desembarque_sim",
-			"grupo_municipios_parada_carga");
+					"grupo_municipios_parada_carga");
 		}
 
 		$('#sabe_desembarque_carga_nao').click(function() {
-			util.progressoRestartSelect("desembarque_uf_carga","UF");
-			util.progressoRestartSelect("desembarque_local_carga","Selecione");
+			util.progressoRestartSelect("desembarque_uf_carga", "UF");
+			util.progressoRestartSelect("desembarque_local_carga", "Selecione");
 			$('#desembarque_mun_carga').val("");
 			app.setAtributo("desembarque_uf", null);
 			app.setAtributo("municipioDesembarqueCarga", null);
@@ -115,10 +114,9 @@ controllers.caracterizacao_viagem2_carga = {
 					}
 				});
 		util.progressoInputText("municipioDesembarqueCarga", "desembarque_mun_carga", "desembarque_local_carga", true);
-		if (cargaPerigosa == true) { 
+		if (cargaPerigosa == true) {
 			util.progressoSelect("idLocalDesembarqueCarga", "desembarque_local_carga", "grupo_parada_especial_carga");
-		}
-		else {
+		} else {
 			util.progressoSelect("idLocalDesembarqueCarga", "desembarque_local_carga", "grupo_municipios_parada_carga");
 		}
 
@@ -133,10 +131,9 @@ controllers.caracterizacao_viagem2_carga = {
 		})
 		util.progressoInputText("idCargaAnterior", "produto_anterior_carga", "grupo_indo_pegar_carga", true);
 
-		if (cargaPerigosa == true) { 
+		if (cargaPerigosa == true) {
 			util.progressoRadioSimNao("indoPegarCarga", "indo_pegar_carga", "grupo_parada_especial_carga");
-		}
-		else {
+		} else {
 			util.progressoRadioSimNao("indoPegarCarga", "indo_pegar_carga", "grupo_municipios_parada_carga");
 		}
 
@@ -146,8 +143,8 @@ controllers.caracterizacao_viagem2_carga = {
 				"grupo_caracterizacao_viagem2_carga_avancar", "div_municipios_parada_carga");
 		$('#municipios_parada_nao_sei_carga').click(function() {
 			if ($(this).is(':checked')) {
-				util.progressoRestartSelect("municipios_parada_uf1_carga","UF");
-				util.progressoRestartSelect("municipios_parada_uf2_carga","UF");
+				util.progressoRestartSelect("municipios_parada_uf1_carga", "UF");
+				util.progressoRestartSelect("municipios_parada_uf2_carga", "UF");
 				$('#municipios_parada_mun1_carga').val("");
 				$('#municipios_parada_mun2_carga').val("");
 				app.setAtributo("", null);
@@ -155,8 +152,8 @@ controllers.caracterizacao_viagem2_carga = {
 		});
 
 		$('#municipios_parada_nao_sei_carga').click(function() {
-			util.progressoRestartSelect("desembarque_uf_carga","UF");
-			util.progressoRestartSelect("desembarque_local_carga","Selecione");
+			util.progressoRestartSelect("desembarque_uf_carga", "UF");
+			util.progressoRestartSelect("desembarque_local_carga", "Selecione");
 			$('#desembarque_mun_carga').val("");
 			app.setAtributo("municipios_parada_uf1", null);
 			app.setAtributo("municipios_parada_uf2", null);
@@ -177,7 +174,8 @@ controllers.caracterizacao_viagem2_carga = {
 								}).trigger('click');
 					}
 				});
-		util.progressoInputText("paradaObrigatoriaMunicipio1", "municipios_parada_mun1_carga", "grupo_caracterizacao_viagem2_carga_avancar", true);
+		util.progressoInputText("paradaObrigatoriaMunicipio1", "municipios_parada_mun1_carga",
+				"grupo_caracterizacao_viagem2_carga_avancar", true);
 
 		// Parada obrigatoria UF1 MUN1
 		util.progressoSelect("municipios_parada_uf2", "municipios_parada_uf2_carga", "grupo_municipios_parada_mun2_carga");
@@ -192,7 +190,8 @@ controllers.caracterizacao_viagem2_carga = {
 								}).trigger('click');
 					}
 				});
-		util.progressoInputText("paradaObrigatoriaMunicipio2", "municipios_parada_mun2_carga", "grupo_caracterizacao_viagem2_carga_avancar", true);
+		util.progressoInputText("paradaObrigatoriaMunicipio2", "municipios_parada_mun2_carga",
+				"grupo_caracterizacao_viagem2_carga_avancar", true);
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
