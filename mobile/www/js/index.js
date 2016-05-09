@@ -498,9 +498,60 @@ var app = {
 				peso = peso * 100;
 			}
 			app.setAtributo('pesoDaCarga', peso)
-		} else if (registro.cancelado != 1) {
+		} 
+		if(util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
 			// TODO: ERRO (peso da carga vazio)
-			app.logger.log("ERRO (peso da carga vazio) no registro: ", registro.id);
+			app.logger.log("ERRO (pesoDaCarga vazio) no registro: ", registro.id);
+		}
+
+		// TIPO DE PRODUTO (CARGA)
+		if (!util.isEmpty(registro.idProduto)) {
+			app.setAtributo('idProduto', registro.idProduto.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idProduto) && registro.possui_carga && registro.cancelado != 1) {
+			// TODO: ERRO (idProduto vazio)
+			app.logger.log("ERRO (idProduto vazio) no registro: ", registro.id);
+		}
+
+		// CARGA ANTERIOR
+		if (!util.isEmpty(registro.idCargaAnterior)) {
+			app.setAtributo('idCargaAnterior', registro.idCargaAnterior.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && registro.cancelado != 1) {
+			// TODO: ERRO (idCargaAnterior vazio)
+			app.logger.log("ERRO (idCargaAnterior vazio) no registro: ", registro.id);
+		}
+
+		// MUNICÍPIO EMBARQUE DA CARGA
+		if (!util.isEmpty(registro.municipioEmbarqueCarga)) {
+			app.setAtributo('municipioEmbarqueCarga', registro.municipioEmbarqueCarga.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && registro.cancelado != 1) {
+			// TODO: ERRO (municipioEmbarqueCarga vazio)
+			app.logger.log("ERRO (municipioEmbarqueCarga vazio) no registro: ", registro.id);
+		}
+
+		// MUNICÍPIO DESEMBARQUE DA CARGA
+		if (!util.isEmpty(registro.municipioDesembarqueCarga)) {
+			app.setAtributo('municipioDesembarqueCarga', registro.municipioDesembarqueCarga.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && registro.cancelado != 1) {
+			// TODO: ERRO (municipioDesembarqueCarga vazio)
+			app.logger.log("ERRO (municipioDesembarqueCarga vazio) no registro: ", registro.id);
+		}
+
+		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+			app.setAtributo('paradaObrigatoriaMunicipio1', registro.paradaObrigatoriaMunicipio1.split("|")[1].trim());
+		}
+		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio2)) {
+			app.setAtributo('paradaObrigatoriaMunicipio2', registro.paradaObrigatoriaMunicipio2.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+			if (!registro.municipiosParadaNaoSabe && registro.cancelado != 1) {
+				// TODO: ERRO (paradaObrigatoriaMunicipios vazio)
+				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ", registro.id);
+			}
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
