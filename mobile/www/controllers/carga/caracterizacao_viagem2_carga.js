@@ -113,11 +113,36 @@ controllers.caracterizacao_viagem2_carga = {
 		util.progressoCheckboxAlternado("municipiosParadaNaoSabe", "municipios_parada_nao_sei_carga",
 				"grupo_caracterizacao_viagem2_carga_avancar", "div_municipios_parada_carga");
 
-		// TODO parada obrigatoria uf1 mun1
+		// Parada obrigatoria UF1 MUN1
+		util.progressoSelect("municipios_parada_uf1", "municipios_parada_uf1_carga", "grupo_municipios_parada_mun1_carga");
+		$('#municipios_parada_uf1_carga').change(
+				function() {
+					var estado = $(this).val();
+					if (estado != '-1') {
+						$('#municipios_parada_mun1_carga').off("click").click(
+								function() {
+									util.autocomplete("municipios_parada_mun1_carga", lista_municipios[estado], "Município",
+											"Entre com o município");
+								}).trigger('click');
+					}
+				});
+		util.progressoInputText("paradaObrigatoriaMunicipio1", "municipios_parada_mun1_carga", "grupo_caracterizacao_viagem2_carga_avancar", true);
 
-		// TODO parada obrigatoria uf2 mun2
-
-		// TODO Usar checkbox para desabilitar as opções e marcar não sabe -->
+		// Parada obrigatoria UF1 MUN1
+		util.progressoSelect("municipios_parada_uf2", "municipios_parada_uf2_carga", "grupo_municipios_parada_mun2_carga");
+		$('#municipios_parada_uf2_carga').change(
+				function() {
+					var estado = $(this).val();
+					if (estado != '-1') {
+						$('#municipios_parada_mun2_carga').off("click").click(
+								function() {
+									util.autocomplete("municipios_parada_mun2_carga", lista_municipios[estado], "Município",
+											"Entre com o município");
+								}).trigger('click');
+					}
+				});
+		util.progressoInputText("paradaObrigatoriaMunicipio2", "municipios_parada_mun2_carga", "grupo_caracterizacao_viagem2_carga_avancar", true);
+		
 
 		// TODO setCamposDerivados unidade default é Ton; Converter para Kg antes de salvar no registro
 	},
@@ -127,7 +152,7 @@ controllers.caracterizacao_viagem2_carga = {
 
 		// TODO
 
-		return false;
+		return true;
 	}
 
 };

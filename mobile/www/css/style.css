@@ -101,6 +101,10 @@ section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui
 	padding-right: .5em;
 }
 
+section.ui-content fieldset>legend.menor {
+	font-size: 21px;
+}
+
 section.ui-content>fieldset>div.ui-block-b {
 	text-align: left;
 }
