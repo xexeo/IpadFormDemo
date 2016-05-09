@@ -38,42 +38,44 @@ controllers.caracterizacao_viagem_onibus = {
 	progressoTela : function() {
 
 		// Origem
-		util.progressoSelectPais("idOrigemPais", "origem_pais_onibus", "origem_uf", "origem_municipio", "grupo_destino_onibus",
-				"onibus");
+		util.progressoSelectPais("idOrigemPais", "idOrigemMunicipio", "origem_pais_onibus", "origem_uf", "origem_municipio",
+				"grupo_destino_onibus", "onibus");
 		util.progressoSelect("origem_uf", "origem_uf_onibus", "grupo_origem_municipio_onibus");
-		$('#origem_uf_onibus').change(function() {
-			var estado = $(this).val();
-			if (estado != '-1') {
-				// util.inicializaSelectMunicipio("origem_municipio_onibus", $(this).val(), "Município");
-				$('#origem_municipio_onibus').off("click").click(function() {
-					util.autocomplete("origem_municipio_onibus", lista_municipios[estado],"Município de origem", "Entre com o município de origem.");
-				}).trigger('click')
-			}
-		});
-		// util.progressoSelect("origem_municipio", "origem_municipio_onibus", "grupo_destino_onibus");
-		util.progressoInputText("origem_municipio", "origem_municipio_onibus", "grupo_destino_onibus", true);
+		$('#origem_uf_onibus').change(
+				function() {
+					var estado = $(this).val();
+					if (estado != '-1') {
+						$('#origem_municipio_onibus').off("click").click(
+								function() {
+									util.autocomplete("origem_municipio_onibus", lista_municipios[estado], "Município de origem",
+											"Entre com o município de origem.");
+								}).trigger('click')
+					}
+				});
+		util.progressoInputText("idOrigemMunicipio", "origem_municipio_onibus", "grupo_destino_onibus", true);
 
 		// Destino
-		util.progressoSelectPais("idDestinoPais", "destino_pais_onibus", "destino_uf", "destino_municipio",
+		util.progressoSelectPais("idDestinoPais", "idDestinoMunicipio", "destino_pais_onibus", "destino_uf", "destino_municipio",
 				"grupo_frequencia_onibus", "onibus");
 		util.progressoSelect("destino_uf", "destino_uf_onibus", "grupo_destino_municipio_onibus");
-		$('#destino_uf_onibus').change(function() {
-			var estado = $(this).val();
-			if (estado != '-1') {
-				// util.inicializaSelectMunicipio("destino_municipio_onibus", $(this).val(), "Município");
-				$('#destino_municipio_onibus').off("click").click(function() {
-					util.autocomplete("destino_municipio_onibus", lista_municipios[estado],"Município de destino", "Entre com o município de destino.");
-				}).trigger('click');
-			}
-		});
-		// util.progressoSelect("destino_municipio", "destino_municipio_onibus", "grupo_frequencia_onibus");
-		util.progressoInputText("destino_municipio", "destino_municipio_onibus", "grupo_frequencia_onibus", true);
+		$('#destino_uf_onibus').change(
+				function() {
+					var estado = $(this).val();
+					if (estado != '-1') {
+						$('#destino_municipio_onibus').off("click").click(
+								function() {
+									util.autocomplete("destino_municipio_onibus", lista_municipios[estado],
+											"Município de destino", "Entre com o município de destino.");
+								}).trigger('click');
+					}
+				});
+		util.progressoInputText("idDestinoMunicipio", "destino_municipio_onibus", "grupo_frequencia_onibus", true);
 
 		// Frequencia
 		$('#frequencia_num_onibus').keyup(function() {
-			app.setAtributo('frequencia_num', $(this).val());
+			app.setAtributo('frequenciaQtd', $(this).val());
 		});
-		util.progressoSelect("frequencia_sel", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
+		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
 
 		util.progressoSelect("idTipoDeViagemOuServico", "tipo_viagem_onibus", "grupo_pessoas_onibus");
 

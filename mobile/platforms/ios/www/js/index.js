@@ -5,38 +5,24 @@ var app = {
 
 	versao : "2.0.0",
 
-	user_admin : {
-		usuario : 'admin', // usuario mestre
-		senha : "123" // senha mestra
-	},
-
-	autentica : function(usuario, senha) {
-		if ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha)) {
-			return true;
-		} else {
-			// TODO: recuperar tb dos logins cadastrados
-		}
-		return false;
-	},
-
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
 
 		// configura identificador do ipad, para executar uma única vez(durante a instalação)
-		// TODO: dúvida - isso não deveria estar dentro do 'if' da função 'autentica' de acordo com o 'user_admin'?
-		if (usuario == 'Master' && senha == 'Aaa') {
+		if (logins.autenticaMaster(usuario, senha)) {
 			ipadID.requestID(function(id) {
 				$("#ipadID").html(id);
 			});
-		} else if (app.autentica(usuario, senha)) {
+		} else if (logins.autentica(usuario, senha)) {
 			app.logger.log("Login efetuado pelo usuário: " + usuario);
 			// navega para págine e executa o script de configuração depois do carregamento
 			app.trocaPagina("views/menu.html", controllers.menu)
-			// set user_login
+			// set: user_login, senha_login, posto e sentido
 			app.user_login = usuario;
-			// set senha_login
 			app.senha_login = senha;
+			app.posto = String(usuario).substr(0, 3);
+			app.sentido = String(usuario).substr(3, 2).toUpperCase();
 			// limpa o registro
 			app.limpaRegistro();
 		} else {
@@ -55,6 +41,41 @@ var app = {
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		app.logger.log('Logout');
+		app.user_login = null;
+		app.senha_login = null;
+		app.posto = null;
+		app.sentido = null;
+	},
+	
+	duplicaDb : function(){
+		if(app.filePaths){
+			app.database.close(function() {
+			app.copyFile(app.dbName, 
+				app.filePaths.dbFolder,
+				app.filePaths.externalFolder,
+				function(newName){
+					alert('Banco de dados ' + newName + ' exportado com sucesso.');
+					app.openDB();
+				});
+			}, function(err) {
+			app.logger.log(JSON.stringify(err));
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+	},
+	
+	duplicaLog : function(){
+		if (app.filePaths){
+				app.copyFile(app.logFileName,
+			cordova.file.dataDirectory,
+			app.filePaths.externalFolder,
+			function(newName){
+				alert('Arquivo de log ' + newName + ' exportado com sucesso.');
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
 	},
 
 	/**
@@ -80,6 +101,18 @@ var app = {
 
 			}
 		}, "Cancelamento de entrevista", "Cancelar entrevista", "Voltar", "Senha", 'password');
+	},
+	
+	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt){
+		prompt(txtPrompt, function(result){
+			if (result == app.senha_login){
+				operacao();
+			} else {
+				confirm(txtConfirm, function(){
+					app.validaOperacoes(operacao,txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt); //try again
+				}, null, titleConfirm);
+			}
+		}, titlePrompt, btnOKPrompt, btnCancelPrompt, "Senha", 'password');
 	},
 
 	/*
@@ -240,13 +273,38 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
-		$("#btn_sair").click(this.logout);
+		//$("#btn_sair").click(this.logout);
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
-
+		
+		//botões do menu
+		$("#btn_sair").click(function(){
+			app.validaOperacoes(app.logout,
+			"Insira a senha para realizar o logout.",
+			"Logout",
+			"Senha incorreta.\nDeseja tentar novamente?",
+			"Senha Incorreta", "Logout", "Voltar" );
+		});
+		
+		$("#duplica_log").click(function() {
+			app.validaOperacoes(app.duplicaLog, 
+			"Insira a senha para exportar o Log de operações.",
+			"Exportar log de operações",
+			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
+			"Senha Incorreta", "Exportar", "Voltar");
+		});
+		
+		$("#duplica_db").click(function() {
+			app.validaOperacoes(app.duplicaDb, 
+			"Insira a senha para exportar o banco de dados.",
+			"Exportar banco de dados",
+			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
+			"Senha Incorreta", "Exportar", "Voltar");
+		});
+		
 		// remove o filtro original do autocomplete para poder filtrar acentos
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
@@ -269,7 +327,45 @@ var app = {
 		handler : function() {
 			try {
 				app.onChangeHandler.controller();
-				$("#btn_cancelar").click(app.cancelar); // não estava funcionando em todas as páginas
+
+				// Botão "Cancelar"
+				$("#btn_cancelar").click(app.cancelar);
+
+				// Input radio
+				$('input[type="radio"]').click(function() {
+					$(this).focus();
+				});
+
+				// Input money
+				$('input[typeMask="money-BRL"]').each(function(key, input) {
+					$(input).maskMoney({
+						prefix : "R$ ",
+						affixesStay : "true",
+						thousands : ".",
+						decimal : ","
+					});
+				});
+
+				$('input[mask]').each(function(key, input) {
+					var decimalSeparator = $(input).attr('mask-decimal-separator');
+					if (util.isEmpty(decimalSeparator)) {
+						$(input).inputmask($(input).attr('mask'), {
+							'autoUnmask' : true
+						});
+					} else {
+						$(input).inputmask($(input).attr('mask'), {
+							'autoUnmask' : true,
+							numericInput : true,
+							radixPoint : decimalSeparator
+						});
+					}
+				});
+
+				$("#versao").html(app.versao);
+				$("#ipadID").html(ipadID.id);
+				$("#posto").html(app.posto);
+				$("#sentido").html(app.sentido);
+
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
 				}
@@ -312,14 +408,12 @@ var app = {
 			app.logger.log('Iniciando registro');
 			app.limpaRegistro();
 			app.setAtributo('id', ipadID.id + String(util.getTimeInSeconds(now)));
-			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
+			app.setAtributo('login', app.user_login);
+			app.setAtributo('idPosto', app.posto);
+			app.setAtributo('sentido', app.sentido);
 			app.setAtributo('uuid', app.uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
 			app.setAtributo('idIpad', ipadID.id);
-			// idIpad: se vocë estiver testando num browser, sem sistema de arquivos, isso vai ser sempre nulo.
-			// TODO: falta setar os seguintes atributos:
-			// idPosto
-			// sentido
 			app.logger.log(JSON.stringify(registro));
 			app.logger.log('Registro iniciado: ' + registro.id);
 		} catch (e) {
@@ -339,42 +433,48 @@ var app = {
 			}
 		}
 		if (util.isEmpty(registro.placa)) {
-			// TODO: ERRO (placa vazia)
-			app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (placa vazia)
+				app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+			}
 		}
 
 		// FRENQUENCIA
-		if ((util.isEmpty(registro.frequencia_num) || (registro.frequencia_num < 1)) && (registro.frequencia_sel == 5)) { // Eventualmente
-			app.setAtributo('frequencia_num', 1);
-		}
-		if ((!util.isEmpty(registro.frequencia_num)) && (!util.isEmpty(registro.frequencia_sel))) {
-			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
-		} else {
+		if (!util.isEmpty(registro.frequenciaPeriodo)) {
+			app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
+			if (registro.frequenciaPeriodo == 'Eventualmente') {
+				app.setAtributo('frequenciaQtd', 1);
+			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
+				if (registro.cancelado != 1) {
+					// TODO: ERRO (frequencia vazia)
+					app.logger.log("ERRO (frequenciaQtd vazia) no registro: ", registro.id);
+				}
+			}
+		} else if (registro.cancelado != 1) {
 			// TODO: ERRO (frequencia vazia)
-			app.logger.log("ERRO (frequencia vazia) no registro: ", registro.id);
+			app.logger.log("ERRO (frequenciaPeriodo vazio) no registro: ", registro.id);
 		}
 
-		// ORIGEM: MUNICÍPIO E GEOCOD
-		var municipioSplit;
-		if (!util.isEmpty(registro.origem_municipio)) {
-			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[1].trim());
-			app.setAtributo('geocod_origem', municipioSplit[2].trim());
+		// ORIGEM: MUNICÍPIO
+		if (!util.isEmpty(registro.idOrigemMunicipio)) {
+			app.setAtributo('idOrigemMunicipio', registro.idOrigemMunicipio.split("|")[1].trim());
 		}
-		if ((util.isEmpty(registro.idOrigemMunicipio) || util.isEmpty(registro.geocod_origem)) && (registro.idOrigemPais == 1)) { // Brasil
-			// TODO: ERRO (destino vazio)
-			app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (destino vazio)
+				app.logger.log("ERRO (idOrigemMunicipio vazio) no registro: ", registro.id);
+			}
 		}
 
-		// DESTINO: MUNICÍPIO E GEOCOD
-		if (!util.isEmpty(registro.destino_municipio)) {
-			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[1].trim());
-			app.setAtributo('geocod_destino', municipioSplit[2].trim());
+		// DESTINO: MUNICÍPIO
+		if (!util.isEmpty(registro.idDestinoMunicipio)) {
+			app.setAtributo('idDestinoMunicipio', registro.idDestinoMunicipio.split("|")[1].trim());
 		}
-		if ((util.isEmpty(registro.idDestinoMunicipio) || util.isEmpty(registro.geocod_destino)) && (registro.idDestinoPais == 1)) { // Brasil
-			// TODO: ERRO (destino vazio)
-			app.logger.log("ERRO (destino vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (destino vazio)
+				app.logger.log("ERRO (idDestinoMunicipio vazio) no registro: ", registro.id);
+			}
 		}
 
 		// RNTRC
@@ -382,9 +482,25 @@ var app = {
 			if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
 				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
 			} else {
-				// TODO: ERRO (rntrc vazio)
-				app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+				if (registro.cancelado != 1) {
+					// TODO: ERRO (rntrc vazio)
+					app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+				}
 			}
+		}
+
+		// PESO DA CARGA ('ton' -> 'kg')
+		if (!util.isEmpty(registro.pesoDaCarga)) {
+			var peso = Number(registro.pesoDaCarga);
+			if (registro.unidadePesoDaCarga == 'kg') {
+				peso = peso / 10;
+			} else {
+				peso = peso * 100;
+			}
+			app.setAtributo('pesoDaCarga', peso)
+		} else if (registro.cancelado != 1) {
+			// TODO: ERRO (peso da carga vazio)
+			app.logger.log("ERRO (peso da carga vazio) no registro: ", registro.id);
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
@@ -421,35 +537,12 @@ var app = {
 				cb();
 			}
 		});
-
-		// aqui eu vou reescrever a função aqui em cima mantendo a lógica mas trocando o paradigma
-		// var tentarNovamente;
-		// var saved;
-		// do {
-		// tentarNovamente = false;
-		// saved = false;
-		// try {
-		// app.logger.log('Finalizando registro: ' + registro.id);
-		// app.setCamposDerivados();
-		// saved = myDb.insertRegistro(registro);
-		// } catch (e) {
-		// app.logger.log(e.message);
-		// }
-		// if (saved) {
-		// app.logger.log('Registro finalizado: ' + registro.id);
-		// app.limpaRegistro();
-		// alert("Entrevista registrada.");
-		// } else { // TITLE: "Falha ao gravar informações."
-		// var tentarNovamente = confirm("Houve uma falha ao finalizar a entrevista.\nDeseja tentar novamente?");
-		// }
-		// } while (tentarNovamente);
-
 	},
 
 	cancelaRegistro : function(cb) {
 		app.logger.log('Cancelando registro: ' + registro.id);
-		app.setCamposDerivados();
 		app.setAtributo('cancelado', 1);
+		app.setCamposDerivados();
 		myDb.insertRegistro(registro, function(error) {
 			app.logger.log(error.message);
 			// confirma se tenta outra vez
@@ -475,29 +568,6 @@ var app = {
 				cb();
 			}
 		});
-
-		// var tentarNovamente;
-		// var saved;
-		// do {
-		// tentarNovamente = false;
-		// saved = false;
-		// try {
-		// app.logger.log('Cancelando registro: ' + registro.id);
-		// app.setCamposDerivados();
-		// app.setAtributo('cancelado', 1);
-		// saved = myDb.insertRegistro(registro);
-		// } catch (e) {
-		// app.logger.log(e.message);
-		// }
-		// if (saved) {
-		// app.logger.log('Registro cancelado: ' + registro.id);
-		// app.limpaRegistro();
-		// alert("Entrevista cancelada.");
-		// } else { // TITLE: "Falha ao gravar informações." var
-		// tentarNovamente = confirm("Houve uma falha o registro.\nDeseja tentar novamente?");
-		// }
-		// } while (tentarNovamente);
-
 	},
 
 	/**
@@ -607,11 +677,15 @@ var app = {
 
 	logFileName : "log.txt",
 
-	user_login : null,
-
 	dbName : "dados.db",
 
+	user_login : null,
+
 	senha_login : null,
+
+	posto : null,
+
+	sentido : null,
 
 	filePaths : null // { externalFolder : null, dbFolder : null, }
 	,

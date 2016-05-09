@@ -33,12 +33,41 @@
 	display: inline;
 }
 
+.ui-input-text, .ui-input-search {
+	margin: 0.75em 0;
+}
+
 .center {
 	text-align: center;
 }
 
 .menu_separator {
 	margin-bottom: 2%;
+}
+
+footer span.versao {
+	display: inline-block;
+	text-align: left;
+	width: 24%;
+}
+
+footer span.posto {
+	display: inline-block;
+	text-align: center;
+	width: 24%;
+}
+
+footer span.sentido {
+	display: inline-block;
+	text-align: center;
+	width: 24%;
+}
+
+footer span.ipad {
+	display: inline-block;
+	float: right;
+	text-align: right;
+	width: 24%;
 }
 
 div.ui-block-b>h2 {
@@ -52,11 +81,11 @@ section.ui-content>fieldset {
 	line-height: 44px;
 }
 
-section.ui-content>fieldset>legend.ui-block-a {
+section.ui-content>fieldset>legend.ui-block-a, section.ui-content>div>fieldset>legend.ui-block-a {
 	width: 32%;
 }
 
-section.ui-content>fieldset>:not(fieldset).ui-block-b {
+section.ui-content>fieldset>:not(fieldset).ui-block-b, section.ui-content>div>fieldset>:not(fieldset).ui-block-b {
 	width: 68%;
 }
 
@@ -64,13 +93,16 @@ legend, label {
 	text-align: right;
 }
 
-section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui-block"]
-	{
+section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui-block"] {
 	display: inline;
 	font-weight: bold;
 	font-size: x-large;
 	line-height: 60px;
 	padding-right: .5em;
+}
+
+section.ui-content fieldset>legend.menor {
+	font-size: 21px;
 }
 
 section.ui-content>fieldset>div.ui-block-b {
@@ -122,6 +154,10 @@ nav.avancar>div.ui-block-b {
 
 .ui-grid-b>.sel_municipio {
 	width: 50%;
+}
+
+#sel_tipo_veiculo_1 .classe_veiculo, #sel_tipo_veiculo_2 .classe_veiculo {
+	height: 100%;
 }
 
 #section_v_simples {
@@ -176,6 +212,7 @@ nav.avancar>div.ui-block-b {
 	margin: 0px;
 	font-weight: bold;
 	font-size: large;
+	height: 1.5em;
 }
 
 .tipos_veiculos {
@@ -184,17 +221,32 @@ nav.avancar>div.ui-block-b {
 	text-align: center;
 	width: 90%;
 	padding: 0% 0%;
-	margin: 2% 5%;
+	margin: 0% 5%;
+	min-height: 600px;
+	max-height: 600px;
+	background-color: #EEE;
+	border-radius: 2%;
 }
 
 .tipos_veiculos ol {
 	display: inherit;
 	list-style: none;
 	text-align: center;
-	width: inherit;
-	padding: 0%;
+	width: 100%;
+	padding: .2em 0em;
 	margin: 0%;
-	min-height: 600px;
+}
+
+#section_v_simples li {
+	line-height: 70px;
+}
+
+#section_v_semireboques li, #section_v_reboques li {
+	line-height: 100px;
+}
+
+#section_v_combinados  li {
+	line-height: 120px;
 }
 
 .tipos_veiculos ol li {
@@ -205,7 +257,65 @@ nav.avancar>div.ui-block-b {
 
 .img_sel_veiculo {
 	vertical-align: middle;
+	max-width: 70%;
+}
+
+.v-simples {
+	max-width: 35%;
+}
+
+#m.v-simples { /* moto */
+	max-width: 30%;
+}
+
+.v-onibus {
+	max-width: 60%;
+}
+
+.v-carga {
+	max-width: 42%;
+}
+
+#c3.v-carga { /* carga: 4CD */
+	max-width: 40%;
+}
+
+#c4.v-carga { /* carga: 4CD */
+	max-width: 48%;
+}
+
+.v-semireboque, .v-combinado, .v-reboque {
 	max-width: 90%;
+}
+
+#confirmar_veiculo>div {
+	padding: 1.5em 0%;
+}
+
+#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n), #confirmar_veiculo.ui-grid-b>div:nth-of-type(3n+1) {
+	width: 10%;
+}
+
+#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n+2) {
+	width: 80%;
+}
+
+#confirmar_veiculo.ui-grid-b nav>div:nth-of-type(1) {
+	padding-left: 10%;
+	padding-right: 3%;
+}
+
+#confirmar_veiculo.ui-grid-b nav>div:nth-of-type(2) {
+	padding-left: 3%;
+	padding-right: 10%;
+}
+
+#confirmar_veiculo section button {
+	background-color: #EEE;
+}
+
+#confirmar_veiculo section button.ui-btn-icon-left:after {
+	left: 5em;
 }
 
 .input_placa {
@@ -220,7 +330,7 @@ ol.tipos_carrocerias {
 	padding: 0%;
 	margin: 0%;
 	background-color: white;
-	border-radius: 2%;
+	border-radius: 1.5em;
 }
 
 ol.tipos_carrocerias>div {
@@ -239,6 +349,15 @@ ol.tipos_carrocerias li {
 	vertical-align: middle;
 	max-width: 100%;
 	padding: 0px 7%;
+	border-radius: 15px;
+}
+
+ol.tipos_carrocerias div:nth-child(2n+1) li:nth-child(2n) {
+	background-color: #DDD;
+}
+
+ol.tipos_carrocerias div:nth-child(2n) li:nth-child(2n+1) {
+	background-color: #DDD;
 }
 
 ol.tipos_carrocerias div:nth-child(1) li {
@@ -266,14 +385,8 @@ ol.tipos_carrocerias div:nth-child(3)  li {
 	color: black;
 }
 
-#section_v_simples .img_sel_veiculo {
-	max-width: 42%;
-}
-
-#grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b,
-	#grupo_placa_dados_onibus, #grupo_placa_unica_onibus>.ui-block-b,
-	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b
-	{
+#grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b, #grupo_placa_dados_onibus, #grupo_placa_unica_onibus>.ui-block-b,
+	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b {
 	width: 15%;
 }
 
@@ -289,6 +402,7 @@ div.ui-block-b>.placa_sufixo>.ui-block-a {
 	display: inline;
 	text-align: center;
 	width: 10%;
+	padding-top: .4em;
 }
 
 div.ui-block-b>.placa_sufixo>.ui-block-b {
@@ -296,28 +410,10 @@ div.ui-block-b>.placa_sufixo>.ui-block-b {
 	display: inline-block;
 }
 
-div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
-	#grupo_placa_unica_simples>.ui-block-b input,
-	#grupo_placa_unica_onibus>.ui-block-b input,
-	#grupo_placa_unica_carga>.ui-block-b input {
+div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input, #grupo_placa_unica_simples>.ui-block-b input,
+	#grupo_placa_unica_onibus>.ui-block-b input, #grupo_placa_unica_carga>.ui-block-b input {
 	width: 100%;
 	text-align: center;
-}
-
-#section_v_simples li {
-	line-height: 65px;
-}
-
-#section_v_semireboques li {
-	line-height: 100px;
-}
-
-#section_v_combinados  li {
-	line-height: 100px;
-}
-
-#section_v_reboques li {
-	line-height: 100px;
 }
 
 #grupo_pessoas_ambos>fieldset.ui-block-a {
@@ -336,14 +432,16 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 	width: 27%;
 }
 
-#grupo_placa_vermelha_carga fieldset.ui-block-a,
-	#grupo_carga_perigosa_carga fieldset.ui-block-a {
+#grupo_placa_vermelha_carga fieldset.ui-block-a, #grupo_carga_perigosa_carga fieldset.ui-block-a {
 	width: 25%;
 }
 
-#grupo_placa_vermelha_carga fieldset.ui-block-b,
-	#grupo_carga_perigosa_carga fieldset.ui-block-b {
+#grupo_placa_vermelha_carga fieldset.ui-block-b, #grupo_carga_perigosa_carga fieldset.ui-block-b {
 	width: 75%;
+}
+
+#grupo_peso_carga>.ui-block-b>.ui-block-a {
+	width: 15%;
 }
 
 .escondido {

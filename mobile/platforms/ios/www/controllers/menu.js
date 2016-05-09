@@ -6,7 +6,7 @@ controllers.menu = {
 			app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
 		});
 
-		$("#duplica_log").click(function() {
+		/*$("#duplica_log").click(function() {
 			if (app.filePaths){
 				app.copyFile(app.logFileName,
                 cordova.file.dataDirectory,
@@ -18,9 +18,9 @@ controllers.menu = {
 				alert('Operação não realizada, o sistema de arquivos não foi definido');
 			}
 			
-		});
+		});*/
 
-		$("#duplica_db").click(function() {
+		/*$("#duplica_db").click(function() {
             if(app.filePaths){
 				app.database.close(function() {
                 app.copyFile(app.dbName, 
@@ -36,8 +36,11 @@ controllers.menu = {
 			} else {
 				alert('Operação não realizada, o sistema de arquivos não foi definido');
 			}
-                    
         });
+		
+		$("#menu_logout").click(function () {
+			app.logout();
+		});*/
 
 	},
 

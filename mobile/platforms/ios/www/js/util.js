@@ -37,9 +37,9 @@ var util = {
 			insert_inicial = "<option value='-1'>" + msgSelecione + "</option>\n";
 		}
 		$.each(lista, function(index, item) {
-			if (inclui_Brasil || (item != "Brasil")) {
+			if (inclui_Brasil || (item != 'Brasil')) {
 				var select_Brasil = "";
-				if (item == "Brasil") {
+				if (item == 'Brasil') {
 					select_Brasil = " selected";
 					app.setAtributo(nome_registro, index + 1);
 				}
@@ -53,24 +53,31 @@ var util = {
 		var lista = lista_municipios[uf_sigla];
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
-			insert_inicial += "<option value='" + item.id + "|" + item.geocod + "'>" + item.nome + "</option>\n";
+			insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	inicializaSelectFrequencia : function(tipo_fluxo) {
+	getIdxArray : function(elem, array) {
+		return jQuery.inArray(elem, array) + 1;
+	},
+
+	getListaFrequencias : function() {
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
+		return lista_frequencias;
+	},
+
+	inicializaSelectFrequencia : function(tipo_fluxo) {
+		var lista_frequencias = util.getListaFrequencias();
 		var nome_campo = 'frequencia_sel_' + tipo_fluxo;
 		util.inicializaSelect(nome_campo, lista_frequencias);
-		$("#" + nome_campo).change(
-				function() {
-					var freq_num = $('#frequencia_num_' + tipo_fluxo);
-					if (($(this).val() == (jQuery.inArray('Eventualmente', lista_frequencias) + 1))
-							&& (util.isEmpty(freq_num.val()) || (Number(freq_num.val()) < 1))) {
-						freq_num.val(1);
-						app.setAtributo('frequencia_num', 1);
-					}
-				});
+		$("#" + nome_campo).change(function() {
+			var freq_num = $('#frequencia_num_' + tipo_fluxo);
+			if ($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias)) {
+				freq_num.val(1);
+				app.setAtributo('frequenciaQtd', 1);
+			}
+		});
 	},
 
 	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
@@ -81,28 +88,37 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	inicializaSelectTipoDeCarga : function(nome_campo, mensagem, lista) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista, function(index, item) {
+			insert_inicial += "<option value='" + item.id + "'>" + item.nomeProduto + "</option>\n";
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
 	inicializaPlacas : function(tipo_fluxo) {
-//		$('.input_placa').keyup(function() {
-//			var input = $(this);
-//			input.val(input.val().toUpperCase());
-//		});
+		// $('.input_placa').keyup(function() {
+		// var input = $(this);
+		// input.val(input.val().toUpperCase());
+		// });
 		$('#placa_letras_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
 			input.val(input.val().replace(regex, ''));
-			if (util.isEmpty(input.val()) || input.val().length < Number(input.attr("maxlength"))) {
+			var value = input.val();
+			if (util.isEmpty(value) || value.length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");
-//				app.setAtributo('placa_numeros', null);
+				// app.setAtributo('placa_numeros', null);
 			} else {
 				app.setAtributo('placa_letras', input.val());
 				$('#grupo_placa_numeros_' + tipo_fluxo).show();
 				$('#placa_letras' + tipo_fluxo).trigger('change');
 				$('#placa_numeros_' + tipo_fluxo).focus();
 			}
-//			$('#placa_letras_' + tipo_fluxo).change(function() {
-//				app.setAtributo('placa_letras', $(this).val());
-//			});
+			// $('#placa_letras_' + tipo_fluxo).change(function() {
+			// app.setAtributo('placa_letras', $(this).val());
+			// });
 		});
 		$('#placa_numeros_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
@@ -112,7 +128,7 @@ var util = {
 			if (input.val().length >= max_len) {
 				input.val(input.val().substring(0, max_len));
 				$('#placa_numeros_' + tipo_fluxo).trigger('change');
-//				app.setAtributo('placa_numeros', input.val());
+				// app.setAtributo('placa_numeros', input.val());
 			}
 		});
 	},
@@ -134,6 +150,19 @@ var util = {
 		});
 		$('#' + nome_campo + '_nao').click(function() {
 			$('#' + grupo_proximo).show();
+			app.setAtributo(nome_registro, false);
+		});
+	},
+
+	progressoRadioSimNaoAlternado : function(nome_registro, nome_campo, grupo_proximo_sim, grupo_proximo_nao) {
+		$('#' + nome_campo + '_sim').click(function() {
+			$('#' + grupo_proximo_sim).show();
+			$('#' + grupo_proximo_nao).hide();
+			app.setAtributo(nome_registro, true);
+		});
+		$('#' + nome_campo + '_nao').click(function() {
+			$('#' + grupo_proximo_sim).hide();
+			$('#' + grupo_proximo_nao).show();
 			app.setAtributo(nome_registro, false);
 		});
 	},
@@ -167,28 +196,18 @@ var util = {
 		});
 	},
 
-	progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) {
-		var nome_registro = "placa_numeros";
-		var nome_campo = "placa_numeros_" + tipo_fluxo;
-
-		$('#' + nome_campo).keyup(function() {
-			progride($(this).val(), Number($(this).attr("maxlength")));
-			// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
-			// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-			//app.setAtributo(nome_registro, $(this).val());
-
-		});
-		$('#' + nome_campo).change(function() {
-			app.setAtributo(nome_registro, $(this).val());
-		});
-		
-		function progride(value, min_len) {
-			if (util.isEmpty(value) || (String(value).trim().length < min_len)) {
-				$("#" + grupo_proximo).hide();
+	progressoCheckboxAlternado : function(nome_registro, nome_campo, grupo_proximo_check, grupo_proximo_uncheck) {
+		$('#' + nome_campo).click(function() {
+			if ($(this).is(':checked')) {
+				$('#' + grupo_proximo_check).show();
+				$('#' + grupo_proximo_uncheck).hide();
+				app.setAtributo(nome_registro, true);
 			} else {
-				$("#" + grupo_proximo).show();
+				$('#' + grupo_proximo_check).hide();
+				$('#' + grupo_proximo_uncheck).show();
+				app.setAtributo(nome_registro, false);
 			}
-		}
+		});
 	},
 
 	/**
@@ -212,7 +231,8 @@ var util = {
 		});
 	},
 
-	progressoSelectPais : function(nome_registro, nome_campo, proximo_imediato, proximo_imediato2, grupo_proximo, fluxo) {
+	progressoSelectPais : function(nome_registro_pais, nome_registro_municipio, nome_campo, proximo_imediato, proximo_imediato2,
+			grupo_proximo, fluxo) {
 		$('#' + nome_campo).change(function() {
 			grupo_proximo_imediato = "grupo_" + proximo_imediato + "_" + fluxo;
 			grupo_proximo_imediato2 = "grupo_" + proximo_imediato2 + "_" + fluxo;
@@ -220,20 +240,20 @@ var util = {
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).hide();
-				app.setAtributo(nome_registro, null);
+				app.setAtributo(nome_registro_pais, null);
 				app.setAtributo(proximo_imediato, null);
-				app.setAtributo(proximo_imediato2, null);
+				app.setAtributo(nome_registro_municipio, null);
 			} else if (Number($(this).val()) != 1) { // País diferente de Brasil
 				$("#" + grupo_proximo_imediato).hide();
 				$("#" + grupo_proximo_imediato2).hide();
 				$("#" + grupo_proximo).show();
-				app.setAtributo(nome_registro, $(this).val());
+				app.setAtributo(nome_registro_pais, $(this).val());
 				app.setAtributo(proximo_imediato, null);
-				app.setAtributo(proximo_imediato2, null);
+				app.setAtributo(nome_registro_municipio, null);
 			} else { // País é Brasil
 				$("#" + grupo_proximo_imediato).show();
 				$("#" + grupo_proximo).hide();
-				app.setAtributo(nome_registro, $(this).val());
+				app.setAtributo(nome_registro_pais, $(this).val());
 			}
 		});
 	},
@@ -268,14 +288,12 @@ var util = {
 				progride($(this).val());
 				// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
 				// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-//				app.setAtributo(nome_registro, $(this).val());
-				
+				// app.setAtributo(nome_registro, $(this).val());
 			});
 			$('#' + nome_campo).change(function() {
 				app.setAtributo(nome_registro, $(this).val());
 			});
 		}
-		
 
 		function progride(value) {
 			if (util.isEmpty(value)) {
@@ -284,6 +302,34 @@ var util = {
 				$("#" + grupo_proximo).show();
 			}
 		}
+	},
+
+	progressoInputTextLen : function(nome_registro, nome_campo, grupo_proximo) {
+		$('#' + nome_campo).keyup(function() {
+			var input = $(this);
+			var max_len = Number(input.attr("maxlength"));
+			if (progride(input.val(), max_len)) {
+				input.val(String(input.val()).trim().substring(0, max_len));
+				input.trigger('change');
+			}
+		});
+		$('#' + nome_campo).change(function() {
+			app.setAtributo(nome_registro, $(this).val());
+		});
+
+		function progride(value, min_len) {
+			if (util.isEmpty(value) || (String(value).trim().length < min_len)) {
+				$("#" + grupo_proximo).hide();
+			} else {
+				$("#" + grupo_proximo).show();
+				return true;
+			}
+			return false;
+		}
+	},
+
+	progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) {
+		util.progressoInputTextLen("placa_numeros", "placa_numeros_" + tipo_fluxo, grupo_proximo);
 	},
 
 	// Funções para validação dos componentes
@@ -373,7 +419,7 @@ var util = {
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {
-		title = (title == null)? "Busca" : title;
+		title = (title == null) ? "Busca" : title;
 		txt_content = (txt_content == null) ? "Entre com o início da palavra." : txt_content;
 		var field = $('#' + nome_do_campo);
 		var overlayInput = $.confirm({
@@ -389,7 +435,7 @@ var util = {
 			onClose : function() {
 				util.isFilterRunning = false;
 			},
-			
+
 			isCentered : false,
 		});
 		overlayInput.$body.addClass("ui-page-theme-a");
@@ -400,18 +446,16 @@ var util = {
 						<ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro" data-inset="true"></ul>';
 		overlayInput.$content.append(extraHtml);
 		var txtInput = overlayInput.$content.find('#filtro');
-		console.log(txtInput);
+		app.logger.log(txtInput);
 		txtInput.textinput();
-		/*txtInput.one('load', function(){
-			$(this).focus();
-			alert('tentou focar');
-		});*/
+		/*
+		 * txtInput.one('load', function(){ $(this).focus(); alert('tentou focar'); });
+		 */
 		overlayInput.$content.find('#filtro_autocomplete').listview();
 		overlayInput.$b.css('margin-top', '0px');
-		
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
-			console.log('entrou no filtro');
+			app.logger.log('entrou no filtro');
 			var ul_list = $(this);
 			var auto_input = $(data.input);
 			var auto_value = auto_input.val();
@@ -451,10 +495,10 @@ var util = {
 					value = value.label || value.value || value.nome || value;
 					return matcher.test(value) || matcher.test(util.replaceDiacritics(value));
 				});
-				console.log(JSON.stringify(res), null, '\t');
+				app.logger.log(JSON.stringify(res), null, '\t');
 				$.each(res, function(i, val) {
-					if (val.geocod != null) { // municipio
-						html += "<li li_id='" + val.id + "' li_geocod='" + val.geocod + "' >" + val.nome + "</li>";
+					if (val.id != null) { // municipio
+						html += "<li li_id='" + val.id + "' >" + val.nome + "</li>";
 					} else {
 						html += "<li>" + val.nome + "</li>";
 					}
@@ -463,13 +507,13 @@ var util = {
 				ul_list.html(html);
 				ul_list.children("li").click(function() {
 					var txt;
-					if ($(this).attr('li_geocod') != null) { // municipio
-						txt = $(this).html() + " | " + $(this).attr('li_id') + " | " + $(this).attr('li_geocod');
+					if ($(this).attr('li_id') != null) { // municipio
+						txt = $(this).html() + " | " + $(this).attr('li_id');
 					} else {
 						txt = $(this).html();
 					}
 					field.val(txt).trigger('change').scrollLeft(0);
-					//overlayInput.$content.find('#filtro').focus();
+					// overlayInput.$content.find('#filtro').focus();
 					overlayInput.close();
 				});
 				ul_list.listview("refresh");
@@ -559,5 +603,12 @@ var util = {
 	escapeRegex : function(value) {
 		return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 	},
+
+	reverse : function(s) {
+		var o = [];
+		for (var i = 0, len = s.length; i <= len; i++)
+			o.push(s.charAt(len - i));
+		return o.join('');
+	}
 
 };
