@@ -157,43 +157,39 @@
 		</fieldset>
 
 		<div class="escondido" id="grupo_municipios_parada_carga">
-			<fieldset class="ui-grid-a">
-				<legend class="ui-block-a menor">Na sua rota de viagem, quais seriam os melhores municípios para que houvesse um local de
-					parada obrigatória de descanso:</legend>
-				<div class="ui-block-b">
+			<fieldset>
+				<legend style="line-height:30px;">Na sua rota de viagem, quais seriam os melhores municípios para que houvesse um local de parada 
+					obrigatória de descanso:</legend>
+				<div style="display:inline-table">
 					<input id="municipios_parada_nao_sei_carga" type="checkbox" name="municipios_parada_nao_sei_carga" data-theme="a" />
 					<label for="municipios_parada_nao_sei_carga">Não sabe informar</label>
 				</div>
 			</fieldset>
-			<div id="div_municipios_parada_carga">
-				<fieldset class="ui-grid-a">
-					<legend class="ui-block-a">&nbsp;</legend>
-					<div class="ui-block-b ui-grid-a">
-						<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf1_carga">
-							<select name="municipios_parada_uf1_carga" id="municipios_parada_uf1_carga" data-theme="a">
-							</select>
-						</div>
-						<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun1_carga">
-							<input data-type='search' type="text" name="municipios_parada_mun1_carga" id="municipios_parada_mun1_carga" data-theme="a"
-								readonly="readonly">
-						</div>
+			<fieldset id="div_municipios_parada_carga">
+				<div class="ui-grid-a">
+					<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf1_carga">
+						<select name="municipios_parada_uf1_carga" id="municipios_parada_uf1_carga" data-theme="a">
+						</select>
 					</div>
-					<legend class="ui-block-a">&nbsp;</legend>
-					<div class="ui-block-b ui-grid-a">
-						<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf2_carga">
-							<select name="municipios_parada_uf2_carga" id="municipios_parada_uf2_carga" data-theme="a">
-							</select>
-						</div>
-						<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun2_carga">
-							<input data-type='search' type="text" name="municipios_parada_mun2_carga" id="municipios_parada_mun2_carga" data-theme="a"
-								readonly="readonly">
-						</div>
+					<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun1_carga">
+						<input data-type='search' type="text" name="municipios_parada_mun1_carga" id="municipios_parada_mun1_carga" data-theme="a"
+							readonly="readonly">
 					</div>
-				</fieldset>
-			</div>
+				</div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf2_carga">
+						<select name="municipios_parada_uf2_carga" id="municipios_parada_uf2_carga" data-theme="a">
+						</select>
+					</div>
+					<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun2_carga">
+						<input data-type='search' type="text" name="municipios_parada_mun2_carga" id="municipios_parada_mun2_carga" data-theme="a"
+							readonly="readonly">
+					</div>
+				</div>
+			</fieldset>
 		</div>
 
-		<nav class="ui-grid-a avancar escondido" id="grupo_caracterizacao_viagem2_carga_avancar">
+		<nav class="ui-grid-a avancar escondido" style="position:relative" id="grupo_caracterizacao_viagem2_carga_avancar">
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
 				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right ui-btn-a" id="caracterizacao_viagem2_carga_avancar">Finalizar</button>
