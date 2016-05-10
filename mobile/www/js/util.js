@@ -430,6 +430,23 @@ var util = {
 		}
 	},
 
+	validaValueInList : function(nome_campo, campo_aviso, lista) {
+		var value = $.trim($('#' + nome_campo).val());
+		value = value.toUpperCase();
+		var encontrou = false;
+
+		$.each(lista, function(index, item) {
+			if (value == item.numeroid) {
+				encontrou = true;
+				// TODO setar no registro o valor de index
+			}
+		});
+		if(!encontrou) {
+			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido");
+		}
+		return encontrou
+	},
+
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {
