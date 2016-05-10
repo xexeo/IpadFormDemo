@@ -13,12 +13,12 @@ controllers.identificacao_visual_carga = {
 				app.trocaPagina('views/carga/caracterizacao_carga.html', controllers.caracterizacao_carga);
 			}
 		});
+		
 		$('#tipo_carroceria_carga').click(function() {
 			$("#grupo_tipo_carroceria_imagens_carga").show();
-			$("#grupo_tipo_carroceria_imagens_carga").siblings(":not(#grupo_tipo_carroceria_carga)").each(function(key, value) {
-				$(value).hide();
-			});
+			$("#grupo_tipo_carroceria_imagens_carga").siblings(":not(#grupo_tipo_carroceria_carga)").hide();
 		});
+		
 	},
 
 	// Inicializa os elementos da tela
@@ -32,9 +32,10 @@ controllers.identificacao_visual_carga = {
 
 		var lista_rntrc = [ 'TAC', 'ETC', 'CTC' ];
 		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");
-
-		util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
-		util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
+		
+		//TODO trocar os componentes abaixo por autocomplete
+		//util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
+		//util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
 
 		$("img:not([src*='outros']).img_carroceria").each(function(key, value) {
 			$(value).after("<span>" + $(value).attr('alt') + "</span>");
