@@ -430,7 +430,7 @@ var util = {
 		}
 	},
 
-	validaValueInList : function(nome_campo, campo_aviso, lista) {
+	validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) {
 		var value = $.trim($('#' + nome_campo).val());
 		value = value.toUpperCase();
 		var encontrou = false;
@@ -438,7 +438,7 @@ var util = {
 		$.each(lista, function(index, item) {
 			if (value == item.numeroid) {
 				encontrou = true;
-				// TODO setar no registro o valor de index
+				app.setAtributo(idRegistro, item.id);
 			}
 		});
 		if(!encontrou) {
