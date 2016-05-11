@@ -351,7 +351,9 @@ var util = {
 		if (Number($('#' + nome_campo).val()) != -1) {
 			return true;
 		} else {
-			util.alerta_msg(campo_aviso);
+			if (!util.isEmpty(campo_aviso)) {
+				util.alerta_msg(campo_aviso);
+			}
 			return false;
 		}
 	},
@@ -381,14 +383,18 @@ var util = {
 		var max_len = Number($.trim($('#' + nome_campo).attr("maxlength")))
 		if (value.length > 0) {
 			if ((max_len > 0) && (value.length > max_len)) {
-				util.alerta_msg(campo_aviso, "O campo deve ter no máximo " + max_len + " caracteres.");
+				if (!util.isEmpty(campo_aviso)) {
+					util.alerta_msg(campo_aviso, "O campo deve ter no máximo " + max_len + " caracteres.");
+				}
 				return false;
 			} else {
 				return true;
 			}
 		} else {
 			util.alerta_msg(campo_aviso);
-			return false;
+			if (!util.isEmpty(campo_aviso)) {
+				return false;
+			}
 		}
 	},
 

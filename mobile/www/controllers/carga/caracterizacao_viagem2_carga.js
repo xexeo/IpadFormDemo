@@ -237,7 +237,7 @@ controllers.caracterizacao_viagem2_carga = {
 					}
 				}
 
-				if(!(ok_possui_carga_sim && ok_local_embarque && ok_local_desmbarque)) {
+				if (!(ok_possui_carga_sim && ok_local_embarque && ok_local_desmbarque)) {
 					return false;
 				}
 			} else if (opt_possui_carga == 'nao') {
@@ -250,8 +250,7 @@ controllers.caracterizacao_viagem2_carga = {
 							return false;
 						}
 					}
-				}
-				else {
+				} else {
 					return false;
 				}
 			}
@@ -259,7 +258,7 @@ controllers.caracterizacao_viagem2_carga = {
 
 		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
 		if (cargaPerigosa == true) {
-			if(!util.validaRadioChecked("parada_especial_carga", "Utiliza parada especial")) {
+			if (!util.validaRadioChecked("parada_especial_carga", "Utiliza parada especial")) {
 				return false;
 			}
 		}
@@ -267,23 +266,21 @@ controllers.caracterizacao_viagem2_carga = {
 		var ckb_municipios_parada = $('#municipios_parada_nao_sei_carga').is(':checked');
 		if (!ckb_municipios_parada) {
 			// SUGESTAO DE MUNICIPIOS DE PARADA
-			alert('ckb_municipios_parada = ' + ckb_municipios_parada);
 			var uma_sugestao = false;
-			if (util.validaSelect("municipios_parada_uf1_carga", "Sugestão parada obrigatória - UF") &&
-					util.validaInputText("municipios_parada_mun1_carga", "Sugestão parada obrigatória - Município")) {
+			if (util.validaSelect("municipios_parada_uf1_carga") && util.validaInputText("municipios_parada_mun1_carga")) {
 				uma_sugestao = true;
 			}
-			if (util.validaSelect("municipios_parada_uf2_carga", "Sugestão parada obrigatória 2 - UF") &&
-					util.validaInputText("municipios_parada_mun2_carga", "Sugestão parada obrigatória 2 - Município")) {
+			if (util.validaSelect("municipios_parada_uf2_carga") && util.validaInputText("municipios_parada_mun2_carga")) {
 				uma_sugestao = true;
 			}
-
+			if(!uma_sugestao) {
+				alert("Preencha pelo menos um dos campos de sugestão de parada obrigatória para descanso", "Erro no preenchimento!", null, 'error');
+			}
 			return uma_sugestao;
-		}
-		else {
+		} else {
 			return true;
 		}
-		
+
 		return false;
 	}
 
