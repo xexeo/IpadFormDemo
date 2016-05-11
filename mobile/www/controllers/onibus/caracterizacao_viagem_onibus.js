@@ -95,13 +95,13 @@ controllers.caracterizacao_viagem_onibus = {
 			var validacoes = true;
 			if (Number($("#origem_pais_onibus").val()) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("origem_uf_onibus", "Origem da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("origem_uf_onibus", "Origem da viagem - estado") && util.validaInputText(
 								"origem_municipio_onibus", "Origem da viagem - município"));
 			}
 
 			if (Number($("#destino_pais_onibus").val()) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("destino_uf_onibus", "Destino da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("destino_uf_onibus", "Destino da viagem - estado") && util.validaInputText(
 								"destino_municipio_onibus", "Destino da viagem - município"));
 			}
 
