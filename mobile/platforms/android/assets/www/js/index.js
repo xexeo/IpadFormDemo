@@ -5,38 +5,31 @@ var app = {
 
 	versao : "2.0.0",
 
-	user_admin : {
-		usuario : 'admin', // usuario mestre
-		senha : "123" // senha mestra
-	},
-
-	autentica : function(usuario, senha) {
-		if ((usuario == app.user_admin.usuario) && (senha == app.user_admin.senha)) {
-			return true;
-		} else {
-			// TODO: recuperar tb dos logins cadastrados
-		}
-		return false;
-	},
-
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
-		if (app.autentica(usuario, senha)) {
-			myLogger.write("Login efetuado pelo usuário: " + usuario);
+
+		// configura identificador do ipad, para executar uma única vez(durante a instalação)
+		if (logins.autenticaMaster(usuario, senha)) {
+			ipadID.requestID(function(id) {
+				$("#ipadID").html(id);
+			});
+		} else if (logins.autentica(usuario, senha)) {
+			app.logger.log("Login efetuado pelo usuário: " + usuario);
 			// navega para págine e executa o script de configuração depois do carregamento
 			app.trocaPagina("views/menu.html", controllers.menu)
-			// set user_login
+			// set: user_login, senha_login, posto e sentido
 			app.user_login = usuario;
-			// set senha_login
 			app.senha_login = senha;
+			app.posto = String(usuario).substr(0, 3);
+			app.sentido = String(usuario).substr(3, 2).toUpperCase();
 			// limpa o registro
 			app.limpaRegistro();
 		} else {
 			// TODO: Trocar por um popup "mais elegante"
 			var msg = "usuário e senha informados não estão cadastrados no sistema";
 			alert(msg);
-			myLogger.write(msg);
+			app.logger.log(msg);
 		}
 	},
 
@@ -47,7 +40,42 @@ var app = {
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
-		myLogger.write('Logout');
+		app.logger.log('Logout');
+		app.user_login = null;
+		app.senha_login = null;
+		app.posto = null;
+		app.sentido = null;
+	},
+	
+	duplicaDb : function(){
+		if(app.filePaths){
+			app.database.close(function() {
+			app.copyFile(app.dbName, 
+				app.filePaths.dbFolder,
+				app.filePaths.externalFolder,
+				function(newName){
+					alert('Banco de dados ' + newName + ' exportado com sucesso.');
+					app.openDB();
+				});
+			}, function(err) {
+			app.logger.log(JSON.stringify(err));
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+	},
+	
+	duplicaLog : function(){
+		if (app.filePaths){
+			app.copyFile(app.logFileName,
+				cordova.file.dataDirectory,
+				app.filePaths.externalFolder,
+				function(newName){
+					alert('Arquivo de log ' + newName + ' exportado com sucesso.');
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
 	},
 
 	/**
@@ -57,24 +85,34 @@ var app = {
 	 *            cb receives a Boolean representing the success in validation
 	 */
 	validaCancelamento : function(cb) {
-		navigator.notification.prompt("Insira a senha para cancelar a entrevista.", function(results) {
-			// botão cancelar
-			if (results.buttonIndex == 1) {
-				if (!util.isEmpty(results.input1) && results.input1 == app.senha_login) {
-					cb(true);
-				} else {
-					navigator.notification.confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?", function(
-							results) {
-						// button ok
-						if (results == 1) {
-							app.validaCancelamento(cb);
-						}
-					}, "Senha incorreta.");
-				}
+		prompt("Insira a senha para cancelar a entrevista.", function(result) {
+			// botão prosseguir cancelamento
+			if (result == app.senha_login) {
+				cb(true);
 			} else {
-				cb(false);
+				confirm("Senha incorreta para o cancelamento.\nDeseja tentar novamente?",
+				// ok button pressed
+				function() {
+					app.validaCancelamento(cb);
+
+				}, function() {
+					cb(false);
+				}, "Senha incorreta.");
+
 			}
-		}, "Cancelamento de entrevista", [ "Cancelar entrevista", "Continuar entrevista" ]);
+		}, "Cancelamento de entrevista", "Cancelar entrevista", "Voltar", "Senha", 'password');
+	},
+	
+	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt){
+		prompt(txtPrompt, function(result){
+			if (result == app.senha_login){
+				operacao();
+			} else {
+				confirm(txtConfirm, function(){
+					app.validaOperacoes(operacao,txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt); //try again
+				}, null, titleConfirm);
+			}
+		}, titlePrompt, btnOKPrompt, btnCancelPrompt, "Senha", 'password');
 	},
 
 	/*
@@ -84,6 +122,10 @@ var app = {
 		this.bindEvents();
 		this.extraConfig();
 		this.baseUrl = window.location.href.replace("index.html", "");
+		// configuring dialogs
+		window.alert = myDialogs.alert;
+		window.prompt = myDialogs.prompt;
+		window.confirm = myDialogs.confirm;
 
 	},
 
@@ -92,9 +134,6 @@ var app = {
 	 */
 	bindEvents : function() {
 		document.addEventListener('deviceready', app.onDeviceReady);
-		// tentativa para chrome e opera
-		// document.addEventListener('filePluginIsReady', app.onFileSystemReady, false);
-
 		console.log('bindindEvents');
 	},
 
@@ -102,65 +141,111 @@ var app = {
 	 * this runs when the device is ready for user interaction:
 	 */
 	onDeviceReady : function() {
-		console.log('device ready');
-		if (device.platform == 'iOS' || device.platform == 'Android'
-				|| (device.platform == 'browser' && device.model == 'Firefox')) {
-			// alert('tô no ' + device.platform);
+		app.logger.log('device ready');
+
+		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
+		if (device.platform == 'iOS' || device.platform == 'Android') {
+			app.filePaths = {}; // inicia a variável
+
 			setTimeout(function() {
 				navigator.splashscreen.hide();
 				console.log("esperando " + device.platform);
 			}, 3000);
-			// fordebug
+
+			// durante o debug, inicia o sistema de arquivos
 			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-			if (device.platform != 'browser') {
-				app.debugOnBrowser = false;
-			}
-			// app.onFileSystemReady();
+
 		}
 
-		if (device.platform == 'browser' && device.model != 'Firefox') {
-			alert('ATENÇÃO!!! \n Use o Firefox para fazer a simulação (cordova run browser --target=firefox)');
-		}
+		// nessa altura do desenvolvimento não faz sentido
+		/*
+		 * if (device.platform == 'browser' && device.model != 'Firefox') { alert('ATENÇÃO!!! \n Use o Firefox para fazer a
+		 * simulação (cordova run browser --target=firefox)'); }
+		 */
 
 		if (device.platform == 'iOS') {
 			// configurando a statusBar
 			StatusBar.overlaysWebView(false);
-			StatusBar.backgroundColorByName("black"); // black, darkGray, lightGray, white, gray, red, green, blue, cyan,
-			// yellow, magenta, orange, purple, brown
+			StatusBar.backgroundColorByName("black");
+			// black, darkGray, lightGray, white, gray, red, green, blue, cyan, yellow, magenta, orange, purple, brown
+
+			// ajusta os caminhos para o iOS
+			app.filePaths['externalFolder'] = cordova.file.documentsDirectory;
+			app.filePaths['dbFolder'] = 'cdvfile://localhost/library/LocalDatabase';
+
 		} else if (device.platform == 'Android') {
 			StatusBar.hide();
+			StatusBar.backgroundColorByName("darkGray");
+
+			// ajusta os caminhos para o Android
+			app.filePaths['externalFolder'] = cordova.file.externalDataDirectory;
+			app.filePaths['dbFolder'] = cordova.file.applicationStorageDirectory + "databases";
 		}
 
 		// alert sem a página como título
-		window.alert = function(txt, cb) {
-			navigator.notification.alert(txt, cb, "Aviso", "Fechar");
-		}
+		/*
+		 * window.alert = function(txt, cb) { navigator.notification.alert(txt, cb, "Aviso", "Fechar"); }
+		 */
+
+		// novo valor para variavel criada no extraConfig()
+		app.uuid_device = device.uuid;
 
 	},
 
 	onFileSystemReady : function() {
-		console.log("folder dos dados: ", cordova.file.dataDirectory);
 
-		// setting logger writer
-		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
-			console.log('file system ready: ', dir);
+		app.logger.log("folder dos dados: ", cordova.file.dataDirectory);
+
+		// setting ipadID file and value
+		window.resolveLocalFileSystemURL(cordova.file.dataDirectory,
+		// success resolving dir
+		function(dir) {
+			app.logger.log('file system ready: ', dir);
+			// modifica o atributo ipadId.id que havia sido configurado no extraConfig() como 'browser'
+			// reading ipadID file
+			dir.getFile(ipadID.ipadIDFileName, {
+				create : false
+			}, function(file) {
+				ipadID.readId(file, function(id) {
+					$("#ipadID").html(id);
+					afterIpadID(id, dir);
+				});
+			}, function(e) {
+				ipadID.requestID(function(id) {
+					$("#ipadID").html(id);
+					afterIpadID(id, dir);
+				});
+			});
+		},
+		// error resolving dir
+		function(err) {
+			app.logger.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+			alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
+		});
+
+		// internal function
+		function afterIpadID(id, dir) {
+
 			dir.getFile(app.logFileName, {
 				create : true
-			}, function(file) {
-				console.log("arquivo de log: ", file);
+			},
+			// success getting file
+			function(file) {
+				app.logger.log("arquivo de log: ", file);
 				myLogger.setLogFile(file);
 				file.createWriter(function(fileWriter) {
 					myLogger.setLogWriter(fileWriter);
-				}, function() {
-					console.log('erro criando o escritor do log');
+					app.openDB(); // if successfully create fileWriter, open database
+					// novo valor para variável criada no extraConfig
+					app.logger = myLogger;
+				},
+				// error creating fileWriter
+				function() {
+					app.logger.log('erro criando o escritor do log');
 				});
-				app.openDB();
-
 			});
-		}, function(err) {
-			console.log("erro no sistema de arquivos: " + err.name + " -> " + err.message);
-			alert("erro no sistema de arquivos: " + err.name + " -> " + err.message);
-		});
+		}
+		;
 
 	},
 
@@ -171,13 +256,13 @@ var app = {
 		},
 		// sucsess
 		function() {
-			myLogger.write('Conexão com o banco de dados criada com sucesso.');
+			app.logger.log('Conexão com o banco de dados criada com sucesso.');
 			myDb.cretateTblDados();
 		},
 		// fail
 		function(err) {
-			myLogger.write('ERRO ao tentar conectar com o banco de dados.');
-			myLogger.write(JSON.stringify(err));
+			app.logger.log('ERRO ao tentar conectar com o banco de dados.');
+			app.logger.log(JSON.stringify(err));
 		});
 	},
 
@@ -188,26 +273,118 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
-		$("#btn_sair").click(this.logout);
+		//$("#btn_sair").click(this.logout);
+
+		// valores iniciais (vão ficar assim se estiver usando o browser)
+		app.uuid_device = "browser";
+		app.logger = window.console;
+		ipadID.id = 'browser';
+		
+		//botões do menu
+		$("#btn_sair").click(function(){
+			app.validaOperacoes(app.logout,
+			"Insira a senha para realizar o logout.",
+			"Logout",
+			"Senha incorreta.\nDeseja tentar novamente?",
+			"Senha Incorreta", "Logout", "Voltar" );
+		});
+		
+		$("#duplica_log").click(function() {
+			app.validaOperacoes(app.duplicaLog, 
+			"Insira a senha para exportar o Log de operações.",
+			"Exportar log de operações",
+			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
+			"Senha Incorreta", "Exportar", "Voltar");
+		});
+		
+		$("#duplica_db").click(function() {
+			app.validaOperacoes(app.duplicaDb, 
+			"Insira a senha para exportar o banco de dados.",
+			"Exportar banco de dados",
+			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
+			"Senha Incorreta", "Exportar", "Voltar");
+		});
+		
+		// remove o filtro original do autocomplete para poder filtrar acentos
+		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
+			return false
+		};
 	},
 
 	trocaPagina : function(view, controller) {
 		if (controller != null) {
-			$(":mobile-pagecontainer").off("pagecontainershow", controller.config).on("pagecontainershow", controller.config);
+			app.onChangeHandler.controller = controller.config;
+			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
+					app.onChangeHandler.handler);
 		}
 
 		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
-		myLogger.write(view);
+		app.logger.log(view);
+	},
+
+	// para apendar coisas aos controllers
+	onChangeHandler : {
+		handler : function() {
+			try {
+				app.onChangeHandler.controller();
+
+				// Botão "Cancelar"
+				$("#btn_cancelar").click(app.cancelar);
+
+				// Input radio
+				$('input[type="radio"]').click(function() {
+					$(this).focus();
+				});
+
+				// Input money
+				$('input[typeMask="money-BRL"]').each(function(key, input) {
+					$(input).maskMoney({
+						prefix : "R$ ",
+						affixesStay : "true",
+						thousands : ".",
+						decimal : ","
+					});
+				});
+
+				$('input[mask]').each(function(key, input) {
+					var decimalSeparator = $(input).attr('mask-decimal-separator');
+					if (util.isEmpty(decimalSeparator)) {
+						$(input).inputmask($(input).attr('mask'), {
+							'autoUnmask' : true
+						});
+					} else {
+						$(input).inputmask($(input).attr('mask'), {
+							'autoUnmask' : true,
+							numericInput : true,
+							radixPoint : decimalSeparator
+						});
+					}
+				});
+
+				$("#versao").html(app.versao);
+				$("#ipadID").html(ipadID.id);
+				$("#posto").html(app.posto);
+				$("#sentido").html(app.sentido);
+
+				if (typeof device != 'undefined' && device.platform == "Android") {
+					StatusBar.hide();
+				}
+			} catch (e) {
+				app.logger.log(e);
+				alert(e.message);
+			}
+		},
+
+		controller : null,
+	},
+
+	getAtributo : function(nome) {
+		return registro[nome];
 	},
 
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
-		try {
-			myLogger.write(JSON.stringify(registro));
-		} catch (e) {
-			myLogger.write(e.message);
-		}
-
+		app.logger.log(JSON.stringify(registro));
 	},
 
 	cancelar : function() {
@@ -221,167 +398,227 @@ var app = {
 	},
 
 	limpaRegistro : function() {
-		myLogger.write('Limpando registro', true);
+		app.logger.log('Limpando registro', true);
 		registro = {};
 	},
 
 	iniciaRegistro : function() {
 		try {
 			var now = new Date();
-			myLogger.write('Iniciando registro');
+			app.logger.log('Iniciando registro');
 			app.limpaRegistro();
-			var uuid_device = "browser";
-			if (!app.debugOnBrowser) {
-				uuid_device = device.uuid;
-			}
-			app.setAtributo('id', uuid_device + String(util.getTimeInSeconds(now)));
-			app.setAtributo('login', app.user_login); // TODO idPosto + sentido?
-			app.setAtributo('uuid', uuid_device);
+			app.setAtributo('id', ipadID.id + String(util.getTimeInSeconds(now)));
+			app.setAtributo('login', app.user_login);
+			app.setAtributo('idPosto', app.posto);
+			app.setAtributo('sentido', app.sentido);
+			app.setAtributo('uuid', app.uuid_device);
 			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
-			// TODO: falta setar os seguintes atributos:
-			// idPosto
-			// sentido
-			// idIpad
-			myLogger.write(JSON.stringify(registro));
-			myLogger.write('Registro iniciado: ' + registro.id);
+			app.setAtributo('idIpad', ipadID.id);
+			app.logger.log(JSON.stringify(registro));
+			app.logger.log('Registro iniciado: ' + registro.id);
 		} catch (e) {
-			myLogger.write(e.message);
+			app.logger.log(e.message);
 		}
 	},
 
 	setCamposDerivados : function() {
-		if (!util.isEmpty(registro.placa_letras) && !util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_letras + "-" + registro.placa_numeros);
-		} else if (!util.isEmpty(registro.placa_letras)) {
-			app.setAtributo('placa', registro.placa_letras);
-		} else if (!util.isEmpty(registro.placa_numeros)) {
-			app.setAtributo('placa', registro.placa_numeros);
+		// PLACA
+		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
+			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
+				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
+			}
+		} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
+			if (!util.isEmpty(registro.placa_unica)) {
+				app.setAtributo('placa', registro.placa_unica.toUpperCase());
+			}
+		}
+		if (util.isEmpty(registro.placa)) {
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (placa vazia)
+				app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+			}
 		}
 
-		if (!util.isEmpty(registro.frequencia_num) || !util.isEmpty(registro.frequencia_sel)) {
-			app.setAtributo('frequencia', registro.frequencia_num + " por " + registro.frequencia_sel);
+		// FRENQUENCIA
+		if (!util.isEmpty(registro.frequenciaPeriodo)) {
+			app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
+			if (registro.frequenciaPeriodo == 'Eventualmente') {
+				app.setAtributo('frequenciaQtd', 1);
+			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
+				if (registro.cancelado != 1) {
+					// TODO: ERRO (frequencia vazia)
+					app.logger.log("ERRO (frequenciaQtd vazia) no registro: ", registro.id);
+				}
+			}
+		} else if (registro.cancelado != 1) {
+			// TODO: ERRO (frequencia vazia)
+			app.logger.log("ERRO (frequenciaPeriodo vazio) no registro: ", registro.id);
 		}
 
-		var municipioSplit;
-		if (registro.origem_municipio != null) {
-			municipioSplit = registro.origem_municipio.split("|");
-			app.setAtributo('idOrigemMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_origem', municipioSplit[1]);
+		// ORIGEM: MUNICÍPIO
+		if (!util.isEmpty(registro.idOrigemMunicipio)) {
+			app.setAtributo('idOrigemMunicipio', registro.idOrigemMunicipio.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (destino vazio)
+				app.logger.log("ERRO (idOrigemMunicipio vazio) no registro: ", registro.id);
+			}
 		}
 
-		if (registro.destino_municipio != null) {
-			municipioSplit = registro.destino_municipio.split("|");
-			app.setAtributo('idDestinoMunicipio', municipioSplit[0]);
-			app.setAtributo('geocod_destino', municipioSplit[1]);
+		// DESTINO: MUNICÍPIO
+		if (!util.isEmpty(registro.idDestinoMunicipio)) {
+			app.setAtributo('idDestinoMunicipio', registro.idDestinoMunicipio.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
+			if (registro.cancelado != 1) {
+				// TODO: ERRO (destino vazio)
+				app.logger.log("ERRO (idDestinoMunicipio vazio) no registro: ", registro.id);
+			}
 		}
 
-		app.setAtributo('timestampIniPesq', new Date());
+		// RNTRC
+		if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
+			if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
+				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
+			} else {
+				if (registro.cancelado != 1) {
+					// TODO: ERRO (rntrc vazio)
+					app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+				}
+			}
+		}
+
+		// PESO DA CARGA ('ton' -> 'kg')
+		if (!util.isEmpty(registro.pesoDaCarga)) {
+			var peso = Number(registro.pesoDaCarga);
+			if (registro.unidadePesoDaCarga == 'kg') {
+				peso = peso / 10;
+			} else {
+				peso = peso * 100;
+			}
+			app.setAtributo('pesoDaCarga', peso)
+		} 
+		if(util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
+			// TODO: ERRO (peso da carga vazio)
+			app.logger.log("ERRO (pesoDaCarga vazio) no registro: ", registro.id);
+		}
+
+		// TIPO DE PRODUTO (CARGA)
+		if (!util.isEmpty(registro.idProduto)) {
+			app.setAtributo('idProduto', registro.idProduto.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idProduto) && registro.possui_carga && registro.cancelado != 1) {
+			// TODO: ERRO (idProduto vazio)
+			app.logger.log("ERRO (idProduto vazio) no registro: ", registro.id);
+		}
+
+		// CARGA ANTERIOR
+		if (!util.isEmpty(registro.idCargaAnterior)) {
+			app.setAtributo('idCargaAnterior', registro.idCargaAnterior.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && registro.cancelado != 1) {
+			// TODO: ERRO (idCargaAnterior vazio)
+			app.logger.log("ERRO (idCargaAnterior vazio) no registro: ", registro.id);
+		}
+
+		// MUNICÍPIO EMBARQUE DA CARGA
+		if (!util.isEmpty(registro.municipioEmbarqueCarga)) {
+			app.setAtributo('municipioEmbarqueCarga', registro.municipioEmbarqueCarga.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && registro.cancelado != 1) {
+			// TODO: ERRO (municipioEmbarqueCarga vazio)
+			app.logger.log("ERRO (municipioEmbarqueCarga vazio) no registro: ", registro.id);
+		}
+
+		// MUNICÍPIO DESEMBARQUE DA CARGA
+		if (!util.isEmpty(registro.municipioDesembarqueCarga)) {
+			app.setAtributo('municipioDesembarqueCarga', registro.municipioDesembarqueCarga.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && registro.cancelado != 1) {
+			// TODO: ERRO (municipioDesembarqueCarga vazio)
+			app.logger.log("ERRO (municipioDesembarqueCarga vazio) no registro: ", registro.id);
+		}
+
+		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+			app.setAtributo('paradaObrigatoriaMunicipio1', registro.paradaObrigatoriaMunicipio1.split("|")[1].trim());
+		}
+		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio2)) {
+			app.setAtributo('paradaObrigatoriaMunicipio2', registro.paradaObrigatoriaMunicipio2.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+			if (!registro.municipiosParadaNaoSabe && registro.cancelado != 1) {
+				// TODO: ERRO (paradaObrigatoriaMunicipios vazio)
+				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ", registro.id);
+			}
+		}
+
+		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
 	},
 
 	finalizaRegistro : function(cb) {
-		myLogger.write('Finalizando registro: ' + registro.id);
+		app.logger.log('Finalizando registro: ' + registro.id);
 		app.setCamposDerivados();
 		myDb.insertRegistro(registro,
 		// erro
 		function(error) {
-			myLogger.write('Erro inserindo registro: ' + error.message);
+			app.logger.log('Erro ao inserir registro: ' + error.message);
 			// confirma se tenta outra vez
-			navigator.notification.confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?", function(results) {
-				// button Sim
-				if (results == 1) {
-					app.finalizaRegistro(cb);
-				} else if (cb != null) {
+			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.finalizaRegistro(cb);
+			},
+			// button cancel
+			function() {
+				app.logger.log("Descartando registro: " + registro.id);
+				if (cb != null) {
 					cb();
 				}
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
-			// results
-			);
+			"Sim", "Não (irá descartar o registro)");
 		},
 		// ok
 		function() {
-			myLogger.write('Registro finalizado: ' + registro.id);
+			app.logger.log('Registro finalizado: ' + registro.id);
 			app.limpaRegistro();
 			alert("Entrevista registrada.");
 			if (cb != null) {
 				cb();
 			}
 		});
-
-		// aqui eu vou reescrever a função aqui em cima mantendo a lógica mas trocando o paradigma
-		// var tentarNovamente;
-		// var saved;
-		// do {
-		// tentarNovamente = false;
-		// saved = false;
-		// try {
-		// myLogger.write('Finalizando registro: ' + registro.id);
-		// app.setCamposDerivados();
-		// saved = myDb.insertRegistro(registro);
-		// } catch (e) {
-		// myLogger.write(e.message);
-		// }
-		// if (saved) {
-		// myLogger.write('Registro finalizado: ' + registro.id);
-		// app.limpaRegistro();
-		// alert("Entrevista registrada.");
-		// } else { // TITLE: "Falha ao gravar informações."
-		// var tentarNovamente = confirm("Houve uma falha ao finalizar a entrevista.\nDeseja tentar novamente?");
-		// }
-		// } while (tentarNovamente);
-
 	},
 
 	cancelaRegistro : function(cb) {
-		myLogger.write('Cancelando registro: ' + registro.id);
-		app.setCamposDerivados();
+		app.logger.log('Cancelando registro: ' + registro.id);
 		app.setAtributo('cancelado', 1);
+		app.setCamposDerivados();
 		myDb.insertRegistro(registro, function(error) {
-			myLogger.write(error.message);
+			app.logger.log(error.message);
 			// confirma se tenta outra vez
-			navigator.notification.confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?", function(
-					results) {
-				// button Sim
-				if (results == 1) {
-					app.cancelaRegistro(cb);
-				} else if (cb != null) {
+			confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.cancelaRegistro(cb);
+			},
+			// button cancel
+			function() {
+				app.logger.log("Descartando registro: " + registro.id);
+				if (cb != null) {
 					cb();
 				}
+
 			}, "Falha na gravação.", // título
-			[ "Sim", "Não" ] // botões -> o índice do botão escolhido, começando em 1, (não fui eu que quiz assim) volta no
-			// results
-			);
+			"Sim", "Não (irá descartar o registro)");
 		}, function() {
-			myLogger.write('Registro cancelado: ' + registro.id);
+			app.logger.log('Registro cancelado: ' + registro.id);
 			app.limpaRegistro();
 			alert("Entrevista cancelada.");
 			if (cb != null) {
 				cb();
 			}
 		});
-
-		// var tentarNovamente;
-		// var saved;
-		// do {
-		// tentarNovamente = false;
-		// saved = false;
-		// try {
-		// myLogger.write('Cancelando registro: ' + registro.id);
-		// app.setCamposDerivados();
-		// app.setAtributo('cancelado', 1);
-		// saved = myDb.insertRegistro(registro);
-		// } catch (e) {
-		// myLogger.write(e.message);
-		// }
-		// if (saved) {
-		// myLogger.write('Registro cancelado: ' + registro.id);
-		// app.limpaRegistro();
-		// alert("Entrevista cancelada.");
-		// } else { // TITLE: "Falha ao gravar informações." var
-		// tentarNovamente = confirm("Houve uma falha o registro.\nDeseja tentar novamente?");
-		// }
-		// } while (tentarNovamente);
-
 	},
 
 	/**
@@ -400,18 +637,18 @@ var app = {
 		window.resolveLocalFileSystemURL(dirURI,
 		// success
 		function(folder) {
-			myLogger.write('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
+			app.logger.log('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));
 			folder.getFile(fileName, {
 				create : false
 			}, function(arquivo) {
 				arquivo.remove(function() {
-					myLogger.write('Arquivo ' + fileName + ' removido');
+					app.logger.log('Arquivo ' + fileName + ' removido');
 					if (util.isFunction(cbSuccess)) {
 						cbSuccess();
 					}
 				});
 			}, function(err) {
-				myLogger.write('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
+				app.logger.log('Arquivo ' + fileName + ' não existe no folder ' + JSON.stringify(folder));
 				if (util.isFunction(cbFail)) {
 					cbFail();
 				}
@@ -420,7 +657,7 @@ var app = {
 		},
 		// fail
 		function(err) {
-			myLogger.write('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
+			app.logger.log('Erro resolvendo o diretório ' + dir + JSON.stringify(err));
 		});
 	},
 
@@ -437,6 +674,7 @@ var app = {
 	 *            cb success callback function
 	 */
 	copyFile : function(fileName, originDirURI, destDirURI, cb) {
+		var newName = ipadID.id + "_" + fileName;
 		// get original dir
 		resolveLocalFileSystemURL(originDirURI,
 		// success
@@ -449,37 +687,37 @@ var app = {
 				resolveLocalFileSystemURL(destDirURI,
 				// success resolving destination
 				function(destDir) {
-					myLogger.write('Copiando o arquivo ' + fileName + ' do folder ' + dir.nativeURL + ' para o folder '
+					app.logger.log('Copiando o arquivo ' + newName + ' do folder ' + dir.nativeURL + ' para o folder '
 							+ destDir.nativeURL);
 					// removing destination file
-					app.removeFile(fileName, destDirURI, function() {
-						realCopier(file, fileName, destDir);
+					app.removeFile(newName, destDirURI, function() {
+						realCopier(file, newName, destDir);
 					},
 					// mesmo se não conseguir remover
 					function() {
-						realCopier(file, fileName, destDir);
+						realCopier(file, newName, destDir);
 					});
 				}, function(err) {
-					myLogger.write('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
+					app.logger.log('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
 				});
 
 			}, function(err) {
-				myLogger.write('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
+				app.logger.log('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));
 			});
 
 		}, function(err) {
-			myLogger.write('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));
+			app.logger.log('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));
 		});
 		// internal function
-		function realCopier(f, name, d) {
-			f.copyTo(d, name, function() {
+		function realCopier(f, newName, d) {
+			f.copyTo(d, newName, function() {
 				// success
-				myLogger.write('Arquivo ' + name + ' copiado.');
+				app.logger.log('Arquivo ' + newName + ' copiado.');
 				if (util.isFunction(cb)) {
-					cb();
+					cb(newName);
 				}
 			}, function(err) {
-				myLogger.write('Erro copiando arquivo ' + name + ' ' + JSON.stringify(err));
+				app.logger.log('Erro copiando arquivo ' + newName + ' ' + JSON.stringify(err));
 
 			});
 		}
@@ -488,13 +726,20 @@ var app = {
 
 	baseUrl : null,
 
-	logFileName : "log.txt", // TODO: uuid no nome do arquivo
+	logFileName : "log.txt",
+
+	dbName : "dados.db",
 
 	user_login : null,
 
-	dbName : "dados.db", // TODO: uuid no nome do arquivo
+	senha_login : null,
 
-	senha_login : null
+	posto : null,
+
+	sentido : null,
+
+	filePaths : null // { externalFolder : null, dbFolder : null, }
+	,
 
 }; // end of app
 

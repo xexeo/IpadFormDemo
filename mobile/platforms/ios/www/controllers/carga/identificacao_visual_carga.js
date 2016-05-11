@@ -13,12 +13,12 @@ controllers.identificacao_visual_carga = {
 				app.trocaPagina('views/carga/caracterizacao_carga.html', controllers.caracterizacao_carga);
 			}
 		});
+		
 		$('#tipo_carroceria_carga').click(function() {
 			$("#grupo_tipo_carroceria_imagens_carga").show();
-			$("#grupo_tipo_carroceria_imagens_carga").siblings(":not(#grupo_tipo_carroceria_carga)").each(function(key, value) {
-				$(value).hide();
-			});
+			$("#grupo_tipo_carroceria_imagens_carga").siblings(":not(#grupo_tipo_carroceria_carga)").hide();
 		});
+		
 	},
 
 	// Inicializa os elementos da tela
@@ -32,10 +32,7 @@ controllers.identificacao_visual_carga = {
 
 		var lista_rntrc = [ 'TAC', 'ETC', 'CTC' ];
 		util.inicializaSelectCustomValueAsIndex("placa_vermelha_rntrc_sel_carga", lista_rntrc, "Selecione");
-
-		util.inicializaSelectCargaRiscoOnu("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco);
-		util.inicializaSelectCargaRiscoOnu("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu);
-
+		
 		$("img:not([src*='outros']).img_carroceria").each(function(key, value) {
 			$(value).after("<span>" + $(value).attr('alt') + "</span>");
 		});
@@ -127,24 +124,11 @@ controllers.identificacao_visual_carga = {
 			app.setAtributo('possuiCargaPerigosa', false);
 			app.setAtributo('idNumeroDeRisco', null);
 			app.setAtributo('idNumeroDaOnu', null);
-			util.progressoRestartSelect("carga_perigosa_risco_carga", "Número de Risco");
-			util.progressoRestartSelect("carga_perigosa_onu_carga", "Número da ONU");
+			$('#carga_perigosa_risco_carga').val("");
+			$('#carga_perigosa_onu_carga').val("");
 		});
-		// util.progressoSelect('idNumeroDeRisco', "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
-		$("#carga_perigosa_risco_carga").change(function() {
-			var nome_registro = 'idNumeroDeRisco';
-			if (Number($(this).val()) != -1) {
-				app.setAtributo(nome_registro, $(this).val());
-				$("#grupo_carga_perigosa_onu_carga").show();
-			} else {
-				app.setAtributo(nome_registro, null);
-				app.setAtributo('idNumeroDaOnu', null);
-				$("#grupo_carga_perigosa_onu_carga").hide();
-				$("#grupo_identificacao_visual_carga_avancar").hide();
-				util.progressoRestartSelect("carga_perigosa_onu_carga", "Número da ONU");
-			}
-		});
-		util.progressoSelect('idNumeroDaOnu', "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
+		util.progressoInputText("idNumeroDeRisco", "carga_perigosa_risco_carga", "grupo_carga_perigosa_onu_carga");
+		util.progressoInputText("idNumeroDaOnu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
@@ -208,10 +192,12 @@ controllers.identificacao_visual_carga = {
 			var ok_carga_perigosa = true;
 			var opt_perigosa = $('input[name=carga_perigosa_carga]:checked').val();
 			if (opt_perigosa == 'sim') {
-				if (!util.validaSelect("carga_perigosa_risco_carga", "Número de risco")) {
+				if (!util.validaInputText("carga_perigosa_risco_carga", "Número de Risco")
+						|| !util.validaInputText("carga_perigosa_onu_carga", "Número da ONU")) {
 					ok_carga_perigosa = false;
 				}
-				if (!util.validaSelect("carga_perigosa_onu_carga", "Número da ONU")) {
+				if (!util.validaValueInList("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco)
+						|| !util.validaValueInList("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu)) {
 					ok_carga_perigosa = false;
 				}
 			}

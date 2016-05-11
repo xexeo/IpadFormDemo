@@ -1,8 +1,6 @@
 controllers.selecionar_tipo = {
 	config : function() {
 
-		$("#btn_cancelar").click(app.cancelar);
-
 		$(".switch_classe_veiculo").click(function() {
 			$('#sel_tipo_veiculo_1').toggle();
 			$('#sel_tipo_veiculo_2').toggle();

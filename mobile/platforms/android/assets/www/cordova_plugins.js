@@ -208,8 +208,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.2.1",
     "cordova-sqlite-storage": "0.8.5",
     "cordova-plugin-statusbar": "2.1.2",
-    "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1",
-    "cordova-plugin-dialogs": "1.2.0"
+    "cordova-plugin-dialogs": "1.2.0",
+    "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1"
 };
 // BOTTOM OF METADATA
 });

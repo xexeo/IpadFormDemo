@@ -286,9 +286,6 @@ var util = {
 		} else { // textinput comum
 			$('#' + nome_campo).keyup(function() {
 				progride($(this).val());
-				// o setAtributo apenas dentro do 'change' não estava sendo executado em tempo
-				// TODO: verificar se o 'change' realmente é necessário, já que nem sempre é executado quando deveria
-				// app.setAtributo(nome_registro, $(this).val());
 			});
 			$('#' + nome_campo).change(function() {
 				app.setAtributo(nome_registro, $(this).val());
@@ -325,6 +322,23 @@ var util = {
 				return true;
 			}
 			return false;
+		}
+	},
+
+	progressoInputMoney : function(nome_registro, nome_campo, grupo_proximo, autocomplete) {
+		$('#' + nome_campo).keyup(function() {
+			progride($(this).maskMoney('unmasked')[0]);
+		});
+		$('#' + nome_campo).change(function() {
+			app.setAtributo(nome_registro, $(this).maskMoney('unmasked')[0]);
+		});
+
+		function progride(value) {
+			if (util.isEmpty(value) || (Number(value) == 0)) {
+				$("#" + grupo_proximo).hide();
+			} else {
+				$("#" + grupo_proximo).show();
+			}
 		}
 	},
 
@@ -414,6 +428,23 @@ var util = {
 		} else {
 			return validaInputText(nome_campo, campo_aviso);
 		}
+	},
+
+	validaValueInList : function(nome_campo, campo_aviso, lista) {
+		var value = $.trim($('#' + nome_campo).val());
+		value = value.toUpperCase();
+		var encontrou = false;
+
+		$.each(lista, function(index, item) {
+			if (value == item.numeroid) {
+				encontrou = true;
+				// TODO setar no registro o valor de index
+			}
+		});
+		if(!encontrou) {
+			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido");
+		}
+		return encontrou
 	},
 
 	isFilterRunning : false, // controla se o filtro já terminou

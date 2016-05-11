@@ -1,36 +1,48 @@
 myDb = {
 
+		
+	// TODO colocar todos os campos, inclusive os nao definidos (com null)
 	tabelaOD : [
-		{field : 'id', type : 'text'}, // TODO (redundante? id + idIpad) Number(String(device.serial) + String(Math.floor(Date.now() / 1000)) that is the device serial concats with unix timestamp
-		{field : 'estaNoNote', type : 'integer'}, //Boolean 1->true||false, otherwise;
+		{field : 'id', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
+		{field : 'estaNoNote', type : 'integer'}, //Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
 		{field : 'idPosto' , type : 'integer'},
 		{field : 'sentido' , type : 'text'},
 		{field : 'idIpad' , type : 'text'},
+		{field : 'uuid' , type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
 		{field : 'login' , type : 'text'}, // idPost + sentido (redundante?)
 		{field : 'timestampIniPesq' , type : 'text'},
 		{field : 'timestampFimPesq' , type : 'text'},
-		{field : 'tipo' , type : 'text'},
-		{field : 'classeVeiculo' , type : 'text'},
-		{field : 'possuiReboque' , type : 'text'},
-		{field : 'placaEstrangeira' , type : 'integer'}, //Boolean 0->false||true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
-		{field : 'idPaisPlacaEstrangeira' , type : 'integer'}, 
 		{field : 'placa' , type : 'text'}, 
 		{field : 'anoDeFabricacao', type : 'integer'},
-		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
-		{field : 'idCombustivel', type : 'integer'},
+		{field : 'tipo' , type : 'text'},
 		{field : 'idOrigemPais', type : 'integer'},
 		{field : 'idOrigemMunicipio', type : 'integer'},
-		{field : 'geocod_origem', type : 'integer'},
 		{field : 'idDestinoPais', type : 'integer'},
 		{field : 'idDestinoMunicipio', type : 'integer'},
-		{field : 'geocod_destino', type : 'integer'},
-		{field : 'frequencia', type : 'text'},
 		{field : 'idMotivoDeEscolhaDaRota', type : 'text'},
-		{field : 'idMotivoDaViagem', type :'text'},
+		{field : 'frequenciaQtd', type : 'integer'}, 
+		{field : 'frequenciaPeriodo', type : 'text'}, 
+		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
+		{field : 'placaEstrangeira' , type : 'integer'}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
+		{field : 'idPaisPlacaEstrangeira' , type : 'integer'},
+		{field : 'idCombustivel', type : 'integer'},
+		{field : 'categoria' , type : 'text'},		
+		{field : 'possuiReboque' , type : 'text'},
 		{field : 'numeroDePessoasNoVeiculo', type : 'integer'},
 		{field : 'numeroDePessoasATrabalho', type : 'integer'},
 		{field : 'idRendaMedia', type :'text'},
+		{field : 'idMotivoDaViagem', type :'text'},
+		{field : 'tipoCaminhao', type : 'text'},
+		{field : 'idTipoDeContainer', type : 'integer'},
+		{field : 'idTipoCarroceria', type : 'integer'},
+		{field : 'rntrc', type : 'text'},
+		{field : 'possuiCargaPerigosa', type : 'integer'}, // Boolean 1->true || false, otherwise;
+		{field : 'idNumeroDeRisco', type : 'integer'},
+		{field : 'idNumeroDaOnu', type : 'integer'},
+		{field : 'idAgregado', type : 'integer'},
+		{field : 'placaVermelha', type : 'integer'}, // Boolean 1->true || false, otherwise;
+		{field : 'idTipoDeViagemOuServico', type : 'integer'},
 	],
 
 
@@ -39,13 +51,14 @@ myDb = {
 		$.each(myDb.tabelaOD, function(index, item) {
 			if (item.field == str) {
 				found = true;
+				return false; //breaks $.each
 			}
 		});
 		return found;
 	},
 
 	cretateTblDados : function() {
-		myLogger.write("criando tabela: tblDados");
+		app.logger.log("criando tabela: tblDados");
 		app.database.transaction(
             function(tx) {
                 var sql = "CREATE TABLE IF NOT EXISTS tblDados \
@@ -54,9 +67,9 @@ myDb = {
                         estado text) ";
                 tx.executeSql(sql);
             }, function(e) {
-                myLogger.write('ERRO: ' + e.message);
+                app.logger.log('ERRO: ' + e.message);
             }, function(){
-                myLogger.write("tabela criada: tblDados");
+                app.logger.log("tabela criada: tblDados");
         });
 		
 	},
@@ -69,24 +82,24 @@ myDb = {
      */
 	insertRegistro : function(reg, fail, success) {
 		//var inseriu = false;
-		myLogger.write("inserindo registro: " + reg.id);
+		app.logger.log("inserindo registro: " + reg.id);
 		try{
             app.database.transaction(function(tx) {
                 var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
                 tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
-                    myLogger.write('id inserido no banco de dados: ' + res.insertId);
+                    app.logger.log('id inserido no banco de dados: ' + res.insertId);
                 });
             },
             // transaction fail
             function(e) {
                 //inseriu = false;
-                myLogger.write('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+                app.logger.log('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
                 fail(e);
             },
             // transaction success
             function() {
                 //inseriu = true;
-                myLogger.write("registro inserido: " + reg.id);
+                app.logger.log("registro inserido: " + reg.id);
                 success();
             });
         } catch(e){

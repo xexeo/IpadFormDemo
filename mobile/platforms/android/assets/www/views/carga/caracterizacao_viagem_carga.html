@@ -17,13 +17,15 @@
 					<select name="origem_pais_carga" id="origem_pais_carga" data-theme="a">
 					</select>
 				</div>
-				<div class="ui-block-b sel_uf escondido" id="grupo_origem_uf_carga">
+				<div class="ui-block-b sel_uf" id="grupo_origem_uf_carga">
 					<select name="origem_uf_carga" id="origem_uf_carga" data-theme="a">
 					</select>
 				</div>
 				<div class="ui-block-c sel_municipio escondido" id="grupo_origem_municipio_carga">
-					<select name="origem_municipio_carga" id="origem_municipio_carga" data-theme="a">
-					</select>
+					<!--<select name="origem_municipio_carga" id="origem_municipio_carga" data-theme="a">
+					</select>-->
+					<input data-type='search' type="text" name="origem_municipio_carga" id="origem_municipio_carga" data-theme="a"
+						readonly="readonly">
 				</div>
 			</div>
 		</fieldset>
@@ -35,13 +37,15 @@
 					<select name="destino_pais_carga" id="destino_pais_carga" data-theme="a">
 					</select>
 				</div>
-				<div class="ui-block-b sel_uf escondido" id="grupo_destino_uf_carga">
+				<div class="ui-block-b sel_uf" id="grupo_destino_uf_carga">
 					<select name="destino_uf_carga" id="destino_uf_carga" data-theme="a">
 					</select>
 				</div>
 				<div class="ui-block-c sel_municipio escondido" id="grupo_destino_municipio_carga">
-					<select name="destino_municipio_carga" id="destino_municipio_carga" data-theme="a">
-					</select>
+					<!--<select name="destino_municipio_carga" id="destino_municipio_carga" data-theme="a">
+					</select>-->
+					<input data-type='search' type="text" name="destino_municipio_carga" id="destino_municipio_carga" data-theme="a"
+						readonly="readonly">
 				</div>
 			</div>
 		</fieldset>
@@ -50,7 +54,7 @@
 			<legend class="ui-block-a">Frequência da viagem:</legend>
 			<div class="ui-block-b ui-grid-b">
 				<div class="ui-block-a">
-					<input id="frequencia_num_carga" type="number" name="frequencia_num_carga" value="" data-theme="a" />
+					<input id="frequencia_num_carga" type="number" name="frequencia_num_carga" value="" min="1" data-theme="a" />
 				</div>
 				<label class="ui-block-b center" for="frequencia_sel_carga">por</label>
 				<div class="ui-block-c">
@@ -71,7 +75,7 @@
 		<nav class="ui-grid-a avancar escondido" id="grupo_caracterizacao_viagem_carga_avancar">
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
-				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right ui-btn-a" id="caracterizacao_viagem_carga_avancar">Finalizar</button>
+				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right ui-btn-a" id="caracterizacao_viagem_carga_avancar">Avançar</button>
 			</div>
 		</nav>
 

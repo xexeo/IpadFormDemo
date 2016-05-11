@@ -46,31 +46,25 @@ var app = {
 		app.posto = null;
 		app.sentido = null;
 	},
-	
-	duplicaDb : function(){
-		if(app.filePaths){
+
+	duplicaDb : function() {
+		if (app.filePaths) {
 			app.database.close(function() {
-			app.copyFile(app.dbName, 
-				app.filePaths.dbFolder,
-				app.filePaths.externalFolder,
-				function(newName){
+				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, function(newName) {
 					alert('Banco de dados ' + newName + ' exportado com sucesso.');
 					app.openDB();
 				});
 			}, function(err) {
-			app.logger.log(JSON.stringify(err));
+				app.logger.log(JSON.stringify(err));
 			});
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
 	},
-	
-	duplicaLog : function(){
-		if (app.filePaths){
-				app.copyFile(app.logFileName,
-			cordova.file.dataDirectory,
-			app.filePaths.externalFolder,
-			function(newName){
+
+	duplicaLog : function() {
+		if (app.filePaths) {
+			app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, function(newName) {
 				alert('Arquivo de log ' + newName + ' exportado com sucesso.');
 			});
 		} else {
@@ -102,15 +96,17 @@ var app = {
 			}
 		}, "Cancelamento de entrevista", "Cancelar entrevista", "Voltar", "Senha", 'password');
 	},
-	
-	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt){
-		prompt(txtPrompt, function(result){
-			if (result == app.senha_login){
+
+	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt) {
+		prompt(txtPrompt, function(result) {
+			if (result == app.senha_login) {
 				operacao();
 			} else {
-				confirm(txtConfirm, function(){
-					app.validaOperacoes(operacao,txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt); //try again
-				}, null, titleConfirm);
+				confirm(txtConfirm,
+						function() {
+							app.validaOperacoes(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt,
+									btnCancelPrompt); // try again
+						}, null, titleConfirm);
 			}
 		}, titlePrompt, btnOKPrompt, btnCancelPrompt, "Senha", 'password');
 	},
@@ -273,38 +269,34 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
-		//$("#btn_sair").click(this.logout);
+		// $("#btn_sair").click(this.logout);
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
 		app.logger = window.console;
 		ipadID.id = 'browser';
-		
-		//botões do menu
-		$("#btn_sair").click(function(){
-			app.validaOperacoes(app.logout,
-			"Insira a senha para realizar o logout.",
-			"Logout",
-			"Senha incorreta.\nDeseja tentar novamente?",
-			"Senha Incorreta", "Logout", "Voltar" );
-		});
-		
-		$("#duplica_log").click(function() {
-			app.validaOperacoes(app.duplicaLog, 
-			"Insira a senha para exportar o Log de operações.",
-			"Exportar log de operações",
-			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
-			"Senha Incorreta", "Exportar", "Voltar");
-		});
-		
-		$("#duplica_db").click(function() {
-			app.validaOperacoes(app.duplicaDb, 
-			"Insira a senha para exportar o banco de dados.",
-			"Exportar banco de dados",
-			"Senha incorreta para a exportação.\nDeseja tentar novamente?",
-			"Senha Incorreta", "Exportar", "Voltar");
-		});
-		
+
+		// botões do menu
+		$("#btn_sair").click(
+				function() {
+					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout",
+							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
+				});
+
+		$("#duplica_log").click(
+				function() {
+					app.validaOperacoes(app.duplicaLog, "Insira a senha para exportar o Log de operações.",
+							"Exportar log de operações", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
+							"Senha Incorreta", "Exportar", "Voltar");
+				});
+
+		$("#duplica_db").click(
+				function() {
+					app.validaOperacoes(app.duplicaDb, "Insira a senha para exportar o banco de dados.",
+							"Exportar banco de dados", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
+							"Senha Incorreta", "Exportar", "Voltar");
+				});
+
 		// remove o filtro original do autocomplete para poder filtrar acentos
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
@@ -497,10 +489,62 @@ var app = {
 			} else {
 				peso = peso * 100;
 			}
-			app.setAtributo('pesoDaCarga', peso)
-		} else if (registro.cancelado != 1) {
+			app.setAtributo('pesoDaCarga', peso);
+		}
+		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
 			// TODO: ERRO (peso da carga vazio)
-			app.logger.log("ERRO (peso da carga vazio) no registro: ", registro.id);
+			app.logger.log("ERRO (pesoDaCarga vazio) no registro: ", registro.id);
+		}
+
+		// TIPO DE PRODUTO (CARGA)
+		if (!util.isEmpty(registro.idProduto)) {
+			app.setAtributo('idProduto', registro.idProduto.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idProduto) && registro.possui_carga && registro.cancelado != 1) {
+			// TODO: ERRO (idProduto vazio)
+			app.logger.log("ERRO (idProduto vazio) no registro: ", registro.id);
+		}
+
+		// CARGA ANTERIOR
+		if (!util.isEmpty(registro.idCargaAnterior)) {
+			app.setAtributo('idCargaAnterior', registro.idCargaAnterior.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && registro.cancelado != 1) {
+			// TODO: ERRO (idCargaAnterior vazio)
+			app.logger.log("ERRO (idCargaAnterior vazio) no registro: ", registro.id);
+		}
+
+		// MUNICÍPIO EMBARQUE DA CARGA
+		if (!util.isEmpty(registro.municipioEmbarqueCarga)) {
+			app.setAtributo('municipioEmbarqueCarga', registro.municipioEmbarqueCarga.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && registro.cancelado != 1) {
+			// TODO: ERRO (municipioEmbarqueCarga vazio)
+			app.logger.log("ERRO (municipioEmbarqueCarga vazio) no registro: ", registro.id);
+		}
+
+		// MUNICÍPIO DESEMBARQUE DA CARGA
+		if (!util.isEmpty(registro.municipioDesembarqueCarga)) {
+			app.setAtributo('municipioDesembarqueCarga', registro.municipioDesembarqueCarga.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && registro.cancelado != 1) {
+			// TODO: ERRO (municipioDesembarqueCarga vazio)
+			app.logger.log("ERRO (municipioDesembarqueCarga vazio) no registro: ", registro.id);
+		}
+
+		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+			app.setAtributo('paradaObrigatoriaMunicipio1', registro.paradaObrigatoriaMunicipio1.split("|")[1].trim());
+		}
+		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio2)) {
+			app.setAtributo('paradaObrigatoriaMunicipio2', registro.paradaObrigatoriaMunicipio2.split("|")[1].trim());
+		}
+		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+			if (!registro.municipiosParadaNaoSabe && registro.cancelado != 1) {
+				// TODO: ERRO (paradaObrigatoriaMunicipios vazio)
+				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ",
+						registro.id);
+			}
 		}
 
 		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));

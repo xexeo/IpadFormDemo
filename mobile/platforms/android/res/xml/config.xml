@@ -48,5 +48,6 @@
     <allow-intent href="geo:*" />
     <preference name="Orientation" value="landscape" />
     <preference name="FadeSplashScreen" value="false" />
-    <preference name="Fullscreen" value="true" />
+    <preference name="FullScreen" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
 </widget>

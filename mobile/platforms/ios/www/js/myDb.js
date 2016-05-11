@@ -1,9 +1,8 @@
 myDb = {
 
 		
-	// TODO colocar todos os campos, inclusive os nao definidos (com null)
 	tabelaOD : [
-		{field : 'id', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
+		{field : 'id', type : 'text primary key'}, // IMPORTANTE: não enviar p/ o servidor
 		{field : 'estaNoNote', type : 'integer'}, //Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
 		{field : 'idPosto' , type : 'integer'},
@@ -24,10 +23,10 @@ myDb = {
 		{field : 'frequenciaQtd', type : 'integer'}, 
 		{field : 'frequenciaPeriodo', type : 'text'}, 
 		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
-		{field : 'placaEstrangeira' , type : 'integer'}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
+		{field : 'placaEstrangeira' , type : 'text'}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
 		{field : 'idPaisPlacaEstrangeira' , type : 'integer'},
 		{field : 'idCombustivel', type : 'integer'},
-		{field : 'categoria' , type : 'text'},		
+		{field : 'categoria' , type : 'text'},
 		{field : 'possuiReboque' , type : 'text'},
 		{field : 'numeroDePessoasNoVeiculo', type : 'integer'},
 		{field : 'numeroDePessoasATrabalho', type : 'integer'},
@@ -38,11 +37,25 @@ myDb = {
 		{field : 'idTipoCarroceria', type : 'integer'},
 		{field : 'rntrc', type : 'text'},
 		{field : 'possuiCargaPerigosa', type : 'integer'}, // Boolean 1->true || false, otherwise;
-		{field : 'idNumeroDeRisco', type : 'integer'},
-		{field : 'idNumeroDaOnu', type : 'integer'},
+		{field : 'idNumeroDeRisco', type : 'text'},
+		{field : 'idNumeroDaOnu', type : 'text'},
 		{field : 'idAgregado', type : 'integer'},
 		{field : 'placaVermelha', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'idTipoDeViagemOuServico', type : 'integer'},
+		{field : 'pesoDaCarga', type : 'real'},
+		{field : 'valorDoFrete', type : 'real'},
+		{field : 'utilizaParadaEspecial', type : 'integer'}, //boolean 1->true
+		{field : 'idProduto', type : 'integer'},
+		{field : 'idCargaAnterior', type : 'integer'},
+		{field : 'valorDaCarga', type : 'real'},
+		{field : 'municipioEmbarqueCarga', type : 'integer'}, 
+		{field : 'idLocalEmbarqueCarga', type : 'integer'},
+		{field : 'municipioDesembarqueCarga', type : 'integer'},
+		{field : 'idLocalDesembarqueCarga', type : 'integer'},
+		{field : 'indoPegarCarga', type : 'integer'},
+		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
+		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
+		{field : 'idPerguntaExtra', type : 'integer'}
 	],
 
 
@@ -61,11 +74,13 @@ myDb = {
 		app.logger.log("criando tabela: tblDados");
 		app.database.transaction(
             function(tx) {
-                var sql = "CREATE TABLE IF NOT EXISTS tblDados \
-                        (id text primary key, \
-                        registro text, \
-                        estado text) ";
-                tx.executeSql(sql);
+                var sql = "CREATE TABLE IF NOT EXISTS tblDados ( ";
+				$.each(myDb.tabelaOD, function(index, item){
+					sql += item.field + " " + item.type;
+					if (index < myDb.tabelaOD.length-1) sql+= ", ";
+				});
+				sql += ");";
+				tx.executeSql(sql);
             }, function(e) {
                 app.logger.log('ERRO: ' + e.message);
             }, function(){
@@ -85,8 +100,26 @@ myDb = {
 		app.logger.log("inserindo registro: " + reg.id);
 		try{
             app.database.transaction(function(tx) {
-                var sql = "INSERT INTO tblDados (id, registro, estado) VALUES (? , ? , ?)";
-                tx.executeSql(sql, [ reg.id, JSON.stringify(reg), 'NAO_ENVIADO' ], function(tx, res) {
+                
+				
+				var fields = "(";
+				var places = "(";
+				var values = [];
+				$.each(myDb.tabelaOD, function(index, item){
+					fields += item.field;
+					places += "?";
+					values.push(reg[item.field]);
+					if (index < myDb.tabelaOD.length-1) {
+						fields += ", ";
+						places += ", ";
+					}
+				});
+				fields += ")";
+				places += ");";
+				
+				var sql = "INSERT INTO tblDados " + fields + " VALUES " + places;
+				
+				tx.executeSql(sql, values, function(tx, res) {
                     app.logger.log('id inserido no banco de dados: ' + res.insertId);
                 });
             },

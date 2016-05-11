@@ -70,16 +70,7 @@ myLogger = {
 		}
 	},
 
-	write : function(str) {
-		if (app.debugOnBrowser) {
-			console.log(str);
-		}
-		// if(!myLogger._ocupado){
-		// myLogger._ocupado = true;
-		// myLogger._internalWrite(str);
-		// } else {
-		// myLogger._fila.push(str);
-		// }
+	log : function(str) {
 		myLogger._fila.push(str);
 	},
 
