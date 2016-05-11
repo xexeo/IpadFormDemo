@@ -45,8 +45,8 @@ abstract class Db {
         return this.statement;
     }
     
-    public void executeStatement(String instruction) throws SQLException{
-        this.statement.executeUpdate(instruction);
+    public int executeStatement(String instruction) throws SQLException{
+        return this.statement.executeUpdate(instruction);
     }
     
     public ResultSet executeQuery(String instruction) throws SQLException{

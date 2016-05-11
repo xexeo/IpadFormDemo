@@ -2,6 +2,7 @@ package br.ufrj.coppeted.concentrador.database;
 
 import br.ufrj.coppetec.concentrador.Concentrador;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -72,6 +73,7 @@ public class ImportedDB extends Db{
 					+ "idPerguntaExtra"
 					+ ") ";
 		String sql;
+		int counter = 0;
 		while (rs.next()){
 			sql = sqlbase + " VALUES ("
 					+ " '" + rs.getString("id") + "', "
@@ -130,7 +132,8 @@ public class ImportedDB extends Db{
 					+ rs.getInt("idPerguntaExtra") 
 					+ "); ";
 			Concentrador.database.setStatement();
-			Concentrador.database.executeStatement(sql);
+			counter += Concentrador.database.executeStatement(sql);
 		}
+		JOptionPane.showMessageDialog(null, "Total de registros inseridos: " + Integer.toString(counter));
 	}
 }

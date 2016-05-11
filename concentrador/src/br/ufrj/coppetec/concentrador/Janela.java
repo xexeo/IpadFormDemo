@@ -15,7 +15,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
@@ -42,6 +45,21 @@ public class Janela extends javax.swing.JFrame {
         imagens = new ImagemRenderer();
         imagens.setHorizontalAlignment(SwingConstants.CENTER);
         
+		intVerifier = new InputVerifier() {
+			public boolean verify(JComponent comp) {
+				boolean returnValue;
+				JTextField textField = (JTextField) comp;
+				try {
+					Integer.parseInt(textField.getText());
+					returnValue = true;
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(Janela.this, "Apenas números inteiros são permitidos como entrada", "Entrada incorreta", JOptionPane.ERROR_MESSAGE);
+					returnValue = false;
+				}
+				return returnValue;
+			}
+		};
+		
         initComponents();
         centeringValues();
         puttingImages();
@@ -80,7 +98,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<String>();
+        cmbHora = new javax.swing.JComboBox<>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblPesquisador = new javax.swing.JLabel();
@@ -412,7 +430,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -577,6 +595,7 @@ public class Janela extends javax.swing.JFrame {
 
         tl0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl0.setToolTipText("");
+        tl0.setInputVerifier(intVerifier);
         tl0.setMinimumSize(new java.awt.Dimension(50, 19));
         tl0.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -589,6 +608,7 @@ public class Janela extends javax.swing.JFrame {
         tl1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl1.setText(" ");
         tl1.setToolTipText("");
+        tl1.setInputVerifier(intVerifier);
         tl1.setMinimumSize(new java.awt.Dimension(50, 19));
         tl1.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -601,6 +621,7 @@ public class Janela extends javax.swing.JFrame {
         tl2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl2.setText(" ");
         tl2.setToolTipText("");
+        tl2.setInputVerifier(intVerifier);
         tl2.setMinimumSize(new java.awt.Dimension(50, 19));
         tl2.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -613,6 +634,7 @@ public class Janela extends javax.swing.JFrame {
         tl3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl3.setText(" ");
         tl3.setToolTipText("");
+        tl3.setInputVerifier(intVerifier);
         tl3.setMinimumSize(new java.awt.Dimension(50, 19));
         tl3.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -625,6 +647,7 @@ public class Janela extends javax.swing.JFrame {
         tl4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl4.setText(" ");
         tl4.setToolTipText("");
+        tl4.setInputVerifier(intVerifier);
         tl4.setMinimumSize(new java.awt.Dimension(50, 19));
         tl4.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -637,6 +660,7 @@ public class Janela extends javax.swing.JFrame {
         tl5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl5.setText(" ");
         tl5.setToolTipText("");
+        tl5.setInputVerifier(intVerifier);
         tl5.setMinimumSize(new java.awt.Dimension(50, 19));
         tl5.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -649,6 +673,7 @@ public class Janela extends javax.swing.JFrame {
         tl6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl6.setText(" ");
         tl6.setToolTipText("");
+        tl6.setInputVerifier(intVerifier);
         tl6.setMinimumSize(new java.awt.Dimension(50, 19));
         tl6.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -661,6 +686,7 @@ public class Janela extends javax.swing.JFrame {
         tl7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl7.setText(" ");
         tl7.setToolTipText("");
+        tl7.setInputVerifier(intVerifier);
         tl7.setMinimumSize(new java.awt.Dimension(50, 19));
         tl7.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -688,6 +714,7 @@ public class Janela extends javax.swing.JFrame {
         tl8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl8.setText(" ");
         tl8.setToolTipText("");
+        tl8.setInputVerifier(intVerifier);
         tl8.setMinimumSize(new java.awt.Dimension(50, 19));
         tl8.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -700,6 +727,7 @@ public class Janela extends javax.swing.JFrame {
         tl9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl9.setText(" ");
         tl9.setToolTipText("");
+        tl9.setInputVerifier(intVerifier);
         tl9.setMinimumSize(new java.awt.Dimension(50, 19));
         tl9.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -712,6 +740,7 @@ public class Janela extends javax.swing.JFrame {
         tl10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl10.setText(" ");
         tl10.setToolTipText("");
+        tl10.setInputVerifier(intVerifier);
         tl10.setMinimumSize(new java.awt.Dimension(50, 19));
         tl10.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -724,6 +753,7 @@ public class Janela extends javax.swing.JFrame {
         tl11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl11.setText(" ");
         tl11.setToolTipText("");
+        tl11.setInputVerifier(intVerifier);
         tl11.setMinimumSize(new java.awt.Dimension(50, 19));
         tl11.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -736,6 +766,7 @@ public class Janela extends javax.swing.JFrame {
         tl12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl12.setText(" ");
         tl12.setToolTipText("");
+        tl12.setInputVerifier(intVerifier);
         tl12.setMinimumSize(new java.awt.Dimension(50, 19));
         tl12.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -748,6 +779,7 @@ public class Janela extends javax.swing.JFrame {
         tl13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl13.setText(" ");
         tl13.setToolTipText("");
+        tl13.setInputVerifier(intVerifier);
         tl13.setMinimumSize(new java.awt.Dimension(50, 19));
         tl13.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -760,6 +792,7 @@ public class Janela extends javax.swing.JFrame {
         tl14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl14.setText(" ");
         tl14.setToolTipText("");
+        tl14.setInputVerifier(intVerifier);
         tl14.setMinimumSize(new java.awt.Dimension(50, 19));
         tl14.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -772,6 +805,7 @@ public class Janela extends javax.swing.JFrame {
         tl15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl15.setText(" ");
         tl15.setToolTipText("");
+        tl15.setInputVerifier(intVerifier);
         tl15.setMinimumSize(new java.awt.Dimension(50, 19));
         tl15.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -799,6 +833,7 @@ public class Janela extends javax.swing.JFrame {
         tl16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl16.setText(" ");
         tl16.setToolTipText("");
+        tl16.setInputVerifier(intVerifier);
         tl16.setMinimumSize(new java.awt.Dimension(50, 19));
         tl16.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -811,6 +846,7 @@ public class Janela extends javax.swing.JFrame {
         tl17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl17.setText(" ");
         tl17.setToolTipText("");
+        tl17.setInputVerifier(intVerifier);
         tl17.setMinimumSize(new java.awt.Dimension(50, 19));
         tl17.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -823,6 +859,7 @@ public class Janela extends javax.swing.JFrame {
         tl18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl18.setText(" ");
         tl18.setToolTipText("");
+        tl18.setInputVerifier(intVerifier);
         tl18.setMinimumSize(new java.awt.Dimension(50, 19));
         tl18.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -835,6 +872,7 @@ public class Janela extends javax.swing.JFrame {
         tl19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl19.setText(" ");
         tl19.setToolTipText("");
+        tl19.setInputVerifier(intVerifier);
         tl19.setMinimumSize(new java.awt.Dimension(50, 19));
         tl19.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -847,6 +885,7 @@ public class Janela extends javax.swing.JFrame {
         tl20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl20.setText(" ");
         tl20.setToolTipText("");
+        tl20.setInputVerifier(intVerifier);
         tl20.setMinimumSize(new java.awt.Dimension(50, 19));
         tl20.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -859,6 +898,7 @@ public class Janela extends javax.swing.JFrame {
         tl21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl21.setText(" ");
         tl21.setToolTipText("");
+        tl21.setInputVerifier(intVerifier);
         tl21.setMinimumSize(new java.awt.Dimension(50, 19));
         tl21.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -871,6 +911,7 @@ public class Janela extends javax.swing.JFrame {
         tl22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl22.setText(" ");
         tl22.setToolTipText("");
+        tl22.setInputVerifier(intVerifier);
         tl22.setMinimumSize(new java.awt.Dimension(50, 19));
         tl22.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -883,6 +924,7 @@ public class Janela extends javax.swing.JFrame {
         tl23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl23.setText(" ");
         tl23.setToolTipText("");
+        tl23.setInputVerifier(intVerifier);
         tl23.setMinimumSize(new java.awt.Dimension(50, 19));
         tl23.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -910,6 +952,7 @@ public class Janela extends javax.swing.JFrame {
         tl24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl24.setText(" ");
         tl24.setToolTipText("");
+        tl24.setInputVerifier(intVerifier);
         tl24.setMinimumSize(new java.awt.Dimension(50, 19));
         tl24.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -922,6 +965,7 @@ public class Janela extends javax.swing.JFrame {
         tl25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl25.setText(" ");
         tl25.setToolTipText("");
+        tl25.setInputVerifier(intVerifier);
         tl25.setMinimumSize(new java.awt.Dimension(50, 19));
         tl25.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -934,6 +978,7 @@ public class Janela extends javax.swing.JFrame {
         tl26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl26.setText(" ");
         tl26.setToolTipText("");
+        tl26.setInputVerifier(intVerifier);
         tl26.setMinimumSize(new java.awt.Dimension(50, 19));
         tl26.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -946,6 +991,7 @@ public class Janela extends javax.swing.JFrame {
         tl27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl27.setText(" ");
         tl27.setToolTipText("");
+        tl27.setInputVerifier(intVerifier);
         tl27.setMinimumSize(new java.awt.Dimension(50, 19));
         tl27.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -958,6 +1004,7 @@ public class Janela extends javax.swing.JFrame {
         tl28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl28.setText(" ");
         tl28.setToolTipText("");
+        tl28.setInputVerifier(intVerifier);
         tl28.setMinimumSize(new java.awt.Dimension(50, 19));
         tl28.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -970,6 +1017,7 @@ public class Janela extends javax.swing.JFrame {
         tl29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl29.setText(" ");
         tl29.setToolTipText("");
+        tl29.setInputVerifier(intVerifier);
         tl29.setMinimumSize(new java.awt.Dimension(50, 19));
         tl29.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -982,6 +1030,7 @@ public class Janela extends javax.swing.JFrame {
         tl30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl30.setText(" ");
         tl30.setToolTipText("");
+        tl30.setInputVerifier(intVerifier);
         tl30.setMinimumSize(new java.awt.Dimension(50, 19));
         tl30.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -994,6 +1043,7 @@ public class Janela extends javax.swing.JFrame {
         tl31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl31.setText(" ");
         tl31.setToolTipText("");
+        tl31.setInputVerifier(intVerifier);
         tl31.setMinimumSize(new java.awt.Dimension(50, 19));
         tl31.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1021,6 +1071,7 @@ public class Janela extends javax.swing.JFrame {
         tl32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl32.setText(" ");
         tl32.setToolTipText("");
+        tl32.setInputVerifier(intVerifier);
         tl32.setMinimumSize(new java.awt.Dimension(50, 19));
         tl32.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1032,6 +1083,7 @@ public class Janela extends javax.swing.JFrame {
         tl33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl33.setText(" ");
         tl33.setToolTipText("");
+        tl33.setInputVerifier(intVerifier);
         tl33.setMinimumSize(new java.awt.Dimension(50, 19));
         tl33.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1043,6 +1095,7 @@ public class Janela extends javax.swing.JFrame {
         tl34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl34.setText(" ");
         tl34.setToolTipText("");
+        tl34.setInputVerifier(intVerifier);
         tl34.setMinimumSize(new java.awt.Dimension(50, 19));
         tl34.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1054,6 +1107,7 @@ public class Janela extends javax.swing.JFrame {
         tl35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl35.setText(" ");
         tl35.setToolTipText("");
+        tl35.setInputVerifier(intVerifier);
         tl35.setMinimumSize(new java.awt.Dimension(50, 19));
         tl35.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1065,6 +1119,7 @@ public class Janela extends javax.swing.JFrame {
         tl36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl36.setText(" ");
         tl36.setToolTipText("");
+        tl36.setInputVerifier(intVerifier);
         tl36.setMinimumSize(new java.awt.Dimension(50, 19));
         tl36.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1076,6 +1131,7 @@ public class Janela extends javax.swing.JFrame {
         tl37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl37.setText(" ");
         tl37.setToolTipText("");
+        tl37.setInputVerifier(intVerifier);
         tl37.setMinimumSize(new java.awt.Dimension(50, 19));
         tl37.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1087,6 +1143,7 @@ public class Janela extends javax.swing.JFrame {
         tl38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl38.setText(" ");
         tl38.setToolTipText("");
+        tl38.setInputVerifier(intVerifier);
         tl38.setMinimumSize(new java.awt.Dimension(50, 19));
         tl38.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1098,6 +1155,7 @@ public class Janela extends javax.swing.JFrame {
         tl39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl39.setText(" ");
         tl39.setToolTipText("");
+        tl39.setInputVerifier(intVerifier);
         tl39.setMinimumSize(new java.awt.Dimension(50, 19));
         tl39.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1125,6 +1183,7 @@ public class Janela extends javax.swing.JFrame {
         tl40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl40.setText(" ");
         tl40.setToolTipText("");
+        tl40.setInputVerifier(intVerifier);
         tl40.setMinimumSize(new java.awt.Dimension(50, 19));
         tl40.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1136,6 +1195,7 @@ public class Janela extends javax.swing.JFrame {
         tl41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl41.setText(" ");
         tl41.setToolTipText("");
+        tl41.setInputVerifier(intVerifier);
         tl41.setMinimumSize(new java.awt.Dimension(50, 19));
         tl41.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1147,6 +1207,7 @@ public class Janela extends javax.swing.JFrame {
         tl42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl42.setText(" ");
         tl42.setToolTipText("");
+        tl42.setInputVerifier(intVerifier);
         tl42.setMinimumSize(new java.awt.Dimension(50, 19));
         tl42.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1158,6 +1219,7 @@ public class Janela extends javax.swing.JFrame {
         tl43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl43.setText(" ");
         tl43.setToolTipText("");
+        tl43.setInputVerifier(intVerifier);
         tl43.setMinimumSize(new java.awt.Dimension(50, 19));
         tl43.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1169,6 +1231,7 @@ public class Janela extends javax.swing.JFrame {
         tl44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl44.setText(" ");
         tl44.setToolTipText("");
+        tl44.setInputVerifier(intVerifier);
         tl44.setMinimumSize(new java.awt.Dimension(50, 19));
         tl44.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1180,6 +1243,7 @@ public class Janela extends javax.swing.JFrame {
         tl45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl45.setText(" ");
         tl45.setToolTipText("");
+        tl45.setInputVerifier(intVerifier);
         tl45.setMinimumSize(new java.awt.Dimension(50, 19));
         tl45.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1191,6 +1255,7 @@ public class Janela extends javax.swing.JFrame {
         tl46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl46.setText(" ");
         tl46.setToolTipText("");
+        tl46.setInputVerifier(intVerifier);
         tl46.setMinimumSize(new java.awt.Dimension(50, 19));
         tl46.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1202,6 +1267,7 @@ public class Janela extends javax.swing.JFrame {
         tl47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl47.setText(" ");
         tl47.setToolTipText("");
+        tl47.setInputVerifier(intVerifier);
         tl47.setMinimumSize(new java.awt.Dimension(50, 19));
         tl47.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1228,6 +1294,7 @@ public class Janela extends javax.swing.JFrame {
         tl48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl48.setText(" ");
         tl48.setToolTipText("");
+        tl48.setInputVerifier(intVerifier);
         tl48.setMinimumSize(new java.awt.Dimension(50, 19));
         tl48.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1239,6 +1306,7 @@ public class Janela extends javax.swing.JFrame {
         tl49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl49.setText(" ");
         tl49.setToolTipText("");
+        tl49.setInputVerifier(intVerifier);
         tl49.setMinimumSize(new java.awt.Dimension(50, 19));
         tl49.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1250,6 +1318,7 @@ public class Janela extends javax.swing.JFrame {
         tl50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl50.setText(" ");
         tl50.setToolTipText("");
+        tl50.setInputVerifier(intVerifier);
         tl50.setMinimumSize(new java.awt.Dimension(50, 19));
         tl50.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1261,6 +1330,7 @@ public class Janela extends javax.swing.JFrame {
         tl51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl51.setText(" ");
         tl51.setToolTipText("");
+        tl51.setInputVerifier(intVerifier);
         tl51.setMinimumSize(new java.awt.Dimension(50, 19));
         tl51.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1272,6 +1342,7 @@ public class Janela extends javax.swing.JFrame {
         tl52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl52.setText(" ");
         tl52.setToolTipText("");
+        tl52.setInputVerifier(intVerifier);
         tl52.setMinimumSize(new java.awt.Dimension(50, 19));
         tl52.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1283,6 +1354,7 @@ public class Janela extends javax.swing.JFrame {
         tl53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl53.setText(" ");
         tl53.setToolTipText("");
+        tl53.setInputVerifier(intVerifier);
         tl53.setMinimumSize(new java.awt.Dimension(50, 19));
         tl53.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1294,6 +1366,7 @@ public class Janela extends javax.swing.JFrame {
         tl54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl54.setText(" ");
         tl54.setToolTipText("");
+        tl54.setInputVerifier(intVerifier);
         tl54.setMinimumSize(new java.awt.Dimension(50, 19));
         tl54.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1305,6 +1378,7 @@ public class Janela extends javax.swing.JFrame {
         tl55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl55.setText(" ");
         tl55.setToolTipText("");
+        tl55.setInputVerifier(intVerifier);
         tl55.setMinimumSize(new java.awt.Dimension(50, 19));
         tl55.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1331,6 +1405,7 @@ public class Janela extends javax.swing.JFrame {
         tl56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl56.setText(" ");
         tl56.setToolTipText("");
+        tl56.setInputVerifier(intVerifier);
         tl56.setMinimumSize(new java.awt.Dimension(50, 19));
         tl56.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1342,6 +1417,7 @@ public class Janela extends javax.swing.JFrame {
         tl57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl57.setText(" ");
         tl57.setToolTipText("");
+        tl57.setInputVerifier(intVerifier);
         tl57.setMinimumSize(new java.awt.Dimension(50, 19));
         tl57.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1353,6 +1429,7 @@ public class Janela extends javax.swing.JFrame {
         tl58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl58.setText(" ");
         tl58.setToolTipText("");
+        tl58.setInputVerifier(intVerifier);
         tl58.setMinimumSize(new java.awt.Dimension(50, 19));
         tl58.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1364,6 +1441,7 @@ public class Janela extends javax.swing.JFrame {
         tl59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl59.setText(" ");
         tl59.setToolTipText("");
+        tl59.setInputVerifier(intVerifier);
         tl59.setMinimumSize(new java.awt.Dimension(50, 19));
         tl59.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1375,6 +1453,7 @@ public class Janela extends javax.swing.JFrame {
         tl60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl60.setText(" ");
         tl60.setToolTipText("");
+        tl60.setInputVerifier(intVerifier);
         tl60.setMinimumSize(new java.awt.Dimension(50, 19));
         tl60.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1386,6 +1465,7 @@ public class Janela extends javax.swing.JFrame {
         tl61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl61.setText(" ");
         tl61.setToolTipText("");
+        tl61.setInputVerifier(intVerifier);
         tl61.setMinimumSize(new java.awt.Dimension(50, 19));
         tl61.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1397,6 +1477,7 @@ public class Janela extends javax.swing.JFrame {
         tl62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl62.setText(" ");
         tl62.setToolTipText("");
+        tl62.setInputVerifier(intVerifier);
         tl62.setMinimumSize(new java.awt.Dimension(50, 19));
         tl62.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1408,6 +1489,7 @@ public class Janela extends javax.swing.JFrame {
         tl63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl63.setText(" ");
         tl63.setToolTipText("");
+        tl63.setInputVerifier(intVerifier);
         tl63.setMinimumSize(new java.awt.Dimension(50, 19));
         tl63.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1434,6 +1516,7 @@ public class Janela extends javax.swing.JFrame {
         tl64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl64.setText(" ");
         tl64.setToolTipText("");
+        tl64.setInputVerifier(intVerifier);
         tl64.setMinimumSize(new java.awt.Dimension(50, 19));
         tl64.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1445,6 +1528,7 @@ public class Janela extends javax.swing.JFrame {
         tl65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl65.setText(" ");
         tl65.setToolTipText("");
+        tl65.setInputVerifier(intVerifier);
         tl65.setMinimumSize(new java.awt.Dimension(50, 19));
         tl65.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1456,6 +1540,7 @@ public class Janela extends javax.swing.JFrame {
         tl66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl66.setText(" ");
         tl66.setToolTipText("");
+        tl66.setInputVerifier(intVerifier);
         tl66.setMinimumSize(new java.awt.Dimension(50, 19));
         tl66.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1467,6 +1552,7 @@ public class Janela extends javax.swing.JFrame {
         tl67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl67.setText(" ");
         tl67.setToolTipText("");
+        tl67.setInputVerifier(intVerifier);
         tl67.setMinimumSize(new java.awt.Dimension(50, 19));
         tl67.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1478,6 +1564,7 @@ public class Janela extends javax.swing.JFrame {
         tl68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl68.setText(" ");
         tl68.setToolTipText("");
+        tl68.setInputVerifier(intVerifier);
         tl68.setMinimumSize(new java.awt.Dimension(50, 19));
         tl68.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1489,6 +1576,7 @@ public class Janela extends javax.swing.JFrame {
         tl69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl69.setText(" ");
         tl69.setToolTipText("");
+        tl69.setInputVerifier(intVerifier);
         tl69.setMinimumSize(new java.awt.Dimension(50, 19));
         tl69.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1500,6 +1588,7 @@ public class Janela extends javax.swing.JFrame {
         tl70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl70.setText(" ");
         tl70.setToolTipText("");
+        tl70.setInputVerifier(intVerifier);
         tl70.setMinimumSize(new java.awt.Dimension(50, 19));
         tl70.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1511,6 +1600,7 @@ public class Janela extends javax.swing.JFrame {
         tl71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl71.setText(" ");
         tl71.setToolTipText("");
+        tl71.setInputVerifier(intVerifier);
         tl71.setMinimumSize(new java.awt.Dimension(50, 19));
         tl71.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1537,6 +1627,7 @@ public class Janela extends javax.swing.JFrame {
         tl72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl72.setText(" ");
         tl72.setToolTipText("");
+        tl72.setInputVerifier(intVerifier);
         tl72.setMinimumSize(new java.awt.Dimension(50, 19));
         tl72.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1548,6 +1639,7 @@ public class Janela extends javax.swing.JFrame {
         tl73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl73.setText(" ");
         tl73.setToolTipText("");
+        tl73.setInputVerifier(intVerifier);
         tl73.setMinimumSize(new java.awt.Dimension(50, 19));
         tl73.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1559,6 +1651,7 @@ public class Janela extends javax.swing.JFrame {
         tl74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl74.setText(" ");
         tl74.setToolTipText("");
+        tl74.setInputVerifier(intVerifier);
         tl74.setMinimumSize(new java.awt.Dimension(50, 19));
         tl74.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1570,6 +1663,7 @@ public class Janela extends javax.swing.JFrame {
         tl75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl75.setText(" ");
         tl75.setToolTipText("");
+        tl75.setInputVerifier(intVerifier);
         tl75.setMinimumSize(new java.awt.Dimension(50, 19));
         tl75.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1581,6 +1675,7 @@ public class Janela extends javax.swing.JFrame {
         tl76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl76.setText(" ");
         tl76.setToolTipText("");
+        tl76.setInputVerifier(intVerifier);
         tl76.setMinimumSize(new java.awt.Dimension(50, 19));
         tl76.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1592,6 +1687,7 @@ public class Janela extends javax.swing.JFrame {
         tl77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl77.setText(" ");
         tl77.setToolTipText("");
+        tl77.setInputVerifier(intVerifier);
         tl77.setMinimumSize(new java.awt.Dimension(50, 19));
         tl77.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1603,6 +1699,7 @@ public class Janela extends javax.swing.JFrame {
         tl78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl78.setText(" ");
         tl78.setToolTipText("");
+        tl78.setInputVerifier(intVerifier);
         tl78.setMinimumSize(new java.awt.Dimension(50, 19));
         tl78.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1614,6 +1711,7 @@ public class Janela extends javax.swing.JFrame {
         tl79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl79.setText(" ");
         tl79.setToolTipText("");
+        tl79.setInputVerifier(intVerifier);
         tl79.setMinimumSize(new java.awt.Dimension(50, 19));
         tl79.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1640,6 +1738,7 @@ public class Janela extends javax.swing.JFrame {
         tl80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl80.setText(" ");
         tl80.setToolTipText("");
+        tl80.setInputVerifier(intVerifier);
         tl80.setMinimumSize(new java.awt.Dimension(50, 19));
         tl80.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1651,6 +1750,7 @@ public class Janela extends javax.swing.JFrame {
         tl81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl81.setText(" ");
         tl81.setToolTipText("");
+        tl81.setInputVerifier(intVerifier);
         tl81.setMinimumSize(new java.awt.Dimension(50, 19));
         tl81.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1662,6 +1762,7 @@ public class Janela extends javax.swing.JFrame {
         tl82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl82.setText(" ");
         tl82.setToolTipText("");
+        tl82.setInputVerifier(intVerifier);
         tl82.setMinimumSize(new java.awt.Dimension(50, 19));
         tl82.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1673,6 +1774,7 @@ public class Janela extends javax.swing.JFrame {
         tl83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl83.setText(" ");
         tl83.setToolTipText("");
+        tl83.setInputVerifier(intVerifier);
         tl83.setMinimumSize(new java.awt.Dimension(50, 19));
         tl83.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1684,6 +1786,7 @@ public class Janela extends javax.swing.JFrame {
         tl84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl84.setText(" ");
         tl84.setToolTipText("");
+        tl84.setInputVerifier(intVerifier);
         tl84.setMinimumSize(new java.awt.Dimension(50, 19));
         tl84.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1695,6 +1798,7 @@ public class Janela extends javax.swing.JFrame {
         tl85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl85.setText(" ");
         tl85.setToolTipText("");
+        tl85.setInputVerifier(intVerifier);
         tl85.setMinimumSize(new java.awt.Dimension(50, 19));
         tl85.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1706,6 +1810,7 @@ public class Janela extends javax.swing.JFrame {
         tl86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl86.setText(" ");
         tl86.setToolTipText("");
+        tl86.setInputVerifier(intVerifier);
         tl86.setMinimumSize(new java.awt.Dimension(50, 19));
         tl86.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1717,6 +1822,7 @@ public class Janela extends javax.swing.JFrame {
         tl87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl87.setText(" ");
         tl87.setToolTipText("");
+        tl87.setInputVerifier(intVerifier);
         tl87.setMinimumSize(new java.awt.Dimension(50, 19));
         tl87.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1743,6 +1849,7 @@ public class Janela extends javax.swing.JFrame {
         tl88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl88.setText(" ");
         tl88.setToolTipText("");
+        tl88.setInputVerifier(intVerifier);
         tl88.setMinimumSize(new java.awt.Dimension(50, 19));
         tl88.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1754,6 +1861,7 @@ public class Janela extends javax.swing.JFrame {
         tl89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl89.setText(" ");
         tl89.setToolTipText("");
+        tl89.setInputVerifier(intVerifier);
         tl89.setMinimumSize(new java.awt.Dimension(50, 19));
         tl89.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1765,6 +1873,7 @@ public class Janela extends javax.swing.JFrame {
         tl90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl90.setText(" ");
         tl90.setToolTipText("");
+        tl90.setInputVerifier(intVerifier);
         tl90.setMinimumSize(new java.awt.Dimension(50, 19));
         tl90.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1776,6 +1885,7 @@ public class Janela extends javax.swing.JFrame {
         tl91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl91.setText(" ");
         tl91.setToolTipText("");
+        tl91.setInputVerifier(intVerifier);
         tl91.setMinimumSize(new java.awt.Dimension(50, 19));
         tl91.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1787,6 +1897,7 @@ public class Janela extends javax.swing.JFrame {
         tl92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl92.setText(" ");
         tl92.setToolTipText("");
+        tl92.setInputVerifier(intVerifier);
         tl92.setMinimumSize(new java.awt.Dimension(50, 19));
         tl92.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1798,6 +1909,7 @@ public class Janela extends javax.swing.JFrame {
         tl93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl93.setText(" ");
         tl93.setToolTipText("");
+        tl93.setInputVerifier(intVerifier);
         tl93.setMinimumSize(new java.awt.Dimension(50, 19));
         tl93.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1809,6 +1921,7 @@ public class Janela extends javax.swing.JFrame {
         tl94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl94.setText(" ");
         tl94.setToolTipText("");
+        tl94.setInputVerifier(intVerifier);
         tl94.setMinimumSize(new java.awt.Dimension(50, 19));
         tl94.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1820,6 +1933,7 @@ public class Janela extends javax.swing.JFrame {
         tl95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl95.setText(" ");
         tl95.setToolTipText("");
+        tl95.setInputVerifier(intVerifier);
         tl95.setMinimumSize(new java.awt.Dimension(50, 19));
         tl95.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1978,6 +2092,7 @@ public class Janela extends javax.swing.JFrame {
 
         tp0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp0.setToolTipText("");
+        tp0.setInputVerifier(intVerifier);
         tp0.setMinimumSize(new java.awt.Dimension(50, 19));
         tp0.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1990,6 +2105,7 @@ public class Janela extends javax.swing.JFrame {
         tp1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp1.setText(" ");
         tp1.setToolTipText("");
+        tp1.setInputVerifier(intVerifier);
         tp1.setMinimumSize(new java.awt.Dimension(50, 19));
         tp1.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2002,6 +2118,7 @@ public class Janela extends javax.swing.JFrame {
         tp2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp2.setText(" ");
         tp2.setToolTipText("");
+        tp2.setInputVerifier(intVerifier);
         tp2.setMinimumSize(new java.awt.Dimension(50, 19));
         tp2.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2014,6 +2131,7 @@ public class Janela extends javax.swing.JFrame {
         tp3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp3.setText(" ");
         tp3.setToolTipText("");
+        tp3.setInputVerifier(intVerifier);
         tp3.setMinimumSize(new java.awt.Dimension(50, 19));
         tp3.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2026,6 +2144,7 @@ public class Janela extends javax.swing.JFrame {
         tp4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp4.setText(" ");
         tp4.setToolTipText("");
+        tp4.setInputVerifier(intVerifier);
         tp4.setMinimumSize(new java.awt.Dimension(50, 19));
         tp4.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2038,6 +2157,7 @@ public class Janela extends javax.swing.JFrame {
         tp5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp5.setText(" ");
         tp5.setToolTipText("");
+        tp5.setInputVerifier(intVerifier);
         tp5.setMinimumSize(new java.awt.Dimension(50, 19));
         tp5.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2050,6 +2170,7 @@ public class Janela extends javax.swing.JFrame {
         tp6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp6.setText(" ");
         tp6.setToolTipText("");
+        tp6.setInputVerifier(intVerifier);
         tp6.setMinimumSize(new java.awt.Dimension(50, 19));
         tp6.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2062,6 +2183,7 @@ public class Janela extends javax.swing.JFrame {
         tp7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp7.setText(" ");
         tp7.setToolTipText("");
+        tp7.setInputVerifier(intVerifier);
         tp7.setMinimumSize(new java.awt.Dimension(50, 19));
         tp7.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2089,6 +2211,7 @@ public class Janela extends javax.swing.JFrame {
         tp8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp8.setText(" ");
         tp8.setToolTipText("");
+        tp8.setInputVerifier(intVerifier);
         tp8.setMinimumSize(new java.awt.Dimension(50, 19));
         tp8.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2101,6 +2224,7 @@ public class Janela extends javax.swing.JFrame {
         tp9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp9.setText(" ");
         tp9.setToolTipText("");
+        tp9.setInputVerifier(intVerifier);
         tp9.setMinimumSize(new java.awt.Dimension(50, 19));
         tp9.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2113,6 +2237,7 @@ public class Janela extends javax.swing.JFrame {
         tp10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp10.setText(" ");
         tp10.setToolTipText("");
+        tp10.setInputVerifier(intVerifier);
         tp10.setMinimumSize(new java.awt.Dimension(50, 19));
         tp10.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2125,6 +2250,7 @@ public class Janela extends javax.swing.JFrame {
         tp11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp11.setText(" ");
         tp11.setToolTipText("");
+        tp11.setInputVerifier(intVerifier);
         tp11.setMinimumSize(new java.awt.Dimension(50, 19));
         tp11.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2137,6 +2263,7 @@ public class Janela extends javax.swing.JFrame {
         tp12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp12.setText(" ");
         tp12.setToolTipText("");
+        tp12.setInputVerifier(intVerifier);
         tp12.setMinimumSize(new java.awt.Dimension(50, 19));
         tp12.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2149,6 +2276,7 @@ public class Janela extends javax.swing.JFrame {
         tp13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp13.setText(" ");
         tp13.setToolTipText("");
+        tp13.setInputVerifier(intVerifier);
         tp13.setMinimumSize(new java.awt.Dimension(50, 19));
         tp13.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2161,6 +2289,7 @@ public class Janela extends javax.swing.JFrame {
         tp14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp14.setText(" ");
         tp14.setToolTipText("");
+        tp14.setInputVerifier(intVerifier);
         tp14.setMinimumSize(new java.awt.Dimension(50, 19));
         tp14.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2173,6 +2302,7 @@ public class Janela extends javax.swing.JFrame {
         tp15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp15.setText(" ");
         tp15.setToolTipText("");
+        tp15.setInputVerifier(intVerifier);
         tp15.setMinimumSize(new java.awt.Dimension(50, 19));
         tp15.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2200,6 +2330,7 @@ public class Janela extends javax.swing.JFrame {
         tp16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp16.setText(" ");
         tp16.setToolTipText("");
+        tp16.setInputVerifier(intVerifier);
         tp16.setMinimumSize(new java.awt.Dimension(50, 19));
         tp16.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2212,6 +2343,7 @@ public class Janela extends javax.swing.JFrame {
         tp17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp17.setText(" ");
         tp17.setToolTipText("");
+        tp17.setInputVerifier(intVerifier);
         tp17.setMinimumSize(new java.awt.Dimension(50, 19));
         tp17.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2224,6 +2356,7 @@ public class Janela extends javax.swing.JFrame {
         tp18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp18.setText(" ");
         tp18.setToolTipText("");
+        tp18.setInputVerifier(intVerifier);
         tp18.setMinimumSize(new java.awt.Dimension(50, 19));
         tp18.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2236,6 +2369,7 @@ public class Janela extends javax.swing.JFrame {
         tp19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp19.setText(" ");
         tp19.setToolTipText("");
+        tp19.setInputVerifier(intVerifier);
         tp19.setMinimumSize(new java.awt.Dimension(50, 19));
         tp19.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2248,6 +2382,7 @@ public class Janela extends javax.swing.JFrame {
         tp20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp20.setText(" ");
         tp20.setToolTipText("");
+        tp20.setInputVerifier(intVerifier);
         tp20.setMinimumSize(new java.awt.Dimension(50, 19));
         tp20.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2260,6 +2395,7 @@ public class Janela extends javax.swing.JFrame {
         tp21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp21.setText(" ");
         tp21.setToolTipText("");
+        tp21.setInputVerifier(intVerifier);
         tp21.setMinimumSize(new java.awt.Dimension(50, 19));
         tp21.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2272,6 +2408,7 @@ public class Janela extends javax.swing.JFrame {
         tp22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp22.setText(" ");
         tp22.setToolTipText("");
+        tp22.setInputVerifier(intVerifier);
         tp22.setMinimumSize(new java.awt.Dimension(50, 19));
         tp22.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2284,6 +2421,7 @@ public class Janela extends javax.swing.JFrame {
         tp23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp23.setText(" ");
         tp23.setToolTipText("");
+        tp23.setInputVerifier(intVerifier);
         tp23.setMinimumSize(new java.awt.Dimension(50, 19));
         tp23.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2311,6 +2449,7 @@ public class Janela extends javax.swing.JFrame {
         tp24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp24.setText(" ");
         tp24.setToolTipText("");
+        tp24.setInputVerifier(intVerifier);
         tp24.setMinimumSize(new java.awt.Dimension(50, 19));
         tp24.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2323,6 +2462,7 @@ public class Janela extends javax.swing.JFrame {
         tp25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp25.setText(" ");
         tp25.setToolTipText("");
+        tp25.setInputVerifier(intVerifier);
         tp25.setMinimumSize(new java.awt.Dimension(50, 19));
         tp25.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2335,6 +2475,7 @@ public class Janela extends javax.swing.JFrame {
         tp26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp26.setText(" ");
         tp26.setToolTipText("");
+        tp26.setInputVerifier(intVerifier);
         tp26.setMinimumSize(new java.awt.Dimension(50, 19));
         tp26.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2347,6 +2488,7 @@ public class Janela extends javax.swing.JFrame {
         tp27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp27.setText(" ");
         tp27.setToolTipText("");
+        tp27.setInputVerifier(intVerifier);
         tp27.setMinimumSize(new java.awt.Dimension(50, 19));
         tp27.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2359,6 +2501,7 @@ public class Janela extends javax.swing.JFrame {
         tp28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp28.setText(" ");
         tp28.setToolTipText("");
+        tp28.setInputVerifier(intVerifier);
         tp28.setMinimumSize(new java.awt.Dimension(50, 19));
         tp28.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2371,6 +2514,7 @@ public class Janela extends javax.swing.JFrame {
         tp29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp29.setText(" ");
         tp29.setToolTipText("");
+        tp29.setInputVerifier(intVerifier);
         tp29.setMinimumSize(new java.awt.Dimension(50, 19));
         tp29.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2383,6 +2527,7 @@ public class Janela extends javax.swing.JFrame {
         tp30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp30.setText(" ");
         tp30.setToolTipText("");
+        tp30.setInputVerifier(intVerifier);
         tp30.setMinimumSize(new java.awt.Dimension(50, 19));
         tp30.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2395,6 +2540,7 @@ public class Janela extends javax.swing.JFrame {
         tp31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp31.setText(" ");
         tp31.setToolTipText("");
+        tp31.setInputVerifier(intVerifier);
         tp31.setMinimumSize(new java.awt.Dimension(50, 19));
         tp31.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2422,6 +2568,7 @@ public class Janela extends javax.swing.JFrame {
         tp32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp32.setText(" ");
         tp32.setToolTipText("");
+        tp32.setInputVerifier(intVerifier);
         tp32.setMinimumSize(new java.awt.Dimension(50, 19));
         tp32.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2433,6 +2580,7 @@ public class Janela extends javax.swing.JFrame {
         tp33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp33.setText(" ");
         tp33.setToolTipText("");
+        tp33.setInputVerifier(intVerifier);
         tp33.setMinimumSize(new java.awt.Dimension(50, 19));
         tp33.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2444,6 +2592,7 @@ public class Janela extends javax.swing.JFrame {
         tp34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp34.setText(" ");
         tp34.setToolTipText("");
+        tp34.setInputVerifier(intVerifier);
         tp34.setMinimumSize(new java.awt.Dimension(50, 19));
         tp34.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2455,6 +2604,7 @@ public class Janela extends javax.swing.JFrame {
         tp35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp35.setText(" ");
         tp35.setToolTipText("");
+        tp35.setInputVerifier(intVerifier);
         tp35.setMinimumSize(new java.awt.Dimension(50, 19));
         tp35.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2466,6 +2616,7 @@ public class Janela extends javax.swing.JFrame {
         tp36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp36.setText(" ");
         tp36.setToolTipText("");
+        tp36.setInputVerifier(intVerifier);
         tp36.setMinimumSize(new java.awt.Dimension(50, 19));
         tp36.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2477,6 +2628,7 @@ public class Janela extends javax.swing.JFrame {
         tp37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp37.setText(" ");
         tp37.setToolTipText("");
+        tp37.setInputVerifier(intVerifier);
         tp37.setMinimumSize(new java.awt.Dimension(50, 19));
         tp37.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2488,6 +2640,7 @@ public class Janela extends javax.swing.JFrame {
         tp38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp38.setText(" ");
         tp38.setToolTipText("");
+        tp38.setInputVerifier(intVerifier);
         tp38.setMinimumSize(new java.awt.Dimension(50, 19));
         tp38.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2499,6 +2652,7 @@ public class Janela extends javax.swing.JFrame {
         tp39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp39.setText(" ");
         tp39.setToolTipText("");
+        tp39.setInputVerifier(intVerifier);
         tp39.setMinimumSize(new java.awt.Dimension(50, 19));
         tp39.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2526,6 +2680,7 @@ public class Janela extends javax.swing.JFrame {
         tp40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp40.setText(" ");
         tp40.setToolTipText("");
+        tp40.setInputVerifier(intVerifier);
         tp40.setMinimumSize(new java.awt.Dimension(50, 19));
         tp40.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2537,6 +2692,7 @@ public class Janela extends javax.swing.JFrame {
         tp41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp41.setText(" ");
         tp41.setToolTipText("");
+        tp41.setInputVerifier(intVerifier);
         tp41.setMinimumSize(new java.awt.Dimension(50, 19));
         tp41.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2548,6 +2704,7 @@ public class Janela extends javax.swing.JFrame {
         tp42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp42.setText(" ");
         tp42.setToolTipText("");
+        tp42.setInputVerifier(intVerifier);
         tp42.setMinimumSize(new java.awt.Dimension(50, 19));
         tp42.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2559,6 +2716,7 @@ public class Janela extends javax.swing.JFrame {
         tp43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp43.setText(" ");
         tp43.setToolTipText("");
+        tp43.setInputVerifier(intVerifier);
         tp43.setMinimumSize(new java.awt.Dimension(50, 19));
         tp43.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2570,6 +2728,7 @@ public class Janela extends javax.swing.JFrame {
         tp44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp44.setText(" ");
         tp44.setToolTipText("");
+        tp44.setInputVerifier(intVerifier);
         tp44.setMinimumSize(new java.awt.Dimension(50, 19));
         tp44.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2581,6 +2740,7 @@ public class Janela extends javax.swing.JFrame {
         tp45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp45.setText(" ");
         tp45.setToolTipText("");
+        tp45.setInputVerifier(intVerifier);
         tp45.setMinimumSize(new java.awt.Dimension(50, 19));
         tp45.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2592,6 +2752,7 @@ public class Janela extends javax.swing.JFrame {
         tp46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp46.setText(" ");
         tp46.setToolTipText("");
+        tp46.setInputVerifier(intVerifier);
         tp46.setMinimumSize(new java.awt.Dimension(50, 19));
         tp46.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2603,6 +2764,7 @@ public class Janela extends javax.swing.JFrame {
         tp47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp47.setText(" ");
         tp47.setToolTipText("");
+        tp47.setInputVerifier(intVerifier);
         tp47.setMinimumSize(new java.awt.Dimension(50, 19));
         tp47.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2629,6 +2791,7 @@ public class Janela extends javax.swing.JFrame {
         tp48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp48.setText(" ");
         tp48.setToolTipText("");
+        tp48.setInputVerifier(intVerifier);
         tp48.setMinimumSize(new java.awt.Dimension(50, 19));
         tp48.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2640,6 +2803,7 @@ public class Janela extends javax.swing.JFrame {
         tp49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp49.setText(" ");
         tp49.setToolTipText("");
+        tp49.setInputVerifier(intVerifier);
         tp49.setMinimumSize(new java.awt.Dimension(50, 19));
         tp49.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2651,6 +2815,7 @@ public class Janela extends javax.swing.JFrame {
         tp50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp50.setText(" ");
         tp50.setToolTipText("");
+        tp50.setInputVerifier(intVerifier);
         tp50.setMinimumSize(new java.awt.Dimension(50, 19));
         tp50.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2662,6 +2827,7 @@ public class Janela extends javax.swing.JFrame {
         tp51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp51.setText(" ");
         tp51.setToolTipText("");
+        tp51.setInputVerifier(intVerifier);
         tp51.setMinimumSize(new java.awt.Dimension(50, 19));
         tp51.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2673,6 +2839,7 @@ public class Janela extends javax.swing.JFrame {
         tp52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp52.setText(" ");
         tp52.setToolTipText("");
+        tp52.setInputVerifier(intVerifier);
         tp52.setMinimumSize(new java.awt.Dimension(50, 19));
         tp52.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2684,6 +2851,7 @@ public class Janela extends javax.swing.JFrame {
         tp53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp53.setText(" ");
         tp53.setToolTipText("");
+        tp53.setInputVerifier(intVerifier);
         tp53.setMinimumSize(new java.awt.Dimension(50, 19));
         tp53.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2695,6 +2863,7 @@ public class Janela extends javax.swing.JFrame {
         tp54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp54.setText(" ");
         tp54.setToolTipText("");
+        tp54.setInputVerifier(intVerifier);
         tp54.setMinimumSize(new java.awt.Dimension(50, 19));
         tp54.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2706,6 +2875,7 @@ public class Janela extends javax.swing.JFrame {
         tp55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp55.setText(" ");
         tp55.setToolTipText("");
+        tp55.setInputVerifier(intVerifier);
         tp55.setMinimumSize(new java.awt.Dimension(50, 19));
         tp55.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2732,6 +2902,7 @@ public class Janela extends javax.swing.JFrame {
         tp56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp56.setText(" ");
         tp56.setToolTipText("");
+        tp56.setInputVerifier(intVerifier);
         tp56.setMinimumSize(new java.awt.Dimension(50, 19));
         tp56.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2743,6 +2914,7 @@ public class Janela extends javax.swing.JFrame {
         tp57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp57.setText(" ");
         tp57.setToolTipText("");
+        tp57.setInputVerifier(intVerifier);
         tp57.setMinimumSize(new java.awt.Dimension(50, 19));
         tp57.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2754,6 +2926,7 @@ public class Janela extends javax.swing.JFrame {
         tp58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp58.setText(" ");
         tp58.setToolTipText("");
+        tp58.setInputVerifier(intVerifier);
         tp58.setMinimumSize(new java.awt.Dimension(50, 19));
         tp58.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2765,6 +2938,7 @@ public class Janela extends javax.swing.JFrame {
         tp59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp59.setText(" ");
         tp59.setToolTipText("");
+        tp59.setInputVerifier(intVerifier);
         tp59.setMinimumSize(new java.awt.Dimension(50, 19));
         tp59.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2776,6 +2950,7 @@ public class Janela extends javax.swing.JFrame {
         tp60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp60.setText(" ");
         tp60.setToolTipText("");
+        tp60.setInputVerifier(intVerifier);
         tp60.setMinimumSize(new java.awt.Dimension(50, 19));
         tp60.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2787,6 +2962,7 @@ public class Janela extends javax.swing.JFrame {
         tp61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp61.setText(" ");
         tp61.setToolTipText("");
+        tp61.setInputVerifier(intVerifier);
         tp61.setMinimumSize(new java.awt.Dimension(50, 19));
         tp61.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2798,6 +2974,7 @@ public class Janela extends javax.swing.JFrame {
         tp62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp62.setText(" ");
         tp62.setToolTipText("");
+        tp62.setInputVerifier(intVerifier);
         tp62.setMinimumSize(new java.awt.Dimension(50, 19));
         tp62.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2809,6 +2986,7 @@ public class Janela extends javax.swing.JFrame {
         tp63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp63.setText(" ");
         tp63.setToolTipText("");
+        tp63.setInputVerifier(intVerifier);
         tp63.setMinimumSize(new java.awt.Dimension(50, 19));
         tp63.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2835,6 +3013,7 @@ public class Janela extends javax.swing.JFrame {
         tp64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp64.setText(" ");
         tp64.setToolTipText("");
+        tp64.setInputVerifier(intVerifier);
         tp64.setMinimumSize(new java.awt.Dimension(50, 19));
         tp64.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2846,6 +3025,7 @@ public class Janela extends javax.swing.JFrame {
         tp65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp65.setText(" ");
         tp65.setToolTipText("");
+        tp65.setInputVerifier(intVerifier);
         tp65.setMinimumSize(new java.awt.Dimension(50, 19));
         tp65.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2857,6 +3037,7 @@ public class Janela extends javax.swing.JFrame {
         tp66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp66.setText(" ");
         tp66.setToolTipText("");
+        tp66.setInputVerifier(intVerifier);
         tp66.setMinimumSize(new java.awt.Dimension(50, 19));
         tp66.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2868,6 +3049,7 @@ public class Janela extends javax.swing.JFrame {
         tp67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp67.setText(" ");
         tp67.setToolTipText("");
+        tp67.setInputVerifier(intVerifier);
         tp67.setMinimumSize(new java.awt.Dimension(50, 19));
         tp67.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2879,6 +3061,7 @@ public class Janela extends javax.swing.JFrame {
         tp68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp68.setText(" ");
         tp68.setToolTipText("");
+        tp68.setInputVerifier(intVerifier);
         tp68.setMinimumSize(new java.awt.Dimension(50, 19));
         tp68.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2890,6 +3073,7 @@ public class Janela extends javax.swing.JFrame {
         tp69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp69.setText(" ");
         tp69.setToolTipText("");
+        tp69.setInputVerifier(intVerifier);
         tp69.setMinimumSize(new java.awt.Dimension(50, 19));
         tp69.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2901,6 +3085,7 @@ public class Janela extends javax.swing.JFrame {
         tp70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp70.setText(" ");
         tp70.setToolTipText("");
+        tp70.setInputVerifier(intVerifier);
         tp70.setMinimumSize(new java.awt.Dimension(50, 19));
         tp70.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2912,6 +3097,7 @@ public class Janela extends javax.swing.JFrame {
         tp71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp71.setText(" ");
         tp71.setToolTipText("");
+        tp71.setInputVerifier(intVerifier);
         tp71.setMinimumSize(new java.awt.Dimension(50, 19));
         tp71.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2938,6 +3124,7 @@ public class Janela extends javax.swing.JFrame {
         tp72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp72.setText(" ");
         tp72.setToolTipText("");
+        tp72.setInputVerifier(intVerifier);
         tp72.setMinimumSize(new java.awt.Dimension(50, 19));
         tp72.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2949,6 +3136,7 @@ public class Janela extends javax.swing.JFrame {
         tp73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp73.setText(" ");
         tp73.setToolTipText("");
+        tp73.setInputVerifier(intVerifier);
         tp73.setMinimumSize(new java.awt.Dimension(50, 19));
         tp73.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2960,6 +3148,7 @@ public class Janela extends javax.swing.JFrame {
         tp74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp74.setText(" ");
         tp74.setToolTipText("");
+        tp74.setInputVerifier(intVerifier);
         tp74.setMinimumSize(new java.awt.Dimension(50, 19));
         tp74.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2971,6 +3160,7 @@ public class Janela extends javax.swing.JFrame {
         tp75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp75.setText(" ");
         tp75.setToolTipText("");
+        tp75.setInputVerifier(intVerifier);
         tp75.setMinimumSize(new java.awt.Dimension(50, 19));
         tp75.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2982,6 +3172,7 @@ public class Janela extends javax.swing.JFrame {
         tp76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp76.setText(" ");
         tp76.setToolTipText("");
+        tp76.setInputVerifier(intVerifier);
         tp76.setMinimumSize(new java.awt.Dimension(50, 19));
         tp76.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2993,6 +3184,7 @@ public class Janela extends javax.swing.JFrame {
         tp77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp77.setText(" ");
         tp77.setToolTipText("");
+        tp77.setInputVerifier(intVerifier);
         tp77.setMinimumSize(new java.awt.Dimension(50, 19));
         tp77.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3004,6 +3196,7 @@ public class Janela extends javax.swing.JFrame {
         tp78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp78.setText(" ");
         tp78.setToolTipText("");
+        tp78.setInputVerifier(intVerifier);
         tp78.setMinimumSize(new java.awt.Dimension(50, 19));
         tp78.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3015,6 +3208,7 @@ public class Janela extends javax.swing.JFrame {
         tp79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp79.setText(" ");
         tp79.setToolTipText("");
+        tp79.setInputVerifier(intVerifier);
         tp79.setMinimumSize(new java.awt.Dimension(50, 19));
         tp79.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3041,6 +3235,7 @@ public class Janela extends javax.swing.JFrame {
         tp80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp80.setText(" ");
         tp80.setToolTipText("");
+        tp80.setInputVerifier(intVerifier);
         tp80.setMinimumSize(new java.awt.Dimension(50, 19));
         tp80.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3052,6 +3247,7 @@ public class Janela extends javax.swing.JFrame {
         tp81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp81.setText(" ");
         tp81.setToolTipText("");
+        tp81.setInputVerifier(intVerifier);
         tp81.setMinimumSize(new java.awt.Dimension(50, 19));
         tp81.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3063,6 +3259,7 @@ public class Janela extends javax.swing.JFrame {
         tp82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp82.setText(" ");
         tp82.setToolTipText("");
+        tp82.setInputVerifier(intVerifier);
         tp82.setMinimumSize(new java.awt.Dimension(50, 19));
         tp82.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3074,6 +3271,7 @@ public class Janela extends javax.swing.JFrame {
         tp83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp83.setText(" ");
         tp83.setToolTipText("");
+        tp83.setInputVerifier(intVerifier);
         tp83.setMinimumSize(new java.awt.Dimension(50, 19));
         tp83.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3085,6 +3283,7 @@ public class Janela extends javax.swing.JFrame {
         tp84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp84.setText(" ");
         tp84.setToolTipText("");
+        tp84.setInputVerifier(intVerifier);
         tp84.setMinimumSize(new java.awt.Dimension(50, 19));
         tp84.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3096,6 +3295,7 @@ public class Janela extends javax.swing.JFrame {
         tp85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp85.setText(" ");
         tp85.setToolTipText("");
+        tp85.setInputVerifier(intVerifier);
         tp85.setMinimumSize(new java.awt.Dimension(50, 19));
         tp85.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3107,6 +3307,7 @@ public class Janela extends javax.swing.JFrame {
         tp86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp86.setText(" ");
         tp86.setToolTipText("");
+        tp86.setInputVerifier(intVerifier);
         tp86.setMinimumSize(new java.awt.Dimension(50, 19));
         tp86.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3118,6 +3319,7 @@ public class Janela extends javax.swing.JFrame {
         tp87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp87.setText(" ");
         tp87.setToolTipText("");
+        tp87.setInputVerifier(intVerifier);
         tp87.setMinimumSize(new java.awt.Dimension(50, 19));
         tp87.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3144,6 +3346,7 @@ public class Janela extends javax.swing.JFrame {
         tp88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp88.setText(" ");
         tp88.setToolTipText("");
+        tp88.setInputVerifier(intVerifier);
         tp88.setMinimumSize(new java.awt.Dimension(50, 19));
         tp88.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3155,6 +3358,7 @@ public class Janela extends javax.swing.JFrame {
         tp89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp89.setText(" ");
         tp89.setToolTipText("");
+        tp89.setInputVerifier(intVerifier);
         tp89.setMinimumSize(new java.awt.Dimension(50, 19));
         tp89.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3166,6 +3370,7 @@ public class Janela extends javax.swing.JFrame {
         tp90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp90.setText(" ");
         tp90.setToolTipText("");
+        tp90.setInputVerifier(intVerifier);
         tp90.setMinimumSize(new java.awt.Dimension(50, 19));
         tp90.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3177,6 +3382,7 @@ public class Janela extends javax.swing.JFrame {
         tp91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp91.setText(" ");
         tp91.setToolTipText("");
+        tp91.setInputVerifier(intVerifier);
         tp91.setMinimumSize(new java.awt.Dimension(50, 19));
         tp91.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3188,6 +3394,7 @@ public class Janela extends javax.swing.JFrame {
         tp92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp92.setText(" ");
         tp92.setToolTipText("");
+        tp92.setInputVerifier(intVerifier);
         tp92.setMinimumSize(new java.awt.Dimension(50, 19));
         tp92.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3199,6 +3406,7 @@ public class Janela extends javax.swing.JFrame {
         tp93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp93.setText(" ");
         tp93.setToolTipText("");
+        tp93.setInputVerifier(intVerifier);
         tp93.setMinimumSize(new java.awt.Dimension(50, 19));
         tp93.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3210,6 +3418,7 @@ public class Janela extends javax.swing.JFrame {
         tp94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp94.setText(" ");
         tp94.setToolTipText("");
+        tp94.setInputVerifier(intVerifier);
         tp94.setMinimumSize(new java.awt.Dimension(50, 19));
         tp94.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3221,6 +3430,7 @@ public class Janela extends javax.swing.JFrame {
         tp95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp95.setText(" ");
         tp95.setToolTipText("");
+        tp95.setInputVerifier(intVerifier);
         tp95.setMinimumSize(new java.awt.Dimension(50, 19));
         tp95.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3247,6 +3457,7 @@ public class Janela extends javax.swing.JFrame {
         tp96.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp96.setText(" ");
         tp96.setToolTipText("");
+        tp96.setInputVerifier(intVerifier);
         tp96.setMinimumSize(new java.awt.Dimension(50, 19));
         tp96.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3258,6 +3469,7 @@ public class Janela extends javax.swing.JFrame {
         tp97.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp97.setText(" ");
         tp97.setToolTipText("");
+        tp97.setInputVerifier(intVerifier);
         tp97.setMinimumSize(new java.awt.Dimension(50, 19));
         tp97.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3269,6 +3481,7 @@ public class Janela extends javax.swing.JFrame {
         tp98.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp98.setText(" ");
         tp98.setToolTipText("");
+        tp98.setInputVerifier(intVerifier);
         tp98.setMinimumSize(new java.awt.Dimension(50, 19));
         tp98.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3280,6 +3493,7 @@ public class Janela extends javax.swing.JFrame {
         tp99.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp99.setText(" ");
         tp99.setToolTipText("");
+        tp99.setInputVerifier(intVerifier);
         tp99.setMinimumSize(new java.awt.Dimension(50, 19));
         tp99.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3291,6 +3505,7 @@ public class Janela extends javax.swing.JFrame {
         tp100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp100.setText(" ");
         tp100.setToolTipText("");
+        tp100.setInputVerifier(intVerifier);
         tp100.setMinimumSize(new java.awt.Dimension(50, 19));
         tp100.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3302,6 +3517,7 @@ public class Janela extends javax.swing.JFrame {
         tp101.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp101.setText(" ");
         tp101.setToolTipText("");
+        tp101.setInputVerifier(intVerifier);
         tp101.setMinimumSize(new java.awt.Dimension(50, 19));
         tp101.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3313,6 +3529,7 @@ public class Janela extends javax.swing.JFrame {
         tp102.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp102.setText(" ");
         tp102.setToolTipText("");
+        tp102.setInputVerifier(intVerifier);
         tp102.setMinimumSize(new java.awt.Dimension(50, 19));
         tp102.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3324,6 +3541,7 @@ public class Janela extends javax.swing.JFrame {
         tp103.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp103.setText(" ");
         tp103.setToolTipText("");
+        tp103.setInputVerifier(intVerifier);
         tp103.setMinimumSize(new java.awt.Dimension(50, 19));
         tp103.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3350,6 +3568,7 @@ public class Janela extends javax.swing.JFrame {
         tp104.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp104.setText(" ");
         tp104.setToolTipText("");
+        tp104.setInputVerifier(intVerifier);
         tp104.setMinimumSize(new java.awt.Dimension(50, 19));
         tp104.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3361,6 +3580,7 @@ public class Janela extends javax.swing.JFrame {
         tp105.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp105.setText(" ");
         tp105.setToolTipText("");
+        tp105.setInputVerifier(intVerifier);
         tp105.setMinimumSize(new java.awt.Dimension(50, 19));
         tp105.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3372,6 +3592,7 @@ public class Janela extends javax.swing.JFrame {
         tp106.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp106.setText(" ");
         tp106.setToolTipText("");
+        tp106.setInputVerifier(intVerifier);
         tp106.setMinimumSize(new java.awt.Dimension(50, 19));
         tp106.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3383,6 +3604,7 @@ public class Janela extends javax.swing.JFrame {
         tp107.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp107.setText(" ");
         tp107.setToolTipText("");
+        tp107.setInputVerifier(intVerifier);
         tp107.setMinimumSize(new java.awt.Dimension(50, 19));
         tp107.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3394,6 +3616,7 @@ public class Janela extends javax.swing.JFrame {
         tp108.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp108.setText(" ");
         tp108.setToolTipText("");
+        tp108.setInputVerifier(intVerifier);
         tp108.setMinimumSize(new java.awt.Dimension(50, 19));
         tp108.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3405,6 +3628,7 @@ public class Janela extends javax.swing.JFrame {
         tp109.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp109.setText(" ");
         tp109.setToolTipText("");
+        tp109.setInputVerifier(intVerifier);
         tp109.setMinimumSize(new java.awt.Dimension(50, 19));
         tp109.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3416,6 +3640,7 @@ public class Janela extends javax.swing.JFrame {
         tp110.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp110.setText(" ");
         tp110.setToolTipText("");
+        tp110.setInputVerifier(intVerifier);
         tp110.setMinimumSize(new java.awt.Dimension(50, 19));
         tp110.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3427,6 +3652,7 @@ public class Janela extends javax.swing.JFrame {
         tp111.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp111.setText(" ");
         tp111.setToolTipText("");
+        tp111.setInputVerifier(intVerifier);
         tp111.setMinimumSize(new java.awt.Dimension(50, 19));
         tp111.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3453,6 +3679,7 @@ public class Janela extends javax.swing.JFrame {
         tp112.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp112.setText(" ");
         tp112.setToolTipText("");
+        tp112.setInputVerifier(intVerifier);
         tp112.setMinimumSize(new java.awt.Dimension(50, 19));
         tp112.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3464,6 +3691,7 @@ public class Janela extends javax.swing.JFrame {
         tp113.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp113.setText(" ");
         tp113.setToolTipText("");
+        tp113.setInputVerifier(intVerifier);
         tp113.setMinimumSize(new java.awt.Dimension(50, 19));
         tp113.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3475,6 +3703,7 @@ public class Janela extends javax.swing.JFrame {
         tp114.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp114.setText(" ");
         tp114.setToolTipText("");
+        tp114.setInputVerifier(intVerifier);
         tp114.setMinimumSize(new java.awt.Dimension(50, 19));
         tp114.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3486,6 +3715,7 @@ public class Janela extends javax.swing.JFrame {
         tp115.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp115.setText(" ");
         tp115.setToolTipText("");
+        tp115.setInputVerifier(intVerifier);
         tp115.setMinimumSize(new java.awt.Dimension(50, 19));
         tp115.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3497,6 +3727,7 @@ public class Janela extends javax.swing.JFrame {
         tp116.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp116.setText(" ");
         tp116.setToolTipText("");
+        tp116.setInputVerifier(intVerifier);
         tp116.setMinimumSize(new java.awt.Dimension(50, 19));
         tp116.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3508,6 +3739,7 @@ public class Janela extends javax.swing.JFrame {
         tp117.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp117.setText(" ");
         tp117.setToolTipText("");
+        tp117.setInputVerifier(intVerifier);
         tp117.setMinimumSize(new java.awt.Dimension(50, 19));
         tp117.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3519,6 +3751,7 @@ public class Janela extends javax.swing.JFrame {
         tp118.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp118.setText(" ");
         tp118.setToolTipText("");
+        tp118.setInputVerifier(intVerifier);
         tp118.setMinimumSize(new java.awt.Dimension(50, 19));
         tp118.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3530,6 +3763,7 @@ public class Janela extends javax.swing.JFrame {
         tp119.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp119.setText(" ");
         tp119.setToolTipText("");
+        tp119.setInputVerifier(intVerifier);
         tp119.setMinimumSize(new java.awt.Dimension(50, 19));
         tp119.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3556,6 +3790,7 @@ public class Janela extends javax.swing.JFrame {
         tp120.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp120.setText(" ");
         tp120.setToolTipText("");
+        tp120.setInputVerifier(intVerifier);
         tp120.setMinimumSize(new java.awt.Dimension(50, 19));
         tp120.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3567,6 +3802,7 @@ public class Janela extends javax.swing.JFrame {
         tp121.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp121.setText(" ");
         tp121.setToolTipText("");
+        tp121.setInputVerifier(intVerifier);
         tp121.setMinimumSize(new java.awt.Dimension(50, 19));
         tp121.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3578,6 +3814,7 @@ public class Janela extends javax.swing.JFrame {
         tp122.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp122.setText(" ");
         tp122.setToolTipText("");
+        tp122.setInputVerifier(intVerifier);
         tp122.setMinimumSize(new java.awt.Dimension(50, 19));
         tp122.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3589,6 +3826,7 @@ public class Janela extends javax.swing.JFrame {
         tp123.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp123.setText(" ");
         tp123.setToolTipText("");
+        tp123.setInputVerifier(intVerifier);
         tp123.setMinimumSize(new java.awt.Dimension(50, 19));
         tp123.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3600,6 +3838,7 @@ public class Janela extends javax.swing.JFrame {
         tp124.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp124.setText(" ");
         tp124.setToolTipText("");
+        tp124.setInputVerifier(intVerifier);
         tp124.setMinimumSize(new java.awt.Dimension(50, 19));
         tp124.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3611,6 +3850,7 @@ public class Janela extends javax.swing.JFrame {
         tp125.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp125.setText(" ");
         tp125.setToolTipText("");
+        tp125.setInputVerifier(intVerifier);
         tp125.setMinimumSize(new java.awt.Dimension(50, 19));
         tp125.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3622,6 +3862,7 @@ public class Janela extends javax.swing.JFrame {
         tp126.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp126.setText(" ");
         tp126.setToolTipText("");
+        tp126.setInputVerifier(intVerifier);
         tp126.setMinimumSize(new java.awt.Dimension(50, 19));
         tp126.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3633,6 +3874,7 @@ public class Janela extends javax.swing.JFrame {
         tp127.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp127.setText(" ");
         tp127.setToolTipText("");
+        tp127.setInputVerifier(intVerifier);
         tp127.setMinimumSize(new java.awt.Dimension(50, 19));
         tp127.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3659,6 +3901,7 @@ public class Janela extends javax.swing.JFrame {
         tp128.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp128.setText(" ");
         tp128.setToolTipText("");
+        tp128.setInputVerifier(intVerifier);
         tp128.setMinimumSize(new java.awt.Dimension(50, 19));
         tp128.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3670,6 +3913,7 @@ public class Janela extends javax.swing.JFrame {
         tp129.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp129.setText(" ");
         tp129.setToolTipText("");
+        tp129.setInputVerifier(intVerifier);
         tp129.setMinimumSize(new java.awt.Dimension(50, 19));
         tp129.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3681,6 +3925,7 @@ public class Janela extends javax.swing.JFrame {
         tp130.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp130.setText(" ");
         tp130.setToolTipText("");
+        tp130.setInputVerifier(intVerifier);
         tp130.setMinimumSize(new java.awt.Dimension(50, 19));
         tp130.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3692,6 +3937,7 @@ public class Janela extends javax.swing.JFrame {
         tp131.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp131.setText(" ");
         tp131.setToolTipText("");
+        tp131.setInputVerifier(intVerifier);
         tp131.setMinimumSize(new java.awt.Dimension(50, 19));
         tp131.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3703,6 +3949,7 @@ public class Janela extends javax.swing.JFrame {
         tp132.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp132.setText(" ");
         tp132.setToolTipText("");
+        tp132.setInputVerifier(intVerifier);
         tp132.setMinimumSize(new java.awt.Dimension(50, 19));
         tp132.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3714,6 +3961,7 @@ public class Janela extends javax.swing.JFrame {
         tp133.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp133.setText(" ");
         tp133.setToolTipText("");
+        tp133.setInputVerifier(intVerifier);
         tp133.setMinimumSize(new java.awt.Dimension(50, 19));
         tp133.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3725,6 +3973,7 @@ public class Janela extends javax.swing.JFrame {
         tp134.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp134.setText(" ");
         tp134.setToolTipText("");
+        tp134.setInputVerifier(intVerifier);
         tp134.setMinimumSize(new java.awt.Dimension(50, 19));
         tp134.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -3736,6 +3985,7 @@ public class Janela extends javax.swing.JFrame {
         tp135.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp135.setText(" ");
         tp135.setToolTipText("");
+        tp135.setInputVerifier(intVerifier);
         tp135.setMinimumSize(new java.awt.Dimension(50, 19));
         tp135.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -4050,7 +4300,7 @@ public class Janela extends javax.swing.JFrame {
     private DefaultTableCellRenderer numeros;
     private ImagemRenderer imagens;
     
-    
+    private InputVerifier intVerifier;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInDados;
@@ -4406,7 +4656,7 @@ class SQLiteFilter extends FileFilter{
 
 	@Override
 	public String getDescription() {
-		return "Dados pesquisa OD";
+		return "Dados pesquisa OD (*.db)";
 	}
 	
 }
