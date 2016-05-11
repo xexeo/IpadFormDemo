@@ -62,46 +62,52 @@
 			<!-- EMBARQUE DA CARGA -->
 			<fieldset class="ui-grid-a escondido" id="grupo_sabe_embarque_carga">
 				<legend class="ui-block-a">Local embarque da carga:</legend>
-				<div class="ui-block-b">
-					<input id="embarque_carga_nao_sei" type="checkbox" name="embarque_carga_nao_sei" data-theme="a" />
-					<label for="embarque_carga_nao_sei">Não sabe informar</label>
-				</div>
-				<legend class="ui-block-a escondido">&nbsp;</legend>
-				<div class="ui-block-b ui-grid-b" id="div_sabe_embarque_sim">
-					<div class="ui-block-a sel_uf" id="grupo_embarque_uf_carga">
-						<select name="embarque_uf_carga" id="embarque_uf_carga" data-theme="a">
-						</select>
+				<div class="ui-block-b ui-grid-a">
+					<div class="ui-block-a">
+						<input id="embarque_carga_nao_sei" type="checkbox" name="embarque_carga_nao_sei" data-theme="a" />
+						<label for="embarque_carga_nao_sei">Não sabe informar</label>
 					</div>
-					<div class="ui-block-b sel_municipio escondido" id="grupo_embarque_mun_carga">
-						<input data-type='search' type="text" name="embarque_mun_carga" id="embarque_mun_carga" data-theme="a" readonly="readonly">
-					</div>
-					<div class="ui-block-c">
-						<select name="embarque_local_carga" id="embarque_local_carga" data-theme="a">
-						</select>
+					<div class="ui-block-b ui-grid-a" id="div_sabe_embarque_sim">
+						<div class="ui-block-a ui-grid-a" id="grupo_embarque_uf_carga">
+							<div class="ui-block-a" id="grupo_embarque_uf_carga">
+								<select name="embarque_uf_carga" id="embarque_uf_carga" data-theme="a">
+								</select>
+							</div>
+							<div class="ui-block-b sel_municipio escondido" id="grupo_embarque_mun_carga">
+								<input data-type='search' type="text" name="embarque_mun_carga" id="embarque_mun_carga" data-theme="a" readonly="readonly">
+							</div>
+						</div>
+						<div class="ui-block-b"> <!-- TODO: tem que colocar escondido e fazer o progresso no js -->
+							<select name="embarque_local_carga" id="embarque_local_carga" data-theme="a">
+							</select>
+						</div>
 					</div>
 				</div>
 			</fieldset>
 
 			<!-- DESEMBARQUE DA CARGA -->
 			<fieldset class="ui-grid-a escondido" id="grupo_sabe_desembarque_carga">
-				<legend class="ui-block-a menor">Local desembarque da carga:</legend>
-				<div class="ui-block-b">
-					<input id="desembarque_carga_nao_sei" type="checkbox" name="desembarque_carga_nao_sei" data-theme="a" />
-					<label for="desembarque_carga_nao_sei">Não sabe informar</label>
-				</div>
-				<legend class="ui-block-a escondido">&nbsp;</legend>
-				<div class="ui-block-b ui-grid-b" id="div_sabe_desembarque_sim">
-					<div class="ui-block-a sel_uf" id="grupo_desembarque_uf_carga">
-						<select name="desembarque_uf_carga" id="desembarque_uf_carga" data-theme="a">
-						</select>
+				<legend class="ui-block-a">Local desembarque da carga:</legend>
+				<div class="ui-block-b ui-grid-a">
+					<div class="ui-block-a">
+						<input id="desembarque_carga_nao_sei" type="checkbox" name="desembarque_carga_nao_sei" data-theme="a" />
+						<label for="desembarque_carga_nao_sei">Não sabe informar</label>
 					</div>
-					<div class="ui-block-b sel_municipio escondido" id="grupo_desembarque_mun_carga">
-						<input data-type='search' type="text" name="desembarque_mun_carga" id="desembarque_mun_carga" data-theme="a"
-							readonly="readonly">
-					</div>
-					<div class="ui-block-b">
-						<select name="desembarque_local_carga" id="desembarque_local_carga" data-theme="a">
-						</select>
+					<div class="ui-block-b ui-grid-a" id="div_sabe_desembarque_sim">
+						<div class="ui-block-a ui-grid-a" id="grupo_desembarque_uf_carga">
+							<div class="ui-block-a" id="grupo_desembarque_uf_carga">
+								<select name="desembarque_uf_carga" id="desembarque_uf_carga" data-theme="a">
+								</select>
+							</div>
+							<div class="ui-block-b sel_municipio escondido" id="grupo_desembarque_mun_carga">
+								<input data-type='search' type="text" name="desembarque_mun_carga" id="desembarque_mun_carga" data-theme="a"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="ui-block-b"> <!-- TODO: tem que colocar escondido e fazer o progresso no js -->
+							<select name="desembarque_local_carga" id="desembarque_local_carga" data-theme="a">
+							</select>
+						</div>
 					</div>
 				</div>
 			</fieldset>

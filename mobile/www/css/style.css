@@ -86,8 +86,8 @@ section.ui-content>fieldset>legend.ui-block-a, section.ui-content>div>fieldset>l
 	width: 32%;
 }
 
-section.ui-content>fieldset>:not(fieldset).ui-block-b,
-	section.ui-content>div>fieldset>:not(fieldset).ui-block-b {
+section.ui-content>fieldset>:not(fieldset).ui-block-b, section.ui-content>div>fieldset>:not(fieldset).ui-block-b
+	{
 	width: 68%;
 }
 
@@ -296,8 +296,8 @@ nav.avancar>div.ui-block-b {
 	padding: 1.5em 0%;
 }
 
-#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n),
-	#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n+1) {
+#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n), #confirmar_veiculo.ui-grid-b>div:nth-of-type(3n+1)
+	{
 	width: 10%;
 }
 
@@ -400,8 +400,7 @@ ol.tipos_carrocerias div:nth-child(3)  li {
 
 #grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b,
 	#grupo_placa_dados_onibus, #grupo_placa_unica_onibus>.ui-block-b,
-	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b
-	{
+	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b {
 	width: 15%;
 }
 
@@ -427,8 +426,8 @@ div.ui-block-b>.placa_sufixo>.ui-block-b {
 
 div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 	#grupo_placa_unica_simples>.ui-block-b input,
-	#grupo_placa_unica_onibus>.ui-block-b input,
-	#grupo_placa_unica_carga>.ui-block-b input {
+	#grupo_placa_unica_onibus>.ui-block-b input, #grupo_placa_unica_carga>.ui-block-b input
+	{
 	width: 100%;
 	text-align: center;
 }
@@ -465,36 +464,34 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-block-a,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-block-a {
-	width: 19%;
+	width: 35%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-block-b,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-block-b {
-	width: 81%;
+	width: 100%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-a,
-	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-a
-	{
-	width: 55%;
+	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-a {
+	width: 63%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-b,
-	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-b
-	{
-	width: 45%;
+	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-b {
+	width: 37%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-a,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-a
 	{
-	width: 32%;
+	width: 23%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-b,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-b
 	{
-	width: 68%;
+	width: 77%;
 }
 
 .escondido {
