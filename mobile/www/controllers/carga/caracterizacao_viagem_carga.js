@@ -91,13 +91,13 @@ controllers.caracterizacao_viagem_carga = {
 			var validacoes = true;
 			if ((Number($("#origem_pais_carga").val())) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaInputText(
 								"origem_municipio_carga", "Origem da viagem - município"));
 			}
 
 			if ((Number($("#destino_pais_carga").val())) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaInputText(
 								"destino_municipio_carga", "Destino da viagem - município"));
 			}
 
