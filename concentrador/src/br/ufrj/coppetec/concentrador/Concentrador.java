@@ -24,7 +24,7 @@ public class Concentrador {
         try{
             database = new myDB();
             createVolTable();
-			createODTable();
+			database.createODTable();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
             e.printStackTrace();
@@ -61,12 +61,12 @@ public class Concentrador {
        database.executeStatement(qry);
     }
     
-    private static void createODTable() throws Exception{
-        database.setStatement();
-        String qry = "CREATE TABLE IF NOT EXISTS odTable "
-					+ "(id text primary key, "
-                    + "registro text, estado text); ";
-		database.executeStatement(qry);
-    }
+//    private static void createODTable() throws Exception{
+//        database.setStatement();
+//        String qry = "CREATE TABLE IF NOT EXISTS odTable "
+//					+ "(id text primary key, "
+//                    + "registro text, estado text); ";
+//		database.executeStatement(qry);
+//    }
     
 }

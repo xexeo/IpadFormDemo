@@ -5,8 +5,11 @@
  */
 package br.ufrj.coppetec.concentrador;
 
+import br.ufrj.coppeted.concentrador.database.ImportedDB;
 import java.awt.Color;
 import java.awt.Component;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
@@ -15,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
@@ -70,21 +74,13 @@ public class Janela extends javax.swing.JFrame {
 
         grpSentido = new javax.swing.ButtonGroup();
         grpPista = new javax.swing.ButtonGroup();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField41 = new javax.swing.JTextField();
-        jTextField42 = new javax.swing.JTextField();
-        jTextField43 = new javax.swing.JTextField();
-        jTextField44 = new javax.swing.JTextField();
-        jTextField45 = new javax.swing.JTextField();
-        jTextField46 = new javax.swing.JTextField();
-        jTextField47 = new javax.swing.JTextField();
-        jTextField48 = new javax.swing.JTextField();
+        dadosFileChooser = new javax.swing.JFileChooser();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         pnl_volumetrica = new javax.swing.JPanel();
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<>();
+        cmbHora = new javax.swing.JComboBox<String>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblPesquisador = new javax.swing.JLabel();
@@ -387,41 +383,23 @@ public class Janela extends javax.swing.JFrame {
         data = new org.jdesktop.swingx.JXDatePicker();
         data.setLocale(new Locale("pt", "BR"));
         btnSalvarForms = new javax.swing.JButton();
-        pnl_envio = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         pnl_servidor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaLog = new javax.swing.JTextArea();
         txtPorta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        pnl_envio = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btnInDados = new javax.swing.JButton();
 
-        jLabel7.setText("jLabel5");
-
-        jTextField41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField41.setText("jTextField1");
-
-        jTextField42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField42.setText("jTextField2");
-
-        jTextField43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField43.setText("jTextField3");
-
-        jTextField44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField44.setText("jTextField4");
-
-        jTextField45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField45.setText("jTextField5");
-
-        jTextField46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField46.setText("jTextField6");
-
-        jTextField47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField47.setText("jTextField7");
-
-        jTextField48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField48.setText("jTextField8");
+        dadosFileChooser.setDialogTitle("Importar dados iPad");
+        dadosFileChooser.setFileFilter(new SQLiteFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Concentrador de dados");
@@ -434,7 +412,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -1862,7 +1840,7 @@ public class Janela extends javax.swing.JFrame {
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab_levesLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 53, Short.MAX_VALUE))
+                .addGap(0, 208, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Veículos e Caminhões Leves", tab_leves);
@@ -3776,7 +3754,7 @@ public class Janela extends javax.swing.JFrame {
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
@@ -3862,33 +3840,6 @@ public class Janela extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Formulário de pesquisa volumétrica", pnl_volumetrica);
 
-        jButton1.setText("Enviar dados ainda não enviados");
-
-        jButton2.setText("Enviar todos os dados");
-
-        javax.swing.GroupLayout pnl_envioLayout = new javax.swing.GroupLayout(pnl_envio);
-        pnl_envio.setLayout(pnl_envioLayout);
-        pnl_envioLayout.setHorizontalGroup(
-            pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_envioLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(1189, Short.MAX_VALUE))
-        );
-        pnl_envioLayout.setVerticalGroup(
-            pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_envioLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(545, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("envio dos dados", pnl_envio);
-
         jLabel1.setText("Porta");
 
         txtAreaLog.setEditable(false);
@@ -3928,10 +3879,87 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Servidor Web", pnl_servidor);
+
+        jButton2.setText("Enviar todos os dados");
+
+        jButton1.setText("Enviar dados ainda não enviados");
+
+        jLabel4.setText("Envio de Dados");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(453, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(31, 31, 31)
+                .addComponent(jButton1)
+                .addGap(35, 35, 35)
+                .addComponent(jButton2)
+                .addContainerGap(650, Short.MAX_VALUE))
+        );
+
+        jLabel3.setText("Captura de Dados");
+
+        btnInDados.setText("Importar dados do Coletor");
+        btnInDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInDadosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(btnInDados))
+                .addContainerGap(538, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(32, 32, 32)
+                .addComponent(btnInDados)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnl_envioLayout = new javax.swing.GroupLayout(pnl_envio);
+        pnl_envio.setLayout(pnl_envioLayout);
+        pnl_envioLayout.setHorizontalGroup(
+            pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_envioLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pnl_envioLayout.setVerticalGroup(
+            pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("captura e envio de dados", pnl_envio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -3966,6 +3994,23 @@ public class Janela extends javax.swing.JFrame {
 		pesados_hora2.setText(hora2);
 		leves_hora2.setText(hora2);
     }//GEN-LAST:event_cmbHoraActionPerformed
+
+    private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInDadosActionPerformed
+        int returnVal = dadosFileChooser.showOpenDialog(this);
+		if (returnVal == dadosFileChooser.APPROVE_OPTION) {
+			File file = dadosFileChooser.getSelectedFile();
+			try {
+			  ImportedDB db = new ImportedDB(file.getAbsolutePath());
+			  db.importData();
+			} catch (IOException ex) {
+			  System.out.println("Problema accessando arquivo "+file.getAbsolutePath());
+			} catch (Exception e){
+				System.out.println("Problema importando dados: " + e.getMessage());
+			}
+		} else {
+			System.out.println("File access cancelled by user.");
+		}
+    }//GEN-LAST:event_btnInDadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4008,8 +4053,10 @@ public class Janela extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInDados;
     private javax.swing.JButton btnSalvarForms;
     private javax.swing.JComboBox<String> cmbHora;
+    private javax.swing.JFileChooser dadosFileChooser;
     private org.jdesktop.swingx.JXDatePicker data;
     private javax.swing.ButtonGroup grpPista;
     private javax.swing.ButtonGroup grpSentido;
@@ -4017,20 +4064,15 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField41;
-    private javax.swing.JTextField jTextField42;
-    private javax.swing.JTextField jTextField43;
-    private javax.swing.JTextField jTextField44;
-    private javax.swing.JTextField jTextField45;
-    private javax.swing.JTextField jTextField46;
-    private javax.swing.JTextField jTextField47;
-    private javax.swing.JTextField jTextField48;
     private javax.swing.JLabel lbl2C;
     private javax.swing.JLabel lbl2C2;
     private javax.swing.JLabel lbl2C3;
@@ -4354,3 +4396,17 @@ class ImagemRenderer extends DefaultTableCellRenderer{
 
     }
     }
+
+class SQLiteFilter extends FileFilter{
+
+	@Override
+	public boolean accept(File f) {
+		return f.isDirectory() || f.getAbsolutePath().endsWith(".db");
+	}
+
+	@Override
+	public String getDescription() {
+		return "Dados pesquisa OD";
+	}
+	
+}
