@@ -62,27 +62,22 @@
 			<!-- EMBARQUE DA CARGA -->
 			<fieldset class="ui-grid-a escondido" id="grupo_sabe_embarque_carga">
 				<legend class="ui-block-a">Local embarque da carga:</legend>
-				<div class="ui-block-b ui-grid-a">
-					<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-a">
-						<input type="radio" name="sabe_embarque_carga" id="sabe_embarque_carga_sim" value="sim" />
-						<label for="sabe_embarque_carga_sim">Sim</label>
-						<input type="radio" name="sabe_embarque_carga" id="sabe_embarque_carga_nao" value="nao" />
-						<label for="sabe_embarque_carga_nao">Não</label>
+				<div class="ui-block-b">
+					<input id="embarque_carga_nao_sei" type="checkbox" name="embarque_carga_nao_sei" data-theme="a" />
+					<label for="embarque_carga_nao_sei">Não sabe informar</label>
+				</div>
+				<legend class="ui-block-a escondido">&nbsp;</legend>
+				<div class="ui-block-b ui-grid-b" id="div_sabe_embarque_sim">
+					<div class="ui-block-a sel_uf" id="grupo_embarque_uf_carga">
+						<select name="embarque_uf_carga" id="embarque_uf_carga" data-theme="a">
+						</select>
 					</div>
-					<div class="ui-block-b ui-grid-a escondido" id="div_sabe_embarque_sim">
-						<div class="ui-block-a ui-grid-a">
-							<div class="ui-block-a sel_uf" id="grupo_embarque_uf_carga">
-								<select name="embarque_uf_carga" id="embarque_uf_carga" data-theme="a">
-								</select>
-							</div>
-							<div class="ui-block-b sel_municipio escondido" id="grupo_embarque_mun_carga">
-								<input data-type='search' type="text" name="embarque_mun_carga" id="embarque_mun_carga" data-theme="a" readonly="readonly">
-							</div>
-						</div>
-						<div class="ui-block-b">
-							<select name="embarque_local_carga" id="embarque_local_carga" data-theme="a">
-							</select>
-						</div>
+					<div class="ui-block-b sel_municipio escondido" id="grupo_embarque_mun_carga">
+						<input data-type='search' type="text" name="embarque_mun_carga" id="embarque_mun_carga" data-theme="a" readonly="readonly">
+					</div>
+					<div class="ui-block-c">
+						<select name="embarque_local_carga" id="embarque_local_carga" data-theme="a">
+						</select>
 					</div>
 				</div>
 			</fieldset>
@@ -90,112 +85,107 @@
 			<!-- DESEMBARQUE DA CARGA -->
 			<fieldset class="ui-grid-a escondido" id="grupo_sabe_desembarque_carga">
 				<legend class="ui-block-a menor">Local desembarque da carga:</legend>
-				<div class="ui-block-b ui-grid-a">
-					<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-a">
-						<input type="radio" name="sabe_desembarque_carga" id="sabe_desembarque_carga_sim" value="sim" />
-						<label for="sabe_desembarque_carga_sim">Sim</label>
-						<input type="radio" name="sabe_desembarque_carga" id="sabe_desembarque_carga_nao" value="nao" />
-						<label for="sabe_desembarque_carga_nao">Não</label>
-					</div>
-					<div class="ui-block-b ui-grid-a escondido" id="div_sabe_desembarque_sim">
-						<div class="ui-block-a ui-grid-a">
-							<div class="ui-block-a sel_uf" id="grupo_desembarque_uf_carga">
-								<select name="desembarque_uf_carga" id="desembarque_uf_carga" data-theme="a">
-								</select>
-							</div>
-							<div class="ui-block-b sel_municipio escondido" id="grupo_desembarque_mun_carga">
-								<input data-type='search' type="text" name="desembarque_mun_carga" id="desembarque_mun_carga" data-theme="a"
-									readonly="readonly">
-							</div>
-						</div>
-						<div class="ui-block-b">
-							<select name="desembarque_local_carga" id="desembarque_local_carga" data-theme="a">
-							</select>
-						</div>
-					</div>
+				<div class="ui-block-b">
+					<input id="desembarque_carga_nao_sei" type="checkbox" name="desembarque_carga_nao_sei" data-theme="a" />
+					<label for="desembarque_carga_nao_sei">Não sabe informar</label>
 				</div>
-			</fieldset>
-
-			<!-- POSSUI CARGA: NAO -->
-			<div class="escondido" id="div_possui_carga_nao">
-				<fieldset class="ui-grid-a" id="grupo_carga_anterior_carga">
-					<legend class="ui-block-a">Carga anterior:</legend>
-					<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
-						<input type="radio" name="carga_anterior_carga" id="carga_anterior_carga_sim" value="sim" />
-						<label for="carga_anterior_carga_sim">Sim</label>
-						<input type="radio" name="carga_anterior_carga" id="carga_anterior_carga_nao" value="nao" />
-						<label for="carga_anterior_carga_nao">Não</label>
+				<legend class="ui-block-a escondido">&nbsp;</legend>
+				<div class="ui-block-b ui-grid-b" id="div_sabe_desembarque_sim">
+					<div class="ui-block-a sel_uf" id="grupo_desembarque_uf_carga">
+						<select name="desembarque_uf_carga" id="desembarque_uf_carga" data-theme="a">
+						</select>
 					</div>
-				</fieldset>
-				<fieldset class="ui-grid-a escondido" id="grupo_produto_anterior_carga">
-					<legend class="ui-block-a">Tipo de carga:</legend>
-					<div class="ui-block-b">
-						<input data-type='search' type="text" name="produto_anterior_carga" id="produto_anterior_carga" data-theme="a"
+					<div class="ui-block-b sel_municipio escondido" id="grupo_desembarque_mun_carga">
+						<input data-type='search' type="text" name="desembarque_mun_carga" id="desembarque_mun_carga" data-theme="a"
 							readonly="readonly">
 					</div>
-				</fieldset>
-
-				<fieldset class="ui-grid-a escondido" id="grupo_indo_pegar_carga">
-					<legend class="ui-block-a">Indo pegar uma carga:</legend>
-					<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
-						<input type="radio" name="indo_pegar_carga" id="indo_pegar_carga_sim" value="sim" />
-						<label for="indo_pegar_carga_sim">Sim</label>
-						<input type="radio" name="indo_pegar_carga" id="indo_pegar_carga_nao" value="nao" />
-						<label for="indo_pegar_carga_nao">Não</label>
+					<div class="ui-block-b">
+						<select name="desembarque_local_carga" id="desembarque_local_carga" data-theme="a">
+						</select>
 					</div>
-				</fieldset>
-			</div>
+				</div>
+			</fieldset>
+		</div>
 
-
-			<fieldset class="ui-grid-a escondido" id="grupo_parada_especial_carga">
-				<legend class="ui-block-a">Utiliza parada especial:</legend>
+		<!-- POSSUI CARGA: NAO -->
+		<div class="escondido" id="div_possui_carga_nao">
+			<fieldset class="ui-grid-a" id="grupo_carga_anterior_carga">
+				<legend class="ui-block-a">Carga anterior:</legend>
 				<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
-					<input type="radio" name="parada_especial_carga" id="parada_especial_carga_sim" value="sim" />
-					<label for="parada_especial_carga_sim">Sim</label>
-					<input type="radio" name="parada_especial_carga" id="parada_especial_carga_nao" value="nao" />
-					<label for="parada_especial_carga_nao">Não</label>
+					<input type="radio" name="carga_anterior_carga" id="carga_anterior_carga_sim" value="sim" />
+					<label for="carga_anterior_carga_sim">Sim</label>
+					<input type="radio" name="carga_anterior_carga" id="carga_anterior_carga_nao" value="nao" />
+					<label for="carga_anterior_carga_nao">Não</label>
+				</div>
+			</fieldset>
+			<fieldset class="ui-grid-a escondido" id="grupo_produto_anterior_carga">
+				<legend class="ui-block-a">Tipo de carga:</legend>
+				<div class="ui-block-b">
+					<input data-type='search' type="text" name="produto_anterior_carga" id="produto_anterior_carga" data-theme="a"
+						readonly="readonly">
 				</div>
 			</fieldset>
 
-			<div class="escondido" id="grupo_municipios_parada_carga">
-				<fieldset>
-					<legend style="line-height: 30px;">Na sua rota de viagem, quais seriam os melhores municípios para que houvesse um
-						local de parada obrigatória de descanso:</legend>
-					<div style="display: inline-table">
-						<input id="municipios_parada_nao_sei_carga" type="checkbox" name="municipios_parada_nao_sei_carga" data-theme="a" />
-						<label for="municipios_parada_nao_sei_carga">Não sabe informar</label>
-					</div>
-				</fieldset>
-				<fieldset id="div_municipios_parada_carga">
-					<div class="ui-grid-a">
-						<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf1_carga">
-							<select name="municipios_parada_uf1_carga" id="municipios_parada_uf1_carga" data-theme="a">
-							</select>
-						</div>
-						<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun1_carga">
-							<input data-type='search' type="text" name="municipios_parada_mun1_carga" id="municipios_parada_mun1_carga" data-theme="a"
-								readonly="readonly">
-						</div>
-					</div>
-					<div class="ui-grid-a">
-						<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf2_carga">
-							<select name="municipios_parada_uf2_carga" id="municipios_parada_uf2_carga" data-theme="a">
-							</select>
-						</div>
-						<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun2_carga">
-							<input data-type='search' type="text" name="municipios_parada_mun2_carga" id="municipios_parada_mun2_carga" data-theme="a"
-								readonly="readonly">
-						</div>
-					</div>
-				</fieldset>
-			</div>
-
-			<nav class="ui-grid-a avancar escondido" style="position: relative" id="grupo_caracterizacao_viagem2_carga_avancar">
-				<div class="ui-block-a">&nbsp;</div>
-				<div class="ui-block-b">
-					<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right ui-btn-a" id="caracterizacao_viagem2_carga_avancar">Finalizar</button>
+			<fieldset class="ui-grid-a escondido" id="grupo_indo_pegar_carga">
+				<legend class="ui-block-a">Indo pegar uma carga:</legend>
+				<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
+					<input type="radio" name="indo_pegar_carga" id="indo_pegar_carga_sim" value="sim" />
+					<label for="indo_pegar_carga_sim">Sim</label>
+					<input type="radio" name="indo_pegar_carga" id="indo_pegar_carga_nao" value="nao" />
+					<label for="indo_pegar_carga_nao">Não</label>
 				</div>
-			</nav>
+			</fieldset>
+		</div>
+
+		<fieldset class="ui-grid-a escondido" id="grupo_parada_especial_carga">
+			<legend class="ui-block-a">Utiliza parada especial:</legend>
+			<div data-role="controlgroup" data-theme="a" data-type="horizontal" class="ui-block-b">
+				<input type="radio" name="parada_especial_carga" id="parada_especial_carga_sim" value="sim" />
+				<label for="parada_especial_carga_sim">Sim</label>
+				<input type="radio" name="parada_especial_carga" id="parada_especial_carga_nao" value="nao" />
+				<label for="parada_especial_carga_nao">Não</label>
+			</div>
+		</fieldset>
+
+		<div class="escondido" id="grupo_municipios_parada_carga">
+			<fieldset>
+				<legend style="line-height: 30px;">Na sua rota de viagem, quais seriam os melhores municípios para que houvesse um
+					local de parada obrigatória de descanso:</legend>
+				<div style="display: inline-table">
+					<input id="municipios_parada_nao_sei_carga" type="checkbox" name="municipios_parada_nao_sei_carga" data-theme="a" />
+					<label for="municipios_parada_nao_sei_carga">Não sabe informar</label>
+				</div>
+			</fieldset>
+			<fieldset id="div_municipios_parada_carga">
+				<div class="ui-grid-a">
+					<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf1_carga">
+						<select name="municipios_parada_uf1_carga" id="municipios_parada_uf1_carga" data-theme="a">
+						</select>
+					</div>
+					<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun1_carga">
+						<input data-type='search' type="text" name="municipios_parada_mun1_carga" id="municipios_parada_mun1_carga" data-theme="a"
+							readonly="readonly">
+					</div>
+				</div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a sel_uf" id="grupo_municipios_parada_uf2_carga">
+						<select name="municipios_parada_uf2_carga" id="municipios_parada_uf2_carga" data-theme="a">
+						</select>
+					</div>
+					<div class="ui-block-b sel_municipio escondido" id="grupo_municipios_parada_mun2_carga">
+						<input data-type='search' type="text" name="municipios_parada_mun2_carga" id="municipios_parada_mun2_carga" data-theme="a"
+							readonly="readonly">
+					</div>
+				</div>
+			</fieldset>
+		</div>
+
+		<nav class="ui-grid-a avancar escondido" style="position: relative" id="grupo_caracterizacao_viagem2_carga_avancar">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right ui-btn-a" id="caracterizacao_viagem2_carga_avancar">Finalizar</button>
+			</div>
+		</nav>
 	</section>
 
 	<!-- footer -->

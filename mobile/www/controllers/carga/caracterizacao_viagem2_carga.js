@@ -24,11 +24,11 @@ controllers.caracterizacao_viagem2_carga = {
 		util.inicializaSelectCustomValueAsIndex("embarque_uf_carga", lista_estados, "UF");
 		var lista_locais = [ 'Porto Seco', 'Porto Marítimo', 'Terminal Ferroviário', 'Terminal Hidroviário',
 				'Empresa Particular', 'Atacadista/Distribuidor', 'Outros' ];
-		util.inicializaSelect("embarque_local_carga", lista_locais);
+		util.inicializaSelectCustom("embarque_local_carga", lista_locais, "Local");
 
 		// DESEMBARQUE DA CARGA
 		util.inicializaSelectCustomValueAsIndex("desembarque_uf_carga", lista_estados, "UF");
-		util.inicializaSelect("desembarque_local_carga", lista_locais);
+		util.inicializaSelectCustom("desembarque_local_carga", lista_locais, "Local");
 
 		// SUGESTAO DE MUNICIPIOS PARADA OBRIGATORIA
 		util.inicializaSelectCustomValueAsIndex("municipios_parada_uf1_carga", lista_estados, "UF");
@@ -59,15 +59,17 @@ controllers.caracterizacao_viagem2_carga = {
 
 		util.progressoInputMoney("valorDaCarga", "valor_nota_carga", "grupo_sabe_embarque_carga");
 
-		util.progressoRadioSimNaoAlternado("sabe_embarque", "sabe_embarque_carga", "div_sabe_embarque_sim",
-				"grupo_sabe_desembarque_carga");
-		$('#sabe_embarque_carga_nao').click(function() {
-			util.progressoRestartSelect("embarque_uf_carga", "UF");
-			util.progressoRestartSelect("embarque_local_carga", "Selecione");
-			$('#embarque_mun_carga').val("");
-			app.setAtributo("embarque_uf", null);
-			app.setAtributo("municipioEmbarqueCarga", null);
-			app.setAtributo("idLocalEmbarqueCarga", null);
+		util.progressoCheckboxAlternado("embarqueCargaNaoSabe", "embarque_carga_nao_sei", "grupo_sabe_desembarque_carga",
+				"div_sabe_embarque_sim");
+		$('#embarque_carga_nao_sei').click(function() {
+			if ($(this).is(':checked')) {
+				util.progressoRestartSelect("embarque_uf_carga", "UF");
+				util.progressoRestartSelect("embarque_local_carga", "Selecione");
+				$('#embarque_mun_carga').val("");
+				app.setAtributo("embarque_uf", null);
+				app.setAtributo("municipioEmbarqueCarga", null);
+				app.setAtributo("idLocalEmbarqueCarga", null);
+			}
 		});
 		util.progressoSelect("embarque_uf", "embarque_uf_carga", "grupo_embarque_mun_carga");
 		$('#embarque_uf_carga').change(
@@ -86,21 +88,25 @@ controllers.caracterizacao_viagem2_carga = {
 
 		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
 		if (cargaPerigosa == true) {
-			util.progressoRadioSimNaoAlternado("sabe_desembarque", "sabe_desembarque_carga", "div_sabe_desembarque_sim",
-					"grupo_parada_especial_carga");
-		} else {
-			util.progressoRadioSimNaoAlternado("sabe_desembarque", "sabe_desembarque_carga", "div_sabe_desembarque_sim",
-					"grupo_municipios_parada_carga");
-		}
+			util.progressoCheckboxAlternado("desembarqueCargaNaoSabe", "desembarque_carga_nao_sei",
+					"grupo_parada_especial_carga", "div_sabe_desembarque_sim");
 
-		$('#sabe_desembarque_carga_nao').click(function() {
-			util.progressoRestartSelect("desembarque_uf_carga", "UF");
-			util.progressoRestartSelect("desembarque_local_carga", "Selecione");
-			$('#desembarque_mun_carga').val("");
-			app.setAtributo("desembarque_uf", null);
-			app.setAtributo("municipioDesembarqueCarga", null);
-			app.setAtributo("idLocalDesembarqueCarga", null);
+		} else {
+			util.progressoCheckboxAlternado("desembarqueCargaNaoSabe", "desembarque_carga_nao_sei",
+					"grupo_municipios_parada_carga", "div_sabe_desembarque_sim");
+			;
+		}
+		$('#desembarque_carga_nao_sei').click(function() {
+			if ($(this).is(':checked')) {
+				util.progressoRestartSelect("desembarque_uf_carga", "UF");
+				util.progressoRestartSelect("desembarque_local_carga", "Selecione");
+				$('#desembarque_mun_carga').val("");
+				app.setAtributo("desembarque_uf", null);
+				app.setAtributo("municipioDesembarqueCarga", null);
+				app.setAtributo("idLocalDesembarqueCarga", null);
+			}
 		});
+
 		util.progressoSelect("desembarque_uf", "desembarque_uf_carga", "grupo_desembarque_mun_carga");
 		$('#desembarque_uf_carga').change(
 				function() {
