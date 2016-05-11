@@ -70,7 +70,7 @@ public class ImportedDB extends Db{
 					+ "paradaObrigatoriaMunicipio1, "
 					+ "paradaObrigatoriaMunicipio2, "
 					+ "idPerguntaExtra"
-					+ "); ";
+					+ ") ";
 		String sql;
 		while (rs.next()){
 			sql = sqlbase + " VALUES ("
