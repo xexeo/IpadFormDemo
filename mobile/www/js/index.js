@@ -3,7 +3,7 @@ var app = {
 	debugOnBrowser : true, // sem o cordova
 	// debugOnBrowser : false, // com o cordova
 
-	versao : "2.1.0",
+	versao : "2.0.0",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
