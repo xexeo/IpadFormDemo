@@ -183,7 +183,7 @@ controllers.caracterizacao_viagem2_carga = {
 		util.progressoInputText("paradaObrigatoriaMunicipio1", "municipios_parada_mun1_carga",
 				"grupo_caracterizacao_viagem2_carga_avancar", true);
 
-		// Parada obrigatoria UF1 MUN1
+		// Parada obrigatoria UF2 MUN2
 		util.progressoSelect("municipios_parada_uf2", "municipios_parada_uf2_carga", "grupo_municipios_parada_mun2_carga");
 		$('#municipios_parada_uf2_carga').change(
 				function() {
@@ -203,9 +203,88 @@ controllers.caracterizacao_viagem2_carga = {
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 
-		// TODO
+		if (util.validaRadioChecked("possui_carga", "Possui carga")) {
+			var opt_possui_carga = $('input[name=possui_carga]:checked').val();
+			if (opt_possui_carga == 'sim') {
+				// POSSUI CARGA = SIM
+				var ok_possui_carga_sim = true;
+				if (!util.validaInputText("produto_carga", "Tipo de carga")
+						|| !util.validaInputText("peso_carga", "Peso da carga")
+						|| !util.validaInputText("valor_frete_carga", "Valor do frete")
+						|| !util.validaInputText("valor_nota_carga", "Valor da carga/nota fiscal")) {
+					ok_possui_carga_sim = false;
+				}
 
-		return true;
+				var ok_local_embarque = true;
+				var ckb_embarque = $('#embarque_carga_nao_sei').is(':checked');
+				if (!ckb_embarque) {
+					// LOCAL EMBARQUE
+					if (!util.validaSelect("embarque_uf_carga", "Embarque da carga - UF")
+							|| !util.validaInputText("embarque_mun_carga", "Embarque da carga - Município")
+							|| !util.validaSelect("embarque_local_carga", "Embarque da carga - Local")) {
+						ok_local_embarque = false;
+					}
+				}
+
+				var ok_local_desmbarque = true;
+				var ckb_desembarque = $('#desembarque_carga_nao_sei').is(':checked');
+				if (!ckb_desembarque) {
+					// LOCAL DESEMBARQUE
+					if (!util.validaSelect("desembarque_uf_carga", "Desembarque da carga - UF")
+							|| !util.validaInputText("desembarque_mun_carga", "Desembarque da carga - Município")
+							|| !util.validaSelect("desembarque_local_carga", "Desembarque da carga - Local")) {
+						ok_local_desmbarque = false;
+					}
+				}
+
+				if(!(ok_possui_carga_sim && ok_local_embarque && ok_local_desmbarque)) {
+					return false;
+				}
+			} else if (opt_possui_carga == 'nao') {
+				// POSSUI CARGA = NAO
+				if (util.validaRadioChecked("carga_anterior_carga", "Carga anterior")
+						&& util.validaRadioChecked("indo_pegar_carga", "Indo pegar uma carga")) {
+					var opt_carga_anterior = $('input[name=carga_anterior_carga]:checked').val();
+					if (opt_carga_anterior == 'sim') {
+						if (!util.validaInputText("produto_anterior_carga", "Tipo de carga")) {
+							return false;
+						}
+					}
+				}
+				else {
+					return false;
+				}
+			}
+		}
+
+		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
+		if (cargaPerigosa == true) {
+			if(!util.validaRadioChecked("parada_especial_carga", "Utiliza parada especial")) {
+				return false;
+			}
+		}
+
+		var ckb_municipios_parada = $('#municipios_parada_nao_sei_carga').is(':checked');
+		if (!ckb_municipios_parada) {
+			// SUGESTAO DE MUNICIPIOS DE PARADA
+			alert('ckb_municipios_parada = ' + ckb_municipios_parada);
+			var uma_sugestao = false;
+			if (util.validaSelect("municipios_parada_uf1_carga", "Sugestão parada obrigatória - UF") &&
+					util.validaInputText("municipios_parada_mun1_carga", "Sugestão parada obrigatória - Município")) {
+				uma_sugestao = true;
+			}
+			if (util.validaSelect("municipios_parada_uf2_carga", "Sugestão parada obrigatória 2 - UF") &&
+					util.validaInputText("municipios_parada_mun2_carga", "Sugestão parada obrigatória 2 - Município")) {
+				uma_sugestao = true;
+			}
+
+			return uma_sugestao;
+		}
+		else {
+			return true;
+		}
+		
+		return false;
 	}
 
 };
