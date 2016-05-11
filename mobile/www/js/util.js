@@ -441,8 +441,8 @@ var util = {
 				app.setAtributo(idRegistro, item.id);
 			}
 		});
-		if(!encontrou) {
-			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido");
+		if (!encontrou) {
+			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido.");
 		}
 		return encontrou
 	},
