@@ -10,15 +10,25 @@ controllers.caracterizacao_viagem_onibus = {
 		$("#caracterizacao_viagem_onibus_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_onibus.validar_componentes();
 			if (ok) {
-				app.finalizaRegistro(function() {
-					app.trocaPagina('views/menu.html', controllers.menu);
-				});
+				if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
+					app.trocaPagina('views/pergunta_extra.html',
+							controllers.pergunta_extra);
+				} else {
+					app.finalizaRegistro(function() {
+						app.trocaPagina('views/menu.html', controllers.menu);
+					});
+				}
 			}
 		})
 	},
 
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
+
+		// Verifica se possui Pergunta Extra
+		if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
+			$("#caracterizacao_viagem_onibus_avancar").html("Avançar");
+		}
 
 		// INICIO PAÍSES
 		util.inicializaSelectPais("idOrigemPais", "origem_pais_onibus", true, "País");

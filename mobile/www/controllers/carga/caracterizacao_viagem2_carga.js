@@ -10,15 +10,24 @@ controllers.caracterizacao_viagem2_carga = {
 		$("#caracterizacao_viagem2_carga_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem2_carga.validar_componentes();
 			if (ok) {
-				app.finalizaRegistro(function() {
-					app.trocaPagina('views/menu.html', controllers.menu);
-				});
+				if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
+					app.trocaPagina('views/pergunta_extra.html', controllers.pergunta_extra);
+				} else {
+					app.finalizaRegistro(function() {
+						app.trocaPagina('views/menu.html', controllers.menu);
+					});
+				}
 			}
 		})
 	},
 
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
+
+		// Verifica se possui Pergunta Extra
+		if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
+			$("#caracterizacao_viagem2_carga_avancar").html("Avançar");
+		}
 
 		// EMBARQUE DA CARGA
 		util.inicializaSelectCustomValueAsIndex("embarque_uf_carga", lista_estados, "UF");
