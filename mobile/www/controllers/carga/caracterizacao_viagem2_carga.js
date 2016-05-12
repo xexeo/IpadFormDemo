@@ -88,7 +88,7 @@ controllers.caracterizacao_viagem2_carga = {
 		util.progressoInputText("municipioEmbarqueCarga", "embarque_mun_carga", "grupo_embarque_local_carga", true);
 		util.progressoSelect("idLocalEmbarqueCarga", "embarque_local_carga", "grupo_sabe_desembarque_carga");
 
-		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
+		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa');
 		if (cargaPerigosa == true) {
 			util.progressoCheckboxAlternado("desembarqueCargaNaoSabe", "desembarque_carga_nao_sei",
 					"grupo_parada_especial_carga", "div_sabe_desembarque_sim");
@@ -260,7 +260,7 @@ controllers.caracterizacao_viagem2_carga = {
 			}
 		}
 
-		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
+		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa');
 		if (cargaPerigosa == true) {
 			if (!util.validaRadioChecked("parada_especial_carga", "Utiliza parada especial")) {
 				return false;
