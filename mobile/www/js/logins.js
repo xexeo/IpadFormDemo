@@ -10,6 +10,7 @@ var logins = {
 	autentica : function(usuario, senha) {
 		if ((logins.user_admin != undefined) && (logins.user_admin.usr != undefined) && (usuario == logins.user_admin.usr)
 				&& (senha == logins.user_admin.pwd)) {
+			logins.user_logado = logins.user_admin;
 			return true;
 		} else if (String(usuario).length == 5) {
 			var regex = new RegExp("[^0-9]+");
@@ -24,6 +25,7 @@ var logins = {
 				/* comentar o 'for' se o sequencial do posto for igual ao posicionamento dele na lista. */
 				var login = logins.users[i];
 				if ((posto == login.usr) && (senha == login.pwd)) {
+					logins.user_logado = login;
 					return true;
 				}
 				// }
@@ -2161,5 +2163,7 @@ var logins = {
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-369(A) (BARBOSA FERRAZ) - ENTR BR-158(A)/369(B) (ANEL VIÁRIO CAMPO MOURÃO)'
-	} ]
+	} ],
+	
+	user_logado : {}
 };

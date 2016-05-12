@@ -459,7 +459,7 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 }
 
 #caracterizacao_viagem2_carga legend.fonte_menor {
-	font-size: 1.3em;
+	font-size: 1.3868em;
 }
 
 #caracterizacao_viagem2_carga section.ui-content>fieldset {
@@ -528,6 +528,7 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 
 #caracterizacao_viagem2_carga fieldset.embarque_desembarque>legend {
 	width: 21%;
+	padding-right: 0em;
 }
 
 #caracterizacao_viagem2_carga fieldset.embarque_desembarque>div {
