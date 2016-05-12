@@ -1,6 +1,8 @@
 package br.ufrj.coppetec.concentrador;
 
 import br.ufrj.coppeted.concentrador.database.myDB;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -21,7 +23,11 @@ public class Concentrador {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
         
-				
+		Splash splash = new Splash();
+		splash.setLocationRelativeTo(null);
+		splash.setVisible(true);
+		
+		
         //criando o banco de dados
         try{
             database = new myDB();
@@ -41,9 +47,19 @@ public class Concentrador {
 		//inicial o servidorWeb
 		boolean successServer = Concentrador.startServer();
         System.out.println(successServer);
+		
+		//wait
+		try {
+			Thread.sleep(2000);                 
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
         
+		splash.setVisible(false);
+		
 		LoginJanela loginJanela = new LoginJanela(janela, true);
 		loginJanela.setVisible(true);
+		
 		
 		
 		janela.lblPosto_dados.setText(posto);

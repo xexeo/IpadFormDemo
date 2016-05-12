@@ -78,7 +78,7 @@ public class LoginJanela extends javax.swing.JDialog {
         btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Login PNT");
+        setTitle("Login PNCT");
         setAlwaysOnTop(true);
         setIconImage(null);
         setLocationByPlatform(true);

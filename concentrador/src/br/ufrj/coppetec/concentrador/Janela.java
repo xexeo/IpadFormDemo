@@ -565,6 +565,7 @@ public class Janela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Concentrador de dados");
+        setIconImage(new ImageIcon(Janela.this.getClass().getResource("/images/icon.png")).getImage());
 
         jTabbedPane2.setDoubleBuffered(true);
 
