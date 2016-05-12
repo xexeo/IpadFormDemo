@@ -207,7 +207,7 @@ controllers.caracterizacao_viagem2_carga = {
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
 	validar_componentes : function(id_avancar) {
 
-		if (util.validaRadioChecked("possui_carga", "Possui carga")) {
+		if (util.validaRadioSimNao("possui_carga", "Possui carga")) {
 			var opt_possui_carga = $('input[name=possui_carga]:checked').val();
 			if (opt_possui_carga == 'sim') {
 				// POSSUI CARGA = SIM
@@ -246,8 +246,8 @@ controllers.caracterizacao_viagem2_carga = {
 				}
 			} else if (opt_possui_carga == 'nao') {
 				// POSSUI CARGA = NAO
-				if (util.validaRadioChecked("carga_anterior_carga", "Carga anterior")
-						&& util.validaRadioChecked("indo_pegar_carga", "Indo pegar uma carga")) {
+				if (util.validaRadioSimNao("carga_anterior_carga", "Carga anterior")
+						&& util.validaRadioSimNao("indo_pegar_carga", "Indo pegar uma carga")) {
 					var opt_carga_anterior = $('input[name=carga_anterior_carga]:checked').val();
 					if (opt_carga_anterior == 'sim') {
 						if (!util.validaInputText("produto_anterior_carga", "Tipo de carga")) {
@@ -262,7 +262,7 @@ controllers.caracterizacao_viagem2_carga = {
 
 		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa');
 		if (cargaPerigosa == true) {
-			if (!util.validaRadioChecked("parada_especial_carga", "Utiliza parada especial")) {
+			if (!util.validaRadioSimNao("parada_especial_carga", "Utiliza parada especial")) {
 				return false;
 			}
 		}

@@ -492,7 +492,7 @@ var util = {
 		overlayInput.$b.css('margin-top', '0px');
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
-			app.logger.log('entrou no filtro');
+			app.logger.log('entrou no filtro'); //TODO ja podemos excluir essa linha?
 			var ul_list = $(this);
 			var auto_input = $(data.input);
 			var auto_value = auto_input.val();
