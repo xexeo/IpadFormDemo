@@ -13,19 +13,19 @@ import javax.swing.JOptionPane;
 public class Concentrador {
     static WebServer wServer;
     static Janela janela;
-    public static String imagesPath;
     public static myDB database;
+	public static String trecho;
+	public static String posto;
 	
     public static void main(String[] args) {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
-        //imagesPath = System.getProperty("user.dir") + "/images/";
         
 				
         //criando o banco de dados
         try{
             database = new myDB();
-            createVolTable();
+            database.createVolTable();
 			database.createODTable();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
@@ -42,10 +42,15 @@ public class Concentrador {
 		boolean successServer = Concentrador.startServer();
         System.out.println(successServer);
         
-        janela.setVisible(true);
-		
 		LoginJanela loginJanela = new LoginJanela(janela, true);
 		loginJanela.setVisible(true);
+		
+		
+		janela.lblPosto_dados.setText(posto);
+		janela.lblTrecho_dados.setText(trecho);
+        janela.setVisible(true);
+		
+		
         
     }
     
@@ -61,13 +66,13 @@ public class Concentrador {
      }
     }
     
-    private static void createVolTable() throws Exception{
-        database.setStatement();
-        String qry = "CREATE TABLE IF NOT EXISTS voltable "
-                + " (id int, posto int, pista text, data text,"
-                + " hora int, sentido text, local text, pesquisador text, origemipad int, dados text); ";
-       database.executeStatement(qry);
-    }
+//    private static void createVolTable() throws Exception{
+//        database.setStatement();
+//        String qry = "CREATE TABLE IF NOT EXISTS voltable "
+//                + " (id int, posto int, pista text, data text,"
+//                + " hora int, sentido text, local text, pesquisador text, origemipad int, dados text); ";
+//       database.executeStatement(qry);
+//    }
     
 //    private static void createODTable() throws Exception{
 //        database.setStatement();

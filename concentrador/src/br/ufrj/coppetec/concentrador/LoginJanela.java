@@ -53,6 +53,8 @@ public class LoginJanela extends javax.swing.JDialog {
 		for (Object dados : logins.getJSONArray("logins")){
 			
 			if(txtUser.getText().equals(((JSONObject)dados).getString("usr")) && String.copyValueOf(txtPassword.getPassword()).equals(((JSONObject) dados).getString("pwd"))){
+				Concentrador.trecho = ((JSONObject)dados).getString("trecho");
+				Concentrador.posto = ((JSONObject)dados).getString("usr");
 				r = true;
 			}
 		}
@@ -148,7 +150,7 @@ public class LoginJanela extends javax.swing.JDialog {
 		if(validateLogin()){
 			LoginJanela.this.dispose();
 		} else {
-			JOptionPane.showMessageDialog(LoginJanela.this, "Usuário ou login informados não puderam ser validados", "Erro no login", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(LoginJanela.this, "Usuário ou login informados não puderam ser validados.", "Erro no login", JOptionPane.ERROR_MESSAGE);
 		}
 		
     }//GEN-LAST:event_btnOKActionPerformed

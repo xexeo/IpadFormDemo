@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import javax.swing.BorderFactory;
@@ -61,13 +62,9 @@ public class Janela extends javax.swing.JFrame {
 		};
 		
         initComponents();
-        centeringValues();
-        puttingImages();
-    }
-    
-    private void centeringValues(){
         
     }
+    
     
     private void puttingImages(){
         HashMap lablesPesadosMap = new HashMap<String, Component>();
@@ -98,7 +95,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<>();
+        cmbHora = new javax.swing.JComboBox<String>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblPesquisador = new javax.swing.JLabel();
@@ -125,113 +122,173 @@ public class Janela extends javax.swing.JFrame {
         lev45_2 = new javax.swing.JTextField();
         lev60_2 = new javax.swing.JTextField();
         lblP1 = new javax.swing.JLabel();
-        tl0 = new javax.swing.JTextField();
         tl1 = new javax.swing.JTextField();
-        tl2 = new javax.swing.JTextField();
         tl3 = new javax.swing.JTextField();
-        tl4 = new javax.swing.JTextField();
         tl5 = new javax.swing.JTextField();
-        tl6 = new javax.swing.JTextField();
         tl7 = new javax.swing.JTextField();
         lblP3 = new javax.swing.JLabel();
-        tl8 = new javax.swing.JTextField();
         tl9 = new javax.swing.JTextField();
-        tl10 = new javax.swing.JTextField();
         tl11 = new javax.swing.JTextField();
-        tl12 = new javax.swing.JTextField();
         tl13 = new javax.swing.JTextField();
-        tl14 = new javax.swing.JTextField();
         tl15 = new javax.swing.JTextField();
         lblP2 = new javax.swing.JLabel();
-        tl16 = new javax.swing.JTextField();
         tl17 = new javax.swing.JTextField();
-        tl18 = new javax.swing.JTextField();
         tl19 = new javax.swing.JTextField();
-        tl20 = new javax.swing.JTextField();
         tl21 = new javax.swing.JTextField();
-        tl22 = new javax.swing.JTextField();
         tl23 = new javax.swing.JTextField();
         lblM = new javax.swing.JLabel();
-        tl24 = new javax.swing.JTextField();
         tl25 = new javax.swing.JTextField();
-        tl26 = new javax.swing.JTextField();
         tl27 = new javax.swing.JTextField();
-        tl28 = new javax.swing.JTextField();
         tl29 = new javax.swing.JTextField();
-        tl30 = new javax.swing.JTextField();
         tl31 = new javax.swing.JTextField();
         lbl2CB = new javax.swing.JLabel();
-        tl32 = new javax.swing.JTextField();
         tl33 = new javax.swing.JTextField();
-        tl34 = new javax.swing.JTextField();
         tl35 = new javax.swing.JTextField();
-        tl36 = new javax.swing.JTextField();
         tl37 = new javax.swing.JTextField();
-        tl38 = new javax.swing.JTextField();
         tl39 = new javax.swing.JTextField();
         lbl3CB = new javax.swing.JLabel();
-        tl40 = new javax.swing.JTextField();
         tl41 = new javax.swing.JTextField();
-        tl42 = new javax.swing.JTextField();
         tl43 = new javax.swing.JTextField();
-        tl44 = new javax.swing.JTextField();
         tl45 = new javax.swing.JTextField();
-        tl46 = new javax.swing.JTextField();
         tl47 = new javax.swing.JTextField();
         lbl4CB = new javax.swing.JLabel();
-        tl48 = new javax.swing.JTextField();
         tl49 = new javax.swing.JTextField();
-        tl50 = new javax.swing.JTextField();
         tl51 = new javax.swing.JTextField();
-        tl52 = new javax.swing.JTextField();
         tl53 = new javax.swing.JTextField();
-        tl54 = new javax.swing.JTextField();
         tl55 = new javax.swing.JTextField();
         lbl2C = new javax.swing.JLabel();
-        tl56 = new javax.swing.JTextField();
         tl57 = new javax.swing.JTextField();
-        tl58 = new javax.swing.JTextField();
         tl59 = new javax.swing.JTextField();
-        tl60 = new javax.swing.JTextField();
         tl61 = new javax.swing.JTextField();
-        tl62 = new javax.swing.JTextField();
         tl63 = new javax.swing.JTextField();
         lbl3C = new javax.swing.JLabel();
-        tl64 = new javax.swing.JTextField();
         tl65 = new javax.swing.JTextField();
-        tl66 = new javax.swing.JTextField();
         tl67 = new javax.swing.JTextField();
-        tl68 = new javax.swing.JTextField();
         tl69 = new javax.swing.JTextField();
-        tl70 = new javax.swing.JTextField();
         tl71 = new javax.swing.JTextField();
         lbl4C = new javax.swing.JLabel();
-        tl72 = new javax.swing.JTextField();
         tl73 = new javax.swing.JTextField();
-        tl74 = new javax.swing.JTextField();
         tl75 = new javax.swing.JTextField();
-        tl76 = new javax.swing.JTextField();
         tl77 = new javax.swing.JTextField();
-        tl78 = new javax.swing.JTextField();
         tl79 = new javax.swing.JTextField();
         lbl4CD = new javax.swing.JLabel();
-        tl80 = new javax.swing.JTextField();
         tl81 = new javax.swing.JTextField();
-        tl82 = new javax.swing.JTextField();
         tl83 = new javax.swing.JTextField();
-        tl84 = new javax.swing.JTextField();
         tl85 = new javax.swing.JTextField();
-        tl86 = new javax.swing.JTextField();
         tl87 = new javax.swing.JTextField();
         lbl3D = new javax.swing.JLabel();
-        tl88 = new javax.swing.JTextField();
         tl89 = new javax.swing.JTextField();
-        tl90 = new javax.swing.JTextField();
         tl91 = new javax.swing.JTextField();
-        tl92 = new javax.swing.JTextField();
         tl93 = new javax.swing.JTextField();
-        tl94 = new javax.swing.JTextField();
         tl95 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        tl0 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        tl8 = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        tl16 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        tl24 = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        tl32 = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        tl40 = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        tl48 = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        tl56 = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
+        tl64 = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
+        tl72 = new javax.swing.JTextField();
+        jPanel13 = new javax.swing.JPanel();
+        tl80 = new javax.swing.JTextField();
+        jPanel14 = new javax.swing.JPanel();
+        tl88 = new javax.swing.JTextField();
+        jPanel15 = new javax.swing.JPanel();
+        tl2 = new javax.swing.JTextField();
+        jPanel16 = new javax.swing.JPanel();
+        tl10 = new javax.swing.JTextField();
+        jPanel17 = new javax.swing.JPanel();
+        tl18 = new javax.swing.JTextField();
+        jPanel18 = new javax.swing.JPanel();
+        tl26 = new javax.swing.JTextField();
+        jPanel19 = new javax.swing.JPanel();
+        tl34 = new javax.swing.JTextField();
+        jPanel20 = new javax.swing.JPanel();
+        tl42 = new javax.swing.JTextField();
+        jPanel21 = new javax.swing.JPanel();
+        tl50 = new javax.swing.JTextField();
+        jPanel22 = new javax.swing.JPanel();
+        tl58 = new javax.swing.JTextField();
+        jPanel23 = new javax.swing.JPanel();
+        tl66 = new javax.swing.JTextField();
+        jPanel24 = new javax.swing.JPanel();
+        tl74 = new javax.swing.JTextField();
+        jPanel25 = new javax.swing.JPanel();
+        tl82 = new javax.swing.JTextField();
+        jPanel26 = new javax.swing.JPanel();
+        tl90 = new javax.swing.JTextField();
+        jPanel27 = new javax.swing.JPanel();
+        tl4 = new javax.swing.JTextField();
+        jPanel28 = new javax.swing.JPanel();
+        tl12 = new javax.swing.JTextField();
+        jPanel29 = new javax.swing.JPanel();
+        tl20 = new javax.swing.JTextField();
+        jPanel30 = new javax.swing.JPanel();
+        tl28 = new javax.swing.JTextField();
+        jPanel31 = new javax.swing.JPanel();
+        tl36 = new javax.swing.JTextField();
+        jPanel32 = new javax.swing.JPanel();
+        tl44 = new javax.swing.JTextField();
+        jPanel33 = new javax.swing.JPanel();
+        tl52 = new javax.swing.JTextField();
+        jPanel34 = new javax.swing.JPanel();
+        tl60 = new javax.swing.JTextField();
+        jPanel35 = new javax.swing.JPanel();
+        tl68 = new javax.swing.JTextField();
+        jPanel36 = new javax.swing.JPanel();
+        tl76 = new javax.swing.JTextField();
+        jPanel37 = new javax.swing.JPanel();
+        tl84 = new javax.swing.JTextField();
+        jPanel38 = new javax.swing.JPanel();
+        tl92 = new javax.swing.JTextField();
+        jPanel39 = new javax.swing.JPanel();
+        tl6 = new javax.swing.JTextField();
+        jPanel40 = new javax.swing.JPanel();
+        tl14 = new javax.swing.JTextField();
+        jPanel41 = new javax.swing.JPanel();
+        tl22 = new javax.swing.JTextField();
+        jPanel42 = new javax.swing.JPanel();
+        tl30 = new javax.swing.JTextField();
+        jPanel43 = new javax.swing.JPanel();
+        tl38 = new javax.swing.JTextField();
+        jPanel44 = new javax.swing.JPanel();
+        tl46 = new javax.swing.JTextField();
+        jPanel45 = new javax.swing.JPanel();
+        tl54 = new javax.swing.JTextField();
+        jPanel46 = new javax.swing.JPanel();
+        tl62 = new javax.swing.JTextField();
+        jPanel47 = new javax.swing.JPanel();
+        tl70 = new javax.swing.JTextField();
+        jPanel48 = new javax.swing.JPanel();
+        tl78 = new javax.swing.JTextField();
+        jPanel49 = new javax.swing.JPanel();
+        tl86 = new javax.swing.JTextField();
+        jPanel50 = new javax.swing.JPanel();
+        tl94 = new javax.swing.JTextField();
         tab_pesados = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         panelPesados = new javax.swing.JPanel();
@@ -246,161 +303,248 @@ public class Janela extends javax.swing.JFrame {
         peso45_2 = new javax.swing.JTextField();
         peso60_2 = new javax.swing.JTextField();
         lbl2S1 = new javax.swing.JLabel();
-        tp0 = new javax.swing.JTextField();
         tp1 = new javax.swing.JTextField();
-        tp2 = new javax.swing.JTextField();
         tp3 = new javax.swing.JTextField();
-        tp4 = new javax.swing.JTextField();
         tp5 = new javax.swing.JTextField();
-        tp6 = new javax.swing.JTextField();
         tp7 = new javax.swing.JTextField();
         lbl2S2 = new javax.swing.JLabel();
-        tp8 = new javax.swing.JTextField();
         tp9 = new javax.swing.JTextField();
-        tp10 = new javax.swing.JTextField();
         tp11 = new javax.swing.JTextField();
-        tp12 = new javax.swing.JTextField();
         tp13 = new javax.swing.JTextField();
-        tp14 = new javax.swing.JTextField();
         tp15 = new javax.swing.JTextField();
         lbl2S3 = new javax.swing.JLabel();
-        tp16 = new javax.swing.JTextField();
         tp17 = new javax.swing.JTextField();
-        tp18 = new javax.swing.JTextField();
         tp19 = new javax.swing.JTextField();
-        tp20 = new javax.swing.JTextField();
         tp21 = new javax.swing.JTextField();
-        tp22 = new javax.swing.JTextField();
         tp23 = new javax.swing.JTextField();
         lbl3S1 = new javax.swing.JLabel();
-        tp24 = new javax.swing.JTextField();
         tp25 = new javax.swing.JTextField();
-        tp26 = new javax.swing.JTextField();
         tp27 = new javax.swing.JTextField();
-        tp28 = new javax.swing.JTextField();
         tp29 = new javax.swing.JTextField();
-        tp30 = new javax.swing.JTextField();
         tp31 = new javax.swing.JTextField();
         lbl3S2 = new javax.swing.JLabel();
-        tp32 = new javax.swing.JTextField();
         tp33 = new javax.swing.JTextField();
-        tp34 = new javax.swing.JTextField();
         tp35 = new javax.swing.JTextField();
-        tp36 = new javax.swing.JTextField();
         tp37 = new javax.swing.JTextField();
-        tp38 = new javax.swing.JTextField();
         tp39 = new javax.swing.JTextField();
         lbl3S3 = new javax.swing.JLabel();
-        tp40 = new javax.swing.JTextField();
         tp41 = new javax.swing.JTextField();
-        tp42 = new javax.swing.JTextField();
         tp43 = new javax.swing.JTextField();
-        tp44 = new javax.swing.JTextField();
         tp45 = new javax.swing.JTextField();
-        tp46 = new javax.swing.JTextField();
         tp47 = new javax.swing.JTextField();
         lbl3T4 = new javax.swing.JLabel();
-        tp48 = new javax.swing.JTextField();
         tp49 = new javax.swing.JTextField();
-        tp50 = new javax.swing.JTextField();
         tp51 = new javax.swing.JTextField();
-        tp52 = new javax.swing.JTextField();
         tp53 = new javax.swing.JTextField();
-        tp54 = new javax.swing.JTextField();
         tp55 = new javax.swing.JTextField();
         lbl3T6 = new javax.swing.JLabel();
-        tp56 = new javax.swing.JTextField();
         tp57 = new javax.swing.JTextField();
-        tp58 = new javax.swing.JTextField();
         tp59 = new javax.swing.JTextField();
-        tp60 = new javax.swing.JTextField();
         tp61 = new javax.swing.JTextField();
-        tp62 = new javax.swing.JTextField();
         tp63 = new javax.swing.JTextField();
         lbl3T6B = new javax.swing.JLabel();
-        tp64 = new javax.swing.JTextField();
         tp65 = new javax.swing.JTextField();
-        tp66 = new javax.swing.JTextField();
         tp67 = new javax.swing.JTextField();
-        tp68 = new javax.swing.JTextField();
         tp69 = new javax.swing.JTextField();
-        tp70 = new javax.swing.JTextField();
         tp71 = new javax.swing.JTextField();
         lbl3V5 = new javax.swing.JLabel();
-        tp72 = new javax.swing.JTextField();
         tp73 = new javax.swing.JTextField();
-        tp74 = new javax.swing.JTextField();
         tp75 = new javax.swing.JTextField();
-        tp76 = new javax.swing.JTextField();
         tp77 = new javax.swing.JTextField();
-        tp78 = new javax.swing.JTextField();
         tp79 = new javax.swing.JTextField();
         lbl3M6 = new javax.swing.JLabel();
-        tp80 = new javax.swing.JTextField();
         tp81 = new javax.swing.JTextField();
-        tp82 = new javax.swing.JTextField();
         tp83 = new javax.swing.JTextField();
-        tp84 = new javax.swing.JTextField();
         tp85 = new javax.swing.JTextField();
-        tp86 = new javax.swing.JTextField();
         tp87 = new javax.swing.JTextField();
         lbl3Q4 = new javax.swing.JLabel();
-        tp88 = new javax.swing.JTextField();
         tp89 = new javax.swing.JTextField();
-        tp90 = new javax.swing.JTextField();
         tp91 = new javax.swing.JTextField();
-        tp92 = new javax.swing.JTextField();
         tp93 = new javax.swing.JTextField();
-        tp94 = new javax.swing.JTextField();
         tp95 = new javax.swing.JTextField();
         lbl2C2 = new javax.swing.JLabel();
-        tp96 = new javax.swing.JTextField();
         tp97 = new javax.swing.JTextField();
-        tp98 = new javax.swing.JTextField();
         tp99 = new javax.swing.JTextField();
-        tp100 = new javax.swing.JTextField();
         tp101 = new javax.swing.JTextField();
-        tp102 = new javax.swing.JTextField();
         tp103 = new javax.swing.JTextField();
         lbl2C3 = new javax.swing.JLabel();
-        tp104 = new javax.swing.JTextField();
         tp105 = new javax.swing.JTextField();
-        tp106 = new javax.swing.JTextField();
         tp107 = new javax.swing.JTextField();
-        tp108 = new javax.swing.JTextField();
         tp109 = new javax.swing.JTextField();
-        tp110 = new javax.swing.JTextField();
         tp111 = new javax.swing.JTextField();
         lbl3C2 = new javax.swing.JLabel();
-        tp112 = new javax.swing.JTextField();
         tp113 = new javax.swing.JTextField();
-        tp114 = new javax.swing.JTextField();
         tp115 = new javax.swing.JTextField();
-        tp116 = new javax.swing.JTextField();
         tp117 = new javax.swing.JTextField();
-        tp118 = new javax.swing.JTextField();
         tp119 = new javax.swing.JTextField();
         lbl3C3 = new javax.swing.JLabel();
-        tp120 = new javax.swing.JTextField();
         tp121 = new javax.swing.JTextField();
-        tp122 = new javax.swing.JTextField();
         tp123 = new javax.swing.JTextField();
-        tp124 = new javax.swing.JTextField();
         tp125 = new javax.swing.JTextField();
-        tp126 = new javax.swing.JTextField();
         tp127 = new javax.swing.JTextField();
         lbl3D4 = new javax.swing.JLabel();
-        tp128 = new javax.swing.JTextField();
         tp129 = new javax.swing.JTextField();
-        tp130 = new javax.swing.JTextField();
         tp131 = new javax.swing.JTextField();
-        tp132 = new javax.swing.JTextField();
         tp133 = new javax.swing.JTextField();
-        tp134 = new javax.swing.JTextField();
         tp135 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jPanel51 = new javax.swing.JPanel();
+        tp0 = new javax.swing.JTextField();
+        jPanel52 = new javax.swing.JPanel();
+        tp8 = new javax.swing.JTextField();
+        jPanel53 = new javax.swing.JPanel();
+        tp16 = new javax.swing.JTextField();
+        jPanel54 = new javax.swing.JPanel();
+        tp24 = new javax.swing.JTextField();
+        jPanel55 = new javax.swing.JPanel();
+        tp32 = new javax.swing.JTextField();
+        jPanel56 = new javax.swing.JPanel();
+        tp40 = new javax.swing.JTextField();
+        jPanel57 = new javax.swing.JPanel();
+        tp48 = new javax.swing.JTextField();
+        jPanel58 = new javax.swing.JPanel();
+        tp56 = new javax.swing.JTextField();
+        jPanel59 = new javax.swing.JPanel();
+        tp64 = new javax.swing.JTextField();
+        jPanel60 = new javax.swing.JPanel();
+        tp72 = new javax.swing.JTextField();
+        jPanel61 = new javax.swing.JPanel();
+        tp80 = new javax.swing.JTextField();
+        jPanel62 = new javax.swing.JPanel();
+        tp88 = new javax.swing.JTextField();
+        jPanel63 = new javax.swing.JPanel();
+        tp96 = new javax.swing.JTextField();
+        jPanel64 = new javax.swing.JPanel();
+        tp104 = new javax.swing.JTextField();
+        jPanel65 = new javax.swing.JPanel();
+        tp112 = new javax.swing.JTextField();
+        jPanel66 = new javax.swing.JPanel();
+        tp120 = new javax.swing.JTextField();
+        jPanel67 = new javax.swing.JPanel();
+        tp128 = new javax.swing.JTextField();
+        jPanel68 = new javax.swing.JPanel();
+        tp2 = new javax.swing.JTextField();
+        jPanel69 = new javax.swing.JPanel();
+        tp10 = new javax.swing.JTextField();
+        jPanel70 = new javax.swing.JPanel();
+        tp18 = new javax.swing.JTextField();
+        jPanel71 = new javax.swing.JPanel();
+        tp26 = new javax.swing.JTextField();
+        jPanel72 = new javax.swing.JPanel();
+        tp34 = new javax.swing.JTextField();
+        jPanel73 = new javax.swing.JPanel();
+        tp42 = new javax.swing.JTextField();
+        jPanel74 = new javax.swing.JPanel();
+        tp50 = new javax.swing.JTextField();
+        jPanel75 = new javax.swing.JPanel();
+        tp58 = new javax.swing.JTextField();
+        jPanel76 = new javax.swing.JPanel();
+        tp66 = new javax.swing.JTextField();
+        jPanel77 = new javax.swing.JPanel();
+        tp74 = new javax.swing.JTextField();
+        jPanel78 = new javax.swing.JPanel();
+        tp82 = new javax.swing.JTextField();
+        jPanel79 = new javax.swing.JPanel();
+        tp90 = new javax.swing.JTextField();
+        jPanel80 = new javax.swing.JPanel();
+        tp98 = new javax.swing.JTextField();
+        jPanel81 = new javax.swing.JPanel();
+        tp106 = new javax.swing.JTextField();
+        jPanel82 = new javax.swing.JPanel();
+        tp114 = new javax.swing.JTextField();
+        jPanel83 = new javax.swing.JPanel();
+        tp122 = new javax.swing.JTextField();
+        jPanel84 = new javax.swing.JPanel();
+        tp130 = new javax.swing.JTextField();
+        jPanel85 = new javax.swing.JPanel();
+        tp4 = new javax.swing.JTextField();
+        jPanel86 = new javax.swing.JPanel();
+        tp12 = new javax.swing.JTextField();
+        jPanel87 = new javax.swing.JPanel();
+        tp20 = new javax.swing.JTextField();
+        jPanel88 = new javax.swing.JPanel();
+        tp28 = new javax.swing.JTextField();
+        jPanel89 = new javax.swing.JPanel();
+        tp36 = new javax.swing.JTextField();
+        jPanel90 = new javax.swing.JPanel();
+        tp44 = new javax.swing.JTextField();
+        jPanel91 = new javax.swing.JPanel();
+        tp52 = new javax.swing.JTextField();
+        jPanel92 = new javax.swing.JPanel();
+        tp60 = new javax.swing.JTextField();
+        jPanel93 = new javax.swing.JPanel();
+        tp68 = new javax.swing.JTextField();
+        jPanel94 = new javax.swing.JPanel();
+        tp76 = new javax.swing.JTextField();
+        jPanel95 = new javax.swing.JPanel();
+        tp84 = new javax.swing.JTextField();
+        jPanel96 = new javax.swing.JPanel();
+        tp92 = new javax.swing.JTextField();
+        jPanel97 = new javax.swing.JPanel();
+        tp100 = new javax.swing.JTextField();
+        jPanel98 = new javax.swing.JPanel();
+        tp108 = new javax.swing.JTextField();
+        jPanel99 = new javax.swing.JPanel();
+        tp116 = new javax.swing.JTextField();
+        jPanel100 = new javax.swing.JPanel();
+        tp124 = new javax.swing.JTextField();
+        jPanel101 = new javax.swing.JPanel();
+        tp132 = new javax.swing.JTextField();
+        jPanel102 = new javax.swing.JPanel();
+        tp6 = new javax.swing.JTextField();
+        jPanel103 = new javax.swing.JPanel();
+        tp14 = new javax.swing.JTextField();
+        jPanel104 = new javax.swing.JPanel();
+        tp22 = new javax.swing.JTextField();
+        jPanel105 = new javax.swing.JPanel();
+        tp30 = new javax.swing.JTextField();
+        jPanel106 = new javax.swing.JPanel();
+        tp38 = new javax.swing.JTextField();
+        jPanel107 = new javax.swing.JPanel();
+        tp46 = new javax.swing.JTextField();
+        jPanel108 = new javax.swing.JPanel();
+        tp54 = new javax.swing.JTextField();
+        jPanel109 = new javax.swing.JPanel();
+        tp62 = new javax.swing.JTextField();
+        jPanel110 = new javax.swing.JPanel();
+        tp70 = new javax.swing.JTextField();
+        jPanel111 = new javax.swing.JPanel();
+        tp78 = new javax.swing.JTextField();
+        jPanel112 = new javax.swing.JPanel();
+        tp86 = new javax.swing.JTextField();
+        jPanel113 = new javax.swing.JPanel();
+        tp94 = new javax.swing.JTextField();
+        jPanel114 = new javax.swing.JPanel();
+        tp102 = new javax.swing.JTextField();
+        jPanel115 = new javax.swing.JPanel();
+        tp110 = new javax.swing.JTextField();
+        jPanel116 = new javax.swing.JPanel();
+        tp118 = new javax.swing.JTextField();
+        jPanel117 = new javax.swing.JPanel();
+        tp126 = new javax.swing.JTextField();
+        jPanel118 = new javax.swing.JPanel();
+        tp134 = new javax.swing.JTextField();
         data = new org.jdesktop.swingx.JXDatePicker();
         data.setLocale(new Locale("pt", "BR"));
         btnSalvarForms = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        lblTrecho_dados = new javax.swing.JLabel();
         pnl_servidor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -424,13 +568,13 @@ public class Janela extends javax.swing.JFrame {
 
         jTabbedPane2.setDoubleBuffered(true);
 
-        lblPosto.setText("Posto");
+        lblPosto.setText("Posto:");
 
-        lblPosto_dados.setText("1-BR-364/AC");
+        lblPosto_dados.setText("-----");
 
-        lblHora.setText("Hora Inicial");
+        lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -469,9 +613,8 @@ public class Janela extends javax.swing.JFrame {
 
         leves_hora1.setEditable(false);
         leves_hora1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        leves_hora1.setText("Hora 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -483,18 +626,18 @@ public class Janela extends javax.swing.JFrame {
         lev15_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev15_1.setText("15");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelLeves.add(lev15_1, gridBagConstraints);
 
         lev30_1.setEditable(false);
-        lev30_1.setBackground(new java.awt.Color(204, 204, 204));
+        lev30_1.setBackground(new java.awt.Color(255, 255, 255));
         lev30_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev30_1.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -505,18 +648,19 @@ public class Janela extends javax.swing.JFrame {
         lev45_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev45_1.setText("45");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
         panelLeves.add(lev45_1, gridBagConstraints);
 
         lev60_1.setEditable(false);
-        lev60_1.setBackground(new java.awt.Color(204, 204, 204));
+        lev60_1.setBackground(new java.awt.Color(255, 255, 255));
         lev60_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev60_1.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -524,9 +668,8 @@ public class Janela extends javax.swing.JFrame {
 
         leves_hora2.setEditable(false);
         leves_hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        leves_hora2.setText("Hora 2");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -538,18 +681,19 @@ public class Janela extends javax.swing.JFrame {
         lev15_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev15_2.setText("15");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
         panelLeves.add(lev15_2, gridBagConstraints);
 
         lev30_2.setEditable(false);
-        lev30_2.setBackground(new java.awt.Color(204, 204, 204));
+        lev30_2.setBackground(new java.awt.Color(255, 255, 255));
         lev30_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev30_2.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -560,27 +704,28 @@ public class Janela extends javax.swing.JFrame {
         lev45_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev45_2.setText("45");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
         panelLeves.add(lev45_2, gridBagConstraints);
 
         lev60_2.setEditable(false);
-        lev60_2.setBackground(new java.awt.Color(204, 204, 204));
+        lev60_2.setBackground(new java.awt.Color(255, 255, 255));
         lev60_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev60_2.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelLeves.add(lev60_2, gridBagConstraints);
 
         lblP1.setBackground(new java.awt.Color(255, 255, 255));
-        lblP1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/p1_01.png"))); // NOI18N
-        lblP1.setText("P1");
+        lblP1.setToolTipText("");
         lblP1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lblP1.setFocusable(false);
         lblP1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -593,18 +738,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lblP1, gridBagConstraints);
 
-        tl0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl0.setToolTipText("");
-        tl0.setInputVerifier(intVerifier);
-        tl0.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl0.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl0, gridBagConstraints);
-
+        tl1.setColumns(5);
         tl1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl1.setText(" ");
         tl1.setToolTipText("");
@@ -612,25 +746,12 @@ public class Janela extends javax.swing.JFrame {
         tl1.setMinimumSize(new java.awt.Dimension(50, 19));
         tl1.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl1, gridBagConstraints);
 
-        tl2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl2.setText(" ");
-        tl2.setToolTipText("");
-        tl2.setInputVerifier(intVerifier);
-        tl2.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl2.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl2, gridBagConstraints);
-
+        tl3.setColumns(5);
         tl3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl3.setText(" ");
         tl3.setToolTipText("");
@@ -638,25 +759,12 @@ public class Janela extends javax.swing.JFrame {
         tl3.setMinimumSize(new java.awt.Dimension(50, 19));
         tl3.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl3, gridBagConstraints);
 
-        tl4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl4.setText(" ");
-        tl4.setToolTipText("");
-        tl4.setInputVerifier(intVerifier);
-        tl4.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl4.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl4, gridBagConstraints);
-
+        tl5.setColumns(5);
         tl5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl5.setText(" ");
         tl5.setToolTipText("");
@@ -664,25 +772,12 @@ public class Janela extends javax.swing.JFrame {
         tl5.setMinimumSize(new java.awt.Dimension(50, 19));
         tl5.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl5, gridBagConstraints);
 
-        tl6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl6.setText(" ");
-        tl6.setToolTipText("");
-        tl6.setInputVerifier(intVerifier);
-        tl6.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl6.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl6, gridBagConstraints);
-
+        tl7.setColumns(5);
         tl7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl7.setText(" ");
         tl7.setToolTipText("");
@@ -690,16 +785,15 @@ public class Janela extends javax.swing.JFrame {
         tl7.setMinimumSize(new java.awt.Dimension(50, 19));
         tl7.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl7, gridBagConstraints);
 
         lblP3.setBackground(new java.awt.Color(255, 255, 255));
-        lblP3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/p3.png"))); // NOI18N
-        lblP3.setText("P3");
+        lblP3.setToolTipText("");
         lblP3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lblP3.setFocusable(false);
         lblP3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -711,19 +805,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lblP3, gridBagConstraints);
 
-        tl8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl8.setText(" ");
-        tl8.setToolTipText("");
-        tl8.setInputVerifier(intVerifier);
-        tl8.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl8.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl8, gridBagConstraints);
-
+        tl9.setColumns(5);
         tl9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl9.setText(" ");
         tl9.setToolTipText("");
@@ -731,25 +813,12 @@ public class Janela extends javax.swing.JFrame {
         tl9.setMinimumSize(new java.awt.Dimension(50, 19));
         tl9.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl9, gridBagConstraints);
 
-        tl10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl10.setText(" ");
-        tl10.setToolTipText("");
-        tl10.setInputVerifier(intVerifier);
-        tl10.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl10.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl10, gridBagConstraints);
-
+        tl11.setColumns(5);
         tl11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl11.setText(" ");
         tl11.setToolTipText("");
@@ -757,25 +826,12 @@ public class Janela extends javax.swing.JFrame {
         tl11.setMinimumSize(new java.awt.Dimension(50, 19));
         tl11.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl11, gridBagConstraints);
 
-        tl12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl12.setText(" ");
-        tl12.setToolTipText("");
-        tl12.setInputVerifier(intVerifier);
-        tl12.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl12.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl12, gridBagConstraints);
-
+        tl13.setColumns(5);
         tl13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl13.setText(" ");
         tl13.setToolTipText("");
@@ -783,25 +839,12 @@ public class Janela extends javax.swing.JFrame {
         tl13.setMinimumSize(new java.awt.Dimension(50, 19));
         tl13.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl13, gridBagConstraints);
 
-        tl14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl14.setText(" ");
-        tl14.setToolTipText("");
-        tl14.setInputVerifier(intVerifier);
-        tl14.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl14.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl14, gridBagConstraints);
-
+        tl15.setColumns(5);
         tl15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl15.setText(" ");
         tl15.setToolTipText("");
@@ -809,16 +852,15 @@ public class Janela extends javax.swing.JFrame {
         tl15.setMinimumSize(new java.awt.Dimension(50, 19));
         tl15.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl15, gridBagConstraints);
 
         lblP2.setBackground(new java.awt.Color(255, 255, 255));
-        lblP2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblP2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/p2.png"))); // NOI18N
-        lblP2.setText("P2");
+        lblP2.setToolTipText("");
         lblP2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lblP2.setFocusable(false);
         lblP2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -830,19 +872,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lblP2, gridBagConstraints);
 
-        tl16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl16.setText(" ");
-        tl16.setToolTipText("");
-        tl16.setInputVerifier(intVerifier);
-        tl16.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl16.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl16, gridBagConstraints);
-
+        tl17.setColumns(5);
         tl17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl17.setText(" ");
         tl17.setToolTipText("");
@@ -850,25 +880,12 @@ public class Janela extends javax.swing.JFrame {
         tl17.setMinimumSize(new java.awt.Dimension(50, 19));
         tl17.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl17, gridBagConstraints);
 
-        tl18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl18.setText(" ");
-        tl18.setToolTipText("");
-        tl18.setInputVerifier(intVerifier);
-        tl18.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl18.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl18, gridBagConstraints);
-
+        tl19.setColumns(5);
         tl19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl19.setText(" ");
         tl19.setToolTipText("");
@@ -876,25 +893,12 @@ public class Janela extends javax.swing.JFrame {
         tl19.setMinimumSize(new java.awt.Dimension(50, 19));
         tl19.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl19, gridBagConstraints);
 
-        tl20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl20.setText(" ");
-        tl20.setToolTipText("");
-        tl20.setInputVerifier(intVerifier);
-        tl20.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl20.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl20, gridBagConstraints);
-
+        tl21.setColumns(5);
         tl21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl21.setText(" ");
         tl21.setToolTipText("");
@@ -902,25 +906,12 @@ public class Janela extends javax.swing.JFrame {
         tl21.setMinimumSize(new java.awt.Dimension(50, 19));
         tl21.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl21, gridBagConstraints);
 
-        tl22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl22.setText(" ");
-        tl22.setToolTipText("");
-        tl22.setInputVerifier(intVerifier);
-        tl22.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl22.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl22, gridBagConstraints);
-
+        tl23.setColumns(5);
         tl23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl23.setText(" ");
         tl23.setToolTipText("");
@@ -928,16 +919,15 @@ public class Janela extends javax.swing.JFrame {
         tl23.setMinimumSize(new java.awt.Dimension(50, 19));
         tl23.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl23, gridBagConstraints);
 
         lblM.setBackground(new java.awt.Color(255, 255, 255));
-        lblM.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/m.png"))); // NOI18N
-        lblM.setText("M");
+        lblM.setToolTipText("");
         lblM.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lblM.setFocusable(false);
         lblM.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -949,19 +939,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lblM, gridBagConstraints);
 
-        tl24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl24.setText(" ");
-        tl24.setToolTipText("");
-        tl24.setInputVerifier(intVerifier);
-        tl24.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl24.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl24, gridBagConstraints);
-
+        tl25.setColumns(5);
         tl25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl25.setText(" ");
         tl25.setToolTipText("");
@@ -969,25 +947,12 @@ public class Janela extends javax.swing.JFrame {
         tl25.setMinimumSize(new java.awt.Dimension(50, 19));
         tl25.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl25, gridBagConstraints);
 
-        tl26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl26.setText(" ");
-        tl26.setToolTipText("");
-        tl26.setInputVerifier(intVerifier);
-        tl26.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl26.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl26, gridBagConstraints);
-
+        tl27.setColumns(5);
         tl27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl27.setText(" ");
         tl27.setToolTipText("");
@@ -995,25 +960,12 @@ public class Janela extends javax.swing.JFrame {
         tl27.setMinimumSize(new java.awt.Dimension(50, 19));
         tl27.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl27, gridBagConstraints);
 
-        tl28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl28.setText(" ");
-        tl28.setToolTipText("");
-        tl28.setInputVerifier(intVerifier);
-        tl28.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl28.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl28, gridBagConstraints);
-
+        tl29.setColumns(5);
         tl29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl29.setText(" ");
         tl29.setToolTipText("");
@@ -1021,25 +973,12 @@ public class Janela extends javax.swing.JFrame {
         tl29.setMinimumSize(new java.awt.Dimension(50, 19));
         tl29.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl29, gridBagConstraints);
 
-        tl30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl30.setText(" ");
-        tl30.setToolTipText("");
-        tl30.setInputVerifier(intVerifier);
-        tl30.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl30.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelLeves.add(tl30, gridBagConstraints);
-
+        tl31.setColumns(5);
         tl31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl31.setText(" ");
         tl31.setToolTipText("");
@@ -1047,16 +986,15 @@ public class Janela extends javax.swing.JFrame {
         tl31.setMinimumSize(new java.awt.Dimension(50, 19));
         tl31.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelLeves.add(tl31, gridBagConstraints);
 
         lbl2CB.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2CB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2CB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2CB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/o1.png"))); // NOI18N
-        lbl2CB.setText("2CB");
+        lbl2CB.setToolTipText("");
         lbl2CB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2CB.setFocusable(false);
         lbl2CB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1068,18 +1006,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl2CB, gridBagConstraints);
 
-        tl32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl32.setText(" ");
-        tl32.setToolTipText("");
-        tl32.setInputVerifier(intVerifier);
-        tl32.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl32.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl32, gridBagConstraints);
-
+        tl33.setColumns(5);
         tl33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl33.setText(" ");
         tl33.setToolTipText("");
@@ -1087,23 +1014,11 @@ public class Janela extends javax.swing.JFrame {
         tl33.setMinimumSize(new java.awt.Dimension(50, 19));
         tl33.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl33, gridBagConstraints);
-
-        tl34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl34.setText(" ");
-        tl34.setToolTipText("");
-        tl34.setInputVerifier(intVerifier);
-        tl34.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl34.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl34, gridBagConstraints);
+        panelLeves.add(tl33, gridBagConstraints);
 
+        tl35.setColumns(5);
         tl35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl35.setText(" ");
         tl35.setToolTipText("");
@@ -1111,23 +1026,11 @@ public class Janela extends javax.swing.JFrame {
         tl35.setMinimumSize(new java.awt.Dimension(50, 19));
         tl35.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl35, gridBagConstraints);
-
-        tl36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl36.setText(" ");
-        tl36.setToolTipText("");
-        tl36.setInputVerifier(intVerifier);
-        tl36.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl36.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl36, gridBagConstraints);
+        panelLeves.add(tl35, gridBagConstraints);
 
+        tl37.setColumns(5);
         tl37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl37.setText(" ");
         tl37.setToolTipText("");
@@ -1135,23 +1038,11 @@ public class Janela extends javax.swing.JFrame {
         tl37.setMinimumSize(new java.awt.Dimension(50, 19));
         tl37.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl37, gridBagConstraints);
-
-        tl38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl38.setText(" ");
-        tl38.setToolTipText("");
-        tl38.setInputVerifier(intVerifier);
-        tl38.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl38.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl38, gridBagConstraints);
+        panelLeves.add(tl37, gridBagConstraints);
 
+        tl39.setColumns(5);
         tl39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl39.setText(" ");
         tl39.setToolTipText("");
@@ -1159,15 +1050,13 @@ public class Janela extends javax.swing.JFrame {
         tl39.setMinimumSize(new java.awt.Dimension(50, 19));
         tl39.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl39, gridBagConstraints);
 
         lbl3CB.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3CB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3CB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3CB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/o2.png"))); // NOI18N
-        lbl3CB.setText("3CB");
         lbl3CB.setToolTipText("");
         lbl3CB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3CB.setFocusable(false);
@@ -1180,18 +1069,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl3CB, gridBagConstraints);
 
-        tl40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl40.setText(" ");
-        tl40.setToolTipText("");
-        tl40.setInputVerifier(intVerifier);
-        tl40.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl40.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl40, gridBagConstraints);
-
+        tl41.setColumns(5);
         tl41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl41.setText(" ");
         tl41.setToolTipText("");
@@ -1199,23 +1077,11 @@ public class Janela extends javax.swing.JFrame {
         tl41.setMinimumSize(new java.awt.Dimension(50, 19));
         tl41.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl41, gridBagConstraints);
-
-        tl42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl42.setText(" ");
-        tl42.setToolTipText("");
-        tl42.setInputVerifier(intVerifier);
-        tl42.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl42.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl42, gridBagConstraints);
+        panelLeves.add(tl41, gridBagConstraints);
 
+        tl43.setColumns(5);
         tl43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl43.setText(" ");
         tl43.setToolTipText("");
@@ -1223,23 +1089,11 @@ public class Janela extends javax.swing.JFrame {
         tl43.setMinimumSize(new java.awt.Dimension(50, 19));
         tl43.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl43, gridBagConstraints);
-
-        tl44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl44.setText(" ");
-        tl44.setToolTipText("");
-        tl44.setInputVerifier(intVerifier);
-        tl44.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl44.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl44, gridBagConstraints);
+        panelLeves.add(tl43, gridBagConstraints);
 
+        tl45.setColumns(5);
         tl45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl45.setText(" ");
         tl45.setToolTipText("");
@@ -1247,23 +1101,11 @@ public class Janela extends javax.swing.JFrame {
         tl45.setMinimumSize(new java.awt.Dimension(50, 19));
         tl45.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl45, gridBagConstraints);
-
-        tl46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl46.setText(" ");
-        tl46.setToolTipText("");
-        tl46.setInputVerifier(intVerifier);
-        tl46.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl46.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl46, gridBagConstraints);
+        panelLeves.add(tl45, gridBagConstraints);
 
+        tl47.setColumns(5);
         tl47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl47.setText(" ");
         tl47.setToolTipText("");
@@ -1271,15 +1113,14 @@ public class Janela extends javax.swing.JFrame {
         tl47.setMinimumSize(new java.awt.Dimension(50, 19));
         tl47.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl47, gridBagConstraints);
 
         lbl4CB.setBackground(new java.awt.Color(255, 255, 255));
-        lbl4CB.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl4CB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl4CB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/o3.png"))); // NOI18N
-        lbl4CB.setText("4CB");
+        lbl4CB.setToolTipText("");
         lbl4CB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl4CB.setFocusable(false);
         lbl4CB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1291,18 +1132,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl4CB, gridBagConstraints);
 
-        tl48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl48.setText(" ");
-        tl48.setToolTipText("");
-        tl48.setInputVerifier(intVerifier);
-        tl48.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl48.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl48, gridBagConstraints);
-
+        tl49.setColumns(5);
         tl49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl49.setText(" ");
         tl49.setToolTipText("");
@@ -1310,23 +1140,11 @@ public class Janela extends javax.swing.JFrame {
         tl49.setMinimumSize(new java.awt.Dimension(50, 19));
         tl49.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl49, gridBagConstraints);
-
-        tl50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl50.setText(" ");
-        tl50.setToolTipText("");
-        tl50.setInputVerifier(intVerifier);
-        tl50.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl50.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl50, gridBagConstraints);
+        panelLeves.add(tl49, gridBagConstraints);
 
+        tl51.setColumns(5);
         tl51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl51.setText(" ");
         tl51.setToolTipText("");
@@ -1334,23 +1152,11 @@ public class Janela extends javax.swing.JFrame {
         tl51.setMinimumSize(new java.awt.Dimension(50, 19));
         tl51.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl51, gridBagConstraints);
-
-        tl52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl52.setText(" ");
-        tl52.setToolTipText("");
-        tl52.setInputVerifier(intVerifier);
-        tl52.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl52.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl52, gridBagConstraints);
+        panelLeves.add(tl51, gridBagConstraints);
 
+        tl53.setColumns(5);
         tl53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl53.setText(" ");
         tl53.setToolTipText("");
@@ -1358,23 +1164,11 @@ public class Janela extends javax.swing.JFrame {
         tl53.setMinimumSize(new java.awt.Dimension(50, 19));
         tl53.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl53, gridBagConstraints);
-
-        tl54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl54.setText(" ");
-        tl54.setToolTipText("");
-        tl54.setInputVerifier(intVerifier);
-        tl54.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl54.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl54, gridBagConstraints);
+        panelLeves.add(tl53, gridBagConstraints);
 
+        tl55.setColumns(5);
         tl55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl55.setText(" ");
         tl55.setToolTipText("");
@@ -1382,15 +1176,14 @@ public class Janela extends javax.swing.JFrame {
         tl55.setMinimumSize(new java.awt.Dimension(50, 19));
         tl55.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl55, gridBagConstraints);
 
         lbl2C.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2C.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2C.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c1.png"))); // NOI18N
-        lbl2C.setText("2C");
+        lbl2C.setToolTipText("");
         lbl2C.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2C.setFocusable(false);
         lbl2C.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1402,18 +1195,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl2C, gridBagConstraints);
 
-        tl56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl56.setText(" ");
-        tl56.setToolTipText("");
-        tl56.setInputVerifier(intVerifier);
-        tl56.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl56.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl56, gridBagConstraints);
-
+        tl57.setColumns(5);
         tl57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl57.setText(" ");
         tl57.setToolTipText("");
@@ -1421,23 +1203,11 @@ public class Janela extends javax.swing.JFrame {
         tl57.setMinimumSize(new java.awt.Dimension(50, 19));
         tl57.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl57, gridBagConstraints);
-
-        tl58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl58.setText(" ");
-        tl58.setToolTipText("");
-        tl58.setInputVerifier(intVerifier);
-        tl58.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl58.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl58, gridBagConstraints);
+        panelLeves.add(tl57, gridBagConstraints);
 
+        tl59.setColumns(5);
         tl59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl59.setText(" ");
         tl59.setToolTipText("");
@@ -1445,23 +1215,11 @@ public class Janela extends javax.swing.JFrame {
         tl59.setMinimumSize(new java.awt.Dimension(50, 19));
         tl59.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl59, gridBagConstraints);
-
-        tl60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl60.setText(" ");
-        tl60.setToolTipText("");
-        tl60.setInputVerifier(intVerifier);
-        tl60.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl60.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl60, gridBagConstraints);
+        panelLeves.add(tl59, gridBagConstraints);
 
+        tl61.setColumns(5);
         tl61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl61.setText(" ");
         tl61.setToolTipText("");
@@ -1469,23 +1227,11 @@ public class Janela extends javax.swing.JFrame {
         tl61.setMinimumSize(new java.awt.Dimension(50, 19));
         tl61.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl61, gridBagConstraints);
-
-        tl62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl62.setText(" ");
-        tl62.setToolTipText("");
-        tl62.setInputVerifier(intVerifier);
-        tl62.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl62.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl62, gridBagConstraints);
+        panelLeves.add(tl61, gridBagConstraints);
 
+        tl63.setColumns(5);
         tl63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl63.setText(" ");
         tl63.setToolTipText("");
@@ -1493,15 +1239,14 @@ public class Janela extends javax.swing.JFrame {
         tl63.setMinimumSize(new java.awt.Dimension(50, 19));
         tl63.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl63, gridBagConstraints);
 
         lbl3C.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3C.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3C.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c2.png"))); // NOI18N
-        lbl3C.setText("3C");
+        lbl3C.setToolTipText("");
         lbl3C.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3C.setFocusable(false);
         lbl3C.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1513,18 +1258,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl3C, gridBagConstraints);
 
-        tl64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl64.setText(" ");
-        tl64.setToolTipText("");
-        tl64.setInputVerifier(intVerifier);
-        tl64.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl64.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl64, gridBagConstraints);
-
+        tl65.setColumns(5);
         tl65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl65.setText(" ");
         tl65.setToolTipText("");
@@ -1532,23 +1266,11 @@ public class Janela extends javax.swing.JFrame {
         tl65.setMinimumSize(new java.awt.Dimension(50, 19));
         tl65.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl65, gridBagConstraints);
-
-        tl66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl66.setText(" ");
-        tl66.setToolTipText("");
-        tl66.setInputVerifier(intVerifier);
-        tl66.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl66.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl66, gridBagConstraints);
+        panelLeves.add(tl65, gridBagConstraints);
 
+        tl67.setColumns(5);
         tl67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl67.setText(" ");
         tl67.setToolTipText("");
@@ -1556,23 +1278,11 @@ public class Janela extends javax.swing.JFrame {
         tl67.setMinimumSize(new java.awt.Dimension(50, 19));
         tl67.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl67, gridBagConstraints);
-
-        tl68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl68.setText(" ");
-        tl68.setToolTipText("");
-        tl68.setInputVerifier(intVerifier);
-        tl68.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl68.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl68, gridBagConstraints);
+        panelLeves.add(tl67, gridBagConstraints);
 
+        tl69.setColumns(5);
         tl69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl69.setText(" ");
         tl69.setToolTipText("");
@@ -1580,23 +1290,11 @@ public class Janela extends javax.swing.JFrame {
         tl69.setMinimumSize(new java.awt.Dimension(50, 19));
         tl69.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl69, gridBagConstraints);
-
-        tl70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl70.setText(" ");
-        tl70.setToolTipText("");
-        tl70.setInputVerifier(intVerifier);
-        tl70.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl70.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl70, gridBagConstraints);
+        panelLeves.add(tl69, gridBagConstraints);
 
+        tl71.setColumns(5);
         tl71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl71.setText(" ");
         tl71.setToolTipText("");
@@ -1604,15 +1302,14 @@ public class Janela extends javax.swing.JFrame {
         tl71.setMinimumSize(new java.awt.Dimension(50, 19));
         tl71.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl71, gridBagConstraints);
 
         lbl4C.setBackground(new java.awt.Color(255, 255, 255));
-        lbl4C.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl4C.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl4C.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c3.png"))); // NOI18N
-        lbl4C.setText("4C");
+        lbl4C.setToolTipText("");
         lbl4C.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl4C.setFocusable(false);
         lbl4C.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1624,18 +1321,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl4C, gridBagConstraints);
 
-        tl72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl72.setText(" ");
-        tl72.setToolTipText("");
-        tl72.setInputVerifier(intVerifier);
-        tl72.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl72.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl72, gridBagConstraints);
-
+        tl73.setColumns(5);
         tl73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl73.setText(" ");
         tl73.setToolTipText("");
@@ -1643,23 +1329,11 @@ public class Janela extends javax.swing.JFrame {
         tl73.setMinimumSize(new java.awt.Dimension(50, 19));
         tl73.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl73, gridBagConstraints);
-
-        tl74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl74.setText(" ");
-        tl74.setToolTipText("");
-        tl74.setInputVerifier(intVerifier);
-        tl74.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl74.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl74, gridBagConstraints);
+        panelLeves.add(tl73, gridBagConstraints);
 
+        tl75.setColumns(5);
         tl75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl75.setText(" ");
         tl75.setToolTipText("");
@@ -1667,23 +1341,11 @@ public class Janela extends javax.swing.JFrame {
         tl75.setMinimumSize(new java.awt.Dimension(50, 19));
         tl75.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl75, gridBagConstraints);
-
-        tl76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl76.setText(" ");
-        tl76.setToolTipText("");
-        tl76.setInputVerifier(intVerifier);
-        tl76.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl76.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl76, gridBagConstraints);
+        panelLeves.add(tl75, gridBagConstraints);
 
+        tl77.setColumns(5);
         tl77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl77.setText(" ");
         tl77.setToolTipText("");
@@ -1691,23 +1353,11 @@ public class Janela extends javax.swing.JFrame {
         tl77.setMinimumSize(new java.awt.Dimension(50, 19));
         tl77.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl77, gridBagConstraints);
-
-        tl78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl78.setText(" ");
-        tl78.setToolTipText("");
-        tl78.setInputVerifier(intVerifier);
-        tl78.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl78.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl78, gridBagConstraints);
+        panelLeves.add(tl77, gridBagConstraints);
 
+        tl79.setColumns(5);
         tl79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl79.setText(" ");
         tl79.setToolTipText("");
@@ -1715,15 +1365,14 @@ public class Janela extends javax.swing.JFrame {
         tl79.setMinimumSize(new java.awt.Dimension(50, 19));
         tl79.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl79, gridBagConstraints);
 
         lbl4CD.setBackground(new java.awt.Color(255, 255, 255));
-        lbl4CD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl4CD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl4CD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c4.png"))); // NOI18N
-        lbl4CD.setText("4CD");
+        lbl4CD.setToolTipText("");
         lbl4CD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl4CD.setFocusable(false);
         lbl4CD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1735,18 +1384,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl4CD, gridBagConstraints);
 
-        tl80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl80.setText(" ");
-        tl80.setToolTipText("");
-        tl80.setInputVerifier(intVerifier);
-        tl80.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl80.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl80, gridBagConstraints);
-
+        tl81.setColumns(5);
         tl81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl81.setText(" ");
         tl81.setToolTipText("");
@@ -1754,23 +1392,11 @@ public class Janela extends javax.swing.JFrame {
         tl81.setMinimumSize(new java.awt.Dimension(50, 19));
         tl81.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl81, gridBagConstraints);
-
-        tl82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl82.setText(" ");
-        tl82.setToolTipText("");
-        tl82.setInputVerifier(intVerifier);
-        tl82.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl82.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl82, gridBagConstraints);
+        panelLeves.add(tl81, gridBagConstraints);
 
+        tl83.setColumns(5);
         tl83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl83.setText(" ");
         tl83.setToolTipText("");
@@ -1778,23 +1404,11 @@ public class Janela extends javax.swing.JFrame {
         tl83.setMinimumSize(new java.awt.Dimension(50, 19));
         tl83.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl83, gridBagConstraints);
-
-        tl84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl84.setText(" ");
-        tl84.setToolTipText("");
-        tl84.setInputVerifier(intVerifier);
-        tl84.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl84.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl84, gridBagConstraints);
+        panelLeves.add(tl83, gridBagConstraints);
 
+        tl85.setColumns(5);
         tl85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl85.setText(" ");
         tl85.setToolTipText("");
@@ -1802,23 +1416,11 @@ public class Janela extends javax.swing.JFrame {
         tl85.setMinimumSize(new java.awt.Dimension(50, 19));
         tl85.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl85, gridBagConstraints);
-
-        tl86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl86.setText(" ");
-        tl86.setToolTipText("");
-        tl86.setInputVerifier(intVerifier);
-        tl86.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl86.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl86, gridBagConstraints);
+        panelLeves.add(tl85, gridBagConstraints);
 
+        tl87.setColumns(5);
         tl87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl87.setText(" ");
         tl87.setToolTipText("");
@@ -1826,15 +1428,14 @@ public class Janela extends javax.swing.JFrame {
         tl87.setMinimumSize(new java.awt.Dimension(50, 19));
         tl87.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(tl87, gridBagConstraints);
 
         lbl3D.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3D.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3D.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3D.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/simples/c5.png"))); // NOI18N
-        lbl3D.setText("3D");
+        lbl3D.setToolTipText("");
         lbl3D.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3D.setFocusable(false);
         lbl3D.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1846,18 +1447,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelLeves.add(lbl3D, gridBagConstraints);
 
-        tl88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl88.setText(" ");
-        tl88.setToolTipText("");
-        tl88.setInputVerifier(intVerifier);
-        tl88.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl88.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl88, gridBagConstraints);
-
+        tl89.setColumns(5);
         tl89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl89.setText(" ");
         tl89.setToolTipText("");
@@ -1865,23 +1455,11 @@ public class Janela extends javax.swing.JFrame {
         tl89.setMinimumSize(new java.awt.Dimension(50, 19));
         tl89.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl89, gridBagConstraints);
-
-        tl90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl90.setText(" ");
-        tl90.setToolTipText("");
-        tl90.setInputVerifier(intVerifier);
-        tl90.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl90.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl90, gridBagConstraints);
+        panelLeves.add(tl89, gridBagConstraints);
 
+        tl91.setColumns(5);
         tl91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl91.setText(" ");
         tl91.setToolTipText("");
@@ -1889,23 +1467,11 @@ public class Janela extends javax.swing.JFrame {
         tl91.setMinimumSize(new java.awt.Dimension(50, 19));
         tl91.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl91, gridBagConstraints);
-
-        tl92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl92.setText(" ");
-        tl92.setToolTipText("");
-        tl92.setInputVerifier(intVerifier);
-        tl92.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl92.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl92, gridBagConstraints);
+        panelLeves.add(tl91, gridBagConstraints);
 
+        tl93.setColumns(5);
         tl93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl93.setText(" ");
         tl93.setToolTipText("");
@@ -1913,23 +1479,11 @@ public class Janela extends javax.swing.JFrame {
         tl93.setMinimumSize(new java.awt.Dimension(50, 19));
         tl93.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl93, gridBagConstraints);
-
-        tl94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tl94.setText(" ");
-        tl94.setToolTipText("");
-        tl94.setInputVerifier(intVerifier);
-        tl94.setMinimumSize(new java.awt.Dimension(50, 19));
-        tl94.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl94, gridBagConstraints);
+        panelLeves.add(tl93, gridBagConstraints);
 
+        tl95.setColumns(5);
         tl95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tl95.setText(" ");
         tl95.setToolTipText("");
@@ -1937,10 +1491,1116 @@ public class Janela extends javax.swing.JFrame {
         tl95.setMinimumSize(new java.awt.Dimension(50, 19));
         tl95.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 13;
+        panelLeves.add(tl95, gridBagConstraints);
+
+        jLabel5.setText("P1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        panelLeves.add(jLabel5, gridBagConstraints);
+
+        jLabel6.setText("P3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        panelLeves.add(jLabel6, gridBagConstraints);
+
+        jLabel7.setText("P2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        panelLeves.add(jLabel7, gridBagConstraints);
+
+        jLabel8.setText("M");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        panelLeves.add(jLabel8, gridBagConstraints);
+
+        jLabel9.setText("2CB");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        panelLeves.add(jLabel9, gridBagConstraints);
+
+        jLabel10.setText("3CB");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        panelLeves.add(jLabel10, gridBagConstraints);
+
+        jLabel11.setText("4CB");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        panelLeves.add(jLabel11, gridBagConstraints);
+
+        jLabel12.setText("2C");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        panelLeves.add(jLabel12, gridBagConstraints);
+
+        jLabel13.setText("3C");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        panelLeves.add(jLabel13, gridBagConstraints);
+
+        jLabel14.setText("4C");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        panelLeves.add(jLabel14, gridBagConstraints);
+
+        jLabel15.setText("4CD");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        panelLeves.add(jLabel15, gridBagConstraints);
+
+        jLabel16.setText("3D");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        panelLeves.add(jLabel16, gridBagConstraints);
+
+        jPanel3.setToolTipText("");
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        tl0.setColumns(5);
+        tl0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl0.setToolTipText("");
+        tl0.setInputVerifier(intVerifier);
+        tl0.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl0.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel3.add(tl0, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel3, gridBagConstraints);
+
+        jPanel4.setToolTipText("");
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        tl8.setColumns(5);
+        tl8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl8.setText(" ");
+        tl8.setToolTipText("");
+        tl8.setInputVerifier(intVerifier);
+        tl8.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl8.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(tl8, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel4, gridBagConstraints);
+
+        jPanel5.setToolTipText("");
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        tl16.setColumns(5);
+        tl16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl16.setText(" ");
+        tl16.setToolTipText("");
+        tl16.setInputVerifier(intVerifier);
+        tl16.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl16.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel5.add(tl16, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel5, gridBagConstraints);
+
+        jPanel6.setToolTipText("");
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        tl24.setColumns(5);
+        tl24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl24.setText(" ");
+        tl24.setToolTipText("");
+        tl24.setInputVerifier(intVerifier);
+        tl24.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl24.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel6.add(tl24, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel6, gridBagConstraints);
+
+        jPanel7.setToolTipText("");
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        tl32.setColumns(5);
+        tl32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl32.setText(" ");
+        tl32.setToolTipText("");
+        tl32.setInputVerifier(intVerifier);
+        tl32.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl32.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel7.add(tl32, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel7, gridBagConstraints);
+
+        jPanel8.setToolTipText("");
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+
+        tl40.setColumns(5);
+        tl40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl40.setText(" ");
+        tl40.setToolTipText("");
+        tl40.setInputVerifier(intVerifier);
+        tl40.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl40.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel8.add(tl40, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel8, gridBagConstraints);
+
+        jPanel9.setToolTipText("");
+        jPanel9.setLayout(new java.awt.GridBagLayout());
+
+        tl48.setColumns(5);
+        tl48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl48.setText(" ");
+        tl48.setToolTipText("");
+        tl48.setInputVerifier(intVerifier);
+        tl48.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl48.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel9.add(tl48, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel9, gridBagConstraints);
+
+        jPanel10.setToolTipText("");
+        jPanel10.setLayout(new java.awt.GridBagLayout());
+
+        tl56.setColumns(5);
+        tl56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl56.setText(" ");
+        tl56.setToolTipText("");
+        tl56.setInputVerifier(intVerifier);
+        tl56.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl56.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel10.add(tl56, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel10, gridBagConstraints);
+
+        jPanel11.setToolTipText("");
+        jPanel11.setLayout(new java.awt.GridBagLayout());
+
+        tl64.setColumns(5);
+        tl64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl64.setText(" ");
+        tl64.setToolTipText("");
+        tl64.setInputVerifier(intVerifier);
+        tl64.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl64.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel11.add(tl64, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel11, gridBagConstraints);
+
+        jPanel12.setToolTipText("");
+        jPanel12.setLayout(new java.awt.GridBagLayout());
+
+        tl72.setColumns(5);
+        tl72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl72.setText(" ");
+        tl72.setToolTipText("");
+        tl72.setInputVerifier(intVerifier);
+        tl72.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl72.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel12.add(tl72, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel12, gridBagConstraints);
+
+        jPanel13.setToolTipText("");
+        jPanel13.setLayout(new java.awt.GridBagLayout());
+
+        tl80.setColumns(5);
+        tl80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl80.setText(" ");
+        tl80.setToolTipText("");
+        tl80.setInputVerifier(intVerifier);
+        tl80.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl80.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel13.add(tl80, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel13, gridBagConstraints);
+
+        jPanel14.setToolTipText("");
+        jPanel14.setLayout(new java.awt.GridBagLayout());
+
+        tl88.setColumns(5);
+        tl88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl88.setText(" ");
+        tl88.setToolTipText("");
+        tl88.setInputVerifier(intVerifier);
+        tl88.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl88.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel14.add(tl88, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel14, gridBagConstraints);
+
+        jPanel15.setLayout(new java.awt.GridBagLayout());
+
+        tl2.setColumns(5);
+        tl2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl2.setText(" ");
+        tl2.setToolTipText("");
+        tl2.setInputVerifier(intVerifier);
+        tl2.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl2.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel15.add(tl2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel15, gridBagConstraints);
+
+        jPanel16.setLayout(new java.awt.GridBagLayout());
+
+        tl10.setColumns(5);
+        tl10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl10.setText(" ");
+        tl10.setToolTipText("");
+        tl10.setInputVerifier(intVerifier);
+        tl10.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl10.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel16.add(tl10, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel16, gridBagConstraints);
+
+        jPanel17.setLayout(new java.awt.GridBagLayout());
+
+        tl18.setColumns(5);
+        tl18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl18.setText(" ");
+        tl18.setToolTipText("");
+        tl18.setInputVerifier(intVerifier);
+        tl18.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl18.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel17.add(tl18, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel17, gridBagConstraints);
+
+        jPanel18.setLayout(new java.awt.GridBagLayout());
+
+        tl26.setColumns(5);
+        tl26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl26.setText(" ");
+        tl26.setToolTipText("");
+        tl26.setInputVerifier(intVerifier);
+        tl26.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl26.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel18.add(tl26, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel18, gridBagConstraints);
+
+        jPanel19.setLayout(new java.awt.GridBagLayout());
+
+        tl34.setColumns(5);
+        tl34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl34.setText(" ");
+        tl34.setToolTipText("");
+        tl34.setInputVerifier(intVerifier);
+        tl34.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl34.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel19.add(tl34, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel19, gridBagConstraints);
+
+        jPanel20.setLayout(new java.awt.GridBagLayout());
+
+        tl42.setColumns(5);
+        tl42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl42.setText(" ");
+        tl42.setToolTipText("");
+        tl42.setInputVerifier(intVerifier);
+        tl42.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl42.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel20.add(tl42, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel20, gridBagConstraints);
+
+        jPanel21.setLayout(new java.awt.GridBagLayout());
+
+        tl50.setColumns(5);
+        tl50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl50.setText(" ");
+        tl50.setToolTipText("");
+        tl50.setInputVerifier(intVerifier);
+        tl50.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl50.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel21.add(tl50, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel21, gridBagConstraints);
+
+        jPanel22.setLayout(new java.awt.GridBagLayout());
+
+        tl58.setColumns(5);
+        tl58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl58.setText(" ");
+        tl58.setToolTipText("");
+        tl58.setInputVerifier(intVerifier);
+        tl58.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl58.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel22.add(tl58, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel22, gridBagConstraints);
+
+        jPanel23.setLayout(new java.awt.GridBagLayout());
+
+        tl66.setColumns(5);
+        tl66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl66.setText(" ");
+        tl66.setToolTipText("");
+        tl66.setInputVerifier(intVerifier);
+        tl66.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl66.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel23.add(tl66, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel23, gridBagConstraints);
+
+        jPanel24.setLayout(new java.awt.GridBagLayout());
+
+        tl74.setColumns(5);
+        tl74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl74.setText(" ");
+        tl74.setToolTipText("");
+        tl74.setInputVerifier(intVerifier);
+        tl74.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl74.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel24.add(tl74, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel24, gridBagConstraints);
+
+        jPanel25.setLayout(new java.awt.GridBagLayout());
+
+        tl82.setColumns(5);
+        tl82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl82.setText(" ");
+        tl82.setToolTipText("");
+        tl82.setInputVerifier(intVerifier);
+        tl82.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl82.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel25.add(tl82, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel25, gridBagConstraints);
+
+        jPanel26.setLayout(new java.awt.GridBagLayout());
+
+        tl90.setColumns(5);
+        tl90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl90.setText(" ");
+        tl90.setToolTipText("");
+        tl90.setInputVerifier(intVerifier);
+        tl90.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl90.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel26.add(tl90, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel26, gridBagConstraints);
+
+        jPanel27.setLayout(new java.awt.GridBagLayout());
+
+        tl4.setColumns(5);
+        tl4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl4.setText(" ");
+        tl4.setToolTipText("");
+        tl4.setInputVerifier(intVerifier);
+        tl4.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl4.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel27.add(tl4, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel27, gridBagConstraints);
+
+        jPanel28.setLayout(new java.awt.GridBagLayout());
+
+        tl12.setColumns(5);
+        tl12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl12.setText(" ");
+        tl12.setToolTipText("");
+        tl12.setInputVerifier(intVerifier);
+        tl12.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl12.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel28.add(tl12, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel28, gridBagConstraints);
+
+        jPanel29.setLayout(new java.awt.GridBagLayout());
+
+        tl20.setColumns(5);
+        tl20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl20.setText(" ");
+        tl20.setToolTipText("");
+        tl20.setInputVerifier(intVerifier);
+        tl20.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl20.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel29.add(tl20, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel29, gridBagConstraints);
+
+        jPanel30.setLayout(new java.awt.GridBagLayout());
+
+        tl28.setColumns(5);
+        tl28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl28.setText(" ");
+        tl28.setToolTipText("");
+        tl28.setInputVerifier(intVerifier);
+        tl28.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl28.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel30.add(tl28, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel30, gridBagConstraints);
+
+        jPanel31.setLayout(new java.awt.GridBagLayout());
+
+        tl36.setColumns(5);
+        tl36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl36.setText(" ");
+        tl36.setToolTipText("");
+        tl36.setInputVerifier(intVerifier);
+        tl36.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl36.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel31.add(tl36, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel31, gridBagConstraints);
+
+        jPanel32.setLayout(new java.awt.GridBagLayout());
+
+        tl44.setColumns(5);
+        tl44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl44.setText(" ");
+        tl44.setToolTipText("");
+        tl44.setInputVerifier(intVerifier);
+        tl44.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl44.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel32.add(tl44, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel32, gridBagConstraints);
+
+        jPanel33.setLayout(new java.awt.GridBagLayout());
+
+        tl52.setColumns(5);
+        tl52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl52.setText(" ");
+        tl52.setToolTipText("");
+        tl52.setInputVerifier(intVerifier);
+        tl52.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl52.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel33.add(tl52, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel33, gridBagConstraints);
+
+        jPanel34.setLayout(new java.awt.GridBagLayout());
+
+        tl60.setColumns(5);
+        tl60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl60.setText(" ");
+        tl60.setToolTipText("");
+        tl60.setInputVerifier(intVerifier);
+        tl60.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl60.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel34.add(tl60, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel34, gridBagConstraints);
+
+        jPanel35.setLayout(new java.awt.GridBagLayout());
+
+        tl68.setColumns(5);
+        tl68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl68.setText(" ");
+        tl68.setToolTipText("");
+        tl68.setInputVerifier(intVerifier);
+        tl68.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl68.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel35.add(tl68, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel35, gridBagConstraints);
+
+        jPanel36.setLayout(new java.awt.GridBagLayout());
+
+        tl76.setColumns(5);
+        tl76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl76.setText(" ");
+        tl76.setToolTipText("");
+        tl76.setInputVerifier(intVerifier);
+        tl76.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl76.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel36.add(tl76, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel36, gridBagConstraints);
+
+        jPanel37.setLayout(new java.awt.GridBagLayout());
+
+        tl84.setColumns(5);
+        tl84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl84.setText(" ");
+        tl84.setToolTipText("");
+        tl84.setInputVerifier(intVerifier);
+        tl84.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl84.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel37.add(tl84, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel37, gridBagConstraints);
+
+        jPanel38.setLayout(new java.awt.GridBagLayout());
+
+        tl92.setColumns(5);
+        tl92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl92.setText(" ");
+        tl92.setToolTipText("");
+        tl92.setInputVerifier(intVerifier);
+        tl92.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl92.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel38.add(tl92, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel38, gridBagConstraints);
+
+        jPanel39.setLayout(new java.awt.GridBagLayout());
+
+        tl6.setColumns(5);
+        tl6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl6.setText(" ");
+        tl6.setToolTipText("");
+        tl6.setInputVerifier(intVerifier);
+        tl6.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl6.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel39.add(tl6, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel39, gridBagConstraints);
+
+        jPanel40.setLayout(new java.awt.GridBagLayout());
+
+        tl14.setColumns(5);
+        tl14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl14.setText(" ");
+        tl14.setToolTipText("");
+        tl14.setInputVerifier(intVerifier);
+        tl14.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl14.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel40.add(tl14, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel40, gridBagConstraints);
+
+        jPanel41.setLayout(new java.awt.GridBagLayout());
+
+        tl22.setColumns(5);
+        tl22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl22.setText(" ");
+        tl22.setToolTipText("");
+        tl22.setInputVerifier(intVerifier);
+        tl22.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl22.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel41.add(tl22, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel41, gridBagConstraints);
+
+        jPanel42.setLayout(new java.awt.GridBagLayout());
+
+        tl30.setColumns(5);
+        tl30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl30.setText(" ");
+        tl30.setToolTipText("");
+        tl30.setInputVerifier(intVerifier);
+        tl30.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl30.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel42.add(tl30, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel42, gridBagConstraints);
+
+        jPanel43.setLayout(new java.awt.GridBagLayout());
+
+        tl38.setColumns(5);
+        tl38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl38.setText(" ");
+        tl38.setToolTipText("");
+        tl38.setInputVerifier(intVerifier);
+        tl38.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl38.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel43.add(tl38, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel43, gridBagConstraints);
+
+        jPanel44.setLayout(new java.awt.GridBagLayout());
+
+        tl46.setColumns(5);
+        tl46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl46.setText(" ");
+        tl46.setToolTipText("");
+        tl46.setInputVerifier(intVerifier);
+        tl46.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl46.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel44.add(tl46, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel44, gridBagConstraints);
+
+        jPanel45.setLayout(new java.awt.GridBagLayout());
+
+        tl54.setColumns(5);
+        tl54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl54.setText(" ");
+        tl54.setToolTipText("");
+        tl54.setInputVerifier(intVerifier);
+        tl54.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl54.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel45.add(tl54, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel45, gridBagConstraints);
+
+        jPanel46.setLayout(new java.awt.GridBagLayout());
+
+        tl62.setColumns(5);
+        tl62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl62.setText(" ");
+        tl62.setToolTipText("");
+        tl62.setInputVerifier(intVerifier);
+        tl62.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl62.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel46.add(tl62, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel46, gridBagConstraints);
+
+        jPanel47.setLayout(new java.awt.GridBagLayout());
+
+        tl70.setColumns(5);
+        tl70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl70.setText(" ");
+        tl70.setToolTipText("");
+        tl70.setInputVerifier(intVerifier);
+        tl70.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl70.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel47.add(tl70, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel47, gridBagConstraints);
+
+        jPanel48.setLayout(new java.awt.GridBagLayout());
+
+        tl78.setColumns(5);
+        tl78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl78.setText(" ");
+        tl78.setToolTipText("");
+        tl78.setInputVerifier(intVerifier);
+        tl78.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl78.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel48.add(tl78, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel48, gridBagConstraints);
+
+        jPanel49.setLayout(new java.awt.GridBagLayout());
+
+        tl86.setColumns(5);
+        tl86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl86.setText(" ");
+        tl86.setToolTipText("");
+        tl86.setInputVerifier(intVerifier);
+        tl86.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl86.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel49.add(tl86, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel49, gridBagConstraints);
+
+        jPanel50.setLayout(new java.awt.GridBagLayout());
+
+        tl94.setColumns(5);
+        tl94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tl94.setText(" ");
+        tl94.setToolTipText("");
+        tl94.setInputVerifier(intVerifier);
+        tl94.setMinimumSize(new java.awt.Dimension(50, 19));
+        tl94.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel50.add(tl94, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelLeves.add(tl95, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelLeves.add(jPanel50, gridBagConstraints);
 
         jScrollPane2.setViewportView(panelLeves);
 
@@ -1953,8 +2613,8 @@ public class Janela extends javax.swing.JFrame {
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab_levesLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 208, Short.MAX_VALUE))
+                .addComponent(jScrollPane2)
+                .addGap(114, 114, 114))
         );
 
         jTabbedPane1.addTab("Veículos e Caminhões Leves", tab_leves);
@@ -1965,9 +2625,8 @@ public class Janela extends javax.swing.JFrame {
 
         pesados_hora1.setEditable(false);
         pesados_hora1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pesados_hora1.setText("Hora 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -1979,18 +2638,18 @@ public class Janela extends javax.swing.JFrame {
         pes15_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes15_1.setText("15");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelPesados.add(pes15_1, gridBagConstraints);
 
         pes30_1.setEditable(false);
-        pes30_1.setBackground(new java.awt.Color(204, 204, 204));
+        pes30_1.setBackground(new java.awt.Color(255, 255, 255));
         pes30_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes30_1.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -2001,18 +2660,18 @@ public class Janela extends javax.swing.JFrame {
         pes45_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes45_1.setText("45");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelPesados.add(pes45_1, gridBagConstraints);
 
         pes60_1.setEditable(false);
-        pes60_1.setBackground(new java.awt.Color(204, 204, 204));
+        pes60_1.setBackground(new java.awt.Color(255, 255, 255));
         pes60_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes60_1.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -2020,9 +2679,8 @@ public class Janela extends javax.swing.JFrame {
 
         pesados_hora2.setEditable(false);
         pesados_hora2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pesados_hora2.setText("Hora 2");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -2034,18 +2692,18 @@ public class Janela extends javax.swing.JFrame {
         pes15_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes15_2.setText("15");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelPesados.add(pes15_2, gridBagConstraints);
 
         pes30_2.setEditable(false);
-        pes30_2.setBackground(new java.awt.Color(204, 204, 204));
+        pes30_2.setBackground(new java.awt.Color(255, 255, 255));
         pes30_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes30_2.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -2056,27 +2714,26 @@ public class Janela extends javax.swing.JFrame {
         peso45_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         peso45_2.setText("45");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelPesados.add(peso45_2, gridBagConstraints);
 
         peso60_2.setEditable(false);
-        peso60_2.setBackground(new java.awt.Color(204, 204, 204));
+        peso60_2.setBackground(new java.awt.Color(255, 255, 255));
         peso60_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         peso60_2.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         panelPesados.add(peso60_2, gridBagConstraints);
 
         lbl2S1.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2S1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2S1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2S1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s1.png"))); // NOI18N
-        lbl2S1.setText("2S1");
         lbl2S1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2S1.setFocusable(false);
         lbl2S1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2090,18 +2747,7 @@ public class Janela extends javax.swing.JFrame {
         panelPesados.add(lbl2S1, gridBagConstraints);
         lbl2S1.getAccessibleContext().setAccessibleDescription("");
 
-        tp0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp0.setToolTipText("");
-        tp0.setInputVerifier(intVerifier);
-        tp0.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp0.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp0, gridBagConstraints);
-
+        tp1.setColumns(5);
         tp1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp1.setText(" ");
         tp1.setToolTipText("");
@@ -2109,25 +2755,12 @@ public class Janela extends javax.swing.JFrame {
         tp1.setMinimumSize(new java.awt.Dimension(50, 19));
         tp1.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp1, gridBagConstraints);
 
-        tp2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp2.setText(" ");
-        tp2.setToolTipText("");
-        tp2.setInputVerifier(intVerifier);
-        tp2.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp2.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp2, gridBagConstraints);
-
+        tp3.setColumns(5);
         tp3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp3.setText(" ");
         tp3.setToolTipText("");
@@ -2135,25 +2768,12 @@ public class Janela extends javax.swing.JFrame {
         tp3.setMinimumSize(new java.awt.Dimension(50, 19));
         tp3.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp3, gridBagConstraints);
 
-        tp4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp4.setText(" ");
-        tp4.setToolTipText("");
-        tp4.setInputVerifier(intVerifier);
-        tp4.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp4.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp4, gridBagConstraints);
-
+        tp5.setColumns(5);
         tp5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp5.setText(" ");
         tp5.setToolTipText("");
@@ -2161,25 +2781,12 @@ public class Janela extends javax.swing.JFrame {
         tp5.setMinimumSize(new java.awt.Dimension(50, 19));
         tp5.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp5, gridBagConstraints);
 
-        tp6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp6.setText(" ");
-        tp6.setToolTipText("");
-        tp6.setInputVerifier(intVerifier);
-        tp6.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp6.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp6, gridBagConstraints);
-
+        tp7.setColumns(5);
         tp7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp7.setText(" ");
         tp7.setToolTipText("");
@@ -2187,16 +2794,14 @@ public class Janela extends javax.swing.JFrame {
         tp7.setMinimumSize(new java.awt.Dimension(50, 19));
         tp7.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp7, gridBagConstraints);
 
         lbl2S2.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2S2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2S2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2S2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s2.png"))); // NOI18N
-        lbl2S2.setText("2S2");
         lbl2S2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2S2.setFocusable(false);
         lbl2S2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2208,19 +2813,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl2S2, gridBagConstraints);
 
-        tp8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp8.setText(" ");
-        tp8.setToolTipText("");
-        tp8.setInputVerifier(intVerifier);
-        tp8.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp8.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp8, gridBagConstraints);
-
+        tp9.setColumns(5);
         tp9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp9.setText(" ");
         tp9.setToolTipText("");
@@ -2228,25 +2821,12 @@ public class Janela extends javax.swing.JFrame {
         tp9.setMinimumSize(new java.awt.Dimension(50, 19));
         tp9.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp9, gridBagConstraints);
 
-        tp10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp10.setText(" ");
-        tp10.setToolTipText("");
-        tp10.setInputVerifier(intVerifier);
-        tp10.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp10.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp10, gridBagConstraints);
-
+        tp11.setColumns(5);
         tp11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp11.setText(" ");
         tp11.setToolTipText("");
@@ -2254,25 +2834,12 @@ public class Janela extends javax.swing.JFrame {
         tp11.setMinimumSize(new java.awt.Dimension(50, 19));
         tp11.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp11, gridBagConstraints);
 
-        tp12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp12.setText(" ");
-        tp12.setToolTipText("");
-        tp12.setInputVerifier(intVerifier);
-        tp12.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp12.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp12, gridBagConstraints);
-
+        tp13.setColumns(5);
         tp13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp13.setText(" ");
         tp13.setToolTipText("");
@@ -2280,25 +2847,12 @@ public class Janela extends javax.swing.JFrame {
         tp13.setMinimumSize(new java.awt.Dimension(50, 19));
         tp13.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp13, gridBagConstraints);
 
-        tp14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp14.setText(" ");
-        tp14.setToolTipText("");
-        tp14.setInputVerifier(intVerifier);
-        tp14.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp14.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp14, gridBagConstraints);
-
+        tp15.setColumns(5);
         tp15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp15.setText(" ");
         tp15.setToolTipText("");
@@ -2306,16 +2860,14 @@ public class Janela extends javax.swing.JFrame {
         tp15.setMinimumSize(new java.awt.Dimension(50, 19));
         tp15.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp15, gridBagConstraints);
 
         lbl2S3.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2S3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2S3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2S3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s3.png"))); // NOI18N
-        lbl2S3.setText("2S3");
         lbl2S3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2S3.setFocusable(false);
         lbl2S3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2327,19 +2879,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl2S3, gridBagConstraints);
 
-        tp16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp16.setText(" ");
-        tp16.setToolTipText("");
-        tp16.setInputVerifier(intVerifier);
-        tp16.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp16.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp16, gridBagConstraints);
-
+        tp17.setColumns(5);
         tp17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp17.setText(" ");
         tp17.setToolTipText("");
@@ -2347,25 +2887,12 @@ public class Janela extends javax.swing.JFrame {
         tp17.setMinimumSize(new java.awt.Dimension(50, 19));
         tp17.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp17, gridBagConstraints);
 
-        tp18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp18.setText(" ");
-        tp18.setToolTipText("");
-        tp18.setInputVerifier(intVerifier);
-        tp18.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp18.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp18, gridBagConstraints);
-
+        tp19.setColumns(5);
         tp19.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp19.setText(" ");
         tp19.setToolTipText("");
@@ -2373,25 +2900,12 @@ public class Janela extends javax.swing.JFrame {
         tp19.setMinimumSize(new java.awt.Dimension(50, 19));
         tp19.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp19, gridBagConstraints);
 
-        tp20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp20.setText(" ");
-        tp20.setToolTipText("");
-        tp20.setInputVerifier(intVerifier);
-        tp20.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp20.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp20, gridBagConstraints);
-
+        tp21.setColumns(5);
         tp21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp21.setText(" ");
         tp21.setToolTipText("");
@@ -2399,25 +2913,12 @@ public class Janela extends javax.swing.JFrame {
         tp21.setMinimumSize(new java.awt.Dimension(50, 19));
         tp21.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp21, gridBagConstraints);
 
-        tp22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp22.setText(" ");
-        tp22.setToolTipText("");
-        tp22.setInputVerifier(intVerifier);
-        tp22.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp22.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp22, gridBagConstraints);
-
+        tp23.setColumns(5);
         tp23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp23.setText(" ");
         tp23.setToolTipText("");
@@ -2425,16 +2926,14 @@ public class Janela extends javax.swing.JFrame {
         tp23.setMinimumSize(new java.awt.Dimension(50, 19));
         tp23.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp23, gridBagConstraints);
 
         lbl3S1.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3S1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3S1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3S1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s4.png"))); // NOI18N
-        lbl3S1.setText("3S1");
         lbl3S1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3S1.setFocusable(false);
         lbl3S1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2446,19 +2945,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3S1, gridBagConstraints);
 
-        tp24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp24.setText(" ");
-        tp24.setToolTipText("");
-        tp24.setInputVerifier(intVerifier);
-        tp24.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp24.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp24, gridBagConstraints);
-
+        tp25.setColumns(5);
         tp25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp25.setText(" ");
         tp25.setToolTipText("");
@@ -2466,25 +2953,12 @@ public class Janela extends javax.swing.JFrame {
         tp25.setMinimumSize(new java.awt.Dimension(50, 19));
         tp25.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp25, gridBagConstraints);
 
-        tp26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp26.setText(" ");
-        tp26.setToolTipText("");
-        tp26.setInputVerifier(intVerifier);
-        tp26.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp26.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp26, gridBagConstraints);
-
+        tp27.setColumns(5);
         tp27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp27.setText(" ");
         tp27.setToolTipText("");
@@ -2492,25 +2966,12 @@ public class Janela extends javax.swing.JFrame {
         tp27.setMinimumSize(new java.awt.Dimension(50, 19));
         tp27.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp27, gridBagConstraints);
 
-        tp28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp28.setText(" ");
-        tp28.setToolTipText("");
-        tp28.setInputVerifier(intVerifier);
-        tp28.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp28.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp28, gridBagConstraints);
-
+        tp29.setColumns(5);
         tp29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp29.setText(" ");
         tp29.setToolTipText("");
@@ -2518,25 +2979,12 @@ public class Janela extends javax.swing.JFrame {
         tp29.setMinimumSize(new java.awt.Dimension(50, 19));
         tp29.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp29, gridBagConstraints);
 
-        tp30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp30.setText(" ");
-        tp30.setToolTipText("");
-        tp30.setInputVerifier(intVerifier);
-        tp30.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp30.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        panelPesados.add(tp30, gridBagConstraints);
-
+        tp31.setColumns(5);
         tp31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp31.setText(" ");
         tp31.setToolTipText("");
@@ -2544,16 +2992,14 @@ public class Janela extends javax.swing.JFrame {
         tp31.setMinimumSize(new java.awt.Dimension(50, 19));
         tp31.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         panelPesados.add(tp31, gridBagConstraints);
 
         lbl3S2.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3S2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3S2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3S2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s5.png"))); // NOI18N
-        lbl3S2.setText("3S2");
         lbl3S2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3S2.setFocusable(false);
         lbl3S2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2565,18 +3011,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3S2, gridBagConstraints);
 
-        tp32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp32.setText(" ");
-        tp32.setToolTipText("");
-        tp32.setInputVerifier(intVerifier);
-        tp32.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp32.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp32, gridBagConstraints);
-
+        tp33.setColumns(5);
         tp33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp33.setText(" ");
         tp33.setToolTipText("");
@@ -2584,23 +3019,11 @@ public class Janela extends javax.swing.JFrame {
         tp33.setMinimumSize(new java.awt.Dimension(50, 19));
         tp33.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp33, gridBagConstraints);
-
-        tp34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp34.setText(" ");
-        tp34.setToolTipText("");
-        tp34.setInputVerifier(intVerifier);
-        tp34.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp34.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp34, gridBagConstraints);
+        panelPesados.add(tp33, gridBagConstraints);
 
+        tp35.setColumns(5);
         tp35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp35.setText(" ");
         tp35.setToolTipText("");
@@ -2608,23 +3031,11 @@ public class Janela extends javax.swing.JFrame {
         tp35.setMinimumSize(new java.awt.Dimension(50, 19));
         tp35.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp35, gridBagConstraints);
-
-        tp36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp36.setText(" ");
-        tp36.setToolTipText("");
-        tp36.setInputVerifier(intVerifier);
-        tp36.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp36.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp36, gridBagConstraints);
+        panelPesados.add(tp35, gridBagConstraints);
 
+        tp37.setColumns(5);
         tp37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp37.setText(" ");
         tp37.setToolTipText("");
@@ -2632,23 +3043,11 @@ public class Janela extends javax.swing.JFrame {
         tp37.setMinimumSize(new java.awt.Dimension(50, 19));
         tp37.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp37, gridBagConstraints);
-
-        tp38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp38.setText(" ");
-        tp38.setToolTipText("");
-        tp38.setInputVerifier(intVerifier);
-        tp38.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp38.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp38, gridBagConstraints);
+        panelPesados.add(tp37, gridBagConstraints);
 
+        tp39.setColumns(5);
         tp39.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp39.setText(" ");
         tp39.setToolTipText("");
@@ -2656,15 +3055,13 @@ public class Janela extends javax.swing.JFrame {
         tp39.setMinimumSize(new java.awt.Dimension(50, 19));
         tp39.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp39, gridBagConstraints);
 
         lbl3S3.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3S3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3S3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3S3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/semireboques/s6.png"))); // NOI18N
-        lbl3S3.setText("3S3");
         lbl3S3.setToolTipText("");
         lbl3S3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3S3.setFocusable(false);
@@ -2677,18 +3074,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3S3, gridBagConstraints);
 
-        tp40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp40.setText(" ");
-        tp40.setToolTipText("");
-        tp40.setInputVerifier(intVerifier);
-        tp40.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp40.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp40, gridBagConstraints);
-
+        tp41.setColumns(5);
         tp41.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp41.setText(" ");
         tp41.setToolTipText("");
@@ -2696,23 +3082,11 @@ public class Janela extends javax.swing.JFrame {
         tp41.setMinimumSize(new java.awt.Dimension(50, 19));
         tp41.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp41, gridBagConstraints);
-
-        tp42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp42.setText(" ");
-        tp42.setToolTipText("");
-        tp42.setInputVerifier(intVerifier);
-        tp42.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp42.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp42, gridBagConstraints);
+        panelPesados.add(tp41, gridBagConstraints);
 
+        tp43.setColumns(5);
         tp43.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp43.setText(" ");
         tp43.setToolTipText("");
@@ -2720,23 +3094,11 @@ public class Janela extends javax.swing.JFrame {
         tp43.setMinimumSize(new java.awt.Dimension(50, 19));
         tp43.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp43, gridBagConstraints);
-
-        tp44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp44.setText(" ");
-        tp44.setToolTipText("");
-        tp44.setInputVerifier(intVerifier);
-        tp44.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp44.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp44, gridBagConstraints);
+        panelPesados.add(tp43, gridBagConstraints);
 
+        tp45.setColumns(5);
         tp45.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp45.setText(" ");
         tp45.setToolTipText("");
@@ -2744,23 +3106,11 @@ public class Janela extends javax.swing.JFrame {
         tp45.setMinimumSize(new java.awt.Dimension(50, 19));
         tp45.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp45, gridBagConstraints);
-
-        tp46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp46.setText(" ");
-        tp46.setToolTipText("");
-        tp46.setInputVerifier(intVerifier);
-        tp46.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp46.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp46, gridBagConstraints);
+        panelPesados.add(tp45, gridBagConstraints);
 
+        tp47.setColumns(5);
         tp47.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp47.setText(" ");
         tp47.setToolTipText("");
@@ -2768,15 +3118,13 @@ public class Janela extends javax.swing.JFrame {
         tp47.setMinimumSize(new java.awt.Dimension(50, 19));
         tp47.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp47, gridBagConstraints);
 
         lbl3T4.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3T4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3T4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3T4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se1.png"))); // NOI18N
-        lbl3T4.setText("3T4");
         lbl3T4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3T4.setFocusable(false);
         lbl3T4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2788,18 +3136,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3T4, gridBagConstraints);
 
-        tp48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp48.setText(" ");
-        tp48.setToolTipText("");
-        tp48.setInputVerifier(intVerifier);
-        tp48.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp48.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp48, gridBagConstraints);
-
+        tp49.setColumns(5);
         tp49.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp49.setText(" ");
         tp49.setToolTipText("");
@@ -2807,23 +3144,11 @@ public class Janela extends javax.swing.JFrame {
         tp49.setMinimumSize(new java.awt.Dimension(50, 19));
         tp49.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp49, gridBagConstraints);
-
-        tp50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp50.setText(" ");
-        tp50.setToolTipText("");
-        tp50.setInputVerifier(intVerifier);
-        tp50.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp50.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp50, gridBagConstraints);
+        panelPesados.add(tp49, gridBagConstraints);
 
+        tp51.setColumns(5);
         tp51.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp51.setText(" ");
         tp51.setToolTipText("");
@@ -2831,23 +3156,11 @@ public class Janela extends javax.swing.JFrame {
         tp51.setMinimumSize(new java.awt.Dimension(50, 19));
         tp51.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp51, gridBagConstraints);
-
-        tp52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp52.setText(" ");
-        tp52.setToolTipText("");
-        tp52.setInputVerifier(intVerifier);
-        tp52.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp52.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp52, gridBagConstraints);
+        panelPesados.add(tp51, gridBagConstraints);
 
+        tp53.setColumns(5);
         tp53.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp53.setText(" ");
         tp53.setToolTipText("");
@@ -2855,23 +3168,11 @@ public class Janela extends javax.swing.JFrame {
         tp53.setMinimumSize(new java.awt.Dimension(50, 19));
         tp53.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp53, gridBagConstraints);
-
-        tp54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp54.setText(" ");
-        tp54.setToolTipText("");
-        tp54.setInputVerifier(intVerifier);
-        tp54.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp54.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp54, gridBagConstraints);
+        panelPesados.add(tp53, gridBagConstraints);
 
+        tp55.setColumns(5);
         tp55.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp55.setText(" ");
         tp55.setToolTipText("");
@@ -2879,15 +3180,13 @@ public class Janela extends javax.swing.JFrame {
         tp55.setMinimumSize(new java.awt.Dimension(50, 19));
         tp55.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp55, gridBagConstraints);
 
         lbl3T6.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3T6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3T6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3T6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se2.png"))); // NOI18N
-        lbl3T6.setText("3T6");
         lbl3T6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3T6.setFocusable(false);
         lbl3T6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2899,18 +3198,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3T6, gridBagConstraints);
 
-        tp56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp56.setText(" ");
-        tp56.setToolTipText("");
-        tp56.setInputVerifier(intVerifier);
-        tp56.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp56.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp56, gridBagConstraints);
-
+        tp57.setColumns(5);
         tp57.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp57.setText(" ");
         tp57.setToolTipText("");
@@ -2918,23 +3206,11 @@ public class Janela extends javax.swing.JFrame {
         tp57.setMinimumSize(new java.awt.Dimension(50, 19));
         tp57.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp57, gridBagConstraints);
-
-        tp58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp58.setText(" ");
-        tp58.setToolTipText("");
-        tp58.setInputVerifier(intVerifier);
-        tp58.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp58.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp58, gridBagConstraints);
+        panelPesados.add(tp57, gridBagConstraints);
 
+        tp59.setColumns(5);
         tp59.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp59.setText(" ");
         tp59.setToolTipText("");
@@ -2942,23 +3218,11 @@ public class Janela extends javax.swing.JFrame {
         tp59.setMinimumSize(new java.awt.Dimension(50, 19));
         tp59.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp59, gridBagConstraints);
-
-        tp60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp60.setText(" ");
-        tp60.setToolTipText("");
-        tp60.setInputVerifier(intVerifier);
-        tp60.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp60.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp60, gridBagConstraints);
+        panelPesados.add(tp59, gridBagConstraints);
 
+        tp61.setColumns(5);
         tp61.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp61.setText(" ");
         tp61.setToolTipText("");
@@ -2966,23 +3230,11 @@ public class Janela extends javax.swing.JFrame {
         tp61.setMinimumSize(new java.awt.Dimension(50, 19));
         tp61.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp61, gridBagConstraints);
-
-        tp62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp62.setText(" ");
-        tp62.setToolTipText("");
-        tp62.setInputVerifier(intVerifier);
-        tp62.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp62.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp62, gridBagConstraints);
+        panelPesados.add(tp61, gridBagConstraints);
 
+        tp63.setColumns(5);
         tp63.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp63.setText(" ");
         tp63.setToolTipText("");
@@ -2990,15 +3242,13 @@ public class Janela extends javax.swing.JFrame {
         tp63.setMinimumSize(new java.awt.Dimension(50, 19));
         tp63.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 9;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp63, gridBagConstraints);
 
         lbl3T6B.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3T6B.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3T6B.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3T6B.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se3.png"))); // NOI18N
-        lbl3T6B.setText("3R6");
         lbl3T6B.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3T6B.setFocusable(false);
         lbl3T6B.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3010,18 +3260,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3T6B, gridBagConstraints);
 
-        tp64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp64.setText(" ");
-        tp64.setToolTipText("");
-        tp64.setInputVerifier(intVerifier);
-        tp64.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp64.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp64, gridBagConstraints);
-
+        tp65.setColumns(5);
         tp65.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp65.setText(" ");
         tp65.setToolTipText("");
@@ -3029,23 +3268,11 @@ public class Janela extends javax.swing.JFrame {
         tp65.setMinimumSize(new java.awt.Dimension(50, 19));
         tp65.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp65, gridBagConstraints);
-
-        tp66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp66.setText(" ");
-        tp66.setToolTipText("");
-        tp66.setInputVerifier(intVerifier);
-        tp66.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp66.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp66, gridBagConstraints);
+        panelPesados.add(tp65, gridBagConstraints);
 
+        tp67.setColumns(5);
         tp67.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp67.setText(" ");
         tp67.setToolTipText("");
@@ -3053,23 +3280,11 @@ public class Janela extends javax.swing.JFrame {
         tp67.setMinimumSize(new java.awt.Dimension(50, 19));
         tp67.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp67, gridBagConstraints);
-
-        tp68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp68.setText(" ");
-        tp68.setToolTipText("");
-        tp68.setInputVerifier(intVerifier);
-        tp68.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp68.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp68, gridBagConstraints);
+        panelPesados.add(tp67, gridBagConstraints);
 
+        tp69.setColumns(5);
         tp69.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp69.setText(" ");
         tp69.setToolTipText("");
@@ -3077,23 +3292,11 @@ public class Janela extends javax.swing.JFrame {
         tp69.setMinimumSize(new java.awt.Dimension(50, 19));
         tp69.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp69, gridBagConstraints);
-
-        tp70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp70.setText(" ");
-        tp70.setToolTipText("");
-        tp70.setInputVerifier(intVerifier);
-        tp70.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp70.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp70, gridBagConstraints);
+        panelPesados.add(tp69, gridBagConstraints);
 
+        tp71.setColumns(5);
         tp71.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp71.setText(" ");
         tp71.setToolTipText("");
@@ -3101,15 +3304,13 @@ public class Janela extends javax.swing.JFrame {
         tp71.setMinimumSize(new java.awt.Dimension(50, 19));
         tp71.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp71, gridBagConstraints);
 
         lbl3V5.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3V5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3V5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3V5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se4.png"))); // NOI18N
-        lbl3V5.setText("3V5");
         lbl3V5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3V5.setFocusable(false);
         lbl3V5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3121,18 +3322,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3V5, gridBagConstraints);
 
-        tp72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp72.setText(" ");
-        tp72.setToolTipText("");
-        tp72.setInputVerifier(intVerifier);
-        tp72.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp72.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp72, gridBagConstraints);
-
+        tp73.setColumns(5);
         tp73.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp73.setText(" ");
         tp73.setToolTipText("");
@@ -3140,23 +3330,11 @@ public class Janela extends javax.swing.JFrame {
         tp73.setMinimumSize(new java.awt.Dimension(50, 19));
         tp73.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp73, gridBagConstraints);
-
-        tp74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp74.setText(" ");
-        tp74.setToolTipText("");
-        tp74.setInputVerifier(intVerifier);
-        tp74.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp74.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp74, gridBagConstraints);
+        panelPesados.add(tp73, gridBagConstraints);
 
+        tp75.setColumns(5);
         tp75.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp75.setText(" ");
         tp75.setToolTipText("");
@@ -3164,23 +3342,11 @@ public class Janela extends javax.swing.JFrame {
         tp75.setMinimumSize(new java.awt.Dimension(50, 19));
         tp75.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp75, gridBagConstraints);
-
-        tp76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp76.setText(" ");
-        tp76.setToolTipText("");
-        tp76.setInputVerifier(intVerifier);
-        tp76.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp76.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp76, gridBagConstraints);
+        panelPesados.add(tp75, gridBagConstraints);
 
+        tp77.setColumns(5);
         tp77.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp77.setText(" ");
         tp77.setToolTipText("");
@@ -3188,23 +3354,11 @@ public class Janela extends javax.swing.JFrame {
         tp77.setMinimumSize(new java.awt.Dimension(50, 19));
         tp77.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp77, gridBagConstraints);
-
-        tp78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp78.setText(" ");
-        tp78.setToolTipText("");
-        tp78.setInputVerifier(intVerifier);
-        tp78.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp78.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp78, gridBagConstraints);
+        panelPesados.add(tp77, gridBagConstraints);
 
+        tp79.setColumns(5);
         tp79.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp79.setText(" ");
         tp79.setToolTipText("");
@@ -3212,15 +3366,13 @@ public class Janela extends javax.swing.JFrame {
         tp79.setMinimumSize(new java.awt.Dimension(50, 19));
         tp79.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp79, gridBagConstraints);
 
         lbl3M6.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3M6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3M6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3M6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combinados/se5.png"))); // NOI18N
-        lbl3M6.setText("3M6");
         lbl3M6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3M6.setFocusable(false);
         lbl3M6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3232,18 +3384,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3M6, gridBagConstraints);
 
-        tp80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp80.setText(" ");
-        tp80.setToolTipText("");
-        tp80.setInputVerifier(intVerifier);
-        tp80.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp80.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp80, gridBagConstraints);
-
+        tp81.setColumns(5);
         tp81.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp81.setText(" ");
         tp81.setToolTipText("");
@@ -3251,23 +3392,11 @@ public class Janela extends javax.swing.JFrame {
         tp81.setMinimumSize(new java.awt.Dimension(50, 19));
         tp81.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp81, gridBagConstraints);
-
-        tp82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp82.setText(" ");
-        tp82.setToolTipText("");
-        tp82.setInputVerifier(intVerifier);
-        tp82.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp82.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp82, gridBagConstraints);
+        panelPesados.add(tp81, gridBagConstraints);
 
+        tp83.setColumns(5);
         tp83.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp83.setText(" ");
         tp83.setToolTipText("");
@@ -3275,23 +3404,11 @@ public class Janela extends javax.swing.JFrame {
         tp83.setMinimumSize(new java.awt.Dimension(50, 19));
         tp83.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp83, gridBagConstraints);
-
-        tp84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp84.setText(" ");
-        tp84.setToolTipText("");
-        tp84.setInputVerifier(intVerifier);
-        tp84.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp84.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp84, gridBagConstraints);
+        panelPesados.add(tp83, gridBagConstraints);
 
+        tp85.setColumns(5);
         tp85.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp85.setText(" ");
         tp85.setToolTipText("");
@@ -3299,23 +3416,11 @@ public class Janela extends javax.swing.JFrame {
         tp85.setMinimumSize(new java.awt.Dimension(50, 19));
         tp85.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp85, gridBagConstraints);
-
-        tp86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp86.setText(" ");
-        tp86.setToolTipText("");
-        tp86.setInputVerifier(intVerifier);
-        tp86.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp86.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp86, gridBagConstraints);
+        panelPesados.add(tp85, gridBagConstraints);
 
+        tp87.setColumns(5);
         tp87.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp87.setText(" ");
         tp87.setToolTipText("");
@@ -3323,15 +3428,13 @@ public class Janela extends javax.swing.JFrame {
         tp87.setMinimumSize(new java.awt.Dimension(50, 19));
         tp87.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp87, gridBagConstraints);
 
         lbl3Q4.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3Q4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3Q4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3Q4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r1.png"))); // NOI18N
-        lbl3Q4.setText("3Q4");
         lbl3Q4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3Q4.setFocusable(false);
         lbl3Q4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3343,18 +3446,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3Q4, gridBagConstraints);
 
-        tp88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp88.setText(" ");
-        tp88.setToolTipText("");
-        tp88.setInputVerifier(intVerifier);
-        tp88.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp88.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp88, gridBagConstraints);
-
+        tp89.setColumns(5);
         tp89.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp89.setText(" ");
         tp89.setToolTipText("");
@@ -3362,23 +3454,11 @@ public class Janela extends javax.swing.JFrame {
         tp89.setMinimumSize(new java.awt.Dimension(50, 19));
         tp89.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp89, gridBagConstraints);
-
-        tp90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp90.setText(" ");
-        tp90.setToolTipText("");
-        tp90.setInputVerifier(intVerifier);
-        tp90.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp90.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp90, gridBagConstraints);
+        panelPesados.add(tp89, gridBagConstraints);
 
+        tp91.setColumns(5);
         tp91.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp91.setText(" ");
         tp91.setToolTipText("");
@@ -3386,23 +3466,11 @@ public class Janela extends javax.swing.JFrame {
         tp91.setMinimumSize(new java.awt.Dimension(50, 19));
         tp91.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp91, gridBagConstraints);
-
-        tp92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp92.setText(" ");
-        tp92.setToolTipText("");
-        tp92.setInputVerifier(intVerifier);
-        tp92.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp92.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp92, gridBagConstraints);
+        panelPesados.add(tp91, gridBagConstraints);
 
+        tp93.setColumns(5);
         tp93.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp93.setText(" ");
         tp93.setToolTipText("");
@@ -3410,23 +3478,11 @@ public class Janela extends javax.swing.JFrame {
         tp93.setMinimumSize(new java.awt.Dimension(50, 19));
         tp93.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp93, gridBagConstraints);
-
-        tp94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp94.setText(" ");
-        tp94.setToolTipText("");
-        tp94.setInputVerifier(intVerifier);
-        tp94.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp94.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp94, gridBagConstraints);
+        panelPesados.add(tp93, gridBagConstraints);
 
+        tp95.setColumns(5);
         tp95.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp95.setText(" ");
         tp95.setToolTipText("");
@@ -3434,15 +3490,13 @@ public class Janela extends javax.swing.JFrame {
         tp95.setMinimumSize(new java.awt.Dimension(50, 19));
         tp95.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp95, gridBagConstraints);
 
         lbl2C2.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2C2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2C2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r2.png"))); // NOI18N
-        lbl2C2.setText("2C2");
         lbl2C2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2C2.setFocusable(false);
         lbl2C2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3454,18 +3508,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl2C2, gridBagConstraints);
 
-        tp96.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp96.setText(" ");
-        tp96.setToolTipText("");
-        tp96.setInputVerifier(intVerifier);
-        tp96.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp96.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp96, gridBagConstraints);
-
+        tp97.setColumns(5);
         tp97.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp97.setText(" ");
         tp97.setToolTipText("");
@@ -3473,23 +3516,11 @@ public class Janela extends javax.swing.JFrame {
         tp97.setMinimumSize(new java.awt.Dimension(50, 19));
         tp97.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp97, gridBagConstraints);
-
-        tp98.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp98.setText(" ");
-        tp98.setToolTipText("");
-        tp98.setInputVerifier(intVerifier);
-        tp98.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp98.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp98, gridBagConstraints);
+        panelPesados.add(tp97, gridBagConstraints);
 
+        tp99.setColumns(5);
         tp99.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp99.setText(" ");
         tp99.setToolTipText("");
@@ -3497,23 +3528,11 @@ public class Janela extends javax.swing.JFrame {
         tp99.setMinimumSize(new java.awt.Dimension(50, 19));
         tp99.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp99, gridBagConstraints);
-
-        tp100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp100.setText(" ");
-        tp100.setToolTipText("");
-        tp100.setInputVerifier(intVerifier);
-        tp100.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp100.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp100, gridBagConstraints);
+        panelPesados.add(tp99, gridBagConstraints);
 
+        tp101.setColumns(5);
         tp101.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp101.setText(" ");
         tp101.setToolTipText("");
@@ -3521,23 +3540,11 @@ public class Janela extends javax.swing.JFrame {
         tp101.setMinimumSize(new java.awt.Dimension(50, 19));
         tp101.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp101, gridBagConstraints);
-
-        tp102.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp102.setText(" ");
-        tp102.setToolTipText("");
-        tp102.setInputVerifier(intVerifier);
-        tp102.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp102.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp102, gridBagConstraints);
+        panelPesados.add(tp101, gridBagConstraints);
 
+        tp103.setColumns(5);
         tp103.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp103.setText(" ");
         tp103.setToolTipText("");
@@ -3545,15 +3552,13 @@ public class Janela extends javax.swing.JFrame {
         tp103.setMinimumSize(new java.awt.Dimension(50, 19));
         tp103.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp103, gridBagConstraints);
 
         lbl2C3.setBackground(new java.awt.Color(255, 255, 255));
-        lbl2C3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl2C3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl2C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r3.png"))); // NOI18N
-        lbl2C3.setText("2C3");
         lbl2C3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl2C3.setFocusable(false);
         lbl2C3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3565,18 +3570,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl2C3, gridBagConstraints);
 
-        tp104.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp104.setText(" ");
-        tp104.setToolTipText("");
-        tp104.setInputVerifier(intVerifier);
-        tp104.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp104.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp104, gridBagConstraints);
-
+        tp105.setColumns(5);
         tp105.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp105.setText(" ");
         tp105.setToolTipText("");
@@ -3584,23 +3578,11 @@ public class Janela extends javax.swing.JFrame {
         tp105.setMinimumSize(new java.awt.Dimension(50, 19));
         tp105.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp105, gridBagConstraints);
-
-        tp106.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp106.setText(" ");
-        tp106.setToolTipText("");
-        tp106.setInputVerifier(intVerifier);
-        tp106.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp106.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp106, gridBagConstraints);
+        panelPesados.add(tp105, gridBagConstraints);
 
+        tp107.setColumns(5);
         tp107.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp107.setText(" ");
         tp107.setToolTipText("");
@@ -3608,23 +3590,11 @@ public class Janela extends javax.swing.JFrame {
         tp107.setMinimumSize(new java.awt.Dimension(50, 19));
         tp107.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp107, gridBagConstraints);
-
-        tp108.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp108.setText(" ");
-        tp108.setToolTipText("");
-        tp108.setInputVerifier(intVerifier);
-        tp108.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp108.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp108, gridBagConstraints);
+        panelPesados.add(tp107, gridBagConstraints);
 
+        tp109.setColumns(5);
         tp109.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp109.setText(" ");
         tp109.setToolTipText("");
@@ -3632,23 +3602,11 @@ public class Janela extends javax.swing.JFrame {
         tp109.setMinimumSize(new java.awt.Dimension(50, 19));
         tp109.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp109, gridBagConstraints);
-
-        tp110.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp110.setText(" ");
-        tp110.setToolTipText("");
-        tp110.setInputVerifier(intVerifier);
-        tp110.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp110.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp110, gridBagConstraints);
+        panelPesados.add(tp109, gridBagConstraints);
 
+        tp111.setColumns(5);
         tp111.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp111.setText(" ");
         tp111.setToolTipText("");
@@ -3656,15 +3614,13 @@ public class Janela extends javax.swing.JFrame {
         tp111.setMinimumSize(new java.awt.Dimension(50, 19));
         tp111.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 15;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp111, gridBagConstraints);
 
         lbl3C2.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3C2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3C2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r4.png"))); // NOI18N
-        lbl3C2.setText("3C2");
         lbl3C2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3C2.setFocusable(false);
         lbl3C2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3676,18 +3632,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3C2, gridBagConstraints);
 
-        tp112.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp112.setText(" ");
-        tp112.setToolTipText("");
-        tp112.setInputVerifier(intVerifier);
-        tp112.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp112.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp112, gridBagConstraints);
-
+        tp113.setColumns(5);
         tp113.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp113.setText(" ");
         tp113.setToolTipText("");
@@ -3695,23 +3640,11 @@ public class Janela extends javax.swing.JFrame {
         tp113.setMinimumSize(new java.awt.Dimension(50, 19));
         tp113.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp113, gridBagConstraints);
-
-        tp114.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp114.setText(" ");
-        tp114.setToolTipText("");
-        tp114.setInputVerifier(intVerifier);
-        tp114.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp114.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp114, gridBagConstraints);
+        panelPesados.add(tp113, gridBagConstraints);
 
+        tp115.setColumns(5);
         tp115.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp115.setText(" ");
         tp115.setToolTipText("");
@@ -3719,23 +3652,11 @@ public class Janela extends javax.swing.JFrame {
         tp115.setMinimumSize(new java.awt.Dimension(50, 19));
         tp115.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp115, gridBagConstraints);
-
-        tp116.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp116.setText(" ");
-        tp116.setToolTipText("");
-        tp116.setInputVerifier(intVerifier);
-        tp116.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp116.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp116, gridBagConstraints);
+        panelPesados.add(tp115, gridBagConstraints);
 
+        tp117.setColumns(5);
         tp117.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp117.setText(" ");
         tp117.setToolTipText("");
@@ -3743,23 +3664,11 @@ public class Janela extends javax.swing.JFrame {
         tp117.setMinimumSize(new java.awt.Dimension(50, 19));
         tp117.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp117, gridBagConstraints);
-
-        tp118.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp118.setText(" ");
-        tp118.setToolTipText("");
-        tp118.setInputVerifier(intVerifier);
-        tp118.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp118.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp118, gridBagConstraints);
+        panelPesados.add(tp117, gridBagConstraints);
 
+        tp119.setColumns(5);
         tp119.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp119.setText(" ");
         tp119.setToolTipText("");
@@ -3767,15 +3676,13 @@ public class Janela extends javax.swing.JFrame {
         tp119.setMinimumSize(new java.awt.Dimension(50, 19));
         tp119.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 16;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp119, gridBagConstraints);
 
         lbl3C3.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3C3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3C3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r5.png"))); // NOI18N
-        lbl3C3.setText("3C3");
         lbl3C3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3C3.setFocusable(false);
         lbl3C3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3787,18 +3694,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3C3, gridBagConstraints);
 
-        tp120.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp120.setText(" ");
-        tp120.setToolTipText("");
-        tp120.setInputVerifier(intVerifier);
-        tp120.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp120.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp120, gridBagConstraints);
-
+        tp121.setColumns(5);
         tp121.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp121.setText(" ");
         tp121.setToolTipText("");
@@ -3806,23 +3702,11 @@ public class Janela extends javax.swing.JFrame {
         tp121.setMinimumSize(new java.awt.Dimension(50, 19));
         tp121.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp121, gridBagConstraints);
-
-        tp122.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp122.setText(" ");
-        tp122.setToolTipText("");
-        tp122.setInputVerifier(intVerifier);
-        tp122.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp122.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp122, gridBagConstraints);
+        panelPesados.add(tp121, gridBagConstraints);
 
+        tp123.setColumns(5);
         tp123.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp123.setText(" ");
         tp123.setToolTipText("");
@@ -3830,23 +3714,11 @@ public class Janela extends javax.swing.JFrame {
         tp123.setMinimumSize(new java.awt.Dimension(50, 19));
         tp123.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp123, gridBagConstraints);
-
-        tp124.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp124.setText(" ");
-        tp124.setToolTipText("");
-        tp124.setInputVerifier(intVerifier);
-        tp124.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp124.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp124, gridBagConstraints);
+        panelPesados.add(tp123, gridBagConstraints);
 
+        tp125.setColumns(5);
         tp125.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp125.setText(" ");
         tp125.setToolTipText("");
@@ -3854,23 +3726,11 @@ public class Janela extends javax.swing.JFrame {
         tp125.setMinimumSize(new java.awt.Dimension(50, 19));
         tp125.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp125, gridBagConstraints);
-
-        tp126.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp126.setText(" ");
-        tp126.setToolTipText("");
-        tp126.setInputVerifier(intVerifier);
-        tp126.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp126.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp126, gridBagConstraints);
+        panelPesados.add(tp125, gridBagConstraints);
 
+        tp127.setColumns(5);
         tp127.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp127.setText(" ");
         tp127.setToolTipText("");
@@ -3878,15 +3738,13 @@ public class Janela extends javax.swing.JFrame {
         tp127.setMinimumSize(new java.awt.Dimension(50, 19));
         tp127.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 17;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(tp127, gridBagConstraints);
 
         lbl3D4.setBackground(new java.awt.Color(255, 255, 255));
-        lbl3D4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl3D4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl3D4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reboques/r6.png"))); // NOI18N
-        lbl3D4.setText("3D4");
         lbl3D4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 3, 1));
         lbl3D4.setFocusable(false);
         lbl3D4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -3898,18 +3756,7 @@ public class Janela extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelPesados.add(lbl3D4, gridBagConstraints);
 
-        tp128.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp128.setText(" ");
-        tp128.setToolTipText("");
-        tp128.setInputVerifier(intVerifier);
-        tp128.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp128.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp128, gridBagConstraints);
-
+        tp129.setColumns(5);
         tp129.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp129.setText(" ");
         tp129.setToolTipText("");
@@ -3917,23 +3764,11 @@ public class Janela extends javax.swing.JFrame {
         tp129.setMinimumSize(new java.awt.Dimension(50, 19));
         tp129.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp129, gridBagConstraints);
-
-        tp130.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp130.setText(" ");
-        tp130.setToolTipText("");
-        tp130.setInputVerifier(intVerifier);
-        tp130.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp130.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp130, gridBagConstraints);
+        panelPesados.add(tp129, gridBagConstraints);
 
+        tp131.setColumns(5);
         tp131.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp131.setText(" ");
         tp131.setToolTipText("");
@@ -3941,23 +3776,11 @@ public class Janela extends javax.swing.JFrame {
         tp131.setMinimumSize(new java.awt.Dimension(50, 19));
         tp131.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp131, gridBagConstraints);
-
-        tp132.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp132.setText(" ");
-        tp132.setToolTipText("");
-        tp132.setInputVerifier(intVerifier);
-        tp132.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp132.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp132, gridBagConstraints);
+        panelPesados.add(tp131, gridBagConstraints);
 
+        tp133.setColumns(5);
         tp133.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp133.setText(" ");
         tp133.setToolTipText("");
@@ -3965,23 +3788,11 @@ public class Janela extends javax.swing.JFrame {
         tp133.setMinimumSize(new java.awt.Dimension(50, 19));
         tp133.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp133, gridBagConstraints);
-
-        tp134.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tp134.setText(" ");
-        tp134.setToolTipText("");
-        tp134.setInputVerifier(intVerifier);
-        tp134.setMinimumSize(new java.awt.Dimension(50, 19));
-        tp134.setName(""); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp134, gridBagConstraints);
+        panelPesados.add(tp133, gridBagConstraints);
 
+        tp135.setColumns(5);
         tp135.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tp135.setText(" ");
         tp135.setToolTipText("");
@@ -3989,10 +3800,1554 @@ public class Janela extends javax.swing.JFrame {
         tp135.setMinimumSize(new java.awt.Dimension(50, 19));
         tp135.setName(""); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 18;
+        panelPesados.add(tp135, gridBagConstraints);
+
+        jLabel17.setText("2S1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        panelPesados.add(jLabel17, gridBagConstraints);
+
+        jLabel18.setText("2S2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        panelPesados.add(jLabel18, gridBagConstraints);
+
+        jLabel19.setText("2S3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        panelPesados.add(jLabel19, gridBagConstraints);
+
+        jLabel20.setText("3S1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        panelPesados.add(jLabel20, gridBagConstraints);
+
+        jLabel21.setText("3S2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        panelPesados.add(jLabel21, gridBagConstraints);
+
+        jLabel22.setText("3S3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        panelPesados.add(jLabel22, gridBagConstraints);
+
+        jLabel23.setText("3T4");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        panelPesados.add(jLabel23, gridBagConstraints);
+
+        jLabel24.setText("3T6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 9;
+        panelPesados.add(jLabel24, gridBagConstraints);
+
+        jLabel25.setText("3R6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        panelPesados.add(jLabel25, gridBagConstraints);
+
+        jLabel26.setText("3V5");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 11;
+        panelPesados.add(jLabel26, gridBagConstraints);
+
+        jLabel27.setText("3M6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        panelPesados.add(jLabel27, gridBagConstraints);
+
+        jLabel28.setText("3Q4");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 13;
+        panelPesados.add(jLabel28, gridBagConstraints);
+
+        jLabel29.setText("2C2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 14;
+        panelPesados.add(jLabel29, gridBagConstraints);
+
+        jLabel30.setText("2C3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 15;
+        panelPesados.add(jLabel30, gridBagConstraints);
+
+        jLabel31.setText("3C2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 16;
+        panelPesados.add(jLabel31, gridBagConstraints);
+
+        jLabel32.setText("3C3");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        panelPesados.add(jLabel32, gridBagConstraints);
+
+        jLabel33.setText("3D4");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 18;
+        panelPesados.add(jLabel33, gridBagConstraints);
+
+        jPanel51.setLayout(new java.awt.GridBagLayout());
+
+        tp0.setColumns(5);
+        tp0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp0.setToolTipText("");
+        tp0.setInputVerifier(intVerifier);
+        tp0.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp0.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel51.add(tp0, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel51, gridBagConstraints);
+
+        jPanel52.setLayout(new java.awt.GridBagLayout());
+
+        tp8.setColumns(5);
+        tp8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp8.setText(" ");
+        tp8.setToolTipText("");
+        tp8.setInputVerifier(intVerifier);
+        tp8.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp8.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel52.add(tp8, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel52, gridBagConstraints);
+
+        jPanel53.setLayout(new java.awt.GridBagLayout());
+
+        tp16.setColumns(5);
+        tp16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp16.setText(" ");
+        tp16.setToolTipText("");
+        tp16.setInputVerifier(intVerifier);
+        tp16.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp16.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel53.add(tp16, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel53, gridBagConstraints);
+
+        jPanel54.setLayout(new java.awt.GridBagLayout());
+
+        tp24.setColumns(5);
+        tp24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp24.setText(" ");
+        tp24.setToolTipText("");
+        tp24.setInputVerifier(intVerifier);
+        tp24.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp24.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel54.add(tp24, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel54, gridBagConstraints);
+
+        jPanel55.setLayout(new java.awt.GridBagLayout());
+
+        tp32.setColumns(5);
+        tp32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp32.setText(" ");
+        tp32.setToolTipText("");
+        tp32.setInputVerifier(intVerifier);
+        tp32.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp32.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel55.add(tp32, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel55, gridBagConstraints);
+
+        jPanel56.setLayout(new java.awt.GridBagLayout());
+
+        tp40.setColumns(5);
+        tp40.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp40.setText(" ");
+        tp40.setToolTipText("");
+        tp40.setInputVerifier(intVerifier);
+        tp40.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp40.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel56.add(tp40, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel56, gridBagConstraints);
+
+        jPanel57.setLayout(new java.awt.GridBagLayout());
+
+        tp48.setColumns(5);
+        tp48.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp48.setText(" ");
+        tp48.setToolTipText("");
+        tp48.setInputVerifier(intVerifier);
+        tp48.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp48.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel57.add(tp48, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel57, gridBagConstraints);
+
+        jPanel58.setLayout(new java.awt.GridBagLayout());
+
+        tp56.setColumns(5);
+        tp56.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp56.setText(" ");
+        tp56.setToolTipText("");
+        tp56.setInputVerifier(intVerifier);
+        tp56.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp56.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel58.add(tp56, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel58, gridBagConstraints);
+
+        jPanel59.setLayout(new java.awt.GridBagLayout());
+
+        tp64.setColumns(5);
+        tp64.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp64.setText(" ");
+        tp64.setToolTipText("");
+        tp64.setInputVerifier(intVerifier);
+        tp64.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp64.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel59.add(tp64, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel59, gridBagConstraints);
+
+        jPanel60.setLayout(new java.awt.GridBagLayout());
+
+        tp72.setColumns(5);
+        tp72.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp72.setText(" ");
+        tp72.setToolTipText("");
+        tp72.setInputVerifier(intVerifier);
+        tp72.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp72.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel60.add(tp72, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel60, gridBagConstraints);
+
+        jPanel61.setLayout(new java.awt.GridBagLayout());
+
+        tp80.setColumns(5);
+        tp80.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp80.setText(" ");
+        tp80.setToolTipText("");
+        tp80.setInputVerifier(intVerifier);
+        tp80.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp80.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel61.add(tp80, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel61, gridBagConstraints);
+
+        jPanel62.setLayout(new java.awt.GridBagLayout());
+
+        tp88.setColumns(5);
+        tp88.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp88.setText(" ");
+        tp88.setToolTipText("");
+        tp88.setInputVerifier(intVerifier);
+        tp88.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp88.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel62.add(tp88, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel62, gridBagConstraints);
+
+        jPanel63.setLayout(new java.awt.GridBagLayout());
+
+        tp96.setColumns(5);
+        tp96.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp96.setText(" ");
+        tp96.setToolTipText("");
+        tp96.setInputVerifier(intVerifier);
+        tp96.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp96.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel63.add(tp96, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel63, gridBagConstraints);
+
+        jPanel64.setLayout(new java.awt.GridBagLayout());
+
+        tp104.setColumns(5);
+        tp104.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp104.setText(" ");
+        tp104.setToolTipText("");
+        tp104.setInputVerifier(intVerifier);
+        tp104.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp104.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel64.add(tp104, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel64, gridBagConstraints);
+
+        jPanel65.setLayout(new java.awt.GridBagLayout());
+
+        tp112.setColumns(5);
+        tp112.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp112.setText(" ");
+        tp112.setToolTipText("");
+        tp112.setInputVerifier(intVerifier);
+        tp112.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp112.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel65.add(tp112, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel65, gridBagConstraints);
+
+        jPanel66.setLayout(new java.awt.GridBagLayout());
+
+        tp120.setColumns(5);
+        tp120.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp120.setText(" ");
+        tp120.setToolTipText("");
+        tp120.setInputVerifier(intVerifier);
+        tp120.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp120.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel66.add(tp120, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel66, gridBagConstraints);
+
+        jPanel67.setLayout(new java.awt.GridBagLayout());
+
+        tp128.setColumns(5);
+        tp128.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp128.setText(" ");
+        tp128.setToolTipText("");
+        tp128.setInputVerifier(intVerifier);
+        tp128.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp128.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel67.add(tp128, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel67, gridBagConstraints);
+
+        jPanel68.setLayout(new java.awt.GridBagLayout());
+
+        tp2.setColumns(5);
+        tp2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp2.setText(" ");
+        tp2.setToolTipText("");
+        tp2.setInputVerifier(intVerifier);
+        tp2.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp2.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel68.add(tp2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel68, gridBagConstraints);
+
+        jPanel69.setLayout(new java.awt.GridBagLayout());
+
+        tp10.setColumns(5);
+        tp10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp10.setText(" ");
+        tp10.setToolTipText("");
+        tp10.setInputVerifier(intVerifier);
+        tp10.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp10.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel69.add(tp10, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel69, gridBagConstraints);
+
+        jPanel70.setLayout(new java.awt.GridBagLayout());
+
+        tp18.setColumns(5);
+        tp18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp18.setText(" ");
+        tp18.setToolTipText("");
+        tp18.setInputVerifier(intVerifier);
+        tp18.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp18.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel70.add(tp18, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel70, gridBagConstraints);
+
+        jPanel71.setLayout(new java.awt.GridBagLayout());
+
+        tp26.setColumns(5);
+        tp26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp26.setText(" ");
+        tp26.setToolTipText("");
+        tp26.setInputVerifier(intVerifier);
+        tp26.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp26.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel71.add(tp26, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel71, gridBagConstraints);
+
+        jPanel72.setLayout(new java.awt.GridBagLayout());
+
+        tp34.setColumns(5);
+        tp34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp34.setText(" ");
+        tp34.setToolTipText("");
+        tp34.setInputVerifier(intVerifier);
+        tp34.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp34.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel72.add(tp34, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel72, gridBagConstraints);
+
+        jPanel73.setLayout(new java.awt.GridBagLayout());
+
+        tp42.setColumns(5);
+        tp42.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp42.setText(" ");
+        tp42.setToolTipText("");
+        tp42.setInputVerifier(intVerifier);
+        tp42.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp42.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel73.add(tp42, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel73, gridBagConstraints);
+
+        jPanel74.setLayout(new java.awt.GridBagLayout());
+
+        tp50.setColumns(5);
+        tp50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp50.setText(" ");
+        tp50.setToolTipText("");
+        tp50.setInputVerifier(intVerifier);
+        tp50.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp50.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel74.add(tp50, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel74, gridBagConstraints);
+
+        jPanel75.setLayout(new java.awt.GridBagLayout());
+
+        tp58.setColumns(5);
+        tp58.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp58.setText(" ");
+        tp58.setToolTipText("");
+        tp58.setInputVerifier(intVerifier);
+        tp58.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp58.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel75.add(tp58, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel75, gridBagConstraints);
+
+        jPanel76.setLayout(new java.awt.GridBagLayout());
+
+        tp66.setColumns(5);
+        tp66.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp66.setText(" ");
+        tp66.setToolTipText("");
+        tp66.setInputVerifier(intVerifier);
+        tp66.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp66.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel76.add(tp66, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel76, gridBagConstraints);
+
+        jPanel77.setLayout(new java.awt.GridBagLayout());
+
+        tp74.setColumns(5);
+        tp74.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp74.setText(" ");
+        tp74.setToolTipText("");
+        tp74.setInputVerifier(intVerifier);
+        tp74.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp74.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel77.add(tp74, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel77, gridBagConstraints);
+
+        jPanel78.setLayout(new java.awt.GridBagLayout());
+
+        tp82.setColumns(5);
+        tp82.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp82.setText(" ");
+        tp82.setToolTipText("");
+        tp82.setInputVerifier(intVerifier);
+        tp82.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp82.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel78.add(tp82, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel78, gridBagConstraints);
+
+        jPanel79.setLayout(new java.awt.GridBagLayout());
+
+        tp90.setColumns(5);
+        tp90.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp90.setText(" ");
+        tp90.setToolTipText("");
+        tp90.setInputVerifier(intVerifier);
+        tp90.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp90.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel79.add(tp90, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel79, gridBagConstraints);
+
+        jPanel80.setLayout(new java.awt.GridBagLayout());
+
+        tp98.setColumns(5);
+        tp98.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp98.setText(" ");
+        tp98.setToolTipText("");
+        tp98.setInputVerifier(intVerifier);
+        tp98.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp98.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel80.add(tp98, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel80, gridBagConstraints);
+
+        jPanel81.setLayout(new java.awt.GridBagLayout());
+
+        tp106.setColumns(5);
+        tp106.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp106.setText(" ");
+        tp106.setToolTipText("");
+        tp106.setInputVerifier(intVerifier);
+        tp106.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp106.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel81.add(tp106, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel81, gridBagConstraints);
+
+        jPanel82.setLayout(new java.awt.GridBagLayout());
+
+        tp114.setColumns(5);
+        tp114.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp114.setText(" ");
+        tp114.setToolTipText("");
+        tp114.setInputVerifier(intVerifier);
+        tp114.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp114.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel82.add(tp114, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel82, gridBagConstraints);
+
+        jPanel83.setLayout(new java.awt.GridBagLayout());
+
+        tp122.setColumns(5);
+        tp122.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp122.setText(" ");
+        tp122.setToolTipText("");
+        tp122.setInputVerifier(intVerifier);
+        tp122.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp122.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel83.add(tp122, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel83, gridBagConstraints);
+
+        jPanel84.setLayout(new java.awt.GridBagLayout());
+
+        tp130.setColumns(5);
+        tp130.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp130.setText(" ");
+        tp130.setToolTipText("");
+        tp130.setInputVerifier(intVerifier);
+        tp130.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp130.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel84.add(tp130, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel84, gridBagConstraints);
+
+        jPanel85.setLayout(new java.awt.GridBagLayout());
+
+        tp4.setColumns(5);
+        tp4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp4.setText(" ");
+        tp4.setToolTipText("");
+        tp4.setInputVerifier(intVerifier);
+        tp4.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp4.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel85.add(tp4, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel85, gridBagConstraints);
+
+        jPanel86.setLayout(new java.awt.GridBagLayout());
+
+        tp12.setColumns(5);
+        tp12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp12.setText(" ");
+        tp12.setToolTipText("");
+        tp12.setInputVerifier(intVerifier);
+        tp12.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp12.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel86.add(tp12, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel86, gridBagConstraints);
+
+        jPanel87.setLayout(new java.awt.GridBagLayout());
+
+        tp20.setColumns(5);
+        tp20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp20.setText(" ");
+        tp20.setToolTipText("");
+        tp20.setInputVerifier(intVerifier);
+        tp20.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp20.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel87.add(tp20, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel87, gridBagConstraints);
+
+        jPanel88.setLayout(new java.awt.GridBagLayout());
+
+        tp28.setColumns(5);
+        tp28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp28.setText(" ");
+        tp28.setToolTipText("");
+        tp28.setInputVerifier(intVerifier);
+        tp28.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp28.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel88.add(tp28, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel88, gridBagConstraints);
+
+        jPanel89.setLayout(new java.awt.GridBagLayout());
+
+        tp36.setColumns(5);
+        tp36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp36.setText(" ");
+        tp36.setToolTipText("");
+        tp36.setInputVerifier(intVerifier);
+        tp36.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp36.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel89.add(tp36, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel89, gridBagConstraints);
+
+        jPanel90.setLayout(new java.awt.GridBagLayout());
+
+        tp44.setColumns(5);
+        tp44.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp44.setText(" ");
+        tp44.setToolTipText("");
+        tp44.setInputVerifier(intVerifier);
+        tp44.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp44.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel90.add(tp44, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel90, gridBagConstraints);
+
+        jPanel91.setLayout(new java.awt.GridBagLayout());
+
+        tp52.setColumns(5);
+        tp52.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp52.setText(" ");
+        tp52.setToolTipText("");
+        tp52.setInputVerifier(intVerifier);
+        tp52.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp52.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel91.add(tp52, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel91, gridBagConstraints);
+
+        jPanel92.setLayout(new java.awt.GridBagLayout());
+
+        tp60.setColumns(5);
+        tp60.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp60.setText(" ");
+        tp60.setToolTipText("");
+        tp60.setInputVerifier(intVerifier);
+        tp60.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp60.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel92.add(tp60, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel92, gridBagConstraints);
+
+        jPanel93.setLayout(new java.awt.GridBagLayout());
+
+        tp68.setColumns(5);
+        tp68.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp68.setText(" ");
+        tp68.setToolTipText("");
+        tp68.setInputVerifier(intVerifier);
+        tp68.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp68.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel93.add(tp68, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel93, gridBagConstraints);
+
+        jPanel94.setLayout(new java.awt.GridBagLayout());
+
+        tp76.setColumns(5);
+        tp76.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp76.setText(" ");
+        tp76.setToolTipText("");
+        tp76.setInputVerifier(intVerifier);
+        tp76.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp76.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel94.add(tp76, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel94, gridBagConstraints);
+
+        jPanel95.setLayout(new java.awt.GridBagLayout());
+
+        tp84.setColumns(5);
+        tp84.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp84.setText(" ");
+        tp84.setToolTipText("");
+        tp84.setInputVerifier(intVerifier);
+        tp84.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp84.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel95.add(tp84, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel95, gridBagConstraints);
+
+        jPanel96.setLayout(new java.awt.GridBagLayout());
+
+        tp92.setColumns(5);
+        tp92.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp92.setText(" ");
+        tp92.setToolTipText("");
+        tp92.setInputVerifier(intVerifier);
+        tp92.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp92.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel96.add(tp92, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel96, gridBagConstraints);
+
+        jPanel97.setLayout(new java.awt.GridBagLayout());
+
+        tp100.setColumns(5);
+        tp100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp100.setText(" ");
+        tp100.setToolTipText("");
+        tp100.setInputVerifier(intVerifier);
+        tp100.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp100.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel97.add(tp100, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel97, gridBagConstraints);
+
+        jPanel98.setLayout(new java.awt.GridBagLayout());
+
+        tp108.setColumns(5);
+        tp108.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp108.setText(" ");
+        tp108.setToolTipText("");
+        tp108.setInputVerifier(intVerifier);
+        tp108.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp108.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel98.add(tp108, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel98, gridBagConstraints);
+
+        jPanel99.setLayout(new java.awt.GridBagLayout());
+
+        tp116.setColumns(5);
+        tp116.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp116.setText(" ");
+        tp116.setToolTipText("");
+        tp116.setInputVerifier(intVerifier);
+        tp116.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp116.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel99.add(tp116, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel99, gridBagConstraints);
+
+        jPanel100.setLayout(new java.awt.GridBagLayout());
+
+        tp124.setColumns(5);
+        tp124.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp124.setText(" ");
+        tp124.setToolTipText("");
+        tp124.setInputVerifier(intVerifier);
+        tp124.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp124.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel100.add(tp124, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel100, gridBagConstraints);
+
+        jPanel101.setLayout(new java.awt.GridBagLayout());
+
+        tp132.setColumns(5);
+        tp132.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp132.setText(" ");
+        tp132.setToolTipText("");
+        tp132.setInputVerifier(intVerifier);
+        tp132.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp132.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel101.add(tp132, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 18;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel101, gridBagConstraints);
+
+        jPanel102.setLayout(new java.awt.GridBagLayout());
+
+        tp6.setColumns(5);
+        tp6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp6.setText(" ");
+        tp6.setToolTipText("");
+        tp6.setInputVerifier(intVerifier);
+        tp6.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp6.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel102.add(tp6, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel102, gridBagConstraints);
+
+        jPanel103.setLayout(new java.awt.GridBagLayout());
+
+        tp14.setColumns(5);
+        tp14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp14.setText(" ");
+        tp14.setToolTipText("");
+        tp14.setInputVerifier(intVerifier);
+        tp14.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp14.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel103.add(tp14, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel103, gridBagConstraints);
+
+        jPanel104.setLayout(new java.awt.GridBagLayout());
+
+        tp22.setColumns(5);
+        tp22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp22.setText(" ");
+        tp22.setToolTipText("");
+        tp22.setInputVerifier(intVerifier);
+        tp22.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp22.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel104.add(tp22, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel104, gridBagConstraints);
+
+        jPanel105.setLayout(new java.awt.GridBagLayout());
+
+        tp30.setColumns(5);
+        tp30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp30.setText(" ");
+        tp30.setToolTipText("");
+        tp30.setInputVerifier(intVerifier);
+        tp30.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp30.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel105.add(tp30, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel105, gridBagConstraints);
+
+        jPanel106.setLayout(new java.awt.GridBagLayout());
+
+        tp38.setColumns(5);
+        tp38.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp38.setText(" ");
+        tp38.setToolTipText("");
+        tp38.setInputVerifier(intVerifier);
+        tp38.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp38.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel106.add(tp38, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel106, gridBagConstraints);
+
+        jPanel107.setLayout(new java.awt.GridBagLayout());
+
+        tp46.setColumns(5);
+        tp46.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp46.setText(" ");
+        tp46.setToolTipText("");
+        tp46.setInputVerifier(intVerifier);
+        tp46.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp46.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel107.add(tp46, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel107, gridBagConstraints);
+
+        jPanel108.setLayout(new java.awt.GridBagLayout());
+
+        tp54.setColumns(5);
+        tp54.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp54.setText(" ");
+        tp54.setToolTipText("");
+        tp54.setInputVerifier(intVerifier);
+        tp54.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp54.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel108.add(tp54, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel108, gridBagConstraints);
+
+        jPanel109.setLayout(new java.awt.GridBagLayout());
+
+        tp62.setColumns(5);
+        tp62.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp62.setText(" ");
+        tp62.setToolTipText("");
+        tp62.setInputVerifier(intVerifier);
+        tp62.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp62.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel109.add(tp62, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel109, gridBagConstraints);
+
+        jPanel110.setLayout(new java.awt.GridBagLayout());
+
+        tp70.setColumns(5);
+        tp70.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp70.setText(" ");
+        tp70.setToolTipText("");
+        tp70.setInputVerifier(intVerifier);
+        tp70.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp70.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel110.add(tp70, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel110, gridBagConstraints);
+
+        jPanel111.setLayout(new java.awt.GridBagLayout());
+
+        tp78.setColumns(5);
+        tp78.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp78.setText(" ");
+        tp78.setToolTipText("");
+        tp78.setInputVerifier(intVerifier);
+        tp78.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp78.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel111.add(tp78, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel111, gridBagConstraints);
+
+        jPanel112.setLayout(new java.awt.GridBagLayout());
+
+        tp86.setColumns(5);
+        tp86.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp86.setText(" ");
+        tp86.setToolTipText("");
+        tp86.setInputVerifier(intVerifier);
+        tp86.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp86.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel112.add(tp86, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel112, gridBagConstraints);
+
+        jPanel113.setLayout(new java.awt.GridBagLayout());
+
+        tp94.setColumns(5);
+        tp94.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp94.setText(" ");
+        tp94.setToolTipText("");
+        tp94.setInputVerifier(intVerifier);
+        tp94.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp94.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel113.add(tp94, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel113, gridBagConstraints);
+
+        jPanel114.setLayout(new java.awt.GridBagLayout());
+
+        tp102.setColumns(5);
+        tp102.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp102.setText(" ");
+        tp102.setToolTipText("");
+        tp102.setInputVerifier(intVerifier);
+        tp102.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp102.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel114.add(tp102, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel114, gridBagConstraints);
+
+        jPanel115.setLayout(new java.awt.GridBagLayout());
+
+        tp110.setColumns(5);
+        tp110.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp110.setText(" ");
+        tp110.setToolTipText("");
+        tp110.setInputVerifier(intVerifier);
+        tp110.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp110.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel115.add(tp110, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel115, gridBagConstraints);
+
+        jPanel116.setLayout(new java.awt.GridBagLayout());
+
+        tp118.setColumns(5);
+        tp118.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp118.setText(" ");
+        tp118.setToolTipText("");
+        tp118.setInputVerifier(intVerifier);
+        tp118.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp118.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel116.add(tp118, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel116, gridBagConstraints);
+
+        jPanel117.setLayout(new java.awt.GridBagLayout());
+
+        tp126.setColumns(5);
+        tp126.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp126.setText(" ");
+        tp126.setToolTipText("");
+        tp126.setInputVerifier(intVerifier);
+        tp126.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp126.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel117.add(tp126, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel117, gridBagConstraints);
+
+        jPanel118.setLayout(new java.awt.GridBagLayout());
+
+        tp134.setColumns(5);
+        tp134.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tp134.setText(" ");
+        tp134.setToolTipText("");
+        tp134.setInputVerifier(intVerifier);
+        tp134.setMinimumSize(new java.awt.Dimension(50, 19));
+        tp134.setName(""); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel118.add(tp134, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 18;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        panelPesados.add(tp135, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPesados.add(jPanel118, gridBagConstraints);
 
         jScrollPane4.setViewportView(panelPesados);
 
@@ -4004,47 +5359,54 @@ public class Janela extends javax.swing.JFrame {
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
 
         btnSalvarForms.setText("Gravar Formulários");
+        btnSalvarForms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarFormsActionPerformed(evt);
+            }
+        });
+
+        jLabel34.setText("Trecho:");
+
+        lblTrecho_dados.setText("------------------------------------------------------------------------------------------");
 
         javax.swing.GroupLayout pnl_volumetricaLayout = new javax.swing.GroupLayout(pnl_volumetrica);
         pnl_volumetrica.setLayout(pnl_volumetricaLayout);
         pnl_volumetricaLayout.setHorizontalGroup(
             pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_volumetricaLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addContainerGap()
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPosto)
+                    .addComponent(lblSentido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_volumetricaLayout.createSequentialGroup()
-                        .addComponent(lblPosto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPosto_dados)
-                        .addGap(41, 41, 41)
-                        .addComponent(lblHora))
-                    .addGroup(pnl_volumetricaLayout.createSequentialGroup()
-                        .addComponent(lblSentido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rdo_SentidoAB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rdo_SentidoBA)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdo_SentidoBA))
+                    .addComponent(lblPosto_dados))
+                .addGap(21, 21, 21)
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPista)
+                    .addComponent(jLabel34))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnl_volumetricaLayout.createSequentialGroup()
-                        .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(lblLocal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnl_volumetricaLayout.createSequentialGroup()
-                        .addComponent(lblPista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rdo_PistaSimples)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rdo_PistaDupla)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdo_PistaDupla)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblHora)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTrecho_dados))
+                .addGap(98, 98, 98)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPesquisador)
                     .addComponent(lblData, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -4053,9 +5415,13 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(txtPesquisador, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvarForms)
+                .addComponent(lblLocal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtLocal, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(btnSalvarForms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnl_volumetricaLayout.setVerticalGroup(
             pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4063,16 +5429,15 @@ public class Janela extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPosto)
-                    .addComponent(lblPosto_dados)
-                    .addComponent(lblHora)
-                    .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPesquisador)
-                    .addComponent(txtPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPosto_dados)
+                    .addComponent(jLabel34)
+                    .addComponent(lblTrecho_dados))
                 .addGap(10, 10, 10)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSentido)
                     .addComponent(rdo_SentidoBA)
                     .addComponent(rdo_SentidoAB)
                     .addComponent(lblPista)
@@ -4080,8 +5445,11 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(rdo_PistaDupla)
                     .addComponent(lblData)
                     .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvarForms))
-                .addGap(23, 23, 23)
+                    .addComponent(btnSalvarForms)
+                    .addComponent(lblSentido)
+                    .addComponent(lblHora)
+                    .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1))
         );
 
@@ -4129,7 +5497,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Servidor Web", pnl_servidor);
@@ -4161,7 +5529,7 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(35, 35, 35)
                 .addComponent(jButton2)
-                .addContainerGap(650, Short.MAX_VALUE))
+                .addContainerGap(539, Short.MAX_VALUE))
         );
 
         jLabel3.setText("Captura de Dados");
@@ -4227,24 +5595,6 @@ public class Janela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraActionPerformed
-        int hora_inicial;
-		try{
-			hora_inicial = Integer.parseInt((String) cmbHora.getSelectedItem());
-		} catch (Exception e){
-			JOptionPane.showMessageDialog(null, "Erro configurando a hora inicial da pesquisa: \n" + e.getMessage());
-			return;
-		}
-		
-		String hora1 = String.valueOf(hora_inicial) + ":00 a " + String.valueOf(hora_inicial+1) + ":00";
-		String hora2 = String.valueOf(hora_inicial+1) + ":00 a " + String.valueOf(hora_inicial+2) + ":00";		
-		
-		pesados_hora1.setText(hora1);
-		leves_hora1.setText(hora1);
-		pesados_hora2.setText(hora2);
-		leves_hora2.setText(hora2);
-    }//GEN-LAST:event_cmbHoraActionPerformed
-
     private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInDadosActionPerformed
         int returnVal = dadosFileChooser.showOpenDialog(this);
 		if (returnVal == dadosFileChooser.APPROVE_OPTION) {
@@ -4261,6 +5611,90 @@ public class Janela extends javax.swing.JFrame {
 			System.out.println("File access cancelled by user.");
 		}
     }//GEN-LAST:event_btnInDadosActionPerformed
+
+    private void cmbHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraActionPerformed
+        int hora_inicial;
+        try{
+            hora_inicial = Integer.parseInt((String) cmbHora.getSelectedItem());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro configurando a hora inicial da pesquisa: \n" + e.getMessage());
+            return;
+        }
+
+        String hora1 = String.valueOf(hora_inicial) + ":00 a " + String.valueOf(hora_inicial+1) + ":00";
+        String hora2 = String.valueOf(hora_inicial+1) + ":00 a " + String.valueOf(hora_inicial+2) + ":00";
+
+        pesados_hora1.setText(hora1);
+        leves_hora1.setText(hora1);
+        pesados_hora2.setText(hora2);
+        leves_hora2.setText(hora2);
+    }//GEN-LAST:event_cmbHoraActionPerformed
+
+    private void btnSalvarFormsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFormsActionPerformed
+        String posto = Concentrador.posto;
+		String pista;
+		String date;
+		String sentido;
+		int hora_inicial;
+		String pesquisador;
+		String local;
+		
+		//validate pista
+		if(!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()){
+			JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.", "Tipo de pista não selecionado.", JOptionPane.ERROR_MESSAGE);
+			return;
+		}else if(rdo_PistaDupla.isSelected()){
+			pista = "D";
+		} else if(rdo_PistaSimples.isSelected()){
+			pista = "S";
+		}
+		
+		//valida e formata data
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (data.getDate() == null){
+			JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.", "Data não preenchida.", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else {
+			date = sdf.format(data.getDate());
+		}
+		
+		//valida sentido
+		if(!rdo_SentidoAB.isSelected() && !rdo_SentidoBA.isSelected()){
+			JOptionPane.showMessageDialog(Janela.this, "O sentido precisa ser selecionado.", "Sentido da pista.", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else if (rdo_SentidoAB.isSelected()){
+			sentido = "AB";
+		} else {
+			sentido = "BA";
+		}
+		
+		//valida hora inicial
+		if(cmbHora.getSelectedItem() == null){
+			JOptionPane.showMessageDialog(Janela.this, "Selecione a hora inicial.", "Hora inicial.", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else {
+			hora_inicial = Integer.parseInt(cmbHora.getSelectedItem().toString());
+		}
+		
+		
+		//valida pesquisador
+		if(txtPesquisador.getText().trim().isEmpty()){
+			JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador não foi preenchida.", "Pesquisador.", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else {
+			pesquisador = txtPesquisador.getText();
+		}
+		
+		//valida local
+		if(txtLocal.getText().trim().isEmpty()){
+			JOptionPane.showMessageDialog(Janela.this, "O local da pesquisa precisa ser preenchido.", "Preenchimento do local da pesquisa.", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else {
+			local = txtLocal.getText();
+		}
+		
+		return;
+    }//GEN-LAST:event_btnSalvarFormsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4301,6 +5735,8 @@ public class Janela extends javax.swing.JFrame {
     private ImagemRenderer imagens;
     
     private InputVerifier intVerifier;
+	
+	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInDados;
@@ -4313,11 +5749,157 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel100;
+    private javax.swing.JPanel jPanel101;
+    private javax.swing.JPanel jPanel102;
+    private javax.swing.JPanel jPanel103;
+    private javax.swing.JPanel jPanel104;
+    private javax.swing.JPanel jPanel105;
+    private javax.swing.JPanel jPanel106;
+    private javax.swing.JPanel jPanel107;
+    private javax.swing.JPanel jPanel108;
+    private javax.swing.JPanel jPanel109;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel110;
+    private javax.swing.JPanel jPanel111;
+    private javax.swing.JPanel jPanel112;
+    private javax.swing.JPanel jPanel113;
+    private javax.swing.JPanel jPanel114;
+    private javax.swing.JPanel jPanel115;
+    private javax.swing.JPanel jPanel116;
+    private javax.swing.JPanel jPanel117;
+    private javax.swing.JPanel jPanel118;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
+    private javax.swing.JPanel jPanel37;
+    private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel40;
+    private javax.swing.JPanel jPanel41;
+    private javax.swing.JPanel jPanel42;
+    private javax.swing.JPanel jPanel43;
+    private javax.swing.JPanel jPanel44;
+    private javax.swing.JPanel jPanel45;
+    private javax.swing.JPanel jPanel46;
+    private javax.swing.JPanel jPanel47;
+    private javax.swing.JPanel jPanel48;
+    private javax.swing.JPanel jPanel49;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel50;
+    private javax.swing.JPanel jPanel51;
+    private javax.swing.JPanel jPanel52;
+    private javax.swing.JPanel jPanel53;
+    private javax.swing.JPanel jPanel54;
+    private javax.swing.JPanel jPanel55;
+    private javax.swing.JPanel jPanel56;
+    private javax.swing.JPanel jPanel57;
+    private javax.swing.JPanel jPanel58;
+    private javax.swing.JPanel jPanel59;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel60;
+    private javax.swing.JPanel jPanel61;
+    private javax.swing.JPanel jPanel62;
+    private javax.swing.JPanel jPanel63;
+    private javax.swing.JPanel jPanel64;
+    private javax.swing.JPanel jPanel65;
+    private javax.swing.JPanel jPanel66;
+    private javax.swing.JPanel jPanel67;
+    private javax.swing.JPanel jPanel68;
+    private javax.swing.JPanel jPanel69;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel70;
+    private javax.swing.JPanel jPanel71;
+    private javax.swing.JPanel jPanel72;
+    private javax.swing.JPanel jPanel73;
+    private javax.swing.JPanel jPanel74;
+    private javax.swing.JPanel jPanel75;
+    private javax.swing.JPanel jPanel76;
+    private javax.swing.JPanel jPanel77;
+    private javax.swing.JPanel jPanel78;
+    private javax.swing.JPanel jPanel79;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel80;
+    private javax.swing.JPanel jPanel81;
+    private javax.swing.JPanel jPanel82;
+    private javax.swing.JPanel jPanel83;
+    private javax.swing.JPanel jPanel84;
+    private javax.swing.JPanel jPanel85;
+    private javax.swing.JPanel jPanel86;
+    private javax.swing.JPanel jPanel87;
+    private javax.swing.JPanel jPanel88;
+    private javax.swing.JPanel jPanel89;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel90;
+    private javax.swing.JPanel jPanel91;
+    private javax.swing.JPanel jPanel92;
+    private javax.swing.JPanel jPanel93;
+    private javax.swing.JPanel jPanel94;
+    private javax.swing.JPanel jPanel95;
+    private javax.swing.JPanel jPanel96;
+    private javax.swing.JPanel jPanel97;
+    private javax.swing.JPanel jPanel98;
+    private javax.swing.JPanel jPanel99;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4358,8 +5940,9 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel lblPesquisador;
     private javax.swing.JLabel lblPista;
     private javax.swing.JLabel lblPosto;
-    private javax.swing.JLabel lblPosto_dados;
+    public javax.swing.JLabel lblPosto_dados;
     private javax.swing.JLabel lblSentido;
+    public javax.swing.JLabel lblTrecho_dados;
     private javax.swing.JTextField lev15_1;
     private javax.swing.JTextField lev15_2;
     private javax.swing.JTextField lev30_1;
@@ -4628,6 +6211,42 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisador;
     public javax.swing.JTextField txtPorta;
     // End of variables declaration//GEN-END:variables
+	
+	//leves
+	private JTextField[] _p1Fields = {tl0,tl1,tl2,tl3,tl4,tl5,tl6,tl7};
+	private JTextField[] _p3Fields ={tl8,tl9,tl10,tl11,tl12,tl13,tl14,tl15};
+	private JTextField[] _p2Fields = {tl16,tl17,tl18,tl19,tl20,tl21,tl22,tl23};
+	private JTextField[] _mFields = {tl24,tl25,tl26,tl27,tl28,tl29,tl30,tl31};
+	private JTextField[] _2CBFields = {tl32,tl33,tl34,tl35,tl36,tl37,tl38,tl39};
+	private JTextField[] _3CBFields = {tl40,tl41,tl42,tl43,tl44,tl45,tl46,tl47};
+	private JTextField[] _4CBFields = {tl48,tl49,tl50,tl51,tl52,tl53,tl54,tl55};
+	private JTextField[] _2CFields = {tl56,tl57,tl58,tl59,tl60,tl61,tl62,tl63};
+	private JTextField[] _3CFields = {tl64,tl65,tl66,tl67,tl68,tl69,tl70,tl71};
+	private JTextField[] _4CFields = {tl72,tl73,tl74,tl75,tl76,tl77,tl78,tl79};
+	private JTextField[] _4CDFields = {tl80,tl81,tl82,tl83,tl84,tl85,tl86,tl87};
+	private JTextField[] _3DFields = {tl88,tl89,tl90,tl91,tl92,tl93,tl94,tl95};
+	//pesados
+	private JTextField[] _2S1Fields = {tp0,tp1,tp2,tp3,tp4,tp5,tp6,tp7};
+	private JTextField[] _2S2Fields = {tp8,tp9,tp10,tp11,tp12,tp13,tp14,tp15};
+	private JTextField[] _2S3Fields = {tp16,tp17,tp18,tp19,tp20,tp21,tp22,tp23};
+	private JTextField[] _3S1Fields = {tp24,tp25,tp26,tp27,tp28,tp29,tp30,tp31};
+	private JTextField[] _3S2Fields = {tp32,tp33,tp34,tp35,tp36,tp37,tp38,tp39};
+	private JTextField[] _3S3Fields = {tp40,tp41,tp42,tp43,tp44,tp45,tp46,tp47};
+	private JTextField[] _3T4Fields = {tp48,tp49,tp50,tp51,tp52,tp53,tp54,tp55};
+	private JTextField[] _3T6Fields = {tp56,tp57,tp58,tp59,tp60,tp61,tp62,tp63};
+	private JTextField[] _3R6Fields = {tp64,tp65,tp66,tp67,tp68,tp69,tp70,tp71};
+	private JTextField[] _3V5Fields = {tp72,tp73,tp74,tp75,tp76,tp77,tp78,tp79};
+	private JTextField[] _3M6Fields = {tp80,tp81,tp82,tp83,tp84,tp85,tp86,tp87};
+	private JTextField[] _3Q4Fields = {tp88,tp89,tp90,tp91,tp92,tp93,tp94,tp95};
+	private JTextField[] _2C2Fields = {tp96,tp97,tp98,tp99,tp100,tp101,tp102,tp103};
+	private JTextField[] _2C3Fields = {tp104,tp105,tp106,tp107,tp108,tp109,tp110,tp111};
+	private JTextField[] _3C2Fields = {tp112,tp113,tp114,tp115,tp116,tp117,tp118,tp119};
+	private JTextField[] _3C3Fields = {tp120,tp121,tp122,tp123,tp124,tp125,tp126,tp127};
+	private JTextField[] _3D4Fields = {tp128,tp129,tp130,tp131,tp132,tp133,tp134,tp135};
+	
+	private JTextField[][] volFields = {_p1Fields,_p3Fields,_p2Fields,_mFields,_2CBFields,_3CBFields,_4CBFields,_2CFields,
+		_3CFields,_4CFields,_4CDFields,_3DFields,_2S1Fields,_2S2Fields,_2S3Fields,_3S1Fields,_3S2Fields,_3S3Fields,_3T4Fields,
+		_3T6Fields,_3R6Fields,_3V5Fields,_3M6Fields,_3Q4Fields,_2C2Fields,_2C3Fields,_3C2Fields,_3C3Fields,_3D4Fields};
 }
 
 class ImagemRenderer extends DefaultTableCellRenderer{

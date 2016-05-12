@@ -1,5 +1,7 @@
 package br.ufrj.coppeted.concentrador.database;
 
+
+
 /**
  *
  * @author mangeli
@@ -9,6 +11,51 @@ public class myDB extends Db{
 	public myDB() throws Exception {
         super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
     }
+	
+	public void createVolTable() throws Exception{
+		this.setStatement();
+        String qry = "CREATE TABLE IF NOT EXISTS voltable "
+                + " (id int, "
+				+ "enviado int, "
+				+ "posto int, "
+				+ "pista text, "
+				+ "data text, "
+                + "hora int, "
+				+ "sentido text, "
+				+ "local text, "
+				+ "pesquisador text, "
+				+ "origemipad int, " //não faz sentido
+				+ "_P1 text, "
+				+ "_P2 text, "
+				+ "_P3 text, "
+				+ "_M text, "
+				+ "_2CB text, "
+				+ "_3CB text, "
+				+ "_4CB text, "
+				+ "_2C text, "
+				+ "_3C text, "
+				+ "_4C text, "
+				+ "_4CD text, "
+				+ "_3D text, "
+				+ "_2S1 text, "
+				+ "_2S2 text, "
+				+ "_2S3 text, "
+				+ "_3S1 text, "
+				+ "_3S2 text, "
+				+ "_3S3 text, "
+				+ "_3T4 text, "
+				+ "_3T6 text, "
+				+ "_3R6 text, "
+				+ "_3V5 text, "
+				+ "_3M6 text, "
+				+ "_3Q4 text, "
+				+ "_2C2 text, "
+				+ "_3C2 text, "
+				+ "_3C3 text, "
+				+ "_3D4 text "
+				+ "); ";
+       this.executeStatement(qry);
+	}
 	
 	public void createODTable() throws Exception{
 		this.setStatement();
