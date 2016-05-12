@@ -6,6 +6,7 @@
 package br.ufrj.coppetec.concentrador;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
@@ -31,14 +32,14 @@ public class LoginJanela extends javax.swing.JDialog {
 	
 	private boolean validateLogin(){
 		StringBuilder result = null;
-		File loginsFile = null;
+		InputStream loginsFile = null;
 		Scanner scanner = null;
 		JSONObject logins = null;
 		JSONObject user = null;
 		boolean r = false;
 		try{
 			result = new StringBuilder("");
-			loginsFile = new File(this.getClass().getResource("/logins/users.json").toURI());
+			loginsFile = this.getClass().getResourceAsStream("/logins/users.json");
 			scanner = new Scanner(loginsFile);
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
