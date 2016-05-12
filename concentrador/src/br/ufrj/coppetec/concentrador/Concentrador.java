@@ -58,6 +58,7 @@ public class Concentrador {
 		splash.setVisible(false);
 		
 		LoginJanela loginJanela = new LoginJanela(janela, true);
+		loginJanela.setLocationRelativeTo(null);
 		loginJanela.setVisible(true);
 		
 		
