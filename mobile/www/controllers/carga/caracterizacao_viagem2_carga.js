@@ -24,11 +24,11 @@ controllers.caracterizacao_viagem2_carga = {
 		util.inicializaSelectCustomValueAsIndex("embarque_uf_carga", lista_estados, "UF");
 		var lista_locais = [ 'Porto Seco', 'Porto Marítimo', 'Terminal Ferroviário', 'Terminal Hidroviário',
 				'Empresa Particular', 'Atacadista/Distribuidor', 'Outros' ];
-		util.inicializaSelectCustom("embarque_local_carga", lista_locais, "Local");
+		util.inicializaSelectCustom("embarque_local_carga", lista_locais, "Tipo do Local");
 
 		// DESEMBARQUE DA CARGA
 		util.inicializaSelectCustomValueAsIndex("desembarque_uf_carga", lista_estados, "UF");
-		util.inicializaSelectCustom("desembarque_local_carga", lista_locais, "Local");
+		util.inicializaSelectCustom("desembarque_local_carga", lista_locais, "Tipo do Local");
 
 		// SUGESTAO DE MUNICIPIOS PARADA OBRIGATORIA
 		util.inicializaSelectCustomValueAsIndex("municipios_parada_uf1_carga", lista_estados, "UF");
@@ -62,13 +62,15 @@ controllers.caracterizacao_viagem2_carga = {
 		util.progressoCheckboxAlternado("embarqueCargaNaoSabe", "embarque_carga_nao_sei", "grupo_sabe_desembarque_carga",
 				"div_sabe_embarque_sim");
 		$('#embarque_carga_nao_sei').click(function() {
+			util.progressoRestartSelect("embarque_uf_carga", "UF");
+			util.progressoRestartSelect("embarque_local_carga", "Tipo do Local");
+			$('#embarque_mun_carga').val("");
+			app.setAtributo("embarque_uf", null);
+			app.setAtributo("municipioEmbarqueCarga", null);
+			app.setAtributo("idLocalEmbarqueCarga", null);
 			if ($(this).is(':checked')) {
-				util.progressoRestartSelect("embarque_uf_carga", "UF");
-				util.progressoRestartSelect("embarque_local_carga", "Selecione");
-				$('#embarque_mun_carga').val("");
-				app.setAtributo("embarque_uf", null);
-				app.setAtributo("municipioEmbarqueCarga", null);
-				app.setAtributo("idLocalEmbarqueCarga", null);
+				$('#grupo_embarque_mun_carga').hide();
+				$('#grupo_embarque_local_carga').hide();
 			}
 		});
 		util.progressoSelect("embarque_uf", "embarque_uf_carga", "grupo_embarque_mun_carga");
@@ -83,7 +85,7 @@ controllers.caracterizacao_viagem2_carga = {
 								}).trigger('click');
 					}
 				});
-		util.progressoInputText("municipioEmbarqueCarga", "embarque_mun_carga", "embarque_local_carga", true);
+		util.progressoInputText("municipioEmbarqueCarga", "embarque_mun_carga", "grupo_embarque_local_carga", true);
 		util.progressoSelect("idLocalEmbarqueCarga", "embarque_local_carga", "grupo_sabe_desembarque_carga");
 
 		var cargaPerigosa = app.getAtributo('possuiCargaPerigosa'); // TODO atualizar se nome do campo no registro for modificado
@@ -97,13 +99,15 @@ controllers.caracterizacao_viagem2_carga = {
 			;
 		}
 		$('#desembarque_carga_nao_sei').click(function() {
+			util.progressoRestartSelect("desembarque_uf_carga", "UF");
+			util.progressoRestartSelect("desembarque_local_carga", "Tipo do Local");
+			$('#desembarque_mun_carga').val("");
+			app.setAtributo("desembarque_uf", null);
+			app.setAtributo("municipioDesembarqueCarga", null);
+			app.setAtributo("idLocalDesembarqueCarga", null);
 			if ($(this).is(':checked')) {
-				util.progressoRestartSelect("desembarque_uf_carga", "UF");
-				util.progressoRestartSelect("desembarque_local_carga", "Selecione");
-				$('#desembarque_mun_carga').val("");
-				app.setAtributo("desembarque_uf", null);
-				app.setAtributo("municipioDesembarqueCarga", null);
-				app.setAtributo("idLocalDesembarqueCarga", null);
+				$('#grupo_desembarque_mun_carga').hide();
+				$('#grupo_desembarque_local_carga').hide();
 			}
 		});
 
@@ -119,7 +123,7 @@ controllers.caracterizacao_viagem2_carga = {
 								}).trigger('click');
 					}
 				});
-		util.progressoInputText("municipioDesembarqueCarga", "desembarque_mun_carga", "desembarque_local_carga", true);
+		util.progressoInputText("municipioDesembarqueCarga", "desembarque_mun_carga", "grupo_desembarque_local_carga", true);
 		if (cargaPerigosa == true) {
 			util.progressoSelect("idLocalDesembarqueCarga", "desembarque_local_carga", "grupo_parada_especial_carga");
 		} else {
@@ -273,8 +277,9 @@ controllers.caracterizacao_viagem2_carga = {
 			if (util.validaSelect("municipios_parada_uf2_carga") && util.validaInputText("municipios_parada_mun2_carga")) {
 				uma_sugestao = true;
 			}
-			if(!uma_sugestao) {
-				alert("Preencha pelo menos um dos campos de sugestão de parada obrigatória para descanso", "Erro no preenchimento!", null, 'error');
+			if (!uma_sugestao) {
+				alert("Preencha pelo menos um dos campos de sugestão de parada obrigatória para descanso",
+						"Erro no preenchimento!", null, 'error');
 			}
 			return uma_sugestao;
 		} else {
