@@ -41,13 +41,9 @@ controllers.caracterizacao_viagem_simples = {
 
 		util.inicializaSelectFrequencia('simples');
 
-		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido',
-				'Proximidade hotéis/postos', 'Segurança', 'Turismo/Paisagem', 'Ausência de pedágio',
-				'Ponto obrigatório de passagem', 'Outros' ];
-		util.inicializaSelect("motivo_rota_simples", lista_motivos_rota);
+		util.inicializaTabelaAuxiliar("motivo_rota_simples", "Selecione", lista_motivo_escolha_rota, "simples");
 
-		var lista_motivos_viagem = [ 'Compra', 'Estudo', 'Lazer', 'Saúde', 'Trabalho', 'Negócios', 'Outros' ];
-		util.inicializaSelect("motivo_viagem_simples", lista_motivos_viagem);
+		util.inicializaTabelaAuxiliar("motivo_viagem_simples", "Selecione", lista_motivo_viagem, "simples");
 
 		var lista_rendas = [ 'Sem renda', 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
 				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado' ];
@@ -113,7 +109,7 @@ controllers.caracterizacao_viagem_simples = {
 			} else {
 				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
-				if (Number($(this).val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
+				if (Number($(this).val()) == 6) { // TODO Trabalho = 5. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_pessoas_trabalho_simples").show();
 					}
@@ -134,7 +130,7 @@ controllers.caracterizacao_viagem_simples = {
 		});
 		$('#pessoas_simples').keyup(function() {
 			if (Number($("#pessoas_simples").val()) > 0) {
-				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
+				if (Number($('#motivo_viagem_simples').val()) == 6) { // TODO Trabalho = 5. Ajustar se id mudar.
 					$("#grupo_pessoas_trabalho_simples").show();
 				} else {
 					$("#grupo_renda_simples").show();
@@ -181,7 +177,7 @@ controllers.caracterizacao_viagem_simples = {
 				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1));
 			}
 
-			if (Number($("#motivo_viagem_simples").val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+			if (Number($("#motivo_viagem_simples").val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 				validacoes = validacoes
 						&& (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
 								"#pessoas_simples").val())));

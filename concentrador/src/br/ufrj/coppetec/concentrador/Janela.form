@@ -132,15 +132,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblPosto" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblLocal" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txtLocal" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="lblPesquisador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPesquisador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPosto_dados" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTrecho_dados" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblLocal" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="txtLocal" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="lblPesquisador" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPesquisador" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPosto_dados" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTrecho_dados" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">

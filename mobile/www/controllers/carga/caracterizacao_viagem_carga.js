@@ -28,9 +28,10 @@ controllers.caracterizacao_viagem_carga = {
 
 		util.inicializaSelectFrequencia('carga');
 
-		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
-				'Ausência de pedágio', 'Próximo a hotéis e postos', 'Segurança', 'Outros' ];
-		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
+//		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
+//				'Ausência de pedágio', 'Proximidade hotéis/postos', 'Segurança', 'Outros' ];
+//		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
+		util.inicializaTabelaAuxiliar("motivo_rota_carga", "Selecione", lista_motivo_escolha_rota, "carga");
 	},
 
 	// Controla o show e hide dos elementos da tela

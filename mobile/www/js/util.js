@@ -133,6 +133,31 @@ var util = {
 		});
 	},
 
+	inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista_tb_aux, function(index, item) {
+			if (nome_fluxo == "simples" && item.simples) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+			}
+			if (nome_fluxo == "onibus" && item.onibus) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+			}
+			if (nome_fluxo == "carga" && item.carga) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+			}
+			if (nome_fluxo == "carga_cinza" && item.carga_cinza) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+			}
+			if (nome_fluxo == "carga_vermelha" && item.carga_vermelha) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+			}
+			if (nome_fluxo == "moto" && item.moto) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+			}
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
 	// Funções para o progresso
 	/**
 	 * 
