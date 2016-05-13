@@ -23,7 +23,7 @@ controllers.pergunta_extra = {
 		util.inicializaSelectFrequencia('simples');
 
 		var lista_opcoes = [ 'Sim, trocaria minha rota atual por esta', 'Não, prefiro usar a rota atual',
-				'Minha rota não seria afetada', 'Não sei informarde' ];
+				'Minha rota não seria afetada', 'Não sei informar' ];
 		util.inicializaSelect("select_pergunta_extra", lista_opcoes);
 	},
 
