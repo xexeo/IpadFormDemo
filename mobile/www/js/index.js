@@ -47,6 +47,31 @@ var app = {
 		app.sentido = null;
 	},
 
+	exportaDbToJson : function() {
+		if (app.filePaths) {
+			resolveLocalFileSystemURL(app.filePaths.externalFolder, function(dir) {
+				dir.getFile(app.jsonName, {
+					create : true
+				}, function(file) {
+					app.logger.log("arquivo JSON: ", file);
+					jsonWriter.setJsonFile(file);
+					file.createWriter(function(fileWriter) {
+						jsonWriter.setJsonWriter(fileWriter);
+						myDb.exportaDbToJson(jsonWriter);
+					}, function() {
+						app.logger.log('ERRO criando o escritor do JSON a ser exportado.');
+					});
+				}, function(e) {
+					app.logger.log('ERRO ao criar o arquivo JSON a ser exportado: ' + e.message);
+				});
+			}, function(err) {
+				app.logger.log('ERRO ao acessar o folder externo ' + app.filePaths.externalFolder + ' ' + JSON.stringify(err));
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+	},
+
 	duplicaDb : function() {
 		if (app.filePaths) {
 			app.database.close(function() {
@@ -295,6 +320,13 @@ var app = {
 					app.validaOperacoes(app.duplicaDb, "Insira a senha para exportar o banco de dados.",
 							"Exportar banco de dados", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
 							"Senha Incorreta", "Exportar", "Voltar");
+				});
+
+		$("#exporta_db_to_json").click(
+				function() {
+					app.validaOperacoes(app.exportaDbToJson, "Insira a senha para exportar os dados no formato JSON.",
+							"Exportar JSON", "Senha incorreta para a exportação.\nDeseja tentar novamente?", "Senha Incorreta",
+							"Exportar", "Voltar");
 				});
 
 		// remove o filtro original do autocomplete para poder filtrar acentos
@@ -722,6 +754,8 @@ var app = {
 	logFileName : "log.txt",
 
 	dbName : "dados.db",
+
+	jsonName : "dados.json",
 
 	user_login : null,
 
