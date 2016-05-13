@@ -443,8 +443,8 @@ var app = {
 		}
 		if (util.isEmpty(registro.placa)) {
 			if (registro.cancelado != 1) {
-				// TODO: ERRO (placa vazia)
-				app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+				app.setAtributo('erro', "ERRO (placa vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
@@ -455,21 +455,21 @@ var app = {
 				app.setAtributo('frequenciaQtd', 1);
 			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
 				if (registro.cancelado != 1) {
-					// TODO: ERRO (frequencia vazia)
-					app.logger.log("ERRO (frequenciaQtd vazia) no registro: ", registro.id);
+					app.setAtributo('erro', "ERRO (frequenciaQtd vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
 		} else if (registro.cancelado != 1) {
-			// TODO: ERRO (frequencia vazia)
-			app.logger.log("ERRO (frequenciaPeriodo vazio) no registro: ", registro.id);
+			app.setAtributo('erro', "ERRO (frequenciaPeriodo vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// ORIGEM: MUNICÍPIO
 		app.splitAtributo('idOrigemMunicipio');
 		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
-				// TODO: ERRO (destino vazio)
-				app.logger.log("ERRO (idOrigemMunicipio vazio) no registro: ", registro.id);
+				app.setAtributo('erro', "ERRO (idOrigemMunicipio vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
@@ -477,8 +477,8 @@ var app = {
 		app.splitAtributo('idDestinoMunicipio');
 		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
-				// TODO: ERRO (destino vazio)
-				app.logger.log("ERRO (idDestinoMunicipio vazio) no registro: ", registro.id);
+				app.setAtributo('erro', "ERRO (idDestinoMunicipio vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
@@ -488,8 +488,8 @@ var app = {
 				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
 			} else {
 				if (registro.cancelado != 1) {
-					// TODO: ERRO (rntrc vazio)
-					app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+					app.setAtributo('erro', "ERRO (rntrc vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
 		}
@@ -504,47 +504,46 @@ var app = {
 			}
 			app.setAtributo('pesoDaCarga', peso);
 		}
-		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
-			// TODO: ERRO (peso da carga vazio)
-			app.logger.log("ERRO (pesoDaCarga vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// TIPO DE PRODUTO (CARGA)
 		app.splitAtributo('idProduto');
-		if (util.isEmpty(registro.idProduto) && registro.possui_carga && registro.cancelado != 1) {
-			// TODO: ERRO (idProduto vazio)
-			app.logger.log("ERRO (idProduto vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (idProduto vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// CARGA ANTERIOR
 		app.splitAtributo('idCargaAnterior');
-		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && registro.cancelado != 1) {
-			// TODO: ERRO (idCargaAnterior vazio)
-			app.logger.log("ERRO (idCargaAnterior vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// MUNICÍPIO EMBARQUE DA CARGA
 		app.splitAtributo('municipioEmbarqueCarga');
-		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && registro.cancelado != 1) {
-			// TODO: ERRO (municipioEmbarqueCarga vazio)
-			app.logger.log("ERRO (municipioEmbarqueCarga vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// MUNICÍPIO DESEMBARQUE DA CARGA
 		app.splitAtributo('municipioDesembarqueCarga');
-		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && registro.cancelado != 1) {
-			// TODO: ERRO (municipioDesembarqueCarga vazio)
-			app.logger.log("ERRO (municipioDesembarqueCarga vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
 		app.splitAtributo('paradaObrigatoriaMunicipio1');
 		app.splitAtributo('paradaObrigatoriaMunicipio2');
 		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-			if (!registro.municipiosParadaNaoSabe && registro.cancelado != 1) {
-				// TODO: ERRO (paradaObrigatoriaMunicipios vazio)
-				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ",
-						registro.id);
+			if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
