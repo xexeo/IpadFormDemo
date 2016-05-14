@@ -478,6 +478,11 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
+
+		// TIPO VEICULO
+		var tipoReal = app.getAtributo('tipo').split("_")[0]
+		app.setAtributo('tipo', tipoReal);
+		
 		// PLACA
 		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
 			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
