@@ -1,13 +1,15 @@
 myDb = {
 
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
+
 	tabelaOD : [
-		{field : 'id', type : 'text primary key'}, // IMPORTANTE: não enviar p/ o servidor
+		{field : 'id', type : 'text primary key'},
 		{field : 'estaNoNote', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
 		{field : 'idPosto', type : 'integer'},
 		{field : 'sentido', type : 'text'},
 		{field : 'idIpad', type : 'text'},
-		// {field : 'uuid', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
+		// {field : 'uuid', type : 'text'},
 		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
 		{field : 'timestampIniPesq', type : 'text'},
 		{field : 'timestampFimPesq', type : 'text'},
@@ -43,7 +45,7 @@ myDb = {
 		{field : 'idTipoDeViagemOuServico', type : 'integer'},
 		{field : 'pesoDaCarga', type : 'real'},
 		{field : 'valorDoFrete', type : 'real'},
-		{field : 'utilizaParadaEspecial', type : 'integer'}, // boolean 1->true
+		{field : 'utilizaParadaEspecial', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'idProduto', type : 'integer'},
 		{field : 'idCargaAnterior', type : 'integer'},
 		{field : 'valorDaCarga', type : 'real'},
@@ -162,7 +164,7 @@ myDb = {
 							rowJson = "[{";
 						}
 						$.each(myDb.tabelaOD, function(index, item) {
-							if (item.field != 'id') { // não enviar o 'id' para o servidor, enviar apenas para o concentrador
+							if (!util.contains(item.field, camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
 								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
 								if ((item.type == 'text') && (value != null)) {

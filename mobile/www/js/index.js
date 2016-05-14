@@ -463,12 +463,12 @@ var app = {
 			var now = new Date();
 			app.logger.log('Iniciando registro');
 			app.limpaRegistro();
-			app.setAtributo('id', ipadID.id + String(util.getTimeInSeconds(now)));
+			app.setAtributo('id', ipadID.id + util.getTimeUnixTimestamp(now));
 			app.setAtributo('login', app.user_login);
 			app.setAtributo('idPosto', app.posto);
 			app.setAtributo('sentido', app.sentido);
 			app.setAtributo('uuid', app.uuid_device);
-			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
+			app.setAtributo('timestampIniPesq', util.getTimeDefaultFormated(now));
 			app.setAtributo('idIpad', ipadID.id);
 			app.logger.log(JSON.stringify(registro));
 			app.logger.log('Registro iniciado: ' + registro.id);
@@ -594,7 +594,7 @@ var app = {
 			}
 		}
 
-		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
+		app.setAtributo('timestampFimPesq', util.getTimeDefaultFormated(new Date()));
 	},
 
 	finalizaRegistro : function(cb) {
