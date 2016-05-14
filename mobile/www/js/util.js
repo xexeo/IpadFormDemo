@@ -200,7 +200,7 @@ var util = {
 		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).show();
 			$('#grupo_placa_' + tipo_fluxo).hide();
-			app.setAtributo('placaEstrangeira', true);
+			app.setAtributo('placaEstrangeira', 1);
 			app.setAtributo('placa_letras', null);
 			app.setAtributo('placa_numeros', null);
 			$('#placa_letras_' + tipo_fluxo).val(null);
@@ -213,11 +213,11 @@ var util = {
 		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).hide();
 			$('#grupo_placa_unica_' + tipo_fluxo).hide();
-			if ((registro.placaEstrangeira == undefined) || (registro.placaEstrangeira)) {
+			if (util.isEmpty(registro.placaEstrangeira) || (registro.placaEstrangeira == 1)) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 			}
 			app.setAtributo('idPaisPlacaEstrangeira', null);
-			app.setAtributo('placaEstrangeira', false);
+			app.setAtributo('placaEstrangeira', 0);
 			app.setAtributo('placa_unica', null);
 			$('#placa_unica_' + tipo_fluxo).val(null);
 			util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");

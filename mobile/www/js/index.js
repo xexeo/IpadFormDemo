@@ -479,11 +479,11 @@ var app = {
 
 	setCamposDerivados : function() {
 		// PLACA
-		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
+		if ((!util.isEmpty(registro.placaEstrangeira)) && (registro.placaEstrangeira != 1)) {
 			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
 				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
 			}
-		} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
+		} else if ((!util.isEmpty(registro.placaEstrangeira)) && (registro.placaEstrangeira == 1)) {
 			if (!util.isEmpty(registro.placa_unica)) {
 				app.setAtributo('placa', registro.placa_unica.toUpperCase());
 			}
