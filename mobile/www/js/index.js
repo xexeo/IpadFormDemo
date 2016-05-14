@@ -529,68 +529,73 @@ var app = {
 			}
 		}
 
-		// RNTRC
-		if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
-			if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
-				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
-			} else {
-				if (registro.cancelado != 1) {
-					app.setAtributo('erro', "ERRO (rntrc vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
+		//ESPECÍFICOS PARA FLUXO DE CARGA
+		if(app.getAtributo('classeVeiculo') == 'carga') {
+
+			// RNTRC
+			if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
+				if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
+					app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
+				} else {
+					if (registro.cancelado != 1) {
+						app.setAtributo('erro', "ERRO (rntrc vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
 				}
 			}
-		}
-
-		// PESO DA CARGA ('ton' -> 'kg')
-		if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
-			var peso = Number(registro.pesoDaCarga);
-			if (registro.unidadePesoDaCarga == 'kg') {
-				peso = peso / 10;
-			} else {
-				peso = peso * 100;
+	
+			// PESO DA CARGA ('ton' -> 'kg')
+			if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
+				var peso = Number(registro.pesoDaCarga);
+				if (registro.unidadePesoDaCarga == 'kg') {
+					peso = peso / 10;
+				} else {
+					peso = peso * 100;
+				}
+				app.setAtributo('pesoDaCarga', peso);
 			}
-			app.setAtributo('pesoDaCarga', peso);
-		}
-		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// TIPO DE PRODUTO (CARGA)
-		app.splitAtributo('idProduto');
-		if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (idProduto vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// CARGA ANTERIOR
-		app.splitAtributo('idCargaAnterior');
-		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// MUNICÍPIO EMBARQUE DA CARGA
-		app.splitAtributo('municipioEmbarqueCarga');
-		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// MUNICÍPIO DESEMBARQUE DA CARGA
-		app.splitAtributo('municipioDesembarqueCarga');
-		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
-		app.splitAtributo('paradaObrigatoriaMunicipio1');
-		app.splitAtributo('paradaObrigatoriaMunicipio2');
-		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-			if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
+			if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
 				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// TIPO DE PRODUTO (CARGA)
+			app.splitAtributo('idProduto');
+			if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (idProduto vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// CARGA ANTERIOR
+			app.splitAtributo('idCargaAnterior');
+			if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// MUNICÍPIO EMBARQUE DA CARGA
+			app.splitAtributo('municipioEmbarqueCarga');
+			if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// MUNICÍPIO DESEMBARQUE DA CARGA
+			app.splitAtributo('municipioDesembarqueCarga');
+			if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+			app.splitAtributo('paradaObrigatoriaMunicipio1');
+			app.splitAtributo('paradaObrigatoriaMunicipio2');
+			
+			if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+				if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
 			}
 		}
 
