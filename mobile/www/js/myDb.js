@@ -166,7 +166,8 @@ myDb = {
 						$.each(myDb.tabelaOD, function(index, item) {
 							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
-								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
+								app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value + '): '
+										+ value);
 								if (value != null) {
 									if (item.type == 'text') {
 										value = '"' + value + '"';
