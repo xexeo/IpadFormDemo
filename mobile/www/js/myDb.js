@@ -2,62 +2,174 @@ myDb = {
 
 	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
 
-	tabelaOD : [
-		{field : 'id', type : 'text primary key'},
-		{field : 'estaNoNote', type : 'integer'}, // Boolean 1->true || false, otherwise;
-		{field : 'cancelado', type : 'integer'},
-		{field : 'idPosto', type : 'integer'},
-		{field : 'sentido', type : 'text'},
-		{field : 'idIpad', type : 'text'},
-		// {field : 'uuid', type : 'text'},
-		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
-		{field : 'dataIniPesq', type : 'text'},
-		{field : 'dataFimPesq', type : 'text'},
-		{field : 'placa', type : 'text'},
-		{field : 'anoDeFabricacao', type : 'integer'},
-		{field : 'tipo', type : 'text'},
-		{field : 'idOrigemPais', type : 'integer'},
-		{field : 'idOrigemMunicipio', type : 'integer'},
-		{field : 'idDestinoPais', type : 'integer'},
-		{field : 'idDestinoMunicipio', type : 'integer'},
-		{field : 'idMotivoDeEscolhaDaRota', type : 'text'},
-		{field : 'frequenciaQtd', type : 'integer'},
-		{field : 'frequenciaPeriodo', type : 'text'},
-		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
-		{field : 'placaEstrangeira', type : 'text'}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
-		{field : 'idPaisPlacaEstrangeira', type : 'integer'},
-		{field : 'idCombustivel', type : 'integer'},
-		{field : 'categoria', type : 'text'},
-		{field : 'possuiReboque', type : 'text'},
-		{field : 'numeroDePessoasNoVeiculo', type : 'integer'},
-		{field : 'numeroDePessoasATrabalho', type : 'integer'},
-		{field : 'idRendaMedia', type : 'integer'},
-		{field : 'idMotivoDaViagem', type : 'integer'},
-		{field : 'tipoCaminhao', type : 'text'},
-		{field : 'idTipoDeContainer', type : 'integer'},
-		{field : 'idTipoCarroceria', type : 'integer'},
-		{field : 'rntrc', type : 'text'},
-		{field : 'possuiCargaPerigosa', type : 'integer'}, // Boolean 1->true || false, otherwise;
-		{field : 'idNumeroDeRisco', type : 'integer'},
-		{field : 'idNumeroDaOnu', type : 'integer'},
-		{field : 'idAgregado', type : 'integer'},
-		{field : 'placaVermelha', type : 'integer'}, // Boolean 1->true || false, otherwise;
-		{field : 'idTipoDeViagemOuServico', type : 'integer'},
-		{field : 'pesoDaCarga', type : 'real'},
-		{field : 'valorDoFrete', type : 'real'},
-		{field : 'utilizaParadaEspecial', type : 'integer'}, // Boolean 1->true || false, otherwise;
-		{field : 'idProduto', type : 'integer'},
-		{field : 'idCargaAnterior', type : 'integer'},
-		{field : 'valorDaCarga', type : 'real'},
-		{field : 'municipioEmbarqueCarga', type : 'integer'},
-		{field : 'idLocalEmbarqueCarga', type : 'integer'},
-		{field : 'municipioDesembarqueCarga', type : 'integer'},
-		{field : 'idLocalDesembarqueCarga', type : 'integer'},
-		{field : 'indoPegarCarga', type : 'integer'},
-		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
-		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
-		{field : 'idPerguntaExtra', type : 'integer'}
-	],
+	tabelaOD : [ {
+		field : 'id',
+		type : 'text primary key'
+	}, {
+		field : 'estaNoNote',
+		type : 'integer'
+	}, // Boolean 1->true || false, otherwise;
+	{
+		field : 'cancelado',
+		type : 'integer'
+	}, {
+		field : 'idPosto',
+		type : 'integer'
+	}, {
+		field : 'sentido',
+		type : 'text'
+	}, {
+		field : 'idIpad',
+		type : 'text'
+	},
+	// {field : 'uuid', type : 'text'},
+	{
+		field : 'login',
+		type : 'text'
+	}, // idPost + sentido (redundante?)
+	{
+		field : 'dataIniPesq',
+		type : 'text'
+	}, {
+		field : 'dataFimPesq',
+		type : 'text'
+	}, {
+		field : 'placa',
+		type : 'text'
+	}, {
+		field : 'anoDeFabricacao',
+		type : 'integer'
+	}, {
+		field : 'tipo',
+		type : 'text'
+	}, {
+		field : 'idOrigemPais',
+		type : 'integer'
+	}, {
+		field : 'idOrigemMunicipio',
+		type : 'integer'
+	}, {
+		field : 'idDestinoPais',
+		type : 'integer'
+	}, {
+		field : 'idDestinoMunicipio',
+		type : 'integer'
+	}, {
+		field : 'idMotivoDeEscolhaDaRota',
+		type : 'text'
+	}, {
+		field : 'frequenciaQtd',
+		type : 'integer'
+	}, {
+		field : 'frequenciaPeriodo',
+		type : 'text'
+	}, {
+		field : 'idPropriedadesDoVeiculo',
+		type : 'integer'
+	}, {
+		field : 'placaEstrangeira',
+		type : 'text'
+	}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
+	{
+		field : 'idPaisPlacaEstrangeira',
+		type : 'integer'
+	}, {
+		field : 'idCombustivel',
+		type : 'integer'
+	}, {
+		field : 'categoria',
+		type : 'text'
+	}, {
+		field : 'possuiReboque',
+		type : 'text'
+	}, {
+		field : 'numeroDePessoasNoVeiculo',
+		type : 'integer'
+	}, {
+		field : 'numeroDePessoasATrabalho',
+		type : 'integer'
+	}, {
+		field : 'idRendaMedia',
+		type : 'integer'
+	}, {
+		field : 'idMotivoDaViagem',
+		type : 'integer'
+	}, {
+		field : 'tipoCaminhao',
+		type : 'text'
+	}, {
+		field : 'idTipoDeContainer',
+		type : 'integer'
+	}, {
+		field : 'idTipoCarroceria',
+		type : 'integer'
+	}, {
+		field : 'rntrc',
+		type : 'text'
+	}, {
+		field : 'possuiCargaPerigosa',
+		type : 'integer'
+	}, // Boolean 1->true || false, otherwise;
+	{
+		field : 'idNumeroDeRisco',
+		type : 'integer'
+	}, {
+		field : 'idNumeroDaOnu',
+		type : 'integer'
+	}, {
+		field : 'idAgregado',
+		type : 'integer'
+	}, {
+		field : 'placaVermelha',
+		type : 'integer'
+	}, // Boolean 1->true || false, otherwise;
+	{
+		field : 'idTipoDeViagemOuServico',
+		type : 'integer'
+	}, {
+		field : 'pesoDaCarga',
+		type : 'real'
+	}, {
+		field : 'valorDoFrete',
+		type : 'real'
+	}, {
+		field : 'utilizaParadaEspecial',
+		type : 'integer'
+	}, // Boolean 1->true || false, otherwise;
+	{
+		field : 'idProduto',
+		type : 'integer'
+	}, {
+		field : 'idCargaAnterior',
+		type : 'integer'
+	}, {
+		field : 'valorDaCarga',
+		type : 'real'
+	}, {
+		field : 'municipioEmbarqueCarga',
+		type : 'integer'
+	}, {
+		field : 'idLocalEmbarqueCarga',
+		type : 'integer'
+	}, {
+		field : 'municipioDesembarqueCarga',
+		type : 'integer'
+	}, {
+		field : 'idLocalDesembarqueCarga',
+		type : 'integer'
+	}, {
+		field : 'indoPegarCarga',
+		type : 'integer'
+	}, {
+		field : 'paradaObrigatoriaMunicipio1',
+		type : 'integer'
+	}, {
+		field : 'paradaObrigatoriaMunicipio2',
+		type : 'integer'
+	}, {
+		field : 'idPerguntaExtra',
+		type : 'integer'
+	} ],
 
 	fieldExists : function(str) {
 		var found = false;
@@ -164,7 +276,7 @@ myDb = {
 							rowJson = "[{";
 						}
 						$.each(myDb.tabelaOD, function(index, item) {
-							if (!util.contains(item.field, camposNaoExportaveisJson)) {
+							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
 								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
 								if ((item.type == 'text') && (value != null)) {
