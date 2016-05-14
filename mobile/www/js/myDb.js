@@ -11,8 +11,8 @@ myDb = {
 		{field : 'idIpad', type : 'text'},
 		// {field : 'uuid', type : 'text'},
 		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
-		{field : 'timestampIniPesq', type : 'text'},
-		{field : 'timestampFimPesq', type : 'text'},
+		{field : 'dataIniPesq', type : 'text'},
+		{field : 'dataFimPesq', type : 'text'},
 		{field : 'placa', type : 'text'},
 		{field : 'anoDeFabricacao', type : 'integer'},
 		{field : 'tipo', type : 'text'},
