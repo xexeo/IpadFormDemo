@@ -213,7 +213,7 @@ var util = {
 		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).hide();
 			$('#grupo_placa_unica_' + tipo_fluxo).hide();
-			if ((registro.placaEstrangeira == undefined) || (registro.placaEstrangeira)) {
+			if (util.isEmpty(registro.placaEstrangeira) || registro.placaEstrangeira) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 			}
 			app.setAtributo('idPaisPlacaEstrangeira', null);
@@ -614,7 +614,7 @@ var util = {
 	},
 
 	getTimeDefaultFormated : function(date) {
-		return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:SS");
+		return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:ss");
 	},
 
 	getTimeUnixTimestamp : function(date) {

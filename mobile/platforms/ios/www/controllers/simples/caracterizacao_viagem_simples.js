@@ -45,8 +45,8 @@ controllers.caracterizacao_viagem_simples = {
 
 		util.inicializaTabelaAuxiliar("motivo_viagem_simples", "Selecione", lista_motivo_viagem, "simples");
 
-		var lista_rendas = [ 'Sem renda', 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
-				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado' ];
+		var lista_rendas = [ 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
+				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado', 'Sem renda'];
 		util.inicializaSelect("renda_simples", lista_rendas);
 
 	},
@@ -109,7 +109,7 @@ controllers.caracterizacao_viagem_simples = {
 			} else {
 				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
-				if (Number($(this).val()) == 6) { // TODO Trabalho = 5. Ajustar se id mudar.
+				if (Number($(this).val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_pessoas_trabalho_simples").show();
 					}
@@ -129,15 +129,20 @@ controllers.caracterizacao_viagem_simples = {
 			app.setAtributo('numeroDePessoasNoVeiculo', $(this).val());
 		});
 		$('#pessoas_simples').keyup(function() {
+			var temTrabalho = (Number($('#motivo_viagem_simples').val()) == 6); // TODO Trabalho. Ajustar se id mudar.
 			if (Number($("#pessoas_simples").val()) > 0) {
-				if (Number($('#motivo_viagem_simples').val()) == 6) { // TODO Trabalho = 5. Ajustar se id mudar.
+				if (temTrabalho) { 
 					$("#grupo_pessoas_trabalho_simples").show();
 				} else {
 					$("#grupo_renda_simples").show();
 				}
 			} else {
-				$("#grupo_pessoas_trabalho_simples").hide();
 				$("#grupo_renda_simples").hide();
+				if (temTrabalho) {
+					$("#grupo_pessoas_trabalho_simples").hide();
+					$('#pessoas_trabalho_simples').val("");
+					app.setAtributo('numeroDePessoasATrabalho', null);
+				}
 			}
 		});
 
