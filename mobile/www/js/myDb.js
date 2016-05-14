@@ -166,13 +166,19 @@ myDb = {
 						$.each(myDb.tabelaOD, function(index, item) {
 							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
-								app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value + '): '
-										+ value);
 								if (value != null) {
+									app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
+											+ '): ' + value);
+									var typeValue = typeof value;
 									if (item.type == 'text') {
 										value = '"' + value + '"';
-									} else if ((item.type == 'integer') && ((typeof value) == 'boolean')) {
-										value = (value ? 1 : 0);
+									} else if (item.type == 'integer' && (typeValue != 'number')) {
+										if (typeValue == 'boolean') {
+											value = Number(value);
+										} else if (typeValue == 'string') {
+											value = ((value == 'true') ? 1 : ((value == 'false') ? 0 : (isNaN(value) ? ('"'
+													+ value + '"') : Number(value))));
+										}
 									}
 								}
 								rowJson += '"' + item.field + '": ' + value;
