@@ -482,6 +482,27 @@ var util = {
 		return encontrou
 	},
 
+	validaQtdMaxPessoas : function(tipo, nome_campo, campo_aviso) {
+		var valor = $.trim($('#' + nome_campo).val());
+		if (tipo == 'p1_01' && valor > 7) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 7");
+			return false;
+		} else if (tipo == 'p1_02' && valor > 9) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 9");
+			return false;
+		} else if (tipo == 'p2' && valor > 9) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 9");
+			return false;
+		} else if (tipo == 'p3' && valor > 2) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 2");
+			return false;
+		} else if (tipo == 'm' && valor > 2) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 2");
+			return false;
+		}
+		return true;
+	},
+
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {

@@ -20,7 +20,7 @@ myDb = {
 		{field : 'idOrigemMunicipio', type : 'integer'},
 		{field : 'idDestinoPais', type : 'integer'},
 		{field : 'idDestinoMunicipio', type : 'integer'},
-		{field : 'idMotivoDeEscolhaDaRota', type : 'text'},
+		{field : 'idMotivoDeEscolhaDaRota', type : 'integer'},
 		{field : 'frequenciaQtd', type : 'integer'},
 		{field : 'frequenciaPeriodo', type : 'text'},
 		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
@@ -28,7 +28,7 @@ myDb = {
 		{field : 'idPaisPlacaEstrangeira', type : 'integer'},
 		{field : 'idCombustivel', type : 'integer'},
 		{field : 'categoria', type : 'text'},
-		{field : 'possuiReboque', type : 'text'},
+		{field : 'possuiReboque', type : 'integer'},
 		{field : 'numeroDePessoasNoVeiculo', type : 'integer'},
 		{field : 'numeroDePessoasATrabalho', type : 'integer'},
 		{field : 'idRendaMedia', type : 'integer'},
@@ -166,12 +166,19 @@ myDb = {
 						$.each(myDb.tabelaOD, function(index, item) {
 							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
-								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
 								if (value != null) {
+									app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
+											+ '): ' + value);
+									var typeValue = typeof value;
 									if (item.type == 'text') {
 										value = '"' + value + '"';
-									} else if ((item.type == 'integer') && ((typeof value) == 'boolean')) {
-										value = (value ? 1 : 0);
+									} else if (item.type == 'integer' && (typeValue != 'number')) {
+										if (typeValue == 'boolean') {
+											value = Number(value);
+										} else if (typeValue == 'string') {
+											value = ((value == 'true') ? 1 : ((value == 'false') ? 0 : (isNaN(value) ? ('"'
+													+ value + '"') : Number(value))));
+										}
 									}
 								}
 								rowJson += '"' + item.field + '": ' + value;

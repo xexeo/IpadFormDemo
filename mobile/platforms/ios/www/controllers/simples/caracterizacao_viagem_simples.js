@@ -131,7 +131,7 @@ controllers.caracterizacao_viagem_simples = {
 		$('#pessoas_simples').keyup(function() {
 			var temTrabalho = (Number($('#motivo_viagem_simples').val()) == 6); // TODO Trabalho. Ajustar se id mudar.
 			if (Number($("#pessoas_simples").val()) > 0) {
-				if (temTrabalho) { 
+				if (temTrabalho) {
 					$("#grupo_pessoas_trabalho_simples").show();
 				} else {
 					$("#grupo_renda_simples").show();
@@ -190,7 +190,9 @@ controllers.caracterizacao_viagem_simples = {
 				validacoes = validacoes && (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0));
 			}
 
-			return validacoes;
+			var validaQtdPessoas = util.validaQtdMaxPessoas(app.getAtributo('tipo'), "pessoas_simples", "Pessoas no veículo");
+
+			return validacoes && validaQtdPessoas;
 		}
 		return false;
 	}
