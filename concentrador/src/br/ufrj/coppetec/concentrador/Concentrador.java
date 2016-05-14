@@ -1,6 +1,6 @@
 package br.ufrj.coppetec.concentrador;
 
-import br.ufrj.coppeted.concentrador.database.myDB;
+import br.ufrj.coppetec.concentrador.database.myDB;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -37,7 +37,9 @@ public class Concentrador {
             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
             e.printStackTrace();
             System.exit(1);
-        }
+        }finally{
+			database.closeConnection();
+		}
         
 		janela = new Janela();
         

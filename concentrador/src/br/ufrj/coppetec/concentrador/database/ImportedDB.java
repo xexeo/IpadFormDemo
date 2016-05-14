@@ -1,4 +1,4 @@
-package br.ufrj.coppeted.concentrador.database;
+package br.ufrj.coppetec.concentrador.database;
 
 import br.ufrj.coppetec.concentrador.Concentrador;
 import java.sql.ResultSet;
