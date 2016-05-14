@@ -155,10 +155,10 @@ myDb = {
 				var sql = "SELECT " + fields + " FROM tblDados;";
 
 				tx.executeSql(sql, [], function(tx, res) {
-					for(var rowIndex = 0; rowIndex < res.rows.length; rowIndex++){
+					for (var rowIndex = 0; rowIndex < res.rows.length; rowIndex++) {
 						var rowDB = res.rows.item(rowIndex);
 						var rowJson = "{";
-						if (rowIndex == 0){
+						if (rowIndex == 0) {
 							rowJson = "[{";
 						}
 						$.each(myDb.tabelaOD, function(index, item) {
@@ -176,8 +176,8 @@ myDb = {
 						});
 						rowJson += "}";
 						if (rowIndex < res.rows.length - 1) {
-								rowJson += ",";
-						}else{
+							rowJson += ",";
+						} else {
 							rowJson += "]";
 						}
 						writer.appendRow(rowJson);

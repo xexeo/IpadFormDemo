@@ -62,7 +62,6 @@ jsonWriter = {
 		try {
 			me._logWriter.seek(me._logWriter.length);
 			me._logWriter.write(blob);
-			console.log(row);
 		} catch (e) {
 			console.log(e.message);
 		}
