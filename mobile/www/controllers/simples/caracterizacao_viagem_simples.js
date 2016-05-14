@@ -45,8 +45,8 @@ controllers.caracterizacao_viagem_simples = {
 
 		util.inicializaTabelaAuxiliar("motivo_viagem_simples", "Selecione", lista_motivo_viagem, "simples");
 
-		var lista_rendas = [ 'Sem renda', 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
-				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado' ];
+		var lista_rendas = [ 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
+				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado', 'Sem renda'];
 		util.inicializaSelect("renda_simples", lista_rendas);
 
 	},
