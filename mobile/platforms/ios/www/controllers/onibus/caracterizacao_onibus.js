@@ -26,8 +26,8 @@ controllers.caracterizacao_onibus = {
 		}
 		util.inicializaSelectCustomValueAsIndex("ano_onibus", lista_anos, "Selecione");
 
-		var lista_propriedades = [ 'Próprio', 'Alugado/Fretado', 'Empresa', 'Serviços Públicos', 'Outros' ];
-		util.inicializaSelect("propriedade_onibus", lista_propriedades);
+		util.inicializaTabelaAuxiliar("propriedade_onibus", "Selecione", lista_propriedade_veiculo, "onibus");
+
 	},
 
 	// Controla o show e hide dos elementos da tela

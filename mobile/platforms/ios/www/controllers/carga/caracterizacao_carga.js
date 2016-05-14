@@ -30,11 +30,13 @@ controllers.caracterizacao_carga = {
 		util.inicializaSelectCustomValueAsIndex("ano_carga", lista_anos, "Selecione");
 
 		// placa cinza
-		var lista_propriedades = [ 'Empresa/Frota própria' ];
-		if (app.getAtributo('placaVermelha') == true) { // TODO atualizar quando nome do campo no registro for modificado
-			lista_propriedades = [ 'Transportadora', 'Própria/Particular/Autônomo', ];
+		if (app.getAtributo('placaVermelha') == true) {
+			// placa vermelha
+			util.inicializaTabelaAuxiliar("propriedade_carga", "Selecione", lista_propriedade_veiculo, "carga_vermelha");
+		} else {
+			// placa cinza
+			util.inicializaTabelaAuxiliar("propriedade_carga", "Selecione", lista_propriedade_veiculo, "carga_cinza");
 		}
-		util.inicializaSelect("propriedade_carga", lista_propriedades);
 
 		var lista_agregado = [ 'Transportadora', 'Empresa/Frota própria', 'Não' ];
 		util.inicializaSelect("agregado_carga", lista_agregado);

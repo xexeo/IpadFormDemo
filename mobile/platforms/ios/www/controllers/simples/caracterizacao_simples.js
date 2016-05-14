@@ -26,15 +26,16 @@ controllers.caracterizacao_simples = {
 		}
 		util.inicializaSelectCustomValueAsIndex("ano_simples", lista_anos, "Selecione");
 
-		var lista_propriedades = [ 'Próprio', 'Alugado/Fretado', 'Empresa', 'Taxi', 'Serviços Públicos', 'Outros' ];
-		util.inicializaSelect("propriedade_simples", lista_propriedades);
+		util.inicializaTabelaAuxiliar("propriedade_simples", "Selecione", lista_propriedade_veiculo, "simples");
 
-		var lista_combustiveis = [ 'Álcool/Etanol', 'Bi-Combustível/Etanol', 'Diesel', 'Gasolina', 'GNV/Gás Natural', 'Híbrido' ];
-		// Se o veículo leve for moto, as opções para combustível são diferentes
 		if (registro.tipo == 'm') {
-			lista_combustiveis = [ 'Bi-Combustível/Etanol', 'Gasolina' ];
+			// Moto
+			util.inicializaTabelaAuxiliar("combustivel_simples", "Selecione", lista_combustivel, "moto");
 		}
-		util.inicializaSelect("combustivel_simples", lista_combustiveis);
+		else {
+			// Veículo simples comum
+			util.inicializaTabelaAuxiliar("combustivel_simples", "Selecione", lista_combustivel, "simples");
+		}
 	},
 
 	// Controla o show e hide dos elementos da tela

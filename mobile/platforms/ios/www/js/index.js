@@ -47,6 +47,36 @@ var app = {
 		app.sentido = null;
 	},
 
+	exportaDbToJson : function() {
+		if (app.filePaths) {
+			resolveLocalFileSystemURL(app.filePaths.externalFolder, function(dir) {
+				var newJsonName = ipadID.id + "_" + app.jsonName;
+				app.removeFile(newJsonName, app.filePaths.externalFolder,function(){realExporter(newJsonName,dir);},function(){realExporter(newJsonName,dir);});
+			}, function(err) {
+				app.logger.log('ERRO ao acessar o folder externo ' + app.filePaths.externalFolder + ' ' + JSON.stringify(err));
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+		
+		function realExporter(jsonName, dir){
+			dir.getFile(jsonName, {
+					create : true
+				}, function(file) {
+					app.logger.log("arquivo JSON: ", file);
+					jsonWriter.setJsonFile(file);
+					file.createWriter(function(fileWriter) {
+						jsonWriter.setJsonWriter(fileWriter);
+						myDb.exportaDbToJson(jsonWriter);
+					}, function() {
+						app.logger.log('ERRO criando o escritor do JSON a ser exportado.');
+					});
+				}, function(e) {
+					app.logger.log('ERRO ao criar o arquivo JSON a ser exportado: ' + e.message);
+				});
+		}
+	},
+
 	duplicaDb : function() {
 		if (app.filePaths) {
 			app.database.close(function() {
@@ -297,6 +327,13 @@ var app = {
 							"Senha Incorreta", "Exportar", "Voltar");
 				});
 
+		$("#exporta_db_to_json").click(
+				function() {
+					app.validaOperacoes(app.exportaDbToJson, "Insira a senha para exportar os dados no formato JSON.",
+							"Exportar JSON", "Senha incorreta para a exportação.\nDeseja tentar novamente?", "Senha Incorreta",
+							"Exportar", "Voltar");
+				});
+
 		// remove o filtro original do autocomplete para poder filtrar acentos
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
@@ -353,8 +390,8 @@ var app = {
 					}
 				});
 
-				$("#versao").html(app.versao);
-				$("#ipadID").html(ipadID.id);
+				$(".versao #versao").html(app.versao);
+				$(".ipad #ipadID").html(ipadID.id);
 				$("#posto").html(app.posto);
 				$("#sentido").html(app.sentido);
 
@@ -377,6 +414,23 @@ var app = {
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
 		app.logger.log(JSON.stringify(registro));
+	},
+
+	splitAtributo : function(nome) {
+		var valor = registro[nome];
+		if (!util.isEmpty(valor)) {
+			var splited = String(valor).split("|");
+			if (splited.length > 1) {
+				valor = splited[splited.length - 1].trim();
+				if (!util.isEmpty(valor)) {
+					if (isNaN(valor)) {
+						app.setAtributo(nome, valor);
+					} else {
+						app.setAtributo(nome, parseInt(valor));
+					}
+				}
+			}
+		}
 	},
 
 	cancelar : function() {
@@ -426,8 +480,8 @@ var app = {
 		}
 		if (util.isEmpty(registro.placa)) {
 			if (registro.cancelado != 1) {
-				// TODO: ERRO (placa vazia)
-				app.logger.log("ERRO (placa vazia) no registro: ", registro.id);
+				app.setAtributo('erro', "ERRO (placa vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
@@ -438,34 +492,30 @@ var app = {
 				app.setAtributo('frequenciaQtd', 1);
 			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
 				if (registro.cancelado != 1) {
-					// TODO: ERRO (frequencia vazia)
-					app.logger.log("ERRO (frequenciaQtd vazia) no registro: ", registro.id);
+					app.setAtributo('erro', "ERRO (frequenciaQtd vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
 		} else if (registro.cancelado != 1) {
-			// TODO: ERRO (frequencia vazia)
-			app.logger.log("ERRO (frequenciaPeriodo vazio) no registro: ", registro.id);
+			app.setAtributo('erro', "ERRO (frequenciaPeriodo vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// ORIGEM: MUNICÍPIO
-		if (!util.isEmpty(registro.idOrigemMunicipio)) {
-			app.setAtributo('idOrigemMunicipio', registro.idOrigemMunicipio.split("|")[1].trim());
-		}
+		app.splitAtributo('idOrigemMunicipio');
 		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
-				// TODO: ERRO (destino vazio)
-				app.logger.log("ERRO (idOrigemMunicipio vazio) no registro: ", registro.id);
+				app.setAtributo('erro', "ERRO (idOrigemMunicipio vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
 		// DESTINO: MUNICÍPIO
-		if (!util.isEmpty(registro.idDestinoMunicipio)) {
-			app.setAtributo('idDestinoMunicipio', registro.idDestinoMunicipio.split("|")[1].trim());
-		}
+		app.splitAtributo('idDestinoMunicipio');
 		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
-				// TODO: ERRO (destino vazio)
-				app.logger.log("ERRO (idDestinoMunicipio vazio) no registro: ", registro.id);
+				app.setAtributo('erro', "ERRO (idDestinoMunicipio vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
@@ -475,14 +525,14 @@ var app = {
 				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
 			} else {
 				if (registro.cancelado != 1) {
-					// TODO: ERRO (rntrc vazio)
-					app.logger.log("ERRO (rntrc vazio) no registro: ", registro.id);
+					app.setAtributo('erro', "ERRO (rntrc vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
 		}
 
 		// PESO DA CARGA ('ton' -> 'kg')
-		if (!util.isEmpty(registro.pesoDaCarga)) {
+		if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
 			var peso = Number(registro.pesoDaCarga);
 			if (registro.unidadePesoDaCarga == 'kg') {
 				peso = peso / 10;
@@ -491,59 +541,46 @@ var app = {
 			}
 			app.setAtributo('pesoDaCarga', peso);
 		}
-		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && registro.cancelado != 1) {
-			// TODO: ERRO (peso da carga vazio)
-			app.logger.log("ERRO (pesoDaCarga vazio) no registro: ", registro.id);
+		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// TIPO DE PRODUTO (CARGA)
-		if (!util.isEmpty(registro.idProduto)) {
-			app.setAtributo('idProduto', registro.idProduto.split("|")[1].trim());
-		}
-		if (util.isEmpty(registro.idProduto) && registro.possui_carga && registro.cancelado != 1) {
-			// TODO: ERRO (idProduto vazio)
-			app.logger.log("ERRO (idProduto vazio) no registro: ", registro.id);
+		app.splitAtributo('idProduto');
+		if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (idProduto vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// CARGA ANTERIOR
-		if (!util.isEmpty(registro.idCargaAnterior)) {
-			app.setAtributo('idCargaAnterior', registro.idCargaAnterior.split("|")[1].trim());
-		}
-		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && registro.cancelado != 1) {
-			// TODO: ERRO (idCargaAnterior vazio)
-			app.logger.log("ERRO (idCargaAnterior vazio) no registro: ", registro.id);
+		app.splitAtributo('idCargaAnterior');
+		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// MUNICÍPIO EMBARQUE DA CARGA
-		if (!util.isEmpty(registro.municipioEmbarqueCarga)) {
-			app.setAtributo('municipioEmbarqueCarga', registro.municipioEmbarqueCarga.split("|")[1].trim());
-		}
-		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && registro.cancelado != 1) {
-			// TODO: ERRO (municipioEmbarqueCarga vazio)
-			app.logger.log("ERRO (municipioEmbarqueCarga vazio) no registro: ", registro.id);
+		app.splitAtributo('municipioEmbarqueCarga');
+		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// MUNICÍPIO DESEMBARQUE DA CARGA
-		if (!util.isEmpty(registro.municipioDesembarqueCarga)) {
-			app.setAtributo('municipioDesembarqueCarga', registro.municipioDesembarqueCarga.split("|")[1].trim());
-		}
-		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && registro.cancelado != 1) {
-			// TODO: ERRO (municipioDesembarqueCarga vazio)
-			app.logger.log("ERRO (municipioDesembarqueCarga vazio) no registro: ", registro.id);
+		app.splitAtributo('municipioDesembarqueCarga');
+		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+			app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
 		}
 
 		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
-		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-			app.setAtributo('paradaObrigatoriaMunicipio1', registro.paradaObrigatoriaMunicipio1.split("|")[1].trim());
-		}
-		if (!util.isEmpty(registro.paradaObrigatoriaMunicipio2)) {
-			app.setAtributo('paradaObrigatoriaMunicipio2', registro.paradaObrigatoriaMunicipio2.split("|")[1].trim());
-		}
+		app.splitAtributo('paradaObrigatoriaMunicipio1');
+		app.splitAtributo('paradaObrigatoriaMunicipio2');
 		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-			if (!registro.municipiosParadaNaoSabe && registro.cancelado != 1) {
-				// TODO: ERRO (paradaObrigatoriaMunicipios vazio)
-				app.logger.log("ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio) no registro: ",
-						registro.id);
+			if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}
 
@@ -722,6 +759,8 @@ var app = {
 	logFileName : "log.txt",
 
 	dbName : "dados.db",
+
+	jsonName : "dados.json",
 
 	user_login : null,
 

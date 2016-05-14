@@ -50,7 +50,17 @@ var app = {
 	exportaDbToJson : function() {
 		if (app.filePaths) {
 			resolveLocalFileSystemURL(app.filePaths.externalFolder, function(dir) {
-				dir.getFile(app.jsonName, {
+				var newJsonName = ipadID.id + "_" + app.jsonName;
+				app.removeFile(newJsonName, app.filePaths.externalFolder,function(){realExporter(newJsonName,dir);},function(){realExporter(newJsonName,dir);});
+			}, function(err) {
+				app.logger.log('ERRO ao acessar o folder externo ' + app.filePaths.externalFolder + ' ' + JSON.stringify(err));
+			});
+		} else {
+			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+		
+		function realExporter(jsonName, dir){
+			dir.getFile(jsonName, {
 					create : true
 				}, function(file) {
 					app.logger.log("arquivo JSON: ", file);
@@ -64,11 +74,6 @@ var app = {
 				}, function(e) {
 					app.logger.log('ERRO ao criar o arquivo JSON a ser exportado: ' + e.message);
 				});
-			}, function(err) {
-				app.logger.log('ERRO ao acessar o folder externo ' + app.filePaths.externalFolder + ' ' + JSON.stringify(err));
-			});
-		} else {
-			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
 	},
 

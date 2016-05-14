@@ -155,11 +155,15 @@ myDb = {
 				var sql = "SELECT " + fields + " FROM tblDados;";
 
 				tx.executeSql(sql, [], function(tx, res) {
-					$.each(res.rows, function(index) {
-						var rowDB = res.rows.item(index);
-						var rowJson = "";
+					for(var rowIndex = 0; rowIndex < res.rows.length; rowIndex++){
+						var rowDB = res.rows.item(rowIndex);
+						var rowJson = "{";
+						if (rowIndex == 0){
+							rowJson = "[{";
+						}
 						$.each(myDb.tabelaOD, function(index, item) {
 							var value = rowDB[item.field];
+							console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
 							if ((item.type == 'text') && (value != null)) {
 								value = '"' + value + '"';
 							}
@@ -168,8 +172,14 @@ myDb = {
 								rowJson += ", ";
 							}
 						});
+						rowJson += "}";
+						if (rowIndex < res.rows.length - 1) {
+								rowJson += ",";
+						}else{
+							rowJson += "]";
+						}
 						writer.appendRow(rowJson);
-					});
+					}
 				});
 
 			},

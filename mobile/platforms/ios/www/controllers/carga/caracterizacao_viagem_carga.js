@@ -28,9 +28,10 @@ controllers.caracterizacao_viagem_carga = {
 
 		util.inicializaSelectFrequencia('carga');
 
-		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
-				'Ausência de pedágio', 'Próximo a hotéis e postos', 'Segurança', 'Outros' ];
-		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
+//		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
+//				'Ausência de pedágio', 'Proximidade hotéis/postos', 'Segurança', 'Outros' ];
+//		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
+		util.inicializaTabelaAuxiliar("motivo_rota_carga", "Selecione", lista_motivo_escolha_rota, "carga");
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -91,13 +92,13 @@ controllers.caracterizacao_viagem_carga = {
 			var validacoes = true;
 			if ((Number($("#origem_pais_carga").val())) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("origem_uf_carga", "Origem da viagem - estado") && util.validaInputText(
 								"origem_municipio_carga", "Origem da viagem - município"));
 			}
 
 			if ((Number($("#destino_pais_carga").val())) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("destino_uf_carga", "Destino da viagem - estado") && util.validaInputText(
 								"destino_municipio_carga", "Destino da viagem - município"));
 			}
 
