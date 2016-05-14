@@ -1,16 +1,18 @@
 myDb = {
 
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
+
 	tabelaOD : [
-		{field : 'id', type : 'text primary key'}, // IMPORTANTE: não enviar p/ o servidor
+		{field : 'id', type : 'text primary key'},
 		{field : 'estaNoNote', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
 		{field : 'idPosto', type : 'integer'},
 		{field : 'sentido', type : 'text'},
 		{field : 'idIpad', type : 'text'},
-		{field : 'uuid', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
+		// {field : 'uuid', type : 'text'},
 		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
-		{field : 'timestampIniPesq', type : 'text'},
-		{field : 'timestampFimPesq', type : 'text'},
+		{field : 'dataIniPesq', type : 'text'},
+		{field : 'dataFimPesq', type : 'text'},
 		{field : 'placa', type : 'text'},
 		{field : 'anoDeFabricacao', type : 'integer'},
 		{field : 'tipo', type : 'text'},
@@ -43,7 +45,7 @@ myDb = {
 		{field : 'idTipoDeViagemOuServico', type : 'integer'},
 		{field : 'pesoDaCarga', type : 'real'},
 		{field : 'valorDoFrete', type : 'real'},
-		{field : 'utilizaParadaEspecial', type : 'integer'}, // boolean 1->true
+		{field : 'utilizaParadaEspecial', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'idProduto', type : 'integer'},
 		{field : 'idCargaAnterior', type : 'integer'},
 		{field : 'valorDaCarga', type : 'real'},
@@ -155,27 +157,29 @@ myDb = {
 				var sql = "SELECT " + fields + " FROM tblDados;";
 
 				tx.executeSql(sql, [], function(tx, res) {
-					for(var rowIndex = 0; rowIndex < res.rows.length; rowIndex++){
+					for (var rowIndex = 0; rowIndex < res.rows.length; rowIndex++) {
 						var rowDB = res.rows.item(rowIndex);
 						var rowJson = "{";
-						if (rowIndex == 0){
+						if (rowIndex == 0) {
 							rowJson = "[{";
 						}
 						$.each(myDb.tabelaOD, function(index, item) {
-							var value = rowDB[item.field];
-							console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
-							if ((item.type == 'text') && (value != null)) {
-								value = '"' + value + '"';
-							}
-							rowJson += '"' + item.field + '": ' + value;
-							if (index < myDb.tabelaOD.length - 1) {
-								rowJson += ", ";
+							if (!util.contains(item.field, camposNaoExportaveisJson)) {
+								var value = rowDB[item.field];
+								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
+								if ((item.type == 'text') && (value != null)) {
+									value = '"' + value + '"';
+								}
+								rowJson += '"' + item.field + '": ' + value;
+								if (index < myDb.tabelaOD.length - 1) {
+									rowJson += ", ";
+								}
 							}
 						});
 						rowJson += "}";
 						if (rowIndex < res.rows.length - 1) {
-								rowJson += ",";
-						}else{
+							rowJson += ",";
+						} else {
 							rowJson += "]";
 						}
 						writer.appendRow(rowJson);
