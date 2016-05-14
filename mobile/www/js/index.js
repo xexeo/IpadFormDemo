@@ -599,6 +599,7 @@ var app = {
 
 	finalizaRegistro : function(cb) {
 		app.logger.log('Finalizando registro: ' + registro.id);
+		app.setAtributo('cancelado', 0);
 		app.setCamposDerivados();
 		myDb.insertRegistro(registro,
 		// erro
