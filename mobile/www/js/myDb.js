@@ -167,8 +167,12 @@ myDb = {
 							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
 								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
-								if ((item.type == 'text') && (value != null)) {
-									value = '"' + value + '"';
+								if (value != null) {
+									if (item.type == 'text') {
+										value = '"' + value + '"';
+									} else if ((item.type == 'integer') && ((typeof value) == 'boolean')) {
+										value = (value ? 1 : 0);
+									}
 								}
 								rowJson += '"' + item.field + '": ' + value;
 								if (index < myDb.tabelaOD.length - 1) {
