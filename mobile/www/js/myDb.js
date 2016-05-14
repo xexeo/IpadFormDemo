@@ -7,7 +7,7 @@ myDb = {
 		{field : 'idPosto', type : 'integer'},
 		{field : 'sentido', type : 'text'},
 		{field : 'idIpad', type : 'text'},
-		{field : 'uuid', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
+		// {field : 'uuid', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
 		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
 		{field : 'timestampIniPesq', type : 'text'},
 		{field : 'timestampFimPesq', type : 'text'},
@@ -162,14 +162,16 @@ myDb = {
 							rowJson = "[{";
 						}
 						$.each(myDb.tabelaOD, function(index, item) {
-							var value = rowDB[item.field];
-							console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
-							if ((item.type == 'text') && (value != null)) {
-								value = '"' + value + '"';
-							}
-							rowJson += '"' + item.field + '": ' + value;
-							if (index < myDb.tabelaOD.length - 1) {
-								rowJson += ", ";
+							if (item.field != 'id') { // não enviar o 'id' para o servidor, enviar apenas para o concentrador
+								var value = rowDB[item.field];
+								console.log('FIELD: ' + item.field + '\tVALUE: ' + value);
+								if ((item.type == 'text') && (value != null)) {
+									value = '"' + value + '"';
+								}
+								rowJson += '"' + item.field + '": ' + value;
+								if (index < myDb.tabelaOD.length - 1) {
+									rowJson += ", ";
+								}
 							}
 						});
 						rowJson += "}";
