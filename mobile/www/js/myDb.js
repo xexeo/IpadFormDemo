@@ -167,8 +167,8 @@ myDb = {
 							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
 								if (value != null) {
-									app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
-											+ '): ' + value);
+									// app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
+									// + '): ' + value);
 									var typeValue = typeof value;
 									if (item.type == 'text') {
 										value = '"' + value + '"';
