@@ -23,11 +23,17 @@ var app = {
 			app.senha_login = senha;
 			app.posto = String(usuario).substr(0, 3);
 			app.sentido = String(usuario).substr(3, 2).toUpperCase();
+			if (isNaN(app.posto)) { // apenas para efeitos ao user admin
+				app.posto = '000';
+			}
+			if ((app.sentido != 'AB') && (app.sentido != 'BA')) { // apenas para efeitos ao user admin
+				app.sentido = 'AB';
+			}
 			// limpa o registro
 			app.limpaRegistro();
 		} else {
 			// TODO: Trocar por um popup "mais elegante"
-			var msg = "usuário e senha informados não estão cadastrados no sistema";
+			var msg = "Usuário e/ou Senha informados não estão cadastrados no sistema!";
 			alert(msg);
 			app.logger.log(msg);
 		}
