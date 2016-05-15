@@ -8,9 +8,9 @@ var logins = {
 	},
 
 	autentica : function(usuario, senha) {
-		if ((logins.user_admin != undefined) && (logins.user_admin.usr != undefined) && (usuario == logins.user_admin.usr)
-				&& (senha == logins.user_admin.pwd)) {
-			logins.user_logado = logins.user_admin;
+		if ((logins.user_tester != undefined) && (logins.user_tester.usr != undefined) && (usuario == logins.user_tester.usr)
+				&& (senha == logins.user_tester.pwd)) {
+			logins.user_logado = logins.user_tester;
 			return true;
 		} else if (String(usuario).length == 5) {
 			var regex = new RegExp("[^0-9]+");
@@ -36,12 +36,13 @@ var logins = {
 
 	user_master : { // Usuário exclusivo para configurar o idIpad na instalação, ele não faz login no aplicativo.
 		usr : 'Master', // usuário mestre
-		pwd : "Aaa" // senha mestra
+		pwd : "434723" // senha mestra (ver teclado numérico para a string 'idIPad')
 	},
 
-	user_admin : { // Usuário destinado aos testes do aplicativo. TODO: iremos removê-lo ao ir para produção?
-		usr : 'admin', // usuário admin
-		pwd : "123", // senha admin
+	user_tester : { // Usuário destinado aos testes do aplicativo.
+		// Antes de ir para produção, basta comentar as duas linhas abaixo se quiser inativar para esse ambiente.
+		usr : 'Teste', // usuário de teste
+		pwd : "837837", // senha de teste (ver teclado numérico para a string 'tester')
 		perguntaExtra : true
 	},
 
@@ -2164,6 +2165,6 @@ var logins = {
 		ladoB : '',
 		trecho : 'ENTR BR-369(A) (BARBOSA FERRAZ) - ENTR BR-158(A)/369(B) (ANEL VIÁRIO CAMPO MOURÃO)'
 	} ],
-	
+
 	user_logado : {}
 };

@@ -181,9 +181,9 @@ myDb = {
 										}
 									}
 								}
-								rowJson += '"' + item.field + '": ' + value;
+								rowJson += '"' + item.field + '":' + value;
 								if (index < myDb.tabelaOD.length - 1) {
-									rowJson += ", ";
+									rowJson += ",";
 								}
 							}
 						});
