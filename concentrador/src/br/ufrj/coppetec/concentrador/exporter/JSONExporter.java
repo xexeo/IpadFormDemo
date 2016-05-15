@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.json.JSONObject;
 
 
 /**
@@ -96,6 +97,38 @@ public class JSONExporter {
 					"Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+	}
+	
+	static public Object getJSONInteger(String val){
+		Object r;
+		if (val == null){
+			r = JSONObject.NULL;
+		} else {
+			r = new Integer(val);
+		}
+		
+		return r;
+	}
+	
+	static public Object getJSONDouble(String val){
+		Object r;
+		if (val == null){
+			r = JSONObject.NULL;
+		} else {
+			r = JSONObject.stringToValue(val);
+		}
+		return r;
+	}
+	
+	static public Object getJSONString(String val){
+		Object r;
+		if (val == null || val.equals("null")){
+			r = JSONObject.NULL;
+		} else {
+			r = val;
+		}
+		
+		return r;
 	}
 	
 }
