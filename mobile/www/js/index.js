@@ -480,9 +480,14 @@ var app = {
 	setCamposDerivados : function() {
 
 		// TIPO VEICULO
-		var tipoReal = app.getAtributo('tipo').split("_")[0]
-		app.setAtributo('tipo', tipoReal);
-		
+		if (!util.isEmpty(app.getAtributo('tipo'))) {
+			var tipoReal = app.getAtributo('tipo').split("_")[0];
+			app.setAtributo('tipo', tipoReal.toUpperCase());
+		} else if (registro.cancelado != 1) {
+			app.setAtributo('erro', "ERRO (tipo vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
+		}
+
 		// PLACA
 		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
 			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {

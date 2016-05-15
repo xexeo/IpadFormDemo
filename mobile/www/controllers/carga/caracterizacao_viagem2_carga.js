@@ -160,24 +160,19 @@ controllers.caracterizacao_viagem2_carga = {
 
 		util.progressoCheckboxAlternado("municipiosParadaNaoSabe", "municipios_parada_nao_sei_carga",
 				"grupo_caracterizacao_viagem2_carga_avancar", "div_municipios_parada_carga");
-		$('#municipios_parada_nao_sei_carga').click(function() {
-			if ($(this).is(':checked')) {
-				util.progressoRestartSelect("municipios_parada_uf1_carga", "UF");
-				util.progressoRestartSelect("municipios_parada_uf2_carga", "UF");
-				$('#municipios_parada_mun1_carga').val("");
-				$('#municipios_parada_mun2_carga').val("");
-				app.setAtributo("", null);
-			}
-		});
 
 		$('#municipios_parada_nao_sei_carga').click(function() {
-			util.progressoRestartSelect("desembarque_uf_carga", "UF");
-			util.progressoRestartSelect("desembarque_local_carga", "Selecione");
-			$('#desembarque_mun_carga').val("");
+			util.progressoRestartSelect("municipios_parada_uf1_carga", "UF");
+			util.progressoRestartSelect("municipios_parada_uf2_carga", "UF");
+			$('#municipios_parada_mun1_carga').val("");
+			$('#municipios_parada_mun2_carga').val("");
 			app.setAtributo("municipios_parada_uf1", null);
 			app.setAtributo("municipios_parada_uf2", null);
 			app.setAtributo("paradaObrigatoriaMunicipio1", null);
 			app.setAtributo("paradaObrigatoriaMunicipio2", null);
+			if ($(this).is(':checked')) {
+				$('#div_municipios_parada_carga').hide();
+			}
 		});
 
 		// Parada obrigatoria UF1 MUN1
