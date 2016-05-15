@@ -37,9 +37,7 @@ public class Concentrador {
             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
             e.printStackTrace();
             System.exit(1);
-        }finally{
-			database.closeConnection();
-		}
+        }
         
 		janela = new Janela();
         

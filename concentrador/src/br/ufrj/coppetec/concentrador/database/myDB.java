@@ -181,6 +181,7 @@ public class myDB extends Db{
 		this.setStatement();
         String qry = "CREATE TABLE IF NOT EXISTS odTable ("
 					+ "id text primary key, "
+					+ "enviado integer, "
 					+ "estaNoNote integer, "
 					+ "cancelado integer, "
 					+ "idPosto integer, "

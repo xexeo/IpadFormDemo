@@ -18,15 +18,16 @@ public class ImportedDB extends Db{
 		ResultSet rs = this.executeQuery("SELECT * FROM tblDados;");
 		String sqlbase = "INSERT OR IGNORE INTO odTable ("
 					+ "id, "
+					+ "enviado, "
 					+ "estaNoNote, "
 					+ "cancelado, "
 					+ "idPosto, "
 					+ "sentido, "
 					+ "idIpad, "
-					+ "uuid, "
+					//+ "uuid, "
 					+ "login, "
-					+ "timestampIniPesq, "
-					+ "timestampFimPesq, "
+					+ "dataIniPesq, "
+					+ "dataFimPesq, "
 					+ "placa, "
 					+ "anoDeFabricacao, "
 					+ "tipo, "
@@ -77,15 +78,16 @@ public class ImportedDB extends Db{
 		while (rs.next()){
 			sql = sqlbase + " VALUES ("
 					+ " '" + rs.getString("id") + "', "
-					+ rs.getInt("estaNoNote")  + ", "
+					+ "0," //não enviado
+					+ "1, " //esta no note
 					+ rs.getInt("cancelado")  + ", "
 					+ rs.getInt("idPosto")  + ", "
 					+ "'" + rs.getString("sentido") + "', "
 					+ "'" + rs.getString("idIpad") + "', "
-					+ "'" + rs.getString("uuid") + "', "
+					//+ "'" + rs.getString("uuid") + "', "
 					+ "'" + rs.getString("login") + "', "
-					+ "'" + rs.getString("timestampIniPesq") + "', "
-					+ "'" + rs.getString("timestampFimPesq") + "', "
+					+ "'" + rs.getString("dataIniPesq") + "', "
+					+ "'" + rs.getString("dataFimPesq") + "', "
 					+ "'" + rs.getString("placa") + "', "
 					+ rs.getInt("anoDeFabricacao") + ", "
 					+ "'" + rs.getString("tipo") + "', "
@@ -97,11 +99,11 @@ public class ImportedDB extends Db{
 					+ rs.getInt("frequenciaQtd") + ", "
 					+ "'" + rs.getString("frequenciaPeriodo") + "', "
 					+ rs.getInt("idPropriedadesDoVeiculo") + ", "
-					+ "'" + rs.getString("placaEstrangeira") + "', "
+					+ rs.getInt("placaEstrangeira") + ", "
 					+ rs.getInt("idPaisPlacaEstrangeira") + ", "
 					+ rs.getInt("idCombustivel") + ", "
 					+ "'" + rs.getString("categoria") + "', "
-					+ "'" + rs.getString("possuiReboque") + "', "
+					+ rs.getInt("possuiReboque") + ", "
 					+ rs.getInt("numeroDePessoasNoVeiculo") + ", "
 					+ rs.getInt("numeroDePessoasATrabalho") + ", "
 					+ rs.getInt("idRendaMedia") + ", "
@@ -134,6 +136,7 @@ public class ImportedDB extends Db{
 			Concentrador.database.setStatement();
 			counter += Concentrador.database.executeStatement(sql);
 		}
+		rs.close();
 		JOptionPane.showMessageDialog(null, "Total de registros inseridos: " + Integer.toString(counter));
 	}
 }

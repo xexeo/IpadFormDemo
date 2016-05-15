@@ -8,6 +8,7 @@ package br.ufrj.coppetec.concentrador;
 import br.ufrj.coppetec.concentrador.database.ImportedDB;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
+import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
@@ -175,6 +176,7 @@ public class Janela extends javax.swing.JFrame {
         grpSentido = new javax.swing.ButtonGroup();
         grpPista = new javax.swing.ButtonGroup();
         dadosFileChooser = new javax.swing.JFileChooser();
+        exporterFileChooser = new javax.swing.JFileChooser();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         pnl_volumetrica = new javax.swing.JPanel();
         lblPosto = new javax.swing.JLabel();
@@ -640,16 +642,22 @@ public class Janela extends javax.swing.JFrame {
         txtPorta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         pnl_envio = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnInDados = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnExportAllVol = new javax.swing.JButton();
+        btnVolNotSent = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        btnODNotSent = new javax.swing.JButton();
+        btnODexportAll = new javax.swing.JButton();
 
         dadosFileChooser.setDialogTitle("Importar dados iPad");
         dadosFileChooser.setFileFilter(new SQLiteFilter());
+
+        exporterFileChooser.setDialogTitle("Exportação de dados");
+        exporterFileChooser.setFileFilter(new JsonFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Concentrador de dados");
@@ -695,6 +703,8 @@ public class Janela extends javax.swing.JFrame {
         jTabbedPane1.setName(""); // NOI18N
 
         lblPesquisador.setText("Pesquisador_1:");
+
+        txtPesquisador1.setNextFocusableComponent(tl0);
 
         jPanel119.setPreferredSize(new java.awt.Dimension(616, 458));
 
@@ -1603,6 +1613,7 @@ public class Janela extends javax.swing.JFrame {
         tl95.setInputVerifier(intVerifier);
         tl95.setMinimumSize(new java.awt.Dimension(50, 19));
         tl95.setName(""); // NOI18N
+        tl95.setNextFocusableComponent(txtPesquisador2);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 13;
@@ -2718,7 +2729,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1522, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
         );
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2728,7 +2739,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblPesquisador)
                     .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Veículos e Caminhões Leves", tab_leves);
@@ -2867,6 +2878,7 @@ public class Janela extends javax.swing.JFrame {
         tp1.setInputVerifier(intVerifier);
         tp1.setMinimumSize(new java.awt.Dimension(50, 19));
         tp1.setName(""); // NOI18N
+        tp1.setNextFocusableComponent(tp2);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -2879,6 +2891,7 @@ public class Janela extends javax.swing.JFrame {
         tp3.setInputVerifier(intVerifier);
         tp3.setMinimumSize(new java.awt.Dimension(50, 19));
         tp3.setName(""); // NOI18N
+        tp3.setNextFocusableComponent(tp4);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
@@ -2891,6 +2904,7 @@ public class Janela extends javax.swing.JFrame {
         tp5.setInputVerifier(intVerifier);
         tp5.setMinimumSize(new java.awt.Dimension(50, 19));
         tp5.setName(""); // NOI18N
+        tp5.setNextFocusableComponent(tp6);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 2;
@@ -2903,6 +2917,7 @@ public class Janela extends javax.swing.JFrame {
         tp7.setInputVerifier(intVerifier);
         tp7.setMinimumSize(new java.awt.Dimension(50, 19));
         tp7.setName(""); // NOI18N
+        tp7.setNextFocusableComponent(tp8);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
@@ -2929,6 +2944,7 @@ public class Janela extends javax.swing.JFrame {
         tp9.setInputVerifier(intVerifier);
         tp9.setMinimumSize(new java.awt.Dimension(50, 19));
         tp9.setName(""); // NOI18N
+        tp9.setNextFocusableComponent(tp10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
@@ -2941,6 +2957,7 @@ public class Janela extends javax.swing.JFrame {
         tp11.setInputVerifier(intVerifier);
         tp11.setMinimumSize(new java.awt.Dimension(50, 19));
         tp11.setName(""); // NOI18N
+        tp11.setNextFocusableComponent(tp12);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
@@ -2953,6 +2970,7 @@ public class Janela extends javax.swing.JFrame {
         tp13.setInputVerifier(intVerifier);
         tp13.setMinimumSize(new java.awt.Dimension(50, 19));
         tp13.setName(""); // NOI18N
+        tp13.setNextFocusableComponent(tp14);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 3;
@@ -2965,6 +2983,7 @@ public class Janela extends javax.swing.JFrame {
         tp15.setInputVerifier(intVerifier);
         tp15.setMinimumSize(new java.awt.Dimension(50, 19));
         tp15.setName(""); // NOI18N
+        tp15.setNextFocusableComponent(tp16);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 3;
@@ -2991,6 +3010,7 @@ public class Janela extends javax.swing.JFrame {
         tp17.setInputVerifier(intVerifier);
         tp17.setMinimumSize(new java.awt.Dimension(50, 19));
         tp17.setName(""); // NOI18N
+        tp17.setNextFocusableComponent(tp18);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
@@ -3003,6 +3023,7 @@ public class Janela extends javax.swing.JFrame {
         tp19.setInputVerifier(intVerifier);
         tp19.setMinimumSize(new java.awt.Dimension(50, 19));
         tp19.setName(""); // NOI18N
+        tp19.setNextFocusableComponent(tp20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
@@ -3015,6 +3036,7 @@ public class Janela extends javax.swing.JFrame {
         tp21.setInputVerifier(intVerifier);
         tp21.setMinimumSize(new java.awt.Dimension(50, 19));
         tp21.setName(""); // NOI18N
+        tp21.setNextFocusableComponent(tp22);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 4;
@@ -3027,6 +3049,7 @@ public class Janela extends javax.swing.JFrame {
         tp23.setInputVerifier(intVerifier);
         tp23.setMinimumSize(new java.awt.Dimension(50, 19));
         tp23.setName(""); // NOI18N
+        tp23.setNextFocusableComponent(tp24);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 4;
@@ -3053,6 +3076,7 @@ public class Janela extends javax.swing.JFrame {
         tp25.setInputVerifier(intVerifier);
         tp25.setMinimumSize(new java.awt.Dimension(50, 19));
         tp25.setName(""); // NOI18N
+        tp25.setNextFocusableComponent(tp26);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
@@ -3065,6 +3089,7 @@ public class Janela extends javax.swing.JFrame {
         tp27.setInputVerifier(intVerifier);
         tp27.setMinimumSize(new java.awt.Dimension(50, 19));
         tp27.setName(""); // NOI18N
+        tp27.setNextFocusableComponent(tp28);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
@@ -3077,6 +3102,7 @@ public class Janela extends javax.swing.JFrame {
         tp29.setInputVerifier(intVerifier);
         tp29.setMinimumSize(new java.awt.Dimension(50, 19));
         tp29.setName(""); // NOI18N
+        tp29.setNextFocusableComponent(tp30);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 5;
@@ -3089,6 +3115,7 @@ public class Janela extends javax.swing.JFrame {
         tp31.setInputVerifier(intVerifier);
         tp31.setMinimumSize(new java.awt.Dimension(50, 19));
         tp31.setName(""); // NOI18N
+        tp31.setNextFocusableComponent(tp32);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 5;
@@ -3115,6 +3142,7 @@ public class Janela extends javax.swing.JFrame {
         tp33.setInputVerifier(intVerifier);
         tp33.setMinimumSize(new java.awt.Dimension(50, 19));
         tp33.setName(""); // NOI18N
+        tp33.setNextFocusableComponent(tp34);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
@@ -3126,6 +3154,7 @@ public class Janela extends javax.swing.JFrame {
         tp35.setInputVerifier(intVerifier);
         tp35.setMinimumSize(new java.awt.Dimension(50, 19));
         tp35.setName(""); // NOI18N
+        tp35.setNextFocusableComponent(tp36);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 6;
@@ -3137,6 +3166,7 @@ public class Janela extends javax.swing.JFrame {
         tp37.setInputVerifier(intVerifier);
         tp37.setMinimumSize(new java.awt.Dimension(50, 19));
         tp37.setName(""); // NOI18N
+        tp37.setNextFocusableComponent(tp38);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 6;
@@ -3148,6 +3178,7 @@ public class Janela extends javax.swing.JFrame {
         tp39.setInputVerifier(intVerifier);
         tp39.setMinimumSize(new java.awt.Dimension(50, 19));
         tp39.setName(""); // NOI18N
+        tp39.setNextFocusableComponent(tp40);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 6;
@@ -3174,6 +3205,7 @@ public class Janela extends javax.swing.JFrame {
         tp41.setInputVerifier(intVerifier);
         tp41.setMinimumSize(new java.awt.Dimension(50, 19));
         tp41.setName(""); // NOI18N
+        tp41.setNextFocusableComponent(tp42);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
@@ -3185,6 +3217,7 @@ public class Janela extends javax.swing.JFrame {
         tp43.setInputVerifier(intVerifier);
         tp43.setMinimumSize(new java.awt.Dimension(50, 19));
         tp43.setName(""); // NOI18N
+        tp43.setNextFocusableComponent(tp44);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 7;
@@ -3196,6 +3229,7 @@ public class Janela extends javax.swing.JFrame {
         tp45.setInputVerifier(intVerifier);
         tp45.setMinimumSize(new java.awt.Dimension(50, 19));
         tp45.setName(""); // NOI18N
+        tp45.setNextFocusableComponent(tp46);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 7;
@@ -3207,6 +3241,7 @@ public class Janela extends javax.swing.JFrame {
         tp47.setInputVerifier(intVerifier);
         tp47.setMinimumSize(new java.awt.Dimension(50, 19));
         tp47.setName(""); // NOI18N
+        tp47.setNextFocusableComponent(tp48);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 7;
@@ -3232,6 +3267,7 @@ public class Janela extends javax.swing.JFrame {
         tp49.setInputVerifier(intVerifier);
         tp49.setMinimumSize(new java.awt.Dimension(50, 19));
         tp49.setName(""); // NOI18N
+        tp49.setNextFocusableComponent(tp50);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
@@ -3243,6 +3279,7 @@ public class Janela extends javax.swing.JFrame {
         tp51.setInputVerifier(intVerifier);
         tp51.setMinimumSize(new java.awt.Dimension(50, 19));
         tp51.setName(""); // NOI18N
+        tp51.setNextFocusableComponent(tp52);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 8;
@@ -3254,6 +3291,7 @@ public class Janela extends javax.swing.JFrame {
         tp53.setInputVerifier(intVerifier);
         tp53.setMinimumSize(new java.awt.Dimension(50, 19));
         tp53.setName(""); // NOI18N
+        tp53.setNextFocusableComponent(tp54);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 8;
@@ -3265,6 +3303,7 @@ public class Janela extends javax.swing.JFrame {
         tp55.setInputVerifier(intVerifier);
         tp55.setMinimumSize(new java.awt.Dimension(50, 19));
         tp55.setName(""); // NOI18N
+        tp55.setNextFocusableComponent(tp56);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 8;
@@ -3290,6 +3329,7 @@ public class Janela extends javax.swing.JFrame {
         tp57.setInputVerifier(intVerifier);
         tp57.setMinimumSize(new java.awt.Dimension(50, 19));
         tp57.setName(""); // NOI18N
+        tp57.setNextFocusableComponent(tp58);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 9;
@@ -3301,6 +3341,7 @@ public class Janela extends javax.swing.JFrame {
         tp59.setInputVerifier(intVerifier);
         tp59.setMinimumSize(new java.awt.Dimension(50, 19));
         tp59.setName(""); // NOI18N
+        tp59.setNextFocusableComponent(tp60);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 9;
@@ -3312,6 +3353,7 @@ public class Janela extends javax.swing.JFrame {
         tp61.setInputVerifier(intVerifier);
         tp61.setMinimumSize(new java.awt.Dimension(50, 19));
         tp61.setName(""); // NOI18N
+        tp61.setNextFocusableComponent(tp62);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 9;
@@ -3323,6 +3365,7 @@ public class Janela extends javax.swing.JFrame {
         tp63.setInputVerifier(intVerifier);
         tp63.setMinimumSize(new java.awt.Dimension(50, 19));
         tp63.setName(""); // NOI18N
+        tp63.setNextFocusableComponent(tp64);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 9;
@@ -3348,6 +3391,7 @@ public class Janela extends javax.swing.JFrame {
         tp65.setInputVerifier(intVerifier);
         tp65.setMinimumSize(new java.awt.Dimension(50, 19));
         tp65.setName(""); // NOI18N
+        tp65.setNextFocusableComponent(tp66);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 10;
@@ -3359,6 +3403,7 @@ public class Janela extends javax.swing.JFrame {
         tp67.setInputVerifier(intVerifier);
         tp67.setMinimumSize(new java.awt.Dimension(50, 19));
         tp67.setName(""); // NOI18N
+        tp67.setNextFocusableComponent(tp68);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 10;
@@ -3370,6 +3415,7 @@ public class Janela extends javax.swing.JFrame {
         tp69.setInputVerifier(intVerifier);
         tp69.setMinimumSize(new java.awt.Dimension(50, 19));
         tp69.setName(""); // NOI18N
+        tp69.setNextFocusableComponent(tp70);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 10;
@@ -3381,6 +3427,7 @@ public class Janela extends javax.swing.JFrame {
         tp71.setInputVerifier(intVerifier);
         tp71.setMinimumSize(new java.awt.Dimension(50, 19));
         tp71.setName(""); // NOI18N
+        tp71.setNextFocusableComponent(tp72);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 10;
@@ -3406,6 +3453,7 @@ public class Janela extends javax.swing.JFrame {
         tp73.setInputVerifier(intVerifier);
         tp73.setMinimumSize(new java.awt.Dimension(50, 19));
         tp73.setName(""); // NOI18N
+        tp73.setNextFocusableComponent(tp74);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 11;
@@ -3417,6 +3465,7 @@ public class Janela extends javax.swing.JFrame {
         tp75.setInputVerifier(intVerifier);
         tp75.setMinimumSize(new java.awt.Dimension(50, 19));
         tp75.setName(""); // NOI18N
+        tp75.setNextFocusableComponent(tp76);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 11;
@@ -3428,6 +3477,7 @@ public class Janela extends javax.swing.JFrame {
         tp77.setInputVerifier(intVerifier);
         tp77.setMinimumSize(new java.awt.Dimension(50, 19));
         tp77.setName(""); // NOI18N
+        tp77.setNextFocusableComponent(tp78);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 11;
@@ -3439,6 +3489,7 @@ public class Janela extends javax.swing.JFrame {
         tp79.setInputVerifier(intVerifier);
         tp79.setMinimumSize(new java.awt.Dimension(50, 19));
         tp79.setName(""); // NOI18N
+        tp79.setNextFocusableComponent(tp80);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 11;
@@ -3464,6 +3515,7 @@ public class Janela extends javax.swing.JFrame {
         tp81.setInputVerifier(intVerifier);
         tp81.setMinimumSize(new java.awt.Dimension(50, 19));
         tp81.setName(""); // NOI18N
+        tp81.setNextFocusableComponent(tp82);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 12;
@@ -3475,6 +3527,7 @@ public class Janela extends javax.swing.JFrame {
         tp83.setInputVerifier(intVerifier);
         tp83.setMinimumSize(new java.awt.Dimension(50, 19));
         tp83.setName(""); // NOI18N
+        tp83.setNextFocusableComponent(tp84);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 12;
@@ -3486,6 +3539,7 @@ public class Janela extends javax.swing.JFrame {
         tp85.setInputVerifier(intVerifier);
         tp85.setMinimumSize(new java.awt.Dimension(50, 19));
         tp85.setName(""); // NOI18N
+        tp85.setNextFocusableComponent(tp86);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 12;
@@ -3497,6 +3551,7 @@ public class Janela extends javax.swing.JFrame {
         tp87.setInputVerifier(intVerifier);
         tp87.setMinimumSize(new java.awt.Dimension(50, 19));
         tp87.setName(""); // NOI18N
+        tp87.setNextFocusableComponent(tp88);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 12;
@@ -3522,6 +3577,7 @@ public class Janela extends javax.swing.JFrame {
         tp89.setInputVerifier(intVerifier);
         tp89.setMinimumSize(new java.awt.Dimension(50, 19));
         tp89.setName(""); // NOI18N
+        tp89.setNextFocusableComponent(tp90);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 13;
@@ -3533,6 +3589,7 @@ public class Janela extends javax.swing.JFrame {
         tp91.setInputVerifier(intVerifier);
         tp91.setMinimumSize(new java.awt.Dimension(50, 19));
         tp91.setName(""); // NOI18N
+        tp91.setNextFocusableComponent(tp92);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 13;
@@ -3544,6 +3601,7 @@ public class Janela extends javax.swing.JFrame {
         tp93.setInputVerifier(intVerifier);
         tp93.setMinimumSize(new java.awt.Dimension(50, 19));
         tp93.setName(""); // NOI18N
+        tp93.setNextFocusableComponent(tp94);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 13;
@@ -3555,6 +3613,7 @@ public class Janela extends javax.swing.JFrame {
         tp95.setInputVerifier(intVerifier);
         tp95.setMinimumSize(new java.awt.Dimension(50, 19));
         tp95.setName(""); // NOI18N
+        tp95.setNextFocusableComponent(tp96);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 13;
@@ -3580,6 +3639,7 @@ public class Janela extends javax.swing.JFrame {
         tp97.setInputVerifier(intVerifier);
         tp97.setMinimumSize(new java.awt.Dimension(50, 19));
         tp97.setName(""); // NOI18N
+        tp97.setNextFocusableComponent(tp98);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 14;
@@ -3591,6 +3651,7 @@ public class Janela extends javax.swing.JFrame {
         tp99.setInputVerifier(intVerifier);
         tp99.setMinimumSize(new java.awt.Dimension(50, 19));
         tp99.setName(""); // NOI18N
+        tp99.setNextFocusableComponent(tp100);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 14;
@@ -3602,6 +3663,7 @@ public class Janela extends javax.swing.JFrame {
         tp101.setInputVerifier(intVerifier);
         tp101.setMinimumSize(new java.awt.Dimension(50, 19));
         tp101.setName(""); // NOI18N
+        tp101.setNextFocusableComponent(tp102);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 14;
@@ -3613,6 +3675,7 @@ public class Janela extends javax.swing.JFrame {
         tp103.setInputVerifier(intVerifier);
         tp103.setMinimumSize(new java.awt.Dimension(50, 19));
         tp103.setName(""); // NOI18N
+        tp103.setNextFocusableComponent(tp104);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 14;
@@ -3638,6 +3701,7 @@ public class Janela extends javax.swing.JFrame {
         tp105.setInputVerifier(intVerifier);
         tp105.setMinimumSize(new java.awt.Dimension(50, 19));
         tp105.setName(""); // NOI18N
+        tp105.setNextFocusableComponent(tp106);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 15;
@@ -3649,6 +3713,7 @@ public class Janela extends javax.swing.JFrame {
         tp107.setInputVerifier(intVerifier);
         tp107.setMinimumSize(new java.awt.Dimension(50, 19));
         tp107.setName(""); // NOI18N
+        tp107.setNextFocusableComponent(tp108);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 15;
@@ -3660,6 +3725,7 @@ public class Janela extends javax.swing.JFrame {
         tp109.setInputVerifier(intVerifier);
         tp109.setMinimumSize(new java.awt.Dimension(50, 19));
         tp109.setName(""); // NOI18N
+        tp109.setNextFocusableComponent(tp110);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 15;
@@ -3671,6 +3737,7 @@ public class Janela extends javax.swing.JFrame {
         tp111.setInputVerifier(intVerifier);
         tp111.setMinimumSize(new java.awt.Dimension(50, 19));
         tp111.setName(""); // NOI18N
+        tp111.setNextFocusableComponent(tp112);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 15;
@@ -3696,6 +3763,7 @@ public class Janela extends javax.swing.JFrame {
         tp113.setInputVerifier(intVerifier);
         tp113.setMinimumSize(new java.awt.Dimension(50, 19));
         tp113.setName(""); // NOI18N
+        tp113.setNextFocusableComponent(tp114);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 16;
@@ -3707,6 +3775,7 @@ public class Janela extends javax.swing.JFrame {
         tp115.setInputVerifier(intVerifier);
         tp115.setMinimumSize(new java.awt.Dimension(50, 19));
         tp115.setName(""); // NOI18N
+        tp115.setNextFocusableComponent(tp116);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 16;
@@ -3718,6 +3787,7 @@ public class Janela extends javax.swing.JFrame {
         tp117.setInputVerifier(intVerifier);
         tp117.setMinimumSize(new java.awt.Dimension(50, 19));
         tp117.setName(""); // NOI18N
+        tp117.setNextFocusableComponent(tp118);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 16;
@@ -3729,6 +3799,7 @@ public class Janela extends javax.swing.JFrame {
         tp119.setInputVerifier(intVerifier);
         tp119.setMinimumSize(new java.awt.Dimension(50, 19));
         tp119.setName(""); // NOI18N
+        tp119.setNextFocusableComponent(tp120);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 16;
@@ -3754,6 +3825,7 @@ public class Janela extends javax.swing.JFrame {
         tp121.setInputVerifier(intVerifier);
         tp121.setMinimumSize(new java.awt.Dimension(50, 19));
         tp121.setName(""); // NOI18N
+        tp121.setNextFocusableComponent(tp122);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 17;
@@ -3765,6 +3837,7 @@ public class Janela extends javax.swing.JFrame {
         tp123.setInputVerifier(intVerifier);
         tp123.setMinimumSize(new java.awt.Dimension(50, 19));
         tp123.setName(""); // NOI18N
+        tp123.setNextFocusableComponent(tp124);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 17;
@@ -3776,6 +3849,7 @@ public class Janela extends javax.swing.JFrame {
         tp125.setInputVerifier(intVerifier);
         tp125.setMinimumSize(new java.awt.Dimension(50, 19));
         tp125.setName(""); // NOI18N
+        tp125.setNextFocusableComponent(tp126);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 17;
@@ -3787,6 +3861,7 @@ public class Janela extends javax.swing.JFrame {
         tp127.setInputVerifier(intVerifier);
         tp127.setMinimumSize(new java.awt.Dimension(50, 19));
         tp127.setName(""); // NOI18N
+        tp127.setNextFocusableComponent(tp128);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 17;
@@ -3812,6 +3887,7 @@ public class Janela extends javax.swing.JFrame {
         tp129.setInputVerifier(intVerifier);
         tp129.setMinimumSize(new java.awt.Dimension(50, 19));
         tp129.setName(""); // NOI18N
+        tp129.setNextFocusableComponent(tp130);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 18;
@@ -3823,6 +3899,7 @@ public class Janela extends javax.swing.JFrame {
         tp131.setInputVerifier(intVerifier);
         tp131.setMinimumSize(new java.awt.Dimension(50, 19));
         tp131.setName(""); // NOI18N
+        tp131.setNextFocusableComponent(tp132);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 18;
@@ -3834,6 +3911,7 @@ public class Janela extends javax.swing.JFrame {
         tp133.setInputVerifier(intVerifier);
         tp133.setMinimumSize(new java.awt.Dimension(50, 19));
         tp133.setName(""); // NOI18N
+        tp133.setNextFocusableComponent(tp134);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 18;
@@ -3960,6 +4038,7 @@ public class Janela extends javax.swing.JFrame {
         tp0.setInputVerifier(intVerifier);
         tp0.setMinimumSize(new java.awt.Dimension(50, 19));
         tp0.setName(""); // NOI18N
+        tp0.setNextFocusableComponent(tp1);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -3981,6 +4060,7 @@ public class Janela extends javax.swing.JFrame {
         tp8.setInputVerifier(intVerifier);
         tp8.setMinimumSize(new java.awt.Dimension(50, 19));
         tp8.setName(""); // NOI18N
+        tp8.setNextFocusableComponent(tp9);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4002,6 +4082,7 @@ public class Janela extends javax.swing.JFrame {
         tp16.setInputVerifier(intVerifier);
         tp16.setMinimumSize(new java.awt.Dimension(50, 19));
         tp16.setName(""); // NOI18N
+        tp16.setNextFocusableComponent(tp17);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4023,6 +4104,7 @@ public class Janela extends javax.swing.JFrame {
         tp24.setInputVerifier(intVerifier);
         tp24.setMinimumSize(new java.awt.Dimension(50, 19));
         tp24.setName(""); // NOI18N
+        tp24.setNextFocusableComponent(tp25);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4044,6 +4126,7 @@ public class Janela extends javax.swing.JFrame {
         tp32.setInputVerifier(intVerifier);
         tp32.setMinimumSize(new java.awt.Dimension(50, 19));
         tp32.setName(""); // NOI18N
+        tp32.setNextFocusableComponent(tp33);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4064,6 +4147,7 @@ public class Janela extends javax.swing.JFrame {
         tp40.setInputVerifier(intVerifier);
         tp40.setMinimumSize(new java.awt.Dimension(50, 19));
         tp40.setName(""); // NOI18N
+        tp40.setNextFocusableComponent(tp41);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4084,6 +4168,7 @@ public class Janela extends javax.swing.JFrame {
         tp48.setInputVerifier(intVerifier);
         tp48.setMinimumSize(new java.awt.Dimension(50, 19));
         tp48.setName(""); // NOI18N
+        tp48.setNextFocusableComponent(tp49);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4104,6 +4189,7 @@ public class Janela extends javax.swing.JFrame {
         tp56.setInputVerifier(intVerifier);
         tp56.setMinimumSize(new java.awt.Dimension(50, 19));
         tp56.setName(""); // NOI18N
+        tp56.setNextFocusableComponent(tp57);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4124,6 +4210,7 @@ public class Janela extends javax.swing.JFrame {
         tp64.setInputVerifier(intVerifier);
         tp64.setMinimumSize(new java.awt.Dimension(50, 19));
         tp64.setName(""); // NOI18N
+        tp64.setNextFocusableComponent(tp65);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4144,6 +4231,7 @@ public class Janela extends javax.swing.JFrame {
         tp72.setInputVerifier(intVerifier);
         tp72.setMinimumSize(new java.awt.Dimension(50, 19));
         tp72.setName(""); // NOI18N
+        tp72.setNextFocusableComponent(tp73);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4164,6 +4252,7 @@ public class Janela extends javax.swing.JFrame {
         tp80.setInputVerifier(intVerifier);
         tp80.setMinimumSize(new java.awt.Dimension(50, 19));
         tp80.setName(""); // NOI18N
+        tp80.setNextFocusableComponent(tp81);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4184,6 +4273,7 @@ public class Janela extends javax.swing.JFrame {
         tp88.setInputVerifier(intVerifier);
         tp88.setMinimumSize(new java.awt.Dimension(50, 19));
         tp88.setName(""); // NOI18N
+        tp88.setNextFocusableComponent(tp89);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4204,6 +4294,7 @@ public class Janela extends javax.swing.JFrame {
         tp96.setInputVerifier(intVerifier);
         tp96.setMinimumSize(new java.awt.Dimension(50, 19));
         tp96.setName(""); // NOI18N
+        tp96.setNextFocusableComponent(tp97);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4224,6 +4315,7 @@ public class Janela extends javax.swing.JFrame {
         tp104.setInputVerifier(intVerifier);
         tp104.setMinimumSize(new java.awt.Dimension(50, 19));
         tp104.setName(""); // NOI18N
+        tp104.setNextFocusableComponent(tp105);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4244,6 +4336,7 @@ public class Janela extends javax.swing.JFrame {
         tp112.setInputVerifier(intVerifier);
         tp112.setMinimumSize(new java.awt.Dimension(50, 19));
         tp112.setName(""); // NOI18N
+        tp112.setNextFocusableComponent(tp113);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4264,6 +4357,7 @@ public class Janela extends javax.swing.JFrame {
         tp120.setInputVerifier(intVerifier);
         tp120.setMinimumSize(new java.awt.Dimension(50, 19));
         tp120.setName(""); // NOI18N
+        tp120.setNextFocusableComponent(tp121);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4284,6 +4378,7 @@ public class Janela extends javax.swing.JFrame {
         tp128.setInputVerifier(intVerifier);
         tp128.setMinimumSize(new java.awt.Dimension(50, 19));
         tp128.setName(""); // NOI18N
+        tp128.setNextFocusableComponent(tp129);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4304,6 +4399,7 @@ public class Janela extends javax.swing.JFrame {
         tp2.setInputVerifier(intVerifier);
         tp2.setMinimumSize(new java.awt.Dimension(50, 19));
         tp2.setName(""); // NOI18N
+        tp2.setNextFocusableComponent(tp3);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4325,6 +4421,7 @@ public class Janela extends javax.swing.JFrame {
         tp10.setInputVerifier(intVerifier);
         tp10.setMinimumSize(new java.awt.Dimension(50, 19));
         tp10.setName(""); // NOI18N
+        tp10.setNextFocusableComponent(tp11);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4346,6 +4443,7 @@ public class Janela extends javax.swing.JFrame {
         tp18.setInputVerifier(intVerifier);
         tp18.setMinimumSize(new java.awt.Dimension(50, 19));
         tp18.setName(""); // NOI18N
+        tp18.setNextFocusableComponent(tp19);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4367,6 +4465,7 @@ public class Janela extends javax.swing.JFrame {
         tp26.setInputVerifier(intVerifier);
         tp26.setMinimumSize(new java.awt.Dimension(50, 19));
         tp26.setName(""); // NOI18N
+        tp26.setNextFocusableComponent(tp27);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4388,6 +4487,7 @@ public class Janela extends javax.swing.JFrame {
         tp34.setInputVerifier(intVerifier);
         tp34.setMinimumSize(new java.awt.Dimension(50, 19));
         tp34.setName(""); // NOI18N
+        tp34.setNextFocusableComponent(tp35);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4408,6 +4508,7 @@ public class Janela extends javax.swing.JFrame {
         tp42.setInputVerifier(intVerifier);
         tp42.setMinimumSize(new java.awt.Dimension(50, 19));
         tp42.setName(""); // NOI18N
+        tp42.setNextFocusableComponent(tp43);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4428,6 +4529,7 @@ public class Janela extends javax.swing.JFrame {
         tp50.setInputVerifier(intVerifier);
         tp50.setMinimumSize(new java.awt.Dimension(50, 19));
         tp50.setName(""); // NOI18N
+        tp50.setNextFocusableComponent(tp51);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4448,6 +4550,7 @@ public class Janela extends javax.swing.JFrame {
         tp58.setInputVerifier(intVerifier);
         tp58.setMinimumSize(new java.awt.Dimension(50, 19));
         tp58.setName(""); // NOI18N
+        tp58.setNextFocusableComponent(tp59);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4468,6 +4571,7 @@ public class Janela extends javax.swing.JFrame {
         tp66.setInputVerifier(intVerifier);
         tp66.setMinimumSize(new java.awt.Dimension(50, 19));
         tp66.setName(""); // NOI18N
+        tp66.setNextFocusableComponent(tp67);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4488,6 +4592,7 @@ public class Janela extends javax.swing.JFrame {
         tp74.setInputVerifier(intVerifier);
         tp74.setMinimumSize(new java.awt.Dimension(50, 19));
         tp74.setName(""); // NOI18N
+        tp74.setNextFocusableComponent(tp75);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4508,6 +4613,7 @@ public class Janela extends javax.swing.JFrame {
         tp82.setInputVerifier(intVerifier);
         tp82.setMinimumSize(new java.awt.Dimension(50, 19));
         tp82.setName(""); // NOI18N
+        tp82.setNextFocusableComponent(tp83);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4528,6 +4634,7 @@ public class Janela extends javax.swing.JFrame {
         tp90.setInputVerifier(intVerifier);
         tp90.setMinimumSize(new java.awt.Dimension(50, 19));
         tp90.setName(""); // NOI18N
+        tp90.setNextFocusableComponent(tp91);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4548,6 +4655,7 @@ public class Janela extends javax.swing.JFrame {
         tp98.setInputVerifier(intVerifier);
         tp98.setMinimumSize(new java.awt.Dimension(50, 19));
         tp98.setName(""); // NOI18N
+        tp98.setNextFocusableComponent(tp99);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4568,6 +4676,7 @@ public class Janela extends javax.swing.JFrame {
         tp106.setInputVerifier(intVerifier);
         tp106.setMinimumSize(new java.awt.Dimension(50, 19));
         tp106.setName(""); // NOI18N
+        tp106.setNextFocusableComponent(tp107);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4588,6 +4697,7 @@ public class Janela extends javax.swing.JFrame {
         tp114.setInputVerifier(intVerifier);
         tp114.setMinimumSize(new java.awt.Dimension(50, 19));
         tp114.setName(""); // NOI18N
+        tp114.setNextFocusableComponent(tp115);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4608,6 +4718,7 @@ public class Janela extends javax.swing.JFrame {
         tp122.setInputVerifier(intVerifier);
         tp122.setMinimumSize(new java.awt.Dimension(50, 19));
         tp122.setName(""); // NOI18N
+        tp122.setNextFocusableComponent(tp123);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4628,6 +4739,7 @@ public class Janela extends javax.swing.JFrame {
         tp130.setInputVerifier(intVerifier);
         tp130.setMinimumSize(new java.awt.Dimension(50, 19));
         tp130.setName(""); // NOI18N
+        tp130.setNextFocusableComponent(tp131);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4648,6 +4760,7 @@ public class Janela extends javax.swing.JFrame {
         tp4.setInputVerifier(intVerifier);
         tp4.setMinimumSize(new java.awt.Dimension(50, 19));
         tp4.setName(""); // NOI18N
+        tp4.setNextFocusableComponent(tp5);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4669,6 +4782,7 @@ public class Janela extends javax.swing.JFrame {
         tp12.setInputVerifier(intVerifier);
         tp12.setMinimumSize(new java.awt.Dimension(50, 19));
         tp12.setName(""); // NOI18N
+        tp12.setNextFocusableComponent(tp13);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4690,6 +4804,7 @@ public class Janela extends javax.swing.JFrame {
         tp20.setInputVerifier(intVerifier);
         tp20.setMinimumSize(new java.awt.Dimension(50, 19));
         tp20.setName(""); // NOI18N
+        tp20.setNextFocusableComponent(tp21);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4711,6 +4826,7 @@ public class Janela extends javax.swing.JFrame {
         tp28.setInputVerifier(intVerifier);
         tp28.setMinimumSize(new java.awt.Dimension(50, 19));
         tp28.setName(""); // NOI18N
+        tp28.setNextFocusableComponent(tp29);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4732,6 +4848,7 @@ public class Janela extends javax.swing.JFrame {
         tp36.setInputVerifier(intVerifier);
         tp36.setMinimumSize(new java.awt.Dimension(50, 19));
         tp36.setName(""); // NOI18N
+        tp36.setNextFocusableComponent(tp37);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4752,6 +4869,7 @@ public class Janela extends javax.swing.JFrame {
         tp44.setInputVerifier(intVerifier);
         tp44.setMinimumSize(new java.awt.Dimension(50, 19));
         tp44.setName(""); // NOI18N
+        tp44.setNextFocusableComponent(tp45);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4772,6 +4890,7 @@ public class Janela extends javax.swing.JFrame {
         tp52.setInputVerifier(intVerifier);
         tp52.setMinimumSize(new java.awt.Dimension(50, 19));
         tp52.setName(""); // NOI18N
+        tp52.setNextFocusableComponent(tp53);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4792,6 +4911,7 @@ public class Janela extends javax.swing.JFrame {
         tp60.setInputVerifier(intVerifier);
         tp60.setMinimumSize(new java.awt.Dimension(50, 19));
         tp60.setName(""); // NOI18N
+        tp60.setNextFocusableComponent(tp61);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4812,6 +4932,7 @@ public class Janela extends javax.swing.JFrame {
         tp68.setInputVerifier(intVerifier);
         tp68.setMinimumSize(new java.awt.Dimension(50, 19));
         tp68.setName(""); // NOI18N
+        tp68.setNextFocusableComponent(tp69);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4832,6 +4953,7 @@ public class Janela extends javax.swing.JFrame {
         tp76.setInputVerifier(intVerifier);
         tp76.setMinimumSize(new java.awt.Dimension(50, 19));
         tp76.setName(""); // NOI18N
+        tp76.setNextFocusableComponent(tp77);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4852,6 +4974,7 @@ public class Janela extends javax.swing.JFrame {
         tp84.setInputVerifier(intVerifier);
         tp84.setMinimumSize(new java.awt.Dimension(50, 19));
         tp84.setName(""); // NOI18N
+        tp84.setNextFocusableComponent(tp85);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4872,6 +4995,7 @@ public class Janela extends javax.swing.JFrame {
         tp92.setInputVerifier(intVerifier);
         tp92.setMinimumSize(new java.awt.Dimension(50, 19));
         tp92.setName(""); // NOI18N
+        tp92.setNextFocusableComponent(tp93);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4892,6 +5016,7 @@ public class Janela extends javax.swing.JFrame {
         tp100.setInputVerifier(intVerifier);
         tp100.setMinimumSize(new java.awt.Dimension(50, 19));
         tp100.setName(""); // NOI18N
+        tp100.setNextFocusableComponent(tp101);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4912,6 +5037,7 @@ public class Janela extends javax.swing.JFrame {
         tp108.setInputVerifier(intVerifier);
         tp108.setMinimumSize(new java.awt.Dimension(50, 19));
         tp108.setName(""); // NOI18N
+        tp108.setNextFocusableComponent(tp109);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4932,6 +5058,7 @@ public class Janela extends javax.swing.JFrame {
         tp116.setInputVerifier(intVerifier);
         tp116.setMinimumSize(new java.awt.Dimension(50, 19));
         tp116.setName(""); // NOI18N
+        tp116.setNextFocusableComponent(tp117);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4952,6 +5079,7 @@ public class Janela extends javax.swing.JFrame {
         tp124.setInputVerifier(intVerifier);
         tp124.setMinimumSize(new java.awt.Dimension(50, 19));
         tp124.setName(""); // NOI18N
+        tp124.setNextFocusableComponent(tp125);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4972,6 +5100,7 @@ public class Janela extends javax.swing.JFrame {
         tp132.setInputVerifier(intVerifier);
         tp132.setMinimumSize(new java.awt.Dimension(50, 19));
         tp132.setName(""); // NOI18N
+        tp132.setNextFocusableComponent(tp133);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -4992,6 +5121,7 @@ public class Janela extends javax.swing.JFrame {
         tp6.setInputVerifier(intVerifier);
         tp6.setMinimumSize(new java.awt.Dimension(50, 19));
         tp6.setName(""); // NOI18N
+        tp6.setNextFocusableComponent(tp7);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5013,6 +5143,7 @@ public class Janela extends javax.swing.JFrame {
         tp14.setInputVerifier(intVerifier);
         tp14.setMinimumSize(new java.awt.Dimension(50, 19));
         tp14.setName(""); // NOI18N
+        tp14.setNextFocusableComponent(tp15);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5034,6 +5165,7 @@ public class Janela extends javax.swing.JFrame {
         tp22.setInputVerifier(intVerifier);
         tp22.setMinimumSize(new java.awt.Dimension(50, 19));
         tp22.setName(""); // NOI18N
+        tp22.setNextFocusableComponent(tp23);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5055,6 +5187,7 @@ public class Janela extends javax.swing.JFrame {
         tp30.setInputVerifier(intVerifier);
         tp30.setMinimumSize(new java.awt.Dimension(50, 19));
         tp30.setName(""); // NOI18N
+        tp30.setNextFocusableComponent(tp31);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5076,6 +5209,7 @@ public class Janela extends javax.swing.JFrame {
         tp38.setInputVerifier(intVerifier);
         tp38.setMinimumSize(new java.awt.Dimension(50, 19));
         tp38.setName(""); // NOI18N
+        tp38.setNextFocusableComponent(tp39);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5096,6 +5230,7 @@ public class Janela extends javax.swing.JFrame {
         tp46.setInputVerifier(intVerifier);
         tp46.setMinimumSize(new java.awt.Dimension(50, 19));
         tp46.setName(""); // NOI18N
+        tp46.setNextFocusableComponent(tp47);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5116,6 +5251,7 @@ public class Janela extends javax.swing.JFrame {
         tp54.setInputVerifier(intVerifier);
         tp54.setMinimumSize(new java.awt.Dimension(50, 19));
         tp54.setName(""); // NOI18N
+        tp54.setNextFocusableComponent(tp55);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5136,6 +5272,7 @@ public class Janela extends javax.swing.JFrame {
         tp62.setInputVerifier(intVerifier);
         tp62.setMinimumSize(new java.awt.Dimension(50, 19));
         tp62.setName(""); // NOI18N
+        tp62.setNextFocusableComponent(tp63);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5156,6 +5293,7 @@ public class Janela extends javax.swing.JFrame {
         tp70.setInputVerifier(intVerifier);
         tp70.setMinimumSize(new java.awt.Dimension(50, 19));
         tp70.setName(""); // NOI18N
+        tp70.setNextFocusableComponent(tp71);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5176,6 +5314,7 @@ public class Janela extends javax.swing.JFrame {
         tp78.setInputVerifier(intVerifier);
         tp78.setMinimumSize(new java.awt.Dimension(50, 19));
         tp78.setName(""); // NOI18N
+        tp78.setNextFocusableComponent(tp79);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5196,6 +5335,7 @@ public class Janela extends javax.swing.JFrame {
         tp86.setInputVerifier(intVerifier);
         tp86.setMinimumSize(new java.awt.Dimension(50, 19));
         tp86.setName(""); // NOI18N
+        tp86.setNextFocusableComponent(tp87);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5216,6 +5356,7 @@ public class Janela extends javax.swing.JFrame {
         tp94.setInputVerifier(intVerifier);
         tp94.setMinimumSize(new java.awt.Dimension(50, 19));
         tp94.setName(""); // NOI18N
+        tp94.setNextFocusableComponent(tp95);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5236,6 +5377,7 @@ public class Janela extends javax.swing.JFrame {
         tp102.setInputVerifier(intVerifier);
         tp102.setMinimumSize(new java.awt.Dimension(50, 19));
         tp102.setName(""); // NOI18N
+        tp102.setNextFocusableComponent(tp103);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5256,6 +5398,7 @@ public class Janela extends javax.swing.JFrame {
         tp110.setInputVerifier(intVerifier);
         tp110.setMinimumSize(new java.awt.Dimension(50, 19));
         tp110.setName(""); // NOI18N
+        tp110.setNextFocusableComponent(tp111);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5276,6 +5419,7 @@ public class Janela extends javax.swing.JFrame {
         tp118.setInputVerifier(intVerifier);
         tp118.setMinimumSize(new java.awt.Dimension(50, 19));
         tp118.setName(""); // NOI18N
+        tp118.setNextFocusableComponent(tp119);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5296,6 +5440,7 @@ public class Janela extends javax.swing.JFrame {
         tp126.setInputVerifier(intVerifier);
         tp126.setMinimumSize(new java.awt.Dimension(50, 19));
         tp126.setName(""); // NOI18N
+        tp126.setNextFocusableComponent(tp127);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5316,6 +5461,7 @@ public class Janela extends javax.swing.JFrame {
         tp134.setInputVerifier(intVerifier);
         tp134.setMinimumSize(new java.awt.Dimension(50, 19));
         tp134.setName(""); // NOI18N
+        tp134.setNextFocusableComponent(tp135);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -5332,6 +5478,8 @@ public class Janela extends javax.swing.JFrame {
 
         lblPesquisador1.setText("Pesquisador_2:");
 
+        txtPesquisador2.setNextFocusableComponent(tp0);
+
         javax.swing.GroupLayout tab_pesadosLayout = new javax.swing.GroupLayout(tab_pesados);
         tab_pesados.setLayout(tab_pesadosLayout);
         tab_pesadosLayout.setHorizontalGroup(
@@ -5342,7 +5490,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1522, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5352,7 +5500,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(txtPesquisador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPesquisador1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
@@ -5472,7 +5620,7 @@ public class Janela extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(txtPorta))
                     .addComponent(jLabel2))
-                .addContainerGap(1262, Short.MAX_VALUE))
+                .addContainerGap(1035, Short.MAX_VALUE))
         );
         pnl_servidorLayout.setVerticalGroup(
             pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5484,40 +5632,10 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Servidor Web", pnl_servidor);
-
-        jButton2.setText("Enviar todos os dados");
-
-        jButton1.setText("Enviar dados ainda não enviados");
-
-        jLabel4.setText("Envio de Dados");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(453, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addGap(31, 31, 31)
-                .addComponent(jButton1)
-                .addGap(35, 35, 35)
-                .addComponent(jButton2)
-                .addContainerGap(546, Short.MAX_VALUE))
-        );
 
         jLabel3.setText("Captura de Dados");
 
@@ -5528,25 +5646,99 @@ public class Janela extends javax.swing.JFrame {
             }
         });
 
+        btnExportAllVol.setText("Enviar todos os dados");
+        btnExportAllVol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportAllVolActionPerformed(evt);
+            }
+        });
+
+        btnVolNotSent.setText("Enviar dados ainda não enviados");
+        btnVolNotSent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolNotSentActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Envio de Dados Pesquisa Volumétrica");
+
+        jLabel35.setText("Envio de Dados Pesquisa OD");
+
+        btnODNotSent.setText("Enviar dados ainda não enviados");
+        btnODNotSent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnODNotSentActionPerformed(evt);
+            }
+        });
+
+        btnODexportAll.setText("Enviar todos os dados");
+        btnODexportAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnODexportAllActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnODexportAll)
+                            .addComponent(btnODNotSent)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnVolNotSent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnExportAllVol)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 89, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(btnVolNotSent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExportAllVol)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(jLabel35)
+                .addGap(18, 18, 18)
+                .addComponent(btnODNotSent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnODexportAll)
+                .addGap(315, 315, 315))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(btnInDados))
-                .addContainerGap(538, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(btnInDados)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 95, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnl_envioLayout = new javax.swing.GroupLayout(pnl_envio);
@@ -5555,12 +5747,10 @@ public class Janela extends javax.swing.JFrame {
             pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_envioLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(315, 315, 315))
         );
         pnl_envioLayout.setVerticalGroup(
             pnl_envioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -5750,6 +5940,47 @@ public class Janela extends javax.swing.JFrame {
 		
 		return;
     }//GEN-LAST:event_btnSalvarFormsActionPerformed
+
+    private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportAllVolActionPerformed
+        exporterFileChooser.setSelectedFile(new File("todos_volumetrica.json"));
+		int returnVal = exporterFileChooser.showSaveDialog(this);
+		
+		if(returnVal == exporterFileChooser.APPROVE_OPTION){
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV);
+			exporter.export(JSONExporter.WhatToExport.ALL);
+		}
+		
+    }//GEN-LAST:event_btnExportAllVolActionPerformed
+
+    private void btnODexportAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnODexportAllActionPerformed
+        exporterFileChooser.setSelectedFile(new File("todos_od.json"));
+		int returnVal = exporterFileChooser.showSaveDialog(this);
+		
+		if(returnVal == exporterFileChooser.APPROVE_OPTION){
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD);
+			exporter.export(JSONExporter.WhatToExport.ALL);
+		}
+    }//GEN-LAST:event_btnODexportAllActionPerformed
+
+    private void btnVolNotSentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolNotSentActionPerformed
+        exporterFileChooser.setSelectedFile(new File("novos_volumetrica.json"));
+		int returnVal = exporterFileChooser.showSaveDialog(this);
+		
+		if(returnVal == exporterFileChooser.APPROVE_OPTION){
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV);
+			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
+		}
+    }//GEN-LAST:event_btnVolNotSentActionPerformed
+
+    private void btnODNotSentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnODNotSentActionPerformed
+		exporterFileChooser.setSelectedFile(new File("novos_od.json"));
+		int returnVal = exporterFileChooser.showSaveDialog(this);
+		
+		if(returnVal == exporterFileChooser.APPROVE_OPTION){
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD);
+			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
+		}
+    }//GEN-LAST:event_btnODNotSentActionPerformed
 	
 	private void clearForm(){
 		data.setDate(null);
@@ -5832,15 +6063,18 @@ public class Janela extends javax.swing.JFrame {
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExportAllVol;
     private javax.swing.JButton btnInDados;
+    private javax.swing.JButton btnODNotSent;
+    private javax.swing.JButton btnODexportAll;
     private javax.swing.JButton btnSalvarForms;
+    private javax.swing.JButton btnVolNotSent;
     private javax.swing.JComboBox<String> cmbHora;
     private javax.swing.JFileChooser dadosFileChooser;
     private org.jdesktop.swingx.JXDatePicker data;
+    private javax.swing.JFileChooser exporterFileChooser;
     private javax.swing.ButtonGroup grpPista;
     private javax.swing.ButtonGroup grpSentido;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -5869,6 +6103,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -6343,6 +6578,20 @@ class SQLiteFilter extends FileFilter{
 	@Override
 	public String getDescription() {
 		return "Dados pesquisa OD (*.db)";
+	}
+	
+}
+
+class JsonFilter extends FileFilter{
+
+	@Override
+	public boolean accept(File f) {
+		return f.isDirectory() || f.getAbsolutePath().endsWith(".json");
+	}
+
+	@Override
+	public String getDescription() {
+		return "Arquivos JSON (*.json)";
 	}
 	
 }
