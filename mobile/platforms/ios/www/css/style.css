@@ -86,8 +86,8 @@ section.ui-content>fieldset>legend.ui-block-a, section.ui-content>div>fieldset>l
 	width: 32%;
 }
 
-section.ui-content>fieldset>:not(fieldset).ui-block-b,
-	section.ui-content>div>fieldset>:not(fieldset).ui-block-b {
+section.ui-content>fieldset>:not(fieldset).ui-block-b, section.ui-content>div>fieldset>:not(fieldset).ui-block-b
+	{
 	width: 68%;
 }
 
@@ -102,10 +102,6 @@ section.ui-content fieldset>legend, section.ui-content fieldset label[class*="ui
 	font-size: x-large;
 	line-height: 60px;
 	padding-right: .5em;
-}
-
-section.ui-content fieldset>legend.menor {
-	font-size: 21px;
 }
 
 section.ui-content>fieldset>div.ui-block-b {
@@ -296,8 +292,8 @@ nav.avancar>div.ui-block-b {
 	padding: 1.5em 0%;
 }
 
-#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n),
-	#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n+1) {
+#confirmar_veiculo.ui-grid-b>div:nth-of-type(3n), #confirmar_veiculo.ui-grid-b>div:nth-of-type(3n+1)
+	{
 	width: 10%;
 }
 
@@ -400,8 +396,7 @@ ol.tipos_carrocerias div:nth-child(3)  li {
 
 #grupo_placa_dados_simples, #grupo_placa_unica_simples>.ui-block-b,
 	#grupo_placa_dados_onibus, #grupo_placa_unica_onibus>.ui-block-b,
-	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b
-	{
+	#grupo_placa_dados_carga, #grupo_placa_unica_carga>.ui-block-b {
 	width: 15%;
 }
 
@@ -427,8 +422,8 @@ div.ui-block-b>.placa_sufixo>.ui-block-b {
 
 div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 	#grupo_placa_unica_simples>.ui-block-b input,
-	#grupo_placa_unica_onibus>.ui-block-b input,
-	#grupo_placa_unica_carga>.ui-block-b input {
+	#grupo_placa_unica_onibus>.ui-block-b input, #grupo_placa_unica_carga>.ui-block-b input
+	{
 	width: 100%;
 	text-align: center;
 }
@@ -463,38 +458,103 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 	width: 15%;
 }
 
+#caracterizacao_viagem2_carga legend.fonte_menor {
+	font-size: 1.3868em;
+}
+
+#caracterizacao_viagem2_carga section.ui-content>fieldset {
+	margin-bottom: 0%;
+	min-height: 1.9em;
+}
+
+#caracterizacao_viagem2_carga .ui-controlgroup {
+	margin: 0;
+}
+
+#caracterizacao_viagem2_carga .ui-input-text {
+	margin: 0.2em 0;
+}
+
+#caracterizacao_viagem2_carga section.ui-content fieldset>legend {
+	line-height: 50px;
+}
+
+#grupo_valor_frete_carga>div.ui-block-b, #grupo_valor_nota_carga>div.ui-block-b
+	{
+	width: 25%;
+}
+
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-block-a,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-block-a {
-	width: 19%;
+	width: 18%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-block-b,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-block-b {
-	width: 81%;
+	width: 82%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-a,
-	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-a
-	{
-	width: 55%;
+	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-a {
+	width: 62%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-b,
-	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-b
-	{
-	width: 45%;
+	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-block-b {
+	width: 38%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-a,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-a
 	{
-	width: 32%;
+	width: 24%;
 }
 
 #grupo_sabe_embarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-b,
 	#grupo_sabe_desembarque_carga>.ui-grid-a>.ui-grid-a>.ui-grid-a>.ui-block-b
 	{
-	width: 68%;
+	width: 76%;
+}
+
+#caracterizacao_viagem2_carga #grupo_municipios_parada_carga>legend {
+	line-height: 1.2em;
+	width: 34%;
+}
+
+#caracterizacao_viagem2_carga section.ui-content fieldset.embarque_desembarque>legend
+	{
+	line-height: 1.2em;
+}
+
+#caracterizacao_viagem2_carga fieldset.embarque_desembarque>legend {
+	width: 21%;
+	padding-right: 0em;
+}
+
+#caracterizacao_viagem2_carga fieldset.embarque_desembarque>div {
+	width: 79%;
+}
+
+#caracterizacao_viagem2_carga #grupo_municipios_parada_carga>div {
+	width: 66%;
+}
+
+#grupo_municipios_parada_carga>.ui-grid-a>.ui-block-a {
+	width: 22%;
+}
+
+#grupo_municipios_parada_carga>.ui-grid-a>.ui-block-b {
+	width: 78%;
+}
+
+#grupo_municipios_parada_carga>.ui-grid-a>.ui-grid-solo>.ui-grid-a>.ui-block-a
+	{
+	width: 20%;
+}
+
+#grupo_municipios_parada_carga>.ui-grid-a>.ui-grid-solo>.ui-grid-a>.ui-block-b
+	{
+	width: 80%;
 }
 
 .escondido {

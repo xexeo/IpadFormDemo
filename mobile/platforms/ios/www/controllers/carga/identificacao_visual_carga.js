@@ -196,8 +196,8 @@ controllers.identificacao_visual_carga = {
 						|| !util.validaInputText("carga_perigosa_onu_carga", "Número da ONU")) {
 					ok_carga_perigosa = false;
 				}
-				if (!util.validaValueInList("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco)
-						|| !util.validaValueInList("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu)) {
+				if (!util.validaValueInList("carga_perigosa_risco_carga", "Número de Risco", lista_numero_risco, "idNumeroDeRisco")
+						|| !util.validaValueInList("carga_perigosa_onu_carga", "Número da ONU", lista_numero_onu, "idNumeroDaOnu")) {
 					ok_carga_perigosa = false;
 				}
 			}

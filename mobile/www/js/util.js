@@ -58,8 +58,12 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	getIdxArray : function(elem, array) {
-		return jQuery.inArray(elem, array) + 1;
+	getIdxArray : function(value, array) {
+		return $.inArray(value, array) + 1;
+	},
+
+	contains : function(value, array) {
+		return ($.inArray(value, array) >= 0);
 	},
 
 	getListaFrequencias : function() {
@@ -137,22 +141,22 @@ var util = {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista_tb_aux, function(index, item) {
 			if (nome_fluxo == "simples" && item.simples) {
-				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 			}
 			if (nome_fluxo == "onibus" && item.onibus) {
-				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 			}
 			if (nome_fluxo == "carga" && item.carga) {
-				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 			}
 			if (nome_fluxo == "carga_cinza" && item.carga_cinza) {
-				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 			}
 			if (nome_fluxo == "carga_vermelha" && item.carga_vermelha) {
-				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 			}
 			if (nome_fluxo == "moto" && item.moto) {
-				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";	
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
 			}
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
@@ -209,7 +213,7 @@ var util = {
 		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).hide();
 			$('#grupo_placa_unica_' + tipo_fluxo).hide();
-			if ((registro.placaEstrangeira == undefined) || (registro.placaEstrangeira)) {
+			if (util.isEmpty(registro.placaEstrangeira) || registro.placaEstrangeira) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 			}
 			app.setAtributo('idPaisPlacaEstrangeira', null);
@@ -478,6 +482,27 @@ var util = {
 		return encontrou
 	},
 
+	validaQtdMaxPessoas : function(tipo, nome_campo, campo_aviso) {
+		var valor = $.trim($('#' + nome_campo).val());
+		if (tipo == 'p1_01' && valor > 7) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 7");
+			return false;
+		} else if (tipo == 'p1_02' && valor > 9) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 9");
+			return false;
+		} else if (tipo == 'p2' && valor > 9) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 9");
+			return false;
+		} else if (tipo == 'p3' && valor > 2) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 2");
+			return false;
+		} else if (tipo == 'm' && valor > 2) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 2");
+			return false;
+		}
+		return true;
+	},
+
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {
@@ -517,7 +542,7 @@ var util = {
 		overlayInput.$b.css('margin-top', '0px');
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
-			app.logger.log('entrou no filtro'); //TODO ja podemos excluir essa linha?
+			app.logger.log('entrou no filtro'); // TODO ja podemos excluir essa linha?
 			var ul_list = $(this);
 			var auto_input = $(data.input);
 			var auto_value = auto_input.val();
@@ -605,8 +630,16 @@ var util = {
 		return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 	},
 
-	getTimeInSeconds : function(date) {
-		return Math.floor(date / 1000);
+	getTimeFormated : function(date, format) {
+		return moment(date).format(format);
+	},
+
+	getTimeDefaultFormated : function(date) {
+		return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:ss");
+	},
+
+	getTimeUnixTimestamp : function(date) {
+		return util.getTimeFormated(date, "X");
 	},
 
 	alphabet : {

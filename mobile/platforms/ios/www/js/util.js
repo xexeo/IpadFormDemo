@@ -58,8 +58,12 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	getIdxArray : function(elem, array) {
-		return jQuery.inArray(elem, array) + 1;
+	getIdxArray : function(value, array) {
+		return $.inArray(value, array) + 1;
+	},
+
+	contains : function(value, array) {
+		return ($.inArray(value, array) >= 0);
 	},
 
 	getListaFrequencias : function() {
@@ -133,6 +137,31 @@ var util = {
 		});
 	},
 
+	inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) {
+		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
+		$.each(lista_tb_aux, function(index, item) {
+			if (nome_fluxo == "simples" && item.simples) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			}
+			if (nome_fluxo == "onibus" && item.onibus) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			}
+			if (nome_fluxo == "carga" && item.carga) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			}
+			if (nome_fluxo == "carga_cinza" && item.carga_cinza) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			}
+			if (nome_fluxo == "carga_vermelha" && item.carga_vermelha) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			}
+			if (nome_fluxo == "moto" && item.moto) {
+				insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\n";
+			}
+		});
+		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
 	// Funções para o progresso
 	/**
 	 * 
@@ -184,7 +213,7 @@ var util = {
 		$('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).hide();
 			$('#grupo_placa_unica_' + tipo_fluxo).hide();
-			if ((registro.placaEstrangeira == undefined) || (registro.placaEstrangeira)) {
+			if (util.isEmpty(registro.placaEstrangeira) || registro.placaEstrangeira) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 			}
 			app.setAtributo('idPaisPlacaEstrangeira', null);
@@ -351,7 +380,9 @@ var util = {
 		if (Number($('#' + nome_campo).val()) != -1) {
 			return true;
 		} else {
-			util.alerta_msg(campo_aviso);
+			if (!util.isEmpty(campo_aviso)) {
+				util.alerta_msg(campo_aviso);
+			}
 			return false;
 		}
 	},
@@ -381,14 +412,18 @@ var util = {
 		var max_len = Number($.trim($('#' + nome_campo).attr("maxlength")))
 		if (value.length > 0) {
 			if ((max_len > 0) && (value.length > max_len)) {
-				util.alerta_msg(campo_aviso, "O campo deve ter no máximo " + max_len + " caracteres.");
+				if (!util.isEmpty(campo_aviso)) {
+					util.alerta_msg(campo_aviso, "O campo deve ter no máximo " + max_len + " caracteres.");
+				}
 				return false;
 			} else {
 				return true;
 			}
 		} else {
 			util.alerta_msg(campo_aviso);
-			return false;
+			if (!util.isEmpty(campo_aviso)) {
+				return false;
+			}
 		}
 	},
 
@@ -430,7 +465,7 @@ var util = {
 		}
 	},
 
-	validaValueInList : function(nome_campo, campo_aviso, lista) {
+	validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) {
 		var value = $.trim($('#' + nome_campo).val());
 		value = value.toUpperCase();
 		var encontrou = false;
@@ -438,13 +473,34 @@ var util = {
 		$.each(lista, function(index, item) {
 			if (value == item.numeroid) {
 				encontrou = true;
-				// TODO setar no registro o valor de index
+				app.setAtributo(idRegistro, item.id);
 			}
 		});
-		if(!encontrou) {
-			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido");
+		if (!encontrou) {
+			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido.");
 		}
 		return encontrou
+	},
+
+	validaQtdMaxPessoas : function(tipo, nome_campo, campo_aviso) {
+		var valor = $.trim($('#' + nome_campo).val());
+		if (tipo == 'p1_01' && valor > 7) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 7");
+			return false;
+		} else if (tipo == 'p1_02' && valor > 9) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 9");
+			return false;
+		} else if (tipo == 'p2' && valor > 9) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 9");
+			return false;
+		} else if (tipo == 'p3' && valor > 2) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 2");
+			return false;
+		} else if (tipo == 'm' && valor > 2) {
+			util.alerta_msg(campo_aviso, "O maior valor possível do campo é 2");
+			return false;
+		}
+		return true;
 	},
 
 	isFilterRunning : false, // controla se o filtro já terminou
@@ -486,7 +542,7 @@ var util = {
 		overlayInput.$b.css('margin-top', '0px');
 
 		$("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) {
-			app.logger.log('entrou no filtro');
+			app.logger.log('entrou no filtro'); // TODO ja podemos excluir essa linha?
 			var ul_list = $(this);
 			var auto_input = $(data.input);
 			var auto_value = auto_input.val();
@@ -574,8 +630,16 @@ var util = {
 		return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 	},
 
-	getTimeInSeconds : function(date) {
-		return Math.floor(date / 1000);
+	getTimeFormated : function(date, format) {
+		return moment(date).format(format);
+	},
+
+	getTimeDefaultFormated : function(date) {
+		return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:ss");
+	},
+
+	getTimeUnixTimestamp : function(date) {
+		return util.getTimeFormated(date, "X");
 	},
 
 	alphabet : {

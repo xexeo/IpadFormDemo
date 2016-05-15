@@ -12,15 +12,24 @@ controllers.caracterizacao_viagem_simples = {
 		$("#caracterizacao_viagem_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
 			if (ok) {
-				app.finalizaRegistro(function() {
-					app.trocaPagina('views/menu.html', controllers.menu);
-				});
+				if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
+					app.trocaPagina('views/pergunta_extra.html', controllers.pergunta_extra);
+				} else {
+					app.finalizaRegistro(function() {
+						app.trocaPagina('views/menu.html', controllers.menu);
+					});
+				}
 			}
 		})
 	},
 
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
+
+		// Verifica se possui Pergunta Extra
+		if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
+			$("#caracterizacao_viagem_simples_avancar").html("Avançar");
+		}
 
 		// INICIO PAÍSES
 		util.inicializaSelectPais("idOrigemPais", "origem_pais_simples", true, "País");
@@ -32,16 +41,12 @@ controllers.caracterizacao_viagem_simples = {
 
 		util.inicializaSelectFrequencia('simples');
 
-		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido',
-				'Proximidade hotéis/postos', 'Segurança', 'Turismo/Paisagem', 'Ausência de pedágio',
-				'Ponto obrigatório de passagem', 'Outros' ];
-		util.inicializaSelect("motivo_rota_simples", lista_motivos_rota);
+		util.inicializaTabelaAuxiliar("motivo_rota_simples", "Selecione", lista_motivo_escolha_rota, "simples");
 
-		var lista_motivos_viagem = [ 'Compra', 'Estudo', 'Lazer', 'Saúde', 'Trabalho', 'Negócios', 'Outros' ];
-		util.inicializaSelect("motivo_viagem_simples", lista_motivos_viagem);
+		util.inicializaTabelaAuxiliar("motivo_viagem_simples", "Selecione", lista_motivo_viagem, "simples");
 
-		var lista_rendas = [ 'Sem renda', 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
-				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado' ];
+		var lista_rendas = [ 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
+				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado', 'Sem renda'];
 		util.inicializaSelect("renda_simples", lista_rendas);
 
 	},
@@ -104,7 +109,7 @@ controllers.caracterizacao_viagem_simples = {
 			} else {
 				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
-				if (Number($(this).val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
+				if (Number($(this).val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_pessoas_trabalho_simples").show();
 					}
@@ -124,15 +129,20 @@ controllers.caracterizacao_viagem_simples = {
 			app.setAtributo('numeroDePessoasNoVeiculo', $(this).val());
 		});
 		$('#pessoas_simples').keyup(function() {
+			var temTrabalho = (Number($('#motivo_viagem_simples').val()) == 6); // TODO Trabalho. Ajustar se id mudar.
 			if (Number($("#pessoas_simples").val()) > 0) {
-				if (Number($('#motivo_viagem_simples').val()) == 5) { // TODO Trabalho = 5. Ajustar se id mudar.
+				if (temTrabalho) {
 					$("#grupo_pessoas_trabalho_simples").show();
 				} else {
 					$("#grupo_renda_simples").show();
 				}
 			} else {
-				$("#grupo_pessoas_trabalho_simples").hide();
 				$("#grupo_renda_simples").hide();
+				if (temTrabalho) {
+					$("#grupo_pessoas_trabalho_simples").hide();
+					$('#pessoas_trabalho_simples').val("");
+					app.setAtributo('numeroDePessoasATrabalho', null);
+				}
 			}
 		});
 
@@ -158,13 +168,13 @@ controllers.caracterizacao_viagem_simples = {
 			var validacoes = true;
 			if (Number($("#origem_pais_simples").val()) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("origem_uf_simples", "Origem da viagem - estado") && util.validaInputText(
 								"origem_municipio_simples", "Origem da viagem - município"));
 			}
 
 			if (Number($("#destino_pais_simples").val()) == 1) { // Brasil
 				validacoes = validacoes
-						&& (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") && util.validaSelect(
+						&& (util.validaSelect("destino_uf_simples", "Destino da viagem - estado") && util.validaInputText(
 								"destino_municipio_simples", "Destino da viagem - município"));
 			}
 
@@ -172,7 +182,7 @@ controllers.caracterizacao_viagem_simples = {
 				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1));
 			}
 
-			if (Number($("#motivo_viagem_simples").val()) == 5) { // TODO Trabalho. Ajustar se id mudar.
+			if (Number($("#motivo_viagem_simples").val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 				validacoes = validacoes
 						&& (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
 								"#pessoas_simples").val())));
@@ -180,7 +190,9 @@ controllers.caracterizacao_viagem_simples = {
 				validacoes = validacoes && (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0));
 			}
 
-			return validacoes;
+			var validaQtdPessoas = util.validaQtdMaxPessoas(app.getAtributo('tipo'), "pessoas_simples", "Pessoas no veículo");
+
+			return validacoes && validaQtdPessoas;
 		}
 		return false;
 	}

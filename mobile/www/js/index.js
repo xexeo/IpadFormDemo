@@ -23,11 +23,17 @@ var app = {
 			app.senha_login = senha;
 			app.posto = String(usuario).substr(0, 3);
 			app.sentido = String(usuario).substr(3, 2).toUpperCase();
+			if (isNaN(app.posto)) { // apenas para efeitos ao user admin
+				app.posto = '000';
+			}
+			if ((app.sentido != 'AB') && (app.sentido != 'BA')) { // apenas para efeitos ao user admin
+				app.sentido = 'AB';
+			}
 			// limpa o registro
 			app.limpaRegistro();
 		} else {
 			// TODO: Trocar por um popup "mais elegante"
-			var msg = "usuário e senha informados não estão cadastrados no sistema";
+			var msg = "Usuário e/ou Senha informados não estão cadastrados no sistema!";
 			alert(msg);
 			app.logger.log(msg);
 		}
@@ -50,25 +56,34 @@ var app = {
 	exportaDbToJson : function() {
 		if (app.filePaths) {
 			resolveLocalFileSystemURL(app.filePaths.externalFolder, function(dir) {
-				dir.getFile(app.jsonName, {
-					create : true
-				}, function(file) {
-					app.logger.log("arquivo JSON: ", file);
-					jsonWriter.setJsonFile(file);
-					file.createWriter(function(fileWriter) {
-						jsonWriter.setJsonWriter(fileWriter);
-						myDb.exportaDbToJson(jsonWriter);
-					}, function() {
-						app.logger.log('ERRO criando o escritor do JSON a ser exportado.');
-					});
-				}, function(e) {
-					app.logger.log('ERRO ao criar o arquivo JSON a ser exportado: ' + e.message);
+				var newJsonName = ipadID.id + "_" + app.jsonName;
+				app.removeFile(newJsonName, app.filePaths.externalFolder, function() {
+					realExporter(newJsonName, dir);
+				}, function() {
+					realExporter(newJsonName, dir);
 				});
 			}, function(err) {
 				app.logger.log('ERRO ao acessar o folder externo ' + app.filePaths.externalFolder + ' ' + JSON.stringify(err));
 			});
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+
+		function realExporter(jsonName, dir) {
+			dir.getFile(jsonName, {
+				create : true
+			}, function(file) {
+				app.logger.log("arquivo JSON: ", file);
+				jsonWriter.setJsonFile(file);
+				file.createWriter(function(fileWriter) {
+					jsonWriter.setJsonWriter(fileWriter);
+					myDb.exportaDbToJson(jsonWriter);
+				}, function() {
+					app.logger.log('ERRO criando o escritor do JSON a ser exportado.');
+				});
+			}, function(e) {
+				app.logger.log('ERRO ao criar o arquivo JSON a ser exportado: ' + e.message);
+			});
 		}
 	},
 
@@ -448,12 +463,12 @@ var app = {
 			var now = new Date();
 			app.logger.log('Iniciando registro');
 			app.limpaRegistro();
-			app.setAtributo('id', ipadID.id + String(util.getTimeInSeconds(now)));
+			app.setAtributo('id', ipadID.id + util.getTimeUnixTimestamp(now));
 			app.setAtributo('login', app.user_login);
 			app.setAtributo('idPosto', app.posto);
 			app.setAtributo('sentido', app.sentido);
 			app.setAtributo('uuid', app.uuid_device);
-			app.setAtributo('timestampIniPesq', util.getTimeInSeconds(now));
+			app.setAtributo('dataIniPesq', util.getTimeDefaultFormated(now));
 			app.setAtributo('idIpad', ipadID.id);
 			app.logger.log(JSON.stringify(registro));
 			app.logger.log('Registro iniciado: ' + registro.id);
@@ -463,6 +478,11 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
+
+		// TIPO VEICULO
+		var tipoReal = app.getAtributo('tipo').split("_")[0]
+		app.setAtributo('tipo', tipoReal);
+		
 		// PLACA
 		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
 			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
@@ -514,76 +534,83 @@ var app = {
 			}
 		}
 
-		// RNTRC
-		if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
-			if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
-				app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel) + String(registro.placa_vermelha_rntrc_num));
-			} else {
-				if (registro.cancelado != 1) {
-					app.setAtributo('erro', "ERRO (rntrc vazio)");
+		// ESPECÍFICOS PARA FLUXO DE CARGA
+		if (app.getAtributo('classeVeiculo') == 'carga') {
+
+			// RNTRC
+			if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
+				if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
+					app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel)
+							+ String(registro.placa_vermelha_rntrc_num));
+				} else {
+					if (registro.cancelado != 1) {
+						app.setAtributo('erro', "ERRO (rntrc vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+				}
+			}
+
+			// PESO DA CARGA ('ton' -> 'kg')
+			if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
+				var peso = Number(registro.pesoDaCarga);
+				if (registro.unidadePesoDaCarga == 'kg') {
+					peso = peso / 10;
+				} else {
+					peso = peso * 100;
+				}
+				app.setAtributo('pesoDaCarga', peso);
+			}
+			if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+
+			// TIPO DE PRODUTO (CARGA)
+			app.splitAtributo('idProduto');
+			if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (idProduto vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+
+			// CARGA ANTERIOR
+			app.splitAtributo('idCargaAnterior');
+			if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+
+			// MUNICÍPIO EMBARQUE DA CARGA
+			app.splitAtributo('municipioEmbarqueCarga');
+			if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+
+			// MUNICÍPIO DESEMBARQUE DA CARGA
+			app.splitAtributo('municipioDesembarqueCarga');
+			if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+				app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+
+			// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+			app.splitAtributo('paradaObrigatoriaMunicipio1');
+			app.splitAtributo('paradaObrigatoriaMunicipio2');
+
+			if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+				if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
 					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
 		}
 
-		// PESO DA CARGA ('ton' -> 'kg')
-		if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
-			var peso = Number(registro.pesoDaCarga);
-			if (registro.unidadePesoDaCarga == 'kg') {
-				peso = peso / 10;
-			} else {
-				peso = peso * 100;
-			}
-			app.setAtributo('pesoDaCarga', peso);
-		}
-		if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// TIPO DE PRODUTO (CARGA)
-		app.splitAtributo('idProduto');
-		if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (idProduto vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// CARGA ANTERIOR
-		app.splitAtributo('idCargaAnterior');
-		if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// MUNICÍPIO EMBARQUE DA CARGA
-		app.splitAtributo('municipioEmbarqueCarga');
-		if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// MUNICÍPIO DESEMBARQUE DA CARGA
-		app.splitAtributo('municipioDesembarqueCarga');
-		if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
-			app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
-		app.splitAtributo('paradaObrigatoriaMunicipio1');
-		app.splitAtributo('paradaObrigatoriaMunicipio2');
-		if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-			if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-		}
-
-		app.setAtributo('timestampFimPesq', util.getTimeInSeconds(new Date()));
+		app.setAtributo('dataFimPesq', util.getTimeDefaultFormated(new Date()));
 	},
 
 	finalizaRegistro : function(cb) {
 		app.logger.log('Finalizando registro: ' + registro.id);
+		app.setAtributo('cancelado', 0);
 		app.setCamposDerivados();
 		myDb.insertRegistro(registro,
 		// erro

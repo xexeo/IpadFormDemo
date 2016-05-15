@@ -1,16 +1,18 @@
 myDb = {
 
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
+
 	tabelaOD : [
-		{field : 'id', type : 'text primary key'}, // IMPORTANTE: não enviar p/ o servidor
+		{field : 'id', type : 'text primary key'},
 		{field : 'estaNoNote', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
 		{field : 'idPosto', type : 'integer'},
 		{field : 'sentido', type : 'text'},
 		{field : 'idIpad', type : 'text'},
-		{field : 'uuid', type : 'text'}, // IMPORTANTE: não enviar p/ o servidor
+		// {field : 'uuid', type : 'text'},
 		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
-		{field : 'timestampIniPesq', type : 'text'},
-		{field : 'timestampFimPesq', type : 'text'},
+		{field : 'dataIniPesq', type : 'text'},
+		{field : 'dataFimPesq', type : 'text'},
 		{field : 'placa', type : 'text'},
 		{field : 'anoDeFabricacao', type : 'integer'},
 		{field : 'tipo', type : 'text'},
@@ -18,15 +20,15 @@ myDb = {
 		{field : 'idOrigemMunicipio', type : 'integer'},
 		{field : 'idDestinoPais', type : 'integer'},
 		{field : 'idDestinoMunicipio', type : 'integer'},
-		{field : 'idMotivoDeEscolhaDaRota', type : 'text'},
+		{field : 'idMotivoDeEscolhaDaRota', type : 'integer'},
 		{field : 'frequenciaQtd', type : 'integer'},
 		{field : 'frequenciaPeriodo', type : 'text'},
 		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
-		{field : 'placaEstrangeira', type : 'text'}, // Boolean 0->false || true, otherwise; //é preciso mesmo? se a placa não for estrangeira o país é o Brasil, oras
+		{field : 'placaEstrangeira', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'idPaisPlacaEstrangeira', type : 'integer'},
 		{field : 'idCombustivel', type : 'integer'},
 		{field : 'categoria', type : 'text'},
-		{field : 'possuiReboque', type : 'text'},
+		{field : 'possuiReboque', type : 'integer'},
 		{field : 'numeroDePessoasNoVeiculo', type : 'integer'},
 		{field : 'numeroDePessoasATrabalho', type : 'integer'},
 		{field : 'idRendaMedia', type : 'integer'},
@@ -43,7 +45,7 @@ myDb = {
 		{field : 'idTipoDeViagemOuServico', type : 'integer'},
 		{field : 'pesoDaCarga', type : 'real'},
 		{field : 'valorDoFrete', type : 'real'},
-		{field : 'utilizaParadaEspecial', type : 'integer'}, // boolean 1->true
+		{field : 'utilizaParadaEspecial', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'idProduto', type : 'integer'},
 		{field : 'idCargaAnterior', type : 'integer'},
 		{field : 'valorDaCarga', type : 'real'},
@@ -155,21 +157,44 @@ myDb = {
 				var sql = "SELECT " + fields + " FROM tblDados;";
 
 				tx.executeSql(sql, [], function(tx, res) {
-					$.each(res.rows, function(index) {
-						var rowDB = res.rows.item(index);
-						var rowJson = "";
+					for (var rowIndex = 0; rowIndex < res.rows.length; rowIndex++) {
+						var rowDB = res.rows.item(rowIndex);
+						var rowJson = "{";
+						if (rowIndex == 0) {
+							rowJson = "[{";
+						}
 						$.each(myDb.tabelaOD, function(index, item) {
-							var value = rowDB[item.field];
-							if ((item.type == 'text') && (value != null)) {
-								value = '"' + value + '"';
-							}
-							rowJson += '"' + item.field + '": ' + value;
-							if (index < myDb.tabelaOD.length - 1) {
-								rowJson += ", ";
+							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
+								var value = rowDB[item.field];
+								if (value != null) {
+									// app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
+									// + '): ' + value);
+									var typeValue = typeof value;
+									if (item.type == 'text') {
+										value = '"' + value + '"';
+									} else if (item.type == 'integer' && (typeValue != 'number')) {
+										if (typeValue == 'boolean') {
+											value = Number(value);
+										} else if (typeValue == 'string') {
+											value = ((value == 'true') ? 1 : ((value == 'false') ? 0 : (isNaN(value) ? ('"'
+													+ value + '"') : Number(value))));
+										}
+									}
+								}
+								rowJson += '"' + item.field + '": ' + value;
+								if (index < myDb.tabelaOD.length - 1) {
+									rowJson += ", ";
+								}
 							}
 						});
+						rowJson += "}";
+						if (rowIndex < res.rows.length - 1) {
+							rowJson += ",";
+						} else {
+							rowJson += "]";
+						}
 						writer.appendRow(rowJson);
-					});
+					}
 				});
 
 			},
