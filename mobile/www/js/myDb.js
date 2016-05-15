@@ -1,6 +1,6 @@
 myDb = {
 
-	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login', 'erro' ],
 
 	tabelaOD : [
 		{field : 'id', type : 'text primary key'},
@@ -56,7 +56,8 @@ myDb = {
 		{field : 'indoPegarCarga', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
-		{field : 'idPerguntaExtra', type : 'integer'}
+		{field : 'idPerguntaExtra', type : 'integer'},
+		{field : 'erro', type : 'text'}
 	],
 
 	fieldExists : function(str) {
