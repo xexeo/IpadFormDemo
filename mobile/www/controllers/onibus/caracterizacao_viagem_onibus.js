@@ -11,8 +11,7 @@ controllers.caracterizacao_viagem_onibus = {
 			var ok = controllers.caracterizacao_viagem_onibus.validar_componentes();
 			if (ok) {
 				if (logins.user_logado != null && logins.user_logado.perguntaExtra) {
-					app.trocaPagina('views/pergunta_extra.html',
-							controllers.pergunta_extra);
+					app.trocaPagina('views/pergunta_extra.html', controllers.pergunta_extra);
 				} else {
 					app.finalizaRegistro(function() {
 						app.trocaPagina('views/menu.html', controllers.menu);
@@ -118,6 +117,8 @@ controllers.caracterizacao_viagem_onibus = {
 			if (Number($("#frequencia_num_onibus").val()) < 1) {
 				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_onibus", "Frequência da viagem", 1));
 			}
+
+			validacoes = validacoes && util.validaLimitePessoas("pessoas_onibus", "Pessoas no veículo");
 
 			return validacoes;
 		}
