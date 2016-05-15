@@ -202,7 +202,7 @@ public class myDB extends Db{
 					+ "frequenciaQtd integer, "
 					+ "frequenciaPeriodo text, "
 					+ "idPropriedadesDoVeiculo integer, "
-					+ "placaEstrangeira text, "
+					+ "placaEstrangeira integer, "
 					+ "idPaisPlacaEstrangeira integer, "
 					+ "idCombustivel integer, "
 					+ "categoria text, "
@@ -240,5 +240,19 @@ public class myDB extends Db{
 		
 	}
     
-	
+	static public String getSQLiteBoolean(String val){
+		String r;
+		if (val != null){
+			if (val.equals("false") || val.equals("0")){
+				r = "0";
+			} else if (val.equals("true")|| val.equals("1")){
+				r = "1";
+			} else {
+				r = null;
+			}
+		} else {
+			r=null;
+		}
+		return r;
+	}
 }
