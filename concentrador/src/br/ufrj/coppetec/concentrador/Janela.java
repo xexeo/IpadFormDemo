@@ -6266,9 +6266,9 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel lblPesquisador1;
     private javax.swing.JLabel lblPista;
     private javax.swing.JLabel lblPosto;
-    private javax.swing.JLabel lblPosto_dados;
+    public javax.swing.JLabel lblPosto_dados;
     private javax.swing.JLabel lblSentido;
-    private javax.swing.JLabel lblTrecho_dados;
+    public javax.swing.JLabel lblTrecho_dados;
     private javax.swing.JTextField lev15_1;
     private javax.swing.JTextField lev15_2;
     private javax.swing.JTextField lev30_1;
