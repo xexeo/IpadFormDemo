@@ -9,9 +9,13 @@ controllers.selecionar_tipo = {
 		$(".img_sel_veiculo").click(function() {
 
 			app.imagemPath = $(this).attr('src');
-			// veiculo_confirmar = $(this).attr('id');
-			// app.setAtributo('tipo', $(this).attr('id').split("_")[0]);
 			app.setAtributo('tipo', $(this).attr('id'));
+			var limitePessoas = $(this).attr('limitePessoas');
+			if ((!util.isEmpty(limitePessoas)) && (!isNaN(limitePessoas))) {
+				app.setAtributo('limitePessoas', parseInt(limitePessoas));
+			} else {
+				app.setAtributo('limitePessoas', null);
+			}
 
 			if ($(this).hasClass('v-simples')) {
 				app.setAtributo('classeVeiculo', 'simples');
@@ -29,7 +33,7 @@ controllers.selecionar_tipo = {
 
 			app.trocaPagina("views/confirmar_veiculo.html", controllers.confirmar_veiculo);
 		});
-		
+
 	},
 
 }

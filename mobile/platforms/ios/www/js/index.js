@@ -16,17 +16,17 @@ var app = {
 			});
 		} else if (logins.autentica(usuario, senha)) {
 			app.logger.log("Login efetuado pelo usuário: " + usuario);
-			// navega para págine e executa o script de configuração depois do carregamento
+			// navega para página e executa o script de configuração depois do carregamento
 			app.trocaPagina("views/menu.html", controllers.menu)
 			// set: user_login, senha_login, posto e sentido
 			app.user_login = usuario;
 			app.senha_login = senha;
 			app.posto = String(usuario).substr(0, 3);
 			app.sentido = String(usuario).substr(3, 2).toUpperCase();
-			if (isNaN(app.posto)) { // apenas para efeitos ao user admin
+			if (isNaN(app.posto)) { // apenas para efeitos ao usuário de testes
 				app.posto = '000';
 			}
-			if ((app.sentido != 'AB') && (app.sentido != 'BA')) { // apenas para efeitos ao user admin
+			if ((app.sentido != 'AB') && (app.sentido != 'BA')) { // apenas para efeitos ao usuário de testes
 				app.sentido = 'AB';
 			}
 			// limpa o registro
@@ -480,9 +480,14 @@ var app = {
 	setCamposDerivados : function() {
 
 		// TIPO VEICULO
-		var tipoReal = app.getAtributo('tipo').split("_")[0]
-		app.setAtributo('tipo', tipoReal);
-		
+		if (!util.isEmpty(app.getAtributo('tipo'))) {
+			var tipoReal = app.getAtributo('tipo').split("_")[0];
+			app.setAtributo('tipo', tipoReal.toUpperCase());
+		} else if (registro.cancelado != 1) {
+			app.setAtributo('erro', "ERRO (tipo vazio)");
+			app.logger.log(registro.erro + " no registro: ", registro.id);
+		}
+
 		// PLACA
 		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
 			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {

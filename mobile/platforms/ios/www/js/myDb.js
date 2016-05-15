@@ -1,6 +1,6 @@
 myDb = {
 
-	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login', 'erro' ],
 
 	tabelaOD : [
 		{field : 'id', type : 'text primary key'},
@@ -56,7 +56,8 @@ myDb = {
 		{field : 'indoPegarCarga', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
-		{field : 'idPerguntaExtra', type : 'integer'}
+		{field : 'idPerguntaExtra', type : 'integer'},
+		{field : 'erro', type : 'text'}
 	],
 
 	fieldExists : function(str) {
@@ -167,8 +168,8 @@ myDb = {
 							if (!util.contains(item.field, myDb.camposNaoExportaveisJson)) {
 								var value = rowDB[item.field];
 								if (value != null) {
-									app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
-											+ '): ' + value);
+									// app.logger.log('FIELD (' + item.type + '): ' + item.field + '\tVALUE (' + typeof value
+									// + '): ' + value);
 									var typeValue = typeof value;
 									if (item.type == 'text') {
 										value = '"' + value + '"';
@@ -181,9 +182,9 @@ myDb = {
 										}
 									}
 								}
-								rowJson += '"' + item.field + '": ' + value;
-								if (index < myDb.tabelaOD.length - 1) {
-									rowJson += ", ";
+								rowJson += '"' + item.field + '":' + value;
+								if (index < myDb.tabelaOD.length - 2) { // (length - 2) pq o último campo ('erro') tb não será exportado
+									rowJson += ",";
 								}
 							}
 						});

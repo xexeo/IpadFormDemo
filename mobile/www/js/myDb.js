@@ -183,11 +183,8 @@ myDb = {
 									}
 								}
 								rowJson += '"' + item.field + '":' + value;
-								if (index < myDb.tabelaOD.length - 1) {
-									if (((index + 1) == (myDb.tabelaOD.length - 1))
-											&& util.contains(myDb.tabelaOD[index + 1].field, myDb.camposNaoExportaveisJson)) {
-										rowJson += ",";
-									}
+								if (index < myDb.tabelaOD.length - 2) { // (length - 2) pq o último campo ('erro') tb não será exportado
+									rowJson += ",";
 								}
 							}
 						});

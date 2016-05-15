@@ -46,7 +46,7 @@ controllers.caracterizacao_viagem_simples = {
 		util.inicializaTabelaAuxiliar("motivo_viagem_simples", "Selecione", lista_motivo_viagem, "simples");
 
 		var lista_rendas = [ 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
-				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado', 'Sem renda'];
+				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado', 'Sem renda' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
 
 	},
@@ -182,6 +182,8 @@ controllers.caracterizacao_viagem_simples = {
 				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1));
 			}
 
+			validacoes = validacoes && util.validaLimitePessoas("pessoas_simples", "Pessoas no veículo");
+
 			if (Number($("#motivo_viagem_simples").val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 				validacoes = validacoes
 						&& (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(
@@ -190,9 +192,7 @@ controllers.caracterizacao_viagem_simples = {
 				validacoes = validacoes && (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 0, 0));
 			}
 
-			var validaQtdPessoas = util.validaQtdMaxPessoas(app.getAtributo('tipo'), "pessoas_simples", "Pessoas no veículo");
-
-			return validacoes && validaQtdPessoas;
+			return validacoes;
 		}
 		return false;
 	}
