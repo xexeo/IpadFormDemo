@@ -709,7 +709,7 @@ public class Janela extends javax.swing.JFrame {
         jPanel119.setPreferredSize(new java.awt.Dimension(616, 458));
 
         panelLeves.setBackground(new java.awt.Color(255, 255, 255));
-        panelLeves.setMinimumSize(new java.awt.Dimension(200, 76));
+        panelLeves.setMinimumSize(new java.awt.Dimension(0, 0));
         panelLeves.setLayout(new java.awt.GridBagLayout());
 
         leves_hora1.setEditable(false);
@@ -2714,7 +2714,7 @@ public class Janela extends javax.swing.JFrame {
             jPanel119Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel119Layout.createSequentialGroup()
                 .addComponent(panelLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jPanel119);
@@ -2729,7 +2729,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2739,7 +2739,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblPesquisador)
                     .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                .addComponent(jScrollPane3))
         );
 
         jTabbedPane1.addTab("Veículos e Caminhões Leves", tab_leves);
@@ -5526,27 +5526,27 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblPosto)
                     .addComponent(lblSentido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnl_volumetricaLayout.createSequentialGroup()
                         .addComponent(rdo_SentidoAB)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdo_SentidoBA))
-                    .addComponent(lblPosto_dados))
-                .addGap(21, 21, 21)
-                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPista)
-                    .addComponent(jLabel34))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnl_volumetricaLayout.createSequentialGroup()
+                        .addComponent(rdo_SentidoBA)
+                        .addGap(33, 33, 33)
+                        .addComponent(lblPista)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rdo_PistaSimples)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rdo_PistaDupla)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(53, 53, 53)
                         .addComponent(lblHora)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblTrecho_dados))
+                    .addGroup(pnl_volumetricaLayout.createSequentialGroup()
+                        .addComponent(lblPosto_dados)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTrecho_dados)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblData, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -5712,7 +5712,7 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(btnODNotSent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnODexportAll)
-                .addGap(315, 315, 315))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -5725,7 +5725,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(btnInDados))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(116, 116, 116))
         );
         jPanel2Layout.setVerticalGroup(
@@ -5737,8 +5737,8 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(btnInDados)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 95, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(95, 95, 95))
         );
 
         javax.swing.GroupLayout pnl_envioLayout = new javax.swing.GroupLayout(pnl_envio);
@@ -5789,158 +5789,6 @@ public class Janela extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_btnInDadosActionPerformed
 
-    private void cmbHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraActionPerformed
-        int hora_inicial;
-		if (cmbHora.getSelectedIndex() != -1){
-			try{
-				hora_inicial = Integer.parseInt((String) cmbHora.getSelectedItem());
-			} catch (Exception e){
-				JOptionPane.showMessageDialog(null, "Erro configurando a hora inicial da pesquisa: \n" + e.getMessage());
-				return;
-			}
-
-			String hora1 = String.valueOf(hora_inicial) + ":00 a " + String.valueOf(hora_inicial+1) + ":00";
-			String hora2 = String.valueOf(hora_inicial+1) + ":00 a " + String.valueOf(hora_inicial+2) + ":00";
-
-			pesados_hora1.setText(hora1);
-			leves_hora1.setText(hora1);
-			pesados_hora2.setText(hora2);
-			leves_hora2.setText(hora2);
-		}
-    }//GEN-LAST:event_cmbHoraActionPerformed
-
-    private void btnSalvarFormsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFormsActionPerformed
-        String posto = Concentrador.posto;
-		String pista;
-		String date;
-		String sentido;
-		int hora_inicial;
-		String pesquisador1;
-		String pesquisador2;
-		String local;
-		myDB database = null;
-		
-		try{
-			database = new myDB();
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(), 
-					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
-		}
-		//validate pista
-		if(!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()){
-			JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.", 
-					"Tipo de pista não selecionado.", JOptionPane.ERROR_MESSAGE);
-			return;
-		}else if(rdo_PistaDupla.isSelected()){
-			pista = "D";
-		} else {
-			pista = "S";
-		}
-		
-		//valida e formata data
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if (data.getDate() == null){
-			JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.", 
-					"Data não preenchida.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			date = sdf.format(data.getDate());
-		}
-		
-		//valida sentido
-		if(!rdo_SentidoAB.isSelected() && !rdo_SentidoBA.isSelected()){
-			JOptionPane.showMessageDialog(Janela.this, "O sentido precisa ser selecionado.", "Sentido da pista.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else if (rdo_SentidoAB.isSelected()){
-			sentido = "AB";
-		} else {
-			sentido = "BA";
-		}
-		
-		//valida hora inicial
-		if(cmbHora.getSelectedItem() == null){
-			JOptionPane.showMessageDialog(Janela.this, "Selecione a hora inicial.", "Hora inicial.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			hora_inicial = Integer.parseInt(cmbHora.getSelectedItem().toString());
-		}
-		
-		
-		//valida pesquisador
-		if(txtPesquisador1.getText().trim().isEmpty()){
-			JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_1 não foi preenchida.", "Pesquisador.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			pesquisador1 = txtPesquisador1.getText();
-		}
-		
-		//valida pesquisador
-		if(txtPesquisador2.getText().trim().isEmpty()){
-			JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_2 não foi preenchida.", "Pesquisador.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			pesquisador2 = txtPesquisador2.getText();
-		}
-		//valida local
-		if(txtLocal.getText().trim().isEmpty()){
-			JOptionPane.showMessageDialog(Janela.this, "O local da pesquisa precisa ser preenchido.", "Preenchimento do local da pesquisa.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			local = txtLocal.getText();
-		}
-		
-		//montando o registro para gravação
-		PVregister reg = new PVregister();
-		reg.data = date;
-		reg.sentido = sentido;
-		reg.pista = pista;
-		reg.posto = Integer.parseInt(posto);
-		reg.local = local;
-		reg.sentido = sentido;
-		reg.pesquisador1 = pesquisador1;
-		reg.pesquisador2 = pesquisador2;
-		reg.hora = hora_inicial;
-		
-		//reg fields for tipes
-		for (String s : volFieldsNames){
-			try{
-				PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
-			} catch(Exception e){
-				JOptionPane.showMessageDialog(Janela.this, "Erro gravando dados:\n"+e.getMessage(), "Erro na gravação dos dados.", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			
-		}
-		
-		
-		try{
-			int alreadyInDataBase = database.verifyPV(reg);
-			if (alreadyInDataBase != 0){
-				int returnedValue = JOptionPane.showConfirmDialog(Janela.this, 
-						"Já existe um registro no Banco de Dados com o mesmo posto, sentido, data e hora.\nVocê deseja sobrescrever os dados já gravados?",
-						"Dados já existentes.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if(returnedValue == JOptionPane.YES_OPTION){
-					database.updatePV(reg, alreadyInDataBase);
-					clearForm();
-				}
-				return;//exit and don't save
-			}
-
-			database.inputPV(reg);
-			clearForm();
-			JOptionPane.showMessageDialog(Janela.this, "Registro gravado com sucesso!", 
-				"Registro gravado.", JOptionPane.INFORMATION_MESSAGE);
-
-			
-			
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(), 
-					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		return;
-    }//GEN-LAST:event_btnSalvarFormsActionPerformed
-
     private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportAllVolActionPerformed
         exporterFileChooser.setSelectedFile(new File("todos_volumetrica.json"));
 		int returnVal = exporterFileChooser.showSaveDialog(this);
@@ -5981,6 +5829,154 @@ public class Janela extends javax.swing.JFrame {
 			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
 		}
     }//GEN-LAST:event_btnODNotSentActionPerformed
+
+    private void btnSalvarFormsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFormsActionPerformed
+        String posto = Concentrador.posto;
+        String pista;
+        String date;
+        String sentido;
+        int hora_inicial;
+        String pesquisador1;
+        String pesquisador2;
+        String local;
+        myDB database = null;
+
+        try{
+            database = new myDB();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
+                "Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+        }
+        //validate pista
+        if(!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()){
+            JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.",
+                "Tipo de pista não selecionado.", JOptionPane.ERROR_MESSAGE);
+            return;
+        }else if(rdo_PistaDupla.isSelected()){
+            pista = "D";
+        } else {
+            pista = "S";
+        }
+
+        //valida e formata data
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (data.getDate() == null){
+            JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.",
+                "Data não preenchida.", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            date = sdf.format(data.getDate());
+        }
+
+        //valida sentido
+        if(!rdo_SentidoAB.isSelected() && !rdo_SentidoBA.isSelected()){
+            JOptionPane.showMessageDialog(Janela.this, "O sentido precisa ser selecionado.", "Sentido da pista.", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (rdo_SentidoAB.isSelected()){
+            sentido = "AB";
+        } else {
+            sentido = "BA";
+        }
+
+        //valida hora inicial
+        if(cmbHora.getSelectedItem() == null){
+            JOptionPane.showMessageDialog(Janela.this, "Selecione a hora inicial.", "Hora inicial.", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            hora_inicial = Integer.parseInt(cmbHora.getSelectedItem().toString());
+        }
+
+        //valida pesquisador
+        if(txtPesquisador1.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_1 não foi preenchida.", "Pesquisador.", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            pesquisador1 = txtPesquisador1.getText();
+        }
+
+        //valida pesquisador
+        if(txtPesquisador2.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_2 não foi preenchida.", "Pesquisador.", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            pesquisador2 = txtPesquisador2.getText();
+        }
+        //valida local
+        if(txtLocal.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(Janela.this, "O local da pesquisa precisa ser preenchido.", "Preenchimento do local da pesquisa.", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            local = txtLocal.getText();
+        }
+
+        //montando o registro para gravação
+        PVregister reg = new PVregister();
+        reg.data = date;
+        reg.sentido = sentido;
+        reg.pista = pista;
+        reg.posto = Integer.parseInt(posto);
+        reg.local = local;
+        reg.sentido = sentido;
+        reg.pesquisador1 = pesquisador1;
+        reg.pesquisador2 = pesquisador2;
+        reg.hora = hora_inicial;
+
+        //reg fields for tipes
+        for (String s : volFieldsNames){
+            try{
+                PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(Janela.this, "Erro gravando dados:\n"+e.getMessage(), "Erro na gravação dos dados.", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+        }
+
+        try{
+            int alreadyInDataBase = database.verifyPV(reg);
+            if (alreadyInDataBase != 0){
+                int returnedValue = JOptionPane.showConfirmDialog(Janela.this,
+                    "Já existe um registro no Banco de Dados com o mesmo posto, sentido, data e hora.\nVocê deseja sobrescrever os dados já gravados?",
+                    "Dados já existentes.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(returnedValue == JOptionPane.YES_OPTION){
+                    database.updatePV(reg, alreadyInDataBase);
+                    clearForm();
+                }
+                return;//exit and don't save
+            }
+
+            database.inputPV(reg);
+            clearForm();
+            JOptionPane.showMessageDialog(Janela.this, "Registro gravado com sucesso!",
+                "Registro gravado.", JOptionPane.INFORMATION_MESSAGE);
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
+                "Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return;
+    }//GEN-LAST:event_btnSalvarFormsActionPerformed
+
+    private void cmbHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHoraActionPerformed
+        int hora_inicial;
+        if (cmbHora.getSelectedIndex() != -1){
+            try{
+                hora_inicial = Integer.parseInt((String) cmbHora.getSelectedItem());
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Erro configurando a hora inicial da pesquisa: \n" + e.getMessage());
+                return;
+            }
+
+            String hora1 = String.valueOf(hora_inicial) + ":00 a " + String.valueOf(hora_inicial+1) + ":00";
+            String hora2 = String.valueOf(hora_inicial+1) + ":00 a " + String.valueOf(hora_inicial+2) + ":00";
+
+            pesados_hora1.setText(hora1);
+            leves_hora1.setText(hora1);
+            pesados_hora2.setText(hora2);
+            leves_hora2.setText(hora2);
+        }
+    }//GEN-LAST:event_cmbHoraActionPerformed
 	
 	private void clearForm(){
 		data.setDate(null);
@@ -6270,9 +6266,9 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel lblPesquisador1;
     private javax.swing.JLabel lblPista;
     private javax.swing.JLabel lblPosto;
-    public javax.swing.JLabel lblPosto_dados;
+    private javax.swing.JLabel lblPosto_dados;
     private javax.swing.JLabel lblSentido;
-    public javax.swing.JLabel lblTrecho_dados;
+    private javax.swing.JLabel lblTrecho_dados;
     private javax.swing.JTextField lev15_1;
     private javax.swing.JTextField lev15_2;
     private javax.swing.JTextField lev30_1;
