@@ -184,7 +184,10 @@ myDb = {
 								}
 								rowJson += '"' + item.field + '":' + value;
 								if (index < myDb.tabelaOD.length - 1) {
-									rowJson += ",";
+									if (((index + 1) == (myDb.tabelaOD.length - 1))
+											&& util.contains(myDb.tabelaOD[index + 1].field, myDb.camposNaoExportaveisJson)) {
+										rowJson += ",";
+									}
 								}
 							}
 						});
