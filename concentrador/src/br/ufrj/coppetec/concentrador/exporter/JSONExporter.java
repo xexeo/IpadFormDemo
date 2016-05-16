@@ -92,6 +92,9 @@ public class JSONExporter {
 			writer.close();
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
 			
+			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.", 
+					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+			
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Erro ao exportar dados da pesquisa volumétrica:\n" + e.getMessage(), 
 					"Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);
