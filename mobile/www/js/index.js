@@ -189,7 +189,7 @@ var app = {
 			}, 3000);
 
 			// durante o debug, inicia o sistema de arquivos
-			navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
+			// navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
 
 		}
 
