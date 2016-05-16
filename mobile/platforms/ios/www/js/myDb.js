@@ -111,7 +111,8 @@ myDb = {
 				$.each(myDb.tabelaOD, function(index, item) {
 					fields += item.field;
 					places += "?";
-					values.push(reg[item.field]);
+					var value = reg[item.field];
+					values.push((value == undefined ? null : value));
 					if (index < myDb.tabelaOD.length - 1) {
 						fields += ", ";
 						places += ", ";

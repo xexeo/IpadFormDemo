@@ -783,11 +783,11 @@ var app = {
 
 	baseUrl : null,
 
-	logFileName : "log.txt",
+	logFileName : "logOD.txt",
 
-	dbName : "dados.db",
+	dbName : "dadosOD.db",
 
-	jsonName : "dados.json",
+	jsonName : "dadosOD.json",
 
 	user_login : null,
 
