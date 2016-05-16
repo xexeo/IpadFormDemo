@@ -48,6 +48,12 @@ public class Concentrador {
 		boolean successServer = Concentrador.startServer();
         System.out.println(successServer);
 		
+		
+		
+		LoginJanela loginJanela = new LoginJanela(janela, true);
+		loginJanela.setLocationRelativeTo(null);
+		loginJanela.setVisible(true);
+		
 		//wait
 		try {
 			Thread.sleep(2000);                 
@@ -56,12 +62,6 @@ public class Concentrador {
 		}
         
 		splash.setVisible(false);
-		
-		LoginJanela loginJanela = new LoginJanela(janela, true);
-		loginJanela.setLocationRelativeTo(null);
-		loginJanela.setVisible(true);
-		
-		
 		
 		janela.lblPosto_dados.setText(posto);
 		janela.lblTrecho_dados.setText(trecho);

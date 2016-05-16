@@ -2798,6 +2798,7 @@ public class Janela extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jPanel119);
 
         txtTotalLeves.setEditable(false);
+        txtTotalLeves.setText("0");
 
         jLabel36.setText("Total:");
 
@@ -5569,6 +5570,7 @@ public class Janela extends javax.swing.JFrame {
         txtPesquisador2.setNextFocusableComponent(tp0);
 
         txtTotalPesados.setEditable(false);
+        txtTotalPesados.setText("0");
 
         jLabel37.setText("Total:");
 
@@ -5945,6 +5947,30 @@ public class Janela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
                 "Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
         }
+		
+		//valida preenchimento de dados
+		String emptyMessage = null;
+		boolean showEmptyMessage = false;
+		if(txtTotalLeves.getText().equals("0") && txtTotalPesados.getText().equals("0")){
+			emptyMessage = "O formulário não contém dados de contagem.\n\n";
+			showEmptyMessage = true;
+		}else if(txtTotalLeves.getText().equals("0")){
+			emptyMessage = "O formulário não contém dados de\ncontagem de veículos e caminhões leves.\n\n";
+			showEmptyMessage = true;
+		}else if(txtTotalPesados.getText().equals("0")){
+			emptyMessage = "O formulário não contém dados de\ncontagem de caminhões pesados.\n\n";
+			showEmptyMessage = true;
+		}
+		
+		if(showEmptyMessage){
+			int returnedValue = JOptionPane.showConfirmDialog(Janela.this,
+                    emptyMessage + "Você deseja gravá-lo assim mesmo?",
+                    "Dados não preenchidos.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if(returnedValue == JOptionPane.NO_OPTION){
+				return;
+			}
+		}
+		
         //validate pista
         if(!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()){
             JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.",
@@ -6019,7 +6045,7 @@ public class Janela extends javax.swing.JFrame {
         reg.pesquisador2 = pesquisador2;
         reg.hora = hora_inicial;
 
-        //reg fields for tipes
+        //reg fields for types
         for (String s : volFieldsNames){
             try{
                 PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
@@ -6088,6 +6114,13 @@ public class Janela extends javax.swing.JFrame {
 		grpPista.clearSelection();
 		grpSentido.clearSelection();
 		cmbHora.setSelectedIndex(-1);
+		//txtTotalLeves.setText("0");
+		//txtTotalPesados.setText("0");
+		for(String s : volFieldsNames){
+			for(JTextField f : fieldsMap.get(s)){
+				f.setText("0");
+			}
+		}
 	}
 	
 	private String buildValues(String field){
