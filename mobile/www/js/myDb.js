@@ -1,6 +1,6 @@
 myDb = {
 
-	camposNaoExportaveisJson : [ 'id', 'uuid', 'login' ],
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login', 'erro' ],
 
 	tabelaOD : [
 		{field : 'id', type : 'text primary key'},
@@ -56,7 +56,8 @@ myDb = {
 		{field : 'indoPegarCarga', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
-		{field : 'idPerguntaExtra', type : 'integer'}
+		{field : 'idPerguntaExtra', type : 'integer'},
+		{field : 'erro', type : 'text'}
 	],
 
 	fieldExists : function(str) {
@@ -182,7 +183,7 @@ myDb = {
 									}
 								}
 								rowJson += '"' + item.field + '":' + value;
-								if (index < myDb.tabelaOD.length - 1) {
+								if (index < myDb.tabelaOD.length - 2) { // (length - 2) pq o último campo ('erro') tb não será exportado
 									rowJson += ",";
 								}
 							}
