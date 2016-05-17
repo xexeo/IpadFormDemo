@@ -1,9 +1,6 @@
 var app = {
 
-	debugOnBrowser : true, // sem o cordova
-	// debugOnBrowser : false, // com o cordova
-
-	versao : "2.0.0",
+	versao : "2.0.2",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -189,8 +186,8 @@ var app = {
 			}, 3000);
 
 			// durante o debug, inicia o sistema de arquivos
-			//navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-
+			// navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
+			app.onFileSystemReady();
 		}
 
 		// nessa altura do desenvolvimento não faz sentido
@@ -783,11 +780,11 @@ var app = {
 
 	baseUrl : null,
 
-	logFileName : "log.txt",
+	logFileName : "logOD.txt",
 
-	dbName : "dados.db",
+	dbName : "dadosOD.db",
 
-	jsonName : "dados.json",
+	jsonName : "dadosOD.json",
 
 	user_login : null,
 

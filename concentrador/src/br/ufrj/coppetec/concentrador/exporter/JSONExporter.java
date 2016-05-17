@@ -99,6 +99,9 @@ public class JSONExporter {
 			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.", 
 					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
 			
+			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.", 
+					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+			
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Erro ao exportar dados da pesquisa volumétrica:\n" + e.getMessage(), 
 					"Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);

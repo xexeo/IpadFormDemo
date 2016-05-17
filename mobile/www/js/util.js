@@ -108,8 +108,11 @@ var util = {
 		$('#placa_letras_' + tipo_fluxo).keyup(function() {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
-			input.val(input.val().replace(regex, ''));
-			var value = input.val();
+			var value = null;
+			if (!util.isEmpty(input.val())){
+				input.val(input.val().replace(regex, ''));
+				value = input.val();
+			}
 			if (util.isEmpty(value) || value.length < Number(input.attr("maxlength"))) {
 				$('#grupo_placa_numeros_' + tipo_fluxo).hide();
 				$('#placa_numeros_' + tipo_fluxo).val("");

@@ -41,8 +41,12 @@
 	text-align: center;
 }
 
+.button_separator {
+	margin-bottom: 10%;
+}
+
 .menu_separator {
-	margin-bottom: 2%;
+	margin-bottom: 30%;
 }
 
 footer span.versao {
