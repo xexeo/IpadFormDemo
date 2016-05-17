@@ -18,7 +18,7 @@
       <Properties>
         <Property name="dialogTitle" type="java.lang.String" value="Exporta&#xe7;&#xe3;o de dados"/>
         <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new JsonFilter()" type="code"/>
+          <Connection code="new ZipFilter()" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -291,8 +291,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPesquisador1" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtTotalLeves" min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane3" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="1" pref="1295" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -302,6 +306,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblPesquisador" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtPesquisador1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTotalLeves" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane3" max="32767" attributes="0"/>
@@ -3642,6 +3648,17 @@
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JTextField" name="txtTotalLeves">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="text" type="java.lang.String" value="0"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel36">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Total:"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="tab_pesados">
@@ -3662,6 +3679,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPesquisador2" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtTotalPesados" min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane4" alignment="0" pref="1295" max="32767" attributes="0"/>
                       </Group>
@@ -3673,6 +3694,8 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtPesquisador2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblPesquisador1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTotalPesados" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane4" pref="584" max="32767" attributes="0"/>
@@ -8226,6 +8249,17 @@
                         </Property>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JTextField" name="txtTotalPesados">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="text" type="java.lang.String" value="0"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel37">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Total:"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -8347,8 +8381,8 @@
         <Container class="javax.swing.JPanel" name="pnl_envio">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="captura e envio de dados">
-                <Property name="tabTitle" type="java.lang.String" value="captura e envio de dados"/>
+              <JTabbedPaneConstraints tabName="captura e exporta&#xe7;&#xe3;o de dados">
+                <Property name="tabTitle" type="java.lang.String" value="captura e exporta&#xe7;&#xe3;o de dados"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -8380,7 +8414,7 @@
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnInDados" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="238" max="32767" attributes="0"/>
+                          <EmptySpace pref="218" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                       </Group>
@@ -8435,7 +8469,7 @@
                                               <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="70" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -8465,7 +8499,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="btnExportAllVol">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Enviar todos os dados"/>
+                        <Property name="text" type="java.lang.String" value="Exporta&#xe7;&#xe3;o todos os dados"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportAllVolActionPerformed"/>
@@ -8473,7 +8507,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btnVolNotSent">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Enviar dados ainda n&#xe3;o enviados"/>
+                        <Property name="text" type="java.lang.String" value="Exporta&#xe7;&#xe3;o dados ainda n&#xe3;o enviados"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVolNotSentActionPerformed"/>
@@ -8481,17 +8515,17 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Envio de Dados Pesquisa Volum&#xe9;trica"/>
+                        <Property name="text" type="java.lang.String" value="Exporta&#xe7;&#xe3;o de Dados Pesquisa Volum&#xe9;trica"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel35">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Envio de Dados Pesquisa OD"/>
+                        <Property name="text" type="java.lang.String" value="Exporta&#xe7;&#xe3;o de Dados Pesquisa OD"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnODNotSent">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Enviar dados ainda n&#xe3;o enviados"/>
+                        <Property name="text" type="java.lang.String" value="Exporta&#xe7;&#xe3;o dados ainda n&#xe3;o enviados"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnODNotSentActionPerformed"/>
@@ -8499,7 +8533,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btnODexportAll">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Enviar todos os dados"/>
+                        <Property name="text" type="java.lang.String" value="Exporta&#xe7;&#xe3;o todos os dados"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnODexportAllActionPerformed"/>

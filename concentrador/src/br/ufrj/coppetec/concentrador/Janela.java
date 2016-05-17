@@ -17,6 +17,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
@@ -26,6 +27,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -70,6 +73,15 @@ public class Janela extends javax.swing.JFrame {
 		
     }
     
+	public String[] concatStringArrays(String[] a, String[] b) {
+		int aLen = a.length;
+		int bLen = b.length;
+		String[] c= new String[aLen+bLen];
+		System.arraycopy(a, 0, c, 0, aLen);
+		System.arraycopy(b, 0, c, aLen, bLen);
+		return c;
+	 }
+	
 	private void initFieldValues(){
 		
 		//leves
@@ -117,6 +129,7 @@ public class Janela extends javax.swing.JFrame {
 		fieldsMap.put("C3", c3Fields);
 		fieldsMap.put("C4", c4Fields);
 		fieldsMap.put("C5", c5Fields);
+		//pesados
 		fieldsMap.put("S1", s1Fields);
 		fieldsMap.put("S2", s2Fields);
 		fieldsMap.put("S3", s3Fields);
@@ -135,6 +148,9 @@ public class Janela extends javax.swing.JFrame {
 		fieldsMap.put("R5", r5Fields);
 		fieldsMap.put("R6", r6Fields);
 		
+		volFieldsNames = concatStringArrays(volFieldsNamesLeves, volFieldsNamesPesados);
+		
+		//select text on enter
 		for(String s : volFieldsNames){
 			for(JTextField f : fieldsMap.get(s)){
 				f.setText("0");
@@ -150,8 +166,66 @@ public class Janela extends javax.swing.JFrame {
 				});
 			}
 		}
+		
+		//sum values
+		HashMap<fieldTypes, String[]> separatedFields = new HashMap<fieldTypes, String[]>();
+		separatedFields.put(fieldTypes.LEVES, volFieldsNamesLeves);
+		separatedFields.put(fieldTypes.PESADOS, volFieldsNamesPesados);
+		
+		for (Map.Entry<fieldTypes, String[]> entry : separatedFields.entrySet()){
+			for(String s : entry.getValue()){
+				for(JTextField f : fieldsMap.get(s)){
+					f.getDocument().addDocumentListener(new DocumentListener() {
+
+						@Override
+						public void insertUpdate(DocumentEvent e) {
+							sumFields(entry.getKey());
+						}
+
+						@Override
+						public void removeUpdate(DocumentEvent e) {
+							sumFields(entry.getKey());
+						}
+
+						@Override
+						public void changedUpdate(DocumentEvent e) {
+							sumFields(entry.getKey());
+						}
+					});
+
+				}
+			}
+		}
+		
 	};
     
+	private void sumFields(fieldTypes type){
+		String[] fields = null;
+		JTextField sumField = null;
+		int r = 0;
+		switch (type){
+			case LEVES:
+				fields = volFieldsNamesLeves;
+				sumField = txtTotalLeves;
+				break;
+			case PESADOS:
+				fields = volFieldsNamesPesados;
+				sumField = txtTotalPesados;
+				break;
+		}
+		
+		for(String s : fields){
+			for(JTextField f : fieldsMap.get(s)){
+				try{
+					r += Integer.parseInt(f.getText());
+				}catch(Exception e){
+					//nothing
+				}
+			}
+		}
+		sumField.setText(String.valueOf(r));
+	}
+	
     private void puttingImages(){
         HashMap lablesPesadosMap = new HashMap<String, Component>();
 		Component[] labelsPesados = panelPesados.getComponents();
@@ -377,6 +451,8 @@ public class Janela extends javax.swing.JFrame {
         tl86 = new javax.swing.JTextField();
         jPanel50 = new javax.swing.JPanel();
         tl94 = new javax.swing.JTextField();
+        txtTotalLeves = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
         tab_pesados = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         panelPesados = new javax.swing.JPanel();
@@ -630,6 +706,8 @@ public class Janela extends javax.swing.JFrame {
         tp134 = new javax.swing.JTextField();
         lblPesquisador1 = new javax.swing.JLabel();
         txtPesquisador2 = new javax.swing.JTextField();
+        txtTotalPesados = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
         data = new org.jdesktop.swingx.JXDatePicker();
         data.setLocale(new Locale("pt", "BR"));
         btnSalvarForms = new javax.swing.JButton();
@@ -657,7 +735,7 @@ public class Janela extends javax.swing.JFrame {
         dadosFileChooser.setFileFilter(new SQLiteFilter());
 
         exporterFileChooser.setDialogTitle("Exportação de dados");
-        exporterFileChooser.setFileFilter(new JsonFilter());
+        exporterFileChooser.setFileFilter(new ZipFilter());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Concentrador de dados");
@@ -2719,6 +2797,11 @@ public class Janela extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jPanel119);
 
+        txtTotalLeves.setEditable(false);
+        txtTotalLeves.setText("0");
+
+        jLabel36.setText("Total:");
+
         javax.swing.GroupLayout tab_levesLayout = new javax.swing.GroupLayout(tab_leves);
         tab_leves.setLayout(tab_levesLayout);
         tab_levesLayout.setHorizontalGroup(
@@ -2728,8 +2811,12 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(lblPesquisador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTotalLeves, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
         );
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2737,7 +2824,9 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPesquisador)
-                    .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotalLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3))
         );
@@ -5480,6 +5569,11 @@ public class Janela extends javax.swing.JFrame {
 
         txtPesquisador2.setNextFocusableComponent(tp0);
 
+        txtTotalPesados.setEditable(false);
+        txtTotalPesados.setText("0");
+
+        jLabel37.setText("Total:");
+
         javax.swing.GroupLayout tab_pesadosLayout = new javax.swing.GroupLayout(tab_pesados);
         tab_pesados.setLayout(tab_pesadosLayout);
         tab_pesadosLayout.setHorizontalGroup(
@@ -5489,7 +5583,11 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(lblPesquisador1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTotalPesados, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
         );
         tab_pesadosLayout.setVerticalGroup(
@@ -5498,7 +5596,9 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesquisador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPesquisador1))
+                    .addComponent(lblPesquisador1)
+                    .addComponent(txtTotalPesados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
@@ -5646,32 +5746,32 @@ public class Janela extends javax.swing.JFrame {
             }
         });
 
-        btnExportAllVol.setText("Enviar todos os dados");
+        btnExportAllVol.setText("Exportação todos os dados");
         btnExportAllVol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportAllVolActionPerformed(evt);
             }
         });
 
-        btnVolNotSent.setText("Enviar dados ainda não enviados");
+        btnVolNotSent.setText("Exportação dados ainda não enviados");
         btnVolNotSent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolNotSentActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Envio de Dados Pesquisa Volumétrica");
+        jLabel4.setText("Exportação de Dados Pesquisa Volumétrica");
 
-        jLabel35.setText("Envio de Dados Pesquisa OD");
+        jLabel35.setText("Exportação de Dados Pesquisa OD");
 
-        btnODNotSent.setText("Enviar dados ainda não enviados");
+        btnODNotSent.setText("Exportação dados ainda não enviados");
         btnODNotSent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnODNotSentActionPerformed(evt);
             }
         });
 
-        btnODexportAll.setText("Enviar todos os dados");
+        btnODexportAll.setText("Exportação todos os dados");
         btnODexportAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnODexportAllActionPerformed(evt);
@@ -5694,7 +5794,7 @@ public class Janela extends javax.swing.JFrame {
                                 .addComponent(btnVolNotSent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnExportAllVol)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 89, Short.MAX_VALUE)))
+                        .addGap(0, 70, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -5724,7 +5824,7 @@ public class Janela extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(btnInDados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(116, 116, 116))
         );
@@ -5754,7 +5854,7 @@ public class Janela extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("captura e envio de dados", pnl_envio);
+        jTabbedPane2.addTab("captura e exportação de dados", pnl_envio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -5790,7 +5890,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInDadosActionPerformed
 
     private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportAllVolActionPerformed
-        exporterFileChooser.setSelectedFile(new File("todos_volumetrica.json"));
+        exporterFileChooser.setSelectedFile(new File("todos_volumetrica.zip"));
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 		
 		if(returnVal == exporterFileChooser.APPROVE_OPTION){
@@ -5801,7 +5901,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportAllVolActionPerformed
 
     private void btnODexportAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnODexportAllActionPerformed
-        exporterFileChooser.setSelectedFile(new File("todos_od.json"));
+        exporterFileChooser.setSelectedFile(new File("todos_od.zip"));
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 		
 		if(returnVal == exporterFileChooser.APPROVE_OPTION){
@@ -5811,7 +5911,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnODexportAllActionPerformed
 
     private void btnVolNotSentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolNotSentActionPerformed
-        exporterFileChooser.setSelectedFile(new File("novos_volumetrica.json"));
+        exporterFileChooser.setSelectedFile(new File("novos_volumetrica.zip"));
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 		
 		if(returnVal == exporterFileChooser.APPROVE_OPTION){
@@ -5821,7 +5921,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolNotSentActionPerformed
 
     private void btnODNotSentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnODNotSentActionPerformed
-		exporterFileChooser.setSelectedFile(new File("novos_od.json"));
+		exporterFileChooser.setSelectedFile(new File("novos_od.zip"));
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 		
 		if(returnVal == exporterFileChooser.APPROVE_OPTION){
@@ -5847,6 +5947,30 @@ public class Janela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
                 "Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
         }
+		
+		//valida preenchimento de dados
+		String emptyMessage = null;
+		boolean showEmptyMessage = false;
+		if(txtTotalLeves.getText().equals("0") && txtTotalPesados.getText().equals("0")){
+			emptyMessage = "O formulário não contém dados de contagem.\n\n";
+			showEmptyMessage = true;
+		}else if(txtTotalLeves.getText().equals("0")){
+			emptyMessage = "O formulário não contém dados de\ncontagem de veículos e caminhões leves.\n\n";
+			showEmptyMessage = true;
+		}else if(txtTotalPesados.getText().equals("0")){
+			emptyMessage = "O formulário não contém dados de\ncontagem de caminhões pesados.\n\n";
+			showEmptyMessage = true;
+		}
+		
+		if(showEmptyMessage){
+			int returnedValue = JOptionPane.showConfirmDialog(Janela.this,
+                    emptyMessage + "Você deseja gravá-lo assim mesmo?",
+                    "Dados não preenchidos.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if(returnedValue == JOptionPane.NO_OPTION){
+				return;
+			}
+		}
+		
         //validate pista
         if(!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()){
             JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.",
@@ -5921,7 +6045,7 @@ public class Janela extends javax.swing.JFrame {
         reg.pesquisador2 = pesquisador2;
         reg.hora = hora_inicial;
 
-        //reg fields for tipes
+        //reg fields for types
         for (String s : volFieldsNames){
             try{
                 PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
@@ -5990,10 +6114,17 @@ public class Janela extends javax.swing.JFrame {
 		grpPista.clearSelection();
 		grpSentido.clearSelection();
 		cmbHora.setSelectedIndex(-1);
+		//txtTotalLeves.setText("0");
+		//txtTotalPesados.setText("0");
+		for(String s : volFieldsNames){
+			for(JTextField f : fieldsMap.get(s)){
+				f.setText("0");
+			}
+		}
 	}
 	
 	private String buildValues(String field){
-		String r = "{\"Veículo\": \"" + field + "\", \"Valores\": \"";
+		String r = "{\"Veiculo\": \"" + field + "\", \"Valores\": \"";
 		JTextField[] inputFields = fieldsMap.get(field);
 		int h1 = 0;
 		
@@ -6100,6 +6231,8 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -6537,14 +6670,20 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisador1;
     private javax.swing.JTextField txtPesquisador2;
     public javax.swing.JTextField txtPorta;
+    private javax.swing.JTextField txtTotalLeves;
+    private javax.swing.JTextField txtTotalPesados;
     // End of variables declaration//GEN-END:variables
 	
 	
 	
-	private String[] volFieldsNames = {"P1","P3","P2","M","O1","O2","O3","C1","C2","C3","C4","C5",
-		"S1","S2","S3","S4","S5","S6","SE1","SE2","SE3","SE4","SE5","R1","R2","R3","R4","R5","R6"};
+	private String[] volFieldsNames;
+	
+	private String[] volFieldsNamesLeves = {"P1","P3","P2","M","O1","O2","O3","C1","C2","C3","C4","C5"};
+	private String[] volFieldsNamesPesados = {"S1","S2","S3","S4","S5","S6","SE1","SE2","SE3","SE4","SE5","R1","R2","R3","R4","R5","R6"};
 	
 	private HashMap<String, JTextField[]> fieldsMap;
+	
+	private enum fieldTypes {LEVES, PESADOS}
 }
 
 class ImagemRenderer extends DefaultTableCellRenderer{
@@ -6588,6 +6727,20 @@ class JsonFilter extends FileFilter{
 	@Override
 	public String getDescription() {
 		return "Arquivos JSON (*.json)";
+	}
+	
+}
+
+class ZipFilter extends FileFilter{
+
+	@Override
+	public boolean accept(File f) {
+		return f.isDirectory() || f.getAbsolutePath().endsWith(".zip");
+	}
+
+	@Override
+	public String getDescription() {
+		return "Arquivos ZIP (*.zip)";
 	}
 	
 }

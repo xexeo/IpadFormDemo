@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.json.JSONObject;
 
 
 /**
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class JSONExporter {
 	private File file;
+	private File tmpFile;
 	private DbTable table;
 	static public enum WhatToExport {ALL, NOT_SENT}
 	private JSONBuilder jsonBuilder;
@@ -34,6 +36,7 @@ public class JSONExporter {
 	public JSONExporter(File f, DbTable t){
 		this.file = f;
 		this.table = t;
+		this.tmpFile = new File("temp.json");
 		switch(t){
 			case PV:
 				jsonBuilder = new PvJSONbuilder();
@@ -84,18 +87,55 @@ public class JSONExporter {
 			database = new myDB();
 			database.setStatement();
 			result = database.executeQuery(qry);
-			writer = new FileWriter(file);
-			//System.out.println(buildJSON(result));
+			//writer = new FileWriter(file);
+			writer = new FileWriter(tmpFile);
 			writer.write(jsonBuilder.build(result));
 			result.close();
 			writer.close();
+			Zipper zipper = new Zipper(tmpFile, file);
+			zipper.zipIt();
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
+			
+			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.", 
+					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
 			
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Erro ao exportar dados da pesquisa volumétrica:\n" + e.getMessage(), 
 					"Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+	}
+	
+	static public Object getJSONInteger(String val){
+		Object r;
+		if (val == null){
+			r = JSONObject.NULL;
+		} else {
+			r = new Integer(val);
+		}
+		
+		return r;
+	}
+	
+	static public Object getJSONDouble(String val){
+		Object r;
+		if (val == null){
+			r = JSONObject.NULL;
+		} else {
+			r = JSONObject.stringToValue(val);
+		}
+		return r;
+	}
+	
+	static public Object getJSONString(String val){
+		Object r;
+		if (val == null || val.equals("null")){
+			r = JSONObject.NULL;
+		} else {
+			r = val;
+		}
+		
+		return r;
 	}
 	
 }
