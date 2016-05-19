@@ -87,7 +87,12 @@ public class JSONExporter {
 				qry = this.table.sql();
 				break;
 			case NOT_SENT:
-				qry = this.table.sql() + " AND enviado=0;";
+				if (this.table == table.OD){
+					qry = this.table.sql() + " AND enviado=0;";
+				} else {
+					qry = this.table.sql() + " WHERE enviado=0;";
+				}
+				
 				break;
 			default:
 				qry = this.table.sql();

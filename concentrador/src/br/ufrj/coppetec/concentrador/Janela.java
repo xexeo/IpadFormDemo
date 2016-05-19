@@ -6144,6 +6144,8 @@ public class Janela extends javax.swing.JFrame {
 		cmbHora.setSelectedIndex(-1);
 		//txtTotalLeves.setText("0");
 		//txtTotalPesados.setText("0");
+		lblFolha1.setText("-");
+		lblFolha2.setText("-");
 		for(String s : volFieldsNames){
 			for(JTextField f : fieldsMap.get(s)){
 				f.setText("0");

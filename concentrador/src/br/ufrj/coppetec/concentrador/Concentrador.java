@@ -18,11 +18,13 @@ public class Concentrador {
     public static myDB database;
 	public static String trecho;
 	public static String posto;
+	public static String version = "1.3";
 	
     public static void main(String[] args) {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-        System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
-        
+        //System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
+        System.out.println("PNCT Concentrador versão: " + version);
+		
 		Splash splash = new Splash();
 		splash.setLocationRelativeTo(null);
 		splash.setVisible(true);
