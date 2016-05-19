@@ -291,6 +291,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPesquisador1" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblFolha1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtTotalLeves" min="-2" pref="64" max="-2" attributes="0"/>
@@ -308,6 +312,8 @@
                                   <Component id="txtPesquisador1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtTotalLeves" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblFolha1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane3" max="32767" attributes="0"/>
@@ -3659,6 +3665,16 @@
                         <Property name="text" type="java.lang.String" value="Total:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="lblFolha1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="-"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel39">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Folha:"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="tab_pesados">
@@ -3679,6 +3695,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPesquisador2" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblFolha2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtTotalPesados" min="-2" pref="64" max="-2" attributes="0"/>
@@ -3696,6 +3716,8 @@
                                   <Component id="lblPesquisador1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtTotalPesados" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblFolha2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane4" pref="584" max="32767" attributes="0"/>
@@ -8258,6 +8280,16 @@
                     <Component class="javax.swing.JLabel" name="jLabel37">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Total:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblFolha2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="-"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel40">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Folha:"/>
                       </Properties>
                     </Component>
                   </SubComponents>

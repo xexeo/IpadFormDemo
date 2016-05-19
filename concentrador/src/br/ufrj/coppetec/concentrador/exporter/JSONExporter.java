@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -30,6 +31,15 @@ public class JSONExporter {
 									}
 									public String toString(){
 										return text;
+									}
+									public String sql(){
+										String r = "SELECT * FROM ";
+										if (text.equals("odtable")){
+											r += "odtable WHERE cancelado=0";
+										} else {
+											r+= "voltable";
+										}
+										return r;
 									}
 								}
 	
@@ -74,19 +84,20 @@ public class JSONExporter {
 		String qry;
 		switch(what){
 			case ALL:
-				qry = "SELECT * FROM " + this.table.toString() + ";";
+				qry = this.table.sql();
 				break;
 			case NOT_SENT:
-				qry = "SELECT * FROM " + this.table.toString() + " WHERE enviado=0;";
+				qry = this.table.sql() + " AND enviado=0;";
 				break;
 			default:
-				qry = "SELECT * FROM " + this.table.toString() + ";";
+				qry = this.table.sql();
 		}
 		
 		try{
 			database = new myDB();
 			database.setStatement();
 			result = database.executeQuery(qry);
+			
 			//writer = new FileWriter(file);
 			writer = new FileWriter(tmpFile);
 			writer.write(jsonBuilder.build(result));
@@ -98,12 +109,13 @@ public class JSONExporter {
 			
 			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.", 
 					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
-			
-			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.", 
+		}catch (JSONException je){
+			//probably empty table
+			JOptionPane.showMessageDialog(null, "Não existem dados para exportação.", 
 					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
-			
+			return;
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Erro ao exportar dados da pesquisa volumétrica:\n" + e.getMessage(), 
+			JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), 
 					"Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);
 			return;
 		}

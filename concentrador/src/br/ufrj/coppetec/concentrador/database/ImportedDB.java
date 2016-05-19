@@ -76,6 +76,7 @@ public class ImportedDB extends Db{
 		String sql;
 		int counter = 0;
 		while (rs.next()){
+			String idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0"))? "3": rs.getString("idCombustivel");
 			sql = sqlbase + " VALUES ("
 					+ " '" + rs.getString("id") + "', "
 					+ "0," //não enviado
@@ -101,7 +102,8 @@ public class ImportedDB extends Db{
 					+ rs.getString("idPropriedadesDoVeiculo") + ", "
 					+ myDB.getSQLiteBoolean(rs.getString("placaEstrangeira")) + ", "
 					+ rs.getString("idPaisPlacaEstrangeira") + ", "
-					+ rs.getString("idCombustivel") + ", "
+					//+ rs.getString("idCombustivel") + ", "
+					+ idCombustivel + ", "
 					+ "'" + rs.getString("categoria") + "', "
 					+ myDB.getSQLiteBoolean(rs.getString("possuiReboque")) + ", "
 					+ rs.getString("numeroDePessoasNoVeiculo") + ", "

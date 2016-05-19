@@ -70,6 +70,8 @@ public class Janela extends javax.swing.JFrame {
 		
         initComponents();
         initFieldValues();
+		//hide server tab
+		jTabbedPane2.remove(pnl_servidor);
 		
     }
     
@@ -453,6 +455,8 @@ public class Janela extends javax.swing.JFrame {
         tl94 = new javax.swing.JTextField();
         txtTotalLeves = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
+        lblFolha1 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         tab_pesados = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         panelPesados = new javax.swing.JPanel();
@@ -708,6 +712,8 @@ public class Janela extends javax.swing.JFrame {
         txtPesquisador2 = new javax.swing.JTextField();
         txtTotalPesados = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
+        lblFolha2 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
         data = new org.jdesktop.swingx.JXDatePicker();
         data.setLocale(new Locale("pt", "BR"));
         btnSalvarForms = new javax.swing.JButton();
@@ -2802,6 +2808,10 @@ public class Janela extends javax.swing.JFrame {
 
         jLabel36.setText("Total:");
 
+        lblFolha1.setText("-");
+
+        jLabel39.setText("Folha:");
+
         javax.swing.GroupLayout tab_levesLayout = new javax.swing.GroupLayout(tab_leves);
         tab_leves.setLayout(tab_levesLayout);
         tab_levesLayout.setHorizontalGroup(
@@ -2812,6 +2822,10 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFolha1)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotalLeves, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2826,7 +2840,9 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblPesquisador)
                     .addComponent(txtPesquisador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTotalLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36))
+                    .addComponent(jLabel36)
+                    .addComponent(lblFolha1)
+                    .addComponent(jLabel39))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3))
         );
@@ -5574,6 +5590,10 @@ public class Janela extends javax.swing.JFrame {
 
         jLabel37.setText("Total:");
 
+        lblFolha2.setText("-");
+
+        jLabel40.setText("Folha:");
+
         javax.swing.GroupLayout tab_pesadosLayout = new javax.swing.GroupLayout(tab_pesados);
         tab_pesados.setLayout(tab_pesadosLayout);
         tab_pesadosLayout.setHorizontalGroup(
@@ -5584,6 +5604,10 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisador2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFolha2)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel37)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotalPesados, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5598,7 +5622,9 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(txtPesquisador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPesquisador1)
                     .addComponent(txtTotalPesados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel37))
+                    .addComponent(jLabel37)
+                    .addComponent(lblFolha2)
+                    .addComponent(jLabel40))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
@@ -6097,8 +6123,10 @@ public class Janela extends javax.swing.JFrame {
 
             pesados_hora1.setText(hora1);
             leves_hora1.setText(hora1);
-            pesados_hora2.setText(hora2);
+			lblFolha1.setText(Integer.toString(cmbHora.getSelectedIndex()+1));
+			pesados_hora2.setText(hora2);
             leves_hora2.setText(hora2);
+			lblFolha2.setText(Integer.toString(cmbHora.getSelectedIndex()+1));
         }
     }//GEN-LAST:event_cmbHoraActionPerformed
 	
@@ -6233,7 +6261,9 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -6389,6 +6419,8 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel lbl4CB;
     private javax.swing.JLabel lbl4CD;
     private javax.swing.JLabel lblData;
+    private javax.swing.JLabel lblFolha1;
+    private javax.swing.JLabel lblFolha2;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblLocal;
     private javax.swing.JLabel lblM;

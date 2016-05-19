@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 
 public class Concentrador {
-    static WebServer wServer;
+    //static WebServer wServer;
     static Janela janela;
     public static myDB database;
 	public static String trecho;
@@ -45,8 +45,8 @@ public class Concentrador {
 		
 		
 		//inicial o servidorWeb
-		boolean successServer = Concentrador.startServer();
-        System.out.println(successServer);
+		//boolean successServer = Concentrador.startServer();
+        //System.out.println(successServer);
 		
 		
 		
@@ -71,7 +71,7 @@ public class Concentrador {
         
     }
     
-    private static boolean startServer(){
+    /*private static boolean startServer(){
      boolean r = true;
      try{
          wServer = new WebServer(janela.txtAreaLog, janela.txtPorta);
@@ -81,7 +81,7 @@ public class Concentrador {
      }finally{
          return r;
      }
-    }
+    }*/
     
 //    private static void createVolTable() throws Exception{
 //        database.setStatement();
