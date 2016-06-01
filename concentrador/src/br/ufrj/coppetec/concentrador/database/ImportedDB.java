@@ -136,7 +136,11 @@ public class ImportedDB extends Db{
 					+ rs.getString("idPerguntaExtra") 
 					+ "); ";
 			Concentrador.database.setStatement();
-			counter += Concentrador.database.executeStatement(sql);
+			try{
+				counter += Concentrador.database.executeStatement(sql);
+			}catch(Exception e){
+				//do nothing only ignore error
+			}
 			//System.out.println(sql);
 		}
 		rs.close();
