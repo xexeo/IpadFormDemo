@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.0.2",
+	versao : "2.0.3",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -498,6 +498,22 @@ var app = {
 		if (util.isEmpty(registro.placa)) {
 			if (registro.cancelado != 1) {
 				app.setAtributo('erro', "ERRO (placa vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+		}
+
+		// TIPO DE COMBUSTÍVEL
+		if (util.isEmpty(registro.idCombustivel) && (!util.isEmpty(registro.categoria))
+				&& (registro.categoria == 'Onibus' || registro.categoria == 'Pesado')) {
+			app.setAtributo('idCombustivel', util.getIdFromTabelaAuxiliar('Diesel', lista_combustivel));
+		}
+		if (registro.cancelado != 1) {
+			if (util.isEmpty(registro.categoria)) {
+				app.setAtributo('erro', "ERRO (categoria vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+			if (util.isEmpty(registro.idCombustivel)) {
+				app.setAtributo('erro', "ERRO (idCombustivel vazio)");
 				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
 		}

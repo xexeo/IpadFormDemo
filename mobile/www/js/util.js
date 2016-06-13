@@ -109,7 +109,7 @@ var util = {
 			var input = $(this);
 			var regex = new RegExp("[^a-zA-Z]+");
 			var value = null;
-			if (!util.isEmpty(input.val())){
+			if (!util.isEmpty(input.val())) {
 				input.val(input.val().replace(regex, ''));
 				value = input.val();
 			}
@@ -163,6 +163,19 @@ var util = {
 			}
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
+	},
+
+	getIdFromTabelaAuxiliar : function(valor, lista_tb_aux) {
+		for ( var item in lista_tb_aux) {
+			if (lista_tb_aux[item].nome == valor) {
+				var id = Number(lista_tb_aux[item].id);
+				if (!isNaN(id)) {
+					return Number(id);
+				}
+				return id;
+			}
+		}
+		return null;
 	},
 
 	// Funções para o progresso
