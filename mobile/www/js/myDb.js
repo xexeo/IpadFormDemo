@@ -6,28 +6,28 @@ myDb = {
 		{field : 'id', type : 'text primary key'},
 		{field : 'estaNoNote', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'cancelado', type : 'integer'},
-		{field : 'idPosto', type : 'integer'},
-		{field : 'sentido', type : 'text'},
-		{field : 'idIpad', type : 'text'},
+		{field : 'idPosto', type : 'integer', notNull: true},
+		{field : 'sentido', type : 'text', notNull: true},
+		{field : 'idIpad', type : 'text', notNull: true},
 		// {field : 'uuid', type : 'text'},
 		{field : 'login', type : 'text'}, // idPost + sentido (redundante?)
 		{field : 'dataIniPesq', type : 'text'},
 		{field : 'dataFimPesq', type : 'text'},
 		{field : 'placa', type : 'text'},
-		{field : 'anoDeFabricacao', type : 'integer'},
-		{field : 'tipo', type : 'text'},
-		{field : 'idOrigemPais', type : 'integer'},
+		{field : 'anoDeFabricacao', type : 'integer', notNull: true},
+		{field : 'tipo', type : 'text', notNull: true},
+		{field : 'idOrigemPais', type : 'integer', notNull: true},
 		{field : 'idOrigemMunicipio', type : 'integer'},
-		{field : 'idDestinoPais', type : 'integer'},
+		{field : 'idDestinoPais', type : 'integer', notNull: true},
 		{field : 'idDestinoMunicipio', type : 'integer'},
 		{field : 'idMotivoDeEscolhaDaRota', type : 'integer'},
 		{field : 'frequenciaQtd', type : 'integer'},
-		{field : 'frequenciaPeriodo', type : 'text'},
-		{field : 'idPropriedadesDoVeiculo', type : 'integer'},
+		{field : 'frequenciaPeriodo', type : 'text', notNull: true},
+		{field : 'idPropriedadesDoVeiculo', type : 'integer', notNull: true},
 		{field : 'placaEstrangeira', type : 'integer'}, // Boolean 1->true || false, otherwise;
 		{field : 'idPaisPlacaEstrangeira', type : 'integer'},
-		{field : 'idCombustivel', type : 'integer'},
-		{field : 'categoria', type : 'text'},
+		{field : 'idCombustivel', type : 'integer', notNull: true},
+		{field : 'categoria', type : 'text', notNull: true},
 		{field : 'possuiReboque', type : 'integer'},
 		{field : 'numeroDePessoasNoVeiculo', type : 'integer'},
 		{field : 'numeroDePessoasATrabalho', type : 'integer'},
@@ -156,7 +156,7 @@ myDb = {
 					}
 				});
 
-				var sql = "SELECT " + fields + " FROM tblDados;";
+				var sql = "SELECT " + fields + " FROM tblDados WHERE cancelado = 0;";
 
 				tx.executeSql(sql, [], function(tx, res) {
 					for (var rowIndex = 0; rowIndex < res.rows.length; rowIndex++) {
@@ -181,6 +181,12 @@ myDb = {
 											value = ((value == 'true') ? 1 : ((value == 'false') ? 0 : (isNaN(value) ? ('"'
 													+ value + '"') : Number(value))));
 										}
+									}
+								} else if (item.notNull) {
+									if (item.type == 'text') {
+										value = '""';
+									} else {
+										value = 0;
 									}
 								}
 								rowJson += '"' + item.field + '":' + value;
