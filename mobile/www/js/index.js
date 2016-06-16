@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.0.3",
+	versao : "2.0.3b",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -348,13 +348,31 @@ var app = {
 	},
 
 	trocaPagina : function(view, controller) {
-		if (controller != null) {
-			app.onChangeHandler.controller = controller.config;
-			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
-					app.onChangeHandler.handler);
+		if (view == null) {
+			app.logger.log("[ERRO] trocaPagina: view null");
 		}
-
-		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+		
+		if (controller != null) {
+			try {
+				app.onChangeHandler.controller = controller.config;
+				$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
+						app.onChangeHandler.handler);
+			} catch(exc) {
+				app.logger.log("[ERRO] trocaPagina: excecao no changeHandler. Detalhes: ")
+				app.logger.log(exc.message)
+			}
+		}
+		else {
+			app.logger.log("[ERRO] trocaPagina: controller null");
+		}
+		
+		try {
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+		} catch(exc) {
+			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
+			app.logger.log(exc.message)
+		}
+		
 		app.logger.log(view);
 	},
 
@@ -491,154 +509,159 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
-
-		// TIPO VEICULO
-		if (!util.isEmpty(app.getAtributo('tipo'))) {
-			var tipoReal = app.getAtributo('tipo').split("_")[0];
-			app.setAtributo('tipo', tipoReal.toUpperCase());
-		} else if (registro.cancelado != 1) {
-			app.setAtributo('erro', "ERRO (tipo vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// PLACA
-		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
-			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
-				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
-			}
-		} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
-			if (!util.isEmpty(registro.placa_unica)) {
-				app.setAtributo('placa', registro.placa_unica.toUpperCase());
-			}
-		}
-		if (util.isEmpty(registro.placa)) {
-			if (registro.cancelado != 1) {
-				app.setAtributo('erro', "ERRO (placa vazio)");
+		try {
+			// TIPO VEICULO
+			if (!util.isEmpty(app.getAtributo('tipo'))) {
+				var tipoReal = app.getAtributo('tipo').split("_")[0];
+				app.setAtributo('tipo', tipoReal.toUpperCase());
+			} else if (registro.cancelado != 1) {
+				app.setAtributo('erro', "ERRO (tipo vazio)");
 				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
-		}
-
-		// TIPO DE COMBUSTÍVEL
-		if (util.isEmpty(registro.idCombustivel) && (!util.isEmpty(registro.categoria))
-				&& (registro.categoria == 'Onibus' || registro.categoria == 'Pesado')) {
-			app.setAtributo('idCombustivel', util.getIdFromTabelaAuxiliar('Diesel', lista_combustivel));
-		}
-		if (registro.cancelado != 1) {
-			if (util.isEmpty(registro.categoria)) {
-				app.setAtributo('erro', "ERRO (categoria vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
+	
+			// PLACA
+			if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
+				if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
+					app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
+				}
+			} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
+				if (!util.isEmpty(registro.placa_unica)) {
+					app.setAtributo('placa', registro.placa_unica.toUpperCase());
+				}
 			}
-			if (util.isEmpty(registro.idCombustivel)) {
-				app.setAtributo('erro', "ERRO (idCombustivel vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-		}
-
-		// FRENQUENCIA
-		if (!util.isEmpty(registro.frequenciaPeriodo)) {
-			app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
-			if (registro.frequenciaPeriodo == 'Eventualmente') {
-				app.setAtributo('frequenciaQtd', 1);
-			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
+			if (util.isEmpty(registro.placa)) {
 				if (registro.cancelado != 1) {
-					app.setAtributo('erro', "ERRO (frequenciaQtd vazio)");
+					app.setAtributo('erro', "ERRO (placa vazio)");
 					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
-		} else if (registro.cancelado != 1) {
-			app.setAtributo('erro', "ERRO (frequenciaPeriodo vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// ORIGEM: MUNICÍPIO
-		app.splitAtributo('idOrigemMunicipio');
-		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
-			if (registro.cancelado != 1) {
-				app.setAtributo('erro', "ERRO (idOrigemMunicipio vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
+	
+			// TIPO DE COMBUSTÍVEL
+			if (util.isEmpty(registro.idCombustivel) && (!util.isEmpty(registro.categoria))
+					&& (registro.categoria == 'Onibus' || registro.categoria == 'Pesado')) {
+				app.setAtributo('idCombustivel', util.getIdFromTabelaAuxiliar('Diesel', lista_combustivel));
 			}
-		}
-
-		// DESTINO: MUNICÍPIO
-		app.splitAtributo('idDestinoMunicipio');
-		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
-				app.setAtributo('erro', "ERRO (idDestinoMunicipio vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
+				if (util.isEmpty(registro.categoria)) {
+					app.setAtributo('erro', "ERRO (categoria vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+				if (util.isEmpty(registro.idCombustivel)) {
+					app.setAtributo('erro', "ERRO (idCombustivel vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
 			}
-		}
-
-		// ESPECÍFICOS PARA FLUXO DE CARGA
-		if (app.getAtributo('classeVeiculo') == 'carga') {
-
-			// RNTRC
-			if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
-				if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
-					app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel)
-							+ String(registro.placa_vermelha_rntrc_num));
-				} else {
+	
+			// FRENQUENCIA
+			if (!util.isEmpty(registro.frequenciaPeriodo)) {
+				app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
+				if (registro.frequenciaPeriodo == 'Eventualmente') {
+					app.setAtributo('frequenciaQtd', 1);
+				} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
 					if (registro.cancelado != 1) {
-						app.setAtributo('erro', "ERRO (rntrc vazio)");
+						app.setAtributo('erro', "ERRO (frequenciaQtd vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+				}
+			} else if (registro.cancelado != 1) {
+				app.setAtributo('erro', "ERRO (frequenciaPeriodo vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// ORIGEM: MUNICÍPIO
+			app.splitAtributo('idOrigemMunicipio');
+			if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
+				if (registro.cancelado != 1) {
+					app.setAtributo('erro', "ERRO (idOrigemMunicipio vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+			}
+	
+			// DESTINO: MUNICÍPIO
+			app.splitAtributo('idDestinoMunicipio');
+			if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
+				if (registro.cancelado != 1) {
+					app.setAtributo('erro', "ERRO (idDestinoMunicipio vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+			}
+	
+			// ESPECÍFICOS PARA FLUXO DE CARGA
+			if (app.getAtributo('classeVeiculo') == 'carga') {
+	
+				// RNTRC
+				if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
+					if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
+						app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel)
+								+ String(registro.placa_vermelha_rntrc_num));
+					} else {
+						if (registro.cancelado != 1) {
+							app.setAtributo('erro', "ERRO (rntrc vazio)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					}
+				}
+	
+				// PESO DA CARGA ('ton' -> 'kg')
+				if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
+					var peso = Number(registro.pesoDaCarga);
+					if (registro.unidadePesoDaCarga == 'kg') {
+						peso = peso / 10;
+					} else {
+						peso = peso * 100;
+					}
+					app.setAtributo('pesoDaCarga', peso);
+				}
+				if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// TIPO DE PRODUTO (CARGA)
+				app.splitAtributo('idProduto');
+				if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (idProduto vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// CARGA ANTERIOR
+				app.splitAtributo('idCargaAnterior');
+				if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// MUNICÍPIO EMBARQUE DA CARGA
+				app.splitAtributo('municipioEmbarqueCarga');
+				if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// MUNICÍPIO DESEMBARQUE DA CARGA
+				app.splitAtributo('municipioDesembarqueCarga');
+				if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+				app.splitAtributo('paradaObrigatoriaMunicipio1');
+				app.splitAtributo('paradaObrigatoriaMunicipio2');
+	
+				if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+					if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
 						app.logger.log(registro.erro + " no registro: ", registro.id);
 					}
 				}
 			}
-
-			// PESO DA CARGA ('ton' -> 'kg')
-			if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
-				var peso = Number(registro.pesoDaCarga);
-				if (registro.unidadePesoDaCarga == 'kg') {
-					peso = peso / 10;
-				} else {
-					peso = peso * 100;
-				}
-				app.setAtributo('pesoDaCarga', peso);
-			}
-			if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// TIPO DE PRODUTO (CARGA)
-			app.splitAtributo('idProduto');
-			if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (idProduto vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// CARGA ANTERIOR
-			app.splitAtributo('idCargaAnterior');
-			if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// MUNICÍPIO EMBARQUE DA CARGA
-			app.splitAtributo('municipioEmbarqueCarga');
-			if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// MUNICÍPIO DESEMBARQUE DA CARGA
-			app.splitAtributo('municipioDesembarqueCarga');
-			if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
-			app.splitAtributo('paradaObrigatoriaMunicipio1');
-			app.splitAtributo('paradaObrigatoriaMunicipio2');
-
-			if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-				if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-			}
 		}
-
+		catch(exc) {
+			app.logger.log("[ERRO] Excecao em setCamposDerivados; Detalhes: ");
+			app.logger.log(exc);
+		}
+		
 		app.setAtributo('dataFimPesq', util.getTimeDefaultFormated(new Date()));
 	},
 
