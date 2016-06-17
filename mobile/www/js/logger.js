@@ -71,7 +71,7 @@ myLogger = {
 	},
 
 	log : function(str) {
-		myLogger._fila.push(str);
+		myLogger._fila.push("[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n");
 	},
 
 	/**
@@ -91,15 +91,15 @@ myLogger = {
 	},
 
 	_internalWrite : function(str) {
-		var log = "[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n";
-		var blob = new Blob([ log ], {
+		//var log = "[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n";
+		var blob = new Blob([ str ], {
 			type : 'text/plain'
 		});
 		var me = this;
 		try {
 			me._logWriter.seek(me._logWriter.length);
 			me._logWriter.write(blob);
-			console.log(log);
+			console.log(str);
 		} catch (e) {
 			console.log(e.message);
 		}

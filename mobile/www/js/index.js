@@ -310,7 +310,7 @@ var app = {
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
-		app.logger = window.console;
+		
 		ipadID.id = 'browser';
 
 		// botões do menu
@@ -346,8 +346,17 @@ var app = {
 			return false
 		};
 	},
-
-	trocaPagina : function(view, controller) {
+	/**
+	 * Change pages within app
+	 * @param view  -> new view
+	 * @param controller  -> controller that will run on view change
+	 * @param String changeFunction -> ['old', 'new'] -- default new
+	 * 
+	 */
+	trocaPagina : function(view, controller, changeFunction) {
+		
+		var changeF = (util.isEmpty(changeFunction) || changeFunction != 'old')? newChange : oldChange;
+		
 		if (view == null) {
 			app.logger.log("[ERRO] trocaPagina: view null");
 		}
@@ -368,13 +377,25 @@ var app = {
 		
 		try {
 			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
-			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
+			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
+			changeF(view);
 		} catch(exc) {
 			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
 			app.logger.log(exc.message)
 		}
 		
 		app.logger.log(view);
+		app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
+		
+		function oldChange(v){
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v);
+			app.logger.log('oldTrocaPagina');
+		}
+		
+		function newChange(v){
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false});
+			app.logger.log('newTrocaPagina');
+		}
 	},
 
 	// para apendar coisas aos controllers
@@ -834,7 +855,9 @@ var app = {
 
 	sentido : null,
 
-	filePaths : null // { externalFolder : null, dbFolder : null, }
+	filePaths : null, // { externalFolder : null, dbFolder : null, }
+	
+	changesCounter : 0
 	,
 
 }; // end of app
@@ -843,6 +866,35 @@ var app = {
 var registro;
 
 $(document).ready(function() {
+	app.logger = window.console; //se existir um sistema de arquivos essa variável muda para usar o logger.js
+	
+	//captura todos os erros 
+	window.onerror = function(msg, url, line, col, error) {
+		// Note that col & error are new to the HTML 5 spec and may not be 
+		// supported in every browser.  It worked for me in Chrome.
+		var extra = !col ? '' : '\ncolumn: ' + col;
+		extra += !error ? '' : '\nerror: ' + error;
+
+		// You can view the information in an alert to see things working like this:
+		if (msg.indexOf("TypeError: null is not an object (evaluating 'input.val().replace')")>-1){
+			//ignores
+		} else if (msg.indexOf("SecurityError: DOM Exception 18")>-1){
+			window.location.href = app.baseUrl + 'index.html';
+			window.setTimeout(function(){
+				window.location.reload();
+			},0);
+			
+		} else {
+			alert("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra);
+		}
+		
+		app.logger.log("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra);
+
+		var suppressErrorAlert = true;
+		// If you return true, then error alerts (like in older versions of 
+		// Internet Explorer) will be suppressed.
+		return suppressErrorAlert;
+	};
 	insert_controllers.insert();
 	app.initialize();
 });
