@@ -1,6 +1,5 @@
 package br.ufrj.coppetec.concentrador.database;
 
-
 public class PVregister {
 	public int enviado;
 	public int posto;

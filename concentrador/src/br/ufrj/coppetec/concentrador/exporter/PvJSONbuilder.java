@@ -6,22 +6,24 @@
 package br.ufrj.coppetec.concentrador.exporter;
 
 import java.sql.ResultSet;
+
 import javax.swing.JOptionPane;
+
 import org.json.JSONObject;
 
 /**
  *
  * @author mangeli
  */
-public class PvJSONbuilder implements JSONBuilder{
+public class PvJSONbuilder implements JSONBuilder {
 
 	@Override
-	public String build(ResultSet result) throws Exception{
+	public String build(ResultSet result) throws Exception {
 		String s;
 		JSONObject json = new JSONObject();
 		JSONObject reg;
-		while(result.next()){
-			try{
+		while (result.next()) {
+			try {
 				reg = new JSONObject();
 				reg.put("Posto", result.getInt("posto"));
 				reg.put("Pista", result.getString("pista"));
@@ -62,13 +64,13 @@ public class PvJSONbuilder implements JSONBuilder{
 				reg.append("DadosVolumetrica", new JSONObject(result.getString("R6")));
 
 				json.append("dados", reg);
-			}catch (Exception e){
-				JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), 
-					"Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		s = json.get("dados").toString().replace("},", "},\n").replace(":[",":\n[");
+		s = json.get("dados").toString().replace("},", "},\n").replace(":[", ":\n[");
 		return s;
 	}
-	
+
 }
