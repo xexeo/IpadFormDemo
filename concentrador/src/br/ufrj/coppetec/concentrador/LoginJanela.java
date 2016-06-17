@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 /**
@@ -17,6 +19,8 @@ import org.json.JSONObject;
  * @author mangeli
  */
 public class LoginJanela extends javax.swing.JDialog {
+
+	private static Logger logger = LogManager.getLogger(LoginJanela.class);
 
 	/**
 	 * Creates new form LoginJanela
@@ -49,6 +53,7 @@ public class LoginJanela extends javax.swing.JDialog {
 			scanner.close();
 			logins = new JSONObject(result.toString());
 		} catch (Exception e) {
+			logger.error("Erro ao ler o arquivo de login", e);
 			JOptionPane.showMessageDialog(null, "Erro lendo o arquivo de login." + e.getMessage());
 		}
 
@@ -185,13 +190,13 @@ public class LoginJanela extends javax.swing.JDialog {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(LoginJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(LoginJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(LoginJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(LoginJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		}
 		// </editor-fold>
 

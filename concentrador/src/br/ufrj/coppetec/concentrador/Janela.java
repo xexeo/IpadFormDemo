@@ -26,6 +26,9 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import br.ufrj.coppetec.concentrador.database.ImportedDB;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
@@ -36,6 +39,8 @@ import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
  * @author ludes
  */
 public class Janela extends javax.swing.JFrame {
+
+	private static Logger logger = LogManager.getLogger(Janela.class);
 
 	/**
 	 * Creates new form Janela
@@ -54,9 +59,19 @@ public class Janela extends javax.swing.JFrame {
 				boolean returnValue;
 				JTextField textField = (JTextField) comp;
 				try {
-					Integer.parseInt(textField.getText());
-					returnValue = true;
+					int qtd = Integer.parseInt(textField.getText());
+					if (qtd <= myDB.MAX_SAFE_INT.intValue()) {
+						returnValue = true;
+					} else {
+						logger.warn(String.format("Formato de número inválido (%d > %d)", qtd, myDB.MAX_SAFE_INT.intValue()));
+						JOptionPane.showMessageDialog(
+								Janela.this,
+								String.format("Apenas números inteiros até %d são permitidos como entrada",
+										myDB.MAX_SAFE_INT.intValue()), "Entrada incorreta", JOptionPane.ERROR_MESSAGE);
+						returnValue = false;
+					}
 				} catch (NumberFormatException e) {
+					logger.warn("Formato de número inválido.", e);
 					JOptionPane.showMessageDialog(Janela.this, "Apenas números inteiros são permitidos como entrada",
 							"Entrada incorreta", JOptionPane.ERROR_MESSAGE);
 					returnValue = false;
@@ -216,9 +231,11 @@ public class Janela extends javax.swing.JFrame {
 		for (String s : fields) {
 			for (JTextField f : fieldsMap.get(s)) {
 				try {
-					r += Integer.parseInt(f.getText());
+					r += myDB.getIntValue(f.getText());
 				} catch (Exception e) {
-					// nothing
+					if ((f.getText() != null) && (!f.getText().isEmpty())) {
+						logger.warn("Erro na conversão de texto em número.", e);
+					}
 				}
 			}
 		}
@@ -5942,9 +5959,9 @@ public class Janela extends javax.swing.JFrame {
 				ImportedDB db = new ImportedDB(file.getAbsolutePath());
 				db.importData();
 			} catch (IOException ex) {
-				System.out.println("Problema accessando arquivo " + file.getAbsolutePath());
+				logger.error(String.format("Erro ao acessar o arquivo %s", file.getAbsolutePath()));
 			} catch (Exception e) {
-				System.out.println("Problema importando dados: " + e.getMessage());
+				logger.error(String.format("Erro ao importar os dados do arquivo %s", file.getAbsolutePath()), e);
 			}
 		} else {
 			System.out.println("File access cancelled by user.");
@@ -6006,6 +6023,7 @@ public class Janela extends javax.swing.JFrame {
 		try {
 			database = new myDB();
 		} catch (Exception e) {
+			logger.error("Erro ao conectar com o BD.", e);
 			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
 		}
@@ -6115,6 +6133,7 @@ public class Janela extends javax.swing.JFrame {
 			try {
 				PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
 			} catch (Exception e) {
+				logger.error("Erro ao gravar os dados.", e);
 				JOptionPane.showMessageDialog(Janela.this, "Erro gravando dados:\n" + e.getMessage(),
 						"Erro na gravação dos dados.", JOptionPane.ERROR_MESSAGE);
 				return;
@@ -6143,6 +6162,7 @@ public class Janela extends javax.swing.JFrame {
 					JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (Exception e) {
+			logger.error("Erro ao conectar com o BD.", e);
 			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
 		}
@@ -6156,6 +6176,7 @@ public class Janela extends javax.swing.JFrame {
 			try {
 				hora_inicial = Integer.parseInt((String) cmbHora.getSelectedItem());
 			} catch (Exception e) {
+				logger.error("Erro ao configurar a hora inicial da pesquisa.", e);
 				JOptionPane.showMessageDialog(null, "Erro configurando a hora inicial da pesquisa: \n" + e.getMessage());
 				return;
 			}
@@ -6238,13 +6259,13 @@ public class Janela extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		}
 		// </editor-fold>
 

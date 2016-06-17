@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="simple-6.0.1/" kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="src/simple-6.0.1/simple-common/src/main/java"/>
 	<classpathentry kind="src" path="src/simple-6.0.1/simple-http/src/main/java"/>
@@ -13,6 +14,8 @@
 	<classpathentry kind="lib" path="lib/json-20160212-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/json-20160212.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-core-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.8.11.2.jar"/>
 	<classpathentry kind="lib" path="lib/swingx-all-1.6.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>

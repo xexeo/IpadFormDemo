@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 /**
@@ -16,6 +18,8 @@ import org.json.JSONObject;
  * @author mangeli
  */
 public class PvJSONbuilder implements JSONBuilder {
+
+	private static Logger logger = LogManager.getLogger(PvJSONbuilder.class);
 
 	@Override
 	public String build(ResultSet result) throws Exception {
@@ -65,6 +69,7 @@ public class PvJSONbuilder implements JSONBuilder {
 
 				json.append("dados", reg);
 			} catch (Exception e) {
+				logger.error("Erro ao exportar dados da PV.", e);
 				JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 						JOptionPane.ERROR_MESSAGE);
 			}

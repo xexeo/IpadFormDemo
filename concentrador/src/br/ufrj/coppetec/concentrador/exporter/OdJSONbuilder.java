@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import br.ufrj.coppetec.concentrador.database.myDB;
@@ -18,6 +20,8 @@ import br.ufrj.coppetec.concentrador.database.myDB;
  * @author mangeli
  */
 public class OdJSONbuilder implements JSONBuilder {
+
+	private static Logger logger = LogManager.getLogger(OdJSONbuilder.class);
 
 	@Override
 	public String build(ResultSet result) throws Exception {
@@ -87,6 +91,9 @@ public class OdJSONbuilder implements JSONBuilder {
 
 				json.append("dados", reg);
 			} catch (Exception e) {
+				logger.error(
+						String.format("Erro ao exportar dados da pesquisa OD no tratamento do registro: %s",
+								result.getString("id")), e);
 				JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 						JOptionPane.ERROR_MESSAGE);
 			}

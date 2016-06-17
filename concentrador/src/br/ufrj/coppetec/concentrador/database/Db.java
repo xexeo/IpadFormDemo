@@ -6,11 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author mangeli
  */
 abstract class Db {
+
+	private static Logger logger = LogManager.getLogger(Db.class);
 
 	private String driver = "";
 	private String url = null;
@@ -23,6 +28,7 @@ abstract class Db {
 		this.url = url;
 		setConnection();
 		setStatement();
+		logger.info("Conexão com o BD estabelecida.");
 	}
 
 	public final void setConnection() throws Exception {
@@ -59,14 +65,14 @@ abstract class Db {
 			try {
 				this.statement.close();
 			} catch (Exception e) {
-				// ignore
+				logger.error("Erro ao encerrar a transação com o BD.", e);
 			}
 		}
 		if (this.conn != null) {
 			try {
 				this.conn.close();
 			} catch (Exception e) {
-				// ignore
+				logger.error("Erro ao fechar a conexão com o BD.", e);
 			}
 		}
 

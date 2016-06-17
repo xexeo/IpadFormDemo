@@ -3,11 +3,16 @@ package br.ufrj.coppetec.concentrador.database;
 import java.math.BigInteger;
 import java.sql.ResultSet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author mangeli
  */
 public class myDB extends Db {
+
+	private static Logger logger = LogManager.getLogger(myDB.class);
 
 	public myDB() throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
@@ -254,7 +259,7 @@ public class myDB extends Db {
 		return r;
 	}
 
-	private final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
+	public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
 
 	/**
 	 * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
@@ -269,6 +274,7 @@ public class myDB extends Db {
 			BigInteger value = new BigInteger(valueStr);
 			if (value.compareTo(MAX_SAFE_INT) > 0) {
 				value = MAX_SAFE_INT;
+				logger.warn(String.format("Valor inteiro maior que o permitido (%s > %d)", valueStr, MAX_SAFE_INT.intValue()));
 			}
 			valueInt = value.intValue();
 		}

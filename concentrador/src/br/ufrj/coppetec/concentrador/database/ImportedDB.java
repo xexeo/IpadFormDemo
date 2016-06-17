@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import br.ufrj.coppetec.concentrador.Concentrador;
 
 /**
@@ -11,6 +14,8 @@ import br.ufrj.coppetec.concentrador.Concentrador;
  * @author mangeli
  */
 public class ImportedDB extends Db {
+
+	private static Logger logger = LogManager.getLogger(ImportedDB.class);
 
 	public ImportedDB(String path) throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:" + path);
@@ -144,6 +149,7 @@ public class ImportedDB extends Db {
 				counter += Concentrador.database.executeStatement(sql);
 			} catch (Exception e) {
 				// do nothing only ignore error
+				logger.error(String.format("Erro a inserir o registro:%s%s", System.lineSeparator(), sql), e);
 			}
 			// System.out.println(sql);
 		}

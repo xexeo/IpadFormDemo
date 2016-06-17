@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Query;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -25,6 +27,9 @@ import org.simpleframework.transport.connect.SocketConnection;
  * @author mangeli
  */
 public class WebServer implements Container {
+
+	private static Logger logger = LogManager.getLogger(WebServer.class);
+
 	private JTextArea observer;
 	private JTextField txtPort;
 	private SocketProcessor realServer;
@@ -49,6 +54,7 @@ public class WebServer implements Container {
 				this.listeningPort = port;
 				break;
 			} catch (Exception e) {
+				logger.error(String.format("Erro ao escutar a porta %d", port), e);
 				observer.append("Erro tentando escutar a porta " + port + ": " + e.getMessage() + "\n");
 				txtPort.setText("");
 			}
@@ -94,6 +100,7 @@ public class WebServer implements Container {
 			}
 
 		} catch (Exception e) {
+			logger.error("Erro ao receber dados.", e);
 			observer.append("ERRO recebendo dados: " + e.getMessage() + "\n");
 		} finally {
 

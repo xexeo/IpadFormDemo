@@ -2,6 +2,9 @@ package br.ufrj.coppetec.concentrador;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import br.ufrj.coppetec.concentrador.database.myDB;
 
 /**
@@ -10,6 +13,8 @@ import br.ufrj.coppetec.concentrador.database.myDB;
  */
 
 public class Concentrador {
+	private static Logger logger = LogManager.getLogger(Concentrador.class);
+
 	// static WebServer wServer;
 	static Janela janela;
 	public static myDB database;
@@ -32,6 +37,7 @@ public class Concentrador {
 			database.createVolTable();
 			database.createODTable();
 		} catch (Exception e) {
+			logger.error("Erro ao acessar o BD.", e);
 			JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
 			e.printStackTrace();
 			System.exit(1);
@@ -61,7 +67,6 @@ public class Concentrador {
 		janela.setVisible(true);
 
 	}
-
 	// private static boolean startServer() {
 	// boolean r = true;
 	// try {

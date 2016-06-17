@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +23,9 @@ import br.ufrj.coppetec.concentrador.database.myDB;
  * @author mangeli
  */
 public class JSONExporter {
+
+	private static Logger logger = LogManager.getLogger(JSONExporter.class);
+
 	private File file;
 	private File tmpFile;
 	private DbTable table;
@@ -126,11 +131,13 @@ public class JSONExporter {
 			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.",
 					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
 		} catch (JSONException je) {
+			logger.warn("Não existem dados para exportação. Provavelmente a tabela está vazia.", je);
 			// probably empty table
 			JOptionPane.showMessageDialog(null, "Não existem dados para exportação.", "Exportação de dados.",
 					JOptionPane.INFORMATION_MESSAGE);
 			return;
 		} catch (Exception e) {
+			logger.error("Erro ao exportar dados.", e);
 			JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 					JOptionPane.ERROR_MESSAGE);
 			return;

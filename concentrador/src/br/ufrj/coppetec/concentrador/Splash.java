@@ -7,11 +7,16 @@ package br.ufrj.coppetec.concentrador;
 
 import javax.swing.ImageIcon;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author mangeli
  */
 public class Splash extends javax.swing.JFrame {
+
+	private static Logger logger = LogManager.getLogger(Splash.class);
 
 	/**
 	 * Creates new form Splash
@@ -64,13 +69,13 @@ public class Splash extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			logger.fatal("ERRO FATAL: a aplicação será finalizada.", ex);
 		}
 		// </editor-fold>
 
