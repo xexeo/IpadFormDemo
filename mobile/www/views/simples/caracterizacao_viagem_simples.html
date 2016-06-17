@@ -50,7 +50,8 @@
 			<legend class="ui-block-a">Frequência da viagem:</legend>
 			<div class="ui-block-b ui-grid-b">
 				<div class="ui-block-a">
-					<input id="frequencia_num_simples" type="number" name="frequencia_num_simples" value="" min="1" data-theme="a" />
+					<input id="frequencia_num_simples" type="text" pattern="\d*" typeMask="integer" name="frequencia_num_simples" value=""
+						min="1" data-theme="a" />
 				</div>
 				<label class="ui-block-b center" for="frequencia_sel_simples">por</label>
 				<div class="ui-block-c">
@@ -80,14 +81,15 @@
 			<fieldset class="ui-block-a ui-grid-a" id="grupo_pessoas_simples">
 				<label class="ui-block-a" for="pessoas_simples">Pessoas no veículo:</label>
 				<div class="ui-block-b">
-					<input id="pessoas_simples" type="number" min="0" pattern="\d*" name="pessoas_simples" value="" data-theme="a" />
+					<input id="pessoas_simples" type="text" pattern="\d*" typeMask="integer" min="0" name="pessoas_simples" value=""
+						data-theme="a" />
 				</div>
 			</fieldset>
 			<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_pessoas_trabalho_simples">
 				<label class="ui-block-a" for="pessoas_trabalho_simples">Pessoas a trabalho:</label>
 				<div class="ui-block-b">
-					<input id="pessoas_trabalho_simples" type="number" min="0" pattern="\d*" name="pessoas_trabalho_simples" value=""
-						data-theme="a" />
+					<input id="pessoas_trabalho_simples" type="text" pattern="\d*" typeMask="integer" min="0" name="pessoas_trabalho_simples"
+						value="" data-theme="a" />
 				</div>
 			</fieldset>
 		</fieldset>

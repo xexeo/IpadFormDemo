@@ -372,6 +372,22 @@ var app = {
 					$(this).focus();
 				});
 
+				// Input integer
+				$('input[typeMask="integer"]').each(function(key, input) {
+					var minValue = 0;
+					var maxValue = 99999999;
+					if (!util.isEmpty($(input).attr('min'))) {
+						minValue = Number($(input).attr('min'));
+					}
+					if (!util.isEmpty($(input).attr('max'))) {
+						maxValue = Number($(input).attr('max'));
+					}
+					$(input).inputmask('integer', {
+						min : minValue,
+						max : maxValue
+					});
+				});
+
 				// Input money
 				$('input[typeMask="money-BRL"]').each(function(key, input) {
 					$(input).maskMoney({

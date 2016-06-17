@@ -14,7 +14,7 @@ controllers.selecionar_tipo = {
 			if ((!util.isEmpty(limitePessoas)) && (!isNaN(limitePessoas))) {
 				app.setAtributo('limitePessoas', parseInt(limitePessoas));
 			} else {
-				app.setAtributo('limitePessoas', null);
+				app.setAtributo('limitePessoas', 999); // máximo de pessoas indefinido
 			}
 
 			if ($(this).hasClass('v-simples')) {
