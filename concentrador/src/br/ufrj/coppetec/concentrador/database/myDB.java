@@ -254,27 +254,23 @@ public class myDB extends Db {
 		return r;
 	}
 
-	private final static BigInteger MAX_INT = BigInteger.valueOf(99999999);
+	private final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
 
 	/**
 	 * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
 	 * 
 	 * @param valueStr
 	 *            - O valor em uma string.
-	 * @return O valor em inteiro. Retornará null se a string não estiver no formato de um inteiro.
+	 * @return O valor em inteiro.
 	 */
 	public static Integer getIntValue(String valueStr) {
 		Integer valueInt = null;
 		if (valueStr != null) {
-			try {
-				BigInteger value = new BigInteger(valueStr);
-				if (value.compareTo(MAX_INT) > 0) {
-					value = MAX_INT;
-				}
-				valueInt = value.intValue();
-			} catch (Exception e) {
-				e.printStackTrace();
+			BigInteger value = new BigInteger(valueStr);
+			if (value.compareTo(MAX_SAFE_INT) > 0) {
+				value = MAX_SAFE_INT;
 			}
+			valueInt = value.intValue();
 		}
 		return valueInt;
 	}
