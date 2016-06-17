@@ -367,7 +367,8 @@ var app = {
 		}
 		
 		try {
-			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
 		} catch(exc) {
 			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
 			app.logger.log(exc.message)
