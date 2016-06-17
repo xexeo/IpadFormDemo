@@ -18,7 +18,7 @@ public class Concentrador {
     public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "1.6";
+	public static String version = "1.7";
 	
     public static void main(String[] args) {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
