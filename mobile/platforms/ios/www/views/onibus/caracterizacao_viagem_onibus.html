@@ -50,7 +50,8 @@
 			<legend class="ui-block-a">Frequência da viagem:</legend>
 			<div class="ui-block-b ui-grid-b">
 				<div class="ui-block-a">
-					<input id="frequencia_num_onibus" type="number" name="frequencia_num_onibus" value="" min="1" data-theme="a" />
+					<input id="frequencia_num_onibus" type="text" pattern="\d*" typeMask="integer" name="frequencia_num_onibus" value="" min="1"
+						data-theme="a" />
 				</div>
 				<label class="ui-block-b center" for="frequencia_sel_onibus">por</label>
 				<div class="ui-block-c">
@@ -70,8 +71,12 @@
 
 		<fieldset class="ui-grid-a escondido" id="grupo_pessoas_onibus">
 			<legend class="ui-block-a">Pessoas no veículo:</legend>
-			<div class="ui-block-b">
-				<input id="pessoas_onibus" type="number" pattern="\d*" name="pessoas_onibus" value="" data-theme="a" />
+			<div class="ui-block-b ui-grid-b">
+				<div class="ui-block-a">
+					<input id="pessoas_onibus" type="text" pattern="\d*" typeMask="integer" name="pessoas_onibus" value="" data-theme="a" />
+				</div>
+				<div class="ui-block-b"></div>
+				<div class="ui-block-c"></div>
 			</div>
 		</fieldset>
 

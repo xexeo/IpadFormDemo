@@ -48,6 +48,7 @@ var app = {
 		app.senha_login = null;
 		app.posto = null;
 		app.sentido = null;
+		app.restart(); //problably the only line we need
 	},
 
 	exportaDbToJson : function() {
@@ -310,7 +311,7 @@ var app = {
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
-		app.logger = window.console;
+		
 		ipadID.id = 'browser';
 
 		// botões do menu
@@ -346,8 +347,17 @@ var app = {
 			return false
 		};
 	},
-
-	trocaPagina : function(view, controller) {
+	/**
+	 * Change pages within app
+	 * @param view  -> new view
+	 * @param controller  -> controller that will run on view change
+	 * @param String changeFunction -> ['old', 'new'] -- default new
+	 * 
+	 */
+	trocaPagina : function(view, controller, changeFunction) {
+		
+		var changeF = (util.isEmpty(changeFunction) || changeFunction != 'old')? newChange : oldChange;
+		
 		if (view == null) {
 			app.logger.log("[ERRO] trocaPagina: view null");
 		}
@@ -367,13 +377,26 @@ var app = {
 		}
 		
 		try {
-			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
+			changeF(view);
 		} catch(exc) {
 			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
 			app.logger.log(exc.message)
 		}
 		
 		app.logger.log(view);
+		app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
+		
+		function oldChange(v){
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v);
+			app.logger.log('oldTrocaPagina');
+		}
+		
+		function newChange(v){
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false});
+			app.logger.log('newTrocaPagina');
+		}
 	},
 
 	// para apendar coisas aos controllers
@@ -832,6 +855,13 @@ var app = {
 		}
 		;
 	},
+	
+	restart : function(){
+		window.location.href = app.baseUrl + 'index.html'; //href para a página inicial
+		window.setTimeout(function(){
+			window.location.reload();
+		},1000);
+	},
 
 	baseUrl : null,
 
@@ -849,7 +879,11 @@ var app = {
 
 	sentido : null,
 
-	filePaths : null // { externalFolder : null, dbFolder : null, }
+	filePaths : null, // { externalFolder : null, dbFolder : null, }
+	
+	changesCounter : 0,
+	
+	logger : window.console //initial value, changed to use logger.js on file system initialization
 	,
 
 }; // end of app
@@ -858,6 +892,47 @@ var app = {
 var registro;
 
 $(document).ready(function() {
+	
+	//captura todos os erros 
+	window.onerror = function(msg, url, line, col, error) {
+		// Note that col & error are new to the HTML 5 spec and may not be 
+		// supported in every browser.  It worked for me in Chrome.
+		var extra = !col ? '' : '\ncolumn: ' + col;
+		extra += !error ? '' : '\nerror: ' + error;
+		
+		var mesageString = "Error: " + msg + "\nurl: " + url + "\nline: " + line + extra;
+
+		if (app == null){
+			console.log(mesageString);
+		} else {
+			app.logger.log(mesageString);
+		}
+
+		// You can view the information in an alert to see things working like this:
+		if (msg.indexOf("TypeError: null is not an object (evaluating 'input.val().replace')")>-1){
+			//ignores
+		} else if (msg.indexOf("SecurityError: DOM Exception 18")>-1){ //app freezes
+			
+			if (app != null){
+				alert("Ocorreu uma condição que impede \no prosseguimento do programa.\nO aplicativo será reiniciado",
+					'Erro fatal.',
+					app.restart,
+					'error');
+			} else {
+				alert("Ocorreu uma condição que impede \no prosseguimento do programa.\nO aplicativo será reiniciado");
+				window.location.reload()
+			}
+			
+		} else {
+			alert("Ocorreu uma condição inesperada anote \n a mensagem abaixo\n" + mesageString);
+		}
+		
+		
+		var suppressErrorAlert = true;
+		// If you return true, then error alerts (like in older versions of 
+		// Internet Explorer) will be suppressed.
+		return suppressErrorAlert;
+	};
 	insert_controllers.insert();
 	app.initialize();
 });

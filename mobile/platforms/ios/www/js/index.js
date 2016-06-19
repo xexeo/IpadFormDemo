@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.0.2",
+	versao : "2.0.3b",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -48,6 +48,7 @@ var app = {
 		app.senha_login = null;
 		app.posto = null;
 		app.sentido = null;
+		app.restart(); //problably the only line we need
 	},
 
 	exportaDbToJson : function() {
@@ -310,7 +311,7 @@ var app = {
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
-		app.logger = window.console;
+		
 		ipadID.id = 'browser';
 
 		// botões do menu
@@ -346,16 +347,56 @@ var app = {
 			return false
 		};
 	},
-
-	trocaPagina : function(view, controller) {
-		if (controller != null) {
-			app.onChangeHandler.controller = controller.config;
-			$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
-					app.onChangeHandler.handler);
+	/**
+	 * Change pages within app
+	 * @param view  -> new view
+	 * @param controller  -> controller that will run on view change
+	 * @param String changeFunction -> ['old', 'new'] -- default new
+	 * 
+	 */
+	trocaPagina : function(view, controller, changeFunction) {
+		
+		var changeF = (util.isEmpty(changeFunction) || changeFunction != 'old')? newChange : oldChange;
+		
+		if (view == null) {
+			app.logger.log("[ERRO] trocaPagina: view null");
 		}
-
-		$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+		
+		if (controller != null) {
+			try {
+				app.onChangeHandler.controller = controller.config;
+				$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
+						app.onChangeHandler.handler);
+			} catch(exc) {
+				app.logger.log("[ERRO] trocaPagina: excecao no changeHandler. Detalhes: ")
+				app.logger.log(exc.message)
+			}
+		}
+		else {
+			app.logger.log("[ERRO] trocaPagina: controller null");
+		}
+		
+		try {
+			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
+			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
+			changeF(view);
+		} catch(exc) {
+			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
+			app.logger.log(exc.message)
+		}
+		
 		app.logger.log(view);
+		app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
+		
+		function oldChange(v){
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v);
+			app.logger.log('oldTrocaPagina');
+		}
+		
+		function newChange(v){
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false});
+			app.logger.log('newTrocaPagina');
+		}
 	},
 
 	// para apendar coisas aos controllers
@@ -370,6 +411,22 @@ var app = {
 				// Input radio
 				$('input[type="radio"]').click(function() {
 					$(this).focus();
+				});
+
+				// Input integer
+				$('input[typeMask="integer"]').each(function(key, input) {
+					var minValue = 0;
+					var maxValue = 99999999;
+					if (!util.isEmpty($(input).attr('min'))) {
+						minValue = Number($(input).attr('min'));
+					}
+					if (!util.isEmpty($(input).attr('max'))) {
+						maxValue = Number($(input).attr('max'));
+					}
+					$(input).inputmask('integer', {
+						min : minValue,
+						max : maxValue
+					});
 				});
 
 				// Input money
@@ -475,138 +532,159 @@ var app = {
 	},
 
 	setCamposDerivados : function() {
-
-		// TIPO VEICULO
-		if (!util.isEmpty(app.getAtributo('tipo'))) {
-			var tipoReal = app.getAtributo('tipo').split("_")[0];
-			app.setAtributo('tipo', tipoReal.toUpperCase());
-		} else if (registro.cancelado != 1) {
-			app.setAtributo('erro', "ERRO (tipo vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// PLACA
-		if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
-			if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
-				app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
-			}
-		} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
-			if (!util.isEmpty(registro.placa_unica)) {
-				app.setAtributo('placa', registro.placa_unica.toUpperCase());
-			}
-		}
-		if (util.isEmpty(registro.placa)) {
-			if (registro.cancelado != 1) {
-				app.setAtributo('erro', "ERRO (placa vazio)");
+		try {
+			// TIPO VEICULO
+			if (!util.isEmpty(app.getAtributo('tipo'))) {
+				var tipoReal = app.getAtributo('tipo').split("_")[0];
+				app.setAtributo('tipo', tipoReal.toUpperCase());
+			} else if (registro.cancelado != 1) {
+				app.setAtributo('erro', "ERRO (tipo vazio)");
 				app.logger.log(registro.erro + " no registro: ", registro.id);
 			}
-		}
-
-		// FRENQUENCIA
-		if (!util.isEmpty(registro.frequenciaPeriodo)) {
-			app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
-			if (registro.frequenciaPeriodo == 'Eventualmente') {
-				app.setAtributo('frequenciaQtd', 1);
-			} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
+	
+			// PLACA
+			if ((!util.isEmpty(registro.placaEstrangeira)) && (!registro.placaEstrangeira)) {
+				if ((!util.isEmpty(registro.placa_letras)) && (!util.isEmpty(registro.placa_numeros))) {
+					app.setAtributo('placa', registro.placa_letras.toUpperCase() + "-" + registro.placa_numeros);
+				}
+			} else if ((!util.isEmpty(registro.placaEstrangeira)) && registro.placaEstrangeira) {
+				if (!util.isEmpty(registro.placa_unica)) {
+					app.setAtributo('placa', registro.placa_unica.toUpperCase());
+				}
+			}
+			if (util.isEmpty(registro.placa)) {
 				if (registro.cancelado != 1) {
-					app.setAtributo('erro', "ERRO (frequenciaQtd vazio)");
+					app.setAtributo('erro', "ERRO (placa vazio)");
 					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 			}
-		} else if (registro.cancelado != 1) {
-			app.setAtributo('erro', "ERRO (frequenciaPeriodo vazio)");
-			app.logger.log(registro.erro + " no registro: ", registro.id);
-		}
-
-		// ORIGEM: MUNICÍPIO
-		app.splitAtributo('idOrigemMunicipio');
-		if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
-			if (registro.cancelado != 1) {
-				app.setAtributo('erro', "ERRO (idOrigemMunicipio vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
+	
+			// TIPO DE COMBUSTÍVEL
+			if (util.isEmpty(registro.idCombustivel) && (!util.isEmpty(registro.categoria))
+					&& (registro.categoria == 'Onibus' || registro.categoria == 'Pesado')) {
+				app.setAtributo('idCombustivel', util.getIdFromTabelaAuxiliar('Diesel', lista_combustivel));
 			}
-		}
-
-		// DESTINO: MUNICÍPIO
-		app.splitAtributo('idDestinoMunicipio');
-		if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
 			if (registro.cancelado != 1) {
-				app.setAtributo('erro', "ERRO (idDestinoMunicipio vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
+				if (util.isEmpty(registro.categoria)) {
+					app.setAtributo('erro', "ERRO (categoria vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+				if (util.isEmpty(registro.idCombustivel)) {
+					app.setAtributo('erro', "ERRO (idCombustivel vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
 			}
-		}
-
-		// ESPECÍFICOS PARA FLUXO DE CARGA
-		if (app.getAtributo('classeVeiculo') == 'carga') {
-
-			// RNTRC
-			if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
-				if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
-					app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel)
-							+ String(registro.placa_vermelha_rntrc_num));
-				} else {
+	
+			// FRENQUENCIA
+			if (!util.isEmpty(registro.frequenciaPeriodo)) {
+				app.setAtributo('frequenciaPeriodo', util.getListaFrequencias()[Number(registro.frequenciaPeriodo) - 1]);
+				if (registro.frequenciaPeriodo == 'Eventualmente') {
+					app.setAtributo('frequenciaQtd', 1);
+				} else if (util.isEmpty(registro.frequenciaQtd) || (Number(registro.frequenciaQtd) <= 0)) {
 					if (registro.cancelado != 1) {
-						app.setAtributo('erro', "ERRO (rntrc vazio)");
+						app.setAtributo('erro', "ERRO (frequenciaQtd vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+				}
+			} else if (registro.cancelado != 1) {
+				app.setAtributo('erro', "ERRO (frequenciaPeriodo vazio)");
+				app.logger.log(registro.erro + " no registro: ", registro.id);
+			}
+	
+			// ORIGEM: MUNICÍPIO
+			app.splitAtributo('idOrigemMunicipio');
+			if (util.isEmpty(registro.idOrigemMunicipio) && (registro.idOrigemPais == 1)) { // Brasil
+				if (registro.cancelado != 1) {
+					app.setAtributo('erro', "ERRO (idOrigemMunicipio vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+			}
+	
+			// DESTINO: MUNICÍPIO
+			app.splitAtributo('idDestinoMunicipio');
+			if (util.isEmpty(registro.idDestinoMunicipio) && (registro.idDestinoPais == 1)) { // Brasil
+				if (registro.cancelado != 1) {
+					app.setAtributo('erro', "ERRO (idDestinoMunicipio vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+			}
+	
+			// ESPECÍFICOS PARA FLUXO DE CARGA
+			if (app.getAtributo('classeVeiculo') == 'carga') {
+	
+				// RNTRC
+				if ((!util.isEmpty(registro.placaVermelha)) && registro.placaVermelha) {
+					if (!util.isEmpty(registro.placa_vermelha_rntrc_sel) && !util.isEmpty(registro.placa_vermelha_rntrc_num)) {
+						app.setAtributo('rntrc', String(registro.placa_vermelha_rntrc_sel)
+								+ String(registro.placa_vermelha_rntrc_num));
+					} else {
+						if (registro.cancelado != 1) {
+							app.setAtributo('erro', "ERRO (rntrc vazio)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					}
+				}
+	
+				// PESO DA CARGA ('ton' -> 'kg')
+				if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
+					var peso = Number(registro.pesoDaCarga);
+					if (registro.unidadePesoDaCarga == 'kg') {
+						peso = peso / 10;
+					} else {
+						peso = peso * 100;
+					}
+					app.setAtributo('pesoDaCarga', peso);
+				}
+				if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// TIPO DE PRODUTO (CARGA)
+				app.splitAtributo('idProduto');
+				if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (idProduto vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// CARGA ANTERIOR
+				app.splitAtributo('idCargaAnterior');
+				if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// MUNICÍPIO EMBARQUE DA CARGA
+				app.splitAtributo('municipioEmbarqueCarga');
+				if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// MUNICÍPIO DESEMBARQUE DA CARGA
+				app.splitAtributo('municipioDesembarqueCarga');
+				if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+					app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+					app.logger.log(registro.erro + " no registro: ", registro.id);
+				}
+	
+				// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
+				app.splitAtributo('paradaObrigatoriaMunicipio1');
+				app.splitAtributo('paradaObrigatoriaMunicipio2');
+	
+				if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
+					if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
 						app.logger.log(registro.erro + " no registro: ", registro.id);
 					}
 				}
 			}
-
-			// PESO DA CARGA ('ton' -> 'kg')
-			if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
-				var peso = Number(registro.pesoDaCarga);
-				if (registro.unidadePesoDaCarga == 'kg') {
-					peso = peso / 10;
-				} else {
-					peso = peso * 100;
-				}
-				app.setAtributo('pesoDaCarga', peso);
-			}
-			if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// TIPO DE PRODUTO (CARGA)
-			app.splitAtributo('idProduto');
-			if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (idProduto vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// CARGA ANTERIOR
-			app.splitAtributo('idCargaAnterior');
-			if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// MUNICÍPIO EMBARQUE DA CARGA
-			app.splitAtributo('municipioEmbarqueCarga');
-			if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// MUNICÍPIO DESEMBARQUE DA CARGA
-			app.splitAtributo('municipioDesembarqueCarga');
-			if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
-				app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
-				app.logger.log(registro.erro + " no registro: ", registro.id);
-			}
-
-			// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
-			app.splitAtributo('paradaObrigatoriaMunicipio1');
-			app.splitAtributo('paradaObrigatoriaMunicipio2');
-
-			if (util.isEmpty(registro.paradaObrigatoriaMunicipio1) && util.isEmpty(registro.paradaObrigatoriaMunicipio1)) {
-				if ((!registro.municipiosParadaNaoSabe) && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (paradaObrigatoriaMunicipio1 ou paradaObrigatoriaMunicipio2 vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-			}
 		}
-
+		catch(exc) {
+			app.logger.log("[ERRO] Excecao em setCamposDerivados; Detalhes: ");
+			app.logger.log(exc);
+		}
+		
 		app.setAtributo('dataFimPesq', util.getTimeDefaultFormated(new Date()));
 	},
 
@@ -777,6 +855,13 @@ var app = {
 		}
 		;
 	},
+	
+	restart : function(){
+		window.location.href = app.baseUrl + 'index.html'; //href para a página inicial
+		window.setTimeout(function(){
+			window.location.reload();
+		},1000);
+	},
 
 	baseUrl : null,
 
@@ -794,7 +879,11 @@ var app = {
 
 	sentido : null,
 
-	filePaths : null // { externalFolder : null, dbFolder : null, }
+	filePaths : null, // { externalFolder : null, dbFolder : null, }
+	
+	changesCounter : 0,
+	
+	logger : window.console //initial value, changed to use logger.js on file system initialization
 	,
 
 }; // end of app
@@ -803,6 +892,47 @@ var app = {
 var registro;
 
 $(document).ready(function() {
+	
+	//captura todos os erros 
+	window.onerror = function(msg, url, line, col, error) {
+		// Note that col & error are new to the HTML 5 spec and may not be 
+		// supported in every browser.  It worked for me in Chrome.
+		var extra = !col ? '' : '\ncolumn: ' + col;
+		extra += !error ? '' : '\nerror: ' + error;
+		
+		var mesageString = "Error: " + msg + "\nurl: " + url + "\nline: " + line + extra;
+
+		if (app == null){
+			console.log(mesageString);
+		} else {
+			app.logger.log(mesageString);
+		}
+
+		// You can view the information in an alert to see things working like this:
+		if (msg.indexOf("TypeError: null is not an object (evaluating 'input.val().replace')")>-1){
+			//ignores
+		} else if (msg.indexOf("SecurityError: DOM Exception 18")>-1){ //app freezes
+			
+			if (app != null){
+				alert("Ocorreu uma condição que impede \no prosseguimento do programa.\nO aplicativo será reiniciado",
+					'Erro fatal.',
+					app.restart,
+					'error');
+			} else {
+				alert("Ocorreu uma condição que impede \no prosseguimento do programa.\nO aplicativo será reiniciado");
+				window.location.reload()
+			}
+			
+		} else {
+			alert("Ocorreu uma condição inesperada anote \n a mensagem abaixo\n" + mesageString);
+		}
+		
+		
+		var suppressErrorAlert = true;
+		// If you return true, then error alerts (like in older versions of 
+		// Internet Explorer) will be suppressed.
+		return suppressErrorAlert;
+	};
 	insert_controllers.insert();
 	app.initialize();
 });

@@ -5,7 +5,20 @@ controllers.menu = {
 			app.iniciaRegistro();
 			app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
 		});
+		
+		$('#testaBugOld').click(function(){
+			for (i = 0; i < 51; i++){
+				app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo, 'old');
+				app.trocaPagina("views/menu.html", controllers.menu, 'old');
+			}
+		});
 
+		$('#testaBugNew').click(function(){
+			for (i = 0; i < 51; i++){
+				app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
+				app.trocaPagina("views/menu.html", controllers.menu);
+			}
+		});
 		/*$("#duplica_log").click(function() {
 			if (app.filePaths){
 				app.copyFile(app.logFileName,
