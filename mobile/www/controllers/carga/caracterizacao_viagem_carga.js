@@ -28,9 +28,9 @@ controllers.caracterizacao_viagem_carga = {
 
 		util.inicializaSelectFrequencia('carga');
 
-//		var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
-//				'Ausência de pedágio', 'Proximidade hotéis/postos', 'Segurança', 'Outros' ];
-//		util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
+		// var lista_motivos_rota = [ 'Asfalto/Sinalização', 'Caminho mais curto', 'Caminho mais rápido', 'Ordens da empresa',
+		// 'Ausência de pedágio', 'Proximidade hotéis/postos', 'Segurança', 'Outros' ];
+		// util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
 		util.inicializaTabelaAuxiliar("motivo_rota_carga", "Selecione", lista_motivo_escolha_rota, "carga");
 	},
 
@@ -72,8 +72,8 @@ controllers.caracterizacao_viagem_carga = {
 		util.progressoInputText("idDestinoMunicipio", "destino_municipio_carga", "grupo_frequencia_carga", true);
 
 		// Frequencia
-		$('#frequencia_num_carga').keyup(function() {
-			app.setAtributo('frequenciaQtd', $(this).val());
+		$('#frequencia_num_carga').change(function() {
+			app.setAtributo('frequenciaQtd', $(this).inputmask('unmaskedvalue'));
 		});
 		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_carga", "grupo_motivo_rota_carga");
 
@@ -103,7 +103,8 @@ controllers.caracterizacao_viagem_carga = {
 			}
 
 			if (Number($("#frequencia_num_carga").val()) < 1) {
-				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_carga", "Frequência da viagem", 1));
+				validacoes = validacoes
+						&& (util.validaInputNumberRange("frequencia_num_carga", "Frequência da viagem", 1, 99999999));
 			}
 
 			return validacoes;
