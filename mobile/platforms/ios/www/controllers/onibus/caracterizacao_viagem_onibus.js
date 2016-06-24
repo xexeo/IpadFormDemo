@@ -81,8 +81,8 @@ controllers.caracterizacao_viagem_onibus = {
 		util.progressoInputText("idDestinoMunicipio", "destino_municipio_onibus", "grupo_frequencia_onibus", true);
 
 		// Frequencia
-		$('#frequencia_num_onibus').keyup(function() {
-			app.setAtributo('frequenciaQtd', $(this).val());
+		$('#frequencia_num_onibus').change(function() {
+			app.setAtributo('frequenciaQtd', $(this).inputmask('unmaskedvalue'));
 		});
 		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
 
@@ -115,7 +115,8 @@ controllers.caracterizacao_viagem_onibus = {
 			}
 
 			if (Number($("#frequencia_num_onibus").val()) < 1) {
-				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_onibus", "Frequência da viagem", 1));
+				validacoes = validacoes
+						&& (util.validaInputNumberRange("frequencia_num_onibus", "Frequência da viagem", 1, 99999999));
 			}
 
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_onibus", "Pessoas no veículo");
