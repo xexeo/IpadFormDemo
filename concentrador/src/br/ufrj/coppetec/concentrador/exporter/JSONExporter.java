@@ -5,6 +5,7 @@
  */
 package br.ufrj.coppetec.concentrador.exporter;
 
+import br.ufrj.coppetec.concentrador.Janela;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.ResultSet;
@@ -17,6 +18,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.ufrj.coppetec.concentrador.database.myDB;
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -29,6 +39,7 @@ public class JSONExporter {
 	private File file;
 	private File tmpFile;
 	private DbTable table;
+	private Janela janela;
 
 	static public enum WhatToExport {
 		ALL, NOT_SENT
@@ -59,9 +70,10 @@ public class JSONExporter {
 		}
 	}
 
-	public JSONExporter(File f, DbTable t) {
+	public JSONExporter(File f, DbTable t, Janela janela) {
 		this.file = f;
 		this.table = t;
+		this.janela = janela;
 		this.tmpFile = new File("temp.json");
 		switch (t) {
 		case PV:
@@ -73,27 +85,54 @@ public class JSONExporter {
 		}
 	}
 
-	// public void exportAll() {
-	// myDB database;
-	// ResultSet result;
-	// FileWriter writer;
-	// try {
-	// database = new myDB();
-	// database.setStatement();
-	// result = database.executeQuery("SELECT * FROM odtable;");
-	// writer = new FileWriter(file);
-	// // System.out.println(buildJSON(result));
-	// writer.write(buildJSON(result));
-	// writer.close();
-	// result.close();
-	// } catch (Exception e) {
-	// JOptionPane.showMessageDialog(null, "Erro ao exportar dados da pesquisa volumétrica:\n" + e.getMessage(),
-	// "Erro na exportação de dados.", JOptionPane.ERROR_MESSAGE);
-	// return;
-	// }
-	// }
+	
+	public void export(WhatToExport what){
+		
+	
+		SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>(){
+         
+			@Override
+			protected Void doInBackground() throws Exception {
+				JSONExporter.this.backgroundExport(what);
+				return null;
+			}
+			
+		};
+		
+		final JDialog dialog = new JDialog(this.janela, "Dialog", Dialog.ModalityType.APPLICATION_MODAL);
 
-	public void export(WhatToExport what) {
+		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				if (evt.getPropertyName().equals("state")) {
+					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+						dialog.dispose();
+						JOptionPane.showMessageDialog(janela, "Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.", "Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+
+			
+		});
+		
+		mySwingWorker.execute();
+	  
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setIndeterminate(true);
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(progressBar, BorderLayout.CENTER);
+		panel.add(new JLabel("Aguarde a exportação dos dados......."), BorderLayout.PAGE_START);
+		dialog.add(panel);
+		dialog.pack();
+		dialog.setLocationRelativeTo(this.janela);
+		dialog.setVisible(true);
+			
+	}
+	
+
+	private void backgroundExport(WhatToExport what) {
 		myDB database;
 		ResultSet result;
 		FileWriter writer;
@@ -128,17 +167,16 @@ public class JSONExporter {
 			zipper.zipIt();
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
 
-			JOptionPane.showMessageDialog(null, "Arquivo " + this.file.getName() + " exportado com sucesso.",
-					"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+			
 		} catch (JSONException je) {
 			logger.warn("Não existem dados para exportação. Provavelmente a tabela está vazia.", je);
 			// probably empty table
-			JOptionPane.showMessageDialog(null, "Não existem dados para exportação.", "Exportação de dados.",
+			JOptionPane.showMessageDialog(janela, "Não existem dados para exportação.", "Exportação de dados.",
 					JOptionPane.INFORMATION_MESSAGE);
 			return;
 		} catch (Exception e) {
 			logger.error("Erro ao exportar dados.", e);
-			JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
+			JOptionPane.showMessageDialog(janela, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}

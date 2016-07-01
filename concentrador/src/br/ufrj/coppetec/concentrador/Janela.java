@@ -269,7 +269,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<String>();
+        cmbHora = new javax.swing.JComboBox<>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblSentido = new javax.swing.JLabel();
@@ -766,7 +766,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -829,7 +829,6 @@ public class Janela extends javax.swing.JFrame {
         panelLeves.add(lev15_1, gridBagConstraints);
 
         lev30_1.setEditable(false);
-        lev30_1.setBackground(new java.awt.Color(255, 255, 255));
         lev30_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev30_1.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -852,7 +851,6 @@ public class Janela extends javax.swing.JFrame {
         panelLeves.add(lev45_1, gridBagConstraints);
 
         lev60_1.setEditable(false);
-        lev60_1.setBackground(new java.awt.Color(255, 255, 255));
         lev60_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev60_1.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -885,7 +883,6 @@ public class Janela extends javax.swing.JFrame {
         panelLeves.add(lev15_2, gridBagConstraints);
 
         lev30_2.setEditable(false);
-        lev30_2.setBackground(new java.awt.Color(255, 255, 255));
         lev30_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev30_2.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -908,7 +905,6 @@ public class Janela extends javax.swing.JFrame {
         panelLeves.add(lev45_2, gridBagConstraints);
 
         lev60_2.setEditable(false);
-        lev60_2.setBackground(new java.awt.Color(255, 255, 255));
         lev60_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lev60_2.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2886,7 +2882,6 @@ public class Janela extends javax.swing.JFrame {
         panelPesados.add(pes15_1, gridBagConstraints);
 
         pes30_1.setEditable(false);
-        pes30_1.setBackground(new java.awt.Color(255, 255, 255));
         pes30_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes30_1.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2908,7 +2903,6 @@ public class Janela extends javax.swing.JFrame {
         panelPesados.add(pes45_1, gridBagConstraints);
 
         pes60_1.setEditable(false);
-        pes60_1.setBackground(new java.awt.Color(255, 255, 255));
         pes60_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes60_1.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2940,7 +2934,6 @@ public class Janela extends javax.swing.JFrame {
         panelPesados.add(pes15_2, gridBagConstraints);
 
         pes30_2.setEditable(false);
-        pes30_2.setBackground(new java.awt.Color(255, 255, 255));
         pes30_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pes30_2.setText("30");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2962,7 +2955,6 @@ public class Janela extends javax.swing.JFrame {
         panelPesados.add(peso45_2, gridBagConstraints);
 
         peso60_2.setEditable(false);
-        peso60_2.setBackground(new java.awt.Color(255, 255, 255));
         peso60_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         peso60_2.setText("60");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -5914,7 +5906,7 @@ public class Janela extends javax.swing.JFrame {
 		if (returnVal == dadosFileChooser.APPROVE_OPTION) {
 			File file = dadosFileChooser.getSelectedFile();
 			try {
-				ImportedDB db = new ImportedDB(file.getAbsolutePath());
+				ImportedDB db = new ImportedDB(file.getAbsolutePath(), this);
 				db.importData();
 			} catch (IOException ex) {
 				logger.error(String.format("Erro ao acessar o arquivo %s", file.getAbsolutePath()));
@@ -5931,7 +5923,7 @@ public class Janela extends javax.swing.JFrame {
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV);
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV, this);
 			exporter.export(JSONExporter.WhatToExport.ALL);
 		}
 
@@ -5942,7 +5934,7 @@ public class Janela extends javax.swing.JFrame {
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD);
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
 			exporter.export(JSONExporter.WhatToExport.ALL);
 		}
 	}// GEN-LAST:event_btnODexportAllActionPerformed
@@ -5952,7 +5944,7 @@ public class Janela extends javax.swing.JFrame {
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV);
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV,this);
 			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
 		}
 	}// GEN-LAST:event_btnVolNotSentActionPerformed
@@ -5962,7 +5954,7 @@ public class Janela extends javax.swing.JFrame {
 		int returnVal = exporterFileChooser.showSaveDialog(this);
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD);
+			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
 			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
 		}
 	}// GEN-LAST:event_btnODNotSentActionPerformed

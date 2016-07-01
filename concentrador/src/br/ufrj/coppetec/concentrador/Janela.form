@@ -404,9 +404,6 @@
                                 <Component class="javax.swing.JTextField" name="lev30_1">
                                   <Properties>
                                     <Property name="editable" type="boolean" value="false"/>
-                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                    </Property>
                                     <Property name="horizontalAlignment" type="int" value="0"/>
                                     <Property name="text" type="java.lang.String" value="30"/>
                                   </Properties>
@@ -434,9 +431,6 @@
                                 <Component class="javax.swing.JTextField" name="lev60_1">
                                   <Properties>
                                     <Property name="editable" type="boolean" value="false"/>
-                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                    </Property>
                                     <Property name="horizontalAlignment" type="int" value="0"/>
                                     <Property name="text" type="java.lang.String" value="60"/>
                                   </Properties>
@@ -475,9 +469,6 @@
                                 <Component class="javax.swing.JTextField" name="lev30_2">
                                   <Properties>
                                     <Property name="editable" type="boolean" value="false"/>
-                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                    </Property>
                                     <Property name="horizontalAlignment" type="int" value="0"/>
                                     <Property name="text" type="java.lang.String" value="30"/>
                                   </Properties>
@@ -505,9 +496,6 @@
                                 <Component class="javax.swing.JTextField" name="lev60_2">
                                   <Properties>
                                     <Property name="editable" type="boolean" value="false"/>
-                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                    </Property>
                                     <Property name="horizontalAlignment" type="int" value="0"/>
                                     <Property name="text" type="java.lang.String" value="60"/>
                                   </Properties>
@@ -3773,9 +3761,6 @@
                             <Component class="javax.swing.JTextField" name="pes30_1">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
                                 <Property name="horizontalAlignment" type="int" value="0"/>
                                 <Property name="text" type="java.lang.String" value="30"/>
                               </Properties>
@@ -3803,9 +3788,6 @@
                             <Component class="javax.swing.JTextField" name="pes60_1">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
                                 <Property name="horizontalAlignment" type="int" value="0"/>
                                 <Property name="text" type="java.lang.String" value="60"/>
                               </Properties>
@@ -3844,9 +3826,6 @@
                             <Component class="javax.swing.JTextField" name="pes30_2">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
                                 <Property name="horizontalAlignment" type="int" value="0"/>
                                 <Property name="text" type="java.lang.String" value="30"/>
                               </Properties>
@@ -3874,9 +3853,6 @@
                             <Component class="javax.swing.JTextField" name="peso60_2">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
                                 <Property name="horizontalAlignment" type="int" value="0"/>
                                 <Property name="text" type="java.lang.String" value="60"/>
                               </Properties>
