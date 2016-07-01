@@ -90,8 +90,8 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoInputText("idDestinoMunicipio", "destino_municipio_simples", "grupo_frequencia_simples", true);
 
 		// Frequencia
-		$('#frequencia_num_simples').keyup(function() {
-			app.setAtributo('frequenciaQtd', $(this).val());
+		$('#frequencia_num_simples').change(function() {
+			app.setAtributo('frequenciaQtd', $(this).inputmask('unmaskedvalue'));
 		});
 		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_simples", "grupo_motivo_rota_simples");
 
@@ -179,7 +179,8 @@ controllers.caracterizacao_viagem_simples = {
 			}
 
 			if (Number($("#frequencia_num_simples").val()) < 1) {
-				validacoes = validacoes && (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1));
+				validacoes = validacoes
+						&& (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1, 99999999));
 			}
 
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_simples", "Pessoas no veículo");
