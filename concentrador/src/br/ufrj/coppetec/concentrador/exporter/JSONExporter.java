@@ -166,7 +166,7 @@ public class JSONExporter {
 			Zipper zipper = new Zipper(tmpFile, file);
 			zipper.zipIt();
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
-
+			tmpFile.delete();
 			
 		} catch (JSONException je) {
 			logger.warn("Não existem dados para exportação. Provavelmente a tabela está vazia.", je);
