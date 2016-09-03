@@ -96,7 +96,7 @@ var app = {
 				app.logger.log(JSON.stringify(err));
 			});
 			// Exporta Log
-			app.duplicaLog;
+			app.duplicaLog();
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
