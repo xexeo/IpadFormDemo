@@ -95,19 +95,17 @@ var app = {
 			}, function(err) {
 				app.logger.log(JSON.stringify(err));
 			});
+			// Exporta Log
+			app.duplicaLog;
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
 	},
 
 	duplicaLog : function() {
-		if (app.filePaths) {
-			app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, function(newName) {
-				alert('Arquivo de log ' + newName + ' exportado com sucesso.');
-			});
-		} else {
-			alert('Operação não realizada, o sistema de arquivos não foi definido');
-		}
+		app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, function(newName) {
+			alert('Arquivo de log ' + newName + ' exportado com sucesso.');
+		});
 	},
 
 	/**
@@ -320,14 +318,16 @@ var app = {
 					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout",
 							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
 				});
-
+		
+		/*
+		 * A partir da Fase 2 o log passou a ser sempre exportado junto ao DB
 		$("#duplica_log").click(
 				function() {
 					app.validaOperacoes(app.duplicaLog, "Insira a senha para exportar o Log de operações.",
 							"Exportar log de operações", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
 							"Senha Incorreta", "Exportar", "Voltar");
 				});
-
+		*/
 		$("#duplica_db").click(
 				function() {
 					app.validaOperacoes(app.duplicaDb, "Insira a senha para exportar o banco de dados.",
