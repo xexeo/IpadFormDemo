@@ -334,14 +334,16 @@ var app = {
 							"Exportar banco de dados", "Senha incorreta para a exportação.\nDeseja tentar novamente?",
 							"Senha Incorreta", "Exportar", "Voltar");
 				});
-
+		
+		/*
+		 * Funçao retirada a partir da fase 2 do projeto
 		$("#exporta_db_to_json").click(
 				function() {
 					app.validaOperacoes(app.exportaDbToJson, "Insira a senha para exportar os dados no formato JSON.",
 							"Exportar JSON", "Senha incorreta para a exportação.\nDeseja tentar novamente?", "Senha Incorreta",
 							"Exportar", "Voltar");
 				});
-
+		*/
 		// remove o filtro original do autocomplete para poder filtrar acentos
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
