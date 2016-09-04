@@ -22,46 +22,9 @@ myLogger = {
 			me._ocupado = false;
 		};
 		myLogger._logWriter.onerror = function(e) {
-			console.log('Erro de escrita: ' + e.message);
+			console.log('Erro de escrita do log: ' + e.message);
 		};
 	},
-
-	// copyLog : function(){
-	// console.log("folder de transferência de dados: ", cordova.file.documentsDirectory);
-	//        
-	// window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function(dir){
-	// console.log('file system ready to copy:', dir);
-	//           
-	// //testa se o arquivo de destino já existe, e o apaga se for o caso
-	// dir.getFile(app.logFileName, {},
-	// //arquivo existe
-	// function(file){
-	// file.remove(function(){
-	// console.log("arquivo antigo do log removido.");
-	// realCopier();
-	// }, function(error){
-	// console.log(error, "erro removendo arquivo antigo do log.");
-	// });
-	// }, function(){
-	// //arquivo não existe
-	// console.log("não existia um arquivo antigo de log")
-	// realCopier();
-	// });
-	//           
-	//           
-	// function realCopier(){
-	// myLogger._logFile.copyTo(dir, app.logFileName, function(){
-	// console.log("arquivo de log copiado");
-	// }, function(error){
-	// console.log(error, "erro copiando arquivo do log.");
-	// });
-	// };
-	//           
-	//           
-	// }, function(err){
-	// console.log("erro no sistema de arquivos: " + err.name + " -> "+ err.message);
-	// });
-	// },
 
 	_monitoraFila : function() {
 		if (myLogger._fila.length > 0 && !myLogger._ocupado) {
@@ -71,7 +34,7 @@ myLogger = {
 	},
 
 	log : function(str) {
-		myLogger._fila.push("[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n");
+		myLogger._fila.push("[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n"); //log moment
 	},
 
 	/**
@@ -92,6 +55,7 @@ myLogger = {
 
 	_internalWrite : function(str) {
 		//var log = "[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n";
+		str =  "[" + (new Date()) + "]" + str; //write moment
 		var blob = new Blob([ str ], {
 			type : 'text/plain'
 		});
