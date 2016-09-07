@@ -807,8 +807,19 @@ var app = {
 	 * @param Function
 	 *            cb success callback function
 	 */
-	copyFile : function(fileName, originDirURI, destDirURI, cb) {
-		var newName = ipadID.id + "_" + fileName;
+copyFile : function(fileName, originDirURI, destDirURI, cb) {
+		var now = new Date();
+		var newName = ipadID.id + "_" + fileName
+		var extension = "";
+		if(newName.lastIndexOf(".txt") > -1) {
+			newName = newName.replace(".txt","");
+			extension = ".txt";
+		}
+		else if (newName.lastIndexOf(".db") > -1) {
+			newName = newName.replace(".db","");
+			extension = ".db";
+		}
+		newName = newName + "_" + util.getTimeToExportFormated(now) + extension;
 		// get original dir
 		resolveLocalFileSystemURL(originDirURI,
 		// success
@@ -823,6 +834,11 @@ var app = {
 				function(destDir) {
 					app.logger.log('Copiando o arquivo ' + newName + ' do folder ' + dir.nativeURL + ' para o folder '
 							+ destDir.nativeURL);
+					//copying new file
+					realCopier(file, newName, destDir);
+					
+					// Deixou de sobrescrever arquivo a partir da Fase 2
+					/*
 					// removing destination file
 					app.removeFile(newName, destDirURI, function() {
 						realCopier(file, newName, destDir);
@@ -831,6 +847,7 @@ var app = {
 					function() {
 						realCopier(file, newName, destDir);
 					});
+					*/
 				}, function(err) {
 					app.logger.log('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));
 				});
@@ -857,7 +874,7 @@ var app = {
 		}
 		;
 	},
-	
+
 	restart : function(){
 		window.location.href = app.baseUrl + 'index.html'; //href para a página inicial
 		window.setTimeout(function(){
