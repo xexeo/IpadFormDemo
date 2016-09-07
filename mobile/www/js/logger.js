@@ -29,7 +29,14 @@ myLogger = {
 	_monitoraFila : function() {
 		if (myLogger._fila.length > 0 && !myLogger._ocupado) {
 			myLogger._ocupado = true;
-			myLogger._internalWrite(myLogger._fila.shift());
+			str = ""
+			while (myLogger._fila.length > 0){
+				str = str + myLogger._fila.shift();
+				if (myLogger._fila.length > 1){
+					str += "\n";
+				}
+			}
+			myLogger._internalWrite(str);
 		}
 	},
 
