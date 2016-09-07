@@ -844,7 +844,7 @@ copyFile : function(fileName, originDirURI, destDirURI, cb) {
 						realCopier(file, newName, destDir);
 					},
 					// mesmo se não conseguir remover
-					function() {
+					function() { 
 						realCopier(file, newName, destDir);
 					});
 					*/
