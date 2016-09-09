@@ -48,7 +48,7 @@ controllers.caracterizacao_viagem_simples = {
 		var lista_rendas = [ 'R$ 1,00 a R$ 1.600,00', 'R$ 1.601,00 a R$ 2.400,00', 'R$ 2.401,00 a R$ 4.000,00',
 				'R$ 4.001,00 a R$ 8.000,00', 'R$ 8.001,00 a R$ 16.600,00', 'Acima de R$ 16.601,00', 'Não informado', 'Sem renda' ];
 		util.inicializaSelect("renda_simples", lista_rendas);
-
+		util.limitaTamanhoCampoPorValor('frequencia_num_simples','999');
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -109,6 +109,7 @@ controllers.caracterizacao_viagem_simples = {
 			} else {
 				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
+				util.limitaTamanhoCampo('pessoas_simples','limitePessoas');
 				if (Number($(this).val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_pessoas_trabalho_simples").show();
@@ -127,6 +128,7 @@ controllers.caracterizacao_viagem_simples = {
 		// Pessoas no veículo
 		$('#pessoas_simples').change(function() {
 			app.setAtributo('numeroDePessoasNoVeiculo', $(this).val());
+			util.limitaTamanhoCampo('pessoas_trabalho_simples','numeroDePessoasNoVeiculo');
 		});
 		$('#pessoas_simples').keyup(function() {
 			var temTrabalho = (Number($('#motivo_viagem_simples').val()) == 6); // TODO Trabalho. Ajustar se id mudar.
@@ -180,7 +182,7 @@ controllers.caracterizacao_viagem_simples = {
 
 			if (Number($("#frequencia_num_simples").val()) < 1) {
 				validacoes = validacoes
-						&& (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1, 99999999));
+						&& (util.validaInputText("frequencia_num_simples", "Frequência da viagem"));
 			}
 
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_simples", "Pessoas no veículo");

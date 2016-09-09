@@ -41,6 +41,7 @@ controllers.caracterizacao_viagem_onibus = {
 
 		var lista_tipo_viagem = [ 'Regular', 'Turismo', 'Fretado/Particular', 'Outros' ];
 		util.inicializaSelect("tipo_viagem_onibus", lista_tipo_viagem);
+		util.limitaTamanhoCampoPorValor('frequencia_num_onibus','999');
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -87,6 +88,12 @@ controllers.caracterizacao_viagem_onibus = {
 		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
 
 		util.progressoSelect("idTipoDeViagemOuServico", "tipo_viagem_onibus", "grupo_pessoas_onibus");
+		
+		$('#tipo_viagem_onibus').change(function() {
+			if (Number($(this).val()) != -1) {
+				util.limitaTamanhoCampo('pessoas_onibus','limitePessoas');
+			}
+		});
 
 		util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_onibus", "grupo_caracterizacao_viagem_onibus_avancar");
 	},
@@ -116,7 +123,7 @@ controllers.caracterizacao_viagem_onibus = {
 
 			if (Number($("#frequencia_num_onibus").val()) < 1) {
 				validacoes = validacoes
-						&& (util.validaInputNumberRange("frequencia_num_onibus", "Frequência da viagem", 1, 99999999));
+						&& (util.validaInputText("frequencia_num_onibus", "Frequência da viagem"));
 			}
 
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_onibus", "Pessoas no veículo");

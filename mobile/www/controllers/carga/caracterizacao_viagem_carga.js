@@ -32,6 +32,7 @@ controllers.caracterizacao_viagem_carga = {
 		// 'Ausência de pedágio', 'Proximidade hotéis/postos', 'Segurança', 'Outros' ];
 		// util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
 		util.inicializaTabelaAuxiliar("motivo_rota_carga", "Selecione", lista_motivo_escolha_rota, "carga");
+		util.limitaTamanhoCampoPorValor('frequencia_num_carga','999');
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -104,7 +105,7 @@ controllers.caracterizacao_viagem_carga = {
 
 			if (Number($("#frequencia_num_carga").val()) < 1) {
 				validacoes = validacoes
-						&& (util.validaInputNumberRange("frequencia_num_carga", "Frequência da viagem", 1, 99999999));
+						&& (util.validaInputText("frequencia_num_carga", "Frequência da viagem"));
 			}
 
 			return validacoes;
