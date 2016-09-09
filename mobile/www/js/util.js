@@ -138,6 +138,7 @@ var util = {
 				// app.setAtributo('placa_numeros', input.val());
 			}
 		});
+		$('#placa_unica_' + tipo_fluxo).attr("maxlength","20");
 	},
 
 	inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) {
