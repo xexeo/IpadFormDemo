@@ -87,6 +87,12 @@ controllers.caracterizacao_viagem_onibus = {
 		util.progressoSelect("frequenciaPeriodo", "frequencia_sel_onibus", "grupo_tipo_viagem_onibus");
 
 		util.progressoSelect("idTipoDeViagemOuServico", "tipo_viagem_onibus", "grupo_pessoas_onibus");
+		
+		$('#tipo_viagem_onibus').change(function() {
+			if (Number($(this).val()) != -1) {
+				util.limitaTamanhoCampo('pessoas_onibus','limitePessoas');
+			}
+		});
 
 		util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_onibus", "grupo_caracterizacao_viagem_onibus_avancar");
 	},
