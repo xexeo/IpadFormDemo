@@ -138,6 +138,7 @@ var util = {
 				// app.setAtributo('placa_numeros', input.val());
 			}
 		});
+		$('#placa_unica_' + tipo_fluxo).attr("maxlength","20");
 	},
 
 	inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) {
@@ -517,6 +518,17 @@ var util = {
 		return true;
 	},
 
+	limitaTamanhoCampo : function(nome_campo, nome_atributo){
+		var limite = app.getAtributo(nome_atributo);
+		util.limitaTamanhoCampoPorValor(nome_campo,limite);
+	},
+
+	limitaTamanhoCampoPorValor : function(nome_campo, valor){
+		if (!util.isEmpty(valor)) {
+			$('#'+nome_campo).attr("maxlength",String(Number(valor)).length);
+		}
+	},
+
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {
@@ -664,6 +676,10 @@ var util = {
 
 	getTimeUnixTimestamp : function(date) {
 		return util.getTimeFormated(date, "X");
+	},
+
+	getTimeToExportFormated : function(date) {
+		return util.getTimeFormated(date, "YYYY-MM-DD_HH-mm-ss");
 	},
 
 	alphabet : {

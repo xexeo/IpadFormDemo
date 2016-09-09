@@ -5,7 +5,7 @@ var ipadID = {
 			function(dir){
 				app.removeFile(ipadID.ipadIDFileName,
 					cordova.file.dataDirectory,
-					function(){_realStore(dir);},
+					function(){_realStore(dir);}, //store even if remove old file fail
 					function(){_realStore(dir);}
 				);
 		});
@@ -69,7 +69,14 @@ var ipadID = {
 	requestID : function(success){
 		navigator.notification.prompt("Entre o ID desse ipad",
 			function(results){
-				if (results.buttonIndex == 2){
+				if (results.buttonIndex == 1 || !ipadID._isValid(results.input1.trim())){
+					navigator.notification.alert(
+							"O ipadID informado deve estar no formato 000000 (seis dígitos).",
+							ipadID.requestID(success),
+							"Erro entrando ipadID",
+							"OK"
+						);
+				} else if (results.buttonIndex ==2){
 					ipadID.storeID(results.input1.trim(), 
 						function(e){
 							if (e == null){
@@ -83,14 +90,20 @@ var ipadID = {
 							}
 					});
 				}
+				
 			},
 			"Identificação do iPad",
 			["Cancelar", "Cadastrar"]
 		);
 	},
-		
+	
+	_isValid : function (id){
+		return (id.length === 6 && $.isNumeric(id))? true : false;
+	},
+			
 	id : null,
 	
 	ipadIDFileName : "ipID.txt",
-};
+	}
+;
 
