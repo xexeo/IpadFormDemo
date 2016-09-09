@@ -32,6 +32,7 @@ controllers.caracterizacao_viagem_carga = {
 		// 'Ausência de pedágio', 'Proximidade hotéis/postos', 'Segurança', 'Outros' ];
 		// util.inicializaSelect("motivo_rota_carga", lista_motivos_rota);
 		util.inicializaTabelaAuxiliar("motivo_rota_carga", "Selecione", lista_motivo_escolha_rota, "carga");
+		util.limitaTamanhoCampoPorValor('frequencia_num_carga','999');
 	},
 
 	// Controla o show e hide dos elementos da tela

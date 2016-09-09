@@ -41,6 +41,7 @@ controllers.caracterizacao_viagem_onibus = {
 
 		var lista_tipo_viagem = [ 'Regular', 'Turismo', 'Fretado/Particular', 'Outros' ];
 		util.inicializaSelect("tipo_viagem_onibus", lista_tipo_viagem);
+		util.limitaTamanhoCampoPorValor('frequencia_num_onibus','999');
 	},
 
 	// Controla o show e hide dos elementos da tela
