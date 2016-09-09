@@ -43,6 +43,8 @@ controllers.caracterizacao_viagem2_carga = {
 		util.inicializaSelectCustomValueAsIndex("municipios_parada_uf1_carga", lista_estados, "UF");
 		util.inicializaSelectCustomValueAsIndex("municipios_parada_uf2_carga", lista_estados, "UF");
 
+		controllers.caracterizacao_viagem2_carga.limitePesoCargaInputText();
+
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -62,6 +64,7 @@ controllers.caracterizacao_viagem2_carga = {
 		app.setAtributo("unidadePesoDaCarga", $('input[name="unidade_peso_carga"]:checked').val());
 		$('input[name=unidade_peso_carga]').change(function() {
 			app.setAtributo("unidadePesoDaCarga", $('input[name="unidade_peso_carga"]:checked').val());
+			controllers.caracterizacao_viagem2_carga.limitePesoCargaInputText();
 		});
 
 		util.progressoInputMoney("valorDoFrete", "valor_frete_carga", "grupo_valor_nota_carga");
@@ -291,6 +294,19 @@ controllers.caracterizacao_viagem2_carga = {
 		}
 
 		return false;
-	}
+	},
 
+	limitePesoCargaInputText : function(){
+		var unidade = $('input[name="unidade_peso_carga"]:checked').val();
+		if(unidade=="ton"){
+			$("#peso_carga").attr("maxlength",4);
+			var peso = $.trim($("#peso_carga").val());
+			if(peso.length>3){
+				$("#peso_carga").val("");
+				app.setAtributo("pesoDaCarga",null);
+			}
+		}else{
+			$("#peso_carga").attr("maxlength",7);
+		}
+	}
 };
