@@ -123,7 +123,7 @@ controllers.caracterizacao_viagem_onibus = {
 
 			if (Number($("#frequencia_num_onibus").val()) < 1) {
 				validacoes = validacoes
-						&& (util.validaInputNumberRange("frequencia_num_onibus", "Frequência da viagem", 1, 99999999));
+						&& (util.validaInputText("frequencia_num_onibus", "Frequência da viagem"));
 			}
 
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_onibus", "Pessoas no veículo");

@@ -182,7 +182,7 @@ controllers.caracterizacao_viagem_simples = {
 
 			if (Number($("#frequencia_num_simples").val()) < 1) {
 				validacoes = validacoes
-						&& (util.validaInputNumberRange("frequencia_num_simples", "Frequência da viagem", 1, 99999999));
+						&& (util.validaInputText("frequencia_num_simples", "Frequência da viagem"));
 			}
 
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_simples", "Pessoas no veículo");

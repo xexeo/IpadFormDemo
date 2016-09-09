@@ -105,7 +105,7 @@ controllers.caracterizacao_viagem_carga = {
 
 			if (Number($("#frequencia_num_carga").val()) < 1) {
 				validacoes = validacoes
-						&& (util.validaInputNumberRange("frequencia_num_carga", "Frequência da viagem", 1, 99999999));
+						&& (util.validaInputText("frequencia_num_carga", "Frequência da viagem"));
 			}
 
 			return validacoes;
