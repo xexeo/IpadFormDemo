@@ -128,6 +128,7 @@ controllers.caracterizacao_viagem_simples = {
 		// Pessoas no veículo
 		$('#pessoas_simples').change(function() {
 			app.setAtributo('numeroDePessoasNoVeiculo', $(this).val());
+			util.limitaTamanhoCampo('pessoas_trabalho_simples','numeroDePessoasNoVeiculo');
 		});
 		$('#pessoas_simples').keyup(function() {
 			var temTrabalho = (Number($('#motivo_viagem_simples').val()) == 6); // TODO Trabalho. Ajustar se id mudar.
