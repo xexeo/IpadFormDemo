@@ -517,6 +517,13 @@ var util = {
 		return true;
 	},
 
+	limitaTamanhoCampo : function(nome_campo, nome_atributo){
+		var limite = app.getAtributo(nome_atributo);
+		if (!util.isEmpty(limite)) {
+			$('#'+nome_campo).attr("maxlength",String(Number(limite)).length);
+		}
+	},
+
 	isFilterRunning : false, // controla se o filtro já terminou
 
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {

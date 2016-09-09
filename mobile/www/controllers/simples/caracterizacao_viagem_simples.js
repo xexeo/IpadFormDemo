@@ -109,6 +109,7 @@ controllers.caracterizacao_viagem_simples = {
 			} else {
 				app.setAtributo('idMotivoDaViagem', $(this).val());
 				$("#grupo_pessoas_ambos").show();
+				util.limitaTamanhoCampo('pessoas_simples','limitePessoas');
 				if (Number($(this).val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 					if (Number($("#pessoas_simples").val()) > 0) {
 						$("#grupo_pessoas_trabalho_simples").show();
