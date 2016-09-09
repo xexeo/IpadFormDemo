@@ -519,8 +519,12 @@ var util = {
 
 	limitaTamanhoCampo : function(nome_campo, nome_atributo){
 		var limite = app.getAtributo(nome_atributo);
-		if (!util.isEmpty(limite)) {
-			$('#'+nome_campo).attr("maxlength",String(Number(limite)).length);
+		util.limitaTamanhoCampoPorValor(nome_campo,limite);
+	},
+
+	limitaTamanhoCampoPorValor : function(nome_campo, valor){
+		if (!util.isEmpty(valor)) {
+			$('#'+nome_campo).attr("maxlength",String(Number(valor)).length);
 		}
 	},
 
