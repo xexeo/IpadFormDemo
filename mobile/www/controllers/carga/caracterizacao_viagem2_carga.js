@@ -44,7 +44,8 @@ controllers.caracterizacao_viagem2_carga = {
 		util.inicializaSelectCustomValueAsIndex("municipios_parada_uf2_carga", lista_estados, "UF");
 
 		controllers.caracterizacao_viagem2_carga.limitePesoCargaInputText();
-
+		controllers.caracterizacao_viagem2_carga.limitePrecoInputText('valor_frete_carga',7);
+		controllers.caracterizacao_viagem2_carga.limitePrecoInputText('valor_nota_carga',17);
 	},
 
 	// Controla o show e hide dos elementos da tela
@@ -308,5 +309,14 @@ controllers.caracterizacao_viagem2_carga = {
 		}else{
 			$("#peso_carga").attr("maxlength",7);
 		}
+	},
+
+	limitePrecoInputText : function(nome_campo,limite){
+		//Numero máximo de pontos por conta da mascara
+		var numero_pts_msk=Math.floor(Math.max(limite-2,0)/3.0);
+		if(limite>2 && (limite-2)%3==0)
+			numero_pts_msk=numero_pts_msk-1;
+
+		$("#"+nome_campo).attr("maxlength",4+limite+numero_pts_msk);
 	}
 };
