@@ -65,7 +65,7 @@ myLogger = {
 		//var log = "[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n";
 		str = "";
 		while(strVO.length > 0){
-			str += "[" + (new Date()) + "]" + str; //write moment
+			str += "[" + (new Date()) + "]" + strVO.shift(); //write moment
 			if (strVO.length > 1){
 				str += "\n";
 			}
