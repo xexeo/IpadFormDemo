@@ -29,14 +29,15 @@ myLogger = {
 	_monitoraFila : function() {
 		if (myLogger._fila.length > 0 && !myLogger._ocupado) {
 			myLogger._ocupado = true;
-			str = ""
-			while (myLogger._fila.length > 0){
-				str = str + myLogger._fila.shift();
-				if (myLogger._fila.length > 1){
-					str += "\n";
-				}
-			}
-			myLogger._internalWrite(str);
+			var strVO = myLogger._fila.slice();
+			myLogger._fila = [];
+//			while (myLogger._fila.length > 0){
+//				str.push(myLogger._fila.shift());
+//				if (myLogger._fila.length > 1){
+//					str += "\n";
+//				}
+//			}
+			myLogger._internalWrite(strVO);
 		}
 	},
 
@@ -60,9 +61,16 @@ myLogger = {
 		});
 	},
 
-	_internalWrite : function(str) {
+	_internalWrite : function(strVO) {
 		//var log = "[" + device.uuid + "] [" + (new Date()) + "] " + str + "\n";
-		str =  "[" + (new Date()) + "]" + str; //write moment
+		str = "";
+		while(strVO.length > 0){
+			str += "[" + (new Date()) + "]" + str; //write moment
+			if (strVO.length > 1){
+				str += "\n";
+			}
+		}
+		
 		var blob = new Blob([ str ], {
 			type : 'text/plain'
 		});
