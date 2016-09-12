@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.1.1",
+	versao : "2.1.2",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
