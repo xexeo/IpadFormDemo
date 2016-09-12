@@ -528,6 +528,15 @@ var util = {
 			$('#'+nome_campo).attr("maxlength",String(Number(valor)).length);
 		}
 	},
+	
+	validacaoLimiteMaximoTempoReal: function(nome_campo,campo_aviso, funcao_validar){
+		$("#"+nome_campo).change(function(){
+			if(funcao_validar(nome_campo,campo_aviso)){
+				$(this).removeClass("invalido");
+			}else
+				$(this).addClass("invalido");
+		})
+	},
 
 	isFilterRunning : false, // controla se o filtro já terminou
 
