@@ -528,6 +528,15 @@ var util = {
 			$('#'+nome_campo).attr("maxlength",String(Number(valor)).length);
 		}
 	},
+	
+	validacaoLimiteMaximoTempoReal: function(nome_campo,campo_aviso, funcao_validar){
+		$("#"+nome_campo).change(function(){
+			if(funcao_validar(nome_campo,campo_aviso)){
+				$(this).removeClass("invalido");
+			}else
+				$(this).addClass("invalido");
+		})
+	},
 
 	isFilterRunning : false, // controla se o filtro já terminou
 
@@ -744,6 +753,52 @@ var util = {
 		for (var i = 0, len = s.length; i <= len; i++)
 			o.push(s.charAt(len - i));
 		return o.join('');
-	}
+	},
 
+	secToFrase : function (d,extended) {
+	    var sec_num = parseInt(d, 10);
+	    var hours   = Math.floor(sec_num / 3600);
+	    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+		var frase = "";
+		
+		if(extended == true) {
+			if(hours > 0) {frase = frase + hours + " hora(s), ";}
+			if(minutes > 0) {frase = frase + minutes + " minuto(s) e ";}
+			if(seconds > 0) {frase = frase + seconds + " segundos";}
+		} else {
+			if(hours > 0) {frase = frase + hours + "h";}
+			if(minutes > 0) {frase = frase + minutes + "m";}
+			if(seconds > 0) {frase = frase + seconds + "s";}
+		}
+			
+	    return frase;
+	},
+
+	formatDateSumario : function (fulldate) {
+		var d = new Date(fulldate.replace(/-/g, '/'));
+		return util.formateDateOnly(d);
+	},
+
+	formatDateAndTimeSumario : function (fulldate) {
+		var d = new Date(fulldate.replace(/-/g, '/'));
+		hora = d.getHours();
+		min = d.getMinutes();
+		sec = d.getSeconds();
+		if (hora< 10) {hora = "0"+hora;}
+		if (min< 10) {min = "0"+min;}
+		if (sec< 10) {sec = "0"+sec;}
+
+		return util.formateDateOnly(d) + ', às ' + hora + ':' + min + ':' + sec;
+	},
+
+	formateDateOnly : function (d) {
+		dia = d.getDate();
+		mes = d.getMonth() + 1;
+		ano = d.getFullYear();
+		if (dia < 10) {dia = "0"+dia;}
+		if (mes< 10) {mes = "0"+mes;}
+
+		return dia + '/' +  mes + '/' + ano;
+	}
 };

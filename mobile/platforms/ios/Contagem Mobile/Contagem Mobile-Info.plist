@@ -35,8 +35,6 @@
     </dict>
     <key>NSMainNibFile</key>
     <string/>
-    <key>NSMainNibFile~ipad</key>
-    <string/>
     <key>UIFileSharingEnabled</key>
     <true/>
     <key>UIInterfaceOrientation</key>

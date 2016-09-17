@@ -525,6 +525,7 @@ var app = {
 			app.setAtributo('sentido', app.sentido);
 			app.setAtributo('uuid', app.uuid_device);
 			app.setAtributo('dataIniPesq', util.getTimeDefaultFormated(now));
+			app.setAtributo('dataIniPesqAbsolute', util.getTimeUnixTimestamp(now));
 			app.setAtributo('idIpad', ipadID.id);
 			app.logger.log(JSON.stringify(registro));
 			app.logger.log('Registro iniciado: ' + registro.id);
@@ -687,7 +688,10 @@ var app = {
 			app.logger.log(exc);
 		}
 		
-		app.setAtributo('dataFimPesq', util.getTimeDefaultFormated(new Date()));
+		var now = new Date();
+		app.setAtributo('dataFimPesq', util.getTimeDefaultFormated(now));
+		var duracao = util.getTimeUnixTimestamp(now) - app.getAtributo('dataIniPesqAbsolute');
+		app.setAtributo('duracaoPesq', duracao);
 	},
 
 	finalizaRegistro : function(cb) {
@@ -722,6 +726,30 @@ var app = {
 				cb();
 			}
 		});
+		app.buscaDuracoesRegistros();
+	},
+	
+	buscaDuracoesRegistros : function() {
+		myDb.selectDuracoesDiaRegistro(
+		// erro
+		function(error) {
+			app.logger.log('Erro ao buscar duracoes: ' + error.message);
+			// confirma se tenta outra vez
+			confirm("Houve uma falha ao buscar os registros.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.buscaDuracoesRegistros();
+			},
+			// button cancel
+			function() {
+				app.logger.log("buscaDuracoesRegistros cancelado");
+			}, "Falha na busca.", // título
+			"Sim", "Não");
+		},
+		// ok
+		function() {
+			app.logger.log('buscaDuracoesRegistros executado com sucesso');
+		});	
 	},
 
 	cancelaRegistro : function(cb) {
@@ -901,6 +929,10 @@ copyFile : function(fileName, originDirURI, destDirURI, cb) {
 	filePaths : null, // { externalFolder : null, dbFolder : null, }
 	
 	changesCounter : 0,
+	
+	sumario_lista : [],
+	
+	ultima_pesquisa : [],
 	
 	logger : window.console //initial value, changed to use logger.js on file system initialization
 	,

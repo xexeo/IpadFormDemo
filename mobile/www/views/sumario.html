@@ -1,0 +1,39 @@
+<section data-role="page" id="sumario" data-transition="slide" data-theme="b">
+
+	<!-- header -->
+	<header data-role="header">
+		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
+		<h1>Sumário</h1>
+	</header>
+
+	<!-- content -->
+	<section role="main" class="ui-content">
+
+		<!-- Tabela com quantidade de pesquisas, média, soma, máximo e mínimo de cada dia-->
+		<table id="sumario_tabela" class="display" width="100%"></table>
+		
+		<!-- Melhorar formatação -->
+		<br><br>
+		<p><output name="sumario_ult_pesq" id="sumario_ult_pesq"></output></p>
+		<br><br>
+		
+		<!-- Retorna ao Menu -->
+		<div class="ui-grid-b">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-btn-a ui-corner-all" id="sumario_retornar_menu" name="sumario_retornar_menu">Retornar ao Menu</button>
+			</div>
+			<div class="ui-block-c">&nbsp;</div>
+		</div>
+
+	</section>
+
+	<!-- footer -->
+	<footer data-role="footer" data-position="fixed">
+		<span class="versao">Versão: <span id="versao"></span></span>
+		<span class="posto">Posto: <span id="posto"></span></span>
+		<span class="sentido">Sentido: <span id="sentido"></span></span>
+		<span class="ipad">id-iPad: <span id="ipadID"></span></span>
+	</footer>
+
+</section>

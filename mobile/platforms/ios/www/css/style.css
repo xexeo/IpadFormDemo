@@ -1,3 +1,11 @@
+input.invalido{
+    background-image: url(../icons/SVG/error.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 5px;
+}
+
 .noshadow {
 	-moz-box-shadow: none !important;
 	-webkit-box-shadow: none !important;
