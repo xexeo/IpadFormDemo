@@ -1,34 +1,31 @@
-<section data-role="page" id="menu" data-transition="slide" data-theme="b">
+<section data-role="page" id="sumario" data-transition="slide" data-theme="b">
 
 	<!-- header -->
 	<header data-role="header">
 		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
-		<h1>Menu principal</h1>
+		<h1>Sumário</h1>
 	</header>
 
 	<!-- content -->
 	<section role="main" class="ui-content">
 
+		<!-- Tabela com quantidade de pesquisas, média, soma, máximo e mínimo de cada dia-->
+		<table id="sumario_tabela" class="display, cell-border" width="100%"></table>
+		
+		<!-- Melhorar formatação -->
+		<br><br>
+		<p><output name="sumario_ult_pesq" id="sumario_ult_pesq"></output></p>
+		<br><br>
+		
+		<!-- Retorna ao Menu -->
 		<div class="ui-grid-b">
 			<div class="ui-block-a">&nbsp;</div>
 			<div class="ui-block-b">
-				<button class="ui-btn ui-btn-a ui-corner-all" id="menu_nova_pesquisa" name="menu_nova_pesquisa">Iniciar nova pesquisa</button>
-				
-				
+				<button class="ui-btn ui-btn-a ui-corner-all" id="sumario_retornar_menu" name="sumario_retornar_menu">Retornar ao Menu</button>
 			</div>
 			<div class="ui-block-c">&nbsp;</div>
 		</div>
 
-		<div class="ui-grid-b">
-			<div class="ui-block-a">&nbsp;</div>
-			<div class="ui-block-b">
-				<button class="ui-btn ui-btn-a ui-corner-all" id="menu_sumario" name="menu_sumario">Sumário</button>
-				<!--<button class="ui-btn ui-btn-a ui-corner-all" id="testaBugOld" name="testaBugOld">Testa Bug Old troca página</button><br>
-				<button class="ui-btn ui-btn-a ui-corner-all" id="testaBugNew" name="testaBugOld">Testa Bug New troca página</button><br>-->
-			</div>
-			<div class="ui-block-c">&nbsp;</div>
-		</div>
-	
 	</section>
 
 	<!-- footer -->

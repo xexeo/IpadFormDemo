@@ -5,7 +5,13 @@ controllers.menu = {
 			app.iniciaRegistro();
 			app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
 		});
-		
+
+        $('#menu_sumario').click(function() {
+			app.buscaDuracoesRegistros();
+			myDb.selectUltimaPesquisaValida();
+			app.trocaPagina("views/sumario.html", controllers.sumario);
+		});
+
 		$('#testaBugOld').click(function(){
 			for (i = 0; i < 51; i++){
 				app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo, 'old');
@@ -19,6 +25,7 @@ controllers.menu = {
 				app.trocaPagina("views/menu.html", controllers.menu);
 			}
 		});
+
 		/*$("#duplica_log").click(function() {
 			if (app.filePaths){
 				app.copyFile(app.logFileName,
@@ -56,5 +63,4 @@ controllers.menu = {
 		});*/
 
 	},
-
 };

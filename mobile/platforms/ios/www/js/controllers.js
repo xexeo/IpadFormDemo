@@ -16,7 +16,8 @@ var insert_controllers={
                         'carga/caracterizacao_carga.js',
                         'carga/caracterizacao_viagem_carga.js',
                         'carga/caracterizacao_viagem2_carga.js',
-                        'pergunta_extra.js'
+                        'pergunta_extra.js',
+						'sumario.js'
                     ],
     
     controller_files_path : 'controllers/',
