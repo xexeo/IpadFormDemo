@@ -101,7 +101,8 @@ public class ImportedDB extends Db {
 				sqlbase += "indoPegarCarga, ";
 				sqlbase += "paradaObrigatoriaMunicipio1, ";
 				sqlbase += "paradaObrigatoriaMunicipio2, ";
-				sqlbase += "idPerguntaExtra";
+				sqlbase += "idPerguntaExtra, ";
+				sqlbase += "duracaoPesq";
 				sqlbase += ") ";
 				String sql = "";
 				String idCombustivel = "";
@@ -171,7 +172,8 @@ public class ImportedDB extends Db {
 						sql += Util.getSQLiteBoolean(rs.getString("indoPegarCarga")) + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio1") + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio2") + ", ";
-						sql += rs.getString("idPerguntaExtra");
+						sql += rs.getString("idPerguntaExtra")+ ", ";
+						sql += rs.getString("duracaoPesq");
 						sql += "); ";
 						Concentrador.database.setStatement();
 
