@@ -24,13 +24,30 @@ controllers.pergunta_extra = {
 
 		var lista_opcoes = [ 'Sim, trocaria minha rota atual por esta', 'Não, prefiro usar a rota atual',
 				'Minha rota não seria afetada', 'Não sei informar' ];
-		util.inicializaSelect("select_pergunta_extra", lista_opcoes);
+		
+		if (logins.user_logado != null && logins.user_logado.usr == '020') {
+			$("#grupo_pergunta_extra_p1").show();
+			util.inicializaSelect("select_pergunta_extra_p1", lista_opcoes);
+		}
+		else if (logins.user_logado != null && (logins.user_logado.usr == '184' || logins.user_logado.usr == '185')) {
+			$("#grupo_pergunta_extra_p2").show();
+			util.inicializaSelect("select_pergunta_extra_p2", lista_opcoes);
+		}
 	},
 
 	// Controla o show e hide dos elementos da tela
 	progressoTela : function() {
 
-		util.progressoSelect("idPerguntaExtra", "select_pergunta_extra", "grupo_pergunta_extra_avancar");
+		if (logins.user_logado != null && logins.user_logado.usr == '020') {
+			util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p1", "grupo_pergunta_extra_avancar");
+		}
+		else if (logins.user_logado != null && (logins.user_logado.usr == '184' || logins.user_logado.usr == '185')) {
+			util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p2", "grupo_pergunta_extra_avancar");
+		}
+		else {
+			// Não deveria entrar aqui. Mostra o botão avançar para finalizar a pesquisa e não ficar travado.
+			$("#grupo_pergunta_extra_avancar").show();
+		}
 	},
 
 	// Controla as validações dos componentes de tela após clicar em AVANÇAR
