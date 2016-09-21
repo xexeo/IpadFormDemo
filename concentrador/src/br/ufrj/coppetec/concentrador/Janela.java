@@ -33,6 +33,13 @@ import br.ufrj.coppetec.concentrador.database.ImportedDB;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -58,24 +65,22 @@ public class Janela extends javax.swing.JFrame {
 			public boolean verify(JComponent comp) {
 				boolean returnValue;
 				JTextField textField = (JTextField) comp;
-				try {
-					int qtd = Integer.parseInt(textField.getText());
-					if (qtd <= myDB.MAX_SAFE_INT.intValue()) {
-						returnValue = true;
-					} else {
-						logger.warn(String.format("Formato de número inválido (%d > %d)", qtd, myDB.MAX_SAFE_INT.intValue()));
-						JOptionPane.showMessageDialog(
-								Janela.this,
-								String.format("Apenas números inteiros até %d são permitidos como entrada",
-										myDB.MAX_SAFE_INT.intValue()), "Entrada incorreta", JOptionPane.ERROR_MESSAGE);
+				int maxLength = 3;
+				if (textField.getText().length() > maxLength){
+					JOptionPane.showMessageDialog(Janela.this, "A entrada máxima é de " + maxLength + " caracteres numéricos para cada campo.",
+								"Entrada incorreta", JOptionPane.ERROR_MESSAGE);
+					returnValue = false;
+				} else {
+					try {
+						Integer.parseInt(textField.getText());
+							returnValue = true;
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(Janela.this, "Apenas números inteiros são permitidos como entrada",
+								"Entrada incorreta", JOptionPane.ERROR_MESSAGE);
 						returnValue = false;
 					}
-				} catch (NumberFormatException e) {
-					logger.warn("Formato de número inválido.", e);
-					JOptionPane.showMessageDialog(Janela.this, "Apenas números inteiros são permitidos como entrada",
-							"Entrada incorreta", JOptionPane.ERROR_MESSAGE);
-					returnValue = false;
 				}
+				
 				return returnValue;
 			}
 		};
@@ -164,6 +169,8 @@ public class Janela extends javax.swing.JFrame {
 
 		volFieldsNames = concatStringArrays(volFieldsNamesLeves, volFieldsNamesPesados);
 
+		
+		
 		// select text on enter
 		for (String s : volFieldsNames) {
 			for (JTextField f : fieldsMap.get(s)) {
@@ -210,9 +217,29 @@ public class Janela extends javax.swing.JFrame {
 				}
 			}
 		}
-
+		
+		//limitando a antrada nos campos de texto
+		txtFree = new HashMap<String, JTextField>();
+		txtFree.put("pesquisador_1", txtPesquisador1);
+		txtFree.put("pesquisador_2", txtPesquisador2);
+		txtFree.put("local", txtLocal);
+		
+		for (Map.Entry<String, JTextField> entry : txtFree.entrySet()){
+			entry.getValue().setDocument(new PlainDocument(){
+				@Override
+				public void insertString(int offs, String str, AttributeSet a) throws BadLocationException{
+					if(getLength() + str.length() <= 
+							Integer.parseInt(Concentrador
+											.configuration
+											.getProperty(entry.getKey(), "3"))){
+						super.insertString(offs, str, a);
+					}
+				}
+			});
+		}
+		
 	};
-
+	
 	private void sumFields(fieldTypes type) {
 		String[] fields = null;
 		JTextField sumField = null;
@@ -231,16 +258,16 @@ public class Janela extends javax.swing.JFrame {
 		for (String s : fields) {
 			for (JTextField f : fieldsMap.get(s)) {
 				try {
-					r += myDB.getIntValue(f.getText());
+					r += Integer.parseInt(f.getText());
 				} catch (Exception e) {
-					if ((f.getText() != null) && (!f.getText().isEmpty())) {
-						logger.warn("Erro na conversão de texto em número.", e);
+					// nothing
 					}
 				}
 			}
-		}
 		sumField.setText(String.valueOf(r));
 	}
+	
+	
 
 	private void puttingImages() {
 		HashMap lablesPesadosMap = new HashMap<String, Component>();
@@ -269,7 +296,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<>();
+        cmbHora = new javax.swing.JComboBox<String>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblSentido = new javax.swing.JLabel();
@@ -766,7 +793,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -5902,6 +5929,19 @@ public class Janela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
+		FileSystemView filesys = FileSystemView.getFileSystemView();
+		File[] roots = filesys.getRoots();
+		File desktop = filesys.getHomeDirectory();
+		
+		File inputFolder = new File(desktop.getAbsolutePath() + File.separator + Concentrador.configuration.getProperty("dataInputFolder"));
+		
+		if (inputFolder.exists()){ //não existe o folder
+			
+		} else { //o folder existe
+		
+		}
+		
+		
 		int returnVal = dadosFileChooser.showOpenDialog(this);
 		if (returnVal == dadosFileChooser.APPROVE_OPTION) {
 			File file = dadosFileChooser.getSelectedFile();
@@ -6722,7 +6762,7 @@ public class Janela extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 	private String[] volFieldsNames;
-
+	
 	private String[] volFieldsNamesLeves = { "P1", "P3", "P2", "M", "O1", "O2", "O3", "C1", "C2", "C3", "C4", "C5" };
 	private String[] volFieldsNamesPesados = { "S1", "S2", "S3", "S4", "S5", "S6", "SE1", "SE2", "SE3", "SE4", "SE5", "R1", "R2",
 			"R3", "R4", "R5", "R6" };
@@ -6732,6 +6772,9 @@ public class Janela extends javax.swing.JFrame {
 	private enum fieldTypes {
 		LEVES, PESADOS
 	}
+	
+	private HashMap<String, JTextField> txtFree;
+	
 }
 
 class ImagemRenderer extends DefaultTableCellRenderer {
@@ -6755,7 +6798,7 @@ class SQLiteFilter extends FileFilter {
 
 	@Override
 	public boolean accept(File f) {
-		return f.isDirectory() || f.getAbsolutePath().endsWith(".db");
+		return f.isDirectory(); //|| f.getAbsolutePath().endsWith(".db");
 	}
 
 	@Override

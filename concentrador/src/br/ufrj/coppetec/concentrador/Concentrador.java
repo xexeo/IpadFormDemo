@@ -6,6 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import br.ufrj.coppetec.concentrador.database.myDB;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  *
@@ -20,22 +23,36 @@ public class Concentrador {
 	public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "1.9";
+	public static String version = "2.0";
+	public static Properties configuration;
+	
 
 	public static void main(String[] args) {
 		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 		// System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
-		System.out.println("PNCT Concentrador versão: " + version);
+		logger.info("PNCT Concentrador versão: " + version);
 
 		Splash splash = new Splash();
 		splash.setLocationRelativeTo(null);
 		splash.setVisible(true);
-
+		
+		//lendo arquivo properties
+		try {
+			PropertyLoader propLoader = new PropertyLoader();
+			configuration = propLoader.getProperties();
+			Util.populateInputLimits();
+		} catch (IOException ex) {
+			logger.catching(ex);
+			System.exit(1);
+		}
+		
+		
 		// criando o banco de dados
 		try {
 			database = new myDB();
 			database.createVolTable();
 			database.createODTable();
+			database.createImportedFilesTable();
 		} catch (Exception e) {
 			logger.error("Erro ao acessar o BD.", e);
 			JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());

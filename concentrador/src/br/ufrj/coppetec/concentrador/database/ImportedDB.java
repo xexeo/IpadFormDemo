@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import br.ufrj.coppetec.concentrador.Concentrador;
 import br.ufrj.coppetec.concentrador.Janela;
+import br.ufrj.coppetec.concentrador.Util;
 import java.awt.BorderLayout;
 import java.awt.Dialog.ModalityType;
 import java.beans.PropertyChangeEvent;
@@ -103,15 +104,18 @@ public class ImportedDB extends Db {
 				sqlbase += "idPerguntaExtra";
 				sqlbase += ") ";
 				String sql = "";
+				String idCombustivel = "";
+				boolean placaEstrangeira;
 				while (rs.next()) {
 					try {
-						String idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0")) ? "3" : rs
+						idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0")) ? "3" : rs
 								.getString("idCombustivel");
+						placaEstrangeira = (Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) == "1");
 						sql = sqlbase + " VALUES (";
 						sql += " '" + rs.getString("id") + "', ";
 						sql += "0, "; // não enviado
 						sql += "1, "; // esta no note
-						sql += myDB.getSQLiteBoolean(rs.getString("cancelado")) + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("cancelado")) + ", ";
 						sql += rs.getString("idPosto") + ", ";
 						sql += "'" + rs.getString("sentido") + "', ";
 						sql += "'" + rs.getString("idIpad") + "', ";
@@ -119,7 +123,11 @@ public class ImportedDB extends Db {
 						sql += "'" + rs.getString("login") + "', ";
 						sql += "'" + rs.getString("dataIniPesq") + "', ";
 						sql += "'" + rs.getString("dataFimPesq") + "', ";
-						sql += "'" + rs.getString("placa") + "', ";
+						if (placaEstrangeira){
+							sql += "'" + Util.getStringLimited(rs.getString("placa"), "placaEstrangeira") + "', ";
+						} else {
+							sql += "'" + rs.getString("placa") + "', ";
+						}
 						sql += rs.getString("anoDeFabricacao") + ", ";
 						sql += "'" + rs.getString("tipo") + "', ";
 						sql += rs.getString("idOrigemPais") + ", ";
@@ -127,40 +135,40 @@ public class ImportedDB extends Db {
 						sql += rs.getString("idDestinoPais") + ", ";
 						sql += rs.getString("idDestinoMunicipio") + ", ";
 						sql += rs.getString("idMotivoDeEscolhaDaRota") + ", ";
-						sql += myDB.getIntValue(rs.getString("frequenciaQtd")) + ", ";
+						sql += Util.getSQLiteIntLimited(rs.getString("frequenciaQtd"), "frequenciaQtd") + ", ";
 						sql += "'" + rs.getString("frequenciaPeriodo") + "', ";
 						sql += rs.getString("idPropriedadesDoVeiculo") + ", ";
-						sql += myDB.getSQLiteBoolean(rs.getString("placaEstrangeira")) + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) + ", ";						
 						sql += rs.getString("idPaisPlacaEstrangeira") + ", ";
 						// sql += rs.getString("idCombustivel") + ", ";
 						sql += idCombustivel + ", ";
 						sql += "'" + rs.getString("categoria") + "', ";
-						sql += myDB.getSQLiteBoolean(rs.getString("possuiReboque")) + ", ";
-						sql += myDB.getIntValue(rs.getString("numeroDePessoasNoVeiculo")) + ", ";
-						sql += myDB.getIntValue(rs.getString("numeroDePessoasATrabalho")) + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("possuiReboque")) + ", ";
+						sql += Util.getSQLiteIntLimited(rs.getString("numeroDePessoasNoVeiculo"), "numeroDePessoasNoVeiculo") + ", ";
+						sql += Util.getSQLiteIntLimited(rs.getString("numeroDePessoasATrabalho"), "numeroDePessoasATrabalho") + ", ";
 						sql += rs.getString("idRendaMedia") + ", ";
 						sql += rs.getString("idMotivoDaViagem") + ", ";
 						sql += "'" + rs.getString("tipoCaminhao") + "', ";
 						sql += rs.getString("idTipoDeContainer") + ", ";
 						sql += rs.getString("idTipoCarroceria") + ", ";
 						sql += "'" + rs.getString("rntrc") + "', ";
-						sql += myDB.getSQLiteBoolean(rs.getString("possuiCargaPerigosa")) + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("possuiCargaPerigosa")) + ", ";
 						sql += rs.getString("idNumeroDeRisco") + ", ";
 						sql += rs.getString("idNumeroDaOnu") + ", ";
 						sql += rs.getString("idAgregado") + ", ";
-						sql += myDB.getSQLiteBoolean(rs.getString("placaVermelha")) + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("placaVermelha")) + ", ";
 						sql += rs.getString("idTipoDeViagemOuServico") + ", ";
-						sql += rs.getString("pesoDaCarga") + ", ";
-						sql += rs.getString("valorDoFrete") + ", ";
-						sql += myDB.getSQLiteBoolean(rs.getString("utilizaParadaEspecial")) + ", ";
+						sql += Util.getSQLiteRealLimited(rs.getString("pesoDaCarga"), "pesoDaCarga") + ", ";
+						sql += Util.getSQLiteRealLimited(rs.getString("valorDoFrete"),"valorDoFrete") + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("utilizaParadaEspecial")) + ", ";
 						sql += rs.getString("idProduto") + ", ";
 						sql += rs.getString("idCargaAnterior") + ", ";
-						sql += rs.getString("valorDaCarga") + ", ";
+						sql += Util.getSQLiteRealLimited(rs.getString("valorDaCarga"), "valorDaCarga") + ", ";
 						sql += rs.getString("municipioEmbarqueCarga") + ", ";
 						sql += rs.getString("idLocalEmbarqueCarga") + ", ";
 						sql += rs.getString("municipioDesembarqueCarga") + ", ";
 						sql += rs.getString("idLocalDesembarqueCarga") + ", ";
-						sql += myDB.getSQLiteBoolean(rs.getString("indoPegarCarga")) + ", ";
+						sql += Util.getSQLiteBoolean(rs.getString("indoPegarCarga")) + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio1") + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio2") + ", ";
 						sql += rs.getString("idPerguntaExtra");

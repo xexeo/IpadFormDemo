@@ -48,7 +48,7 @@ public class OdJSONbuilder implements JSONBuilder {
 				reg.put("idDestinoPais", JSONExporter.getJSONInteger(result.getString("idDestinoPais")));
 				reg.put("idDestinoMunicipio", JSONExporter.getJSONInteger(result.getString("idDestinoMunicipio")));
 				reg.put("idMotivoDeEscolhaDaRota", JSONExporter.getJSONInteger(result.getString("idMotivoDeEscolhaDaRota")));
-				reg.put("frequenciaQtd", JSONExporter.getJSONInteger(myDB.getStrFromIntValue(result.getString("frequenciaQtd"))));
+				reg.put("frequenciaQtd", JSONExporter.getJSONInteger(result.getString("frequenciaQtd")));
 				reg.put("frequenciaPeriodo", JSONExporter.getJSONString(result.getString("frequenciaPeriodo")));
 				reg.put("idPropriedadesDoVeiculo", JSONExporter.getJSONInteger(result.getString("idPropriedadesDoVeiculo")));
 				reg.put("placaEstrangeira", JSONExporter.getJSONInteger(result.getString("placaEstrangeira")));
@@ -57,9 +57,9 @@ public class OdJSONbuilder implements JSONBuilder {
 				reg.put("categoria", JSONExporter.getJSONString(result.getString("categoria")));
 				reg.put("possuiReboque", JSONExporter.getJSONInteger(result.getString("possuiReboque")));
 				reg.put("numeroDePessoasNoVeiculo",
-						JSONExporter.getJSONInteger(myDB.getStrFromIntValue(result.getString("numeroDePessoasNoVeiculo"))));
+						JSONExporter.getJSONInteger(result.getString("numeroDePessoasNoVeiculo")));
 				reg.put("numeroDePessoasATrabalho",
-						JSONExporter.getJSONInteger(myDB.getStrFromIntValue(result.getString("numeroDePessoasATrabalho"))));
+						JSONExporter.getJSONInteger(result.getString("numeroDePessoasATrabalho")));
 				reg.put("idRendaMedia", JSONExporter.getJSONInteger(result.getString("idRendaMedia")));
 				reg.put("idMotivoDaViagem", JSONExporter.getJSONInteger(result.getString("idMotivoDaViagem")));
 				reg.put("tipoCaminhao", JSONExporter.getJSONString(result.getString("tipoCaminhao")));

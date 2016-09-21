@@ -1,7 +1,10 @@
 package br.ufrj.coppetec.concentrador.database;
 
+import br.ufrj.coppetec.concentrador.Concentrador;
 import java.math.BigInteger;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,9 +16,11 @@ import org.apache.logging.log4j.Logger;
 public class myDB extends Db {
 
 	private static Logger logger = LogManager.getLogger(myDB.class);
+	
 
 	public myDB() throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
+		
 	}
 
 	public int verifyPV(PVregister reg) throws Exception {
@@ -179,6 +184,17 @@ public class myDB extends Db {
 		this.executeStatement(qry);
 
 	}
+	
+	public void createImportedFilesTable() throws Exception{
+		this.setStatement();
+		String qry = "CREATE TABLE IF NOT EXISTS importedFiles (";
+		qry += "id text primary key, ";
+		qry += "path text,";
+		qry += "hash text";
+		qry += "date integer";
+		qry += "); ";
+		this.executeStatement(qry);
+	}
 
 	public void createODTable() throws Exception {
 		this.setStatement();
@@ -243,46 +259,32 @@ public class myDB extends Db {
 
 	}
 
-	static public String getSQLiteBoolean(String val) {
-		String r;
-		if (val != null) {
-			if (val.equals("false") || val.equals("0")) {
-				r = "0";
-			} else if (val.equals("true") || val.equals("1")) {
-				r = "1";
-			} else {
-				r = null;
-			}
-		} else {
-			r = null;
-		}
-		return r;
-	}
+	
+	
+//	public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
+//
+//	/**
+//	 * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
+//	 * 
+//	 * @param valueStr
+//	 *            - O valor em uma string.
+//	 * @return O valor em inteiro.
+//	 */
+//	public static Integer getIntValue(String valueStr) {
+//		Integer valueInt = null;
+//		if (valueStr != null) {
+//			BigInteger value = new BigInteger(valueStr);
+//			if (value.compareTo(MAX_SAFE_INT) > 0) {
+//				value = MAX_SAFE_INT;
+//				logger.warn(String.format("Valor inteiro maior que o permitido (%s > %d)", valueStr, MAX_SAFE_INT.intValue()));
+//			}
+//			valueInt = value.intValue();
+//		}
+//		return valueInt;
+//	}
 
-	public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
-
-	/**
-	 * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
-	 * 
-	 * @param valueStr
-	 *            - O valor em uma string.
-	 * @return O valor em inteiro.
-	 */
-	public static Integer getIntValue(String valueStr) {
-		Integer valueInt = null;
-		if (valueStr != null) {
-			BigInteger value = new BigInteger(valueStr);
-			if (value.compareTo(MAX_SAFE_INT) > 0) {
-				value = MAX_SAFE_INT;
-				logger.warn(String.format("Valor inteiro maior que o permitido (%s > %d)", valueStr, MAX_SAFE_INT.intValue()));
-			}
-			valueInt = value.intValue();
-		}
-		return valueInt;
-	}
-
-	public static String getStrFromIntValue(String valueStr) {
-		Integer valueInt = getIntValue(valueStr);
-		return (valueInt == null ? null : String.valueOf(valueInt.intValue()));
-	}
+//	public static String getStrFromIntValue(String valueStr) {
+//		Integer valueInt = getIntValue(valueStr);
+//		return (valueInt == null ? null : String.valueOf(valueInt.intValue()));
+//	}
 }
