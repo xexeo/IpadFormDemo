@@ -1,6 +1,6 @@
 myDb = {
 
-	camposNaoExportaveisJson : [ 'id', 'uuid', 'login', 'erro' ],
+	camposNaoExportaveisJson : [ 'id', 'uuid', 'login', 'erro', 'duracaoPesq' ],
 
 	tabelaOD : [
 		{field : 'id', type : 'text primary key'},
@@ -57,7 +57,8 @@ myDb = {
 		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
 		{field : 'idPerguntaExtra', type : 'integer'},
-		{field : 'erro', type : 'text'}
+		{field : 'erro', type : 'text'},
+		{field : 'duracaoPesq', type : 'integer'}
 	],
 
 	fieldExists : function(str) {
@@ -137,6 +138,89 @@ myDb = {
 			function() {
 				// inseriu = true;
 				app.logger.log("registro inserido: " + reg.id);
+				success();
+			});
+		} catch (e) {
+			fail(e);
+		}
+	},
+
+/*
+select date(dataIniPesq) as 'diaPesq',AVG(duracaoPesq) as 'mediaDia',SUM(duracaoPesq) as 'somaDia',COUNT(id) as 'qtdDia', MAX(duracaoPesq) as 'maxTempoDia', MIN(duracaoPesq) as 'minTempoDia'
+from tblDados
+WHERE cancelado = 0
+GROUP by date(dataIniPesq)
+ORDER BY diaPesq DESC;
+*/
+	selectDuracoesDiaRegistro : function(fail, success) {
+		app.logger.log("(selectDuracoesDiaRegistro) buscando no registro");
+		var linhas = [];
+		try {
+			app.database.transaction(function(tx) {
+
+				var sql = "SELECT DATE(dataIniPesq) as 'diaPesq'," +
+						" AVG(duracaoPesq) as 'mediaDia'," +
+						" SUM(duracaoPesq) as 'somaDia',"+
+						" COUNT(id) as 'qtdDia'," +
+						" MAX(duracaoPesq) as 'maxTempoDia'," +
+						" MIN(duracaoPesq) as 'minTempoDia'" +
+						" FROM tblDados WHERE cancelado = 0" +
+						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
+
+				tx.executeSql(sql, [], function(tx, res) {
+					app.logger.log('qtd linhas select: ' + res.rows.length);
+					for (i = 0; i < res.rows.length; i++) {
+						var elem = res.rows.item(i);
+						linhas.push(elem);
+						app.logger.log('item ' + i + ':' + elem.diaPesq + '; ' + elem.mediaDia  + '; ' + elem.somaDia + '; ' + elem.qtdDia + '; ' + elem.maxTempoDia + '; ' + elem.minTempoDia);
+					}
+				});
+			},
+			// transaction fail
+			function(e) {
+				app.logger.log('ERRO ao buscar tempos das pesquisas: ' + e.message);
+				fail(e);
+			},
+			// transaction success
+			function() {
+				app.logger.log("Busca dos tempos das pesquisas realizado com sucesso");
+				app.sumario_lista = linhas;
+				success();
+			});
+		} catch (e) {
+			fail(e);
+		}
+	},
+
+	selectUltimaPesquisaValida : function() {
+		app.logger.log("(selectUltimaPesquisaValida) buscando no registro");
+		var ultimoRegistro = [];
+		try {
+			app.database.transaction(function(tx) {
+
+				var sql = "SELECT dataIniPesq," +
+						" duracaoPesq" +
+						" FROM tblDados WHERE cancelado = 0" +
+						" ORDER BY dataIniPesq DESC" +
+						" LIMIT 1";
+
+				tx.executeSql(sql, [], function(tx, res) {
+					if( res.rows.length > 0) {
+						ultimoRegistro.push(res.rows.item(0).dataIniPesq);
+						ultimoRegistro.push(res.rows.item(0).duracaoPesq);
+						app.logger.log('Ultimo registro: dataIniPesq = ' + ultimoRegistro[0] + '; duracaoPesq = ' + ultimoRegistro[1]);
+					}
+				});
+			},
+			// transaction fail
+			function(e) {
+				app.logger.log('ERRO ao buscar última pesquisa: ' + e.message);
+				fail(e);
+			},
+			// transaction success
+			function() {
+				app.logger.log("Busca da última pesquisa realizada com sucesso");
+				app.ultima_pesquisa = ultimoRegistro;
 				success();
 			});
 		} catch (e) {

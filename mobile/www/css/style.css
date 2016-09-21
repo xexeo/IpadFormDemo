@@ -60,26 +60,33 @@ input.invalido{
 footer span.versao {
 	display: inline-block;
 	text-align: left;
-	width: 24%;
+	width: 19%;
 }
+
+footer span.data_atual {
+	display: inline-block;
+	text-align: center;
+	width: 19%;
+}
+
 
 footer span.posto {
 	display: inline-block;
 	text-align: center;
-	width: 24%;
+	width: 19%;
 }
 
 footer span.sentido {
 	display: inline-block;
 	text-align: center;
-	width: 24%;
+	width: 19%;
 }
 
 footer span.ipad {
 	display: inline-block;
 	float: right;
 	text-align: right;
-	width: 24%;
+	width: 19%;
 }
 
 div.ui-block-b>h2 {
@@ -572,6 +579,12 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 .escondido {
 	display: none;
 }
+
+#sumario_tabela td{
+	color: black;
+	text-align: center;
+}
+
 
 /* bloqueando copiar no ipad */
 * {

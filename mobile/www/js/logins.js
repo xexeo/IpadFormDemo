@@ -46,6 +46,8 @@ var logins = {
 		perguntaExtra : true
 	},
 
+	// Postos com pergunta extra na 1ª fase: 211
+	// Postos com pergunta extra na 2ª fase: 020, 184, 185 
 	users : [
 	// usr = número do posto
 	// pwd = 4 últimos números do SNV
@@ -188,7 +190,8 @@ var logins = {
 		fase : '2',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR BR-457(B)/GO-219 - ENTR GO-020(A)'
+		trecho : 'ENTR BR-457(B)/GO-219 - ENTR GO-020(A)',
+		perguntaExtra : true
 	}, {
 		usr : '021',
 		pwd : '0112',
@@ -1336,14 +1339,16 @@ var logins = {
 		fase : '2',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR BR-462(B) - ENTR BR-262'
+		trecho : 'ENTR BR-462(B) - ENTR BR-262',
+		perguntaExtra : true
 	}, {
 		usr : '185',
 		pwd : '0930',
 		fase : '4',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR BR-452 (P/UBERLÂNDIA) - ENTR BR-462 (PERDIZES)'
+		trecho : 'ENTR BR-452 (P/UBERLÂNDIA) - ENTR BR-462 (PERDIZES)',
+		perguntaExtra : true
 	}, {
 		usr : '186',
 		pwd : '0070',
@@ -1525,8 +1530,8 @@ var logins = {
 		fase : '1',
 		ladoA : 'ENTR MS-316 (PARAÍSO DAS ÁGUAS)',
 		ladoB : 'ENTR MS-324(A)',
-		trecho : 'ENTR MS-316 (PARAÍSO) - ENTR MS-324(A)',
-		perguntaExtra : true
+		trecho : 'ENTR MS-316 (PARAÍSO) - ENTR MS-324(A)'
+		// perguntaExtra : true // Possuiu pergunta extra na 1ª fase
 	}, {
 		usr : '212',
 		pwd : '0180',
