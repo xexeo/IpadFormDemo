@@ -1,5 +1,7 @@
 *~
 /nbproject/private/
 /logs/
+logs/*
 /store/
 /nbproject/
+dados.db
