@@ -253,7 +253,8 @@ public class myDB extends Db {
 		qry += "indoPegarCarga integer, ";
 		qry += "paradaObrigatoriaMunicipio1 integer, ";
 		qry += "paradaObrigatoriaMunicipio2 integer, ";
-		qry += "idPerguntaExtra integer";
+		qry += "idPerguntaExtra integer,";
+		qry += "duracaoPesq integer ";
 		qry += "); ";
 		this.executeStatement(qry);
 
