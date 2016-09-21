@@ -8,7 +8,7 @@ controllers.menu = {
 
         $('#menu_sumario').click(function() {
 			app.buscaDuracoesRegistros();
-			myDb.selectUltimaPesquisaValida();
+			app.buscaUltimaPesquisa();
 			app.trocaPagina("views/sumario.html", controllers.sumario);
 		});
 

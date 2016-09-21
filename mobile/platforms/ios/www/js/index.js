@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.1.3",
+	versao : "2.1.5",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -727,7 +727,6 @@ var app = {
 				cb();
 			}
 		});
-		app.buscaDuracoesRegistros();
 	},
 	
 	buscaDuracoesRegistros : function() {
@@ -750,6 +749,29 @@ var app = {
 		// ok
 		function() {
 			app.logger.log('buscaDuracoesRegistros executado com sucesso');
+		});	
+	},
+
+	buscaUltimaPesquisa : function() {
+		myDb.selectUltimaPesquisaValida(
+		// erro
+		function(error) {
+			app.logger.log('Erro ao buscar última pesquisa: ' + error.message);
+			// confirma se tenta outra vez
+			confirm("Houve uma falha ao buscar a última pesquisa realizada.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.buscaUltimaPesquisa();
+			},
+			// button cancel
+			function() {
+				app.logger.log("buscaUltimaPesquisa cancelado");
+			}, "Falha na busca.", // título
+			"Sim", "Não");
+		},
+		// ok
+		function() {
+			app.logger.log('buscaUltimaPesquisa executado com sucesso');
 		});	
 	},
 

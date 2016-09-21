@@ -192,7 +192,7 @@ ORDER BY diaPesq DESC;
 		}
 	},
 
-	selectUltimaPesquisaValida : function() {
+	selectUltimaPesquisaValida : function(fail, success) {
 		app.logger.log("(selectUltimaPesquisaValida) buscando no registro");
 		var ultimoRegistro = [];
 		try {

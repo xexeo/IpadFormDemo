@@ -10,8 +10,6 @@ controllers.sumario = {
 		}
 
 		$('#sumario_tabela').DataTable({
-			// TODO personalizar a tabela:
-			// Melhorar cores e linhas entre colunas
 			"data": dataSet,
 			"paging": false,
 			"info": false,
