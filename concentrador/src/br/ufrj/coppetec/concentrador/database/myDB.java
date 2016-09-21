@@ -190,7 +190,6 @@ public class myDB extends Db {
 		String qry = "CREATE TABLE IF NOT EXISTS importedFiles (";
 		qry += "id text primary key, ";
 		qry += "path text,";
-		qry += "hash text";
 		qry += "date integer";
 		qry += "); ";
 		this.executeStatement(qry);
