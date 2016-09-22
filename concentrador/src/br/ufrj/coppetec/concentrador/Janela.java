@@ -5,6 +5,7 @@
  */
 package br.ufrj.coppetec.concentrador;
 
+import br.ufrj.coppetec.concentrador.database.DBFileImporter;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +34,8 @@ import br.ufrj.coppetec.concentrador.database.ImportedDB;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
+import java.security.NoSuchAlgorithmException;
+import javax.naming.NoPermissionException;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -5933,28 +5936,27 @@ public class Janela extends javax.swing.JFrame {
 		File[] roots = filesys.getRoots();
 		File desktop = filesys.getHomeDirectory();
 		
-		File inputFolder = new File(desktop.getAbsolutePath() + File.separator + Concentrador.configuration.getProperty("dataInputFolder"));
+		File inputFolder = new File(desktop.getAbsolutePath() + File.separator + Concentrador.configuration.getProperty("dataInputFolder")+File.separator);
+
+		logger.debug(String.format("Procurando arquivos para importação em %s", inputFolder.getAbsolutePath()));				
 		
-		if (inputFolder.exists()){ //não existe o folder
-			
-		} else { //o folder existe
-		
+		if (!inputFolder.exists()){
+			inputFolder.mkdir();
+			logger.debug(String.format("Diretório criado: %s", inputFolder.getAbsolutePath()));				
 		}
 		
-		
-		int returnVal = dadosFileChooser.showOpenDialog(this);
-		if (returnVal == dadosFileChooser.APPROVE_OPTION) {
-			File file = dadosFileChooser.getSelectedFile();
-			try {
-				ImportedDB db = new ImportedDB(file.getAbsolutePath(), this);
-				db.importData();
-			} catch (IOException ex) {
-				logger.error(String.format("Erro ao acessar o arquivo %s", file.getAbsolutePath()));
-			} catch (Exception e) {
-				logger.error(String.format("Erro ao importar os dados do arquivo %s", file.getAbsolutePath()), e);
-			}
-		} else {
-			System.out.println("File access cancelled by user.");
+		try{
+			DBFileImporter dbfile = new DBFileImporter(inputFolder);
+			dbfile.readNewFiles();
+			JOptionPane.showMessageDialog(this, "Total de registros inseridos: " + Integer.toString(dbfile.getCounter()));
+		}catch(IOException e){
+			logger.error(String.format("Erro ao importar arquivos em %s", inputFolder.getAbsolutePath()));				
+		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}catch(NoPermissionException e){
+			e.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}// GEN-LAST:event_btnInDadosActionPerformed
 

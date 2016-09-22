@@ -190,7 +190,7 @@ public class ImportedDB extends Db {
 			}
 		};
 
-      
+		
 		final JDialog dialog = new JDialog(this.janela, "Dialog", ModalityType.APPLICATION_MODAL);
 
 		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
@@ -200,7 +200,10 @@ public class ImportedDB extends Db {
 				if (evt.getPropertyName().equals("state")) {
 					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
 						dialog.dispose();
-						JOptionPane.showMessageDialog(ImportedDB.this.janela, "Total de registros inseridos: " + Integer.toString(ImportedDB.this.counter));
+						if(ImportedDB.this.janela!=null)
+							JOptionPane.showMessageDialog(ImportedDB.this.janela, "Total de registros inseridos: " + Integer.toString(ImportedDB.this.counter));
+						else
+							logger.debug("Novos registros: "+Integer.toString(ImportedDB.this.counter));
 					}
 				}
 			}
@@ -222,5 +225,9 @@ public class ImportedDB extends Db {
 		dialog.setVisible(true);
 		
 		
+	}
+	
+	public int getCounter(){
+		return counter;
 	}
 }

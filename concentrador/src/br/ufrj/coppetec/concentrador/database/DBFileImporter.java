@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.naming.NoPermissionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,14 +27,16 @@ public class DBFileImporter {
 	private File folder;
 	private Map<String, String> storedDbFiles; //<path, hasg>
 	private Map<File, String> newDbFiles;
+	private int counter;
 	
 	public DBFileImporter(File folder) throws Exception{
 		this.folder = folder;
 		getStoredFiles();
+		counter=0;
 	}
 	
 	private void getStoredFiles() throws Exception {
-		myDB database = new myDB();
+		/*myDB database = new myDB();
 		ResultSet result;
 		String qry = "SELECT * FROM importedFiles;";
 		database.setStatement();
@@ -42,10 +45,10 @@ public class DBFileImporter {
 		while(result.next()){
 			storedDbFiles.put(result.getString("path"), result.getString("hash"));
 		}
-		result.close();
+		result.close();*/
 	}
 	
-	public void readNewFiles() throws NoSuchAlgorithmException, IOException{
+	public void readNewFiles() throws NoSuchAlgorithmException, IOException, NoPermissionException{
 		FileFilter fileFilter = new FileFilter(){
 			@Override
 			public boolean accept(File f) {
@@ -56,18 +59,25 @@ public class DBFileImporter {
 		String hash = null;
 		
 		File[] fileList = folder.listFiles(fileFilter);
+		if(fileList==null)
+			throw new NoPermissionException("Verifique a permissao da pasta!");
 		
 		for (File f : fileList){
-			hash = Util.getFileChecksum(MessageDigest.getInstance("MD5"), f);
-			if (!storedDbFiles.containsValue(hash)){
-				//readFile
-				//TODO implementar a leitura dos arquivos
+			try {
+				ImportedDB db = new ImportedDB(f.getAbsolutePath(), null);
+				db.importData();
+				counter+=db.getCounter();
+			} catch (IOException ex) {
+				logger.error(String.format("Erro ao acessar o arquivo %s", f.getAbsolutePath()));
+			} catch (Exception e) {
+				logger.error(String.format("Erro ao importar os dados do arquivo %s", f.getAbsolutePath()), e);
 			}
 		}
 	}
 	
-	
-	
+	public int getCounter(){
+		return counter;
+	}
 }
 
 
