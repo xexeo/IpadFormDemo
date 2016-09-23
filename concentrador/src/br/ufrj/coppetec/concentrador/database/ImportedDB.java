@@ -36,15 +36,25 @@ public class ImportedDB extends Db {
 		this.janela = janela;
 		counter = 0;
 	}
+	
+	public int importData() throws Exception {
+		this.openTransaction();
+		this.counter = importData(Concentrador.database);
+		this.commit();
+		//final JDialog dialog = new JDialog(this.janela, "Dialog", ModalityType.APPLICATION_MODAL);
+		//JOptionPane.showMessageDialog(this.janela, "Total de registros inseridos: " + Integer.toString(this.counter));
+		logger.debug("Novos registros: "+Integer.toString(this.counter));
+		return counter;
+	}
 
-	public void importData() throws Exception {
-		
-		SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>(){
+	public int importData(myDB concentradorDb) throws Exception {
+		Db db = this;
+		SwingWorker<Integer, Void> mySwingWorker = new SwingWorker<Integer, Void>(){
          
 			@Override
-			protected Void doInBackground() throws Exception {
-				ImportedDB.this.setStatement();
-				ResultSet rs = ImportedDB.this.executeQuery("SELECT * FROM tblDados;");
+			protected Integer doInBackground() throws Exception {
+				db.setStatement();
+				ResultSet rs = db.executeQuery("SELECT * FROM tblDados;");
 				String sqlbase = "INSERT OR IGNORE INTO odTable (";  
 
 				sqlbase += "id, ";
@@ -107,6 +117,7 @@ public class ImportedDB extends Db {
 				String sql = "";
 				String idCombustivel = "";
 				boolean placaEstrangeira;
+				int counter=0;
 				while (rs.next()) {
 					try {
 						idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0")) ? "3" : rs
@@ -175,9 +186,9 @@ public class ImportedDB extends Db {
 						sql += rs.getString("idPerguntaExtra")+ ", ";
 						sql += rs.getString("duracaoPesq");
 						sql += "); ";
-						Concentrador.database.setStatement();
+						concentradorDb.setStatement();
 
-						ImportedDB.this.counter += Concentrador.database.executeStatement(sql);
+						counter += concentradorDb.executeStatement(sql);
 					} catch (Exception e) {
 						// do nothing only ignore error
 						logger.error(String.format("Erro a inserir o registro:%s%s", System.lineSeparator(), sql), e);
@@ -186,12 +197,12 @@ public class ImportedDB extends Db {
 				}
 				rs.close();
 
-				return null;
+				return counter;
 			}
 		};
 
 		
-		final JDialog dialog = new JDialog(this.janela, "Dialog", ModalityType.APPLICATION_MODAL);
+		final JDialog dialog = new JDialog(janela, "Dialog", ModalityType.APPLICATION_MODAL);
 
 		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -200,17 +211,12 @@ public class ImportedDB extends Db {
 				if (evt.getPropertyName().equals("state")) {
 					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
 						dialog.dispose();
-						if(ImportedDB.this.janela!=null)
-							JOptionPane.showMessageDialog(ImportedDB.this.janela, "Total de registros inseridos: " + Integer.toString(ImportedDB.this.counter));
-						else
-							logger.debug("Novos registros: "+Integer.toString(ImportedDB.this.counter));
 					}
 				}
 			}
 
 			
 		});
-		
 		mySwingWorker.execute();
 	  
 		
@@ -221,10 +227,10 @@ public class ImportedDB extends Db {
 		panel.add(new JLabel("Aguarde a importação dos dados......."), BorderLayout.PAGE_START);
 		dialog.add(panel);
 		dialog.pack();
-		dialog.setLocationRelativeTo(this.janela);
+		dialog.setLocationRelativeTo(janela);
 		dialog.setVisible(true);
 		
-		
+		return mySwingWorker.get();
 	}
 	
 	public int getCounter(){

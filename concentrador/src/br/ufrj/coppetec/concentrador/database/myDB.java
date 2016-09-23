@@ -15,6 +15,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class myDB extends Db {
 
+	public static final String TABLE_IMPORTED_FILES="importedFiles";
+	public static final String TABLE_IMPORTED_FILES_ID="id";
+	public static final String TABLE_IMPORTED_FILES_PATH="path";
+	public static final String TABLE_IMPORTED_FILES_DATE="DATE";
+	
 	private static Logger logger = LogManager.getLogger(myDB.class);
 	
 
@@ -187,10 +192,10 @@ public class myDB extends Db {
 	
 	public void createImportedFilesTable() throws Exception{
 		this.setStatement();
-		String qry = "CREATE TABLE IF NOT EXISTS importedFiles (";
-		qry += "id text primary key, ";
-		qry += "path text,";
-		qry += "date integer";
+		String qry = "CREATE TABLE IF NOT EXISTS "+TABLE_IMPORTED_FILES+" (";
+		qry += TABLE_IMPORTED_FILES_ID+" text primary key, ";
+		qry += TABLE_IMPORTED_FILES_PATH+" text unique,";
+		qry += TABLE_IMPORTED_FILES_DATE+" datetime DEFAULT CURRENT_TIMESTAMP";
 		qry += "); ";
 		this.executeStatement(qry);
 	}

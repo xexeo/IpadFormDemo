@@ -28,16 +28,49 @@ abstract class Db {
 		this.url = url;
 		setConnection();
 		setStatement();
-		logger.info("Conexão com o BD estabelecida.");
+	}
+	
+	public Db(String driver) throws Exception {
+		this.driver = driver;
+		this.conn=null;
+	}
+	
+	public void rollback(){
+		try{
+			if(this.conn!=null)
+				this.conn.rollback();
+		}catch(Exception e){
+			logger.error("Erro ao fazer rollback.", e);
+		}
+	}
+	
+	public void setConnection() throws Exception {
+		this.setConnection(this.url);
 	}
 
-	public final void setConnection() throws Exception {
+	public void setConnection(String url) throws Exception {
+		logger.info("Driver: "+this.driver);
 		Class.forName(this.driver);
-		this.conn = DriverManager.getConnection(this.url);
+		this.conn = DriverManager.getConnection(url);
+		logger.info("Conexão com o BD estabelecida.");
 	}
 
 	public Connection getConnection() throws Exception {
 		return this.conn;
+	}
+	
+	public void openTransaction() throws Exception {
+		this.openTransaction(this.url);
+	}
+	
+	public void openTransaction(String url) throws Exception {
+		if(this.conn==null)
+			setConnection(url);
+		this.conn.setAutoCommit(false);
+	}
+	
+	public void commit() throws Exception{
+		this.conn.commit();
 	}
 
 	public final void setStatement() throws Exception {

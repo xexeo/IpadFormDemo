@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author mangeli
  */
-public class DBFileImporter {
+public class DBFileImporter{
 	private static Logger logger = LogManager.getLogger(DBFileImporter.class);
 	private File folder;
 	private Map<String, String> storedDbFiles; //<path, hasg>
@@ -48,6 +48,15 @@ public class DBFileImporter {
 		result.close();*/
 	}
 	
+	public void saveFile(myDB concentrador,String path, String fileName) throws Exception{
+		String sqlInsert = "INSERT INTO "+myDB.TABLE_IMPORTED_FILES+" ("
+				+ myDB.TABLE_IMPORTED_FILES_ID+","+myDB.TABLE_IMPORTED_FILES_PATH
+				+") VALUES ('"+fileName+"','"+path+"')";  
+		logger.debug("SQL: "+sqlInsert);
+		concentrador.setStatement();
+		concentrador.executeStatement(sqlInsert);
+	}
+	
 	public void readNewFiles() throws NoSuchAlgorithmException, IOException, NoPermissionException{
 		FileFilter fileFilter = new FileFilter(){
 			@Override
@@ -63,14 +72,23 @@ public class DBFileImporter {
 			throw new NoPermissionException("Verifique a permissao da pasta!");
 		
 		for (File f : fileList){
+			myDB concentrador=null;
 			try {
+				concentrador = new myDB();
+				concentrador.openTransaction();
+				saveFile(concentrador, f.getAbsolutePath(), f.getName());
 				ImportedDB db = new ImportedDB(f.getAbsolutePath(), null);
-				db.importData();
-				counter+=db.getCounter();
+				counter+=db.importData(concentrador);
+				concentrador.commit();
 			} catch (IOException ex) {
 				logger.error(String.format("Erro ao acessar o arquivo %s", f.getAbsolutePath()));
+				concentrador.rollback();
 			} catch (Exception e) {
 				logger.error(String.format("Erro ao importar os dados do arquivo %s", f.getAbsolutePath()), e);
+				concentrador.rollback();
+			}finally{
+				if(concentrador!=null)
+					concentrador.closeConnection();
 			}
 		}
 	}
