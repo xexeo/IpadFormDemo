@@ -228,6 +228,51 @@ ORDER BY diaPesq DESC;
 		}
 	},
 
+/*
+select date(dataIniPesq) as 'diaPesq',AVG(duracaoPesq) as 'mediaDia',SUM(duracaoPesq) as 'somaDia',COUNT(id) as 'qtdDia'
+from tblDados
+WHERE cancelado = 1
+GROUP by date(dataIniPesq)
+ORDER BY diaPesq DESC;
+*/
+	selectRegistrosCancelados : function(fail, success) {
+		app.logger.log("(selectRegistrosCancelados) buscando no registro");
+		var linhas = [];
+		try {
+			app.database.transaction(function(tx) {
+
+				var sql = "SELECT DATE(dataIniPesq) as 'diaPesq'," +
+						" AVG(duracaoPesq) as 'mediaDia'," +
+						" SUM(duracaoPesq) as 'somaDia',"+
+						" COUNT(id) as 'qtdDia'" +
+						" FROM tblDados WHERE cancelado = 1" +
+						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
+
+				tx.executeSql(sql, [], function(tx, res) {
+					app.logger.log('qtd linhas select: ' + res.rows.length);
+					for (i = 0; i < res.rows.length; i++) {
+						var elem = res.rows.item(i);
+						linhas.push(elem);
+						app.logger.log('item ' + i + ':' + elem.diaPesq + '; ' + elem.mediaDia  + '; ' + elem.somaDia  + '; ' + elem.qtdDia);
+					}
+				});
+			},
+			// transaction fail
+			function(e) {
+				app.logger.log('ERRO ao buscar pesquisas canceladas: ' + e.message);
+				fail(e);
+			},
+			// transaction success
+			function() {
+				app.logger.log("Busca das pesquisas canceladas realizada com sucesso");
+				app.sumario_lista_cancelados = linhas;
+				success();
+			});
+		} catch (e) {
+			fail(e);
+		}
+	},
+
 	exportaDbToJson : function(writer, fail, success) {
 		app.logger.log("exportando Json: ");
 		try {

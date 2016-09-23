@@ -43,17 +43,33 @@ controllers.sumario = {
 					" e durou " + util.secToFrase(app.ultima_pesquisa[1],true));
 		}
 
-		// Utilizado para testes
-		$('#sumario_test_button').click(function() {
-			//app.buscaDuracoesRegistros();
-			
-			/*
-			// var lista = app.getAtributo('sumario_lista');
-			for (i = 0; i < lista.length; i++) {
-				var elem = lista[i];
-				app.logger.log('item ' + i + ':' + elem.dataIniPesq + '; ' + elem.duracaoPesq);
-			}
-			*/
+		var dataCancelados = [];
+		for (i = 0; i < app.sumario_lista_cancelados.length; i++) {
+			var elem = app.sumario_lista_cancelados[i];
+			dataCancelados.push([util.formatDateSumario(elem.diaPesq),elem.qtdDia,util.secToFrase(elem.somaDia),
+				util.secToFrase(Math.round(elem.mediaDia * 100) / 100)]);
+		}
+
+		$('#sumario_tab_cancelados').DataTable({
+			"data": dataCancelados,
+			"paging": false,
+			"info": false,
+			"ordering" : false,
+			"searching" : false,
+			"columns": [
+				{
+					title: "Dia",
+					className : "cell_dia"},
+				{
+					title: "Quantidade pesquisas canceladas",
+					className : "cell_quantidade"},
+				{
+					title: "Tempo total",
+					className : "cell_tempo_total"},
+				{
+					title: "Tempo médio",
+					className : "cell_tempo_medio"}
+			]
 		});
 
 		$('#sumario_retornar_menu').click(function() {

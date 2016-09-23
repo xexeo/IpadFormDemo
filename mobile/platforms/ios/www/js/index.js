@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.1.5",
+	versao : "2.1.6",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -775,6 +775,29 @@ var app = {
 		});	
 	},
 
+	buscaRegistrosCancelados : function() {
+		myDb.selectRegistrosCancelados(
+		// erro
+		function(error) {
+			app.logger.log('Erro ao buscar cancelados: ' + error.message);
+			// confirma se tenta outra vez
+			confirm("Houve uma falha ao buscar os registros cancelados.\nDeseja tentar novamente?",
+			// button ok
+			function() {
+				app.buscaRegistrosCancelados();
+			},
+			// button cancel
+			function() {
+				app.logger.log("buscaRegistrosCancelados cancelado");
+			}, "Falha na busca.", // título
+			"Sim", "Não");
+		},
+		// ok
+		function() {
+			app.logger.log('buscaRegistrosCancelados executado com sucesso');
+		});	
+	},
+
 	cancelaRegistro : function(cb) {
 		app.logger.log('Cancelando registro: ' + registro.id);
 		app.setAtributo('cancelado', 1);
@@ -954,6 +977,8 @@ copyFile : function(fileName, originDirURI, destDirURI, cb) {
 	changesCounter : 0,
 	
 	sumario_lista : [],
+	
+	sumario_lista_cancelados : [],
 	
 	ultima_pesquisa : [],
 	

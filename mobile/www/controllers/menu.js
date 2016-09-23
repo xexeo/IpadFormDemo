@@ -9,6 +9,7 @@ controllers.menu = {
         $('#menu_sumario').click(function() {
 			app.buscaDuracoesRegistros();
 			app.buscaUltimaPesquisa();
+			app.buscaRegistrosCancelados();
 			app.trocaPagina("views/sumario.html", controllers.sumario);
 		});
 

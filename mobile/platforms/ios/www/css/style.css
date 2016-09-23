@@ -585,6 +585,10 @@ div.ui-block-b>.placa_prefixo input, div.ui-block-b>.placa_sufixo input,
 	text-align: center;
 }
 
+#sumario_tab_cancelados td{
+	color: black;
+	text-align: center;
+}
 
 /* bloqueando copiar no ipad */
 * {
