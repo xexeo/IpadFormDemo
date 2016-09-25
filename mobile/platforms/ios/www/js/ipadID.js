@@ -71,7 +71,7 @@ var ipadID = {
 			function(results){
 				if (results.buttonIndex == 1 || !ipadID._isValid(results.input1.trim())){
 					navigator.notification.alert(
-							"O ipadID informado deve estar no formato 000000 (seis dígitos).",
+							"O ipadID informado deve estar no formato 000000 (seis dígitos), sendo 3 deles para o posto e 3 para o número de ordem [posto][ordem]",
 							ipadID.requestID(success),
 							"Erro entrando ipadID",
 							"OK"
@@ -98,7 +98,12 @@ var ipadID = {
 	},
 	
 	_isValid : function (id){
-		return (id.length === 6 && $.isNumeric(id))? true : false;
+		return (id.length === 6 
+				&& $.isNumeric(id) 
+				&& id.substring(0,3) <= 303
+				&& id.substring(0,3) > 0
+				&& id.substring(3) > 0
+				&& id.substring(3) <= 15)? true : false;
 	},
 			
 	id : null,
