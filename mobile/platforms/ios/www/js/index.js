@@ -396,7 +396,7 @@ var app = {
 		}
 		
 		function newChange(v){
-			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false});
+			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false, transition : 'none'});
 			app.logger.log('newTrocaPagina');
 		}
 	},
