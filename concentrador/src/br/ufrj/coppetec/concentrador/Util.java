@@ -82,6 +82,13 @@ public final class Util {
 				limit = 2;
 			}
 			r = cutString(val, limit);
+			
+			try{
+				Integer.parseInt(r);
+			} catch (NumberFormatException e){
+				logger.debug("Erro na conversão do campo " + fieldName, e);
+				r = new String(new char[limit]).replace("\0", "9");
+			}
 		}
 		return r;
 	}
@@ -107,7 +114,12 @@ public final class Util {
 				r = cutString(val, limit);
 			}
 			
-			
+			try{
+				Float.parseFloat(r);
+			} catch (NumberFormatException e){
+				logger.debug("Erro na conversão do campo " + fieldName, e);
+				r = new String(new char[limit]).replace("\0", "9");
+			}
 		}
 		return r;
 	}
