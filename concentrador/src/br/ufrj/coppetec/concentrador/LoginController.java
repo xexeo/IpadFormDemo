@@ -61,7 +61,7 @@ public class LoginController {
 		if (r == false){
 			logger.info("Tentativa de login SEM sucesso para o usuário: " + user);
 		} else {
-			logger.info("Login do usuário COM sucesso: " + user);
+			logger.info("Login do usuário COM : " + user);
 		}
 		return r;
 	}

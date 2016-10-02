@@ -100,6 +100,8 @@ public class Janela extends javax.swing.JFrame {
 		// hide server tab
 		jTabbedPane2.remove(pnl_servidor);
 		btnApagar.setVisible(false);
+		chk_exportadas_sumVol.setVisible(false);
+		chk_nao_exportadas_sumVol.setVisible(false);
 
 	}
 
@@ -110,6 +112,45 @@ public class Janela extends javax.swing.JFrame {
 		System.arraycopy(a, 0, c, 0, aLen);
 		System.arraycopy(b, 0, c, aLen, bLen);
 		return c;
+	}
+	
+	private void fillCmbDatesSumVol(){
+		try{
+			myDB database = new myDB();
+			String[] dates = database.getVolDates();
+			
+			if (dates != null){
+				cmbDataSumVol.removeAllItems();
+				cmbDataSumVol.addItem("Todas");
+				for (int i = 0 ; i<dates.length;i++){
+					cmbDataSumVol.addItem(sdfToBrazil.format(sdf.parse(dates[i])));
+				}
+			}
+			
+		} catch (Exception e){
+			logger.error("Erro ao conectar com o BD.", e);
+			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
+					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void setSumVolData(String date){
+		Map<String, Integer> volData;
+		try{
+			myDB database = new myDB();
+			volData = database.getSumVol(volFieldsNames, date);
+			Class<Janela> janelaClass = Janela.class;
+			Field sumVol;
+			for (int i = 0; i < volFieldsNamesLeves.length; i++){
+				sumVol = janelaClass.getDeclaredField("txtSumVol"+volFieldsNamesLeves[i]);
+				JTextField txtField = (JTextField) sumVol.get(this);
+				txtField.setText(volData.get(volFieldsNamesLeves[i]).toString());
+			}
+		}catch (Exception e) {
+				logger.error("Erro preenchendo o sumário da pesquisa volumétrica.", e);
+				JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
+						"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+			}
 	}
 
 	private void initFieldValues() {
@@ -869,6 +910,35 @@ public class Janela extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         btnODNotSent = new javax.swing.JButton();
         btnODexportAll = new javax.swing.JButton();
+        pnl_sumario_volumetrica = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        cmbDataSumVol = new javax.swing.JComboBox();
+        chk_exportadas_sumVol = new javax.swing.JCheckBox();
+        chk_nao_exportadas_sumVol = new javax.swing.JCheckBox();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        txtSumVolP1 = new javax.swing.JTextField();
+        txtSumVolP2 = new javax.swing.JTextField();
+        txtSumVolP3 = new javax.swing.JTextField();
+        txtSumVolM = new javax.swing.JTextField();
+        txtSumVolO1 = new javax.swing.JTextField();
+        txtSumVolO2 = new javax.swing.JTextField();
+        txtSumVolO3 = new javax.swing.JTextField();
+        txtSumVolC1 = new javax.swing.JTextField();
+        txtSumVolC2 = new javax.swing.JTextField();
+        txtSumVolC3 = new javax.swing.JTextField();
+        txtSumVolC4 = new javax.swing.JTextField();
+        txtSumVolC5 = new javax.swing.JTextField();
 
         dadosFileChooser.setDialogTitle("Importar dados iPad");
         dadosFileChooser.setFileFilter(new SQLiteFilter());
@@ -881,6 +951,11 @@ public class Janela extends javax.swing.JFrame {
         setIconImage(new ImageIcon(Janela.this.getClass().getResource("/images/icon.png")).getImage());
 
         jTabbedPane2.setDoubleBuffered(true);
+        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane2StateChanged(evt);
+            }
+        });
 
         lblPosto.setText("Posto:");
 
@@ -6033,6 +6108,219 @@ public class Janela extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("captura e exportação de dados", pnl_envio);
 
+        jLabel38.setText("Data");
+
+        cmbDataSumVol.setSelectedIndex(-1);
+        cmbDataSumVol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDataSumVolActionPerformed(evt);
+            }
+        });
+
+        chk_exportadas_sumVol.setText("Exportadas");
+
+        chk_nao_exportadas_sumVol.setText("Não exportadas");
+
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel41.setText("P1");
+
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("P2");
+
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel43.setText("P3");
+
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel44.setText("M");
+
+        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel45.setText("2CB");
+
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel46.setText("3CB");
+
+        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel47.setText("4CB");
+
+        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel48.setText("2C");
+
+        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel49.setText("3C");
+
+        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel50.setText("4C");
+
+        jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel51.setText("4CD");
+
+        jLabel52.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel52.setText("3D");
+
+        txtSumVolP1.setEditable(false);
+        txtSumVolP1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolP2.setEditable(false);
+        txtSumVolP2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolP3.setEditable(false);
+        txtSumVolP3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolM.setEditable(false);
+        txtSumVolM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolO1.setEditable(false);
+        txtSumVolO1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolO2.setEditable(false);
+        txtSumVolO2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolO3.setEditable(false);
+        txtSumVolO3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolC1.setEditable(false);
+        txtSumVolC1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolC2.setEditable(false);
+        txtSumVolC2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolC3.setEditable(false);
+        txtSumVolC3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolC4.setEditable(false);
+        txtSumVolC4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtSumVolC5.setEditable(false);
+        txtSumVolC5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        javax.swing.GroupLayout pnl_sumario_volumetricaLayout = new javax.swing.GroupLayout(pnl_sumario_volumetrica);
+        pnl_sumario_volumetrica.setLayout(pnl_sumario_volumetricaLayout);
+        pnl_sumario_volumetricaLayout.setHorizontalGroup(
+            pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                                .addComponent(cmbDataSumVol, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(chk_exportadas_sumVol)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chk_nao_exportadas_sumVol))
+                            .addComponent(txtSumVolP1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolM, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolO1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolO2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolO3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolC1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolC2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolC3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolC4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolC5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolP3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSumVolP2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(802, Short.MAX_VALUE))
+        );
+        pnl_sumario_volumetricaLayout.setVerticalGroup(
+            pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel38)
+                    .addComponent(cmbDataSumVol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chk_exportadas_sumVol)
+                    .addComponent(chk_nao_exportadas_sumVol))
+                .addGap(42, 42, 42)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41)
+                    .addComponent(txtSumVolP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43)
+                    .addComponent(txtSumVolP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42)
+                    .addComponent(txtSumVolP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44)
+                    .addComponent(txtSumVolM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel45)
+                    .addComponent(txtSumVolO1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46)
+                    .addComponent(txtSumVolO2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(txtSumVolO3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(txtSumVolC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel49)
+                    .addComponent(txtSumVolC2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel50)
+                    .addComponent(txtSumVolC3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel51)
+                    .addComponent(txtSumVolC4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel52)
+                    .addComponent(txtSumVolC5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(346, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Sumário Volumétrica", pnl_sumario_volumetrica);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -6109,6 +6397,26 @@ public class Janela extends javax.swing.JFrame {
 		return; //sai sem apagar
 		}
     }//GEN-LAST:event_btnApagarActionPerformed
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+        if(jTabbedPane2.getSelectedComponent().equals(pnl_sumario_volumetrica)){
+			this.fillCmbDatesSumVol();
+		}
+    }//GEN-LAST:event_jTabbedPane2StateChanged
+
+    private void cmbDataSumVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDataSumVolActionPerformed
+        try{
+			if (cmbDataSumVol.getSelectedItem().toString().equals("Todas")){
+				this.setSumVolData(null);
+			} else {
+				this.setSumVolData(sdf.format(sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
+			}
+			
+		} catch (Exception e){
+			logger.info("Erro na conversão de datas para consulta e construção do sumário da pesquisa volumétrica.", e);
+		}
+
+    }//GEN-LAST:event_cmbDataSumVolActionPerformed
 
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
@@ -6461,6 +6769,9 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JButton btnODexportAll;
     private javax.swing.JButton btnSalvarForms;
     private javax.swing.JButton btnVolNotSent;
+    private javax.swing.JCheckBox chk_exportadas_sumVol;
+    private javax.swing.JCheckBox chk_nao_exportadas_sumVol;
+    private javax.swing.JComboBox cmbDataSumVol;
     private javax.swing.JComboBox<String> cmbHora;
     private javax.swing.JFileChooser dadosFileChooser;
     private org.jdesktop.swingx.JXDatePicker data;
@@ -6498,10 +6809,23 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -6695,6 +7019,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField peso60_2;
     private javax.swing.JPanel pnl_envio;
     private javax.swing.JPanel pnl_servidor;
+    private javax.swing.JPanel pnl_sumario_volumetrica;
     private javax.swing.JPanel pnl_volumetrica;
     private javax.swing.JRadioButton rdo_PistaDupla;
     private javax.swing.JRadioButton rdo_PistaSimples;
@@ -6939,6 +7264,18 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisador1;
     private javax.swing.JTextField txtPesquisador2;
     public javax.swing.JTextField txtPorta;
+    private javax.swing.JTextField txtSumVolC1;
+    private javax.swing.JTextField txtSumVolC2;
+    private javax.swing.JTextField txtSumVolC3;
+    private javax.swing.JTextField txtSumVolC4;
+    private javax.swing.JTextField txtSumVolC5;
+    private javax.swing.JTextField txtSumVolM;
+    private javax.swing.JTextField txtSumVolO1;
+    private javax.swing.JTextField txtSumVolO2;
+    private javax.swing.JTextField txtSumVolO3;
+    private javax.swing.JTextField txtSumVolP1;
+    private javax.swing.JTextField txtSumVolP2;
+    private javax.swing.JTextField txtSumVolP3;
     private javax.swing.JTextField txtTotalLeves;
     private javax.swing.JTextField txtTotalPesados;
     // End of variables declaration//GEN-END:variables
@@ -6960,6 +7297,7 @@ public class Janela extends javax.swing.JFrame {
 	private boolean ctlGetValuesFromDataBase = true;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfToBrazil = new SimpleDateFormat("dd/MM/yyy");
 }
 
 class ImagemRenderer extends DefaultTableCellRenderer {

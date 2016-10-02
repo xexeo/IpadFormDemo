@@ -5,10 +5,12 @@ import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 /**
  *
@@ -112,7 +114,55 @@ public class myDB extends Db {
 		
 		this.executeStatement(qry);
 	}
-
+	
+	public String[] getVolDates() throws Exception{
+		this.setStatement();
+		ResultSet result = null;
+		String[] datesReturn = null;
+		int qtd = 0;
+		String qry = "SELECT COUNT(DISTINCT data) as qtd from voltable";
+		result = this.executeQuery(qry);
+		if (result.next()){
+			qtd = result.getInt("qtd");
+		}
+		result.close();
+		if (qtd != 0){
+			datesReturn = new String[qtd];
+			this.setStatement();
+			qry = "SELECT DISTINCT data from voltable";
+			result = this.executeQuery(qry);
+			int count = 0;
+			while(result.next()){
+				datesReturn[count++] = result.getString("data");
+			}
+		}
+		return datesReturn;
+	}
+	
+	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception{
+		this.setStatement();
+		Map<String, Integer> returnData = new HashMap<String, Integer>();
+		String qry;
+		JSONObject jsonObject = null;
+		for (int i=0; i<fieldNames.length; i++){
+			returnData.put(fieldNames[i], 0);
+		}
+		if (date == null){
+			qry = "SELECT * from voltable";
+		} else {
+			qry = "SELECT * from voltable WHERE data = '" + date + "'";
+		}
+		ResultSet result = this.executeQuery(qry);
+		while(result.next()){
+			for (String field : returnData.keySet()){
+				jsonObject = new JSONObject(result.getString(field));
+				returnData.put(field, returnData.get(field) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+			}
+		}
+		result.close();
+		return returnData; 
+	}
+	
 	public void updatePV(PVregister reg, int id) throws Exception {
 		String sql = "UPDATE voltable SET ";
 		sql += "enviado=" + Integer.toString(reg.enviado) + ",";
