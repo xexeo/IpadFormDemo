@@ -6743,7 +6743,7 @@ public class Janela extends javax.swing.JFrame {
 			int counter = 0;
 			boolean wrong_password = true;
 			JPanel panel = new JPanel();
-			JLabel label = new JLabel("Entre com o senha para a pagar o registro.");
+			JLabel label = new JLabel("Entre com o senha para apagar o registro.");
 			JPasswordField pass = new JPasswordField(10);
 			panel.add(label);
 			panel.add(pass);
