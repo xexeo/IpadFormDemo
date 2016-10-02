@@ -31,10 +31,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import br.ufrj.coppetec.concentrador.database.ImportedDB;
+import br.ufrj.coppetec.concentrador.database.PVKey;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
+import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
+import java.time.Clock;
 import javax.naming.NoPermissionException;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.AbstractDocument;
@@ -43,6 +46,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.StyledDocument;
+import org.json.JSONObject;
 
 /**
  *
@@ -242,6 +246,84 @@ public class Janela extends javax.swing.JFrame {
 		}
 		
 	};
+	
+	private boolean checkPVKeyDataEnter(){
+		return (cmbHora.getSelectedIndex() != -1 &&
+				data.getDate() != null &&
+				(rdo_SentidoAB.isSelected() || rdo_SentidoBA.isSelected()));
+	}
+	
+	private void askForDataRetrieve(){
+		if (checkPVKeyDataEnter() && ctlGetValuesFromDataBase){
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			PVKey pvKey = new PVKey();
+			pvKey.data = sdf.format(data.getDate());
+			pvKey.hora = Integer.parseInt(cmbHora.getSelectedItem().toString());
+			pvKey.posto = Integer.parseInt(Concentrador.posto);
+			pvKey.sentido = (rdo_SentidoAB.isSelected())? "AB" : "BA";
+			
+			try{
+				myDB database = new myDB();
+				int alreadyInDataBase = database.verifyPV(pvKey);
+				if (alreadyInDataBase != 0) {
+					int returnedValue = JOptionPane
+							.showConfirmDialog(
+									Janela.this,
+									"Já existe um registro no Banco de Dados com o mesmo posto, sentido, data e hora.\nVocê deseja recuperar os dados já gravados?",
+									"Dados já existentes.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (returnedValue == JOptionPane.YES_OPTION) {
+						
+						//preenche os dados
+						ctlGetValuesFromDataBase = false;
+						PVregister pvR = database.getPVRegister(alreadyInDataBase);
+						txtLocal.setText(pvR.local);
+						txtPesquisador1.setText(pvR.pesquisador1);
+						txtPesquisador2.setText(pvR.pesquisador2);
+						data.setDate(sdf.parse(pvR.data));
+						if (pvR.sentido.equals("AB")){
+							rdo_SentidoAB.doClick();
+						} else {
+							rdo_SentidoBA.doClick();
+						}
+						
+						if (pvR.pista.equals("S")){
+							rdo_PistaSimples.doClick();
+						} else {
+							rdo_PistaDupla.doClick();
+						}
+						ctlGetValuesFromDataBase = true;
+											
+						Class<PVregister> registerClass = PVregister.class;
+						Field vehicleType;
+						String jsonData = null;
+						JSONObject typeData;
+						String[] values;
+						int i;
+						for (String fieldName : fieldsMap.keySet()){
+							vehicleType = registerClass.getDeclaredField(fieldName.toLowerCase());
+							vehicleType.setAccessible(true);
+							jsonData = (String) vehicleType.get(pvR);
+							typeData = new JSONObject(jsonData);
+							values = ((String) typeData.get("Valores")).split(",");
+							for (i = 0; i < fieldsMap.get(fieldName).length;i++){
+								fieldsMap.get(fieldName)[i].setText(values[i]);
+							}
+						
+						}
+					}
+					return;// exit and don't get data
+				}
+			} catch (Exception e) {
+				logger.error("Erro ao conectar com o BD.", e);
+				JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
+						"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
+		}
+	}
 	
 	private void sumFields(fieldTypes type) {
 		String[] fields = null;
@@ -811,9 +893,19 @@ public class Janela extends javax.swing.JFrame {
 
         grpSentido.add(rdo_SentidoBA);
         rdo_SentidoBA.setText("B->A");
+        rdo_SentidoBA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo_SentidoBAActionPerformed(evt);
+            }
+        });
 
         grpSentido.add(rdo_SentidoAB);
         rdo_SentidoAB.setText("A->B");
+        rdo_SentidoAB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo_SentidoABActionPerformed(evt);
+            }
+        });
 
         lblPista.setText("Pista:");
 
@@ -5664,6 +5756,12 @@ public class Janela extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
 
+        data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataActionPerformed(evt);
+            }
+        });
+
         btnSalvarForms.setText("Gravar Formulários");
         btnSalvarForms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -5931,6 +6029,18 @@ public class Janela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rdo_SentidoBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_SentidoBAActionPerformed
+        askForDataRetrieve();
+    }//GEN-LAST:event_rdo_SentidoBAActionPerformed
+
+    private void rdo_SentidoABActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_SentidoABActionPerformed
+        askForDataRetrieve();
+    }//GEN-LAST:event_rdo_SentidoABActionPerformed
+
+    private void dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataActionPerformed
+        askForDataRetrieve();
+    }//GEN-LAST:event_dataActionPerformed
+
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		File[] roots = filesys.getRoots();
@@ -6182,6 +6292,7 @@ public class Janela extends javax.swing.JFrame {
 			pesados_hora2.setText(hora2);
 			leves_hora2.setText(hora2);
 			lblFolha2.setText(Integer.toString(cmbHora.getSelectedIndex() + 1));
+			askForDataRetrieve();
 		}
 	}// GEN-LAST:event_cmbHoraActionPerformed
 
@@ -6776,6 +6887,8 @@ public class Janela extends javax.swing.JFrame {
 	}
 	
 	private HashMap<String, JTextField> txtFree;
+	
+	private boolean ctlGetValuesFromDataBase = true;
 	
 }
 

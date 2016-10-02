@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,14 +29,14 @@ public class myDB extends Db {
 		
 	}
 
-	public int verifyPV(PVregister reg) throws Exception {
+	public int verifyPV(PVKey regKey) throws Exception {
 		this.setStatement();
-		String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(reg.posto);
+		String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(regKey.posto);
 		// qry += " AND pista='" + reg.pista + "'";
-		qry += " AND data='" + reg.data + "'";
-		qry += " AND hora=" + Integer.toString(reg.hora);
-		qry += " AND sentido='" + reg.sentido + "'";
-		qry += " AND posto='" + Integer.toString(reg.posto) + "'";
+		qry += " AND data='" + regKey.data + "'";
+		qry += " AND hora=" + Integer.toString(regKey.hora);
+		qry += " AND sentido='" + regKey.sentido + "'";
+		// qry += " AND posto='" + Integer.toString(reg.posto) + "'";
 		// qry += " AND pesquisador1='" + reg.pesquisador1 + "'";
 		// qry += " AND pesquisador2='" + reg.pesquisador2 + "'";
 
@@ -43,6 +44,63 @@ public class myDB extends Db {
 		int r = ((result.next()) ? result.getInt("id") : 0);
 		result.close();
 		return r;
+	}
+	
+	public int verifyPV(PVregister reg) throws Exception{
+		return verifyPV(new PVKey(reg));
+	}
+	
+	public PVregister getPVRegister(PVKey key)throws Exception{
+		return getPVRegister(verifyPV(key));
+	}
+	
+	public PVregister getPVRegister(int id)throws Exception{
+		PVregister pvR = new PVregister();
+		String qry = "SELECT * FROM voltable WHERE id = " + "'" + id + "'";
+		
+			this.setStatement();
+			ResultSet result = this.executeQuery(qry);
+			if (result.next()){
+				pvR.posto = result.getInt("posto");
+				pvR.pista = result.getString("pista");
+				pvR.data = result.getString("data");
+				pvR.hora = result.getInt("hora");
+				pvR.sentido = result.getString("sentido");
+				pvR.local = result.getString("local");
+				pvR.pesquisador1 = result.getString("pesquisador1");
+				pvR.pesquisador2 = result.getString("pesquisador2");
+				pvR.p1=result.getString("P1");
+				pvR.p2=result.getString("P2");
+				pvR.p3=result.getString("P3");
+				pvR.m=result.getString("M");
+				pvR.o1=result.getString("O1");
+				pvR.o2=result.getString("O2");
+				pvR.o3=result.getString("O3");
+				pvR.c1=result.getString("C1");
+				pvR.c2=result.getString("C2");
+				pvR.c3=result.getString("C3");
+				pvR.c4=result.getString("C4");
+				pvR.c5=result.getString("C5");
+				pvR.s1=result.getString("S1");
+				pvR.s2=result.getString("S2");
+				pvR.s3=result.getString("S3");
+				pvR.s4=result.getString("S4");
+				pvR.s5=result.getString("S5");
+				pvR.s6=result.getString("S6");
+				pvR.se1=result.getString("SE1");
+				pvR.se2=result.getString("SE2");
+				pvR.se3=result.getString("SE3");
+				pvR.se4=result.getString("SE4");
+				pvR.se5=result.getString("SE5");
+				pvR.r1=result.getString("R1");
+				pvR.r2=result.getString("R2");
+				pvR.r3=result.getString("R3");
+				pvR.r4=result.getString("R4");
+				pvR.r5=result.getString("R5");
+				pvR.r6=result.getString("R6");
+			}
+			result.close();
+	return pvR;
 	}
 
 	public void updatePV(PVregister reg, int id) throws Exception {
