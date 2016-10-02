@@ -163,6 +163,33 @@ public class myDB extends Db {
 		return returnData; 
 	}
 	
+	public Map<String, Map<Integer, Integer>> getSumVolPerHour(String[] fieldNames, String date) throws Exception{
+		this.setStatement();
+		Map<String, Map<Integer, Integer>> returnData = new HashMap<String, Map<Integer, Integer>>();
+		String qry;
+		JSONObject jsonObject = null;
+		for (int i=0; i<fieldNames.length; i++){
+			returnData.put(fieldNames[i], new HashMap<Integer, Integer>());
+			for(int j = 0; j< 24; j += 2){
+				returnData.get(fieldNames[i]).put(j, 0);
+			}
+		}
+		if (date == null){
+			qry = "SELECT * from voltable";
+		} else {
+			qry = "SELECT * from voltable WHERE data = '" + date + "'";
+		}
+		ResultSet result = this.executeQuery(qry);
+		while(result.next()){
+			for (String field : returnData.keySet()){
+				jsonObject = new JSONObject(result.getString(field));
+				returnData.get(field).put(result.getInt("hora"), returnData.get(field).get(result.getInt("hora")) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+			}
+		}
+		result.close();
+		return returnData; 
+	}
+	
 	public void updatePV(PVregister reg, int id) throws Exception {
 		String sql = "UPDATE voltable SET ";
 		sql += "enviado=" + Integer.toString(reg.enviado) + ",";
