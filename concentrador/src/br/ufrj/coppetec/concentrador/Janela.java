@@ -39,6 +39,9 @@ import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
 import javax.naming.NoPermissionException;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -96,6 +99,7 @@ public class Janela extends javax.swing.JFrame {
 		initFieldValues();
 		// hide server tab
 		jTabbedPane2.remove(pnl_servidor);
+		btnApagar.setVisible(false);
 
 	}
 
@@ -253,16 +257,20 @@ public class Janela extends javax.swing.JFrame {
 				(rdo_SentidoAB.isSelected() || rdo_SentidoBA.isSelected()));
 	}
 	
+	private PVKey makePVKey(){
+		PVKey pvKey = new PVKey();
+		pvKey.data = sdf.format(data.getDate());
+		pvKey.hora = Integer.parseInt(cmbHora.getSelectedItem().toString());
+		pvKey.posto = Integer.parseInt(Concentrador.posto);
+		pvKey.sentido = (rdo_SentidoAB.isSelected())? "AB" : "BA";
+		return pvKey;
+	}
+	
 	private void askForDataRetrieve(){
 		if (checkPVKeyDataEnter() && ctlGetValuesFromDataBase){
+			btnApagar.setVisible(false);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
-			PVKey pvKey = new PVKey();
-			pvKey.data = sdf.format(data.getDate());
-			pvKey.hora = Integer.parseInt(cmbHora.getSelectedItem().toString());
-			pvKey.posto = Integer.parseInt(Concentrador.posto);
-			pvKey.sentido = (rdo_SentidoAB.isSelected())? "AB" : "BA";
+			PVKey pvKey = makePVKey();
 			
 			try{
 				myDB database = new myDB();
@@ -277,6 +285,7 @@ public class Janela extends javax.swing.JFrame {
 						
 						//preenche os dados
 						ctlGetValuesFromDataBase = false;
+						btnApagar.setVisible(true);
 						PVregister pvR = database.getPVRegister(alreadyInDataBase);
 						txtLocal.setText(pvR.local);
 						txtPesquisador1.setText(pvR.pesquisador1);
@@ -842,6 +851,7 @@ public class Janela extends javax.swing.JFrame {
         btnSalvarForms = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         lblTrecho_dados = new javax.swing.JLabel();
+        btnApagar = new javax.swing.JButton();
         pnl_servidor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -5773,6 +5783,13 @@ public class Janela extends javax.swing.JFrame {
 
         lblTrecho_dados.setText("------------------------------------------------------------------------------------------");
 
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_volumetricaLayout = new javax.swing.GroupLayout(pnl_volumetrica);
         pnl_volumetrica.setLayout(pnl_volumetricaLayout);
         pnl_volumetricaLayout.setHorizontalGroup(
@@ -5813,7 +5830,9 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addComponent(txtLocal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvarForms, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalvarForms, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -5827,7 +5846,8 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblPosto_dados)
                     .addComponent(jLabel34)
                     .addComponent(lblTrecho_dados)
-                    .addComponent(lblPosto))
+                    .addComponent(lblPosto)
+                    .addComponent(btnApagar))
                 .addGap(10, 10, 10)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdo_SentidoBA)
@@ -6041,6 +6061,55 @@ public class Janela extends javax.swing.JFrame {
         askForDataRetrieve();
     }//GEN-LAST:event_dataActionPerformed
 
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        int returnedValue = JOptionPane
+							.showConfirmDialog(
+									Janela.this,
+									"Os dados apagados não poderão ser recuperados.\nVocê deseja continuar?",
+									"Apagar dados.", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+		if (returnedValue == JOptionPane.YES_OPTION) {
+			//solicita senha
+			int counter = 0;
+			boolean wrong_password = true;
+			JPanel panel = new JPanel();
+			JLabel label = new JLabel("Entre com o senha para a pagar o registro.");
+			JPasswordField pass = new JPasswordField(10);
+			panel.add(label);
+			panel.add(pass);
+			String[] options = new String[]{"Cancel", "OK"};
+			int option = JOptionPane.showOptionDialog(Janela.this,
+										panel,
+										"Senha para apagar registro.",
+										JOptionPane.NO_OPTION,
+										JOptionPane.WARNING_MESSAGE,
+										null,
+										options,
+										options[1]);
+			if (option == 1){ //ok button
+				LoginController controller = new LoginController("/logins/users.json");
+				if (controller.validateLogin(Concentrador.posto, String.copyValueOf(pass.getPassword()))){
+					try{
+						myDB database = new myDB();
+						database.deletePV(makePVKey());
+						this.clearForm();
+						JOptionPane.showMessageDialog(Janela.this, "Operação concluída", "Operação concluída", JOptionPane.INFORMATION_MESSAGE);
+						
+					} catch (Exception e){
+						logger.error("Erro ao tentar apagar um registro.", e);
+						JOptionPane.showMessageDialog(Janela.this, "Erro ao tentar apagar um registro:\n" + e.getMessage(),
+							"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					
+				} else {
+					JOptionPane.showMessageDialog(Janela.this, "A senha informada não confere.", "Senha incorreta",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		} else {
+		return; //sai sem apagar
+		}
+    }//GEN-LAST:event_btnApagarActionPerformed
+
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		File[] roots = filesys.getRoots();
@@ -6164,7 +6233,6 @@ public class Janela extends javax.swing.JFrame {
 		}
 
 		// valida e formata data
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (data.getDate() == null) {
 			JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.", "Data não preenchida.",
 					JOptionPane.ERROR_MESSAGE);
@@ -6386,6 +6454,7 @@ public class Janela extends javax.swing.JFrame {
 	private InputVerifier intVerifier;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnExportAllVol;
     private javax.swing.JButton btnInDados;
     private javax.swing.JButton btnODNotSent;
@@ -6890,6 +6959,7 @@ public class Janela extends javax.swing.JFrame {
 	
 	private boolean ctlGetValuesFromDataBase = true;
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 }
 
 class ImagemRenderer extends DefaultTableCellRenderer {

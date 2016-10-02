@@ -102,6 +102,16 @@ public class myDB extends Db {
 			result.close();
 	return pvR;
 	}
+	
+	public void deletePV(PVKey key) throws Exception{
+		this.setStatement();
+		String qry = "DELETE FROM voltable WHERE posto = " + Integer.toString(key.posto);
+		qry += " AND data='" + key.data + "'";
+		qry += " AND hora=" + Integer.toString(key.hora);
+		qry += " AND sentido='" + key.sentido + "'";
+		
+		this.executeStatement(qry);
+	}
 
 	public void updatePV(PVregister reg, int id) throws Exception {
 		String sql = "UPDATE voltable SET ";

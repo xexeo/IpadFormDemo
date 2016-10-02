@@ -31,43 +31,13 @@ public class LoginJanela extends javax.swing.JDialog {
 	}
 
 	private void exitProgram() {
-		System.out.println("Usuário cancelou o login");
+		logger.info("Usuário cancelou o login");
 		System.exit(0);
 	}
 
 	private boolean validateLogin() {
-		StringBuilder result = null;
-		InputStream loginsFile = null;
-		Scanner scanner = null;
-		JSONObject logins = null;
-		JSONObject user = null;
-		boolean r = false;
-		try {
-			result = new StringBuilder("");
-			loginsFile = this.getClass().getResourceAsStream("/logins/users.json");
-			scanner = new Scanner(loginsFile);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				result.append(line).append("\n");
-			}
-			scanner.close();
-			logins = new JSONObject(result.toString());
-		} catch (Exception e) {
-			logger.error("Erro ao ler o arquivo de login", e);
-			JOptionPane.showMessageDialog(null, "Erro lendo o arquivo de login." + e.getMessage());
-		}
-
-		for (Object dados : logins.getJSONArray("logins")) {
-
-			if (txtUser.getText().equals(((JSONObject) dados).getString("usr"))
-					&& String.copyValueOf(txtPassword.getPassword()).equals(((JSONObject) dados).getString("pwd"))) {
-				Concentrador.trecho = ((JSONObject) dados).getString("trecho");
-				Concentrador.posto = ((JSONObject) dados).getString("usr");
-				r = true;
-			}
-		}
-
-		return r;
+		LoginController controller = new LoginController("/logins/users.json");
+		return controller.validateLogin(txtUser.getText(), String.copyValueOf(txtPassword.getPassword()));
 	}
 
 	/**
