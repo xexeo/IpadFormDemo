@@ -36,6 +36,7 @@ import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
@@ -6731,9 +6732,9 @@ public class Janela extends javax.swing.JFrame {
             .addGroup(pnl_relatorioLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(699, Short.MAX_VALUE))
+                    .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(482, Short.MAX_VALUE))
         );
         pnl_relatorioLayout.setVerticalGroup(
             pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6741,8 +6742,8 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(583, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(444, Short.MAX_VALUE))
         );
 
         tabRelatorio.addTab("Sumário OD", pnl_relatorio);
@@ -6893,6 +6894,7 @@ public class Janela extends javax.swing.JFrame {
 			model.fireTableStructureChanged();
 			relatorio.setModel(model);
 			relatorio.setCellSelectionEnabled(false);
+			relatorio.setIntercellSpacing(new Dimension(0, 2));
 			odStatus.setText("");
 		}
 	}
@@ -7914,18 +7916,25 @@ class RelatorioODRender extends DefaultTableCellRenderer{
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column){ 
 		Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 
-		if (! table.isRowSelected(row)){
-			if(column == 0)
-				c.setBackground(Color.LIGHT_GRAY);
-			else
-				c.setBackground(table.getBackground());
-			
-			if(column==0 || column==table.getColumnCount()-1 || row==table.getRowCount()-1)
-				c.setFont(c.getFont().deriveFont(
-                        Font.BOLD));
-			else
-				c.setFont(c.getFont().deriveFont(
-                        Font.PLAIN));
+		if(column == 0)
+			c.setBackground(Color.LIGHT_GRAY);
+		else
+			c.setBackground(table.getBackground());
+
+		if(column==0 || column==table.getColumnCount()-1 || row==table.getRowCount()-1)
+			c.setFont(c.getFont().deriveFont(
+					Font.BOLD));
+		else
+			c.setFont(c.getFont().deriveFont(
+					Font.PLAIN));
+		
+		if(row!=0){
+			super.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		}
+		
+		if (table.isRowSelected(row) || table.isColumnSelected(column)){
+			if(column!=0 && (row<table.getRowCount()-1 || column==table.getSelectedColumn()))
+				c.setBackground(new Color(240, 255, 128));
 		}
 
 		return c; 
