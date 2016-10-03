@@ -35,6 +35,8 @@ import br.ufrj.coppetec.concentrador.database.PVKey;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
+import java.awt.Color;
+import java.awt.Font;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
 import java.util.Vector;
@@ -102,7 +104,9 @@ public class Janela extends javax.swing.JFrame {
 		btnApagar.setVisible(false);
 		chk_exportadas_sumVol.setVisible(false);
 		chk_nao_exportadas_sumVol.setVisible(false);
-
+		
+		
+		relatorio.setDefaultRenderer(Object.class, new RelatorioODRender());
 	}
 
 	public String[] concatStringArrays(String[] a, String[] b) {
@@ -7898,4 +7902,26 @@ class ZipFilter extends FileFilter {
 		return "Arquivos ZIP (*.zip)";
 	}
 
+}
+
+class RelatorioODRender extends DefaultTableCellRenderer{
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column){ 
+		Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
+
+		if (! table.isRowSelected(row)){
+			if(column == 0)
+				c.setBackground(Color.LIGHT_GRAY);
+			else
+				c.setBackground(table.getBackground());
+			
+			if(column==0 || column==table.getColumnCount()-1 || row==table.getRowCount()-1)
+				c.setFont(c.getFont().deriveFont(
+                        Font.BOLD));
+			else
+				c.setFont(c.getFont().deriveFont(
+                        Font.PLAIN));
+		}
+
+		return c; 
+	} 
 }
