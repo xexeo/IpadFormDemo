@@ -47,6 +47,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -6828,7 +6829,12 @@ public class Janela extends javax.swing.JFrame {
 		Map<String, Map<String, Integer> > data=null;
 		Vector<String> cols = null;
 		Vector<String> rows = null;
-		DefaultTableModel model = new DefaultTableModel();
+		DefaultTableModel model = new DefaultTableModel(){
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
 		try {
 			cols = Concentrador.database.fetchReportODColumns();
 			rows = Concentrador.database.fetchReportODRows();
