@@ -30,26 +30,23 @@ import javax.swing.table.DefaultTableCellRenderer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import br.ufrj.coppetec.concentrador.database.ImportedDB;
 import br.ufrj.coppetec.concentrador.database.PVKey;
 import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
-import java.time.Clock;
+import java.util.Vector;
 import javax.naming.NoPermissionException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.text.AbstractDocument;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
-import javax.swing.text.StyledDocument;
 import org.json.JSONObject;
 
 /**
@@ -99,7 +96,7 @@ public class Janela extends javax.swing.JFrame {
 		initComponents();
 		initFieldValues();
 		// hide server tab
-		jTabbedPane2.remove(pnl_servidor);
+		tabRelatorio.remove(pnl_servidor);
 		btnApagar.setVisible(false);
 		chk_exportadas_sumVol.setVisible(false);
 		chk_nao_exportadas_sumVol.setVisible(false);
@@ -459,12 +456,12 @@ public class Janela extends javax.swing.JFrame {
         grpPista = new javax.swing.ButtonGroup();
         dadosFileChooser = new javax.swing.JFileChooser();
         exporterFileChooser = new javax.swing.JFileChooser();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        tabRelatorio = new javax.swing.JTabbedPane();
         pnl_volumetrica = new javax.swing.JPanel();
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<String>();
+        cmbHora = new javax.swing.JComboBox<>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblSentido = new javax.swing.JLabel();
@@ -1009,6 +1006,9 @@ public class Janela extends javax.swing.JFrame {
         jLabel70 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSumVol = new javax.swing.JTable();
+        pnl_relatorio = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        relatorio = new javax.swing.JTable();
 
         dadosFileChooser.setDialogTitle("Importar dados iPad");
         dadosFileChooser.setFileFilter(new SQLiteFilter());
@@ -1020,10 +1020,10 @@ public class Janela extends javax.swing.JFrame {
         setTitle("Concentrador de dados - versão " + Concentrador.version);
         setIconImage(new ImageIcon(Janela.this.getClass().getResource("/images/icon.png")).getImage());
 
-        jTabbedPane2.setDoubleBuffered(true);
-        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+        tabRelatorio.setDoubleBuffered(true);
+        tabRelatorio.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPane2StateChanged(evt);
+                tabRelatorioStateChanged(evt);
             }
         });
 
@@ -1033,7 +1033,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -6013,7 +6013,7 @@ public class Janela extends javax.swing.JFrame {
         jTabbedPane1.getAccessibleContext().setAccessibleName("tab_leves");
         jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
 
-        jTabbedPane2.addTab("Formulário de pesquisa volumétrica", pnl_volumetrica);
+        tabRelatorio.addTab("Formulário de pesquisa volumétrica", pnl_volumetrica);
 
         jLabel1.setText("Porta");
 
@@ -6057,7 +6057,7 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Servidor Web", pnl_servidor);
+        tabRelatorio.addTab("Servidor Web", pnl_servidor);
 
         jLabel3.setText("Captura de Dados");
 
@@ -6176,11 +6176,10 @@ public class Janela extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("captura e exportação de dados", pnl_envio);
+        tabRelatorio.addTab("captura e exportação de dados", pnl_envio);
 
         jLabel38.setText("Data");
 
-        cmbDataSumVol.setSelectedIndex(-1);
         cmbDataSumVol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDataSumVolActionPerformed(evt);
@@ -6702,20 +6701,52 @@ public class Janela extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        jTabbedPane2.addTab("Sumário Volumétrica", pnl_sumario_volumetrica);
+        tabRelatorio.addTab("Sumário Volumétrica", pnl_sumario_volumetrica);
+
+        relatorio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(relatorio);
+
+        javax.swing.GroupLayout pnl_relatorioLayout = new javax.swing.GroupLayout(pnl_relatorio);
+        pnl_relatorio.setLayout(pnl_relatorioLayout);
+        pnl_relatorioLayout.setHorizontalGroup(
+            pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_relatorioLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(699, Short.MAX_VALUE))
+        );
+        pnl_relatorioLayout.setVerticalGroup(
+            pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_relatorioLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(592, Short.MAX_VALUE))
+        );
+
+        tabRelatorio.addTab("Relatório OD", pnl_relatorio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tabRelatorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(tabRelatorio)
         );
 
-        jTabbedPane2.getAccessibleContext().setAccessibleName("tabna1");
+        tabRelatorio.getAccessibleContext().setAccessibleName("tabna1");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -6781,11 +6812,79 @@ public class Janela extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_btnApagarActionPerformed
 
-    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
-        if(jTabbedPane2.getSelectedComponent().equals(pnl_sumario_volumetrica)){
-			this.fillCmbDatesSumVol();
+	private void relatorioOD(){
+		Map<String, Map<String, Integer> > data=null;
+		Vector<String> cols = null;
+		Vector<String> rows = null;
+		DefaultTableModel model = new DefaultTableModel();
+		try {
+			cols = Concentrador.database.fetchReportODColumns();
+			rows = Concentrador.database.fetchReportODRows();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-    }//GEN-LAST:event_jTabbedPane2StateChanged
+		if(cols!=null){
+			relatorio.setAutoCreateColumnsFromModel(true);
+			model.setColumnCount(cols.size());
+			model.setColumnIdentifiers(cols);
+			model.addColumn("Total");			
+			HashMap<String, Integer> totals = new HashMap();
+			for(String ipad: cols){
+				if(!ipad.equals("") && !ipad.equals("Total")){
+					totals.put(ipad, 0);
+				}
+			}
+			for(String date: rows){
+				try{
+					Vector<String> rowData = new Vector();
+					Map<String, Integer> ipads = Concentrador.database.fetchReportODData(date);
+					rowData.add(date);
+					int total=0;
+					if(ipads != null){
+						for(String ipad: cols){
+							if(!ipad.equals("") && !ipad.equals("Total")){
+								Integer counter = ipads.get(ipad);
+								if(counter!=null){
+									rowData.add(String.valueOf(counter));
+									total+=counter;
+									int tmp = totals.get(ipad);
+									totals.put(ipad, tmp+counter);
+								}else
+									rowData.add("0");
+							}
+						}
+					}
+					rowData.add(String.valueOf(total));
+					model.addRow(rowData);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			
+			Vector<String> totalsRow = new Vector();
+			totalsRow.add("Total");
+			int sumTotal=0;
+			for(String ipad: cols){
+				if(!ipad.equals("") && !ipad.equals("Total")){
+					totalsRow.add(String.valueOf(totals.get(ipad)));
+					sumTotal+=totals.get(ipad);
+				}
+			}
+			totalsRow.add(String.valueOf(sumTotal));
+			model.addRow(totalsRow);
+			model.fireTableStructureChanged();
+			relatorio.setModel(model);
+			relatorio.setCellSelectionEnabled(false);
+		}
+	}
+	
+    private void tabRelatorioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabRelatorioStateChanged
+        if(tabRelatorio.getSelectedComponent().equals(pnl_sumario_volumetrica)){
+			this.fillCmbDatesSumVol();
+		}else if(tabRelatorio.getSelectedComponent().equals(pnl_relatorio)){
+			this.relatorioOD();
+		}
+    }//GEN-LAST:event_tabRelatorioStateChanged
 
     private void cmbDataSumVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDataSumVolActionPerformed
         try{
@@ -7356,8 +7455,8 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lbl2C;
     private javax.swing.JLabel lbl2C2;
     private javax.swing.JLabel lbl2C3;
@@ -7422,6 +7521,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField peso45_2;
     private javax.swing.JTextField peso60_2;
     private javax.swing.JPanel pnl_envio;
+    private javax.swing.JPanel pnl_relatorio;
     private javax.swing.JPanel pnl_servidor;
     private javax.swing.JPanel pnl_sumario_volumetrica;
     private javax.swing.JPanel pnl_volumetrica;
@@ -7429,6 +7529,8 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_PistaSimples;
     private javax.swing.JRadioButton rdo_SentidoAB;
     private javax.swing.JRadioButton rdo_SentidoBA;
+    private javax.swing.JTable relatorio;
+    private javax.swing.JTabbedPane tabRelatorio;
     private javax.swing.JPanel tab_leves;
     private javax.swing.JPanel tab_pesados;
     private javax.swing.JTable tblSumVol;

@@ -1,12 +1,12 @@
 package br.ufrj.coppetec.concentrador.database;
 
-import br.ufrj.coppetec.concentrador.Concentrador;
-import java.math.BigInteger;
 import java.sql.ResultSet;
-import java.util.Arrays;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
+import java.util.Vector;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -410,6 +410,73 @@ public class myDB extends Db {
 	}
 
 	
+	public Vector<String> fetchReportODColumns() throws Exception{
+		Vector<String> cols = new Vector();
+		String sel_sql= "SELECT distinct idIpad from odTable ";
+		ResultSet result = this.executeQuery(sel_sql);
+		cols.add("");
+		while(result.next())cols.add(result.getString("idIpad"));
+		return cols;
+	}
+	
+	public Vector<String> fetchReportODRows() throws Exception{
+		Vector<String> rows = new Vector();
+		String sel_sql= "SELECT distinct date(dataIniPesq) as data from odTable order by date(dataIniPesq) desc";
+		ResultSet result = this.executeQuery(sel_sql);
+		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		while(result.next()){
+			Date day = sqlDateFormater.parse(result.getString("data"));
+			rows.add(guiDateFormater.format(day));
+		}
+		return rows;
+	}
+	
+	public Map<String, Integer> fetchReportODData(String strData) throws Exception{
+		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		Date data = guiDateFormater.parse(strData);
+		String sqlData = sqlDateFormater.format(data);
+		String sel_sql= "SELECT idIpad, count(idIpad) as times from odTable "
+				+ " where date(dataIniPesq)='"+sqlData+"' group by idIpad ";
+		
+		HashMap<String, Integer> map = new HashMap();
+		ResultSet result = this.executeQuery(sel_sql);
+		while(result.next()){
+			String ipad = result.getString("idIpad");
+			Integer count = result.getInt("times");
+			map.put(ipad, count);
+		}
+		return map;
+	}
+
+	public Map<String,Map<String, Integer> > fetchReportODData() throws Exception{
+		String sel_sql= "SELECT date(dataIniPesq) as dia, idIpad, count(idIpad) as times from odTable "
+				+ "group by date(dataIniPesq),idIpad "
+				+ "order by date(dataIniPesq) asc, idIpad asc";
+		HashMap<String,Map<String, Integer>> data = new HashMap();
+		ResultSet result = this.executeQuery(sel_sql);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
+		while(result.next()){
+			Date day = df.parse(result.getString("dia"));
+			String ipad = result.getString("idIpad");
+			Integer times = result.getInt("times");
+			
+			logger.debug(day.getTime()+":"+ipad+"("+times+")");
+			if(data.containsKey(day)){
+				Map<String,Integer> regs = data.get(day);
+				regs.put(ipad, times);
+				data.put(guiDateFormater.format(day), regs);
+			}else{
+				HashMap<String,Integer> regs = new HashMap();
+				regs.put(ipad,times);
+				data.put(guiDateFormater.format(day), regs);
+			}
+		}
+		result.close();
+		return data;
+	}
 	
 //	public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
 //
