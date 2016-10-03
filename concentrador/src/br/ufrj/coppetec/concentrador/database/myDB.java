@@ -129,7 +129,7 @@ public class myDB extends Db {
 		if (qtd != 0){
 			datesReturn = new String[qtd];
 			this.setStatement();
-			qry = "SELECT DISTINCT data from voltable";
+			qry = "SELECT DISTINCT data from voltable ORDER BY data DESC";
 			result = this.executeQuery(qry);
 			int count = 0;
 			while(result.next()){
@@ -412,7 +412,7 @@ public class myDB extends Db {
 	
 	public Vector<String> fetchReportODColumns() throws Exception{
 		Vector<String> cols = new Vector();
-		String sel_sql= "SELECT distinct idIpad from odTable ";
+		String sel_sql= "SELECT distinct idIpad from odTable ORDER BY idIpad asc";
 		ResultSet result = this.executeQuery(sel_sql);
 		cols.add("");
 		while(result.next())cols.add(result.getString("idIpad"));

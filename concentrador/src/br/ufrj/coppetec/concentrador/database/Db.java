@@ -97,6 +97,7 @@ abstract class Db {
 		if (this.statement != null) {
 			try {
 				this.statement.close();
+				logger.info("Database statement closed.");
 			} catch (Exception e) {
 				logger.error("Erro ao encerrar a transação com o BD.", e);
 			}
@@ -104,6 +105,7 @@ abstract class Db {
 		if (this.conn != null) {
 			try {
 				this.conn.close();
+				logger.info("Database connection closed.");
 			} catch (Exception e) {
 				logger.error("Erro ao fechar a conexão com o BD.", e);
 			}

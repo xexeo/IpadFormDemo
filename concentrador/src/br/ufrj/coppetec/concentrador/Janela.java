@@ -6947,7 +6947,12 @@ public class Janela extends javax.swing.JFrame {
 		
 		if (!inputFolder.exists()){
 			inputFolder.mkdir();
-			logger.debug(String.format("Diretório criado: %s", inputFolder.getAbsolutePath()));				
+			logger.debug(String.format("Diretório criado: %s", inputFolder.getAbsolutePath()));
+			JOptionPane.showMessageDialog(this, "O diretório \"" + inputFolder.getName() + "\" foi criado na área de trabalho.\n"
+					+ "O Concentrador de dados vasculha esse diretório procurando pelos arquivos.\n"
+					+ "Armazene nele os arquivos que deseja importar.", 
+					"Diretório de importação criado.",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		try{

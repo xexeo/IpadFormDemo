@@ -89,12 +89,11 @@ public class JSONExporter {
 	public void export(WhatToExport what){
 		
 	
-		SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>(){
+		SwingWorker<Boolean, Void> mySwingWorker = new SwingWorker<Boolean, Void>(){
          
 			@Override
-			protected Void doInBackground() throws Exception {
-				JSONExporter.this.backgroundExport(what);
-				return null;
+			protected Boolean doInBackground() throws Exception {
+				return JSONExporter.this.backgroundExport(what);
 			}
 			
 		};
@@ -108,7 +107,14 @@ public class JSONExporter {
 				if (evt.getPropertyName().equals("state")) {
 					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
 						dialog.dispose();
-						JOptionPane.showMessageDialog(janela, "Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.", "Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+						try{
+							if(mySwingWorker.get() == true){
+							JOptionPane.showMessageDialog(janela, "Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.", "Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+							}
+						}catch (Exception e){
+							logger.error("Error exportando dados: ", e);
+						}
+						
 					}
 				}
 			}
@@ -132,7 +138,7 @@ public class JSONExporter {
 	}
 	
 
-	private void backgroundExport(WhatToExport what) {
+	private Boolean backgroundExport(WhatToExport what) {
 		myDB database;
 		ResultSet result;
 		FileWriter writer;
@@ -169,17 +175,19 @@ public class JSONExporter {
 			tmpFile.delete();
 			
 		} catch (JSONException je) {
-			logger.warn("Não existem dados para exportação. Provavelmente a tabela está vazia.", je);
+			logger.warn("Não existem dados para exportação", je);
 			// probably empty table
 			JOptionPane.showMessageDialog(janela, "Não existem dados para exportação.", "Exportação de dados.",
 					JOptionPane.INFORMATION_MESSAGE);
-			return;
+			return false;
 		} catch (Exception e) {
 			logger.error("Erro ao exportar dados.", e);
 			JOptionPane.showMessageDialog(janela, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 					JOptionPane.ERROR_MESSAGE);
-			return;
+			return false;
 		}
+		
+		return true;
 	}
 
 	static public Object getJSONInteger(String val) {
