@@ -6740,7 +6740,7 @@ public class Janela extends javax.swing.JFrame {
                 .addContainerGap(583, Short.MAX_VALUE))
         );
 
-        tabRelatorio.addTab("Relatório OD", pnl_relatorio);
+        tabRelatorio.addTab("Sumário OD", pnl_relatorio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

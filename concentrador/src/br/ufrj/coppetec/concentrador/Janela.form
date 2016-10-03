@@ -9388,8 +9388,8 @@
         <Container class="javax.swing.JPanel" name="pnl_relatorio">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Relat&#xf3;rio OD">
-                <Property name="tabTitle" type="java.lang.String" value="Relat&#xf3;rio OD"/>
+              <JTabbedPaneConstraints tabName="Sum&#xe1;rio OD">
+                <Property name="tabTitle" type="java.lang.String" value="Sum&#xe1;rio OD"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
