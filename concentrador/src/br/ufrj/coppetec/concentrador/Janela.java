@@ -109,6 +109,11 @@ public class Janela extends javax.swing.JFrame {
 		
 		
 		relatorio.setDefaultRenderer(Object.class, new RelatorioODRender());
+		relatorio.setDragEnabled(false);
+		relatorio.setRowHeight(25);
+		relatorio.getTableHeader().setReorderingAllowed(false);
+		relatorio.getTableHeader().setResizingAllowed(false);
+		
 	}
 
 	public String[] concatStringArrays(String[] a, String[] b) {
@@ -6731,10 +6736,11 @@ public class Janela extends javax.swing.JFrame {
             pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_relatorioLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(482, Short.MAX_VALUE))
+                .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1096, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_relatorioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5))
         );
         pnl_relatorioLayout.setVerticalGroup(
             pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6742,8 +6748,8 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabRelatorio.addTab("Sumário OD", pnl_relatorio);
