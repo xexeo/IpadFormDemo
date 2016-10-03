@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.swing.SwingWorker;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
@@ -42,6 +43,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
+import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
@@ -1009,6 +1011,7 @@ public class Janela extends javax.swing.JFrame {
         pnl_relatorio = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         relatorio = new javax.swing.JTable();
+        odStatus = new javax.swing.JLabel();
 
         dadosFileChooser.setDialogTitle("Importar dados iPad");
         dadosFileChooser.setFileFilter(new SQLiteFilter());
@@ -6722,15 +6725,19 @@ public class Janela extends javax.swing.JFrame {
             pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_relatorioLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(699, Short.MAX_VALUE))
         );
         pnl_relatorioLayout.setVerticalGroup(
             pnl_relatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_relatorioLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(14, 14, 14)
+                .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(592, Short.MAX_VALUE))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
 
         tabRelatorio.addTab("Relatório OD", pnl_relatorio);
@@ -6813,6 +6820,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnApagarActionPerformed
 
 	private void relatorioOD(){
+		odStatus.setText("Carregando dados ...");
 		Map<String, Map<String, Integer> > data=null;
 		Vector<String> cols = null;
 		Vector<String> rows = null;
@@ -6875,6 +6883,7 @@ public class Janela extends javax.swing.JFrame {
 			model.fireTableStructureChanged();
 			relatorio.setModel(model);
 			relatorio.setCellSelectionEnabled(false);
+			odStatus.setText("");
 		}
 	}
 	
@@ -6882,7 +6891,14 @@ public class Janela extends javax.swing.JFrame {
         if(tabRelatorio.getSelectedComponent().equals(pnl_sumario_volumetrica)){
 			this.fillCmbDatesSumVol();
 		}else if(tabRelatorio.getSelectedComponent().equals(pnl_relatorio)){
-			this.relatorioOD();
+			SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
+				@Override
+				protected Void doInBackground() throws Exception {
+					relatorioOD();
+					return null;
+				}
+			};
+			worker.execute();
 		}
     }//GEN-LAST:event_tabRelatorioStateChanged
 
@@ -7508,6 +7524,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField lev60_2;
     private javax.swing.JTextField leves_hora1;
     private javax.swing.JTextField leves_hora2;
+    private javax.swing.JLabel odStatus;
     private javax.swing.JPanel panelLeves;
     private javax.swing.JPanel panelPesados;
     private javax.swing.JTextField pes15_1;
