@@ -107,8 +107,8 @@ public final class Util {
 			} 
 			//if is a decimal separator
 			if (val.indexOf('.') != -1){
-				String intPart = cutString(val.split(".")[0], limit);
-				r = intPart + "." + val.split(".")[1];
+				String intPart = cutString(val.split("\\.")[0], limit);
+				r = intPart + "." + val.split("\\.")[1];
 			
 			} else {
 				r = cutString(val, limit);

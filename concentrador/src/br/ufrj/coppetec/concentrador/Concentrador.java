@@ -23,7 +23,7 @@ public class Concentrador {
 	public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "2.1";
+	public static String version = "2.2";
 	public static Properties configuration;
 	
 

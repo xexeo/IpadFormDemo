@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 
 
 /**
@@ -202,8 +203,8 @@ public class ImportedDB extends Db {
 		};
 
 		
-		final JDialog dialog = new JDialog(janela, "Dialog", ModalityType.APPLICATION_MODAL);
-
+		final JDialog dialog = new JDialog(janela, "Aguarde", ModalityType.APPLICATION_MODAL);
+		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
