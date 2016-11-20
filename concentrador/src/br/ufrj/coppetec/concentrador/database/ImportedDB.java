@@ -38,7 +38,12 @@ public class ImportedDB extends Db {
 		counter = 0;
 	}
 	
+	public void sanitize() throws Exception {
+		this.executeStatement("DELETE FROM tblDados WHERE id is null or id = 'null';");
+	}
+	
 	public int importData() throws Exception {
+		this.sanitize();
 		this.openTransaction();
 		this.counter = importData(Concentrador.database);
 		this.commit();
@@ -50,6 +55,7 @@ public class ImportedDB extends Db {
 
 	public int importData(myDB concentradorDb) throws Exception {
 		Db db = this;
+		this.sanitize();
 		SwingWorker<Integer, Void> mySwingWorker = new SwingWorker<Integer, Void>(){
          
 			@Override
