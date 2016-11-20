@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.1.8",
+	versao : "2.2.0",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -290,6 +290,7 @@ var app = {
 		function() {
 			app.logger.log('Conexão com o banco de dados criada com sucesso.');
 			myDb.cretateTblDados();
+			myDb.sanitize();
 		},
 		// fail
 		function(err) {
@@ -699,6 +700,10 @@ var app = {
 		app.logger.log('Finalizando registro: ' + registro.id);
 		app.setAtributo('cancelado', 0);
 		app.setCamposDerivados();
+		app.inserirRegistro(cb);
+	},
+	
+	inserirRegistro : function(cb){
 		myDb.insertRegistro(registro,
 		// erro
 		function(error) {
@@ -707,7 +712,7 @@ var app = {
 			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?",
 			// button ok
 			function() {
-				app.finalizaRegistro(cb);
+				app.inserirRegistro(cb);
 			},
 			// button cancel
 			function() {
@@ -722,6 +727,7 @@ var app = {
 		function() {
 			app.logger.log('Registro finalizado: ' + registro.id);
 			app.limpaRegistro();
+			
 			alert("Entrevista registrada.");
 			if (cb != null) {
 				cb();
