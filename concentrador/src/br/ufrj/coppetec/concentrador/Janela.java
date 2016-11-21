@@ -356,9 +356,9 @@ public class Janela extends javax.swing.JFrame {
 			btnApagar.setVisible(false);
 			
 			PVKey pvKey = makePVKey();
-			myDB database=null;
+			
 			try{
-				database = new myDB();
+				myDB database = new myDB();
 				int alreadyInDataBase = database.verifyPV(pvKey);
 				if (alreadyInDataBase != 0) {
 					int returnedValue = JOptionPane
@@ -409,18 +409,13 @@ public class Janela extends javax.swing.JFrame {
 					}
 					return;// exit and don't get data
 				}
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				logger.error("Erro ao conectar com o BD.", e);
 				JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 						"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
-			}catch (Exception e) {
-				logger.error("Erro ao carregar ou procurar uma pesquisa volumetrica.", e);
-				JOptionPane.showMessageDialog(Janela.this, "Erro ao carregar ou procurar uma pesquisa volumetrica:\n" + e.getMessage(),
-						"Erro ao carregar ou procurar uma pesquisa volumetrica.", JOptionPane.ERROR_MESSAGE);
-			}finally{
-				if(database!=null)
-					database.closeConnection();
 			}
+			
+			
 		}
 	}
 	
@@ -7144,19 +7139,23 @@ public class Janela extends javax.swing.JFrame {
 
 			//try {
 			database = new myDB();
+			logger.info("Verificando se pesquisa volumetrica ja existe.");
 			int alreadyInDataBase = database.verifyPV(reg);
 			if (alreadyInDataBase != 0) {
+				logger.info("Encontrou pesquisa volumetrica.");
 				int returnedValue = JOptionPane
 						.showConfirmDialog(
 								Janela.this,
 								"Já existe um registro no Banco de Dados com o mesmo posto, sentido, data e hora.\nVocê deseja sobrescrever os dados já gravados?",
 								"Dados já existentes.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (returnedValue == JOptionPane.YES_OPTION) {
+					logger.info("Buscando dados da pesquisa volumetrica.");
 					database.updatePV(reg, alreadyInDataBase);
 					clearForm();
 					logger.info("Dados da pesquisa volumetrica carregados.");
 				}
 			}else{
+				logger.info("Nova pesquisa volumetrica");
 				database.inputPV(reg);
 				clearForm();
 				JOptionPane.showMessageDialog(Janela.this, "Registro gravado com sucesso!", "Registro gravado.",
