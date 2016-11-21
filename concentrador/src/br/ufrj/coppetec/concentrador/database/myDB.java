@@ -26,10 +26,22 @@ public class myDB extends Db {
 	
 	private static Logger logger = LogManager.getLogger(myDB.class);
 	
+	private static myDB instance=null;
 
-	public myDB() throws Exception {
+	private myDB() throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
 		
+	}
+	
+	public static myDB getInstance() throws Exception{
+		if(instance==null){
+			instance = new myDB();
+		}
+		return instance;
+	}
+	
+	public void keepAlive() throws Exception{
+		this.executeQuery("Select 1;");
 	}
 
 	public void sanitize() throws Exception{	
@@ -37,6 +49,7 @@ public class myDB extends Db {
 	}
 	
 	public int verifyPV(PVKey regKey) throws Exception {
+		this.openTransaction();
 		this.setStatement();
 		String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(regKey.posto);
 		// qry += " AND pista='" + reg.pista + "'";
@@ -50,6 +63,7 @@ public class myDB extends Db {
 		ResultSet result = this.executeQuery(qry);
 		int r = ((result.next()) ? result.getInt("id") : 0);
 		result.close();
+		this.commit();
 		return r;
 	}
 	

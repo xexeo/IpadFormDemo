@@ -73,12 +73,15 @@ public class DBFileImporter{
 		
 		for (File f : fileList){
 			myDB concentrador=null;
+			ImportedDB db = null;
 			try {
-				concentrador = new myDB();
+				concentrador = myDB.getInstance();
 				concentrador.openTransaction();
 				saveFile(concentrador, f.getAbsolutePath(), f.getName());
-				ImportedDB db = new ImportedDB(f.getAbsolutePath(), null);
+				db = new ImportedDB(f.getAbsolutePath(), null);
 				counter+=db.importData(concentrador);
+				db.closeConnection();
+				db=null;
 				concentrador.commit();
 			} catch (IOException ex) {
 				logger.error(String.format("Erro ao acessar o arquivo %s", f.getAbsolutePath()));
@@ -87,8 +90,8 @@ public class DBFileImporter{
 				logger.error(String.format("Erro ao importar os dados do arquivo %s", f.getAbsolutePath()), e);
 				concentrador.rollback();
 			}finally{
-				if(concentrador!=null)
-					concentrador.closeConnection();
+				if(db!=null)
+					db.closeConnection();
 			}
 		}
 	}

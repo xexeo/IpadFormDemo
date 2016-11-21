@@ -160,7 +160,7 @@ public class JSONExporter {
 		}
 
 		try {
-			database = new myDB();
+			database = myDB.getInstance();
 			database.setStatement();
 			result = database.executeQuery(qry);
 

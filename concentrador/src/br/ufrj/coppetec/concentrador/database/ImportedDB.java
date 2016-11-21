@@ -203,7 +203,6 @@ public class ImportedDB extends Db {
 					// System.out.println(sql);
 				}
 				rs.close();
-
 				return counter;
 			}
 		};

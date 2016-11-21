@@ -49,10 +49,27 @@ public class Concentrador {
 		
 		// criando o banco de dados
 		try {
-			database = new myDB();
+			database = myDB.getInstance();
 			database.createVolTable();
 			database.createODTable();
 			database.createImportedFilesTable();
+			
+			Runnable keepAlive = new Runnable() {
+				public void run() {
+					try{
+						while(true){
+							database.keepAlive();
+							logger.info("Keep alive!");
+							Thread.sleep(1000*60);
+						}
+					}catch(Exception e){
+						logger.error("Erro keep alive BD.", e);			
+						logger.info("Keep alive parou!");
+					}
+				}
+			};
+			Thread p = new Thread(keepAlive);
+			p.start();
 		} catch (Exception e) {
 			logger.error("Erro ao acessar o BD.", e);
 			JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());

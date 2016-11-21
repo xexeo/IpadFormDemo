@@ -127,7 +127,7 @@ public class Janela extends javax.swing.JFrame {
 	
 	private void fillCmbDatesSumVol(){
 		try{
-			myDB database = new myDB();
+			myDB database = Concentrador.database;
 			String[] dates = database.getVolDates();
 			
 			if (dates != null){
@@ -148,7 +148,7 @@ public class Janela extends javax.swing.JFrame {
 	private void setSumVolData(String date){
 		Map<String, Integer> volData;
 		try{
-			myDB database = new myDB();
+			myDB database = Concentrador.database;
 			volData = database.getSumVol(volFieldsNames, date);
 			Class<Janela> janelaClass = Janela.class;
 			Field sumVol;
@@ -168,7 +168,7 @@ public class Janela extends javax.swing.JFrame {
 		Map<String, Map<Integer, Integer>> volData;
 		
 		try{
-			myDB database = new myDB();
+			myDB database = Concentrador.database;
 			volData = database.getSumVolPerHour(volFieldsNames, date);
 			int col;
 			for (int i = 0; i < volFieldsNames.length; i++){
@@ -357,7 +357,7 @@ public class Janela extends javax.swing.JFrame {
 			PVKey pvKey = makePVKey();
 			
 			try{
-				myDB database = new myDB();
+				myDB database = Concentrador.database;
 				int alreadyInDataBase = database.verifyPV(pvKey);
 				if (alreadyInDataBase != 0) {
 					int returnedValue = JOptionPane
@@ -6810,7 +6810,7 @@ public class Janela extends javax.swing.JFrame {
 				LoginController controller = new LoginController("/logins/users.json");
 				if (controller.validateLogin(Concentrador.posto, String.copyValueOf(pass.getPassword()))){
 					try{
-						myDB database = new myDB();
+						myDB database = Concentrador.database;
 						database.deletePV(makePVKey());
 						this.clearForm();
 						JOptionPane.showMessageDialog(Janela.this, "Operação concluída", "Operação concluída", JOptionPane.INFORMATION_MESSAGE);
@@ -6846,7 +6846,7 @@ public class Janela extends javax.swing.JFrame {
 			cols = Concentrador.database.fetchReportODColumns();
 			rows = Concentrador.database.fetchReportODRows();
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.error("Error ao ler dados para relatorio OD.",ex);
 		}
 		if(cols!=null){
 			relatorio.setAutoCreateColumnsFromModel(true);
@@ -6922,7 +6922,7 @@ public class Janela extends javax.swing.JFrame {
 
     private void cmbDataSumVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDataSumVolActionPerformed
         try{
-			if (cmbDataSumVol.getSelectedItem().toString().equals("Todas")){
+			if (cmbDataSumVol.getSelectedItem()==null || cmbDataSumVol.getSelectedItem().toString().equals("Todas")){
 				this.setSumVolData(null);
 				this.setSumVolTable(null);
 			} else {
@@ -7020,15 +7020,7 @@ public class Janela extends javax.swing.JFrame {
 		String pesquisador1;
 		String pesquisador2;
 		String local;
-		myDB database = null;
-
-		try {
-			database = new myDB();
-		} catch (Exception e) {
-			logger.error("Erro ao conectar com o BD.", e);
-			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
-					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
-		}
+		myDB database = Concentrador.database;
 
 		// valida preenchimento de dados
 		String emptyMessage = null;
