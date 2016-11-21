@@ -23,7 +23,7 @@ abstract class Db {
 	private Connection conn = null;
 	private Statement statement = null;
 
-	public Db(String driver, String url) throws Exception {
+	public Db(String driver, String url) throws SQLException,ClassNotFoundException {
 		this.driver = driver;
 		this.url = url;
 		setConnection();
@@ -44,11 +44,11 @@ abstract class Db {
 		}
 	}
 	
-	public void setConnection() throws Exception {
+	public void setConnection() throws SQLException,ClassNotFoundException {
 		this.setConnection(this.url);
 	}
 
-	public void setConnection(String url) throws Exception {
+	public void setConnection(String url) throws SQLException,ClassNotFoundException {
 		logger.info("Driver: "+this.driver);
 		Class.forName(this.driver);
 		this.conn = DriverManager.getConnection(url);
@@ -73,7 +73,7 @@ abstract class Db {
 		this.conn.commit();
 	}
 
-	public final void setStatement() throws Exception {
+	public final void setStatement() throws SQLException, ClassNotFoundException {
 		if (this.conn == null) {
 			setConnection();
 		}

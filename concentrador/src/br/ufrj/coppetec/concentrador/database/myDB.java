@@ -1,6 +1,7 @@
 package br.ufrj.coppetec.concentrador.database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class myDB extends Db {
 	private static Logger logger = LogManager.getLogger(myDB.class);
 	
 
-	public myDB() throws Exception {
+	public myDB() throws SQLException, ClassNotFoundException {
 		super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
 		
 	}

@@ -40,6 +40,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.Vector;
 import javax.naming.NoPermissionException;
 import javax.swing.JLabel;
@@ -7023,149 +7024,155 @@ public class Janela extends javax.swing.JFrame {
 		myDB database = null;
 
 		try {
+		
+			// valida preenchimento de dados
+			String emptyMessage = null;
+			boolean showEmptyMessage = false;
+			if (txtTotalLeves.getText().equals("0") && txtTotalPesados.getText().equals("0")) {
+				emptyMessage = "O formulário não contém dados de contagem.\n\n";
+				showEmptyMessage = true;
+			} else if (txtTotalLeves.getText().equals("0")) {
+				emptyMessage = "O formulário não contém dados de\ncontagem de veículos e caminhões leves.\n\n";
+				showEmptyMessage = true;
+			} else if (txtTotalPesados.getText().equals("0")) {
+				emptyMessage = "O formulário não contém dados de\ncontagem de caminhões pesados.\n\n";
+				showEmptyMessage = true;
+			}
+
+			if (showEmptyMessage) {
+				int returnedValue = JOptionPane.showConfirmDialog(Janela.this, emptyMessage + "Você deseja gravá-lo assim mesmo?",
+						"Dados não preenchidos.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (returnedValue == JOptionPane.NO_OPTION) {
+					return;
+				}
+			}
+
+			// validate pista
+			if (!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()) {
+				JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.",
+						"Tipo de pista não selecionado.", JOptionPane.ERROR_MESSAGE);
+				return;
+			} else if (rdo_PistaDupla.isSelected()) {
+				pista = "D";
+			} else {
+				pista = "S";
+			}
+
+			// valida e formata data
+			if (data.getDate() == null) {
+				JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.", "Data não preenchida.",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			} else {
+				date = sdf.format(data.getDate());
+			}
+
+			// valida sentido
+			if (!rdo_SentidoAB.isSelected() && !rdo_SentidoBA.isSelected()) {
+				JOptionPane.showMessageDialog(Janela.this, "O sentido precisa ser selecionado.", "Sentido da pista.",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			} else if (rdo_SentidoAB.isSelected()) {
+				sentido = "AB";
+			} else {
+				sentido = "BA";
+			}
+
+			// valida hora inicial
+			if (cmbHora.getSelectedItem() == null) {
+				JOptionPane.showMessageDialog(Janela.this, "Selecione a hora inicial.", "Hora inicial.", JOptionPane.ERROR_MESSAGE);
+				return;
+			} else {
+				hora_inicial = Integer.parseInt(cmbHora.getSelectedItem().toString());
+			}
+
+			// valida pesquisador
+			if (txtPesquisador1.getText().trim().isEmpty()) {
+				JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_1 não foi preenchida.", "Pesquisador.",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			} else {
+				pesquisador1 = txtPesquisador1.getText();
+			}
+
+			// valida pesquisador
+			if (txtPesquisador2.getText().trim().isEmpty()) {
+				JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_2 não foi preenchida.", "Pesquisador.",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			} else {
+				pesquisador2 = txtPesquisador2.getText();
+			}
+			// valida local
+			if (txtLocal.getText().trim().isEmpty()) {
+				JOptionPane.showMessageDialog(Janela.this, "O local da pesquisa precisa ser preenchido.",
+						"Preenchimento do local da pesquisa.", JOptionPane.ERROR_MESSAGE);
+				return;
+			} else {
+				local = txtLocal.getText();
+			}
+
+			// montando o registro para gravação
+			PVregister reg = new PVregister();
+			reg.data = date;
+			reg.sentido = sentido;
+			reg.pista = pista;
+			reg.posto = Integer.parseInt(posto);
+			reg.local = local;
+			reg.sentido = sentido;
+			reg.pesquisador1 = pesquisador1;
+			reg.pesquisador2 = pesquisador2;
+			reg.hora = hora_inicial;
+
+			// reg fields for types
+			for (String s : volFieldsNames) {
+				try {
+					PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
+				} catch (Exception e) {
+					logger.error("Erro ao gravar os dados.", e);
+					JOptionPane.showMessageDialog(Janela.this, "Erro gravando dados:\n" + e.getMessage(),
+							"Erro na gravação dos dados.", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+			}
+
+			//try {
 			database = new myDB();
-		} catch (Exception e) {
-			logger.error("Erro ao conectar com o BD.", e);
-			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
-					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
-		}
-
-		// valida preenchimento de dados
-		String emptyMessage = null;
-		boolean showEmptyMessage = false;
-		if (txtTotalLeves.getText().equals("0") && txtTotalPesados.getText().equals("0")) {
-			emptyMessage = "O formulário não contém dados de contagem.\n\n";
-			showEmptyMessage = true;
-		} else if (txtTotalLeves.getText().equals("0")) {
-			emptyMessage = "O formulário não contém dados de\ncontagem de veículos e caminhões leves.\n\n";
-			showEmptyMessage = true;
-		} else if (txtTotalPesados.getText().equals("0")) {
-			emptyMessage = "O formulário não contém dados de\ncontagem de caminhões pesados.\n\n";
-			showEmptyMessage = true;
-		}
-
-		if (showEmptyMessage) {
-			int returnedValue = JOptionPane.showConfirmDialog(Janela.this, emptyMessage + "Você deseja gravá-lo assim mesmo?",
-					"Dados não preenchidos.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-			if (returnedValue == JOptionPane.NO_OPTION) {
-				return;
-			}
-		}
-
-		// validate pista
-		if (!rdo_PistaDupla.isSelected() && !rdo_PistaSimples.isSelected()) {
-			JOptionPane.showMessageDialog(Janela.this, "O tipo de pista precisa ser selecionado.",
-					"Tipo de pista não selecionado.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else if (rdo_PistaDupla.isSelected()) {
-			pista = "D";
-		} else {
-			pista = "S";
-		}
-
-		// valida e formata data
-		if (data.getDate() == null) {
-			JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.", "Data não preenchida.",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			date = sdf.format(data.getDate());
-		}
-
-		// valida sentido
-		if (!rdo_SentidoAB.isSelected() && !rdo_SentidoBA.isSelected()) {
-			JOptionPane.showMessageDialog(Janela.this, "O sentido precisa ser selecionado.", "Sentido da pista.",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		} else if (rdo_SentidoAB.isSelected()) {
-			sentido = "AB";
-		} else {
-			sentido = "BA";
-		}
-
-		// valida hora inicial
-		if (cmbHora.getSelectedItem() == null) {
-			JOptionPane.showMessageDialog(Janela.this, "Selecione a hora inicial.", "Hora inicial.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			hora_inicial = Integer.parseInt(cmbHora.getSelectedItem().toString());
-		}
-
-		// valida pesquisador
-		if (txtPesquisador1.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_1 não foi preenchida.", "Pesquisador.",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			pesquisador1 = txtPesquisador1.getText();
-		}
-
-		// valida pesquisador
-		if (txtPesquisador2.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(Janela.this, "A identificação do pesquisador_2 não foi preenchida.", "Pesquisador.",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			pesquisador2 = txtPesquisador2.getText();
-		}
-		// valida local
-		if (txtLocal.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(Janela.this, "O local da pesquisa precisa ser preenchido.",
-					"Preenchimento do local da pesquisa.", JOptionPane.ERROR_MESSAGE);
-			return;
-		} else {
-			local = txtLocal.getText();
-		}
-
-		// montando o registro para gravação
-		PVregister reg = new PVregister();
-		reg.data = date;
-		reg.sentido = sentido;
-		reg.pista = pista;
-		reg.posto = Integer.parseInt(posto);
-		reg.local = local;
-		reg.sentido = sentido;
-		reg.pesquisador1 = pesquisador1;
-		reg.pesquisador2 = pesquisador2;
-		reg.hora = hora_inicial;
-
-		// reg fields for types
-		for (String s : volFieldsNames) {
-			try {
-				PVregister.class.getField(s.toLowerCase()).set(reg, buildValues(s));
-			} catch (Exception e) {
-				logger.error("Erro ao gravar os dados.", e);
-				JOptionPane.showMessageDialog(Janela.this, "Erro gravando dados:\n" + e.getMessage(),
-						"Erro na gravação dos dados.", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-
-		}
-
-		try {
+			logger.info("Verificando se pesquisa volumetrica ja existe.");
 			int alreadyInDataBase = database.verifyPV(reg);
 			if (alreadyInDataBase != 0) {
+				logger.info("Encontrou pesquisa volumetrica.");
 				int returnedValue = JOptionPane
 						.showConfirmDialog(
 								Janela.this,
 								"Já existe um registro no Banco de Dados com o mesmo posto, sentido, data e hora.\nVocê deseja sobrescrever os dados já gravados?",
 								"Dados já existentes.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (returnedValue == JOptionPane.YES_OPTION) {
+					logger.info("Buscando dados da pesquisa volumetrica.");
 					database.updatePV(reg, alreadyInDataBase);
 					clearForm();
+					logger.info("Dados da pesquisa volumetrica carregados.");
 				}
-				return;// exit and don't save
+			}else{
+				logger.info("Nova pesquisa volumetrica");
+				database.inputPV(reg);
+				clearForm();
+				JOptionPane.showMessageDialog(Janela.this, "Registro gravado com sucesso!", "Registro gravado.",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 
-			database.inputPV(reg);
-			clearForm();
-			JOptionPane.showMessageDialog(Janela.this, "Registro gravado com sucesso!", "Registro gravado.",
-					JOptionPane.INFORMATION_MESSAGE);
-
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error("Erro ao conectar com o BD.", e);
 			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			logger.error("Erro no formulario de pesquisa volumetrica.", e);
+			JOptionPane.showMessageDialog(Janela.this, "Erro no formulario de pesquisa volumetrica:\n" + e.getMessage(),
+					"Erro formulario pesquisa volumetrica.", JOptionPane.ERROR_MESSAGE);
+		}finally{
+			if(database!=null)
+				database.closeConnection();
 		}
 
 		return;
