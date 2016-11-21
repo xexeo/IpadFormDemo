@@ -38,6 +38,7 @@ public class myDB extends Db {
 	}
 	
 	public int verifyPV(PVKey regKey) throws Exception {
+		logger.info("Verificando se pesquisa volumetrica ja existe.");
 		this.setStatement();
 		String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(regKey.posto);
 		// qry += " AND pista='" + reg.pista + "'";
@@ -51,6 +52,10 @@ public class myDB extends Db {
 		ResultSet result = this.executeQuery(qry);
 		int r = ((result.next()) ? result.getInt("id") : 0);
 		result.close();
+		if(r!=0)
+			logger.info("Encontrou pesquisa volumetrica.");
+		else
+			logger.info("Não encontrou pesquisa volumetrica.");
 		return r;
 	}
 	
@@ -197,6 +202,7 @@ public class myDB extends Db {
 	}
 	
 	public void updatePV(PVregister reg, int id) throws Exception {
+		logger.info("Atualizando dados da pesquisa volumetrica.");
 		String sql = "UPDATE voltable SET ";
 		sql += "enviado=" + Integer.toString(reg.enviado) + ",";
 		sql += "posto=" + Integer.toString(reg.posto) + ",";
@@ -239,9 +245,11 @@ public class myDB extends Db {
 		sql += " WHERE id=" + "'" + id + "'";
 		this.setStatement();
 		this.executeStatement(sql);
+		logger.info("Dados da pesquisa volumetrica atualizados.");
 	}
 
 	public int inputPV(PVregister reg) throws Exception {
+		logger.info("Gravando pesquisa volumetrica");
 		int timeId = (int) (System.currentTimeMillis() / 1000L);
 
 		this.setStatement();
@@ -290,7 +298,7 @@ public class myDB extends Db {
 		sql += "'" + reg.r5 + "', ";
 		sql += "'" + reg.r6 + "') ";
 		int r = this.executeStatement(sql);
-
+		logger.info("Pesquisa volumetrica gravada.");
 		return r;
 	}
 
