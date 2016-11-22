@@ -52,6 +52,7 @@ abstract class Db {
 		logger.info("Driver: "+this.driver);
 		Class.forName(this.driver);
 		this.conn = DriverManager.getConnection(url);
+		this.conn.setAutoCommit(false);
 		logger.info("Conexão com o BD estabelecida.");
 	}
 

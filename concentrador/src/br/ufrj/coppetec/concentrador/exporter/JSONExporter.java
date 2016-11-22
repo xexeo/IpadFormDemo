@@ -171,7 +171,9 @@ public class JSONExporter {
 			writer.close();
 			Zipper zipper = new Zipper(tmpFile, file);
 			zipper.zipIt();
+			database.openTransaction();
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
+			database.commit();
 			tmpFile.delete();
 			
 		} catch (JSONException je) {

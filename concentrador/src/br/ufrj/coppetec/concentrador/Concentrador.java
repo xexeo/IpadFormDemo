@@ -53,6 +53,7 @@ public class Concentrador {
 			database.createVolTable();
 			database.createODTable();
 			database.createImportedFilesTable();
+			database.commit();
 			
 			Runnable keepAlive = new Runnable() {
 				public void run() {

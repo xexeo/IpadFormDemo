@@ -6811,7 +6811,9 @@ public class Janela extends javax.swing.JFrame {
 				if (controller.validateLogin(Concentrador.posto, String.copyValueOf(pass.getPassword()))){
 					try{
 						myDB database = Concentrador.database;
+						database.openTransaction();
 						database.deletePV(makePVKey());
+						database.commit();
 						this.clearForm();
 						JOptionPane.showMessageDialog(Janela.this, "Operação concluída", "Operação concluída", JOptionPane.INFORMATION_MESSAGE);
 						
@@ -7143,13 +7145,17 @@ public class Janela extends javax.swing.JFrame {
 								"Já existe um registro no Banco de Dados com o mesmo posto, sentido, data e hora.\nVocê deseja sobrescrever os dados já gravados?",
 								"Dados já existentes.", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (returnedValue == JOptionPane.YES_OPTION) {
+					database.openTransaction();
 					database.updatePV(reg, alreadyInDataBase);
+					database.commit();
 					clearForm();
 				}
 				return;// exit and don't save
 			}
 
+			database.openTransaction();
 			database.inputPV(reg);
+			database.commit();
 			clearForm();
 			JOptionPane.showMessageDialog(Janela.this, "Registro gravado com sucesso!", "Registro gravado.",
 					JOptionPane.INFORMATION_MESSAGE);
