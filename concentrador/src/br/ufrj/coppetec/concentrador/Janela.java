@@ -6833,7 +6833,7 @@ public class Janela extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_btnApagarActionPerformed
 
-	private void relatorioOD(){
+	private synchronized void relatorioOD(){
 		odStatus.setText("Carregando dados ...");
 		Map<String, Map<String, Integer> > data=null;
 		Vector<String> cols = null;
@@ -6911,14 +6911,7 @@ public class Janela extends javax.swing.JFrame {
         if(tabRelatorio.getSelectedComponent().equals(pnl_sumario_volumetrica)){
 			this.fillCmbDatesSumVol();
 		}else if(tabRelatorio.getSelectedComponent().equals(pnl_relatorio)){
-			SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
-				@Override
-				protected Void doInBackground() throws Exception {
-					relatorioOD();
-					return null;
-				}
-			};
-			worker.execute();
+			relatorioOD();
 		}
     }//GEN-LAST:event_tabRelatorioStateChanged
 
