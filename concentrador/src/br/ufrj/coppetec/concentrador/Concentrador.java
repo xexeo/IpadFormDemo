@@ -23,7 +23,7 @@ public class Concentrador {
 	public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "2.4";
+	public static String version = "2.5";
 	public static Properties configuration;
 	
 
@@ -34,6 +34,7 @@ public class Concentrador {
 
 		Splash splash = new Splash();
 		splash.setLocationRelativeTo(null);
+		splash.setVersionLabet(version);
 		splash.setVisible(true);
 		
 		//lendo arquivo properties

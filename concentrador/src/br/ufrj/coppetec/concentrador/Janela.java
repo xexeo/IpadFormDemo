@@ -6813,6 +6813,7 @@ public class Janela extends javax.swing.JFrame {
 						myDB database = Concentrador.database;
 						database.deletePV(makePVKey());
 						this.clearForm();
+						btnApagar.setVisible(false);
 						JOptionPane.showMessageDialog(Janela.this, "Operação concluída", "Operação concluída", JOptionPane.INFORMATION_MESSAGE);
 						
 					} catch (Exception e){
