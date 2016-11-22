@@ -1,6 +1,7 @@
 package br.ufrj.coppetec.concentrador.database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,29 +42,44 @@ public class myDB extends Db {
 	}
 	
 	public void keepAlive() throws Exception{
+		openTransaction();
 		this.executeQuery("Select 1;");
+		commit();
 	}
 
-	public void sanitize() throws Exception{	
-		this.executeStatement("DELETE FROM odtable WHERE id is null OR id = 'null';");
+	public void sanitize() throws Exception{
+		try{
+			openTransaction();
+			this.executeStatement("DELETE FROM odtable WHERE id is null OR id = 'null';");
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
+		}
 	}
 	
 	public int verifyPV(PVKey regKey) throws Exception {
-		this.openTransaction();
-		this.setStatement();
-		String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(regKey.posto);
-		// qry += " AND pista='" + reg.pista + "'";
-		qry += " AND data='" + regKey.data + "'";
-		qry += " AND hora=" + Integer.toString(regKey.hora);
-		qry += " AND sentido='" + regKey.sentido + "'";
-		// qry += " AND posto='" + Integer.toString(reg.posto) + "'";
-		// qry += " AND pesquisador1='" + reg.pesquisador1 + "'";
-		// qry += " AND pesquisador2='" + reg.pesquisador2 + "'";
+		int r=0;
+		try{
+			this.openTransaction();
+			this.setStatement();
+			String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(regKey.posto);
+			// qry += " AND pista='" + reg.pista + "'";
+			qry += " AND data='" + regKey.data + "'";
+			qry += " AND hora=" + Integer.toString(regKey.hora);
+			qry += " AND sentido='" + regKey.sentido + "'";
+			// qry += " AND posto='" + Integer.toString(reg.posto) + "'";
+			// qry += " AND pesquisador1='" + reg.pesquisador1 + "'";
+			// qry += " AND pesquisador2='" + reg.pesquisador2 + "'";
 
-		ResultSet result = this.executeQuery(qry);
-		int r = ((result.next()) ? result.getInt("id") : 0);
-		result.close();
-		this.commit();
+			ResultSet result = this.executeQuery(qry);
+			r = ((result.next()) ? result.getInt("id") : 0);
+			result.close();
+			this.commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
+		}
 		return r;
 	}
 	
@@ -125,13 +141,20 @@ public class myDB extends Db {
 	}
 	
 	public void deletePV(PVKey key) throws Exception{
-		this.setStatement();
-		String qry = "DELETE FROM voltable WHERE posto = " + Integer.toString(key.posto);
-		qry += " AND data='" + key.data + "'";
-		qry += " AND hora=" + Integer.toString(key.hora);
-		qry += " AND sentido='" + key.sentido + "'";
-		
-		this.executeStatement(qry);
+		try{
+			openTransaction();
+			this.setStatement();
+			String qry = "DELETE FROM voltable WHERE posto = " + Integer.toString(key.posto);
+			qry += " AND data='" + key.data + "'";
+			qry += " AND hora=" + Integer.toString(key.hora);
+			qry += " AND sentido='" + key.sentido + "'";
+
+			this.executeStatement(qry);
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
+		}
 	}
 	
 	public String[] getVolDates() throws Exception{
@@ -159,155 +182,199 @@ public class myDB extends Db {
 	}
 	
 	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception{
-		this.setStatement();
 		Map<String, Integer> returnData = new HashMap<String, Integer>();
-		String qry;
-		JSONObject jsonObject = null;
-		for (int i=0; i<fieldNames.length; i++){
-			returnData.put(fieldNames[i], 0);
-		}
-		if (date == null){
-			qry = "SELECT * from voltable";
-		} else {
-			qry = "SELECT * from voltable WHERE data = '" + date + "'";
-		}
-		ResultSet result = this.executeQuery(qry);
-		while(result.next()){
-			for (String field : returnData.keySet()){
-				jsonObject = new JSONObject(result.getString(field));
-				returnData.put(field, returnData.get(field) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+		try{
+			openTransaction();
+			this.setStatement();
+			String qry;
+			JSONObject jsonObject = null;
+			for (int i=0; i<fieldNames.length; i++){
+				returnData.put(fieldNames[i], 0);
 			}
+			if (date == null){
+				qry = "SELECT * from voltable";
+			} else {
+				qry = "SELECT * from voltable WHERE data = '" + date + "'";
+			}
+			
+			ResultSet result = this.executeQuery(qry);
+			while(result.next()){
+				for (String field : returnData.keySet()){
+					jsonObject = new JSONObject(result.getString(field));
+					returnData.put(field, returnData.get(field) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+				}
+			}
+			result.close();
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
 		}
-		result.close();
 		return returnData; 
+		
 	}
 	
 	public Map<String, Map<Integer, Integer>> getSumVolPerHour(String[] fieldNames, String date) throws Exception{
-		this.setStatement();
 		Map<String, Map<Integer, Integer>> returnData = new HashMap<String, Map<Integer, Integer>>();
-		String qry;
-		JSONObject jsonObject = null;
-		for (int i=0; i<fieldNames.length; i++){
-			returnData.put(fieldNames[i], new HashMap<Integer, Integer>());
-			for(int j = 0; j< 24; j += 2){
-				returnData.get(fieldNames[i]).put(j, 0);
+		
+		try{
+			openTransaction();
+			this.setStatement();
+			String qry;
+			JSONObject jsonObject = null;
+			for (int i=0; i<fieldNames.length; i++){
+				returnData.put(fieldNames[i], new HashMap<Integer, Integer>());
+				for(int j = 0; j< 24; j += 2){
+					returnData.get(fieldNames[i]).put(j, 0);
+				}
 			}
-		}
-		if (date == null){
-			qry = "SELECT * from voltable";
-		} else {
-			qry = "SELECT * from voltable WHERE data = '" + date + "'";
-		}
-		ResultSet result = this.executeQuery(qry);
-		while(result.next()){
-			for (String field : returnData.keySet()){
-				jsonObject = new JSONObject(result.getString(field));
-				returnData.get(field).put(result.getInt("hora"), returnData.get(field).get(result.getInt("hora")) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+			if (date == null){
+				qry = "SELECT * from voltable";
+			} else {
+				qry = "SELECT * from voltable WHERE data = '" + date + "'";
 			}
+			ResultSet result = this.executeQuery(qry);
+			while(result.next()){
+				for (String field : returnData.keySet()){
+					jsonObject = new JSONObject(result.getString(field));
+					returnData.get(field).put(result.getInt("hora"), returnData.get(field).get(result.getInt("hora")) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+				}
+			}
+			result.close();
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
 		}
-		result.close();
 		return returnData; 
 	}
 	
 	public void updatePV(PVregister reg, int id) throws Exception {
-		String sql = "UPDATE voltable SET ";
-		sql += "enviado=" + Integer.toString(reg.enviado) + ",";
-		sql += "posto=" + Integer.toString(reg.posto) + ",";
-		sql += "pista=" + "'" + reg.pista + "', ";
-		sql += "data=" + "'" + reg.data + "',";
-		sql += "hora=" + Integer.toString(reg.hora) + ", ";
-		sql += "sentido=" + "" + "'" + reg.sentido + "', ";
-		sql += "local=" + "'" + reg.local + "', ";
-		sql += "pesquisador1=" + "'" + reg.pesquisador1 + "', ";
-		sql += "pesquisador2=" + "'" + reg.pesquisador2 + "', ";
-		sql += "P1=" + "'" + reg.p1 + "', ";
-		sql += "P2=" + "'" + reg.p2 + "', ";
-		sql += "P3=" + "'" + reg.p3 + "', ";
-		sql += "M=" + "'" + reg.m + "', ";
-		sql += "O1=" + "'" + reg.o1 + "', ";
-		sql += "O2=" + "'" + reg.o2 + "',";
-		sql += "O3=" + "'" + reg.o3 + "', ";
-		sql += "C1=" + "'" + reg.c1 + "', ";
-		sql += "C2=" + "'" + reg.c2 + "', ";
-		sql += "C3=" + "'" + reg.c3 + "', ";
-		sql += "C4=" + "'" + reg.c4 + "', ";
-		sql += "C5=" + "'" + reg.c5 + "', ";
-		sql += "S1=" + "'" + reg.s1 + "', ";
-		sql += "S2=" + "'" + reg.s2 + "', ";
-		sql += "S3=" + "'" + reg.s3 + "', ";
-		sql += "S4=" + "'" + reg.s4 + "', ";
-		sql += "S5=" + "'" + reg.s5 + "', ";
-		sql += "S6=" + "'" + reg.s6 + "', ";
-		sql += "SE1=" + "'" + reg.se1 + "', ";
-		sql += "SE2=" + "'" + reg.se2 + "', ";
-		sql += "SE3=" + "'" + reg.se3 + "', ";
-		sql += "SE4=" + "'" + reg.se4 + "', ";
-		sql += "SE5=" + "'" + reg.se5 + "', ";
-		sql += "R1=" + "'" + reg.r1 + "', ";
-		sql += "R2=" + "'" + reg.r2 + "', ";
-		sql += "R3=" + "'" + reg.r3 + "', ";
-		sql += "R4=" + "'" + reg.r4 + "', ";
-		sql += "R5=" + "'" + reg.r5 + "', ";
-		sql += "R6=" + "'" + reg.r6 + "'";
-		sql += " WHERE id=" + "'" + id + "'";
-		this.setStatement();
-		this.executeStatement(sql);
+		try{
+			openTransaction();
+			String sql = "UPDATE voltable SET ";
+			sql += "enviado=" + Integer.toString(reg.enviado) + ",";
+			sql += "posto=" + Integer.toString(reg.posto) + ",";
+			sql += "pista=" + "'" + reg.pista + "', ";
+			sql += "data=" + "'" + reg.data + "',";
+			sql += "hora=" + Integer.toString(reg.hora) + ", ";
+			sql += "sentido=" + "" + "'" + reg.sentido + "', ";
+			sql += "local=" + "'" + reg.local + "', ";
+			sql += "pesquisador1=" + "'" + reg.pesquisador1 + "', ";
+			sql += "pesquisador2=" + "'" + reg.pesquisador2 + "', ";
+			sql += "P1=" + "'" + reg.p1 + "', ";
+			sql += "P2=" + "'" + reg.p2 + "', ";
+			sql += "P3=" + "'" + reg.p3 + "', ";
+			sql += "M=" + "'" + reg.m + "', ";
+			sql += "O1=" + "'" + reg.o1 + "', ";
+			sql += "O2=" + "'" + reg.o2 + "',";
+			sql += "O3=" + "'" + reg.o3 + "', ";
+			sql += "C1=" + "'" + reg.c1 + "', ";
+			sql += "C2=" + "'" + reg.c2 + "', ";
+			sql += "C3=" + "'" + reg.c3 + "', ";
+			sql += "C4=" + "'" + reg.c4 + "', ";
+			sql += "C5=" + "'" + reg.c5 + "', ";
+			sql += "S1=" + "'" + reg.s1 + "', ";
+			sql += "S2=" + "'" + reg.s2 + "', ";
+			sql += "S3=" + "'" + reg.s3 + "', ";
+			sql += "S4=" + "'" + reg.s4 + "', ";
+			sql += "S5=" + "'" + reg.s5 + "', ";
+			sql += "S6=" + "'" + reg.s6 + "', ";
+			sql += "SE1=" + "'" + reg.se1 + "', ";
+			sql += "SE2=" + "'" + reg.se2 + "', ";
+			sql += "SE3=" + "'" + reg.se3 + "', ";
+			sql += "SE4=" + "'" + reg.se4 + "', ";
+			sql += "SE5=" + "'" + reg.se5 + "', ";
+			sql += "R1=" + "'" + reg.r1 + "', ";
+			sql += "R2=" + "'" + reg.r2 + "', ";
+			sql += "R3=" + "'" + reg.r3 + "', ";
+			sql += "R4=" + "'" + reg.r4 + "', ";
+			sql += "R5=" + "'" + reg.r5 + "', ";
+			sql += "R6=" + "'" + reg.r6 + "'";
+			sql += " WHERE id=" + "'" + id + "'";
+			this.setStatement();
+			this.executeStatement(sql);
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
+		}
 	}
 
 	public int inputPV(PVregister reg) throws Exception {
-		int timeId = (int) (System.currentTimeMillis() / 1000L);
+		int r=-1;
+		try{
+			openTransaction();
+			int timeId = (int) (System.currentTimeMillis() / 1000L);
 
-		this.setStatement();
-		String sql = "INSERT OR IGNORE INTO voltable (";
-		sql += "id, enviado, posto, pista, data, hora, sentido, local, pesquisador1, pesquisador2, ";
-		sql += "P1, P2, P3, M, O1, O2, O3, C1, C2, C3, C4, C5, ";
-		sql += "S1, S2, S3, S4, S5, S6, SE1, SE2, SE3, SE4, SE5, R1, R2, R3, R4, R5, R6";
-		sql += ") VALUES (";
-		sql += Integer.toString(timeId) + ", ";
-		sql += Integer.toString(reg.enviado) + ",";
-		sql += Integer.toString(reg.posto) + ",";
-		sql += "'" + reg.pista + "', ";
-		sql += "'" + reg.data + "',";
-		sql += Integer.toString(reg.hora) + ", ";
-		sql += "'" + reg.sentido + "', ";
-		sql += "'" + reg.local + "', ";
-		sql += "'" + reg.pesquisador1 + "', ";
-		sql += "'" + reg.pesquisador2 + "', ";
-		sql += "'" + reg.p1 + "', ";
-		sql += "'" + reg.p2 + "', ";
-		sql += "'" + reg.p3 + "', ";
-		sql += "'" + reg.m + "', ";
-		sql += "'" + reg.o1 + "', ";
-		sql += "'" + reg.o2 + "',";
-		sql += "'" + reg.o3 + "', ";
-		sql += "'" + reg.c1 + "', ";
-		sql += "'" + reg.c2 + "', ";
-		sql += "'" + reg.c3 + "', ";
-		sql += "'" + reg.c4 + "', ";
-		sql += "'" + reg.c5 + "', ";
-		sql += "'" + reg.s1 + "', ";
-		sql += "'" + reg.s2 + "', ";
-		sql += "'" + reg.s3 + "', ";
-		sql += "'" + reg.s4 + "', ";
-		sql += "'" + reg.s5 + "', ";
-		sql += "'" + reg.s6 + "', ";
-		sql += "'" + reg.se1 + "', ";
-		sql += "'" + reg.se2 + "', ";
-		sql += "'" + reg.se3 + "', ";
-		sql += "'" + reg.se4 + "', ";
-		sql += "'" + reg.se5 + "', ";
-		sql += "'" + reg.r1 + "', ";
-		sql += "'" + reg.r2 + "', ";
-		sql += "'" + reg.r3 + "', ";
-		sql += "'" + reg.r4 + "', ";
-		sql += "'" + reg.r5 + "', ";
-		sql += "'" + reg.r6 + "') ";
-		int r = this.executeStatement(sql);
-
+			this.setStatement();
+			String sql = "INSERT OR IGNORE INTO voltable (";
+			sql += "id, enviado, posto, pista, data, hora, sentido, local, pesquisador1, pesquisador2, ";
+			sql += "P1, P2, P3, M, O1, O2, O3, C1, C2, C3, C4, C5, ";
+			sql += "S1, S2, S3, S4, S5, S6, SE1, SE2, SE3, SE4, SE5, R1, R2, R3, R4, R5, R6";
+			sql += ") VALUES (";
+			sql += Integer.toString(timeId) + ", ";
+			sql += Integer.toString(reg.enviado) + ",";
+			sql += Integer.toString(reg.posto) + ",";
+			sql += "'" + reg.pista + "', ";
+			sql += "'" + reg.data + "',";
+			sql += Integer.toString(reg.hora) + ", ";
+			sql += "'" + reg.sentido + "', ";
+			sql += "'" + reg.local + "', ";
+			sql += "'" + reg.pesquisador1 + "', ";
+			sql += "'" + reg.pesquisador2 + "', ";
+			sql += "'" + reg.p1 + "', ";
+			sql += "'" + reg.p2 + "', ";
+			sql += "'" + reg.p3 + "', ";
+			sql += "'" + reg.m + "', ";
+			sql += "'" + reg.o1 + "', ";
+			sql += "'" + reg.o2 + "',";
+			sql += "'" + reg.o3 + "', ";
+			sql += "'" + reg.c1 + "', ";
+			sql += "'" + reg.c2 + "', ";
+			sql += "'" + reg.c3 + "', ";
+			sql += "'" + reg.c4 + "', ";
+			sql += "'" + reg.c5 + "', ";
+			sql += "'" + reg.s1 + "', ";
+			sql += "'" + reg.s2 + "', ";
+			sql += "'" + reg.s3 + "', ";
+			sql += "'" + reg.s4 + "', ";
+			sql += "'" + reg.s5 + "', ";
+			sql += "'" + reg.s6 + "', ";
+			sql += "'" + reg.se1 + "', ";
+			sql += "'" + reg.se2 + "', ";
+			sql += "'" + reg.se3 + "', ";
+			sql += "'" + reg.se4 + "', ";
+			sql += "'" + reg.se5 + "', ";
+			sql += "'" + reg.r1 + "', ";
+			sql += "'" + reg.r2 + "', ";
+			sql += "'" + reg.r3 + "', ";
+			sql += "'" + reg.r4 + "', ";
+			sql += "'" + reg.r5 + "', ";
+			sql += "'" + reg.r6 + "') ";
+			r = this.executeStatement(sql);
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
+		}
 		return r;
 	}
+	
+	public void initDatabaseTables() throws Exception {
+		try{
+			openTransaction();
+			createVolTable();
+			createODTable();
+			createImportedFilesTable();
+			commit();
+		}catch(Exception e){
+			rollback();
+			throw e;
+		}
+	}
 
-	public void createVolTable() throws Exception {
+	private void createVolTable() throws Exception {
 		this.setStatement();
 		String qry = "CREATE TABLE IF NOT EXISTS voltable ";
 		qry += " (id int PRIMARY KEY, ";
@@ -354,7 +421,7 @@ public class myDB extends Db {
 
 	}
 	
-	public void createImportedFilesTable() throws Exception{
+	private void createImportedFilesTable() throws Exception{
 		this.setStatement();
 		String qry = "CREATE TABLE IF NOT EXISTS "+TABLE_IMPORTED_FILES+" (";
 		qry += TABLE_IMPORTED_FILES_ID+" text primary key, ";
@@ -364,7 +431,7 @@ public class myDB extends Db {
 		this.executeStatement(qry);
 	}
 
-	public void createODTable() throws Exception {
+	private void createODTable() throws Exception {
 		this.setStatement();
 		String qry = "CREATE TABLE IF NOT EXISTS odTable (";
 		qry += "id text primary key NOT NULL, ";
@@ -433,15 +500,18 @@ public class myDB extends Db {
 	
 	public Vector<String> fetchReportODColumns() throws Exception{
 		Vector<String> cols = new Vector();
+		openTransaction();
 		String sel_sql= "SELECT distinct idIpad from odTable ORDER BY idIpad asc";
 		ResultSet result = this.executeQuery(sel_sql);
 		cols.add("");
 		while(result.next())cols.add(result.getString("idIpad"));
+		commit();
 		return cols;
 	}
 	
 	public Vector<String> fetchReportODRows() throws Exception{
 		Vector<String> rows = new Vector();
+		openTransaction();
 		String sel_sql= "SELECT distinct date(dataIniPesq) as data from odTable order by date(dataIniPesq) desc";
 		ResultSet result = this.executeQuery(sel_sql);
 		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
@@ -450,6 +520,7 @@ public class myDB extends Db {
 			Date day = sqlDateFormater.parse(result.getString("data"));
 			rows.add(guiDateFormater.format(day));
 		}
+		commit();
 		return rows;
 	}
 	
@@ -457,6 +528,7 @@ public class myDB extends Db {
 		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
 		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
 		Date data = guiDateFormater.parse(strData);
+		openTransaction();
 		String sqlData = sqlDateFormater.format(data);
 		String sel_sql= "SELECT idIpad, count(idIpad) as times from odTable "
 				+ " where date(dataIniPesq)='"+sqlData+"' group by idIpad ";
@@ -468,10 +540,12 @@ public class myDB extends Db {
 			Integer count = result.getInt("times");
 			map.put(ipad, count);
 		}
+		commit();
 		return map;
 	}
 
 	public Map<String,Map<String, Integer> > fetchReportODData() throws Exception{
+		openTransaction();
 		String sel_sql= "SELECT date(dataIniPesq) as dia, idIpad, count(idIpad) as times from odTable "
 				+ "group by date(dataIniPesq),idIpad "
 				+ "order by date(dataIniPesq) asc, idIpad asc";
@@ -496,6 +570,7 @@ public class myDB extends Db {
 			}
 		}
 		result.close();
+		commit();
 		return data;
 	}
 	

@@ -139,7 +139,7 @@ public class JSONExporter {
 	
 
 	private Boolean backgroundExport(WhatToExport what) {
-		myDB database;
+		myDB database=null;
 		ResultSet result;
 		FileWriter writer;
 		String qry;
@@ -161,6 +161,7 @@ public class JSONExporter {
 
 		try {
 			database = myDB.getInstance();
+			database.openTransaction();
 			database.setStatement();
 			result = database.executeQuery(qry);
 
@@ -171,7 +172,6 @@ public class JSONExporter {
 			writer.close();
 			Zipper zipper = new Zipper(tmpFile, file);
 			zipper.zipIt();
-			database.openTransaction();
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
 			database.commit();
 			tmpFile.delete();
@@ -181,11 +181,13 @@ public class JSONExporter {
 			// probably empty table
 			JOptionPane.showMessageDialog(janela, "Não existem dados para exportação.", "Exportação de dados.",
 					JOptionPane.INFORMATION_MESSAGE);
+			if(database!=null)database.rollback();
 			return false;
 		} catch (Exception e) {
 			logger.error("Erro ao exportar dados.", e);
 			JOptionPane.showMessageDialog(janela, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 					JOptionPane.ERROR_MESSAGE);
+			if(database!=null)database.rollback();
 			return false;
 		}
 		

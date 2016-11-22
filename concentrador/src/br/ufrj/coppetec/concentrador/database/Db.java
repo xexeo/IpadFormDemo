@@ -37,8 +37,10 @@ abstract class Db {
 	
 	public void rollback(){
 		try{
-			if(this.conn!=null)
+			if(this.conn!=null){
 				this.conn.rollback();
+				logger.info("Rollback!");
+			}
 		}catch(Exception e){
 			logger.error("Erro ao fazer rollback.", e);
 		}

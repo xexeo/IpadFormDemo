@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.naming.NoPermissionException;
@@ -74,21 +75,30 @@ public class DBFileImporter{
 		for (File f : fileList){
 			myDB concentrador=null;
 			ImportedDB db = null;
+			boolean novoArquivo=true;
 			try {
 				concentrador = myDB.getInstance();
 				concentrador.openTransaction();
+				logger.info("Importando arquivo: "+f.getAbsolutePath());
+				novoArquivo=false;
 				saveFile(concentrador, f.getAbsolutePath(), f.getName());
+				novoArquivo=true;
 				db = new ImportedDB(f.getAbsolutePath(), null);
 				counter+=db.importData(concentrador);
 				db.closeConnection();
 				db=null;
 				concentrador.commit();
+				logger.info("Arquivo importado: "+f.getAbsolutePath());
 			} catch (IOException ex) {
 				logger.error(String.format("Erro ao acessar o arquivo %s", f.getAbsolutePath()));
-				concentrador.rollback();
-			} catch (Exception e) {
+				if(concentrador!=null)concentrador.rollback();
+			}catch (SQLException e) {
+				if(novoArquivo)
+					logger.error(String.format("Erro ao importar os dados do arquivo %s", f.getAbsolutePath()), e);
+				if(concentrador!=null)concentrador.rollback();
+			}catch (Exception e) {
 				logger.error(String.format("Erro ao importar os dados do arquivo %s", f.getAbsolutePath()), e);
-				concentrador.rollback();
+				if(concentrador!=null)concentrador.rollback();
 			}finally{
 				if(db!=null)
 					db.closeConnection();

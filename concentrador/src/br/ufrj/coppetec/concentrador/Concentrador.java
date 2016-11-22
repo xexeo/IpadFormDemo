@@ -50,12 +50,8 @@ public class Concentrador {
 		// criando o banco de dados
 		try {
 			database = myDB.getInstance();
-			database.createVolTable();
-			database.createODTable();
-			database.createImportedFilesTable();
-			database.commit();
-			
-			Runnable keepAlive = new Runnable() {
+			database.initDatabaseTables();
+			/*Runnable keepAlive = new Runnable() {
 				public void run() {
 					try{
 						while(true){
@@ -70,7 +66,7 @@ public class Concentrador {
 				}
 			};
 			Thread p = new Thread(keepAlive);
-			p.start();
+			p.start();*/
 		} catch (Exception e) {
 			logger.error("Erro ao acessar o BD.", e);
 			JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());

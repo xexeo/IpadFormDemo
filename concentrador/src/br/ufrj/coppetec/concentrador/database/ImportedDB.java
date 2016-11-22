@@ -39,7 +39,9 @@ public class ImportedDB extends Db {
 	}
 	
 	public void sanitize() throws Exception {
+		openTransaction();
 		this.executeStatement("DELETE FROM tblDados WHERE id is null or id = 'null';");
+		commit();
 	}
 	
 	public int importData() throws Exception {
