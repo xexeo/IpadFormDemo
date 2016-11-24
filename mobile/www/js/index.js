@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.2.0",
+	versao : "2.2.1",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -88,11 +88,30 @@ var app = {
 	duplicaDb : function() {
 		if (app.filePaths) {
 			app.database.close(function() {
-				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, function(newName) {
+				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, false, function(newName) {
 					alert('Banco de dados ' + newName + ' exportado com sucesso.');
 					app.openDB();
 				});
 			}, function(err) {
+				//falha na cópia do banco
+				//copia banco com problema
+				app.logger.log('Exportando bando de dados corrompido');
+				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, function(newName) {
+					alert('Banco de dados ' + newName + ' exportado!\n\nEntre em contato com o suporte.',
+						"Banco da Dados Corrompido", null, "info");
+					//apaga banco atual
+					app.removeFile(app.dbName, app.filePaths.dbFolder,
+						function(){ //removeu com sucesso
+							app.logger.log("Banco de dados corrompido removido do sistema de arquivos do app.");
+							app.openDB();
+						}, function(){//falhou quando removia
+							app.logger.log("Falha removendo banco de dados corrompido");
+							alert('Houve uma falha grava no sistema. \n Continue o processo de exportação, entre em contato com o suporte e NÃO CONTINUE A USAR ESSE IPAD.',
+								"Erro no Banco da Dados", null, "error");
+							app.openDB();
+					});
+					
+				});
 				app.logger.log(JSON.stringify(err));
 			});
 			// Exporta Log
@@ -103,7 +122,7 @@ var app = {
 	},
 
 	duplicaLog : function() {
-		app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, function(newName) {
+		app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, false, function(newName) {
 			alert('Arquivo de log ' + newName + ' exportado com sucesso.');
 		});
 	},
@@ -296,6 +315,8 @@ var app = {
 		function(err) {
 			app.logger.log('ERRO ao tentar conectar com o banco de dados.');
 			app.logger.log(JSON.stringify(err));
+			alert("O Banco da dados foi corrompido. \n Exporte todos os dados e entre em contato com o suporte.",
+				"Erro no Banco da Dados", null, "error");
 		});
 	},
 
@@ -884,12 +905,14 @@ var app = {
 	 *            originDir
 	 * @param String
 	 *            destDir
+	 * @param Boolean
+	 *			  isCorrupted
 	 * @param Function
 	 *            cb success callback function
 	 */
-copyFile : function(fileName, originDirURI, destDirURI, cb) {
+copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) {
 		var now = new Date();
-		var newName = ipadID.id + "_" + fileName
+		var newName = (isCorrupted)? "CORROMPIDO" + ipadID.id + "_" + fileName : ipadID.id + "_" + fileName;
 		var extension = "";
 		if(newName.lastIndexOf(".txt") > -1) {
 			newName = newName.replace(".txt","");
