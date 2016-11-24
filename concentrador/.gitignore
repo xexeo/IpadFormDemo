@@ -1,7 +1,9 @@
 *~
-/nbproject/private/
+/*.db
+/*.json
+/*.zip
+/build/
+/dist/
 /logs/
-logs/*
+/nbproject/private/
 /store/
-/nbproject/
-dados.db
