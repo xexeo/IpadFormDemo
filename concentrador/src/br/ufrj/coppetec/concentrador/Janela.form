@@ -124,8 +124,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="data" pref="234" max="32767" attributes="0"/>
-                          <Component id="txtLocal" max="32767" attributes="0"/>
+                          <Component id="txtLocal" pref="234" max="32767" attributes="0"/>
+                          <Component id="cmbData" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -134,7 +134,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" alignment="1" pref="1303" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -158,14 +158,14 @@
                           <Component id="rdo_PistaSimples" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rdo_PistaDupla" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblData" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="data" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSalvarForms" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblSentido" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblHora" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbData" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" pref="769" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -8287,14 +8287,6 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="data">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="data.setLocale(new Locale(&quot;pt&quot;, &quot;BR&quot;));"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JButton" name="btnSalvarForms">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gravar Formul&#xe1;rios"/>
@@ -8323,6 +8315,18 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApagarActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbData">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

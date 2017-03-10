@@ -8,7 +8,9 @@ package br.ufrj.coppetec.concentrador;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +26,35 @@ public final class Util {
 	
 	private static HashMap<String,Integer> inputLimits = new HashMap();
 	
+	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	public static SimpleDateFormat sdfToBrazil = new SimpleDateFormat("dd/MM/yyy");
+	
 	private Util(){
+	}
+	
+	static public <T> T[] concatArrays(T[] a, T[] b) {
+		int aLen = a.length;
+		int bLen = b.length;
+		
+		@SuppressWarnings("unchecked")
+		T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen+bLen);
+		System.arraycopy(a, 0, c, 0, aLen);
+		System.arraycopy(b, 0, c, aLen, bLen);
+		return c;
+	}
+	
+	static public String[] getDates(){
+		String[] r;
+		if(Concentrador.treinamento){
+			r = Concentrador.configuration.getProperty("trainingDays").split(",");
+		} else {
+			r = Concentrador.configuration.getProperty("validDays").split(",");
+		}
+		
+		for(int i=0; i<r.length; i++){
+			r[i] = r[i].trim();
+		}
+		return r;
 	}
 	
 	static public void populateInputLimits(){

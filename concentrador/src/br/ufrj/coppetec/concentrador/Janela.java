@@ -38,10 +38,12 @@ import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
 import java.util.Vector;
 import javax.naming.NoPermissionException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -53,6 +55,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import org.apache.commons.lang3.ArrayUtils;
 import org.json.JSONObject;
 
 /**
@@ -114,28 +117,34 @@ public class Janela extends javax.swing.JFrame {
 		relatorio.getTableHeader().setReorderingAllowed(false);
 		relatorio.getTableHeader().setResizingAllowed(false);
 		
+		
 	}
 
-	public String[] concatStringArrays(String[] a, String[] b) {
-		int aLen = a.length;
-		int bLen = b.length;
-		String[] c = new String[aLen + bLen];
-		System.arraycopy(a, 0, c, 0, aLen);
-		System.arraycopy(b, 0, c, aLen, bLen);
-		return c;
+	public void initDatasValidas(){
+		String[] datasValidas = Util.getDates();
+		String[] vazio = {""};
+		
+		cmbData.setModel(new DefaultComboBoxModel(Util.concatArrays(vazio, datasValidas)));
+		cmbData.setSelectedItem(0);
 	}
 	
 	private void fillCmbDatesSumVol(){
 		try{
 			myDB database = Concentrador.database;
-			String[] dates = database.getVolDates();
+			String[] dataBaseDates = database.getVolDates();
+			String[] validDates = Util.getDates();
+			String date;
 			
-			if (dates != null){
+			if (dataBaseDates != null){
 				cmbDataSumVol.removeAllItems();
 				cmbDataSumVol.addItem("Todas");
-				for (int i = 0 ; i<dates.length;i++){
-					cmbDataSumVol.addItem(sdfToBrazil.format(sdf.parse(dates[i])));
+				for (String dataBaseDate : dataBaseDates) {
+					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
+					if (ArrayUtils.contains(validDates, date)){
+						cmbDataSumVol.addItem(date);
+					}
 				}
+				
 			}
 			
 		} catch (Exception e){
@@ -152,10 +161,10 @@ public class Janela extends javax.swing.JFrame {
 			volData = database.getSumVol(volFieldsNames, date);
 			Class<Janela> janelaClass = Janela.class;
 			Field sumVol;
-			for (int i = 0; i < volFieldsNames.length; i++){
-				sumVol = janelaClass.getDeclaredField("txtSumVol"+volFieldsNames[i]);
+			for (String volFieldsName : volFieldsNames) {
+				sumVol = janelaClass.getDeclaredField("txtSumVol" + volFieldsName);
 				JTextField txtField = (JTextField) sumVol.get(this);
-				txtField.setText(volData.get(volFieldsNames[i]).toString());
+				txtField.setText(volData.get(volFieldsName).toString());
 			}
 		}catch (Exception e) {
 				logger.error("Erro preenchendo o sumário da pesquisa volumétrica.", e);
@@ -250,7 +259,7 @@ public class Janela extends javax.swing.JFrame {
 		fieldsMap.put("R5", r5Fields);
 		fieldsMap.put("R6", r6Fields);
 
-		volFieldsNames = concatStringArrays(volFieldsNamesLeves, volFieldsNamesPesados);
+		volFieldsNames = Util.concatArrays(volFieldsNamesLeves, volFieldsNamesPesados);
 
 		
 		
@@ -259,6 +268,7 @@ public class Janela extends javax.swing.JFrame {
 			for (JTextField f : fieldsMap.get(s)) {
 				f.setText("0");
 				f.addFocusListener(new java.awt.event.FocusAdapter() {
+					@Override
 					public void focusGained(java.awt.event.FocusEvent evt) {
 						SwingUtilities.invokeLater(new Runnable() {
 							@Override
@@ -337,13 +347,13 @@ public class Janela extends javax.swing.JFrame {
 	
 	private boolean checkPVKeyDataEnter(){
 		return (cmbHora.getSelectedIndex() != -1 &&
-				data.getDate() != null &&
+				cmbData.getSelectedIndex() != 0 &&
 				(rdo_SentidoAB.isSelected() || rdo_SentidoBA.isSelected()));
 	}
 	
 	private PVKey makePVKey(){
 		PVKey pvKey = new PVKey();
-		pvKey.data = sdf.format(data.getDate());
+		pvKey.data = cmbData.getSelectedItem().toString();
 		pvKey.hora = Integer.parseInt(cmbHora.getSelectedItem().toString());
 		pvKey.posto = Integer.parseInt(Concentrador.posto);
 		pvKey.sentido = (rdo_SentidoAB.isSelected())? "AB" : "BA";
@@ -374,7 +384,8 @@ public class Janela extends javax.swing.JFrame {
 						txtLocal.setText(pvR.local);
 						txtPesquisador1.setText(pvR.pesquisador1);
 						txtPesquisador2.setText(pvR.pesquisador2);
-						data.setDate(sdf.parse(pvR.data));
+						//data.setDate(Util.sdf.parse(pvR.data));
+						cmbData.setSelectedItem(Util.sdfToBrazil.format(Util.sdf.parse(pvR.data)));
 						if (pvR.sentido.equals("AB")){
 							rdo_SentidoAB.doClick();
 						} else {
@@ -447,15 +458,6 @@ public class Janela extends javax.swing.JFrame {
 	
 	
 
-	private void puttingImages() {
-		HashMap lablesPesadosMap = new HashMap<String, Component>();
-		Component[] labelsPesados = panelPesados.getComponents();
-		for (int i = 0; i < labelsPesados.length; i++) {
-			lablesPesadosMap.put(labelsPesados[i].getName(), labelsPesados[i]);
-		}
-
-	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of
 	 * this method is always regenerated by the Form Editor.
@@ -474,7 +476,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<>();
+        cmbHora = new javax.swing.JComboBox<String>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblSentido = new javax.swing.JLabel();
@@ -930,12 +932,11 @@ public class Janela extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         lblFolha2 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        data = new org.jdesktop.swingx.JXDatePicker();
-        data.setLocale(new Locale("pt", "BR"));
         btnSalvarForms = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         lblTrecho_dados = new javax.swing.JLabel();
         btnApagar = new javax.swing.JButton();
+        cmbData = new javax.swing.JComboBox();
         pnl_servidor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1047,7 +1048,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -5925,12 +5926,6 @@ public class Janela extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
 
-        data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataActionPerformed(evt);
-            }
-        });
-
         btnSalvarForms.setText("Gravar Formulários");
         btnSalvarForms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -5948,6 +5943,8 @@ public class Janela extends javax.swing.JFrame {
                 btnApagarActionPerformed(evt);
             }
         });
+
+        cmbData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnl_volumetricaLayout = new javax.swing.GroupLayout(pnl_volumetrica);
         pnl_volumetrica.setLayout(pnl_volumetricaLayout);
@@ -5986,14 +5983,14 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblLocal, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                    .addComponent(txtLocal))
+                    .addComponent(txtLocal, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                    .addComponent(cmbData, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalvarForms, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1303, Short.MAX_VALUE)
         );
         pnl_volumetricaLayout.setVerticalGroup(
             pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6015,13 +6012,13 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(rdo_PistaSimples)
                     .addComponent(rdo_PistaDupla)
                     .addComponent(lblData)
-                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvarForms)
                     .addComponent(lblSentido)
                     .addComponent(lblHora)
-                    .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("tab_leves");
@@ -6778,10 +6775,6 @@ public class Janela extends javax.swing.JFrame {
         askForDataRetrieve();
     }//GEN-LAST:event_rdo_SentidoABActionPerformed
 
-    private void dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataActionPerformed
-        askForDataRetrieve();
-    }//GEN-LAST:event_dataActionPerformed
-
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         int returnedValue = JOptionPane
 							.showConfirmDialog(
@@ -6920,12 +6913,12 @@ public class Janela extends javax.swing.JFrame {
 				this.setSumVolData(null);
 				this.setSumVolTable(null);
 			} else {
-				this.setSumVolData(sdf.format(sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
-				this.setSumVolTable(sdf.format(sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
+				this.setSumVolData(Util.sdf.format(Util.sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
+				this.setSumVolTable(Util.sdf.format(Util.sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
 			}
 			
 		} catch (Exception e){
-			logger.info("Erro na conversão de datas para consulta e construção do sumário da pesquisa volumétrica.", e);
+			logger.error("Erro na conversão de datas para consulta e construção do sumário da pesquisa volumétrica.", e);
 		}
 
     }//GEN-LAST:event_cmbDataSumVolActionPerformed
@@ -6953,15 +6946,10 @@ public class Janela extends javax.swing.JFrame {
 			DBFileImporter dbfile = new DBFileImporter(inputFolder);
 			dbfile.readNewFiles();
 			JOptionPane.showMessageDialog(this, "Total de registros inseridos: " + Integer.toString(dbfile.getCounter()));
-		}catch(IOException e){
-			logger.error(String.format("Erro ao importar arquivos em %s", inputFolder.getAbsolutePath()));				
-		}catch(NoSuchAlgorithmException e){
-			e.printStackTrace();
-		}catch(NoPermissionException e){
-			e.printStackTrace();
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error(String.format("Erro ao importar arquivos em %s", inputFolder.getAbsolutePath()), e);				
 		}
+		
 	}// GEN-LAST:event_btnInDadosActionPerformed
 
 	private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnExportAllVolActionPerformed
@@ -7008,7 +6996,7 @@ public class Janela extends javax.swing.JFrame {
 	private void btnSalvarFormsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSalvarFormsActionPerformed
 		String posto = Concentrador.posto;
 		String pista;
-		String date;
+		String date = "";
 		String sentido;
 		int hora_inicial;
 		String pesquisador1;
@@ -7050,12 +7038,17 @@ public class Janela extends javax.swing.JFrame {
 		}
 
 		// valida e formata data
-		if (data.getDate() == null) {
+		if (cmbData.getSelectedIndex() == 0) {
 			JOptionPane.showMessageDialog(Janela.this, "A data do formulário precisa ser preenchida.", "Data não preenchida.",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		} else {
-			date = sdf.format(data.getDate());
+			try{
+				date = Util.sdf.format(Util.sdfToBrazil.parse(cmbData.getSelectedItem().toString()));
+			} catch(Exception e){
+				logger.info("Erro na conversão de datas para salvar o registro da pesquisa volumétrica.", e);
+			}
+			
 		}
 
 		// valida sentido
@@ -7182,7 +7175,7 @@ public class Janela extends javax.swing.JFrame {
 	}// GEN-LAST:event_cmbHoraActionPerformed
 
 	private void clearForm() {
-		data.setDate(null);
+		cmbData.setSelectedIndex(0);
 		txtPesquisador1.setText(null);
 		txtPesquisador2.setText(null);
 		txtLocal.setText(null);
@@ -7280,10 +7273,10 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JButton btnVolNotSent;
     private javax.swing.JCheckBox chk_exportadas_sumVol;
     private javax.swing.JCheckBox chk_nao_exportadas_sumVol;
+    private javax.swing.JComboBox cmbData;
     private javax.swing.JComboBox cmbDataSumVol;
     private javax.swing.JComboBox<String> cmbHora;
     private javax.swing.JFileChooser dadosFileChooser;
-    private org.jdesktop.swingx.JXDatePicker data;
     private javax.swing.JFileChooser exporterFileChooser;
     private javax.swing.ButtonGroup grpPista;
     private javax.swing.ButtonGroup grpSentido;
@@ -7846,8 +7839,7 @@ public class Janela extends javax.swing.JFrame {
 	
 	private boolean ctlGetValuesFromDataBase = true;
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	SimpleDateFormat sdfToBrazil = new SimpleDateFormat("dd/MM/yyy");
+	
 }
 
 class ImagemRenderer extends DefaultTableCellRenderer {

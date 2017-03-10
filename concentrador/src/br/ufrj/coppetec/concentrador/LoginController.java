@@ -49,19 +49,37 @@ public class LoginController {
 	
 	public boolean validateLogin(String user, String pwd) {
 		boolean r = false;
-		for (Object dados : logins.getJSONArray("logins")) {
+		
+		if(isTraining(user, pwd)){
+			r = true;
+			Concentrador.treinamento = true;
+			Concentrador.posto = "000";
+			Concentrador.trecho = "Treinamento";
+							} else {
+			for (Object dados : logins.getJSONArray("logins")) {
 
-			if (user.equals(((JSONObject) dados).getString("usr"))
-					&& pwd.equals(((JSONObject) dados).getString("pwd"))) {
-				Concentrador.trecho = ((JSONObject) dados).getString("trecho");
-				Concentrador.posto = ((JSONObject) dados).getString("usr");
-				r = true;
+				if (user.equals(((JSONObject) dados).getString("usr"))
+						&& pwd.equals(((JSONObject) dados).getString("pwd"))) {
+					Concentrador.trecho = ((JSONObject) dados).getString("trecho");
+					Concentrador.posto = ((JSONObject) dados).getString("usr");
+					r = true;
+				}
 			}
 		}
+		
 		if (r == false){
 			logger.info("Tentativa de login SEM sucesso para o usuário: " + user);
 		} else {
 			logger.info("Login do usuário COM sucesso: " + user);
+		}
+		return r;
+	}
+	
+	private Boolean isTraining(String user, String pwd){
+		boolean r = false;
+		if(user.equals(Concentrador.configuration.getProperty("trainingUser")) 
+				&& pwd.equals(Concentrador.configuration.getProperty("trainingPassword"))){
+			r = true;
 		}
 		return r;
 	}
