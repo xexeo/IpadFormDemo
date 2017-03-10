@@ -159,12 +159,12 @@ public class myDB extends Db {
 		}
 	}
 	
-	private String[] getDates(String table,String field, String postoField,Integer posto ) throws Exception{
+	private String[] getDates(String table,String field, String postoField,Integer posto, String extra_condition ) throws Exception{
 		this.setStatement();
 		ResultSet result = null;
 		String[] datesReturn = null;
 		int qtd = 0;
-		String qry = "SELECT COUNT(DISTINCT SUBSTR("+field+",0,11)) as qtd from "+table+" WHERE "+postoField+"="+posto;
+		String qry = "SELECT COUNT(DISTINCT SUBSTR("+field+",0,11)) as qtd from "+table+" WHERE "+postoField+"="+posto+" "+extra_condition;
 		result = this.executeQuery(qry);
 		if (result.next()){
 			qtd = result.getInt("qtd");
@@ -174,7 +174,7 @@ public class myDB extends Db {
 		if (qtd != 0){
 			datesReturn = new String[qtd];
 			this.setStatement();
-			qry = "SELECT DISTINCT SUBSTR("+field+",0,11) as d from "+table+" WHERE "+postoField+"="+posto+" ORDER BY d DESC";
+			qry = "SELECT DISTINCT SUBSTR("+field+",0,11) as d from "+table+" WHERE "+postoField+"="+posto+" "+extra_condition +" ORDER BY d DESC";
 			result = this.executeQuery(qry);
 			int count = 0;
 			while(result.next()){
@@ -185,11 +185,11 @@ public class myDB extends Db {
 	}
 	
 	public String[] getODDates(Integer posto) throws Exception{
-		return getDates("odTable","dataIniPesq","idPosto",posto);
+		return getDates("odTable","dataIniPesq","idPosto",posto," AND cancelado=0");
 	}
 	
 	public String[] getVolDates(Integer posto) throws Exception{
-		return getDates("voltable","data","posto",posto);
+		return getDates("voltable","data","posto",posto,"");
 	}
 	
 	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception{
