@@ -41,6 +41,8 @@ import java.awt.Font;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Vector;
 import javax.naming.NoPermissionException;
 import javax.swing.DefaultComboBoxModel;
@@ -128,10 +130,48 @@ public class Janela extends javax.swing.JFrame {
 		cmbData.setSelectedItem(0);
 	}
 	
+	private void fillCmbDatesExp(){
+		try{
+			myDB database = Concentrador.database;
+			String[] dataBaseDatesVol = database.getVolDates(Integer.valueOf(Concentrador.posto));
+			String[] dataBaseDatesOD = database.getODDates(Integer.valueOf(Concentrador.posto));
+			String[] validDates = Util.getDates();
+			String date;
+			
+			if (dataBaseDatesVol != null){
+				cmbDateExpVol.removeAllItems();
+				cmbDateExpVol.addItem("Todas");
+				for (String dataBaseDate : dataBaseDatesVol) {
+					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
+					if (ArrayUtils.contains(validDates, date)){
+						cmbDateExpVol.addItem(date);
+					}
+				}
+			}
+			
+			if(dataBaseDatesOD!=null){
+				cmbDateExpOD.removeAllItems();
+				cmbDateExpOD.addItem("Todas");
+				
+				for (String dataBaseDate : dataBaseDatesOD) {
+					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
+					if (ArrayUtils.contains(validDates, date)){
+						cmbDateExpOD.addItem(date);
+					}
+				}
+			}
+			
+		} catch (Exception e){
+			logger.error("Erro ao conectar com o BD.", e);
+			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
+					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	private void fillCmbDatesSumVol(){
 		try{
 			myDB database = Concentrador.database;
-			String[] dataBaseDates = database.getVolDates();
+			String[] dataBaseDates = database.getVolDates(Integer.valueOf(Concentrador.posto));
 			String[] validDates = Util.getDates();
 			String date;
 			
@@ -476,7 +516,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<String>();
+        cmbHora = new javax.swing.JComboBox<>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblSentido = new javax.swing.JLabel();
@@ -948,12 +988,14 @@ public class Janela extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnInDados = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        btnExportAllVol = new javax.swing.JButton();
-        btnVolNotSent = new javax.swing.JButton();
+        btnExpVolDate = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        btnODNotSent = new javax.swing.JButton();
-        btnODexportAll = new javax.swing.JButton();
+        cmbDateExpVol = new javax.swing.JComboBox<>();
+        jLabel71 = new javax.swing.JLabel();
+        cmbDateExpOD = new javax.swing.JComboBox<>();
+        jLabel72 = new javax.swing.JLabel();
+        btnExpODDate = new javax.swing.JButton();
         pnl_sumario_volumetrica = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         cmbDataSumVol = new javax.swing.JComboBox();
@@ -1048,7 +1090,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -5990,7 +6032,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(btnSalvarForms, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1303, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnl_volumetricaLayout.setVerticalGroup(
             pnl_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6079,17 +6121,10 @@ public class Janela extends javax.swing.JFrame {
             }
         });
 
-        btnExportAllVol.setText("Exportação todos os dados");
-        btnExportAllVol.addActionListener(new java.awt.event.ActionListener() {
+        btnExpVolDate.setText("Exportar");
+        btnExpVolDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportAllVolActionPerformed(evt);
-            }
-        });
-
-        btnVolNotSent.setText("Exportação dados ainda não enviados");
-        btnVolNotSent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolNotSentActionPerformed(evt);
+                btnExpVolDateActionPerformed(evt);
             }
         });
 
@@ -6097,17 +6132,29 @@ public class Janela extends javax.swing.JFrame {
 
         jLabel35.setText("Exportação de Dados Pesquisa OD");
 
-        btnODNotSent.setText("Exportação dados ainda não enviados");
-        btnODNotSent.addActionListener(new java.awt.event.ActionListener() {
+        cmbDateExpVol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cmbDateExpVol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnODNotSentActionPerformed(evt);
+                cmbDateExpVolActionPerformed(evt);
             }
         });
 
-        btnODexportAll.setText("Exportação todos os dados");
-        btnODexportAll.addActionListener(new java.awt.event.ActionListener() {
+        jLabel71.setText("Data:");
+
+        cmbDateExpOD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cmbDateExpOD.setToolTipText("");
+        cmbDateExpOD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnODexportAllActionPerformed(evt);
+                cmbDateExpODActionPerformed(evt);
+            }
+        });
+
+        jLabel72.setText("Data:");
+
+        btnExpODDate.setText("Exportar");
+        btnExpODDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExpODDateActionPerformed(evt);
             }
         });
 
@@ -6115,20 +6162,30 @@ public class Janela extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnODexportAll)
-                            .addComponent(btnODNotSent)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnVolNotSent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExportAllVol)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 70, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel72, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel71))
+                                .addGap(5, 5, 5)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cmbDateExpVol, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnExpVolDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cmbDateExpOD, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnExpODDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(81, 81, 81))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6136,16 +6193,18 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(btnVolNotSent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExportAllVol)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExpVolDate)
+                    .addComponent(cmbDateExpVol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel71))
+                .addGap(51, 51, 51)
                 .addComponent(jLabel35)
                 .addGap(18, 18, 18)
-                .addComponent(btnODNotSent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnODexportAll)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbDateExpOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel72)
+                    .addComponent(btnExpODDate))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -6157,7 +6216,7 @@ public class Janela extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(btnInDados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(116, 116, 116))
         );
@@ -6168,7 +6227,7 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(btnInDados)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(769, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(95, 95, 95))
@@ -6904,6 +6963,9 @@ public class Janela extends javax.swing.JFrame {
 			this.fillCmbDatesSumVol();
 		}else if(tabRelatorio.getSelectedComponent().equals(pnl_relatorio)){
 			relatorioOD();
+		}else if(tabRelatorio.getSelectedComponent().equals(pnl_envio)){
+			this.fillCmbDatesExp();
+			
 		}
     }//GEN-LAST:event_tabRelatorioStateChanged
 
@@ -6922,6 +6984,18 @@ public class Janela extends javax.swing.JFrame {
 		}
 
     }//GEN-LAST:event_cmbDataSumVolActionPerformed
+
+    private void cmbDateExpVolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDateExpVolActionPerformed
+        
+    }//GEN-LAST:event_cmbDateExpVolActionPerformed
+
+    private void btnExpODDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpODDateActionPerformed
+        exportData(JSONExporter.DbTable.OD);
+    }//GEN-LAST:event_btnExpODDateActionPerformed
+
+    private void cmbDateExpODActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDateExpODActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDateExpODActionPerformed
 
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
@@ -6958,7 +7032,7 @@ public class Janela extends javax.swing.JFrame {
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
 			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV, this);
-			exporter.export(JSONExporter.WhatToExport.ALL);
+			exporter.export(Integer.parseInt(Concentrador.posto),String.valueOf(cmbDateExpVol.getSelectedItem()));
 		}
 
 	}// GEN-LAST:event_btnExportAllVolActionPerformed
@@ -6969,19 +7043,52 @@ public class Janela extends javax.swing.JFrame {
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
 			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
-			exporter.export(JSONExporter.WhatToExport.ALL);
+			
+			exporter.export(Integer.parseInt(Concentrador.posto));
 		}
 	}// GEN-LAST:event_btnODexportAllActionPerformed
 
-	private void btnVolNotSentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnVolNotSentActionPerformed
-		exporterFileChooser.setSelectedFile(new File("novos_volumetrica.zip"));
-		int returnVal = exporterFileChooser.showSaveDialog(this);
+	private String getSelectedDateFromCombo(javax.swing.JComboBox combo) throws ParseException{
+		if(combo.getSelectedIndex()==0)return null;
+		String date= Util.sdf.format(Util.sdfToBrazil.parse(combo.getSelectedItem().toString()));
+		return date;
+	}
+	
+	private String buildExportName(JSONExporter.DbTable t){
+		String name="exportar_";
+		if(t.toString().equals(JSONExporter.DbTable.OD.toString()))
+			name+="od_";
+		else if(t.toString().equals(JSONExporter.DbTable.PV.toString()))
+			name+="volumetrica_";
+		name+=Util.sdfToArq.format(new Date())+".zip";
+		return name;
+	}
+	
+	private void exportData(JSONExporter.DbTable t){
+		try{
+			exporterFileChooser.setSelectedFile(new File(buildExportName(t)));
+			String date = null;
+			if(t.toString().equals(JSONExporter.DbTable.OD.toString()))
+				date= getSelectedDateFromCombo(cmbDateExpOD);
+			else if(t.toString().equals(JSONExporter.DbTable.PV.toString()))
+				date= getSelectedDateFromCombo(cmbDateExpVol);
+			
+			int returnVal = exporterFileChooser.showSaveDialog(this);
 
-		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV,this);
-			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
+			if (returnVal == exporterFileChooser.APPROVE_OPTION) {
+				JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), t,this);
+				exporter.export(Integer.parseInt(Concentrador.posto),date);
+			}
+		}catch(ParseException e){
+			logger.info("Erro na conversão de datas para exportar pesquisa volumétrica.", e);
+			JOptionPane.showMessageDialog(Janela.this, "Error de conversão de data.", "Formatado de data.",
+					JOptionPane.ERROR_MESSAGE);
 		}
-	}// GEN-LAST:event_btnVolNotSentActionPerformed
+	}
+	
+	private void btnExpVolDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnVolNotSentActionPerformed
+		exportData(JSONExporter.DbTable.PV);
+	}
 
 	private void btnODNotSentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnODNotSentActionPerformed
 		exporterFileChooser.setSelectedFile(new File("novos_od.zip"));
@@ -6989,7 +7096,7 @@ public class Janela extends javax.swing.JFrame {
 
 		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
 			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
-			exporter.export(JSONExporter.WhatToExport.NOT_SENT);
+			exporter.export(Integer.parseInt(Concentrador.posto));
 		}
 	}// GEN-LAST:event_btnODNotSentActionPerformed
 
@@ -7265,16 +7372,16 @@ public class Janela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;
-    private javax.swing.JButton btnExportAllVol;
+    private javax.swing.JButton btnExpODDate;
+    private javax.swing.JButton btnExpVolDate;
     private javax.swing.JButton btnInDados;
-    private javax.swing.JButton btnODNotSent;
-    private javax.swing.JButton btnODexportAll;
     private javax.swing.JButton btnSalvarForms;
-    private javax.swing.JButton btnVolNotSent;
     private javax.swing.JCheckBox chk_exportadas_sumVol;
     private javax.swing.JCheckBox chk_nao_exportadas_sumVol;
     private javax.swing.JComboBox cmbData;
     private javax.swing.JComboBox cmbDataSumVol;
+    private javax.swing.JComboBox<String> cmbDateExpOD;
+    private javax.swing.JComboBox<String> cmbDateExpVol;
     private javax.swing.JComboBox<String> cmbHora;
     private javax.swing.JFileChooser dadosFileChooser;
     private javax.swing.JFileChooser exporterFileChooser;
@@ -7348,6 +7455,8 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

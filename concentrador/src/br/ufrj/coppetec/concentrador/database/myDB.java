@@ -157,28 +157,37 @@ public class myDB extends Db {
 		}
 	}
 	
-	public String[] getVolDates() throws Exception{
+	private String[] getDates(String table,String field, String postoField,Integer posto ) throws Exception{
 		this.setStatement();
 		ResultSet result = null;
 		String[] datesReturn = null;
 		int qtd = 0;
-		String qry = "SELECT COUNT(DISTINCT data) as qtd from voltable";
+		String qry = "SELECT COUNT(DISTINCT SUBSTR("+field+",0,11)) as qtd from "+table+" WHERE "+postoField+"="+posto;
 		result = this.executeQuery(qry);
 		if (result.next()){
 			qtd = result.getInt("qtd");
 		}
+		System.out.println("QTD para tabela "+table+": "+qtd);
 		result.close();
 		if (qtd != 0){
 			datesReturn = new String[qtd];
 			this.setStatement();
-			qry = "SELECT DISTINCT data from voltable ORDER BY data DESC";
+			qry = "SELECT DISTINCT SUBSTR("+field+",0,11) as d from "+table+" WHERE "+postoField+"="+posto+" ORDER BY d DESC";
 			result = this.executeQuery(qry);
 			int count = 0;
 			while(result.next()){
-				datesReturn[count++] = result.getString("data");
+				datesReturn[count++] = result.getString("d");
 			}
 		}
 		return datesReturn;
+	}
+	
+	public String[] getODDates(Integer posto) throws Exception{
+		return getDates("odTable","dataIniPesq","idPosto",posto);
+	}
+	
+	public String[] getVolDates(Integer posto) throws Exception{
+		return getDates("voltable","data","posto",posto);
 	}
 	
 	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception{

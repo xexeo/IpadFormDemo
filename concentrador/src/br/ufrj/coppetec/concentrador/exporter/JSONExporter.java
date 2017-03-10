@@ -42,7 +42,7 @@ public class JSONExporter {
 	private Janela janela;
 
 	static public enum WhatToExport {
-		ALL, NOT_SENT
+		ALL, NOT_SENT, DATE
 	}
 
 	private JSONBuilder jsonBuilder;
@@ -59,12 +59,12 @@ public class JSONExporter {
 			return text;
 		}
 
-		public String sql() {
+		public String sql(Integer posto) {
 			String r = "SELECT * FROM ";
 			if (text.equals("odtable")) {
-				r += "odtable WHERE cancelado=0";
+				r += "odtable WHERE cancelado=0 and idPosto="+posto.intValue();
 			} else {
-				r += "voltable";
+				r += "voltable WHERE posto="+posto.intValue();
 			}
 			return r;
 		}
@@ -85,15 +85,18 @@ public class JSONExporter {
 		}
 	}
 
+	public void export(Integer posto){
+		export(posto, null);
+	}
 	
-	public void export(WhatToExport what){
+	public void export(Integer posto, String date){
 		
 	
 		SwingWorker<Boolean, Void> mySwingWorker = new SwingWorker<Boolean, Void>(){
          
 			@Override
 			protected Boolean doInBackground() throws Exception {
-				return JSONExporter.this.backgroundExport(what);
+				return JSONExporter.this.backgroundExport(posto,date);
 			}
 			
 		};
@@ -137,28 +140,24 @@ public class JSONExporter {
 			
 	}
 	
+	private Boolean backgroundExport(Integer posto) {
+		return backgroundExport(posto,null);
+	}
 
-	private Boolean backgroundExport(WhatToExport what) {
+	private Boolean backgroundExport(Integer posto, String date) {
 		myDB database=null;
 		ResultSet result;
 		FileWriter writer;
-		String qry;
-		switch (what) {
-		case ALL:
-			qry = this.table.sql();
-			break;
-		case NOT_SENT:
-			if (this.table == table.OD) {
-				qry = this.table.sql() + " AND enviado=0;";
+		String qry = this.table.sql(posto);
+		
+		if(date!=null){
+			if (this.table.text.equals("odtable")) {
+				qry+= " AND dataIniPesq like '"+date+"%';";		
 			} else {
-				qry = this.table.sql() + " WHERE enviado=0;";
+				qry+= " AND data like '"+date+"%';";		
 			}
-
-			break;
-		default:
-			qry = this.table.sql();
+			
 		}
-
 		try {
 			database = myDB.getInstance();
 			database.openTransaction();
