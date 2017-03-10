@@ -1,5 +1,6 @@
 package br.ufrj.coppetec.concentrador.database;
 
+import br.ufrj.coppetec.concentrador.Util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import org.apache.commons.lang3.ArrayUtils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -518,29 +520,32 @@ public class myDB extends Db {
 		return cols;
 	}
 	
-	public Vector<String> fetchReportODRows() throws Exception{
+	public Vector<String> fetchReportODRows(Integer posto) throws Exception{
 		Vector<String> rows = new Vector();
 		openTransaction();
-		String sel_sql= "SELECT distinct date(dataIniPesq) as data from odTable order by date(dataIniPesq) desc";
+		String sel_sql= "SELECT distinct date(dataIniPesq) as data from odTable WHERE idPosto="+posto+" AND cancelado=0 order by date(dataIniPesq) desc";
 		ResultSet result = this.executeQuery(sel_sql);
 		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
 		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		String[] validDates = Util.getDates();
 		while(result.next()){
 			Date day = sqlDateFormater.parse(result.getString("data"));
-			rows.add(guiDateFormater.format(day));
+			String d = guiDateFormater.format(day);
+			if(ArrayUtils.contains(validDates, d))
+				rows.add(d);
 		}
 		commit();
 		return rows;
 	}
 	
-	public Map<String, Integer> fetchReportODData(String strData) throws Exception{
+	public Map<String, Integer> fetchReportODData(String strData, Integer posto) throws Exception{
 		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
 		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
 		Date data = guiDateFormater.parse(strData);
 		openTransaction();
 		String sqlData = sqlDateFormater.format(data);
 		String sel_sql= "SELECT idIpad, count(idIpad) as times from odTable "
-				+ " where date(dataIniPesq)='"+sqlData+"' group by idIpad ";
+				+ " where date(dataIniPesq)='"+sqlData+"' and cancelado=0 and idPosto="+posto+" group by idIpad ";
 		
 		HashMap<String, Integer> map = new HashMap();
 		ResultSet result = this.executeQuery(sel_sql);
@@ -553,10 +558,10 @@ public class myDB extends Db {
 		return map;
 	}
 
-	public Map<String,Map<String, Integer> > fetchReportODData() throws Exception{
+	public Map<String,Map<String, Integer> > fetchReportODData(Integer posto) throws Exception{
 		openTransaction();
 		String sel_sql= "SELECT date(dataIniPesq) as dia, idIpad, count(idIpad) as times from odTable "
-				+ "group by date(dataIniPesq),idIpad "
+				+ "WHERE and cancelado=0 and idPosto="+posto+" group by date(dataIniPesq),idIpad "
 				+ "order by date(dataIniPesq) asc, idIpad asc";
 		HashMap<String,Map<String, Integer>> data = new HashMap();
 		ResultSet result = this.executeQuery(sel_sql);

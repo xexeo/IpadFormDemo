@@ -6897,7 +6897,7 @@ public class Janela extends javax.swing.JFrame {
 		
 		try {
 			cols = Concentrador.database.fetchReportODColumns();
-			rows = Concentrador.database.fetchReportODRows();
+			rows = Concentrador.database.fetchReportODRows(Integer.parseInt(Concentrador.posto));
 		} catch (Exception ex) {
 			logger.error("Error ao ler dados para relatorio OD.",ex);
 		}
@@ -6915,7 +6915,7 @@ public class Janela extends javax.swing.JFrame {
 			for(String date: rows){
 				try{
 					Vector<String> rowData = new Vector();
-					Map<String, Integer> ipads = Concentrador.database.fetchReportODData(date);
+					Map<String, Integer> ipads = Concentrador.database.fetchReportODData(date,Integer.parseInt(Concentrador.posto));
 					rowData.add(date);
 					int total=0;
 					if(ipads != null){
