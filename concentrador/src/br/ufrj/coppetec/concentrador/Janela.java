@@ -145,6 +145,7 @@ public class Janela extends javax.swing.JFrame {
 					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
 					if (ArrayUtils.contains(validDates, date)){
 						cmbDateExpVol.addItem(date);
+						cmbDateExpVol.setSelectedIndex(1);
 					}
 				}
 			}
@@ -157,6 +158,7 @@ public class Janela extends javax.swing.JFrame {
 					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
 					if (ArrayUtils.contains(validDates, date)){
 						cmbDateExpOD.addItem(date);
+						cmbDateExpOD.setSelectedIndex(1);
 					}
 				}
 			}
