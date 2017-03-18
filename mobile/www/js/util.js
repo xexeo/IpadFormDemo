@@ -359,7 +359,14 @@ var util = {
 		$('#' + nome_campo).keyup(function() {
 			var input = $(this);
 			var max_len = Number(input.attr("maxlength"));
-			if (progride(input.val(), max_len)) {
+			var min_len = input.attr("minlength");
+			
+			if(typeof min_len !== typeof undefined && min_len !== false){
+				min_len=Number(min_len);
+			}else
+				min_len=max_len;
+			
+			if (progride(input.val(),min_len)) {
 				input.val(String(input.val()).trim().substring(0, max_len));
 				input.trigger('change');
 			}
@@ -455,9 +462,19 @@ var util = {
 	validaLenInputText : function(nome_campo, campo_aviso) {
 		var value = $.trim($('#' + nome_campo).val());
 		var len = Number($.trim($('#' + nome_campo).attr("maxlength")));
+		var min_len = $('#' + nome_campo).attr("minlength");
+			
+		if(typeof min_len !== typeof undefined && min_len !== false){
+			min_len=Number(min_len);
+		}else
+			min_len=len;
+			
 		if (len > 0) {
-			if (value.length != len) {
-				util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");
+			if (value.length < min_len || value.length > len) {
+				if(min_len===len)
+					util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");
+				else
+					util.alerta_msg(campo_aviso, "O campo deve ter entre " + min_len + " e "+len+" caracteres.");
 				return false;
 			}
 		}
