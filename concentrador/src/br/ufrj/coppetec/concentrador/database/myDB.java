@@ -169,7 +169,6 @@ public class myDB extends Db {
 		if (result.next()){
 			qtd = result.getInt("qtd");
 		}
-		System.out.println("QTD para tabela "+table+": "+qtd);
 		result.close();
 		if (qtd != 0){
 			datesReturn = new String[qtd];

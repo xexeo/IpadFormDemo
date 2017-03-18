@@ -28,7 +28,7 @@ public final class Util {
 	
 	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat sdfToBrazil = new SimpleDateFormat("dd/MM/yyy");
-	public static SimpleDateFormat sdfToArq = new SimpleDateFormat("ddMMyyyy_HHmmss");
+	public static SimpleDateFormat sdfToArq = new SimpleDateFormat("yy-MM-dd-HH-mm-ss");
 	
 	private Util(){
 	}

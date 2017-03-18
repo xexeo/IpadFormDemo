@@ -7057,12 +7057,12 @@ public class Janela extends javax.swing.JFrame {
 	}
 	
 	private String buildExportName(JSONExporter.DbTable t){
-		String name="exportar_";
+		String name="";
 		if(t.toString().equals(JSONExporter.DbTable.OD.toString()))
-			name+="od_";
+			name="od_";
 		else if(t.toString().equals(JSONExporter.DbTable.PV.toString()))
-			name+="volumetrica_";
-		name+=Util.sdfToArq.format(new Date())+".zip";
+			name="volumetrica_";
+		name+=Concentrador.posto+"_"+Util.sdfToArq.format(new Date())+".zip";
 		return name;
 	}
 	
