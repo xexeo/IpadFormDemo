@@ -1,6 +1,6 @@
 var app = {
 
-	versao : "2.2.1",
+	versao : "2.3.0",
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -286,9 +286,15 @@ var app = {
 				myLogger.setLogFile(file);
 				file.createWriter(function(fileWriter) {
 					myLogger.setLogWriter(fileWriter);
-					app.openDB(); // if successfully create fileWriter, open database
 					// novo valor para variável criada no extraConfig
 					app.logger = myLogger;
+					app.openDB(function(){// if successfully create fileWriter, open database for testing
+						app.logger.log("Conexão inicial com o banco para verificação");
+						app.database.close(function(){
+							app.logger.log("Conexão com o banco fechada");
+						});
+					}); 
+					
 				},
 				// error creating fileWriter
 				function() {
@@ -300,7 +306,7 @@ var app = {
 
 	},
 
-	openDB : function() {
+	openDB : function(cb) {
 		app.database = sqlitePlugin.openDatabase({
 			name : app.dbName,
 			iosDatabaseLocation : 'default'
@@ -310,6 +316,9 @@ var app = {
 			app.logger.log('Conexão com o banco de dados criada com sucesso.');
 			myDb.cretateTblDados();
 			myDb.sanitize();
+			if(cb != null){
+				cb();
+			}
 		},
 		// fail
 		function(err) {
@@ -370,6 +379,12 @@ var app = {
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
 		};
+		
+		//configurando o spinner
+		$.mobile.loader.prototype.options.text = "Aguarde";
+		$.mobile.loader.prototype.options.textVisible = true;
+		$.mobile.loader.prototype.options.theme = "b";
+		$.mobile.loader.prototype.options.html = "";
 	},
 	/**
 	 * Change pages within app
@@ -721,10 +736,20 @@ var app = {
 		app.logger.log('Finalizando registro: ' + registro.id);
 		app.setAtributo('cancelado', 0);
 		app.setCamposDerivados();
-		app.inserirRegistro(cb);
+		app.setAtributo('finalizado', 1); //para facilitar a recuperação do registro final pelo log
+		$.mobile.loading("show");
+		app.openDB(function(){
+			app.inserirRegistro(function(){
+				$.mobile.loadint('hide');
+				cb();
+				app.database.close();//fechando a conexão com o banco depois de inserir o registro;
+				app.logger.log("Conexão com o banco fechada");
+			});
+		});
+		
 	},
 	
-	inserirRegistro : function(cb){
+	inserirRegistro : function(cb){ //função é chamada por finalizaRegistro
 		myDb.insertRegistro(registro,
 		// erro
 		function(error) {
@@ -757,103 +782,123 @@ var app = {
 	},
 	
 	buscaDuracoesRegistros : function() {
-		myDb.selectDuracoesDiaRegistro(
-		// erro
-		function(error) {
-			app.logger.log('Erro ao buscar duracoes: ' + error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao buscar os registros.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.buscaDuracoesRegistros();
+		app.openDB(function(){
+			myDb.selectDuracoesDiaRegistro(
+			// erro
+			function(error) {
+				app.logger.log('Erro ao buscar duracoes: ' + error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao buscar os registros.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.buscaDuracoesRegistros();
+				},
+				// button cancel
+				function() {
+					app.logger.log("buscaDuracoesRegistros cancelado");
+				}, "Falha na busca.", // título
+				"Sim", "Não");
 			},
-			// button cancel
+			// ok
 			function() {
-				app.logger.log("buscaDuracoesRegistros cancelado");
-			}, "Falha na busca.", // título
-			"Sim", "Não");
-		},
-		// ok
-		function() {
-			app.logger.log('buscaDuracoesRegistros executado com sucesso');
-		});	
+				app.logger.log('buscaDuracoesRegistros executado com sucesso');
+				app.database.close();
+				app.logger.log('conexão com o banco fechada');
+			});
+		});
+			
 	},
 
 	buscaUltimaPesquisa : function() {
-		myDb.selectUltimaPesquisaValida(
-		// erro
-		function(error) {
-			app.logger.log('Erro ao buscar última pesquisa: ' + error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao buscar a última pesquisa realizada.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.buscaUltimaPesquisa();
+		app.openDB(function(){
+			myDb.selectUltimaPesquisaValida(
+			// erro
+			function(error) {
+				app.logger.log('Erro ao buscar última pesquisa: ' + error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao buscar a última pesquisa realizada.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.buscaUltimaPesquisa();
+				},
+				// button cancel
+				function() {
+					app.logger.log("buscaUltimaPesquisa cancelado");
+				}, "Falha na busca.", // título
+				"Sim", "Não");
 			},
-			// button cancel
+			// ok
 			function() {
-				app.logger.log("buscaUltimaPesquisa cancelado");
-			}, "Falha na busca.", // título
-			"Sim", "Não");
-		},
-		// ok
-		function() {
-			app.logger.log('buscaUltimaPesquisa executado com sucesso');
-		});	
+				app.logger.log('buscaUltimaPesquisa executado com sucesso');
+				app.database.close();
+				app.logger.log('Conexão com o banco fechada.');
+			});
+		});
+			
 	},
 
 	buscaRegistrosCancelados : function() {
-		myDb.selectRegistrosCancelados(
-		// erro
-		function(error) {
-			app.logger.log('Erro ao buscar cancelados: ' + error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao buscar os registros cancelados.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.buscaRegistrosCancelados();
+		app.openDB(function(){
+			myDb.selectRegistrosCancelados(
+			// erro
+			function(error) {
+				app.logger.log('Erro ao buscar cancelados: ' + error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao buscar os registros cancelados.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.buscaRegistrosCancelados();
+				},
+				// button cancel
+				function() {
+					app.logger.log("buscaRegistrosCancelados cancelado");
+				}, "Falha na busca.", // título
+				"Sim", "Não");
 			},
-			// button cancel
+			// ok
 			function() {
-				app.logger.log("buscaRegistrosCancelados cancelado");
-			}, "Falha na busca.", // título
-			"Sim", "Não");
-		},
-		// ok
-		function() {
-			app.logger.log('buscaRegistrosCancelados executado com sucesso');
-		});	
+				app.logger.log('buscaRegistrosCancelados executado com sucesso');
+				app.database.close();
+				app.logger.log('Conexão com o banco fechada');
+			});	
+		});
+		
 	},
 
 	cancelaRegistro : function(cb) {
 		app.logger.log('Cancelando registro: ' + registro.id);
 		app.setAtributo('cancelado', 1);
 		app.setCamposDerivados();
-		myDb.insertRegistro(registro, function(error) {
-			app.logger.log(error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.cancelaRegistro(cb);
-			},
-			// button cancel
-			function() {
-				app.logger.log("Descartando registro: " + registro.id);
+		app.openDB(function(){
+			myDb.insertRegistro(registro, function(error) {
+				app.logger.log(error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.cancelaRegistro(cb);
+				},
+				// button cancel
+				function() {
+					app.logger.log("Descartando registro: " + registro.id);
+					if (cb != null) {
+						cb();
+					}
+
+				}, "Falha na gravação.", // título
+				"Sim", "Não (irá descartar o registro)");
+			}, function() {
+				app.logger.log('Registro cancelado: ' + registro.id);
+				app.limpaRegistro();
+				app.database.close();
+				app.logger.log("Conexão com o banco fechada.");
+				alert("Entrevista cancelada.");
 				if (cb != null) {
 					cb();
 				}
-
-			}, "Falha na gravação.", // título
-			"Sim", "Não (irá descartar o registro)");
-		}, function() {
-			app.logger.log('Registro cancelado: ' + registro.id);
-			app.limpaRegistro();
-			alert("Entrevista cancelada.");
-			if (cb != null) {
-				cb();
-			}
+			});
 		});
+		
 	},
 
 	/**
