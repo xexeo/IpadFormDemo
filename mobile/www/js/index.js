@@ -742,8 +742,10 @@ var app = {
 			app.inserirRegistro(function(){
 				$.mobile.loadint('hide');
 				cb();
-				app.database.close();//fechando a conexão com o banco depois de inserir o registro;
-				app.logger.log("Conexão com o banco fechada");
+				app.database.close(function(){
+					app.logger.log("Conexão com o banco fechada");
+				});//fechando a conexão com o banco depois de inserir o registro;
+				
 			});
 		});
 		
@@ -802,8 +804,10 @@ var app = {
 			// ok
 			function() {
 				app.logger.log('buscaDuracoesRegistros executado com sucesso');
-				app.database.close();
-				app.logger.log('conexão com o banco fechada');
+				app.database.close(function(){
+					app.logger.log('conexão com o banco fechada');
+				});
+				
 			});
 		});
 			
@@ -830,8 +834,9 @@ var app = {
 			// ok
 			function() {
 				app.logger.log('buscaUltimaPesquisa executado com sucesso');
-				app.database.close();
-				app.logger.log('Conexão com o banco fechada.');
+				app.database.close(function(){
+					app.logger.log('Conexão com o banco fechada.');
+				});
 			});
 		});
 			
@@ -858,8 +863,10 @@ var app = {
 			// ok
 			function() {
 				app.logger.log('buscaRegistrosCancelados executado com sucesso');
-				app.database.close();
-				app.logger.log('Conexão com o banco fechada');
+				app.database.close(function(){
+					app.logger.log('Conexão com o banco fechada');
+				});
+				
 			});	
 		});
 		
@@ -890,8 +897,9 @@ var app = {
 			}, function() {
 				app.logger.log('Registro cancelado: ' + registro.id);
 				app.limpaRegistro();
-				app.database.close();
-				app.logger.log("Conexão com o banco fechada.");
+				app.database.close(function(){
+					app.logger.log("Conexão com o banco fechada.");
+				});
 				alert("Entrevista cancelada.");
 				if (cb != null) {
 					cb();
