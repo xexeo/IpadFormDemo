@@ -7,10 +7,16 @@ controllers.menu = {
 		});
 
         $('#menu_sumario').click(function() {
-			app.buscaDuracoesRegistros();
-			app.buscaUltimaPesquisa();
-			app.buscaRegistrosCancelados();
-			app.trocaPagina("views/sumario.html", controllers.sumario);
+			$.mobile.loading("show");
+			app.buscaDuracoesRegistros(function(){
+				app.buscaUltimaPesquisa(function(){
+					app.buscaRegistrosCancelados(function(){
+						$.mobile.loading("hide");
+						app.trocaPagina("views/sumario.html", controllers.sumario);
+					});
+				});
+			});
+			
 		});
 
 		$('#testaBugOld').click(function(){

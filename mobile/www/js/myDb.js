@@ -72,7 +72,7 @@ myDb = {
 		return found;
 	},
 
-	cretateTblDados : function() {
+	cretateTblDados : function(cb) {
 		app.logger.log("criando tabela: tblDados");
 		app.database.transaction(function(tx) {
 			var sql = "CREATE TABLE IF NOT EXISTS tblDados ( ";
@@ -87,6 +87,9 @@ myDb = {
 			app.logger.log('ERRO: ' + e.message);
 		}, function() {
 			app.logger.log("tabela criada: tblDados");
+			if(util.isFunction(cb)){
+				cb();
+			}
 		});
 
 	},
@@ -150,7 +153,7 @@ myDb = {
 		
 	},
 	
-	sanitize: function(){
+	sanitize: function(cb){
 		app.database.transaction(function(tx) {
 			var sql = "DELETE from tblDados WHERE id is null;";
 			tx.executeSql(sql);
@@ -162,6 +165,9 @@ myDb = {
 		//success
 		function(){
 			app.logger.log('Base de dados limpa');
+			if (util.isFunction(cb)){
+				cb();
+			}
 		})
 	},
 

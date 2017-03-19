@@ -1,6 +1,8 @@
 var app = {
 
 	versao : "2.3.0",
+	
+	debugMode : true,
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -87,35 +89,38 @@ var app = {
 
 	duplicaDb : function() {
 		if (app.filePaths) {
-			app.database.close(function() {
-				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, false, function(newName) {
-					alert('Banco de dados ' + newName + ' exportado com sucesso.');
-					app.openDB();
-				});
-			}, function(err) {
-				//falha na cópia do banco
-				//copia banco com problema
-				app.logger.log('Exportando bando de dados corrompido');
-				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, function(newName) {
-					alert('Banco de dados ' + newName + ' exportado!\n\nEntre em contato com o suporte.',
-						"Banco da Dados Corrompido", null, "info");
-					//apaga banco atual
-					app.removeFile(app.dbName, app.filePaths.dbFolder,
-						function(){ //removeu com sucesso
-							app.logger.log("Banco de dados corrompido removido do sistema de arquivos do app.");
-							app.openDB();
-						}, function(){//falhou quando removia
-							app.logger.log("Falha removendo banco de dados corrompido");
-							alert('Houve uma falha grava no sistema. \n Continue o processo de exportação, entre em contato com o suporte e NÃO CONTINUE A USAR ESSE IPAD.',
-								"Erro no Banco da Dados", null, "error");
-							app.openDB();
+			app.openDB(function(){
+				app.database.close(function() {
+					app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, false, function(newName) {
+						alert('Banco de dados ' + newName + ' exportado com sucesso.');
+						//app.openDB(); a conexão com o banco de dados permanece fechada
 					});
-					
+				}, function(err) {
+					//falha na cópia do banco
+					//copia banco com problema
+					app.logger.log('Exportando bando de dados corrompido');
+					app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, function(newName) {
+						alert('Banco de dados ' + newName + ' exportado!\n\nEntre em contato com o suporte.',
+							"Banco da Dados Corrompido", null, "info");
+						//apaga banco atual
+						app.removeFile(app.dbName, app.filePaths.dbFolder,
+							function(){ //removeu com sucesso
+								app.logger.log("Banco de dados corrompido removido do sistema de arquivos do app.");
+								//app.openDB(); a conexão com o banco de dados permanece fechada
+							}, function(){//falhou quando removia
+								app.logger.log("Falha removendo banco de dados corrompido");
+								alert('Houve uma falha grava no sistema. \n Continue o processo de exportação, entre em contato com o suporte e NÃO CONTINUE A USAR ESSE IPAD.',
+									"Erro no Banco da Dados", null, "error");
+								//app.openDB(); a conexão com o banco de dados permanece fechada
+						});
+
+					});
+					app.logger.log(JSON.stringify(err));
 				});
-				app.logger.log(JSON.stringify(err));
+			   // Exporta Log
+			   app.duplicaLog();	
 			});
-			// Exporta Log
-			app.duplicaLog();
+			
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
@@ -203,9 +208,13 @@ var app = {
 				console.log("esperando " + device.platform);
 			}, 3000);
 
+
 			// durante o debug, inicia o sistema de arquivos
-			// navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-			app.onFileSystemReady();
+			if (app.debugMode){
+				navigator.notification.alert("App em modo debug. \nConecte o debugger", app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
+			}else{
+				app.onFileSystemReady();
+			} 
 		}
 
 		// nessa altura do desenvolvimento não faz sentido
@@ -314,11 +323,13 @@ var app = {
 		// sucsess
 		function() {
 			app.logger.log('Conexão com o banco de dados criada com sucesso.');
-			myDb.cretateTblDados();
-			myDb.sanitize();
-			if(cb != null){
-				cb();
-			}
+			myDb.cretateTblDados(function(){
+				myDb.sanitize(function(){
+					if(util.isFunction(cb)){
+						cb();
+					}
+				});
+			});	
 		},
 		// fail
 		function(err) {
@@ -328,7 +339,7 @@ var app = {
 				"Erro no Banco da Dados", null, "error");
 		});
 	},
-
+	
 	extraConfig : function() {
 		// initialize panel
 		$(function() {
@@ -742,10 +753,10 @@ var app = {
 		$.mobile.loading("show");
 		app.openDB(function(){
 			app.inserirRegistro(function(){
-				$.mobile.loadint('hide');
-				cb();
+				$.mobile.loading('hide');
 				app.database.close(function(){
 					app.logger.log("Conexão com o banco fechada");
+					cb();
 				});//fechando a conexão com o banco depois de inserir o registro;
 				
 			});
@@ -779,13 +790,13 @@ var app = {
 			app.limpaRegistro();
 			
 			alert("Entrevista registrada.");
-			if (cb != null) {
+			if (util.isFunction(cb)) {
 				cb();
 			}
 		});
 	},
 	
-	buscaDuracoesRegistros : function() {
+	buscaDuracoesRegistros : function(cb) {
 		app.openDB(function(){
 			myDb.selectDuracoesDiaRegistro(
 			// erro
@@ -800,6 +811,9 @@ var app = {
 				// button cancel
 				function() {
 					app.logger.log("buscaDuracoesRegistros cancelado");
+					app.database.close(function(){
+						app.logger.log('conexão com o banco fechada');
+					});
 				}, "Falha na busca.", // título
 				"Sim", "Não");
 			},
@@ -808,6 +822,9 @@ var app = {
 				app.logger.log('buscaDuracoesRegistros executado com sucesso');
 				app.database.close(function(){
 					app.logger.log('conexão com o banco fechada');
+					if(util.isFunction(cb)){
+						cb();
+					}
 				});
 				
 			});
@@ -815,7 +832,7 @@ var app = {
 			
 	},
 
-	buscaUltimaPesquisa : function() {
+	buscaUltimaPesquisa : function(cb) {
 		app.openDB(function(){
 			myDb.selectUltimaPesquisaValida(
 			// erro
@@ -830,6 +847,9 @@ var app = {
 				// button cancel
 				function() {
 					app.logger.log("buscaUltimaPesquisa cancelado");
+					app.database.close(function(){
+						app.logger.log('conexão com o banco fechada');
+					});
 				}, "Falha na busca.", // título
 				"Sim", "Não");
 			},
@@ -838,13 +858,16 @@ var app = {
 				app.logger.log('buscaUltimaPesquisa executado com sucesso');
 				app.database.close(function(){
 					app.logger.log('Conexão com o banco fechada.');
+					if(util.isFunction(cb)){
+						cb();
+					}
 				});
 			});
 		});
 			
 	},
 
-	buscaRegistrosCancelados : function() {
+	buscaRegistrosCancelados : function(cb) {
 		app.openDB(function(){
 			myDb.selectRegistrosCancelados(
 			// erro
@@ -859,6 +882,9 @@ var app = {
 				// button cancel
 				function() {
 					app.logger.log("buscaRegistrosCancelados cancelado");
+					app.database.close(function(){
+						app.logger.log('conexão com o banco fechada');
+					});
 				}, "Falha na busca.", // título
 				"Sim", "Não");
 			},
@@ -867,6 +893,9 @@ var app = {
 				app.logger.log('buscaRegistrosCancelados executado com sucesso');
 				app.database.close(function(){
 					app.logger.log('Conexão com o banco fechada');
+					if(util.isFunction(cb)){
+						cb();
+					}
 				});
 				
 			});	
