@@ -502,6 +502,8 @@ var app = {
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
 				}
+				//removendo outras páginas do DOM
+				$('div[data-role=page]:hidden').remove();
 			} catch (e) {
 				app.logger.log(e);
 				alert(e.message);
