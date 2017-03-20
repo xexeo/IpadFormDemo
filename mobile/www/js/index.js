@@ -357,8 +357,8 @@ var app = {
 		// botões do menu
 		$("#btn_sair").click(
 				function() {
-					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout",
-							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
+					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout"
+,							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
 				});
 		
 		/*

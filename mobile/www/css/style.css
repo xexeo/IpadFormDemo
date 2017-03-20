@@ -625,3 +625,7 @@ div#display_data_hora_block{
 	margin-top: 1%;
 	margin-bottom: 2%;
 }
+
+button#menu_nova_pesquisa{
+	height: 100px;
+}

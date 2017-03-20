@@ -28,6 +28,26 @@ controllers.menu = {
 			});
 			
 		});
+		
+		$("#menu_trocar_sentido").click(function(){
+			var novo_sentido;
+			if (app.sentido = 'AB'){
+				novo_sentido = 'BA'
+			}else{
+				novo_sentido = 'AB'
+			}
+			app.validaOperacoes(function(){
+					app.sentido = novo_sentido;
+					app.trocaPagina("views/menu.html", controllers.menu);
+				}, 
+				"Insira a senha para alterar o sentido para " + novo_sentido + ".",
+				"Alterar Sentido",
+				"Senha incorreta.\nDeseja tentar novamente?",
+				"Senha Incorreta", 
+				"Alterar Sentido",
+				"Voltar"
+			);
+		});
 
 		$('#testaBugOld').click(function(){
 			for (i = 0; i < 51; i++){
