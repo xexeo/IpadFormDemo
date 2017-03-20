@@ -31,7 +31,7 @@ controllers.menu = {
 		
 		$("#menu_trocar_sentido").click(function(){
 			var novo_sentido;
-			if (app.sentido = 'AB'){
+			if (app.sentido == 'AB'){
 				novo_sentido = 'BA'
 			}else{
 				novo_sentido = 'AB'
@@ -40,7 +40,7 @@ controllers.menu = {
 					app.sentido = novo_sentido;
 					app.trocaPagina("views/menu.html", controllers.menu);
 				}, 
-				"Insira a senha para alterar o sentido para " + novo_sentido + ".",
+				"Insira a senha para alterar o sentido para <span style='font-weight: bolder;'>" + novo_sentido + "</span>.",
 				"Alterar Sentido",
 				"Senha incorreta.\nDeseja tentar novamente?",
 				"Senha Incorreta", 
