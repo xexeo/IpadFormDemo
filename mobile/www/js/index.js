@@ -353,7 +353,7 @@ var app = {
 		app.uuid_device = "browser";
 		
 		ipadID.id = 'browser';
-
+		
 		// botões do menu
 		$("#btn_sair").click(
 				function() {
@@ -994,7 +994,7 @@ var app = {
 	 * @param Function
 	 *            cb success callback function
 	 */
-copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) {
+	copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) {
 		var now = new Date();
 		var newName = (isCorrupted)? "CORROMPIDO" + ipadID.id + "_" + fileName : ipadID.id + "_" + fileName;
 		var extension = "";
@@ -1068,7 +1068,7 @@ copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) {
 			window.location.reload();
 		},1000);
 	},
-
+	
 	baseUrl : null,
 
 	logFileName : "logOD.txt",

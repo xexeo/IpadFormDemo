@@ -817,5 +817,14 @@ var util = {
 		if (mes< 10) {mes = "0"+mes;}
 
 		return dia + '/' +  mes + '/' + ano;
+	},
+	
+	formatDateTimeToDisplay : function(){
+		var d = new Date();
+		var hora = d.getHours();
+		var min = d.getMinutes();
+		if (hora< 10) {hora = "0"+hora;}
+		if (min< 10) {min = "0"+min;}
+		return util.formateDateOnly(d) + '  ' + hora + ':' + min;
 	}
 };

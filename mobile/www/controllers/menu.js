@@ -1,8 +1,17 @@
 controllers.menu = {
 	config : function() {
+		$('#display_posto').html(app.posto);
+		$('#display_idIpad').html(ipadID.id);
+		$('#display_sentido').html(app.sentido);
+		$('#display_data_hora').html(util.formatDateTimeToDisplay());
+		var updater_dataTimeToDisplay = setInterval(function(){
+			$('#display_data_hora').html(util.formatDateTimeToDisplay());
+		},10000);
+		
         $('#menu_nova_pesquisa').click(function() {
 			// clear registro
 			app.iniciaRegistro();
+			clearInterval(updater_dataTimeToDisplay);
 			app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
 		});
 
@@ -12,6 +21,7 @@ controllers.menu = {
 				app.buscaUltimaPesquisa(function(){
 					app.buscaRegistrosCancelados(function(){
 						$.mobile.loading("hide");
+						clearInterval(updater_dataTimeToDisplay);
 						app.trocaPagina("views/sumario.html", controllers.sumario);
 					});
 				});

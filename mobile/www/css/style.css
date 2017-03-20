@@ -611,3 +611,17 @@ input {
 input[type=text] {
 	-webkit-user-select: auto;
 }*/
+
+div.display_block{
+	text-align: center;
+}
+
+h1.display_value{
+	font-weight: bolder;
+	font-size: xx-large;
+}
+
+div#display_data_hora_block{
+	margin-top: 1%;
+	margin-bottom: 2%;
+}
