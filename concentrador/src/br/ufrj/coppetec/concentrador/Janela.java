@@ -393,9 +393,10 @@ public class Janela extends javax.swing.JFrame {
 				(rdo_SentidoAB.isSelected() || rdo_SentidoBA.isSelected()));
 	}
 	
-	private PVKey makePVKey(){
+	private PVKey makePVKey() throws ParseException{
 		PVKey pvKey = new PVKey();
 		pvKey.data = cmbData.getSelectedItem().toString();
+		pvKey.data = Util.sdf.format(Util.sdfToBrazil.parse(cmbData.getSelectedItem().toString())).toString();
 		pvKey.hora = Integer.parseInt(cmbHora.getSelectedItem().toString());
 		pvKey.posto = Integer.parseInt(Concentrador.posto);
 		pvKey.sentido = (rdo_SentidoAB.isSelected())? "AB" : "BA";
@@ -406,9 +407,8 @@ public class Janela extends javax.swing.JFrame {
 		if (checkPVKeyDataEnter() && ctlGetValuesFromDataBase){
 			btnApagar.setVisible(false);
 			
-			PVKey pvKey = makePVKey();
-			
 			try{
+				PVKey pvKey = makePVKey();
 				myDB database = Concentrador.database;
 				int alreadyInDataBase = database.verifyPV(pvKey);
 				if (alreadyInDataBase != 0) {
@@ -5989,6 +5989,11 @@ public class Janela extends javax.swing.JFrame {
         });
 
         cmbData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDataActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_volumetricaLayout = new javax.swing.GroupLayout(pnl_volumetrica);
         pnl_volumetrica.setLayout(pnl_volumetricaLayout);
@@ -6998,6 +7003,10 @@ public class Janela extends javax.swing.JFrame {
     private void cmbDateExpODActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDateExpODActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDateExpODActionPerformed
+
+    private void cmbDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDataActionPerformed
+        askForDataRetrieve();
+    }//GEN-LAST:event_cmbDataActionPerformed
 
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
