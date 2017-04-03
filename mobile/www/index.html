@@ -50,17 +50,31 @@
 
 		<!-- content -->
 		<section role="main" class="ui-content">
-			<div class="ui-grid-a">
-				<div class="ui-block-a">
-					<div class="ui-field-contain">
+			<div class="ui-grid-a principal">
+				<div class="ui-block-a formulario">
+					<div class="ui-field-contain controles">
 						<label for="usuario">Usuário:</label>
 						<input id="usuario" type="text" name="usuario" data-theme="a" />
 					</div>
-					<div class="ui-field-contain">
+					<div class="ui-field-contain controles">
 						<label for="senha">Senha:</label>
 						<input id="senha" type="password" name="senha" data-theme="a" />
 					</div>
-					<button class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-check" id="entrar" name="entrar">Entrar</button>
+					<div class="ui-grid-a terceira" >
+						<div class="ui-block-a">
+							<fieldset id='agregador' data-role="controlgroup" data-type="horizontal" data-theme="a">
+								<input type="radio" name="sentido" id="rdo_sentido_ab" value="AB">
+								<label for="rdo_sentido_ab">AB</label>
+								<input type="radio" name="sentido" id="rdo_sentido_ba" value="BA">
+								<label for="rdo_sentido_ba">BA</label>
+							</fieldset>
+						</div>
+						
+						<div class="ui-block-b">
+							<button class="botao ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-check" id="entrar" name="entrar">Entrar</button>
+						</div>
+					</div>
+					
 				</div>
 				<div class="ui-block-b"></div>
 			</div>

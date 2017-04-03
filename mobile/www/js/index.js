@@ -7,6 +7,10 @@ var app = {
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
+		if(app.sentido === null){
+			alert("Selecione o sentido!");
+			return;
+		}
 
 		// configura identificador do ipad, para executar uma única vez(durante a instalação)
 		if (logins.autenticaMaster(usuario, senha)) {
@@ -21,7 +25,7 @@ var app = {
 			app.user_login = usuario;
 			app.senha_login = senha;
 			app.posto = String(usuario).substr(0, 3);
-			app.sentido = String(usuario).substr(3, 2).toUpperCase();
+			//app.sentido = String(usuario).substr(3, 2).toUpperCase();
 			if (isNaN(app.posto)) { // apenas para efeitos ao usuário de testes
 				app.posto = '000';
 			}
@@ -44,6 +48,8 @@ var app = {
 		// realiza logout
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
+		$("#agregador input[type='radio']").prop('checked', false);
+		$("#entrar").prop('disabled', true);
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		app.logger.log('Logout');
 		app.user_login = null;
@@ -347,7 +353,11 @@ var app = {
 		});
 		$("#versao").html(this.versao);
 		$("#entrar").click(this.login);
-		// $("#btn_sair").click(this.logout);
+		$("#entrar").prop('disabled', true);
+		$("#agregador input[type='radio']").prop('checked', false).change(function(event, ui){
+			$("#entrar").prop('disabled', false);
+			app.sentido = $(this).val();
+		});
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";

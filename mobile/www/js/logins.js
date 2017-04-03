@@ -12,20 +12,14 @@ var logins = {
 				&& (senha == logins.user_tester.pwd)) {
 			logins.user_logado = logins.user_tester;
 			return true;
-		} else if((usuario.toUpperCase() == logins.user_trainning.usr + 'AB' || 
-				usuario.toUpperCase() == logins.user_trainning.usr + 'BA') && 
+		} else if((usuario.toUpperCase() == logins.user_trainning.usr) && 
 				senha == logins.user_trainning.pwd){ //usuário de treinamento
 			logins.user_logado = logins.user_trainning;
 			return true;
-		}else if (String(usuario).length == 5) {
+		}else if (String(usuario).length == 3) {
 			var regex = new RegExp("[^0-9]+");
-			var posto = String(usuario).substr(0, 3).replace(regex, '');
-			var sentido = String(usuario).substr(3, 2).toUpperCase();
-			if ((posto.length == 3) && (Number(posto) > 0) && ((sentido == 'AB') || (sentido == 'BA'))) {
-				//mesma senha para ambos os sentidos				
-//				if (sentido == 'BA') {
-//					senha = util.reverse(senha);
-//				}
+			var posto = String(usuario)
+			if (posto.length == 3 && Number(posto) > 0) {
 				var i = Number(posto) - 1;
 				// for (i = 0; i < logins.users.length; i++) {
 				/* comentar o 'for' se o sequencial do posto for igual ao posicionamento dele na lista. */

@@ -23,11 +23,11 @@
 	border: none;
 }
 
-#page_login ui-grid-a {
+#page_login .principal {
 	width: 100%;
 }
 
-#page_login .ui-block-a {
+#page_login /*.ui-block-a*/ .formulario {
 	margin-top: 9.2em;
 	float: right;
 	margin-right: 3.2em;
@@ -35,15 +35,15 @@
 	background-color: rgba(36, 74, 125, 0.4);
 }
 
-#page_login .ui-block-b {
+/*#page_login .ui-block-b {
 	
-}
+}*/
 
-#page_login .ui-field-contain {
+#page_login /*.ui-field-contain*/ .controles {
 	width: 90%;
 }
 
-#page_login .ui-btn {
+#page_login /*.ui-btn*/ .botao{
 	background-image: linear-gradient(to right, #244a7d, #4167ad 130%);
 	border: 0 none;
 	border-radius: 3px;
@@ -55,8 +55,18 @@
 	text-shadow: none;
 }
 
-#page_login .ui-field-contain label {
+#page_login /*.ui-field-contain*/ .controles label {
 	font-weight: bold;
 	color: #244a7d;
 	text-shadow: none;
+}
+
+#page_login .terceira{
+	width: 90%;
+}
+
+#page_login .terceira fieldset{
+	float: right;
+	margin-right: 50px;
+	display: block;
 }
