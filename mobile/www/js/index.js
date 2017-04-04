@@ -463,6 +463,20 @@ var app = {
 	onChangeHandler : {
 		handler : function() {
 			try {
+				$("section[data-role=page]").append(
+						"<footer data-role='footer' data-position='fixed'> \
+							<span class='versao'>Versão: <span id='versao'></span></span> \
+							<span class='data_atual'>Data: <span id='data_atual'></span></span> \
+							<span class='posto'>Posto: <span id='posto'></span></span> \
+							<span class='sentido'>Sentido: <span id='sentido'></span></span> \
+							<span class='ipad'>id-iPad: <span id='ipadID'></span></span> \
+						</footer>"
+						);
+				$("footer[data-role='footer']").toolbar({
+					defaults : true,
+					position: "fixed"
+				});
+				
 				app.onChangeHandler.controller();
 
 				// Botão "Cancelar"
@@ -513,12 +527,13 @@ var app = {
 						});
 					}
 				});
-
+				
+				
 				$(".versao #versao").html(app.versao);
 				$(".data_atual #data_atual").html(util.formateDateOnly(new Date()));
 				$(".ipad #ipadID").html(ipadID.id);
-				$("#posto").html(app.posto);
-				$("#sentido").html(app.sentido);
+				$(".posto #posto").html(app.posto);
+				$(".sentido #sentido").html(app.sentido);
 
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
