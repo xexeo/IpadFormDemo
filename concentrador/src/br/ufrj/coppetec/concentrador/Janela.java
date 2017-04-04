@@ -140,12 +140,12 @@ public class Janela extends javax.swing.JFrame {
 			
 			if (dataBaseDatesVol != null){
 				cmbDateExpVol.removeAllItems();
-				cmbDateExpVol.addItem("Todas");
+				//cmbDateExpVol.addItem("Todas");
 				for (String dataBaseDate : dataBaseDatesVol) {
 					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
 					if (ArrayUtils.contains(validDates, date)){
 						cmbDateExpVol.addItem(date);
-						cmbDateExpVol.setSelectedIndex(1);
+						cmbDateExpVol.setSelectedIndex(0);
 					}
 				}
 			}
