@@ -463,19 +463,19 @@ var app = {
 	onChangeHandler : {
 		handler : function() {
 			try {
-				$("section[data-role=page]").append(
-						"<footer data-role='footer' data-position='fixed'> \
-							<span class='versao'>Versão: <span id='versao'></span></span> \
-							<span class='data_atual'>Data: <span id='data_atual'></span></span> \
-							<span class='posto'>Posto: <span id='posto'></span></span> \
-							<span class='sentido'>Sentido: <span id='sentido'></span></span> \
-							<span class='ipad'>id-iPad: <span id='ipadID'></span></span> \
-						</footer>"
-						);
-				$("footer[data-role='footer']").toolbar({
-					defaults : true,
-					position: "fixed"
-				});
+//				$("section[data-role=page]").append(
+//						"<footer data-role='footer' data-position='fixed'> \
+//							<span class='versao'>Versão: <span id='versao'></span></span> \
+//							<span class='data_atual'>Data: <span id='data_atual'></span></span> \
+//							<span class='posto'>Posto: <span id='posto'></span></span> \
+//							<span class='sentido'>Sentido: <span id='sentido'></span></span> \
+//							<span class='ipad'>id-iPad: <span id='ipadID'></span></span> \
+//						</footer>"
+//						);
+//				$("footer[data-role='footer']").toolbar({
+//					defaults : true,
+//					position: "fixed"
+//				});
 				
 				app.onChangeHandler.controller();
 
