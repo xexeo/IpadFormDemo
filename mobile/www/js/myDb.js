@@ -59,7 +59,7 @@ myDb = {
 		{field : 'idPerguntaExtra', type : 'integer'},
 		{field : 'erro', type : 'text'},
 		{field : 'duracaoPesq', type : 'integer'},
-		{field : 'treinamento', type : 'integer'}// Boolean 1->true || false, otherwise;
+		{field : 'treinamento', type : 'integer', notNull: true}// Boolean 1->true || false, otherwise;
 	],
 
 	fieldExists : function(str) {
@@ -189,7 +189,7 @@ ORDER BY diaPesq DESC;
 						" MAX(duracaoPesq) as 'maxTempoDia'," +
 						" MIN(duracaoPesq) as 'minTempoDia'" +
 						" FROM tblDados WHERE cancelado = 0" +
-						" AND treimamento = " + treinamento + 
+						" AND treinamento = " + treinamento + 
 						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
 
 				tx.executeSql(sql, [], function(tx, res) {

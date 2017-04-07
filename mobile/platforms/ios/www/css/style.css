@@ -150,7 +150,7 @@ section.ui-content>fieldset.ui-grid-c>.ui-block-d {
 nav.avancar {
 	width: 100%;
 	position: fixed;
-	bottom: 1%;
+	bottom: 3%;
 	right: 1%;
 }
 
@@ -611,3 +611,29 @@ input {
 input[type=text] {
 	-webkit-user-select: auto;
 }*/
+
+div.display_block{
+	text-align: center;
+}
+
+h1.display_value{
+	font-weight: bolder;
+	font-size: xx-large;
+}
+
+div#display_data_hora_block{
+	margin-top: 1%;
+	margin-bottom: 2%;
+}
+
+button#menu_nova_pesquisa{
+	height: 100px;
+	font-size: larger;
+}
+
+.avisoTreinamento{
+	height: 120px;
+    background-color: crimson;
+    font-size: xx-large;
+    text-align: center;
+}

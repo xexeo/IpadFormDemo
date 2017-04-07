@@ -612,6 +612,14 @@ var app = {
 
 	setCamposDerivados : function() {
 		try {
+			//Treinamento
+			if (app.isTreinamento){
+				app.setAtributo('treinamento', 1);
+			}else{
+				app.setAtributo('treinamento', 0);				
+			}
+			
+			
 			// TIPO VEICULO
 			if (!util.isEmpty(app.getAtributo('tipo'))) {
 				var tipoReal = app.getAtributo('tipo').split("_")[0];

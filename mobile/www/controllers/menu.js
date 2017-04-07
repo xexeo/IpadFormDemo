@@ -9,7 +9,7 @@ controllers.menu = {
 		},10000);
 		
 		if (app.isTreinamento){
-				$('#banner_supra').html("<br>O sitema esá em modo de treinamento").addClass('avisoTreinamento');
+				$('#banner_supra').html("<br>O sistema está em modo de treinamento").addClass('avisoTreinamento');
 			}else{
 				$('#banner_supra').html("").removeClass('avisoTreinamento');
 		}
