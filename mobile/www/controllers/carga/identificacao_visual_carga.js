@@ -73,11 +73,24 @@ controllers.identificacao_visual_carga = {
 		util.progressoPlacaNumeros("carga", "grupo_placa_vermelha_carga");
 
 		// Placa única
-		util.progressoInputText("placa_unica", "placa_unica_carga", "grupo_placa_vermelha_carga");
+		$('#placa_unica_carga').keyup(function() {
+			if (util.isEmpty($(this).val())) {
+				$("#grupo_carga_perigosa_carga").hide();
+				$("#placa_vermelha_rntrc_num_carga").val(null);
+			} else {
+				$("#grupo_carga_perigosa_carga").show();
+			}
+		});
+		$('#placa_unica_carga').change(function() {
+			app.setAtributo('placa_unica', $(this).val());
+			app.setAtributo('placaVermelha', false);
+			app.setAtributo('placa_vermelha_rntrc_sel', null);
+			app.setAtributo('placa_vermelha_rntrc_num', null);
+		});
 
 		// Placa Vermelha
 		$('#placa_vermelha_carga_sim').click(function() {
-			$('#grupo_placa_vermelha_rntrc_carga').show();
+			$('#grupo_qr_code_carga').show();
 			if ((registro.placa_vermelha == undefined) || (!registro.placa_vermelha)) {
 				$('#grupo_carga_perigosa_carga').hide();
 				$('#grupo_placa_vermelha_rntrc_num_carga').hide();
@@ -85,6 +98,7 @@ controllers.identificacao_visual_carga = {
 			app.setAtributo('placaVermelha', true);
 		});
 		$('#placa_vermelha_carga_nao').click(function() {
+			$('#grupo_qr_code_carga').hide();
 			$('#grupo_placa_vermelha_rntrc_carga').hide();
 			$('#grupo_carga_perigosa_carga').show();
 			app.setAtributo('placaVermelha', false);
@@ -93,8 +107,28 @@ controllers.identificacao_visual_carga = {
 			$("#placa_vermelha_rntrc_num_carga").val(null);
 			util.progressoRestartSelect("placa_vermelha_rntrc_sel_carga", "Selecione");
 		});
-		// util.progressoSelect("placa_vermelha_rntrc_sel", "placa_vermelha_rntrc_sel_carga",
-		// "grupo_placa_vermelha_rntrc_num_carga");
+		
+		//QR Code
+		$('#qr_code_carga_sim').click(function() {
+			$('#grupo_placa_vermelha_rntrc_carga').show();
+			app.setAtributo('placa_vermelha_rntrc_num', null);
+			$("#placa_vermelha_rntrc_num_carga").val(null);
+			$('#placa_vermelha_rntrc_num_carga').attr('maxlength','9');
+			$('#placa_vermelha_rntrc_num_carga').attr('minlength','9');
+			$('#grupo_carga_perigosa_carga').hide();
+			util.progressoRestartSelect("placa_vermelha_rntrc_sel_carga", "Selecione");
+		});
+		$('#qr_code_carga_nao').click(function() {
+			$('#grupo_placa_vermelha_rntrc_carga').show();
+			app.setAtributo('placa_vermelha_rntrc_num', null);
+			$("#placa_vermelha_rntrc_num_carga").val(null);
+			$('#placa_vermelha_rntrc_num_carga').attr('maxlength','8');
+			$('#placa_vermelha_rntrc_num_carga').attr('minlength','8');
+			$('#grupo_carga_perigosa_carga').hide();
+			util.progressoRestartSelect("placa_vermelha_rntrc_sel_carga", "Selecione");
+		});
+
+		// RNTRC
 		$("#placa_vermelha_rntrc_sel_carga").change(function() {
 			var nome_registro = "placa_vermelha_rntrc_sel";
 			if (Number($(this).val()) != -1) {
@@ -136,7 +170,6 @@ controllers.identificacao_visual_carga = {
 
 		if (util.validaRadioChecked("tipo_carroceria_carga", "Tipo de carroceria")
 				&& util.validaRadioSimNao("placa_estrangeira_carga", "Placa estrangeira")
-				&& util.validaRadioSimNao("placa_vermelha_carga", "Placa vermelha")
 				&& util.validaRadioSimNao("carga_perigosa_carga", "Carga perigosa")) {
 
 			var ok_tipo_conteiner = true;
@@ -178,14 +211,17 @@ controllers.identificacao_visual_carga = {
 			}
 
 			var ok_placa_vermelha = true;
-			var opt_vermelha = $('input[name=placa_vermelha_carga]:checked').val();
-			if (opt_vermelha == 'sim') {
-				if (!util.validaSelect("placa_vermelha_rntrc_sel_carga", "RNTRC")) {
-					ok_placa_vermelha = false;
-				}
-				if (!util.validaInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")
-						|| !util.validaLenInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")) {
-					ok_placa_vermelha = false;
+			if (option == 'nao') {
+				ok_placa_vermelha = util.validaRadioSimNao("placa_vermelha_carga", "Placa vermelha");
+				var opt_vermelha = $('input[name=placa_vermelha_carga]:checked').val();
+				if (opt_vermelha == 'sim') {
+					if (!util.validaSelect("placa_vermelha_rntrc_sel_carga", "RNTRC")) {
+						ok_placa_vermelha = false;
+					}
+					if (!util.validaInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")
+							|| !util.validaLenInputText("placa_vermelha_rntrc_num_carga", "Número do RNTRC")) {
+						ok_placa_vermelha = false;
+					}
 				}
 			}
 
