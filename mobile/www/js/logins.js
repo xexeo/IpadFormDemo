@@ -210,7 +210,7 @@ var logins = {
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-457(B)/GO-219 - ENTR GO-020(A)',
-		perguntaExtra : true
+		// perguntaExtra : true // Possuiu pergunta extra na 2ª fase
 	}, {
 		usr : '021',
 		pwd : '0112',
@@ -847,7 +847,8 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'FIM PISTA DUPLA - ENTR GO-156(B)'
+		trecho : 'FIM PISTA DUPLA - ENTR GO-156(B)',
+		perguntaExtra : true
 	}, {
 		usr : '112',
 		pwd : '0025',
@@ -1106,7 +1107,8 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'DIV MG/GO - ENTR GO-010(A)'
+		trecho : 'DIV MG/GO - ENTR GO-010(A)',
+		perguntaExtra : true
 	}, {
 		usr : '149',
 		pwd : '0050',
@@ -1162,7 +1164,8 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)'
+		trecho : 'ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)',
+		perguntaExtra : true
 	}, {
 		usr : '157',
 		pwd : '0280',
