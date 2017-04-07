@@ -630,3 +630,10 @@ button#menu_nova_pesquisa{
 	height: 100px;
 	font-size: larger;
 }
+
+.avisoTreinamento{
+	height: 120px;
+    background-color: crimson;
+    font-size: xx-large;
+    text-align: center;
+}

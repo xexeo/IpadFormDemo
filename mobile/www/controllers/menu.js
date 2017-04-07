@@ -8,6 +8,12 @@ controllers.menu = {
 			$('#display_data_hora').html(util.formatDateTimeToDisplay());
 		},10000);
 		
+		if (app.isTreinamento){
+				$('#banner_supra').html("<br>O sitema esá em modo de treinamento").addClass('avisoTreinamento');
+			}else{
+				$('#banner_supra').html("").removeClass('avisoTreinamento');
+		}
+		
         $('#menu_nova_pesquisa').click(function() {
 			// clear registro
 			app.iniciaRegistro();

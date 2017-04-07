@@ -1109,6 +1109,8 @@ var app = {
 	posto : null,
 
 	sentido : null,
+	
+	isTreinamento : false,
 
 	filePaths : null, // { externalFolder : null, dbFolder : null, }
 	

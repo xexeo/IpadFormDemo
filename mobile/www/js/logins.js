@@ -8,18 +8,32 @@ var logins = {
 	},
 
 	autentica : function(usuario, senha) {
+		var posto = null;
 		if ((logins.user_tester != undefined) && (logins.user_tester.usr != undefined) && (usuario == logins.user_tester.usr)
 				&& (senha == logins.user_tester.pwd)) {
 			logins.user_logado = logins.user_tester;
 			return true;
-		} else if((usuario.toUpperCase() == logins.user_trainning.usr) && 
-				senha == logins.user_trainning.pwd){ //usuário de treinamento
-			logins.user_logado = logins.user_trainning;
-			return true;
-		}else if (String(usuario).length == 3) {
-			var regex = new RegExp("[^0-9]+");
-			var posto = String(usuario)
-			if (posto.length == 3 && Number(posto) > 0) {
+		} else if (String(usuario).length == 3) {
+			posto = String(usuario)
+			return logins.verificaPostoSenha(posto, senha);
+			//treinamento
+		} else if (String(usuario).length == 4 && String(usuario).substr(3).toUpperCase() == 'T'){
+			if (datas.verificaData()){
+				alert("Logins de treinamento não funcionam em datas da pesquisa real","Erro!",null,'error');
+				return false;
+			}
+			posto = String(usuario).substr(0,3);
+			if (logins.verificaPostoSenha(posto, senha)){
+				app.isTreinamento = true;
+				alert("O sistema funcionará em modo de treinamento",null,null,'error');
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	verificaPostoSenha : function(posto, senha){
+		if (posto.length == 3 && Number(posto) > 0) {
 				var i = Number(posto) - 1;
 				// for (i = 0; i < logins.users.length; i++) {
 				/* comentar o 'for' se o sequencial do posto for igual ao posicionamento dele na lista. */
@@ -29,11 +43,10 @@ var logins = {
 					return true;
 				}
 				// }
-			}
 		}
 		return false;
 	},
-
+	
 	user_master : { // Usuário exclusivo para configurar o idIpad na instalação, ele não faz login no aplicativo.
 		usr : 'Master', // usuário mestre
 		pwd : "434723" // senha mestra (ver teclado numérico para a string 'idIPad')
@@ -46,11 +59,6 @@ var logins = {
 		perguntaExtra : true
 	},
 	
-	user_trainning : { //Usuário para treinamento
-		usr : '000',
-		pwd : '000'
-	},
-
 	// Postos com pergunta extra na 1ª fase: 211
 	// Postos com pergunta extra na 2ª fase: 020, 184, 185 
 	users : [
