@@ -7060,29 +7060,32 @@ public class Janela extends javax.swing.JFrame {
 	}// GEN-LAST:event_btnODexportAllActionPerformed
 
 	private String getSelectedDateFromCombo(javax.swing.JComboBox combo) throws ParseException{
-		if(combo.getSelectedIndex()==0)return null;
+		if(combo.getSelectedItem().toString().equals("--"))return null;
 		String date= Util.sdf.format(Util.sdfToBrazil.parse(combo.getSelectedItem().toString()));
 		return date;
 	}
 	
-	private String buildExportName(JSONExporter.DbTable t){
+	private String buildExportName(JSONExporter.DbTable t, String date) throws ParseException{
 		String name="";
 		if(t.toString().equals(JSONExporter.DbTable.OD.toString()))
 			name="od_";
 		else if(t.toString().equals(JSONExporter.DbTable.PV.toString()))
 			name="volumetrica_";
-		name+=Concentrador.posto+"_"+Util.sdfToArq.format(new Date())+".zip";
+		//name+=Concentrador.posto+"_"+Util.sdfToArq.format(Util.sdf.parse(date))+".zip";
+		name+=Concentrador.posto+"_"+ date +".zip";
 		return name;
 	}
 	
 	private void exportData(JSONExporter.DbTable t){
 		try{
-			exporterFileChooser.setSelectedFile(new File(buildExportName(t)));
+			
 			String date = null;
 			if(t.toString().equals(JSONExporter.DbTable.OD.toString()))
 				date= getSelectedDateFromCombo(cmbDateExpOD);
 			else if(t.toString().equals(JSONExporter.DbTable.PV.toString()))
 				date= getSelectedDateFromCombo(cmbDateExpVol);
+			
+			exporterFileChooser.setSelectedFile(new File(buildExportName(t, date)));
 			
 			int returnVal = exporterFileChooser.showSaveDialog(this);
 
