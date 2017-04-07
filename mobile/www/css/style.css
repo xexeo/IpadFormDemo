@@ -637,3 +637,7 @@ button#menu_nova_pesquisa{
     font-size: xx-large;
     text-align: center;
 }
+
+.qrCode_group{
+	width: 41% !important;
+}
