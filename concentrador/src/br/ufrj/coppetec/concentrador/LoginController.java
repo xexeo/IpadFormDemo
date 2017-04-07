@@ -1,10 +1,18 @@
 package br.ufrj.coppetec.concentrador;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
+
 import javax.swing.JOptionPane;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /*
@@ -18,69 +26,114 @@ import org.json.JSONObject;
  * @author mangeli
  */
 public class LoginController {
-	
-	private JSONObject logins;
+
+	private JSONObject loginsJson;
+	private Map<String, Map<String, String>> logins;
 	private static Logger logger = LogManager.getLogger(LoginController.class);
-	
-	public LoginController(){
-		this.buildLoginsObject("/logins/users.json");
+	private static int LEN_LOGIN_USER = 3;
+
+	public LoginController() {
+		this("/logins/users.json");
 	}
-	
-	public LoginController(String loginsFile){
+
+	public LoginController(String loginsFile) {
 		this.buildLoginsObject(loginsFile);
 	}
-	
-	private void buildLoginsObject(String loginsFile){
-		try{
+
+	private void buildLoginsObject(String loginsFile) {
+		try {
 			StringBuilder result = new StringBuilder("");
 			InputStream loginsFileStream = this.getClass().getResourceAsStream(loginsFile);
 			Scanner scanner = new Scanner(loginsFileStream);
-			while (scanner.hasNextLine()){
+			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
-					result.append(line).append("\n");
+				result.append(line).append("\n");
 			}
 			scanner.close();
-			logins = new JSONObject(result.toString());
-		}catch (Exception e) {
+			loginsJson = new JSONObject(result.toString());
+			loadMapLogins(loginsJson.getJSONArray("logins"));
+		} catch (Exception e) {
 			logger.error("Erro ao ler o arquivo de login", e);
 			JOptionPane.showMessageDialog(null, "Erro lendo o arquivo de login." + e.getMessage());
 		}
 	}
-	
-	public boolean validateLogin(String user, String pwd) {
-		boolean r = false;
-		
-		if(isTraining(user, pwd)){
-			r = true;
-			Concentrador.treinamento = true;
-			Concentrador.posto = "000";
-			Concentrador.trecho = "Treinamento";
-							} else {
-			for (Object dados : logins.getJSONArray("logins")) {
 
-				if (user.equals(((JSONObject) dados).getString("usr"))
-						&& pwd.equals(((JSONObject) dados).getString("pwd"))) {
-					Concentrador.trecho = ((JSONObject) dados).getString("trecho");
-					Concentrador.posto = ((JSONObject) dados).getString("usr");
-					r = true;
+	private void loadMapLogins(JSONArray arrayLoginsJson) {
+		logins = new TreeMap<String, Map<String, String>>();
+		for (Object objLoginJson : arrayLoginsJson) {
+			JSONObject loginJson = (JSONObject) objLoginJson;
+			Map<String, String> mapInfoByLogin = new LinkedHashMap<String, String>(loginJson.length() - 1);
+			String usr = loginJson.getString("usr");
+			for (String key : loginJson.keySet()) {
+				if (!key.equals("usr")) {
+					Object value = loginJson.get(key);
+					if (value instanceof String) {
+						mapInfoByLogin.put(key, (String) value);
+					} else if (value instanceof Boolean) {
+						mapInfoByLogin.put(key, Boolean.toString(loginJson.getBoolean(key)));
+					}
 				}
 			}
+			logins.put(usr, mapInfoByLogin);
 		}
-		
-		if (r == false){
-			logger.info("Tentativa de login SEM sucesso para o usuário: " + user);
+
+	}
+
+	public boolean validateLogin(String user, String pwd) {
+		boolean isValidLogin = false;
+
+		if (verificaUserPwdProducao(user, pwd)) {
+			Concentrador.posto = user;
+			Concentrador.trecho = logins.get(user).get("trecho");
+			isValidLogin = true;
+		} else if (verificaUserPwdTreinamento(user, pwd)) {
+			user = user.substring(0, 3);
+			Concentrador.treinamento = true;
+			Concentrador.posto = user;
+			Concentrador.trecho = String.format("TREINAMENTO (%s)", logins.get(user).get("trecho"));
+			isValidLogin = true;
+		}
+
+		if (isValidLogin == true) {
+			logger.info("Login" + (Concentrador.treinamento ? " de TREINAMENTO " : " ") + "do usuário COM sucesso: " + user);
 		} else {
-			logger.info("Login do usuário COM sucesso: " + user);
+			logger.info("Tentativa de login SEM sucesso para o usuário: " + user);
 		}
-		return r;
+		return isValidLogin;
 	}
-	
-	private Boolean isTraining(String user, String pwd){
-		boolean r = false;
-		if(user.equals(Concentrador.configuration.getProperty("trainingUser")) 
-				&& pwd.equals(Concentrador.configuration.getProperty("trainingPassword"))){
-			r = true;
+
+	private boolean verificaUserPwdProducao(String user, String pwd) {
+		if (user.length() == LEN_LOGIN_USER) {
+			try {
+				if (Util.isInOrAfterValidPeriod(new Date())) {
+					return verificaUserPwd(user, pwd);
+				}
+			} catch (ParseException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao carregar datas válidas." + e.getMessage());
+			}
 		}
-		return r;
+		return false;
 	}
+
+	private boolean verificaUserPwdTreinamento(String user, String pwd) {
+		if ((user.length() == LEN_LOGIN_USER + 1) && (Character.toUpperCase(user.charAt(LEN_LOGIN_USER)) == 'T')) {
+			try {
+				if (Util.isOutValidPeriod(new Date())) {
+					return verificaUserPwd(user.substring(0, LEN_LOGIN_USER), pwd);
+				}
+			} catch (ParseException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao carregar datas válidas." + e.getMessage());
+			}
+		}
+		return false;
+	}
+
+	private boolean verificaUserPwd(String user, String pwd) {
+		Map<String, String> loginInfos = logins.get(user);
+		if (loginInfos != null) {
+			return pwd.equals(loginInfos.get("pwd"));
+		}
+		return false;
+	}
+
 }

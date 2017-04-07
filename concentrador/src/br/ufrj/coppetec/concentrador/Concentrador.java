@@ -1,14 +1,15 @@
 package br.ufrj.coppetec.concentrador;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Properties;
+
 import javax.swing.JOptionPane;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import br.ufrj.coppetec.concentrador.database.myDB;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.logging.Level;
 
 /**
  *
@@ -26,7 +27,6 @@ public class Concentrador {
 	public static String version = "3.0.1";
 	public static Properties configuration;
 	public static boolean treinamento = false;
-	
 
 	public static void main(String[] args) {
 		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
@@ -37,8 +37,8 @@ public class Concentrador {
 		splash.setLocationRelativeTo(null);
 		splash.setVersionLabet(version);
 		splash.setVisible(true);
-		
-		//lendo arquivo properties
+
+		// lendo arquivo properties
 		try {
 			PropertyLoader propLoader = new PropertyLoader();
 			configuration = propLoader.getProperties();
@@ -47,28 +47,16 @@ public class Concentrador {
 			logger.catching(ex);
 			System.exit(1);
 		}
-		
-		
+
 		// criando o banco de dados
 		try {
 			database = myDB.getInstance();
 			database.initDatabaseTables();
-			/*Runnable keepAlive = new Runnable() {
-				public void run() {
-					try{
-						while(true){
-							database.keepAlive();
-							logger.info("Keep alive!");
-							Thread.sleep(1000*60);
-						}
-					}catch(Exception e){
-						logger.error("Erro keep alive BD.", e);			
-						logger.info("Keep alive parou!");
-					}
-				}
-			};
-			Thread p = new Thread(keepAlive);
-			p.start();*/
+			/*
+			 * Runnable keepAlive = new Runnable() { public void run() { try{ while(true){ database.keepAlive();
+			 * logger.info("Keep alive!"); Thread.sleep(1000*60); } }catch(Exception e){ logger.error("Erro keep alive BD.", e);
+			 * logger.info("Keep alive parou!"); } } }; Thread p = new Thread(keepAlive); p.start();
+			 */
 		} catch (Exception e) {
 			logger.error("Erro ao acessar o BD.", e);
 			JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
@@ -95,11 +83,16 @@ public class Concentrador {
 
 		splash.setVisible(false);
 
-		janela.initDatasValidas();
-		janela.lblPosto_dados.setText(posto);
-		janela.lblTrecho_dados.setText(trecho);
-		janela.setVisible(true);
-
+		try {
+			janela.initDatesToShow();
+			janela.lblPosto_dados.setText(posto);
+			janela.lblTrecho_dados.setText(trecho);
+			janela.setVisible(true);
+		} catch (ParseException e) {
+			logger.error("Erro ao carregar datas válidas.", e);
+			JOptionPane.showMessageDialog(null, "Erro ao carregar datas válidas." + e.getMessage());
+			System.exit(1);
+		}
 	}
 	// private static boolean startServer() {
 	// boolean r = true;

@@ -12,7 +12,10 @@ import java.awt.Font;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -57,6 +60,7 @@ import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
 public class Janela extends javax.swing.JFrame {
 
 	private static Logger logger = LogManager.getLogger(Janela.class);
+	private String[] datesToShow;
 
 	/**
 	 * Creates new form Janela
@@ -111,12 +115,36 @@ public class Janela extends javax.swing.JFrame {
 
 	}
 
-	public void initDatasValidas() {
-		String[] datasValidas = Util.getDates();
+	public void initDatesToShow() throws ParseException {
+		buildListDatesToShow();
 		String[] vazio = { "" };
-
-		cmbData.setModel(new DefaultComboBoxModel(Util.concatArrays(vazio, datasValidas)));
+		cmbData.setModel(new DefaultComboBoxModel(Util.concatArrays(vazio, datesToShow)));
 		cmbData.setSelectedItem(0);
+	}
+
+	private void buildListDatesToShow() throws ParseException {
+		datesToShow = null;
+		if (Concentrador.treinamento) {
+			List<String> datesStr = new ArrayList<String>();
+			if (Util.isBeforeValidPeriod(new Date())) {
+				Date minValidDate = Util.getMinValidDate();
+				Date date = new Date();
+				while (date.compareTo(minValidDate) < 0) {
+					datesStr.add(Util.sdfToBrazil.format(date));
+					date = Util.incrementDay(date, 1);
+				}
+			} else if (Util.isAfterValidPeriod(new Date())) {
+				Date date = Util.getMaxValidDate();
+				Date today = new Date();
+				do {
+					date = Util.incrementDay(date, 1);
+					datesStr.add(Util.sdfToBrazil.format(date));
+				} while (date.compareTo(today) <= 0);
+			}
+			datesToShow = datesStr.toArray(new String[0]);
+		} else {
+			datesToShow = Util.getValidDatesStr();
+		}
 	}
 
 	private void fillCmbDatesExp() {
@@ -124,15 +152,14 @@ public class Janela extends javax.swing.JFrame {
 			myDB database = Concentrador.database;
 			String[] dataBaseDatesVol = database.getVolDates(Integer.valueOf(Concentrador.posto));
 			String[] dataBaseDatesOD = database.getODDates(Integer.valueOf(Concentrador.posto));
-			String[] validDates = Util.getDates();
 			String date;
 
 			if (dataBaseDatesVol != null) {
 				cmbDateExpVol.removeAllItems();
 				// cmbDateExpVol.addItem("Todas");
 				for (String dataBaseDate : dataBaseDatesVol) {
-					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
-					if (ArrayUtils.contains(validDates, date)) {
+					date = Util.sdfToBrazil.format(Util.sdfToSQL.parse(dataBaseDate)).trim();
+					if (ArrayUtils.contains(datesToShow, date)) {
 						cmbDateExpVol.addItem(date);
 						cmbDateExpVol.setSelectedIndex(0);
 					}
@@ -144,8 +171,8 @@ public class Janela extends javax.swing.JFrame {
 				cmbDateExpOD.addItem("Todas");
 
 				for (String dataBaseDate : dataBaseDatesOD) {
-					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
-					if (ArrayUtils.contains(validDates, date)) {
+					date = Util.sdfToBrazil.format(Util.sdfToSQL.parse(dataBaseDate)).trim();
+					if (ArrayUtils.contains(datesToShow, date)) {
 						cmbDateExpOD.addItem(date);
 						cmbDateExpOD.setSelectedIndex(1);
 					}
@@ -163,15 +190,14 @@ public class Janela extends javax.swing.JFrame {
 		try {
 			myDB database = Concentrador.database;
 			String[] dataBaseDates = database.getVolDates(Integer.valueOf(Concentrador.posto));
-			String[] validDates = Util.getDates();
 			String date;
 
 			if (dataBaseDates != null) {
 				cmbDataSumVol.removeAllItems();
 				cmbDataSumVol.addItem("Todas");
 				for (String dataBaseDate : dataBaseDates) {
-					date = Util.sdfToBrazil.format(Util.sdf.parse(dataBaseDate)).trim();
-					if (ArrayUtils.contains(validDates, date)) {
+					date = Util.sdfToBrazil.format(Util.sdfToSQL.parse(dataBaseDate)).trim();
+					if (ArrayUtils.contains(datesToShow, date)) {
 						cmbDataSumVol.addItem(date);
 					}
 				}
@@ -379,7 +405,7 @@ public class Janela extends javax.swing.JFrame {
 	private PVKey makePVKey() throws ParseException {
 		PVKey pvKey = new PVKey();
 		pvKey.data = cmbData.getSelectedItem().toString();
-		pvKey.data = Util.sdf.format(Util.sdfToBrazil.parse(cmbData.getSelectedItem().toString())).toString();
+		pvKey.data = Util.sdfToSQL.format(Util.sdfToBrazil.parse(cmbData.getSelectedItem().toString())).toString();
 		pvKey.hora = Integer.parseInt(cmbHora.getSelectedItem().toString());
 		pvKey.posto = Integer.parseInt(Concentrador.posto);
 		pvKey.sentido = (rdo_SentidoAB.isSelected()) ? "AB" : "BA";
@@ -408,7 +434,7 @@ public class Janela extends javax.swing.JFrame {
 						txtPesquisador1.setText(pvR.pesquisador1);
 						txtPesquisador2.setText(pvR.pesquisador2);
 						// data.setDate(Util.sdf.parse(pvR.data));
-						cmbData.setSelectedItem(Util.sdfToBrazil.format(Util.sdf.parse(pvR.data)));
+						cmbData.setSelectedItem(Util.sdfToBrazil.format(Util.sdfToSQL.parse(pvR.data)));
 						if (pvR.sentido.equals("AB")) {
 							rdo_SentidoAB.doClick();
 						} else {
@@ -7167,8 +7193,8 @@ public class Janela extends javax.swing.JFrame {
 				this.setSumVolData(null);
 				this.setSumVolTable(null);
 			} else {
-				this.setSumVolData(Util.sdf.format(Util.sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
-				this.setSumVolTable(Util.sdf.format(Util.sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
+				this.setSumVolData(Util.sdfToSQL.format(Util.sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
+				this.setSumVolTable(Util.sdfToSQL.format(Util.sdfToBrazil.parse(cmbDataSumVol.getSelectedItem().toString())));
 			}
 
 		} catch (Exception e) {
@@ -7248,7 +7274,7 @@ public class Janela extends javax.swing.JFrame {
 	private String getSelectedDateFromCombo(javax.swing.JComboBox combo) throws ParseException {
 		if (combo.getSelectedItem().toString().equals("--"))
 			return null;
-		String date = Util.sdf.format(Util.sdfToBrazil.parse(combo.getSelectedItem().toString()));
+		String date = Util.sdfToSQL.format(Util.sdfToBrazil.parse(combo.getSelectedItem().toString()));
 		return date;
 	}
 
@@ -7352,7 +7378,7 @@ public class Janela extends javax.swing.JFrame {
 			return;
 		} else {
 			try {
-				date = Util.sdf.format(Util.sdfToBrazil.parse(cmbData.getSelectedItem().toString()));
+				date = Util.sdfToSQL.format(Util.sdfToBrazil.parse(cmbData.getSelectedItem().toString()));
 			} catch (Exception e) {
 				logger.info("Erro na conversão de datas para salvar o registro da pesquisa volumétrica.", e);
 			}

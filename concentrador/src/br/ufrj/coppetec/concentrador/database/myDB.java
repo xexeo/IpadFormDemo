@@ -1,20 +1,19 @@
 package br.ufrj.coppetec.concentrador.database;
 
-import br.ufrj.coppetec.concentrador.Util;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
-import org.apache.commons.lang3.ArrayUtils;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
-import org.sqlite.SQLite;
+
+import br.ufrj.coppetec.concentrador.Util;
 
 /**
  *
@@ -22,47 +21,47 @@ import org.sqlite.SQLite;
  */
 public class myDB extends Db {
 
-	public static final String TABLE_IMPORTED_FILES="importedFiles";
-	public static final String TABLE_IMPORTED_FILES_ID="id";
-	public static final String TABLE_IMPORTED_FILES_PATH="path";
-	public static final String TABLE_IMPORTED_FILES_DATE="DATE";
-	
+	public static final String TABLE_IMPORTED_FILES = "importedFiles";
+	public static final String TABLE_IMPORTED_FILES_ID = "id";
+	public static final String TABLE_IMPORTED_FILES_PATH = "path";
+	public static final String TABLE_IMPORTED_FILES_DATE = "DATE";
+
 	private static Logger logger = LogManager.getLogger(myDB.class);
-	
-	private static myDB instance=null;
+
+	private static myDB instance = null;
 
 	private myDB() throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
-		
+
 	}
-	
-	public static myDB getInstance() throws Exception{
-		if(instance==null){
+
+	public static myDB getInstance() throws Exception {
+		if (instance == null) {
 			instance = new myDB();
 		}
 		return instance;
 	}
-	
-	public void keepAlive() throws Exception{
+
+	public void keepAlive() throws Exception {
 		openTransaction();
 		this.executeQuery("Select 1;");
 		commit();
 	}
 
-	public void sanitize() throws Exception{
-		try{
+	public void sanitize() throws Exception {
+		try {
 			openTransaction();
 			this.executeStatement("DELETE FROM odtable WHERE id is null OR id = 'null';");
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
 	}
-	
+
 	public int verifyPV(PVKey regKey) throws Exception {
-		int r=0;
-		try{
+		int r = 0;
+		try {
 			this.openTransaction();
 			this.setStatement();
 			String qry = "SELECT * FROM voltable WHERE posto = " + Integer.toString(regKey.posto);
@@ -78,72 +77,72 @@ public class myDB extends Db {
 			r = ((result.next()) ? result.getInt("id") : 0);
 			result.close();
 			this.commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
 		return r;
 	}
-	
-	public int verifyPV(PVregister reg) throws Exception{
+
+	public int verifyPV(PVregister reg) throws Exception {
 		return verifyPV(new PVKey(reg));
 	}
-	
-	public PVregister getPVRegister(PVKey key)throws Exception{
+
+	public PVregister getPVRegister(PVKey key) throws Exception {
 		return getPVRegister(verifyPV(key));
 	}
-	
-	public PVregister getPVRegister(int id)throws Exception{
+
+	public PVregister getPVRegister(int id) throws Exception {
 		PVregister pvR = new PVregister();
 		String qry = "SELECT * FROM voltable WHERE id = " + "'" + id + "'";
-		
-			this.setStatement();
-			ResultSet result = this.executeQuery(qry);
-			if (result.next()){
-				pvR.posto = result.getInt("posto");
-				pvR.pista = result.getString("pista");
-				pvR.data = result.getString("data");
-				pvR.hora = result.getInt("hora");
-				pvR.sentido = result.getString("sentido");
-				pvR.local = result.getString("local");
-				pvR.pesquisador1 = result.getString("pesquisador1");
-				pvR.pesquisador2 = result.getString("pesquisador2");
-				pvR.p1=result.getString("P1");
-				pvR.p2=result.getString("P2");
-				pvR.p3=result.getString("P3");
-				pvR.m=result.getString("M");
-				pvR.o1=result.getString("O1");
-				pvR.o2=result.getString("O2");
-				pvR.o3=result.getString("O3");
-				pvR.c1=result.getString("C1");
-				pvR.c2=result.getString("C2");
-				pvR.c3=result.getString("C3");
-				pvR.c4=result.getString("C4");
-				pvR.c5=result.getString("C5");
-				pvR.s1=result.getString("S1");
-				pvR.s2=result.getString("S2");
-				pvR.s3=result.getString("S3");
-				pvR.s4=result.getString("S4");
-				pvR.s5=result.getString("S5");
-				pvR.s6=result.getString("S6");
-				pvR.se1=result.getString("SE1");
-				pvR.se2=result.getString("SE2");
-				pvR.se3=result.getString("SE3");
-				pvR.se4=result.getString("SE4");
-				pvR.se5=result.getString("SE5");
-				pvR.r1=result.getString("R1");
-				pvR.r2=result.getString("R2");
-				pvR.r3=result.getString("R3");
-				pvR.r4=result.getString("R4");
-				pvR.r5=result.getString("R5");
-				pvR.r6=result.getString("R6");
-			}
-			result.close();
-	return pvR;
+
+		this.setStatement();
+		ResultSet result = this.executeQuery(qry);
+		if (result.next()) {
+			pvR.posto = result.getInt("posto");
+			pvR.pista = result.getString("pista");
+			pvR.data = result.getString("data");
+			pvR.hora = result.getInt("hora");
+			pvR.sentido = result.getString("sentido");
+			pvR.local = result.getString("local");
+			pvR.pesquisador1 = result.getString("pesquisador1");
+			pvR.pesquisador2 = result.getString("pesquisador2");
+			pvR.p1 = result.getString("P1");
+			pvR.p2 = result.getString("P2");
+			pvR.p3 = result.getString("P3");
+			pvR.m = result.getString("M");
+			pvR.o1 = result.getString("O1");
+			pvR.o2 = result.getString("O2");
+			pvR.o3 = result.getString("O3");
+			pvR.c1 = result.getString("C1");
+			pvR.c2 = result.getString("C2");
+			pvR.c3 = result.getString("C3");
+			pvR.c4 = result.getString("C4");
+			pvR.c5 = result.getString("C5");
+			pvR.s1 = result.getString("S1");
+			pvR.s2 = result.getString("S2");
+			pvR.s3 = result.getString("S3");
+			pvR.s4 = result.getString("S4");
+			pvR.s5 = result.getString("S5");
+			pvR.s6 = result.getString("S6");
+			pvR.se1 = result.getString("SE1");
+			pvR.se2 = result.getString("SE2");
+			pvR.se3 = result.getString("SE3");
+			pvR.se4 = result.getString("SE4");
+			pvR.se5 = result.getString("SE5");
+			pvR.r1 = result.getString("R1");
+			pvR.r2 = result.getString("R2");
+			pvR.r3 = result.getString("R3");
+			pvR.r4 = result.getString("R4");
+			pvR.r5 = result.getString("R5");
+			pvR.r6 = result.getString("R6");
+		}
+		result.close();
+		return pvR;
 	}
-	
-	public void deletePV(PVKey key) throws Exception{
-		try{
+
+	public void deletePV(PVKey key) throws Exception {
+		try {
 			openTransaction();
 			this.setStatement();
 			String qry = "DELETE FROM voltable WHERE posto = " + Integer.toString(key.posto);
@@ -153,114 +152,118 @@ public class myDB extends Db {
 
 			this.executeStatement(qry);
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
 	}
-	
-	private String[] getDates(String table,String field, String postoField,Integer posto, String extra_condition ) throws Exception{
+
+	private String[] getDates(String table, String field, String postoField, Integer posto, String extra_condition)
+			throws Exception {
 		this.setStatement();
 		ResultSet result = null;
 		String[] datesReturn = null;
 		int qtd = 0;
-		String qry = "SELECT COUNT(DISTINCT SUBSTR("+field+",0,11)) as qtd from "+table+" WHERE "+postoField+"="+posto+" "+extra_condition;
+		String qry = "SELECT COUNT(DISTINCT SUBSTR(" + field + ",0,11)) as qtd from " + table + " WHERE " + postoField + "="
+				+ posto + " " + extra_condition;
 		result = this.executeQuery(qry);
-		if (result.next()){
+		if (result.next()) {
 			qtd = result.getInt("qtd");
 		}
 		result.close();
-		if (qtd != 0){
+		if (qtd != 0) {
 			datesReturn = new String[qtd];
 			this.setStatement();
-			qry = "SELECT DISTINCT SUBSTR("+field+",0,11) as d from "+table+" WHERE "+postoField+"="+posto+" "+extra_condition +" ORDER BY d DESC";
+			qry = "SELECT DISTINCT SUBSTR(" + field + ",0,11) as d from " + table + " WHERE " + postoField + "=" + posto + " "
+					+ extra_condition + " ORDER BY d DESC";
 			result = this.executeQuery(qry);
 			int count = 0;
-			while(result.next()){
+			while (result.next()) {
 				datesReturn[count++] = result.getString("d");
 			}
 		}
 		return datesReturn;
 	}
-	
-	public String[] getODDates(Integer posto) throws Exception{
-		return getDates("odTable","dataIniPesq","idPosto",posto," AND cancelado=0");
+
+	public String[] getODDates(Integer posto) throws Exception {
+		return getDates("odTable", "dataIniPesq", "idPosto", posto, " AND cancelado=0");
 	}
-	
-	public String[] getVolDates(Integer posto) throws Exception{
-		return getDates("voltable","data","posto",posto,"");
+
+	public String[] getVolDates(Integer posto) throws Exception {
+		return getDates("voltable", "data", "posto", posto, "");
 	}
-	
-	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception{
+
+	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception {
 		Map<String, Integer> returnData = new HashMap<String, Integer>();
-		try{
+		try {
 			openTransaction();
 			this.setStatement();
 			String qry;
 			JSONObject jsonObject = null;
-			for (int i=0; i<fieldNames.length; i++){
+			for (int i = 0; i < fieldNames.length; i++) {
 				returnData.put(fieldNames[i], 0);
 			}
-			if (date == null){
+			if (date == null) {
 				qry = "SELECT * from voltable";
 			} else {
 				qry = "SELECT * from voltable WHERE data = '" + date + "'";
 			}
-			
+
 			ResultSet result = this.executeQuery(qry);
-			while(result.next()){
-				for (String field : returnData.keySet()){
+			while (result.next()) {
+				for (String field : returnData.keySet()) {
 					jsonObject = new JSONObject(result.getString(field));
 					returnData.put(field, returnData.get(field) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
 				}
 			}
 			result.close();
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
-		return returnData; 
-		
+		return returnData;
+
 	}
-	
-	public Map<String, Map<Integer, Integer>> getSumVolPerHour(String[] fieldNames, String date) throws Exception{
+
+	public Map<String, Map<Integer, Integer>> getSumVolPerHour(String[] fieldNames, String date) throws Exception {
 		Map<String, Map<Integer, Integer>> returnData = new HashMap<String, Map<Integer, Integer>>();
-		
-		try{
+
+		try {
 			openTransaction();
 			this.setStatement();
 			String qry;
 			JSONObject jsonObject = null;
-			for (int i=0; i<fieldNames.length; i++){
+			for (int i = 0; i < fieldNames.length; i++) {
 				returnData.put(fieldNames[i], new HashMap<Integer, Integer>());
-				for(int j = 0; j< 24; j += 2){
+				for (int j = 0; j < 24; j += 2) {
 					returnData.get(fieldNames[i]).put(j, 0);
 				}
 			}
-			if (date == null){
+			if (date == null) {
 				qry = "SELECT * from voltable";
 			} else {
 				qry = "SELECT * from voltable WHERE data = '" + date + "'";
 			}
 			ResultSet result = this.executeQuery(qry);
-			while(result.next()){
-				for (String field : returnData.keySet()){
+			while (result.next()) {
+				for (String field : returnData.keySet()) {
 					jsonObject = new JSONObject(result.getString(field));
-					returnData.get(field).put(result.getInt("hora"), returnData.get(field).get(result.getInt("hora")) + jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
+					returnData.get(field).put(result.getInt("hora"), returnData.get(field).get(result.getInt("hora"))
+							+ jsonObject.getInt("Hora1") + jsonObject.getInt("Hora2"));
 				}
 			}
 			result.close();
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
-		return returnData; 
+		return returnData;
 	}
-	
+
 	public void updatePV(PVregister reg, int id) throws Exception {
-		try{
+		try {
 			openTransaction();
 			String sql = "UPDATE voltable SET ";
 			sql += "enviado=" + Integer.toString(reg.enviado) + ",";
@@ -305,15 +308,15 @@ public class myDB extends Db {
 			this.setStatement();
 			this.executeStatement(sql);
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
 	}
 
 	public int inputPV(PVregister reg) throws Exception {
-		int r=-1;
-		try{
+		int r = -1;
+		try {
 			openTransaction();
 			int timeId = (int) (System.currentTimeMillis() / 1000L);
 
@@ -364,21 +367,21 @@ public class myDB extends Db {
 			sql += "'" + reg.r6 + "') ";
 			r = this.executeStatement(sql);
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
 		return r;
 	}
-	
+
 	public void initDatabaseTables() throws Exception {
-		try{
+		try {
 			openTransaction();
 			createVolTable();
 			createODTable();
 			createImportedFilesTable();
 			commit();
-		}catch(Exception e){
+		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
@@ -430,13 +433,13 @@ public class myDB extends Db {
 		this.executeStatement(qry);
 
 	}
-	
-	private void createImportedFilesTable() throws Exception{
+
+	private void createImportedFilesTable() throws Exception {
 		this.setStatement();
-		String qry = "CREATE TABLE IF NOT EXISTS "+TABLE_IMPORTED_FILES+" (";
-		qry += TABLE_IMPORTED_FILES_ID+" text primary key, ";
-		qry += TABLE_IMPORTED_FILES_PATH+" text unique,";
-		qry += TABLE_IMPORTED_FILES_DATE+" datetime DEFAULT CURRENT_TIMESTAMP";
+		String qry = "CREATE TABLE IF NOT EXISTS " + TABLE_IMPORTED_FILES + " (";
+		qry += TABLE_IMPORTED_FILES_ID + " text primary key, ";
+		qry += TABLE_IMPORTED_FILES_PATH + " text unique,";
+		qry += TABLE_IMPORTED_FILES_DATE + " datetime DEFAULT CURRENT_TIMESTAMP";
 		qry += "); ";
 		this.executeStatement(qry);
 	}
@@ -504,51 +507,48 @@ public class myDB extends Db {
 		this.executeStatement(qry);
 		this.sanitize();
 
-
 	}
 
-	
-	public Vector<String> fetchReportODColumns() throws Exception{
-		Vector<String> cols = new Vector();
+	public Vector<String> fetchReportODColumns() throws Exception {
+		Vector<String> cols = new Vector<String>();
 		openTransaction();
-		String sel_sql= "SELECT distinct idIpad from odTable ORDER BY idIpad asc";
+		String sel_sql = "SELECT distinct idIpad from odTable ORDER BY idIpad asc";
 		ResultSet result = this.executeQuery(sel_sql);
 		cols.add("");
-		while(result.next())cols.add(result.getString("idIpad"));
+		while (result.next())
+			cols.add(result.getString("idIpad"));
 		commit();
 		return cols;
 	}
-	
-	public Vector<String> fetchReportODRows(Integer posto) throws Exception{
-		Vector<String> rows = new Vector();
+
+	public Vector<String> fetchReportODRows(Integer posto) throws Exception {
+		Vector<String> rows = new Vector<String>();
 		openTransaction();
-		String sel_sql= "SELECT distinct date(dataIniPesq) as data from odTable WHERE idPosto="+posto+" AND cancelado=0 order by date(dataIniPesq) desc";
+		String sel_sql = "SELECT distinct date(dataIniPesq) as data from odTable WHERE idPosto=" + posto
+				+ " AND cancelado=0 order by date(dataIniPesq) desc";
 		ResultSet result = this.executeQuery(sel_sql);
-		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
-		String[] validDates = Util.getDates();
-		while(result.next()){
-			Date day = sqlDateFormater.parse(result.getString("data"));
-			String d = guiDateFormater.format(day);
-			if(ArrayUtils.contains(validDates, d))
+		// TODO acredito que precisa rever quem será exportado/importado conforme o período
+		String[] validDates = Util.getValidDatesStr();
+		while (result.next()) {
+			Date day = Util.sdfToSQL.parse(result.getString("data"));
+			String d = Util.sdfToBrazil.format(day);
+			if (ArrayUtils.contains(validDates, d))
 				rows.add(d);
 		}
 		commit();
 		return rows;
 	}
-	
-	public Map<String, Integer> fetchReportODData(String strData, Integer posto) throws Exception{
-		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormat sqlDateFormater = new SimpleDateFormat("yyyy-MM-dd");
-		Date data = guiDateFormater.parse(strData);
+
+	public Map<String, Integer> fetchReportODData(String strData, Integer posto) throws Exception {
+		Date data = Util.sdfToBrazil.parse(strData);
 		openTransaction();
-		String sqlData = sqlDateFormater.format(data);
-		String sel_sql= "SELECT idIpad, count(idIpad) as times from odTable "
-				+ " where date(dataIniPesq)='"+sqlData+"' and cancelado=0 and idPosto="+posto+" group by idIpad ";
-		
-		HashMap<String, Integer> map = new HashMap();
+		String sqlData = Util.sdfToSQL.format(data);
+		String sel_sql = "SELECT idIpad, count(idIpad) as times from odTable " + " where date(dataIniPesq)='" + sqlData
+				+ "' and cancelado=0 and idPosto=" + posto + " group by idIpad ";
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		ResultSet result = this.executeQuery(sel_sql);
-		while(result.next()){
+		while (result.next()) {
 			String ipad = result.getString("idIpad");
 			Integer count = result.getInt("times");
 			map.put(ipad, count);
@@ -557,28 +557,28 @@ public class myDB extends Db {
 		return map;
 	}
 
-	public Map<String,Map<String, Integer> > fetchReportODData(Integer posto) throws Exception{
+	public Map<String, Map<String, Integer>> fetchReportODData(Integer posto) throws Exception {
 		openTransaction();
-		String sel_sql= "SELECT date(dataIniPesq) as dia, idIpad, count(idIpad) as times from odTable "
-				+ "WHERE and cancelado=0 and idPosto="+posto+" group by date(dataIniPesq),idIpad "
+		String sel_sql = "SELECT date(dataIniPesq) as dia, idIpad, count(idIpad) as times from odTable "
+				+ "WHERE and cancelado=0 and idPosto=" + posto + " group by date(dataIniPesq),idIpad "
 				+ "order by date(dataIniPesq) asc, idIpad asc";
-		HashMap<String,Map<String, Integer>> data = new HashMap();
+		HashMap<String, Map<String, Integer>> data = new HashMap<String, Map<String, Integer>>();
 		ResultSet result = this.executeQuery(sel_sql);
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
-		while(result.next()){
+		while (result.next()) {
 			Date day = df.parse(result.getString("dia"));
 			String ipad = result.getString("idIpad");
 			Integer times = result.getInt("times");
-			
-			logger.debug(day.getTime()+":"+ipad+"("+times+")");
-			if(data.containsKey(day)){
-				Map<String,Integer> regs = data.get(day);
+
+			logger.debug(day.getTime() + ":" + ipad + "(" + times + ")");
+			if (data.containsKey(day)) {
+				Map<String, Integer> regs = data.get(day);
 				regs.put(ipad, times);
 				data.put(guiDateFormater.format(day), regs);
-			}else{
-				HashMap<String,Integer> regs = new HashMap();
-				regs.put(ipad,times);
+			} else {
+				HashMap<String, Integer> regs = new HashMap<String, Integer>();
+				regs.put(ipad, times);
 				data.put(guiDateFormater.format(day), regs);
 			}
 		}
@@ -586,31 +586,31 @@ public class myDB extends Db {
 		commit();
 		return data;
 	}
-	
-//	public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
-//
-//	/**
-//	 * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
-//	 * 
-//	 * @param valueStr
-//	 *            - O valor em uma string.
-//	 * @return O valor em inteiro.
-//	 */
-//	public static Integer getIntValue(String valueStr) {
-//		Integer valueInt = null;
-//		if (valueStr != null) {
-//			BigInteger value = new BigInteger(valueStr);
-//			if (value.compareTo(MAX_SAFE_INT) > 0) {
-//				value = MAX_SAFE_INT;
-//				logger.warn(String.format("Valor inteiro maior que o permitido (%s > %d)", valueStr, MAX_SAFE_INT.intValue()));
-//			}
-//			valueInt = value.intValue();
-//		}
-//		return valueInt;
-//	}
 
-//	public static String getStrFromIntValue(String valueStr) {
-//		Integer valueInt = getIntValue(valueStr);
-//		return (valueInt == null ? null : String.valueOf(valueInt.intValue()));
-//	}
+	// public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
+	//
+	// /**
+	// * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
+	// *
+	// * @param valueStr
+	// * - O valor em uma string.
+	// * @return O valor em inteiro.
+	// */
+	// public static Integer getIntValue(String valueStr) {
+	// Integer valueInt = null;
+	// if (valueStr != null) {
+	// BigInteger value = new BigInteger(valueStr);
+	// if (value.compareTo(MAX_SAFE_INT) > 0) {
+	// value = MAX_SAFE_INT;
+	// logger.warn(String.format("Valor inteiro maior que o permitido (%s > %d)", valueStr, MAX_SAFE_INT.intValue()));
+	// }
+	// valueInt = value.intValue();
+	// }
+	// return valueInt;
+	// }
+
+	// public static String getStrFromIntValue(String valueStr) {
+	// Integer valueInt = getIntValue(valueStr);
+	// return (valueInt == null ? null : String.valueOf(valueInt.intValue()));
+	// }
 }
