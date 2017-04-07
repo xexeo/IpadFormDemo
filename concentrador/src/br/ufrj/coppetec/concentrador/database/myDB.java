@@ -1,8 +1,6 @@
 package br.ufrj.coppetec.concentrador.database;
 
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -564,10 +562,8 @@ public class myDB extends Db {
 				+ "order by date(dataIniPesq) asc, idIpad asc";
 		HashMap<String, Map<String, Integer>> data = new HashMap<String, Map<String, Integer>>();
 		ResultSet result = this.executeQuery(sel_sql);
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		DateFormat guiDateFormater = new SimpleDateFormat("dd/MM/yyyy");
 		while (result.next()) {
-			Date day = df.parse(result.getString("dia"));
+			Date day = Util.sdfToSQL.parse(result.getString("dia"));
 			String ipad = result.getString("idIpad");
 			Integer times = result.getInt("times");
 
@@ -575,11 +571,11 @@ public class myDB extends Db {
 			if (data.containsKey(day)) {
 				Map<String, Integer> regs = data.get(day);
 				regs.put(ipad, times);
-				data.put(guiDateFormater.format(day), regs);
+				data.put(Util.sdfToBrazil.format(day), regs);
 			} else {
 				HashMap<String, Integer> regs = new HashMap<String, Integer>();
 				regs.put(ipad, times);
-				data.put(guiDateFormater.format(day), regs);
+				data.put(Util.sdfToBrazil.format(day), regs);
 			}
 		}
 		result.close();
