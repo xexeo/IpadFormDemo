@@ -34,11 +34,6 @@ var app = {
 			}
 			// limpa o registro
 			app.limpaRegistro();
-		} else {
-			// TODO: Trocar por um popup "mais elegante"
-			var msg = "Usuário e/ou Senha informados não estão cadastrados no sistema!";
-			alert(msg);
-			app.logger.log(msg);
 		}
 	},
 

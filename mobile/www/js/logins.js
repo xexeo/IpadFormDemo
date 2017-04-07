@@ -9,26 +9,32 @@ var logins = {
 
 	autentica : function(usuario, senha) {
 		var posto = null;
+		var msg = null;
 		if ((logins.user_tester != undefined) && (logins.user_tester.usr != undefined) && (usuario == logins.user_tester.usr)
 				&& (senha == logins.user_tester.pwd)) {
 			logins.user_logado = logins.user_tester;
 			return true;
-		} else if (String(usuario).length == 3) {
-			posto = String(usuario)
-			return logins.verificaPostoSenha(posto, senha);
+		} else if (String(usuario).length == 3 && logins.verificaPostoSenha(String(usuario), senha)) {
+			return true;
 			//treinamento
 		} else if (String(usuario).length == 4 && String(usuario).substr(3).toUpperCase() == 'T'){
 			if (datas.verificaData()){
-				alert("Logins de treinamento não funcionam em datas da pesquisa real","Erro!",null,'error');
+				msg = "Logins de treinamento não funcionam em datas da pesquisa real";
+				alert(msg ,"Erro!",null,'error');
+				app.logger.log(msg)
 				return false;
 			}
 			posto = String(usuario).substr(0,3);
 			if (logins.verificaPostoSenha(posto, senha)){
 				app.isTreinamento = true;
-				alert("O sistema funcionará em modo de treinamento",null,null,'error');
+				msg = "O sistema funcionará em modo de treinamento";
+				alert(msg,null,null,'error');
 				return true;
 			}
 		}
+		msg = "Usuário e/ou Senha informados não estão cadastrados no sistema!";
+		alert(msg);
+		app.logger.log(msg);
 		return false;
 	},
 	
