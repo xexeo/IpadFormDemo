@@ -189,7 +189,8 @@ ORDER BY diaPesq DESC;
 						" MAX(duracaoPesq) as 'maxTempoDia'," +
 						" MIN(duracaoPesq) as 'minTempoDia'" +
 						" FROM tblDados WHERE cancelado = 0" +
-						" AND treinamento = " + treinamento + 
+						" AND treinamento = " + treinamento +
+						" AND idPosto = " + app.posto +
 						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
 
 				tx.executeSql(sql, [], function(tx, res) {
@@ -227,7 +228,8 @@ ORDER BY diaPesq DESC;
 				var sql = "SELECT dataIniPesq," +
 						" duracaoPesq" +
 						" FROM tblDados WHERE cancelado = 0" +
-						" AND treinamento = " + treinamento + 
+						" AND treinamento = " + treinamento +
+						" AND idPosto = " + app.posto +
 						" ORDER BY dataIniPesq DESC" +
 						" LIMIT 1";
 
@@ -274,7 +276,8 @@ ORDER BY diaPesq DESC;
 						" SUM(duracaoPesq) as 'somaDia',"+
 						" COUNT(id) as 'qtdDia'" +
 						" FROM tblDados WHERE cancelado = 1" +
-						" AND treinamento = " + treinamento + 
+						" AND treinamento = " + treinamento +
+						" AND idPosto = " + app.posto +
 						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
 
 				tx.executeSql(sql, [], function(tx, res) {
