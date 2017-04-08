@@ -346,8 +346,16 @@ var app = {
 		$(function() {
 			$("[data-role=panel]").panel().enhanceWithin();
 		});
+		$('#dataHoraLogin').html(util.formatDateTimeToDisplay());
+		var updater_dataTimeToDisplay = setInterval(function(){
+			$('#dataHoraLogin').html(util.formatDateTimeToDisplay());
+		},10000);
+		
 		$("#versao").html(this.versao);
-		$("#entrar").click(this.login);
+		$("#entrar").click(function(){
+			clearInterval(updater_dataTimeToDisplay);
+			app.login()
+		});
 		$("#entrar").prop('disabled', true);
 		$("#agregador input[type='radio']").prop('checked', false).change(function(event, ui){
 			$("#entrar").prop('disabled', false);

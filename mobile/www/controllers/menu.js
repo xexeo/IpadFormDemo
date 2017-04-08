@@ -1,3 +1,5 @@
+/* global util, app, ipadID */
+
 controllers.menu = {
 	config : function() {
 		$('#display_posto').html(app.posto);

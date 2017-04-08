@@ -641,3 +641,7 @@ button#menu_nova_pesquisa{
 .qrCode_group{
 	width: 41% !important;
 }
+
+label[for=dataHoraLogin]{
+	font-size: 0.9em;
+}
