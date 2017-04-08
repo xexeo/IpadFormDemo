@@ -15,20 +15,31 @@ var logins = {
 			logins.user_logado = logins.user_tester;
 			return true;
 		} else if (String(usuario).length == 3 && logins.verificaPostoSenha(String(usuario), senha)) {
-			return true;
+			if(datas.verificaData()){
+				app.isTreinamento = false;
+				app.logger.log("Sistema em modo de produção.");
+				return true;
+			}else{
+				msg = "Logins de produção não funcionam fora das datas da pesquisa real!";
+				alert(msg ,"Erro!",null,'error');
+				app.logger.log(msg);
+				return false;
+			}
+			
 			//treinamento
 		} else if (String(usuario).length == 4 && String(usuario).substr(3).toUpperCase() == 'T'){
 			if (datas.verificaData()){
-				msg = "Logins de treinamento não funcionam em datas da pesquisa real";
+				msg = "Logins de treinamento não funcionam em datas da pesquisa real!";
 				alert(msg ,"Erro!",null,'error');
-				app.logger.log(msg)
+				app.logger.log(msg);
 				return false;
 			}
 			posto = String(usuario).substr(0,3);
 			if (logins.verificaPostoSenha(posto, senha)){
 				app.isTreinamento = true;
-				msg = "O sistema funcionará em modo de treinamento";
+				msg = "O sistema funcionará em modo de treinamento!";
 				alert(msg,null,null,'error');
+				app.logger.log(msg);
 				return true;
 			}
 		}
