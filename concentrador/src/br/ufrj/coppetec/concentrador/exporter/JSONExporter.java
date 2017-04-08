@@ -5,28 +5,31 @@
  */
 package br.ufrj.coppetec.concentrador.exporter;
 
-import br.ufrj.coppetec.concentrador.Janela;
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.ResultSet;
+import java.text.ParseException;
 
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.ufrj.coppetec.concentrador.Concentrador;
+import br.ufrj.coppetec.concentrador.Janela;
+import br.ufrj.coppetec.concentrador.Util;
 import br.ufrj.coppetec.concentrador.database.myDB;
-import java.awt.BorderLayout;
-import java.awt.Dialog;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingWorker;
 
 /**
  *
@@ -59,12 +62,18 @@ public class JSONExporter {
 			return text;
 		}
 
-		public String sql(Integer posto) {
+		public String sql(Integer posto) throws ParseException {
 			String r = "SELECT * FROM ";
 			if (text.equals("odtable")) {
-				r += "odtable WHERE cancelado=0 and idPosto="+posto.intValue();
+				r += "odtable WHERE cancelado=0 and idPosto=" + posto.intValue();
+				if (!Concentrador.treinamento) {
+					r += " AND DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "'";
+				}
 			} else {
-				r += "voltable WHERE posto="+posto.intValue();
+				r += "voltable WHERE posto=" + posto.intValue();
+				if (!Concentrador.treinamento) {
+					r += " AND data>='" + Util.getMinValidDateSQL() + "'";
+				}
 			}
 			return r;
 		}
@@ -85,22 +94,21 @@ public class JSONExporter {
 		}
 	}
 
-	public void export(Integer posto){
+	public void export(Integer posto) {
 		export(posto, null);
 	}
-	
-	public void export(Integer posto, String date){
-		
-	
-		SwingWorker<Boolean, Void> mySwingWorker = new SwingWorker<Boolean, Void>(){
-         
+
+	public void export(Integer posto, String date) {
+
+		SwingWorker<Boolean, Void> mySwingWorker = new SwingWorker<Boolean, Void>() {
+
 			@Override
 			protected Boolean doInBackground() throws Exception {
-				return JSONExporter.this.backgroundExport(posto,date);
+				return JSONExporter.this.backgroundExport(posto, date);
 			}
-			
+
 		};
-		
+
 		final JDialog dialog = new JDialog(this.janela, "Dialog", Dialog.ModalityType.APPLICATION_MODAL);
 
 		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
@@ -110,24 +118,24 @@ public class JSONExporter {
 				if (evt.getPropertyName().equals("state")) {
 					if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
 						dialog.dispose();
-						try{
-							if(mySwingWorker.get() == true){
-							JOptionPane.showMessageDialog(janela, "Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.", "Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+						try {
+							if (mySwingWorker.get() == true) {
+								JOptionPane.showMessageDialog(janela,
+										"Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.",
+										"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
 							}
-						}catch (Exception e){
+						} catch (Exception e) {
 							logger.error("Error exportando dados: ", e);
 						}
-						
+
 					}
 				}
 			}
 
-			
 		});
-		
+
 		mySwingWorker.execute();
-	  
-		
+
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setIndeterminate(true);
 		JPanel panel = new JPanel(new BorderLayout());
@@ -137,28 +145,29 @@ public class JSONExporter {
 		dialog.pack();
 		dialog.setLocationRelativeTo(this.janela);
 		dialog.setVisible(true);
-			
+
 	}
-	
+
 	private Boolean backgroundExport(Integer posto) {
-		return backgroundExport(posto,null);
+		return backgroundExport(posto, null);
 	}
 
 	private Boolean backgroundExport(Integer posto, String date) {
-		myDB database=null;
+		myDB database = null;
 		ResultSet result;
 		FileWriter writer;
-		String qry = this.table.sql(posto);
-		
-		if(date!=null){
-			if (this.table.text.equals("odtable")) {
-				qry+= " AND dataIniPesq like '"+date+"%';";		
-			} else {
-				qry+= " AND data like '"+date+"%';";		
-			}
-			
-		}
 		try {
+			String qry = this.table.sql(posto);
+
+			if (date != null) {
+				if (this.table.text.equals("odtable")) {
+					qry += " AND dataIniPesq like '" + date + "%';";
+				} else {
+					qry += " AND data like '" + date + "%';";
+				}
+
+			}
+
 			database = myDB.getInstance();
 			database.openTransaction();
 			database.setStatement();
@@ -174,22 +183,24 @@ public class JSONExporter {
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
 			database.commit();
 			tmpFile.delete();
-			
+
 		} catch (JSONException je) {
 			logger.warn("Não existem dados para exportação", je);
 			// probably empty table
 			JOptionPane.showMessageDialog(janela, "Não existem dados para exportação.", "Exportação de dados.",
 					JOptionPane.INFORMATION_MESSAGE);
-			if(database!=null)database.rollback();
+			if (database != null)
+				database.rollback();
 			return false;
 		} catch (Exception e) {
 			logger.error("Erro ao exportar dados.", e);
 			JOptionPane.showMessageDialog(janela, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 					JOptionPane.ERROR_MESSAGE);
-			if(database!=null)database.rollback();
+			if (database != null)
+				database.rollback();
 			return false;
 		}
-		
+
 		return true;
 	}
 

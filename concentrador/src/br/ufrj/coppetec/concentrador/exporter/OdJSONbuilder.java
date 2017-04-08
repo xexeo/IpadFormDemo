@@ -13,8 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
-import br.ufrj.coppetec.concentrador.database.myDB;
-
 /**
  *
  * @author mangeli
@@ -56,10 +54,8 @@ public class OdJSONbuilder implements JSONBuilder {
 				reg.put("idCombustivel", JSONExporter.getJSONInteger(result.getString("idCombustivel")));
 				reg.put("categoria", JSONExporter.getJSONString(result.getString("categoria")));
 				reg.put("possuiReboque", JSONExporter.getJSONInteger(result.getString("possuiReboque")));
-				reg.put("numeroDePessoasNoVeiculo",
-						JSONExporter.getJSONInteger(result.getString("numeroDePessoasNoVeiculo")));
-				reg.put("numeroDePessoasATrabalho",
-						JSONExporter.getJSONInteger(result.getString("numeroDePessoasATrabalho")));
+				reg.put("numeroDePessoasNoVeiculo", JSONExporter.getJSONInteger(result.getString("numeroDePessoasNoVeiculo")));
+				reg.put("numeroDePessoasATrabalho", JSONExporter.getJSONInteger(result.getString("numeroDePessoasATrabalho")));
 				reg.put("idRendaMedia", JSONExporter.getJSONInteger(result.getString("idRendaMedia")));
 				reg.put("idMotivoDaViagem", JSONExporter.getJSONInteger(result.getString("idMotivoDaViagem")));
 				reg.put("tipoCaminhao", JSONExporter.getJSONString(result.getString("tipoCaminhao")));
@@ -88,13 +84,12 @@ public class OdJSONbuilder implements JSONBuilder {
 				reg.put("paradaObrigatoriaMunicipio2",
 						JSONExporter.getJSONInteger(result.getString("paradaObrigatoriaMunicipio2")));
 				reg.put("idPerguntaExtra", JSONExporter.getJSONInteger(result.getString("idPerguntaExtra")));
-				//reg.put("duracaoPesq", JSONExporter.getJSONInteger(result.getString("duracaoPesq")));
+				// reg.put("duracaoPesq", JSONExporter.getJSONInteger(result.getString("duracaoPesq")));
 
 				json.append("dados", reg);
 			} catch (Exception e) {
-				logger.error(
-						String.format("Erro ao exportar dados da pesquisa OD no tratamento do registro: %s",
-								result.getString("id")), e);
+				logger.error(String.format("Erro ao exportar dados da pesquisa OD no tratamento do registro: %s",
+						result.getString("id")), e);
 				JOptionPane.showMessageDialog(null, "Erro ao exportar dados:\n" + e.getMessage(), "Erro na exportação de dados.",
 						JOptionPane.ERROR_MESSAGE);
 			}

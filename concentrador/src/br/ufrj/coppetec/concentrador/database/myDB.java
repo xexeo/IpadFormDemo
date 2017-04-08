@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
+import br.ufrj.coppetec.concentrador.Concentrador;
 import br.ufrj.coppetec.concentrador.Util;
 
 /**
@@ -156,14 +157,18 @@ public class myDB extends Db {
 		}
 	}
 
-	private String[] getDates(String table, String field, String postoField, Integer posto, String extra_condition)
+	private String[] getDates(String table, String nameFieldDate, String postoField, Integer posto, String extra_condition)
 			throws Exception {
+		String validPeriodCondition = "";
+		if (!Concentrador.treinamento) {
+			validPeriodCondition = " AND DATE(" + nameFieldDate + ")>='" + Util.getMinValidDateSQL() + "' ";
+		}
 		this.setStatement();
 		ResultSet result = null;
 		String[] datesReturn = null;
 		int qtd = 0;
-		String qry = "SELECT COUNT(DISTINCT SUBSTR(" + field + ",0,11)) as qtd from " + table + " WHERE " + postoField + "="
-				+ posto + " " + extra_condition;
+		String qry = "SELECT COUNT(DISTINCT DATE(" + nameFieldDate + ")) as qtd from " + table + " WHERE " + postoField + "="
+				+ posto + " " + validPeriodCondition + extra_condition;
 		result = this.executeQuery(qry);
 		if (result.next()) {
 			qtd = result.getInt("qtd");
@@ -172,8 +177,8 @@ public class myDB extends Db {
 		if (qtd != 0) {
 			datesReturn = new String[qtd];
 			this.setStatement();
-			qry = "SELECT DISTINCT SUBSTR(" + field + ",0,11) as d from " + table + " WHERE " + postoField + "=" + posto + " "
-					+ extra_condition + " ORDER BY d DESC";
+			qry = "SELECT DISTINCT DATE(" + nameFieldDate + ") as d from " + table + " WHERE " + postoField + "=" + posto + " "
+					+ validPeriodCondition + extra_condition + " ORDER BY d DESC";
 			result = this.executeQuery(qry);
 			int count = 0;
 			while (result.next()) {
@@ -203,6 +208,9 @@ public class myDB extends Db {
 			}
 			if (date == null) {
 				qry = "SELECT * from voltable";
+				if (!Concentrador.treinamento) {
+					qry += " WHERE data>='" + Util.getMinValidDateSQL() + "'";
+				}
 			} else {
 				qry = "SELECT * from voltable WHERE data = '" + date + "'";
 			}
@@ -240,6 +248,9 @@ public class myDB extends Db {
 			}
 			if (date == null) {
 				qry = "SELECT * from voltable";
+				if (!Concentrador.treinamento) {
+					qry += " WHERE data>='" + Util.getMinValidDateSQL() + "' ";
+				}
 			} else {
 				qry = "SELECT * from voltable WHERE data = '" + date + "'";
 			}
@@ -510,7 +521,11 @@ public class myDB extends Db {
 	public Vector<String> fetchReportODColumns() throws Exception {
 		Vector<String> cols = new Vector<String>();
 		openTransaction();
-		String sel_sql = "SELECT distinct idIpad from odTable ORDER BY idIpad asc";
+		String validPeriodCondition = "";
+		if (!Concentrador.treinamento) {
+			validPeriodCondition = " WHERE DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "' ";
+		}
+		String sel_sql = "SELECT DISTINCT idIpad FROM odTable " + validPeriodCondition + " ORDER BY idIpad ASC";
 		ResultSet result = this.executeQuery(sel_sql);
 		cols.add("");
 		while (result.next())
@@ -522,14 +537,18 @@ public class myDB extends Db {
 	public Vector<String> fetchReportODRows(Integer posto) throws Exception {
 		Vector<String> rows = new Vector<String>();
 		openTransaction();
-		String sel_sql = "SELECT distinct date(dataIniPesq) as data from odTable WHERE idPosto=" + posto
-				+ " AND cancelado=0 order by date(dataIniPesq) desc";
+		String validPeriodCondition = "";
+		if (!Concentrador.treinamento) {
+			validPeriodCondition = " AND DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "' ";
+		}
+		String sel_sql = "SELECT DISTINCT DATE(dataIniPesq) AS data FROM odTable WHERE idPosto=" + posto + " AND cancelado=0 "
+				+ validPeriodCondition + " ORDER BY date(dataIniPesq) DESC";
 		ResultSet result = this.executeQuery(sel_sql);
 		// TODO acredito que precisa rever quem será exportado/importado conforme o período
 		String[] validDates = Util.getValidDatesStr();
 		while (result.next()) {
-			Date day = Util.sdfToSQL.parse(result.getString("data"));
-			String d = Util.sdfToBrazil.format(day);
+			Date day = Util.SDF_SQL_DATE_ONLY.parse(result.getString("data"));
+			String d = Util.SDF_BRAZIL.format(day);
 			if (ArrayUtils.contains(validDates, d))
 				rows.add(d);
 		}
@@ -538,11 +557,11 @@ public class myDB extends Db {
 	}
 
 	public Map<String, Integer> fetchReportODData(String strData, Integer posto) throws Exception {
-		Date data = Util.sdfToBrazil.parse(strData);
+		Date data = Util.SDF_BRAZIL.parse(strData);
 		openTransaction();
-		String sqlData = Util.sdfToSQL.format(data);
-		String sel_sql = "SELECT idIpad, count(idIpad) as times from odTable " + " where date(dataIniPesq)='" + sqlData
-				+ "' and cancelado=0 and idPosto=" + posto + " group by idIpad ";
+		String sqlData = Util.SDF_SQL_DATE_ONLY.format(data);
+		String sel_sql = "SELECT idIpad, COUNT(idIpad) AS times FROM odTable " + " WHERE DATE(dataIniPesq)='" + sqlData
+				+ "' AND cancelado=0 AND idPosto=" + posto + " GROUP BY idIpad ";
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		ResultSet result = this.executeQuery(sel_sql);
@@ -557,13 +576,17 @@ public class myDB extends Db {
 
 	public Map<String, Map<String, Integer>> fetchReportODData(Integer posto) throws Exception {
 		openTransaction();
-		String sel_sql = "SELECT date(dataIniPesq) as dia, idIpad, count(idIpad) as times from odTable "
-				+ "WHERE and cancelado=0 and idPosto=" + posto + " group by date(dataIniPesq),idIpad "
-				+ "order by date(dataIniPesq) asc, idIpad asc";
+		String validPeriodCondition = "";
+		if (!Concentrador.treinamento) {
+			validPeriodCondition = " AND DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "' ";
+		}
+		String sel_sql = "SELECT DATE(dataIniPesq) AS dia, idIpad, COUNT(idIpad) AS times FROM odTable "
+				+ "WHERE cancelado=0 AND idPosto=" + posto + validPeriodCondition + " GROUP BY date(dataIniPesq), idIpad "
+				+ "ORDER BY date(dataIniPesq) ASC, idIpad ASC";
 		HashMap<String, Map<String, Integer>> data = new HashMap<String, Map<String, Integer>>();
 		ResultSet result = this.executeQuery(sel_sql);
 		while (result.next()) {
-			Date day = Util.sdfToSQL.parse(result.getString("dia"));
+			Date day = Util.SDF_SQL_DATE_ONLY.parse(result.getString("dia"));
 			String ipad = result.getString("idIpad");
 			Integer times = result.getInt("times");
 
@@ -571,11 +594,11 @@ public class myDB extends Db {
 			if (data.containsKey(day)) {
 				Map<String, Integer> regs = data.get(day);
 				regs.put(ipad, times);
-				data.put(Util.sdfToBrazil.format(day), regs);
+				data.put(Util.SDF_BRAZIL.format(day), regs);
 			} else {
 				HashMap<String, Integer> regs = new HashMap<String, Integer>();
 				regs.put(ipad, times);
-				data.put(Util.sdfToBrazil.format(day), regs);
+				data.put(Util.SDF_BRAZIL.format(day), regs);
 			}
 		}
 		result.close();

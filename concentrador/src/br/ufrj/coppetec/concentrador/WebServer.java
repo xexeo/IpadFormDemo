@@ -119,6 +119,6 @@ public class WebServer implements Container {
 	private void sendError(PrintStream body, Response resp) throws Exception {
 		resp.setStatus(Status.NOT_FOUND);
 		body.close();
-		throw new Exception("tentativa de acesso não autorizado " + new SimpleDateFormat("dd/MM/yyy k:m:s").format(new Date()));
+		throw new Exception("tentativa de acesso não autorizado " + new SimpleDateFormat("dd/MM/yyyy k:m:s").format(new Date()));
 	}
 }

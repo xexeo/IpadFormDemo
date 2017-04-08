@@ -35,9 +35,9 @@ public final class Util {
 
 	private static HashMap<String, Integer> inputLimits = new HashMap<String, Integer>();
 
-	public static SimpleDateFormat sdfToSQL = new SimpleDateFormat("yyyy-MM-dd");
-	public static SimpleDateFormat sdfToBrazil = new SimpleDateFormat("dd/MM/yyyy");
-	public static SimpleDateFormat sdfToArq = new SimpleDateFormat("yy-MM-dd-HH-mm-ss");
+	public static final SimpleDateFormat SDF_SQL_DATE_ONLY = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat SDF_BRAZIL = new SimpleDateFormat("dd/MM/yyyy");
+	public static final SimpleDateFormat SDF_ARQ = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
 	private Util() {
 	}
@@ -88,13 +88,21 @@ public final class Util {
 		Set<Date> validDates = new HashSet<Date>(r.length);
 		for (int i = 0; i < r.length; i++) {
 			try {
-				validDates.add(sdfToBrazil.parse(r[i].trim()));
+				validDates.add(SDF_BRAZIL.parse(r[i].trim()));
 			} catch (ParseException e) {
 				logger.error(String.format("Erro ao carregar datas válidas (formato inválido da data: %s).", r[i]), e);
 				throw e;
 			}
 		}
 		return validDates;
+	}
+
+	public static String getMinValidDateSQL() throws ParseException {
+		return SDF_SQL_DATE_ONLY.format(getMinValidDate());
+	}
+
+	public static String getMaxValidDateSQL() throws ParseException {
+		return SDF_SQL_DATE_ONLY.format(getMaxValidDate());
 	}
 
 	public static Date getMinValidDate() throws ParseException {

@@ -1,19 +1,11 @@
 package br.ufrj.coppetec.concentrador.database;
 
-import java.sql.ResultSet;
-
-import javax.swing.JOptionPane;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import br.ufrj.coppetec.concentrador.Concentrador;
-import br.ufrj.coppetec.concentrador.Janela;
-import br.ufrj.coppetec.concentrador.Util;
 import java.awt.BorderLayout;
 import java.awt.Dialog.ModalityType;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.sql.ResultSet;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +13,12 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import br.ufrj.coppetec.concentrador.Concentrador;
+import br.ufrj.coppetec.concentrador.Janela;
+import br.ufrj.coppetec.concentrador.Util;
 
 /**
  *
@@ -37,34 +35,40 @@ public class ImportedDB extends Db {
 		this.janela = janela;
 		counter = 0;
 	}
-	
+
 	public void sanitize() throws Exception {
 		openTransaction();
 		this.executeStatement("DELETE FROM tblDados WHERE id is null or id = 'null';");
 		commit();
 	}
-	
+
 	public int importData() throws Exception {
 		this.sanitize();
 		this.openTransaction();
 		this.counter = importData(Concentrador.database);
 		this.commit();
-		//final JDialog dialog = new JDialog(this.janela, "Dialog", ModalityType.APPLICATION_MODAL);
-		//JOptionPane.showMessageDialog(this.janela, "Total de registros inseridos: " + Integer.toString(this.counter));
-		logger.debug("Novos registros: "+Integer.toString(this.counter));
+		// final JDialog dialog = new JDialog(this.janela, "Dialog", ModalityType.APPLICATION_MODAL);
+		// JOptionPane.showMessageDialog(this.janela, "Total de registros inseridos: " + Integer.toString(this.counter));
+		logger.debug("Novos registros: " + Integer.toString(this.counter));
 		return counter;
 	}
 
 	public int importData(myDB concentradorDb) throws Exception {
 		Db db = this;
 		this.sanitize();
-		SwingWorker<Integer, Void> mySwingWorker = new SwingWorker<Integer, Void>(){
-         
+		SwingWorker<Integer, Void> mySwingWorker = new SwingWorker<Integer, Void>() {
+
 			@Override
 			protected Integer doInBackground() throws Exception {
 				db.setStatement();
-				ResultSet rs = db.executeQuery("SELECT * FROM tblDados;");
-				String sqlbase = "INSERT OR IGNORE INTO odTable (";  
+				String queryToImport = "SELECT * FROM tblDados";
+				if (Concentrador.treinamento) {
+					queryToImport += ";";
+				} else {
+					queryToImport += " WHERE DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "';";
+				}
+				ResultSet rs = db.executeQuery(queryToImport);
+				String sqlbase = "INSERT OR IGNORE INTO odTable (";
 
 				sqlbase += "id, ";
 				sqlbase += "enviado, ";
@@ -126,11 +130,11 @@ public class ImportedDB extends Db {
 				String sql = "";
 				String idCombustivel = "";
 				boolean placaEstrangeira;
-				int counter=0;
+				int counter = 0;
 				while (rs.next()) {
 					try {
-						idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0")) ? "3" : rs
-								.getString("idCombustivel");
+						idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0")) ? "3"
+								: rs.getString("idCombustivel");
 						placaEstrangeira = (Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) == "1");
 						sql = sqlbase + " VALUES (";
 						sql += " '" + rs.getString("id") + "', ";
@@ -144,7 +148,7 @@ public class ImportedDB extends Db {
 						sql += "'" + rs.getString("login") + "', ";
 						sql += "'" + rs.getString("dataIniPesq") + "', ";
 						sql += "'" + rs.getString("dataFimPesq") + "', ";
-						if (placaEstrangeira){
+						if (placaEstrangeira) {
 							sql += "'" + Util.getStringLimited(rs.getString("placa"), "placaEstrangeira") + "', ";
 						} else {
 							sql += "'" + rs.getString("placa") + "', ";
@@ -159,14 +163,16 @@ public class ImportedDB extends Db {
 						sql += Util.getSQLiteIntLimited(rs.getString("frequenciaQtd"), "frequenciaQtd") + ", ";
 						sql += "'" + rs.getString("frequenciaPeriodo") + "', ";
 						sql += rs.getString("idPropriedadesDoVeiculo") + ", ";
-						sql += Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) + ", ";						
+						sql += Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) + ", ";
 						sql += rs.getString("idPaisPlacaEstrangeira") + ", ";
 						// sql += rs.getString("idCombustivel") + ", ";
 						sql += idCombustivel + ", ";
 						sql += "'" + rs.getString("categoria") + "', ";
 						sql += Util.getSQLiteBoolean(rs.getString("possuiReboque")) + ", ";
-						sql += Util.getSQLiteIntLimited(rs.getString("numeroDePessoasNoVeiculo"), "numeroDePessoasNoVeiculo") + ", ";
-						sql += Util.getSQLiteIntLimited(rs.getString("numeroDePessoasATrabalho"), "numeroDePessoasATrabalho") + ", ";
+						sql += Util.getSQLiteIntLimited(rs.getString("numeroDePessoasNoVeiculo"), "numeroDePessoasNoVeiculo")
+								+ ", ";
+						sql += Util.getSQLiteIntLimited(rs.getString("numeroDePessoasATrabalho"), "numeroDePessoasATrabalho")
+								+ ", ";
 						sql += rs.getString("idRendaMedia") + ", ";
 						sql += rs.getString("idMotivoDaViagem") + ", ";
 						sql += "'" + rs.getString("tipoCaminhao") + "', ";
@@ -180,7 +186,7 @@ public class ImportedDB extends Db {
 						sql += Util.getSQLiteBoolean(rs.getString("placaVermelha")) + ", ";
 						sql += rs.getString("idTipoDeViagemOuServico") + ", ";
 						sql += Util.getSQLiteRealLimited(rs.getString("pesoDaCarga"), "pesoDaCarga") + ", ";
-						sql += Util.getSQLiteRealLimited(rs.getString("valorDoFrete"),"valorDoFrete") + ", ";
+						sql += Util.getSQLiteRealLimited(rs.getString("valorDoFrete"), "valorDoFrete") + ", ";
 						sql += Util.getSQLiteBoolean(rs.getString("utilizaParadaEspecial")) + ", ";
 						sql += rs.getString("idProduto") + ", ";
 						sql += rs.getString("idCargaAnterior") + ", ";
@@ -192,7 +198,7 @@ public class ImportedDB extends Db {
 						sql += Util.getSQLiteBoolean(rs.getString("indoPegarCarga")) + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio1") + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio2") + ", ";
-						sql += rs.getString("idPerguntaExtra")+ ", ";
+						sql += rs.getString("idPerguntaExtra") + ", ";
 						sql += rs.getString("duracaoPesq");
 						sql += "); ";
 						concentradorDb.setStatement();
@@ -207,9 +213,9 @@ public class ImportedDB extends Db {
 				rs.close();
 				return counter;
 			}
+
 		};
 
-		
 		final JDialog dialog = new JDialog(janela, "Aguarde", ModalityType.APPLICATION_MODAL);
 		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
@@ -223,11 +229,9 @@ public class ImportedDB extends Db {
 				}
 			}
 
-			
 		});
 		mySwingWorker.execute();
-	  
-		
+
 		JProgressBar progressBar = new JProgressBar();
 		progressBar.setIndeterminate(true);
 		JPanel panel = new JPanel(new BorderLayout());
@@ -237,11 +241,11 @@ public class ImportedDB extends Db {
 		dialog.pack();
 		dialog.setLocationRelativeTo(janela);
 		dialog.setVisible(true);
-		
+
 		return mySwingWorker.get();
 	}
-	
-	public int getCounter(){
+
+	public int getCounter() {
 		return counter;
 	}
 }
