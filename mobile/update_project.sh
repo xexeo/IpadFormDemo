@@ -23,3 +23,6 @@ cordova plugin add cordova-plugin-statusbar
 
 cordova plugin remove cordova-sqlite-storage
 cordova plugin add cordova-sqlite-storage
+
+cordova plugin remove cordova-plugin-battery-status
+cordova plugin add cordova-plugin-battery-status
