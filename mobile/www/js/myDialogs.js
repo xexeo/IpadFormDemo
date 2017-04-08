@@ -1,3 +1,5 @@
+/* global util */
+
 var myDialogs = {
 
 	/**
