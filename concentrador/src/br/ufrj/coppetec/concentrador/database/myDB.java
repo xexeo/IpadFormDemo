@@ -1,6 +1,7 @@
 package br.ufrj.coppetec.concentrador.database;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,9 @@ public class myDB extends Db {
 	public static final String TABLE_IMPORTED_FILES_PATH = "path";
 	public static final String TABLE_IMPORTED_FILES_DATE = "DATE";
 
+	public static final String TABLE_NAME_OD = "odtable";
+	public static final String TABLE_NAME_VOL = "voltable";
+
 	private static Logger logger = LogManager.getLogger(myDB.class);
 
 	private static myDB instance = null;
@@ -39,6 +43,11 @@ public class myDB extends Db {
 			instance = new myDB();
 		}
 		return instance;
+	}
+
+	public static String getConditionByValidDate(String tableName) throws ParseException {
+		return String.format("%s %s IN %s", (Concentrador.treinamento ? "NOT" : ""),
+				(tableName.equalsIgnoreCase(TABLE_NAME_OD) ? "DATE(dataIniPesq)" : "data"), Util.getValidDatesListInSQL());
 	}
 
 	public void keepAlive() throws Exception {
@@ -159,15 +168,12 @@ public class myDB extends Db {
 
 	private String[] getDates(String table, String nameFieldDate, String postoField, Integer posto, String extra_condition)
 			throws Exception {
-		String validPeriodCondition = "";
-		if (!Concentrador.treinamento) {
-			validPeriodCondition = " AND DATE(" + nameFieldDate + ")>='" + Util.getMinValidDateSQL() + "' ";
-		}
+		String validPeriodCondition = " AND " + getConditionByValidDate(table) + " ";
 		this.setStatement();
 		ResultSet result = null;
 		String[] datesReturn = null;
 		int qtd = 0;
-		String qry = "SELECT COUNT(DISTINCT DATE(" + nameFieldDate + ")) as qtd from " + table + " WHERE " + postoField + "="
+		String qry = "SELECT COUNT(DISTINCT DATE(" + nameFieldDate + ")) AS qtd FROM " + table + " WHERE " + postoField + "="
 				+ posto + " " + validPeriodCondition + extra_condition;
 		result = this.executeQuery(qry);
 		if (result.next()) {
@@ -177,7 +183,7 @@ public class myDB extends Db {
 		if (qtd != 0) {
 			datesReturn = new String[qtd];
 			this.setStatement();
-			qry = "SELECT DISTINCT DATE(" + nameFieldDate + ") as d from " + table + " WHERE " + postoField + "=" + posto + " "
+			qry = "SELECT DISTINCT DATE(" + nameFieldDate + ") AS d FROM " + table + " WHERE " + postoField + "=" + posto + " "
 					+ validPeriodCondition + extra_condition + " ORDER BY d DESC";
 			result = this.executeQuery(qry);
 			int count = 0;
@@ -207,12 +213,9 @@ public class myDB extends Db {
 				returnData.put(fieldNames[i], 0);
 			}
 			if (date == null) {
-				qry = "SELECT * from voltable";
-				if (!Concentrador.treinamento) {
-					qry += " WHERE data>='" + Util.getMinValidDateSQL() + "'";
-				}
+				qry = "SELECT * FROM voltable WHERE " + getConditionByValidDate(TABLE_NAME_VOL);
 			} else {
-				qry = "SELECT * from voltable WHERE data = '" + date + "'";
+				qry = "SELECT * FROM voltable WHERE data = '" + date + "'";
 			}
 
 			ResultSet result = this.executeQuery(qry);
@@ -247,12 +250,9 @@ public class myDB extends Db {
 				}
 			}
 			if (date == null) {
-				qry = "SELECT * from voltable";
-				if (!Concentrador.treinamento) {
-					qry += " WHERE data>='" + Util.getMinValidDateSQL() + "' ";
-				}
+				qry = "SELECT * FROM voltable WHERE " + getConditionByValidDate(TABLE_NAME_VOL);
 			} else {
-				qry = "SELECT * from voltable WHERE data = '" + date + "'";
+				qry = "SELECT * FROM voltable WHERE data = '" + date + "'";
 			}
 			ResultSet result = this.executeQuery(qry);
 			while (result.next()) {
@@ -521,11 +521,8 @@ public class myDB extends Db {
 	public Vector<String> fetchReportODColumns() throws Exception {
 		Vector<String> cols = new Vector<String>();
 		openTransaction();
-		String validPeriodCondition = "";
-		if (!Concentrador.treinamento) {
-			validPeriodCondition = " WHERE DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "' ";
-		}
-		String sel_sql = "SELECT DISTINCT idIpad FROM odTable " + validPeriodCondition + " ORDER BY idIpad ASC";
+		String sel_sql = String.format("SELECT DISTINCT idIpad FROM odTable WHERE %s ORDER BY idIpad ASC",
+				getConditionByValidDate(TABLE_NAME_OD));
 		ResultSet result = this.executeQuery(sel_sql);
 		cols.add("");
 		while (result.next())
@@ -537,10 +534,7 @@ public class myDB extends Db {
 	public Vector<String> fetchReportODRows(Integer posto) throws Exception {
 		Vector<String> rows = new Vector<String>();
 		openTransaction();
-		String validPeriodCondition = "";
-		if (!Concentrador.treinamento) {
-			validPeriodCondition = " AND DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "' ";
-		}
+		String validPeriodCondition = " AND " + getConditionByValidDate(TABLE_NAME_OD);
 		String sel_sql = "SELECT DISTINCT DATE(dataIniPesq) AS data FROM odTable WHERE idPosto=" + posto + " AND cancelado=0 "
 				+ validPeriodCondition + " ORDER BY date(dataIniPesq) DESC";
 		ResultSet result = this.executeQuery(sel_sql);
@@ -576,10 +570,7 @@ public class myDB extends Db {
 
 	public Map<String, Map<String, Integer>> fetchReportODData(Integer posto) throws Exception {
 		openTransaction();
-		String validPeriodCondition = "";
-		if (!Concentrador.treinamento) {
-			validPeriodCondition = " AND DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "' ";
-		}
+		String validPeriodCondition = " AND " + getConditionByValidDate(TABLE_NAME_OD);
 		String sel_sql = "SELECT DATE(dataIniPesq) AS dia, idIpad, COUNT(idIpad) AS times FROM odTable "
 				+ "WHERE cancelado=0 AND idPosto=" + posto + validPeriodCondition + " GROUP BY date(dataIniPesq), idIpad "
 				+ "ORDER BY date(dataIniPesq) ASC, idIpad ASC";

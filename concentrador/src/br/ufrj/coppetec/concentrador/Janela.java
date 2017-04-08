@@ -12,10 +12,7 @@ import java.awt.Font;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -116,35 +113,15 @@ public class Janela extends javax.swing.JFrame {
 	}
 
 	public void initDatesToShow() throws ParseException {
-		buildListDatesToShow();
-		String[] vazio = { "" };
-		cmbData.setModel(new DefaultComboBoxModel(Util.concatArrays(vazio, datesToShow)));
-		cmbData.setSelectedItem(0);
-	}
-
-	private void buildListDatesToShow() throws ParseException {
 		datesToShow = null;
 		if (Concentrador.treinamento) {
-			List<String> datesStr = new ArrayList<String>();
-			if (Util.isBeforeValidPeriod(new Date())) {
-				Date minValidDate = Util.getMinValidDate();
-				Date date = new Date();
-				while (date.compareTo(minValidDate) < 0) {
-					datesStr.add(Util.SDF_BRAZIL.format(date));
-					date = Util.incrementDay(date, 1);
-				}
-			} else if (Util.isAfterValidPeriod(new Date())) {
-				Date date = Util.getMaxValidDate();
-				Date today = new Date();
-				do {
-					date = Util.incrementDay(date, 1);
-					datesStr.add(Util.SDF_BRAZIL.format(date));
-				} while (date.compareTo(today) <= 0);
-			}
-			datesToShow = datesStr.toArray(new String[0]);
+			datesToShow = Util.getTrainingDatesStr();
 		} else {
 			datesToShow = Util.getValidDatesStr();
 		}
+		String[] vazio = { "" };
+		cmbData.setModel(new DefaultComboBoxModel(Util.concatArrays(vazio, datesToShow)));
+		cmbData.setSelectedItem(0);
 	}
 
 	private void fillCmbDatesExp() {
@@ -7193,8 +7170,10 @@ public class Janela extends javax.swing.JFrame {
 				this.setSumVolData(null);
 				this.setSumVolTable(null);
 			} else {
-				this.setSumVolData(Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(cmbDataSumVol.getSelectedItem().toString())));
-				this.setSumVolTable(Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(cmbDataSumVol.getSelectedItem().toString())));
+				this.setSumVolData(
+						Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(cmbDataSumVol.getSelectedItem().toString())));
+				this.setSumVolTable(
+						Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(cmbDataSumVol.getSelectedItem().toString())));
 			}
 
 		} catch (Exception e) {

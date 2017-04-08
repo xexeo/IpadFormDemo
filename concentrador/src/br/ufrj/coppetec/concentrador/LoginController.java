@@ -105,7 +105,10 @@ public class LoginController {
 	private boolean verificaUserPwdProducao(String user, String pwd) {
 		if (user.length() == LEN_LOGIN_USER) {
 			try {
-				if (Util.isInOrAfterValidPeriod(new Date())) {
+				if (Util.isInValidPeriod(new Date())) { /*
+														 * Se a data atual não vale de nada (afirmação do Mangeli), então basta
+														 * comentar/remover o IF e permanecer com o comando contido no IF.
+														 */
 					return verificaUserPwd(user, pwd);
 				}
 			} catch (ParseException e) {
@@ -118,11 +121,14 @@ public class LoginController {
 	private boolean verificaUserPwdTreinamento(String user, String pwd) {
 		if ((user.length() == LEN_LOGIN_USER + 1) && (Character.toUpperCase(user.charAt(LEN_LOGIN_USER)) == 'T')) {
 			try {
-				if (Util.isOutValidPeriod(new Date())) {
+				if (!Util.isInValidPeriod(new Date())) {/*
+														 * Se a data atual não vale de nada (afirmação do Mangeli), então basta
+														 * comentar/remover o IF e permanecer com o comando contido no IF.
+														 */
 					return verificaUserPwd(user.substring(0, LEN_LOGIN_USER), pwd);
 				}
 			} catch (ParseException e) {
-				JOptionPane.showMessageDialog(null, "Erro ao carregar datas válidas." + e.getMessage());
+				JOptionPane.showMessageDialog(null, "Erro ao carregar datas de treinamento." + e.getMessage());
 			}
 		}
 		return false;

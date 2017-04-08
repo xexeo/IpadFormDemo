@@ -26,9 +26,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.ufrj.coppetec.concentrador.Concentrador;
 import br.ufrj.coppetec.concentrador.Janela;
-import br.ufrj.coppetec.concentrador.Util;
 import br.ufrj.coppetec.concentrador.database.myDB;
 
 /**
@@ -66,17 +64,13 @@ public class JSONExporter {
 			String r = "SELECT * FROM ";
 			if (text.equals("odtable")) {
 				r += "odtable WHERE cancelado=0 and idPosto=" + posto.intValue();
-				if (!Concentrador.treinamento) {
-					r += " AND DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "'";
-				}
 			} else {
 				r += "voltable WHERE posto=" + posto.intValue();
-				if (!Concentrador.treinamento) {
-					r += " AND data>='" + Util.getMinValidDateSQL() + "'";
-				}
 			}
+			r += " AND " + myDB.getConditionByValidDate(text);
 			return r;
 		}
+
 	}
 
 	public JSONExporter(File f, DbTable t, Janela janela) {
