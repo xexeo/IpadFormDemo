@@ -1,3 +1,5 @@
+/* global util, ipadID */
+
 var app = {
 
 	versao : "2.3.0",
@@ -354,7 +356,7 @@ var app = {
 		$("#versao").html(this.versao);
 		$("#entrar").click(function(){
 			clearInterval(updater_dataTimeToDisplay);
-			app.login()
+			app.login();
 		});
 		$("#entrar").prop('disabled', true);
 		$("#agregador input[type='radio']").prop('checked', false).change(function(event, ui){
@@ -444,8 +446,8 @@ var app = {
 			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
 			changeF(view);
 		} catch(exc) {
-			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
-			app.logger.log(exc.message)
+			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ");
+			app.logger.log(exc.message);
 		}
 		
 		app.logger.log(view);
