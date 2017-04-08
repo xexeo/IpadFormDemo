@@ -197,7 +197,7 @@ var app = {
 			alert("A bateria atingiu nível crítco! \nCarregue o ipad imediatamente.\nNível de bateria: " + status.level + "%",
 				'Alerta de Bateria', null, 'info');
 		}, false);
-		documento.addEventListener('batterylow', function(status){
+		document.addEventListener('batterylow', function(status){
 			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
 				'Alerta de Bateria', null, 'info');;
 		}, false);
