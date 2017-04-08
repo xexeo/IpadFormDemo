@@ -61,11 +61,13 @@ public class ImportedDB extends Db {
 			@Override
 			protected Integer doInBackground() throws Exception {
 				db.setStatement();
-				String queryToImport = String.format("SELECT * FROM tblDados WHERE treinamento = %d;",
-						(Concentrador.treinamento ? 1 : 0));
+				// String queryToImport = String.format("SELECT * FROM tblDados WHERE treinamento = %d;",
+				// (Concentrador.treinamento ? 1 : 0));
 				/* Outra possibilidade para a mesma consulta acima: */
 				// String queryToImport = String.format("SELECT * FROM tblDados WHERE %s;",
 				// myDB.getConditionByValidDate(myDB.TABLE_NAME_OD));
+				/* Mas como o ideal é importar tudo, e deixar que o concentrador exiba as informações conforme o contexto. */
+				String queryToImport = "SELECT * FROM tblDados;";
 
 				ResultSet rs = db.executeQuery(queryToImport);
 				String sqlbase = "INSERT OR IGNORE INTO odTable (";
@@ -125,22 +127,30 @@ public class ImportedDB extends Db {
 				sqlbase += "paradaObrigatoriaMunicipio1, ";
 				sqlbase += "paradaObrigatoriaMunicipio2, ";
 				sqlbase += "idPerguntaExtra, ";
-				sqlbase += "duracaoPesq";
+				sqlbase += "duracaoPesq, ";
+				sqlbase += "treinamento";
+				// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
 				sqlbase += ") ";
 				String sql = "";
 				String idCombustivel = "";
+				String treinamento = "";
+				String cancelado = "";
 				boolean placaEstrangeira;
 				int counter = 0;
+				int counterTraining = 0;
 				while (rs.next()) {
 					try {
-						idCombustivel = (rs.getString("idCombustivel") == null && rs.getString("cancelado").equals("0")) ? "3"
+
+						cancelado = Util.getSQLiteBoolean(rs.getString("cancelado"));
+						idCombustivel = (rs.getString("idCombustivel") == null && cancelado.equals("0")) ? "3"
 								: rs.getString("idCombustivel");
-						placaEstrangeira = (Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) == "1");
+						placaEstrangeira = Util.getSQLiteBoolean(rs.getString("placaEstrangeira")).equals("1");
+						treinamento = Util.getSQLiteBoolean(rs.getString("treinamento"));
 						sql = sqlbase + " VALUES (";
 						sql += " '" + rs.getString("id") + "', ";
 						sql += "0, "; // não enviado
 						sql += "1, "; // esta no note
-						sql += Util.getSQLiteBoolean(rs.getString("cancelado")) + ", ";
+						sql += cancelado + ", ";
 						sql += rs.getString("idPosto") + ", ";
 						sql += "'" + rs.getString("sentido") + "', ";
 						sql += "'" + rs.getString("idIpad") + "', ";
@@ -199,10 +209,15 @@ public class ImportedDB extends Db {
 						sql += rs.getString("paradaObrigatoriaMunicipio1") + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio2") + ", ";
 						sql += rs.getString("idPerguntaExtra") + ", ";
-						sql += rs.getString("duracaoPesq");
+						sql += rs.getString("duracaoPesq") + ", ";
+						sql += treinamento;
+						// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
 						sql += "); ";
 						concentradorDb.setStatement();
 
+						if (treinamento.equals("1")) {
+							counterTraining++;
+						}
 						counter += concentradorDb.executeStatement(sql);
 					} catch (Exception e) {
 						// do nothing only ignore error

@@ -1,8 +1,6 @@
 package br.ufrj.coppetec.concentrador;
 
 import java.io.InputStream;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -104,32 +102,28 @@ public class LoginController {
 
 	private boolean verificaUserPwdProducao(String user, String pwd) {
 		if (user.length() == LEN_LOGIN_USER) {
-			try {
-				if (Util.isInValidPeriod(new Date())) { /*
-														 * Se a data atual não vale de nada (afirmação do Mangeli), então basta
-														 * comentar/remover o IF e permanecer com o comando contido no IF.
-														 */
-					return verificaUserPwd(user, pwd);
-				}
-			} catch (ParseException e) {
-				JOptionPane.showMessageDialog(null, "Erro ao carregar datas válidas." + e.getMessage());
-			}
+			// try {
+			// /* O IF abaixo está comentado por não termos confiança na data do sistema. */
+			// if (Util.isInValidPeriod(new Date())) {
+			return verificaUserPwd(user, pwd);
+			// }
+			// } catch (ParseException e) { /* O TRY/CATCH acompanha a condição do IF. */
+			// JOptionPane.showMessageDialog(null, "Erro ao carregar datas válidas." + e.getMessage());
+			// }
 		}
 		return false;
 	}
 
 	private boolean verificaUserPwdTreinamento(String user, String pwd) {
 		if ((user.length() == LEN_LOGIN_USER + 1) && (Character.toUpperCase(user.charAt(LEN_LOGIN_USER)) == 'T')) {
-			try {
-				if (!Util.isInValidPeriod(new Date())) {/*
-														 * Se a data atual não vale de nada (afirmação do Mangeli), então basta
-														 * comentar/remover o IF e permanecer com o comando contido no IF.
-														 */
-					return verificaUserPwd(user.substring(0, LEN_LOGIN_USER), pwd);
-				}
-			} catch (ParseException e) {
-				JOptionPane.showMessageDialog(null, "Erro ao carregar datas de treinamento." + e.getMessage());
-			}
+			// try {
+			// /* O IF abaixo está comentado por não termos confiança na data do sistema. */
+			// if (!Util.isInValidPeriod(new Date())) {
+			return verificaUserPwd(user.substring(0, LEN_LOGIN_USER), pwd);
+			// }
+			// } catch (ParseException e) { /* O TRY/CATCH acompanha a condição do IF. */
+			// JOptionPane.showMessageDialog(null, "Erro ao carregar datas de treinamento." + e.getMessage());
+			// }
 		}
 		return false;
 	}
