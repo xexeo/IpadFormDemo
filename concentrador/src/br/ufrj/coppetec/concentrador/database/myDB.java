@@ -511,7 +511,9 @@ public class myDB extends Db {
 		qry += "paradaObrigatoriaMunicipio1 integer, ";
 		qry += "paradaObrigatoriaMunicipio2 integer, ";
 		qry += "idPerguntaExtra integer,";
-		qry += "duracaoPesq integer ";
+		qry += "duracaoPesq integer, ";
+		qry += "treinamento integer";
+		// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
 		qry += "); ";
 		this.executeStatement(qry);
 		this.sanitize();
