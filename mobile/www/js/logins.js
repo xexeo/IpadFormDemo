@@ -15,7 +15,7 @@ var logins = {
 			logins.user_logado = logins.user_tester;
 			return true;
 		} else if (String(usuario).length == 3 && logins.verificaPostoSenha(String(usuario), senha)) {
-			if(datas.verificaData()){
+			if(datas.verificaData() || app.debugMode){
 				app.isTreinamento = false;
 				app.logger.log("Sistema em modo de produção.");
 				return true;
