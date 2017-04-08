@@ -14,13 +14,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,59 +59,92 @@ public final class Util {
 		return r;
 	}
 
+	public static String[] getTrainingDatesStr() {
+		String[] r;
+		r = Concentrador.configuration.getProperty("trainingDays").split(",");
+		for (int i = 0; i < r.length; i++) {
+			r[i] = r[i].trim();
+		}
+		return r;
+	}
+
 	public static boolean isInValidPeriod(Date date) throws ParseException {
 		return getValidDates().contains(lowDateTime(date));
 	}
 
-	public static boolean isOutValidPeriod(Date date) throws ParseException {
-		return (getMinValidDate().compareTo(date) > 0) || (getMaxValidDate().compareTo(date) < 0);
-	}
-
-	public static boolean isBeforeValidPeriod(Date date) throws ParseException {
-		return getMinValidDate().compareTo(date) > 0;
-	}
-
-	public static boolean isAfterValidPeriod(Date date) throws ParseException {
-		return getMaxValidDate().compareTo(date) < 0;
-	}
-
-	public static boolean isInOrAfterValidPeriod(Date date) throws ParseException {
-		// return getMinValidDate().compareTo(date) <= 0; /* Se o intervalo não for contínuo, essa linha não é adequada! */
-		return isInValidPeriod(date) || isAfterValidPeriod(date);
-	}
+	// public static boolean isOutValidPeriod(Date date) throws ParseException {
+	// return (getMinValidDate().compareTo(date) > 0) || (getMaxValidDate().compareTo(date) < 0);
+	// }
+	//
+	// public static boolean isBeforeValidPeriod(Date date) throws ParseException {
+	// return getMinValidDate().compareTo(date) > 0;
+	// }
+	//
+	// public static boolean isAfterValidPeriod(Date date) throws ParseException {
+	// return getMaxValidDate().compareTo(date) < 0;
+	// }
+	//
+	// public static boolean isInOrAfterValidPeriod(Date date) throws ParseException {
+	// // return getMinValidDate().compareTo(date) <= 0; /* Se o intervalo não for contínuo, essa linha não é adequada! */
+	// return isInValidPeriod(date) || isAfterValidPeriod(date);
+	// }
 
 	public static Set<Date> getValidDates() throws ParseException {
-		String[] r = getValidDatesStr();
-		Set<Date> validDates = new HashSet<Date>(r.length);
-		for (int i = 0; i < r.length; i++) {
+		return parseDates(getValidDatesStr());
+	}
+
+	public static Set<Date> getTrainingDates() throws ParseException {
+		return parseDates(getTrainingDatesStr());
+	}
+
+	protected static Set<Date> parseDates(String[] datesStr) throws ParseException {
+		Set<Date> dates = new HashSet<Date>(datesStr.length);
+		for (int i = 0; i < datesStr.length; i++) {
 			try {
-				validDates.add(SDF_BRAZIL.parse(r[i].trim()));
+				dates.add(SDF_BRAZIL.parse(datesStr[i].trim()));
 			} catch (ParseException e) {
-				logger.error(String.format("Erro ao carregar datas válidas (formato inválido da data: %s).", r[i]), e);
+				logger.error(String.format("Erro ao carregar datas (formato inválido da data: %s).", datesStr[i]), e);
 				throw e;
 			}
 		}
-		return validDates;
+		return dates;
 	}
 
-	public static String getMinValidDateSQL() throws ParseException {
-		return SDF_SQL_DATE_ONLY.format(getMinValidDate());
+	public static String getValidDatesListInSQL() throws ParseException {
+		return getDatesListInSQL(getValidDates());
 	}
 
-	public static String getMaxValidDateSQL() throws ParseException {
-		return SDF_SQL_DATE_ONLY.format(getMaxValidDate());
+	public static String getTrainingDatesListInSQL() throws ParseException {
+		return getDatesListInSQL(getTrainingDates());
 	}
 
-	public static Date getMinValidDate() throws ParseException {
-		Set<Date> sortedValidDates = new TreeSet<Date>(getValidDates());
-		return sortedValidDates.iterator().next();
+	protected static String getDatesListInSQL(Set<Date> dates) throws ParseException {
+		String dateListInSQL = "";
+		for (Date date : dates) {
+			dateListInSQL += ", '" + SDF_SQL_DATE_ONLY.format(date) + "'";
+		}
+		dateListInSQL += ")";
+		return dateListInSQL.replaceFirst(", ", "(");
 	}
 
-	public static Date getMaxValidDate() throws ParseException {
-		Set<Date> sortedValidDates = new TreeSet<Date>(Collections.reverseOrder());
-		sortedValidDates.addAll(getValidDates());
-		return highDateTime(sortedValidDates.iterator().next());
-	}
+	// public static String getMinValidDateSQL() throws ParseException {
+	// return SDF_SQL_DATE_ONLY.format(getMinValidDate());
+	// }
+	//
+	// public static String getMaxValidDateSQL() throws ParseException {
+	// return SDF_SQL_DATE_ONLY.format(getMaxValidDate());
+	// }
+	//
+	// public static Date getMinValidDate() throws ParseException {
+	// Set<Date> sortedValidDates = new TreeSet<Date>(getValidDates());
+	// return sortedValidDates.iterator().next();
+	// }
+	//
+	// public static Date getMaxValidDate() throws ParseException {
+	// Set<Date> sortedValidDates = new TreeSet<Date>(Collections.reverseOrder());
+	// sortedValidDates.addAll(getValidDates());
+	// return highDateTime(sortedValidDates.iterator().next());
+	// }
 
 	/**
 	 * Retorna o valor do horário minimo para a data de referencia passada. <BR>
@@ -133,22 +163,22 @@ public final class Util {
 		return aux.getTime();
 	}
 
-	/**
-	 * Retorna o valor do horário maximo para a data de referencia passada. <BR>
-	 * <BR>
-	 * Por exemplo se a data for "30/01/2017 as 17h:33m:12s e 299ms" a data retornada por este metodo será "30/01/2017 as
-	 * 23h:59m:59s e 999ms".
-	 * 
-	 * @param date
-	 *            de referencia.
-	 * @return {@link Date} que representa o horário maximo para dia informado.
-	 */
-	public static Date highDateTime(Date date) {
-		Calendar aux = Calendar.getInstance();
-		aux.setTime(date);
-		toFinalDate(aux); // maximiza os parametros de hour,min,sec,millisec
-		return aux.getTime();
-	}
+	// /**
+	// * Retorna o valor do horário maximo para a data de referencia passada. <BR>
+	// * <BR>
+	// * Por exemplo se a data for "30/01/2017 as 17h:33m:12s e 299ms" a data retornada por este metodo será "30/01/2017 as
+	// * 23h:59m:59s e 999ms".
+	// *
+	// * @param date
+	// * de referencia.
+	// * @return {@link Date} que representa o horário maximo para dia informado.
+	// */
+	// public static Date highDateTime(Date date) {
+	// Calendar aux = Calendar.getInstance();
+	// aux.setTime(date);
+	// toFinalDate(aux); // maximiza os parametros de hour,min,sec,millisec
+	// return aux.getTime();
+	// }
 
 	/**
 	 * Zera todas as referencias de hora, minuto, segundo e milissegundo do {@link Calendar}.
@@ -163,33 +193,33 @@ public final class Util {
 		date.set(Calendar.MILLISECOND, 0);
 	}
 
-	/**
-	 * Maximiza todas as referencias de hora, minuto, segundo e milissegundo do {@link Calendar}.
-	 * 
-	 * @param date
-	 *            a ser modificado.
-	 */
-	private static void toFinalDate(Calendar date) {
-		date.set(Calendar.HOUR_OF_DAY, 23);
-		date.set(Calendar.MINUTE, 59);
-		date.set(Calendar.SECOND, 59);
-		date.set(Calendar.MILLISECOND, 999);
-	}
-
-	public static Date incrementDay(Date date, int amount) {
-		return incrementDayOfMonth(date, amount);
-	}
-
-	public static Date incrementDayOfMonth(Date date, int amount) {
-		return incrementDate(date, Calendar.DAY_OF_MONTH, amount);
-	}
-
-	private static Date incrementDate(Date date, int field, int amount) {
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
-		calendar.add(field, amount);
-		return calendar.getTime();
-	}
+	// /**
+	// * Maximiza todas as referencias de hora, minuto, segundo e milissegundo do {@link Calendar}.
+	// *
+	// * @param date
+	// * a ser modificado.
+	// */
+	// private static void toFinalDate(Calendar date) {
+	// date.set(Calendar.HOUR_OF_DAY, 23);
+	// date.set(Calendar.MINUTE, 59);
+	// date.set(Calendar.SECOND, 59);
+	// date.set(Calendar.MILLISECOND, 999);
+	// }
+	//
+	// public static Date incrementDay(Date date, int amount) {
+	// return incrementDayOfMonth(date, amount);
+	// }
+	//
+	// public static Date incrementDayOfMonth(Date date, int amount) {
+	// return incrementDate(date, Calendar.DAY_OF_MONTH, amount);
+	// }
+	//
+	// private static Date incrementDate(Date date, int field, int amount) {
+	// Calendar calendar = new GregorianCalendar();
+	// calendar.setTime(date);
+	// calendar.add(field, amount);
+	// return calendar.getTime();
+	// }
 
 	public static void populateInputLimits() {
 		inputLimits.put("placaEstrangeira",

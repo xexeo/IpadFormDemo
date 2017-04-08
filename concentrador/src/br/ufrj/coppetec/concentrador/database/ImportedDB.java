@@ -61,12 +61,12 @@ public class ImportedDB extends Db {
 			@Override
 			protected Integer doInBackground() throws Exception {
 				db.setStatement();
-				String queryToImport = "SELECT * FROM tblDados";
-				if (Concentrador.treinamento) {
-					queryToImport += ";";
-				} else {
-					queryToImport += " WHERE DATE(dataIniPesq)>='" + Util.getMinValidDateSQL() + "';";
-				}
+				String queryToImport = String.format("SELECT * FROM tblDados WHERE treinamento = %d;",
+						(Concentrador.treinamento ? 1 : 0));
+				/* Outra possibilidade para a mesma consulta acima: */
+				// String queryToImport = String.format("SELECT * FROM tblDados WHERE %s;",
+				// myDB.getConditionByValidDate(myDB.TABLE_NAME_OD));
+
 				ResultSet rs = db.executeQuery(queryToImport);
 				String sqlbase = "INSERT OR IGNORE INTO odTable (";
 
