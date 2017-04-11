@@ -115,7 +115,11 @@ public class LoginController {
 	}
 
 	private boolean verificaUserPwdTreinamento(String user, String pwd) {
-		if ((user.length() == LEN_LOGIN_USER + 1) && (Character.toUpperCase(user.charAt(LEN_LOGIN_USER)) == 'T')) {
+		if ((user.equals(Concentrador.configuration.getProperty("trainingUser"))
+				|| user.equalsIgnoreCase(Concentrador.configuration.getProperty("trainingUser") + "T"))
+				&& pwd.equals(Concentrador.configuration.getProperty("trainingPassword"))) {
+			return true;
+		} else if ((user.length() == LEN_LOGIN_USER + 1) && (Character.toUpperCase(user.charAt(LEN_LOGIN_USER)) == 'T')) {
 			// try {
 			// /* O IF abaixo está comentado por não termos confiança na data do sistema. */
 			// if (!Util.isInValidPeriod(new Date())) {
