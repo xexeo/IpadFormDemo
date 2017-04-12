@@ -193,14 +193,6 @@ var app = {
 	 */
 	bindEvents : function() {
 		document.addEventListener('deviceready', app.onDeviceReady);
-		document.addEventListener('batterycritical',function(status){
-			alert("A bateria atingiu nível crítco! \nCarregue o ipad imediatamente.\nNível de bateria: " + status.level + "%",
-				'Alerta de Bateria', null, 'info');
-		}, false);
-		document.addEventListener('batterylow', function(status){
-			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
-				'Alerta de Bateria', null, 'info');;
-		}, false);
 		console.log('bindindEvents');
 	},
 
@@ -209,6 +201,14 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		app.logger.log('device ready');
+		document.addEventListener('batterycritical',function(status){
+			alert("A bateria atingiu nível crítco! \nCarregue o ipad imediatamente.\nNível de bateria: " + status.level + "%",
+				'Alerta de Bateria', null, 'info');
+		}, false);
+		document.addEventListener('batterylow', function(status){
+			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
+				'Alerta de Bateria', null, 'info');;
+		}, false);
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
 		if (device.platform == 'iOS' || device.platform == 'Android') {
