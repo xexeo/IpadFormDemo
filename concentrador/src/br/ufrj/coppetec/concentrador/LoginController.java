@@ -88,7 +88,8 @@ public class LoginController {
 			user = user.substring(0, 3);
 			Concentrador.treinamento = true;
 			Concentrador.posto = user;
-			Concentrador.trecho = String.format("TREINAMENTO (%s)", logins.get(user).get("trecho"));
+			Concentrador.trecho = String.format("TREINAMENTO (%s)",
+					(!user.equals("000") ? logins.get(user).get("trecho") : "Trecho de teste"));
 			isValidLogin = true;
 		}
 
