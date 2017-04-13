@@ -1,4 +1,4 @@
-/* global util, app, ipadID */
+/* global util, datas, app, ipadID */
 
 controllers.menu = {
 	config : function() {
@@ -17,10 +17,19 @@ controllers.menu = {
 		}
 		
         $('#menu_nova_pesquisa').click(function() {
-			// clear registro
-			app.iniciaRegistro();
 			clearInterval(updater_dataTimeToDisplay);
-			app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
+			
+			if (datas.verificaData() && app.isTreinamento) {
+				alert("Login de treinamento não podem ser \nutilizado em dias de produção de pesquisas reais.\nA aplicação será reiniciada",
+				"Controle de acesso", app.restart,	'error');
+			} else if (!datas.verificaData() && !app.isTreinamento){
+				alert("Logins de produção não podem ser \nutilizados fora das datas de produção de pesquisas reais.\nA aplicação será reiniciada",
+				"Controle de acesso", app.restart, 'error');
+			} else {
+				// clear registro
+				app.iniciaRegistro();
+				app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
+			}
 		});
 
         $('#menu_sumario').click(function() {

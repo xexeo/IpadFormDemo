@@ -4,7 +4,7 @@ var app = {
 
 	versao : "2.3.2",
 	
-	debugMode : true,
+	debugMode : false,
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -207,7 +207,7 @@ var app = {
 		}, false);
 		window.addEventListener('batterylow', function(status){
 			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
-				'Alerta de Bateria', null, 'info');;
+				'Alerta de Bateria', null, 'info');
 		}, false);
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
