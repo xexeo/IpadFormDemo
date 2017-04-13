@@ -201,11 +201,11 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		app.logger.log('device ready');
-		document.addEventListener('batterycritical',function(status){
+		window.addEventListener('batterycritical',function(status){
 			alert("A bateria atingiu nível crítco! \nCarregue o ipad imediatamente.\nNível de bateria: " + status.level + "%",
 				'Alerta de Bateria', null, 'info');
 		}, false);
-		document.addEventListener('batterylow', function(status){
+		window.addEventListener('batterylow', function(status){
 			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
 				'Alerta de Bateria', null, 'info');;
 		}, false);
