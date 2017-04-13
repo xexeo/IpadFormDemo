@@ -148,8 +148,8 @@ public class Janela extends javax.swing.JFrame {
 		}
 
 		try {
-			prepareFillComboDates(cmbDateExpVol, dataBaseDatesVol, 0);
-			prepareFillComboDates(cmbDateExpOD, dataBaseDatesOD, 1);
+			prepareFillComboDates(cmbDateExpVol, dataBaseDatesVol, 0, false);
+			prepareFillComboDates(cmbDateExpOD, dataBaseDatesOD, 1, true);
 		} catch (ParseException e) {
 			logger.error("Erro no preenchimento dos campos de data para exportação.", e);
 			JOptionPane.showMessageDialog(Janela.this,
@@ -169,7 +169,7 @@ public class Janela extends javax.swing.JFrame {
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
 		}
 		try {
-			prepareFillComboDates(cmbDataSumVol, dataBaseDates, 0);
+			prepareFillComboDates(cmbDataSumVol, dataBaseDates, 0, false);
 		} catch (ParseException e) {
 			logger.error("Erro no preenchimento dos campos de data do sumário da pesquisa volumétrica.", e);
 			JOptionPane.showMessageDialog(Janela.this,
@@ -178,8 +178,8 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 
-	protected void prepareFillComboDates(JComboBox<String> cmbDateExp, String[] dataBaseDates, int defaultIndex)
-			throws ParseException {
+	protected void prepareFillComboDates(JComboBox<String> cmbDateExp, String[] dataBaseDates, int defaultIndex,
+			boolean includeDatasDB_OD) throws ParseException {
 		if ((cmbDateExp != null) && (dataBaseDates != null)) {
 			String date;
 			cmbDateExp.removeAllItems();
@@ -187,7 +187,7 @@ public class Janela extends javax.swing.JFrame {
 			subListDatesToShow.add(TODAS);
 			for (String dataBaseDate : dataBaseDates) {
 				date = Util.SDF_BRAZIL.format(Util.SDF_SQL_DATE_ONLY.parse(dataBaseDate)).trim();
-				if (ArrayUtils.contains(datesToShow, date)) {
+				if (includeDatasDB_OD || ArrayUtils.contains(datesToShow, date)) {
 					subListDatesToShow.add(date);
 				}
 			}
