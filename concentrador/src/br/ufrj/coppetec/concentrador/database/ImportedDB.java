@@ -147,9 +147,13 @@ public class ImportedDB extends Db {
 				int counterPostoProducaoCancelados = 0;
 				int counterPostoTrainingCancelados = 0;
 				int rowsAffected = 0;
+				int counterInconsistentes = 0;
+				int counterInconsistentesTreinamento = 0;
 				while (rs.next()) {
 					try {
-
+						idPosto = 0;
+						cancelado = "";
+						treinamento = "";
 						idPosto = Integer.parseInt(rs.getString("idPosto"));
 						cancelado = Util.getSQLiteBoolean(rs.getString("cancelado"));
 						treinamento = Util.getSQLiteBoolean(rs.getString("treinamento"));
@@ -262,6 +266,10 @@ public class ImportedDB extends Db {
 					} catch (Exception e) {
 						// do nothing only ignore error
 						logger.error(String.format("Erro a inserir o registro:%s%s", System.lineSeparator(), sql), e);
+						counterInconsistentes++;
+						if (treinamento.equals("1")) {
+							counterInconsistentesTreinamento++;
+						}
 					}
 					// System.out.println(sql);
 				}
@@ -272,6 +280,9 @@ public class ImportedDB extends Db {
 						counterPostoProducao, Concentrador.posto, counterPostoProducao - counterPostoProducaoCancelados));
 				logger.info(String.format(logImports, counterTraining, "TREINAMENTO", counterTraining - counterTrainingCancelados,
 						counterPostoTraining, Concentrador.posto, counterPostoTraining - counterPostoTrainingCancelados));
+				logger.info(String.format(
+						"Foram detectados %d registros inconsistentes dentre os quais, pelo menos %d são da fase de treinamento.",
+						counterInconsistentes, counterInconsistentesTreinamento));
 				return counter;
 			}
 

@@ -23,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -57,8 +58,13 @@ import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
  *
  * @author ludes
  */
+@SuppressWarnings("serial")
 public class Janela extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final String TODAS = "Todas";
 	private static Logger logger = LogManager.getLogger(Janela.class);
 	private String[] datesToShow;
 
@@ -123,79 +129,76 @@ public class Janela extends javax.swing.JFrame {
 			datesToShow = Util.getValidDatesStr();
 		}
 		String[] vazio = { "" };
-		cmbData.setModel(new DefaultComboBoxModel(Util.concatArrays(vazio, datesToShow)));
+		cmbData.setModel(new DefaultComboBoxModel<String>(Util.concatArrays(vazio, datesToShow)));
 		cmbData.setSelectedItem(0);
 	}
 
 	private void fillCmbDatesExp() {
+		String[] dataBaseDatesVol = null;
+		String[] dataBaseDatesOD = null;
 		try {
 			myDB database = Concentrador.database;
-			String[] dataBaseDatesVol = database.getVolDates(Integer.valueOf(Concentrador.posto));
-			String[] dataBaseDatesOD = database.getODDates(Integer.valueOf(Concentrador.posto));
-			String date;
-
-			if (dataBaseDatesVol != null) {
-				cmbDateExpVol.removeAllItems();
-				// cmbDateExpVol.addItem("Todas");
-				for (String dataBaseDate : dataBaseDatesVol) {
-					date = Util.SDF_BRAZIL.format(Util.SDF_SQL_DATE_ONLY.parse(dataBaseDate)).trim();
-					if (ArrayUtils.contains(datesToShow, date)) {
-						cmbDateExpVol.addItem(date);
-						cmbDateExpVol.setSelectedIndex(0);
-					}
-				}
-			}
-
-			if (dataBaseDatesOD != null) {
-				cmbDateExpOD.removeAllItems();
-
-				List<String> subListDatesToShow = new ArrayList<String>();
-				subListDatesToShow.add("Todas");
-				for (String dataBaseDate : dataBaseDatesOD) {
-					date = Util.SDF_BRAZIL.format(Util.SDF_SQL_DATE_ONLY.parse(dataBaseDate)).trim();
-					if (ArrayUtils.contains(datesToShow, date)) {
-						subListDatesToShow.add(date);
-					}
-				}
-				int indexSelect = subListDatesToShow.indexOf(Util.SDF_BRAZIL.format(new Date()));
-				if (indexSelect < 0) {
-					indexSelect = 1;
-				}
-				for (String dateToShow : subListDatesToShow) {
-					cmbDateExpOD.addItem(dateToShow);
-				}
-				cmbDateExpOD.setSelectedIndex(indexSelect);
-			}
+			dataBaseDatesVol = database.getVolDates(Integer.valueOf(Concentrador.posto));
+			dataBaseDatesOD = database.getODDates(Integer.valueOf(Concentrador.posto));
 
 		} catch (Exception e) {
 			logger.error("Erro ao conectar com o BD.", e);
 			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
 		}
+
+		try {
+			prepareFillComboDates(cmbDateExpVol, dataBaseDatesVol, 0);
+			prepareFillComboDates(cmbDateExpOD, dataBaseDatesOD, 1);
+		} catch (ParseException e) {
+			logger.error("Erro no preenchimento dos campos de data para exportação.", e);
+			JOptionPane.showMessageDialog(Janela.this,
+					"Erro no preenchimento dos campos de data para exportação:\n" + e.getMessage(),
+					"Erro no preenchimento de campos.", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void fillCmbDatesSumVol() {
+		String[] dataBaseDates = null;
 		try {
 			myDB database = Concentrador.database;
-			String[] dataBaseDates = database.getVolDates(Integer.valueOf(Concentrador.posto));
-			String date;
-
-			if (dataBaseDates != null) {
-				cmbDataSumVol.removeAllItems();
-				cmbDataSumVol.addItem("Todas");
-				for (String dataBaseDate : dataBaseDates) {
-					date = Util.SDF_BRAZIL.format(Util.SDF_SQL_DATE_ONLY.parse(dataBaseDate)).trim();
-					if (ArrayUtils.contains(datesToShow, date)) {
-						cmbDataSumVol.addItem(date);
-					}
-				}
-
-			}
-
+			dataBaseDates = database.getVolDates(Integer.valueOf(Concentrador.posto));
 		} catch (Exception e) {
 			logger.error("Erro ao conectar com o BD.", e);
 			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
+		}
+		try {
+			prepareFillComboDates(cmbDataSumVol, dataBaseDates, 0);
+		} catch (ParseException e) {
+			logger.error("Erro no preenchimento dos campos de data do sumário da pesquisa volumétrica.", e);
+			JOptionPane.showMessageDialog(Janela.this,
+					"Erro no preenchimento dos campos de data do sumário da pesquisa volumétrica:\n" + e.getMessage(),
+					"Erro no preenchimento de campos.", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	protected void prepareFillComboDates(JComboBox<String> cmbDateExp, String[] dataBaseDates, int defaultIndex)
+			throws ParseException {
+		if ((cmbDateExp != null) && (dataBaseDates != null)) {
+			String date;
+			cmbDateExp.removeAllItems();
+			List<String> subListDatesToShow = new ArrayList<String>();
+			subListDatesToShow.add(TODAS);
+			for (String dataBaseDate : dataBaseDates) {
+				date = Util.SDF_BRAZIL.format(Util.SDF_SQL_DATE_ONLY.parse(dataBaseDate)).trim();
+				if (ArrayUtils.contains(datesToShow, date)) {
+					subListDatesToShow.add(date);
+				}
+			}
+			int indexSelect = subListDatesToShow.indexOf(Util.SDF_BRAZIL.format(new Date()));
+			if (indexSelect < 0) {
+				indexSelect = (subListDatesToShow.size() > defaultIndex ? Math.max(defaultIndex, 0) : 0);
+			}
+			for (String dateToShow : subListDatesToShow) {
+				cmbDateExp.addItem(dateToShow);
+			}
+			cmbDateExp.setSelectedIndex(indexSelect);
 		}
 	}
 
@@ -496,7 +499,7 @@ public class Janela extends javax.swing.JFrame {
 	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of
 	 * this method is always regenerated by the Form Editor.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "deprecation" })
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
@@ -970,7 +973,7 @@ public class Janela extends javax.swing.JFrame {
 		jLabel34 = new javax.swing.JLabel();
 		lblTrecho_dados = new javax.swing.JLabel();
 		btnApagar = new javax.swing.JButton();
-		cmbData = new javax.swing.JComboBox();
+		cmbData = new javax.swing.JComboBox<String>();
 		pnl_servidor = new javax.swing.JPanel();
 		jLabel1 = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
@@ -992,7 +995,7 @@ public class Janela extends javax.swing.JFrame {
 		btnExpODDate = new javax.swing.JButton();
 		pnl_sumario_volumetrica = new javax.swing.JPanel();
 		jLabel38 = new javax.swing.JLabel();
-		cmbDataSumVol = new javax.swing.JComboBox();
+		cmbDataSumVol = new javax.swing.JComboBox<String>();
 		chk_exportadas_sumVol = new javax.swing.JCheckBox();
 		chk_nao_exportadas_sumVol = new javax.swing.JCheckBox();
 		jLabel41 = new javax.swing.JLabel();
@@ -5966,7 +5969,7 @@ public class Janela extends javax.swing.JFrame {
 			}
 		});
 
-		cmbData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+		cmbData.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 		cmbData.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cmbDataActionPerformed(evt);
@@ -6444,14 +6447,14 @@ public class Janela extends javax.swing.JFrame {
 				new String[] { "Tipos", "0:00 - 2:00", "2:00 - 4:00", "4:00 - 6:00", "6:00 - 8:00", "8:00 - 10:00",
 						"10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00",
 						"22:00 - 24:00" }) {
-			Class[] types = new Class[] { java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class,
+			Class<?>[] types = new Class[] { java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class,
 					java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class,
 					java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class,
 					java.lang.Integer.class, java.lang.Integer.class };
 			boolean[] canEdit = new boolean[] { false, false, false, false, false, false, false, false, false, false, false,
 					false, false };
 
-			public Class getColumnClass(int columnIndex) {
+			public Class<?> getColumnClass(int columnIndex) {
 				return types[columnIndex];
 			}
 
@@ -7052,8 +7055,6 @@ public class Janela extends javax.swing.JFrame {
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		if (returnedValue == JOptionPane.YES_OPTION) {
 			// solicita senha
-			int counter = 0;
-			boolean wrong_password = true;
 			JPanel panel = new JPanel();
 			JLabel label = new JLabel("Entre com o senha para apagar o registro.");
 			JPasswordField pass = new JPasswordField(10);
@@ -7091,7 +7092,6 @@ public class Janela extends javax.swing.JFrame {
 
 	private synchronized void relatorioOD() {
 		odStatus.setText("Carregando dados ...");
-		Map<String, Map<String, Integer>> data = null;
 		Vector<String> cols = null;
 		Vector<String> rows = null;
 		DefaultTableModel model = new DefaultTableModel() {
@@ -7111,7 +7111,7 @@ public class Janela extends javax.swing.JFrame {
 			model.setColumnCount(cols.size());
 			model.setColumnIdentifiers(cols);
 			model.addColumn("Total");
-			HashMap<String, Integer> totals = new HashMap();
+			HashMap<String, Integer> totals = new HashMap<String, Integer>();
 			for (String ipad : cols) {
 				if (!ipad.equals("") && !ipad.equals("Total")) {
 					totals.put(ipad, 0);
@@ -7119,7 +7119,7 @@ public class Janela extends javax.swing.JFrame {
 			}
 			for (String date : rows) {
 				try {
-					Vector<String> rowData = new Vector();
+					Vector<String> rowData = new Vector<String>();
 					Map<String, Integer> ipads = Concentrador.database.fetchReportODData(date,
 							Integer.parseInt(Concentrador.posto));
 					rowData.add(date);
@@ -7145,7 +7145,7 @@ public class Janela extends javax.swing.JFrame {
 				}
 			}
 
-			Vector<String> totalsRow = new Vector();
+			Vector<String> totalsRow = new Vector<String>();
 			totalsRow.add("Total");
 			int sumTotal = 0;
 			for (String ipad : cols) {
@@ -7177,16 +7177,9 @@ public class Janela extends javax.swing.JFrame {
 
 	private void cmbDataSumVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDataSumVolActionPerformed
 		try {
-			if (cmbDataSumVol.getSelectedItem() == null || cmbDataSumVol.getSelectedItem().toString().equals("Todas")) {
-				this.setSumVolData(null);
-				this.setSumVolTable(null);
-			} else {
-				this.setSumVolData(
-						Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(cmbDataSumVol.getSelectedItem().toString())));
-				this.setSumVolTable(
-						Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(cmbDataSumVol.getSelectedItem().toString())));
-			}
-
+			String dateStr = getSelectedDateFromCombo(cmbDataSumVol);
+			this.setSumVolData(dateStr);
+			this.setSumVolTable(dateStr);
 		} catch (Exception e) {
 			logger.error("Erro na conversão de datas para consulta e construção do sumário da pesquisa volumétrica.", e);
 		}
@@ -7194,7 +7187,7 @@ public class Janela extends javax.swing.JFrame {
 	}// GEN-LAST:event_cmbDataSumVolActionPerformed
 
 	private void cmbDateExpVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDateExpVolActionPerformed
-
+		// TO-DO add your handling code here:
 	}// GEN-LAST:event_cmbDateExpVolActionPerformed
 
 	private void btnExpODDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnExpODDateActionPerformed
@@ -7202,7 +7195,7 @@ public class Janela extends javax.swing.JFrame {
 	}// GEN-LAST:event_btnExpODDateActionPerformed
 
 	private void cmbDateExpODActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDateExpODActionPerformed
-		// TODO add your handling code here:
+		// TO-DO add your handling code here:
 	}// GEN-LAST:event_cmbDateExpODActionPerformed
 
 	private void cmbDataActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDataActionPerformed
@@ -7211,7 +7204,7 @@ public class Janela extends javax.swing.JFrame {
 
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
-		File[] roots = filesys.getRoots();
+		// File[] roots = filesys.getRoots();
 		File desktop = filesys.getHomeDirectory();
 
 		File inputFolder = new File(desktop.getAbsolutePath() + File.separator
@@ -7240,33 +7233,39 @@ public class Janela extends javax.swing.JFrame {
 
 	}// GEN-LAST:event_btnInDadosActionPerformed
 
-	private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnExportAllVolActionPerformed
-		exporterFileChooser.setSelectedFile(new File("todos_volumetrica.zip"));
-		int returnVal = exporterFileChooser.showSaveDialog(this);
+	// private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {//
+	// GEN-FIRST:event_btnExportAllVolActionPerformed
+	// exporterFileChooser.setSelectedFile(new File("todos_volumetrica.zip"));
+	// int returnVal = exporterFileChooser.showSaveDialog(this);
+	//
+	// if (returnVal == exporterFileChooser.APPROVE_OPTION) {
+	// JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV, this);
+	// exporter.export(Integer.parseInt(Concentrador.posto), String.valueOf(cmbDateExpVol.getSelectedItem()));
+	// }
+	//
+	// }// GEN-LAST:event_btnExportAllVolActionPerformed
+	//
+	// private void btnODexportAllActionPerformed(java.awt.event.ActionEvent evt) {//
+	// GEN-FIRST:event_btnODexportAllActionPerformed
+	// exporterFileChooser.setSelectedFile(new File("todos_od.zip"));
+	// int returnVal = exporterFileChooser.showSaveDialog(this);
+	//
+	// if (returnVal == exporterFileChooser.APPROVE_OPTION) {
+	// JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
+	//
+	// exporter.export(Integer.parseInt(Concentrador.posto));
+	// }
+	// }// GEN-LAST:event_btnODexportAllActionPerformed
 
-		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV, this);
-			exporter.export(Integer.parseInt(Concentrador.posto), String.valueOf(cmbDateExpVol.getSelectedItem()));
-		}
-
-	}// GEN-LAST:event_btnExportAllVolActionPerformed
-
-	private void btnODexportAllActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnODexportAllActionPerformed
-		exporterFileChooser.setSelectedFile(new File("todos_od.zip"));
-		int returnVal = exporterFileChooser.showSaveDialog(this);
-
-		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
-
-			exporter.export(Integer.parseInt(Concentrador.posto));
-		}
-	}// GEN-LAST:event_btnODexportAllActionPerformed
-
-	private String getSelectedDateFromCombo(javax.swing.JComboBox combo) throws ParseException {
-		if (combo.getSelectedItem().toString().equals("--"))
+	private String getSelectedDateFromCombo(javax.swing.JComboBox<String> combo) throws ParseException {
+		if (combo.getSelectedItem() == null) {
 			return null;
-		String date = Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(combo.getSelectedItem().toString()));
-		return date;
+		}
+		String dateStr = combo.getSelectedItem().toString();
+		if (dateStr.equals("--") || dateStr.equals(TODAS)) {
+			return null;
+		}
+		return Util.SDF_SQL_DATE_ONLY.format(Util.SDF_BRAZIL.parse(dateStr));
 	}
 
 	private String buildExportName(JSONExporter.DbTable t, String date) throws ParseException {
@@ -7276,7 +7275,7 @@ public class Janela extends javax.swing.JFrame {
 		else if (t.toString().equals(JSONExporter.DbTable.PV.toString()))
 			name = "volumetrica_";
 		// name+=Concentrador.posto+"_"+Util.SDF_ARQ.format(Util.sdf.parse(date))+".zip";
-		name += Concentrador.posto + "_" + date + ".zip";
+		name += Concentrador.posto + "_" + (date == null ? TODAS : date) + ".zip";
 		return name;
 	}
 
@@ -7293,7 +7292,7 @@ public class Janela extends javax.swing.JFrame {
 
 			int returnVal = exporterFileChooser.showSaveDialog(this);
 
-			if (returnVal == exporterFileChooser.APPROVE_OPTION) {
+			if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
 				JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), t, this);
 				exporter.export(Integer.parseInt(Concentrador.posto), date);
 			}
@@ -7308,15 +7307,15 @@ public class Janela extends javax.swing.JFrame {
 		exportData(JSONExporter.DbTable.PV);
 	}
 
-	private void btnODNotSentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnODNotSentActionPerformed
-		exporterFileChooser.setSelectedFile(new File("novos_od.zip"));
-		int returnVal = exporterFileChooser.showSaveDialog(this);
-
-		if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-			JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
-			exporter.export(Integer.parseInt(Concentrador.posto));
-		}
-	}// GEN-LAST:event_btnODNotSentActionPerformed
+	// private void btnODNotSentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnODNotSentActionPerformed
+	// exporterFileChooser.setSelectedFile(new File("novos_od.zip"));
+	// int returnVal = exporterFileChooser.showSaveDialog(this);
+	//
+	// if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+	// JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
+	// exporter.export(Integer.parseInt(Concentrador.posto));
+	// }
+	// }// GEN-LAST:event_btnODNotSentActionPerformed
 
 	private void btnSalvarFormsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSalvarFormsActionPerformed
 		String posto = Concentrador.posto;
@@ -7594,8 +7593,8 @@ public class Janela extends javax.swing.JFrame {
 	private javax.swing.JButton btnSalvarForms;
 	private javax.swing.JCheckBox chk_exportadas_sumVol;
 	private javax.swing.JCheckBox chk_nao_exportadas_sumVol;
-	private javax.swing.JComboBox cmbData;
-	private javax.swing.JComboBox cmbDataSumVol;
+	private javax.swing.JComboBox<String> cmbData;
+	private javax.swing.JComboBox<String> cmbDataSumVol;
 	private javax.swing.JComboBox<String> cmbDateExpOD;
 	private javax.swing.JComboBox<String> cmbDateExpVol;
 	private javax.swing.JComboBox<String> cmbHora;
@@ -8166,6 +8165,7 @@ public class Janela extends javax.swing.JFrame {
 
 }
 
+@SuppressWarnings("serial")
 class ImagemRenderer extends DefaultTableCellRenderer {
 	public ImagemRenderer() {
 		super();
@@ -8225,6 +8225,7 @@ class ZipFilter extends FileFilter {
 
 }
 
+@SuppressWarnings("serial")
 class RelatorioODRender extends DefaultTableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row,
 			int column) {
