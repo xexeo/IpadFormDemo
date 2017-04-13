@@ -541,7 +541,7 @@ public class myDB extends Db {
 		ResultSet result = this.executeQuery(sel_sql);
 		while (result.next()) {
 			Date day = Util.SDF_SQL_DATE_ONLY.parse(result.getString("data"));
-			Util.SDF_BRAZIL.format(Util.SDF_BRAZIL.format(day));
+			rows.add(Util.SDF_BRAZIL.format(day));
 		}
 		commit();
 		return rows;
