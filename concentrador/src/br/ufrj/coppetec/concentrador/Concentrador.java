@@ -108,6 +108,9 @@ public class Concentrador {
 		}
 	}
 
+	public static int getPostoInt() {
+		return Integer.parseInt(Concentrador.posto);
+	}
 	// private static boolean startServer() {
 	// boolean r = true;
 	// try {

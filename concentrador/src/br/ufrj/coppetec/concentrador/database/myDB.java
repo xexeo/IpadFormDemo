@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
@@ -540,13 +539,9 @@ public class myDB extends Db {
 		String sel_sql = "SELECT DISTINCT DATE(dataIniPesq) AS data FROM odTable WHERE idPosto=" + posto + " AND cancelado=0 "
 				+ validPeriodCondition + " ORDER BY date(dataIniPesq) DESC";
 		ResultSet result = this.executeQuery(sel_sql);
-		// TODO acredito que precisa rever quem será exportado/importado conforme o período
-		String[] validDates = Util.getValidDatesStr();
 		while (result.next()) {
 			Date day = Util.SDF_SQL_DATE_ONLY.parse(result.getString("data"));
-			String d = Util.SDF_BRAZIL.format(day);
-			if (ArrayUtils.contains(validDates, d))
-				rows.add(d);
+			rows.add(Util.SDF_BRAZIL.format(day));
 		}
 		commit();
 		return rows;

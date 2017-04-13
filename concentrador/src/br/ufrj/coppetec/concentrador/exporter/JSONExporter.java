@@ -62,7 +62,7 @@ public class JSONExporter {
 
 		public String sql(Integer posto) throws ParseException {
 			String r = "SELECT * FROM ";
-			if (text.equals("odtable")) {
+			if (text.equals(myDB.TABLE_NAME_OD)) {
 				r += "odtable WHERE cancelado=0 and idPosto=" + posto.intValue();
 			} else {
 				r += "voltable WHERE posto=" + posto.intValue();
@@ -154,12 +154,11 @@ public class JSONExporter {
 			String qry = this.table.sql(posto);
 
 			if (date != null) {
-				if (this.table.text.equals("odtable")) {
+				if (this.table.text.equals(myDB.TABLE_NAME_OD)) {
 					qry += " AND dataIniPesq like '" + date + "%';";
 				} else {
 					qry += " AND data like '" + date + "%';";
 				}
-
 			}
 
 			database = myDB.getInstance();
