@@ -7102,7 +7102,7 @@ public class Janela extends javax.swing.JFrame {
 
 		try {
 			cols = Concentrador.database.fetchReportODColumns();
-			rows = Concentrador.database.fetchReportODRows(Integer.parseInt(Concentrador.posto));
+			rows = Concentrador.database.fetchReportODRows(Concentrador.getPostoInt());
 		} catch (Exception ex) {
 			logger.error("Error ao ler dados para relatorio OD.", ex);
 		}
@@ -7168,7 +7168,7 @@ public class Janela extends javax.swing.JFrame {
 		if (tabRelatorio.getSelectedComponent().equals(pnl_sumario_volumetrica)) {
 			this.fillCmbDatesSumVol();
 		} else if (tabRelatorio.getSelectedComponent().equals(pnl_relatorio)) {
-			relatorioOD();
+			this.relatorioOD();
 		} else if (tabRelatorio.getSelectedComponent().equals(pnl_envio)) {
 			this.fillCmbDatesExp();
 
