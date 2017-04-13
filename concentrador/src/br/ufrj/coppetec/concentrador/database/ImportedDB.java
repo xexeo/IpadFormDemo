@@ -132,32 +132,48 @@ public class ImportedDB extends Db {
 				// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
 				sqlbase += ") ";
 				String sql = "";
+				int idPosto = 0;
 				String idCombustivel = "";
 				String treinamento = "";
 				String cancelado = "";
 				boolean placaEstrangeira;
 				int counter = 0;
+				int counterProducao = 0;
 				int counterTraining = 0;
+				int counterProducaoCancelados = 0;
+				int counterTrainingCancelados = 0;
+				int counterPostoProducao = 0;
+				int counterPostoTraining = 0;
+				int counterPostoProducaoCancelados = 0;
+				int counterPostoTrainingCancelados = 0;
+				int rowsAffected = 0;
 				while (rs.next()) {
 					try {
 
+						idPosto = Integer.parseInt(rs.getString("idPosto"));
 						cancelado = Util.getSQLiteBoolean(rs.getString("cancelado"));
-						idCombustivel = (rs.getString("idCombustivel") == null && cancelado.equals("0")) ? "3"
-								: rs.getString("idCombustivel");
-						placaEstrangeira = Util.getSQLiteBoolean(rs.getString("placaEstrangeira")).equals("1");
 						treinamento = Util.getSQLiteBoolean(rs.getString("treinamento"));
+
+						/*
+						 * IMPORTANTE: não se deve fazer nenhum outro tratamento nos dados recuperados (além dos três acima) antes
+						 * de começar a contruir o SQL com pelo menos os campos identificadores. Portanto é imprescindível que o
+						 * tratamento do campo seja feito logo antes de usá-lo para montrar a string SQL. Isso impacta no log caso
+						 * ocorra algum erro/exceção nesse tratamento. Exemplos: placaEstrangeira e idCombustivel.
+						 */
+
 						sql = sqlbase + " VALUES (";
 						sql += " '" + rs.getString("id") + "', ";
 						sql += "0, "; // não enviado
 						sql += "1, "; // esta no note
 						sql += cancelado + ", ";
-						sql += rs.getString("idPosto") + ", ";
+						sql += idPosto + ", ";
 						sql += "'" + rs.getString("sentido") + "', ";
 						sql += "'" + rs.getString("idIpad") + "', ";
 						// sql += "'" + rs.getString("uuid") + "', ";
 						sql += "'" + rs.getString("login") + "', ";
 						sql += "'" + rs.getString("dataIniPesq") + "', ";
 						sql += "'" + rs.getString("dataFimPesq") + "', ";
+						placaEstrangeira = Util.getSQLiteBoolean(rs.getString("placaEstrangeira")).equals("1");
 						if (placaEstrangeira) {
 							sql += "'" + Util.getStringLimited(rs.getString("placa"), "placaEstrangeira") + "', ";
 						} else {
@@ -175,6 +191,8 @@ public class ImportedDB extends Db {
 						sql += rs.getString("idPropriedadesDoVeiculo") + ", ";
 						sql += Util.getSQLiteBoolean(rs.getString("placaEstrangeira")) + ", ";
 						sql += rs.getString("idPaisPlacaEstrangeira") + ", ";
+						idCombustivel = (rs.getString("idCombustivel") == null && cancelado.equals("0")) ? "3"
+								: rs.getString("idCombustivel");
 						// sql += rs.getString("idCombustivel") + ", ";
 						sql += idCombustivel + ", ";
 						sql += "'" + rs.getString("categoria") + "', ";
@@ -211,14 +229,36 @@ public class ImportedDB extends Db {
 						sql += rs.getString("idPerguntaExtra") + ", ";
 						sql += rs.getString("duracaoPesq") + ", ";
 						sql += treinamento;
-						// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
+						/* IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior. */
 						sql += "); ";
 						concentradorDb.setStatement();
 
-						if (treinamento.equals("1")) {
-							counterTraining++;
+						rowsAffected = concentradorDb.executeStatement(sql);
+
+						if (treinamento.equals("0")) {
+							counterProducao += rowsAffected;
+							if (cancelado.equals("1")) {
+								counterProducaoCancelados += rowsAffected;
+							}
+							if (idPosto == Concentrador.getPostoInt()) {
+								counterPostoProducao += rowsAffected;
+								if (cancelado.equals("1")) {
+									counterPostoProducaoCancelados += rowsAffected;
+								}
+							}
+						} else {
+							counterTraining += rowsAffected;
+							if (cancelado.equals("1")) {
+								counterTrainingCancelados += rowsAffected;
+							}
+							if (idPosto == Concentrador.getPostoInt()) {
+								counterPostoTraining += rowsAffected;
+								if (cancelado.equals("1")) {
+									counterPostoTrainingCancelados += rowsAffected;
+								}
+							}
 						}
-						counter += concentradorDb.executeStatement(sql);
+						counter += rowsAffected;
 					} catch (Exception e) {
 						// do nothing only ignore error
 						logger.error(String.format("Erro a inserir o registro:%s%s", System.lineSeparator(), sql), e);
@@ -226,6 +266,12 @@ public class ImportedDB extends Db {
 					// System.out.println(sql);
 				}
 				rs.close();
+				String logImports = "Foram importados %d registros do período de %s, em que %d são válidos,"
+						+ " e %d são do POSTO %s, com %d registros válidos para este posto.";
+				logger.info(String.format(logImports, counterProducao, "PRODUÇÃO", counterProducao - counterProducaoCancelados,
+						counterPostoProducao, Concentrador.posto, counterPostoProducao - counterPostoProducaoCancelados));
+				logger.info(String.format(logImports, counterTraining, "TREINAMENTO", counterTraining - counterTrainingCancelados,
+						counterPostoTraining, Concentrador.posto, counterPostoTraining - counterPostoTrainingCancelados));
 				return counter;
 			}
 

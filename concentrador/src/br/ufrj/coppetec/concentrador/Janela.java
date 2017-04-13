@@ -12,7 +12,10 @@ import java.awt.Font;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -145,15 +148,23 @@ public class Janela extends javax.swing.JFrame {
 
 			if (dataBaseDatesOD != null) {
 				cmbDateExpOD.removeAllItems();
-				cmbDateExpOD.addItem("Todas");
 
+				List<String> subListDatesToShow = new ArrayList<String>();
+				subListDatesToShow.add("Todas");
 				for (String dataBaseDate : dataBaseDatesOD) {
 					date = Util.SDF_BRAZIL.format(Util.SDF_SQL_DATE_ONLY.parse(dataBaseDate)).trim();
 					if (ArrayUtils.contains(datesToShow, date)) {
-						cmbDateExpOD.addItem(date);
-						cmbDateExpOD.setSelectedIndex(1);
+						subListDatesToShow.add(date);
 					}
 				}
+				int indexSelect = subListDatesToShow.indexOf(Util.SDF_BRAZIL.format(new Date()));
+				if (indexSelect < 0) {
+					indexSelect = 1;
+				}
+				for (String dateToShow : subListDatesToShow) {
+					cmbDateExpOD.addItem(dateToShow);
+				}
+				cmbDateExpOD.setSelectedIndex(indexSelect);
 			}
 
 		} catch (Exception e) {
@@ -7222,6 +7233,7 @@ public class Janela extends javax.swing.JFrame {
 			DBFileImporter dbfile = new DBFileImporter(inputFolder);
 			dbfile.readNewFiles();
 			JOptionPane.showMessageDialog(this, "Total de registros inseridos: " + Integer.toString(dbfile.getCounter()));
+			this.fillCmbDatesExp();
 		} catch (Exception e) {
 			logger.error(String.format("Erro ao importar arquivos em %s", inputFolder.getAbsolutePath()), e);
 		}
