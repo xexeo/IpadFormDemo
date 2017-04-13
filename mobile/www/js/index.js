@@ -2,7 +2,7 @@
 
 var app = {
 
-	versao : "2.3.0",
+	versao : "2.3.2",
 	
 	debugMode : true,
 

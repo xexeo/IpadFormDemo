@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="br.ufrj.coppetec.contDNIT"
-	version="2.3.0">
+	version="2.3.2">
 	<name>Contagem Mobile</name>
 	<description>Software mobile para contagem de tráfego.</description>
 	<author email="dev@cordova.apache.org" href="http://cordova.io">Coppetec/UFRJ Team</author>
@@ -47,7 +47,7 @@
 		<preference name="AutoHideSplashScreen" value="false" />
 	</platform>
 
-	<!--<preference name="Orientation" value="landscape" />-->
+	<preference name="Orientation" value="landscape" />
 	<preference name="DisallowOverscroll" value="true" />
 	<preference name="FadeSplashScreen" value="false" />
 	<preference name="FullScreen" value="falses" />
