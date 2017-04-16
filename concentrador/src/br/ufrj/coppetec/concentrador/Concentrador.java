@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import br.ufrj.coppetec.concentrador.database.myDB;
+import java.awt.Color;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Concentrador {
 	public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "3.0.1";
+	public static String version = "3.2.0";
 	public static Properties configuration;
 	public static boolean treinamento = false;
 
@@ -95,7 +96,9 @@ public class Concentrador {
 		}
 
 		splash.setVisible(false);
-
+		
+		janela.setTitle(janela.getTituloJanela());
+		
 		try {
 			janela.initDatesToShow();
 			janela.lblPosto_dados.setText(posto);

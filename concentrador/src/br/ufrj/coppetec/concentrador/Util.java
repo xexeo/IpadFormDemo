@@ -32,9 +32,9 @@ public final class Util {
 
 	private static HashMap<String, Integer> inputLimits = new HashMap<String, Integer>();
 
-	public static final SimpleDateFormat SDF_SQL_DATE_ONLY = new SimpleDateFormat("yyyy-MM-dd");
-	public static final SimpleDateFormat SDF_BRAZIL = new SimpleDateFormat("dd/MM/yyyy");
-	public static final SimpleDateFormat SDF_ARQ = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+	public static final SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat sdfBrazil = new SimpleDateFormat("dd/MM/yyyy");
+	public static final SimpleDateFormat sdfArq = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
 	private Util() {
 	}
@@ -101,7 +101,7 @@ public final class Util {
 		Set<Date> dates = new HashSet<Date>(datesStr.length);
 		for (int i = 0; i < datesStr.length; i++) {
 			try {
-				dates.add(SDF_BRAZIL.parse(datesStr[i].trim()));
+				dates.add(sdfBrazil.parse(datesStr[i].trim()));
 			} catch (ParseException e) {
 				logger.error(String.format("Erro ao carregar datas (formato inválido da data: %s).", datesStr[i]), e);
 				throw e;
@@ -121,7 +121,7 @@ public final class Util {
 	protected static String getDatesListInSQL(Set<Date> dates) throws ParseException {
 		String dateListInSQL = "";
 		for (Date date : dates) {
-			dateListInSQL += ", '" + SDF_SQL_DATE_ONLY.format(date) + "'";
+			dateListInSQL += ", '" + sdfSQL.format(date) + "'";
 		}
 		dateListInSQL += ")";
 		return dateListInSQL.replaceFirst(", ", "(");

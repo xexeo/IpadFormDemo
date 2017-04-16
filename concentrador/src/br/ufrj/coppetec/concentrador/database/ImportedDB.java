@@ -262,7 +262,13 @@ public class ImportedDB extends Db {
 								}
 							}
 						}
-						counter += rowsAffected;
+						//conta apenas os registros não cancelados do posto logado e do modo atual, apesar de importar TODOS!
+						if(idPosto == Concentrador.getPostoInt() && !cancelado.equals("1")){
+							if ((Concentrador.treinamento && treinamento.equals("1")) || (!Concentrador.treinamento && treinamento.equals("0"))){
+								counter += rowsAffected;
+							}
+						}
+						
 					} catch (Exception e) {
 						// do nothing only ignore error
 						logger.error(String.format("Erro a inserir o registro:%s%s", System.lineSeparator(), sql), e);

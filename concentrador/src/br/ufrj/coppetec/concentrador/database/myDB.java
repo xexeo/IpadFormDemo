@@ -540,17 +540,17 @@ public class myDB extends Db {
 				+ validPeriodCondition + " ORDER BY date(dataIniPesq) DESC";
 		ResultSet result = this.executeQuery(sel_sql);
 		while (result.next()) {
-			Date day = Util.SDF_SQL_DATE_ONLY.parse(result.getString("data"));
-			rows.add(Util.SDF_BRAZIL.format(day));
+			Date day = Util.sdfSQL.parse(result.getString("data"));
+			rows.add(Util.sdfBrazil.format(day));
 		}
 		commit();
 		return rows;
 	}
 
 	public Map<String, Integer> fetchReportODData(String strData, Integer posto) throws Exception {
-		Date data = Util.SDF_BRAZIL.parse(strData);
+		Date data = Util.sdfBrazil.parse(strData);
 		openTransaction();
-		String sqlData = Util.SDF_SQL_DATE_ONLY.format(data);
+		String sqlData = Util.sdfSQL.format(data);
 		String sel_sql = "SELECT idIpad, COUNT(idIpad) AS times FROM odTable " + " WHERE DATE(dataIniPesq)='" + sqlData
 				+ "' AND cancelado=0 AND idPosto=" + posto + " GROUP BY idIpad ";
 
@@ -574,7 +574,7 @@ public class myDB extends Db {
 		HashMap<String, Map<String, Integer>> data = new HashMap<String, Map<String, Integer>>();
 		ResultSet result = this.executeQuery(sel_sql);
 		while (result.next()) {
-			Date day = Util.SDF_SQL_DATE_ONLY.parse(result.getString("dia"));
+			Date day = Util.sdfSQL.parse(result.getString("dia"));
 			String ipad = result.getString("idIpad");
 			Integer times = result.getInt("times");
 
@@ -582,11 +582,11 @@ public class myDB extends Db {
 			if (data.containsKey(day)) {
 				Map<String, Integer> regs = data.get(day);
 				regs.put(ipad, times);
-				data.put(Util.SDF_BRAZIL.format(day), regs);
+				data.put(Util.sdfBrazil.format(day), regs);
 			} else {
 				HashMap<String, Integer> regs = new HashMap<String, Integer>();
 				regs.put(ipad, times);
-				data.put(Util.SDF_BRAZIL.format(day), regs);
+				data.put(Util.sdfBrazil.format(day), regs);
 			}
 		}
 		result.close();
