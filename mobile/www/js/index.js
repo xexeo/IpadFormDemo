@@ -2,7 +2,7 @@
 
 var app = {
 
-	versao : "2.3.3",
+	versao : '2.3.3',
 	
 	debugMode : false,
 
@@ -361,7 +361,7 @@ var app = {
 			$('#dataHoraLogin').html(util.formatDateTimeToDisplay());
 		},10000);
 		
-		$("#versao").html(this.versao);
+		$("#versao").html(app.versao);
 		$("#entrar").click(function(){
 			clearInterval(updater_dataTimeToDisplay);
 			app.login();
