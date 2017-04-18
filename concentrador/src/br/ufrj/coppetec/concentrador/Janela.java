@@ -7056,7 +7056,8 @@ public class Janela extends javax.swing.JFrame {
 		try {
 			DBFileImporter dbfile = new DBFileImporter(inputFolder);
 			dbfile.readNewFiles();
-			JOptionPane.showMessageDialog(this, "Total de registros inseridos: " + Integer.toString(dbfile.getCounter()));
+			String modoOperacao = (Concentrador.treinamento)? "treinamento" : "produção"; 
+			JOptionPane.showMessageDialog(this, "Total de registros inseridos para o posto " + Concentrador.posto + ", no modo de " + modoOperacao + ": " + Integer.toString(dbfile.getCounter()));
 			this.fillCmbDatesExp();
 		} catch (Exception e) {
 			logger.error(String.format("Erro ao importar arquivos em %s", inputFolder.getAbsolutePath()), e);

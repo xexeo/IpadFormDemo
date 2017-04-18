@@ -33,7 +33,7 @@ public class Blinker implements ActionListener{
 			txtField.setBackground(color);
 		}
 		counter++;
-		if (counter>10) counter = 0;
+		if (counter>9) counter = 0;
 	}
 	
 	
