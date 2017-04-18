@@ -25,7 +25,7 @@ public class Concentrador {
 	public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "3.2.0";
+	public static String version = "3.3.0";
 	public static Properties configuration;
 	public static boolean treinamento = false;
 
@@ -98,6 +98,7 @@ public class Concentrador {
 		splash.setVisible(false);
 		
 		janela.setTitle(janela.getTituloJanela());
+		janela.setAlertaTreinamento();
 		
 		try {
 			janela.initDatesToShow();

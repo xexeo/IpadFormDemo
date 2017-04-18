@@ -54,6 +54,7 @@ import br.ufrj.coppetec.concentrador.database.PVregister;
 import br.ufrj.coppetec.concentrador.database.myDB;
 import br.ufrj.coppetec.concentrador.exporter.JSONExporter;
 import java.awt.Color;
+import javax.swing.Timer;
 
 /**
  *
@@ -129,6 +130,16 @@ public class Janela extends javax.swing.JFrame {
 		return titulo;
 	}
 
+	public void setAlertaTreinamento(){
+		if (!Concentrador.treinamento){
+			this.alertaTreinamento.setVisible(false);
+		} else {
+			Timer timer = new Timer(1000, new Blinker(this.txtAlertTreinamento));
+			timer.setInitialDelay(0);
+			timer.start();
+		}
+	}
+	
 	public void initDatesToShow() throws ParseException {
 		datesToShow = null;
 		if (Concentrador.treinamento) {
@@ -523,6 +534,8 @@ public class Janela extends javax.swing.JFrame {
         grpPista = new javax.swing.ButtonGroup();
         dadosFileChooser = new javax.swing.JFileChooser();
         exporterFileChooser = new javax.swing.JFileChooser();
+        alertaTreinamento = new javax.swing.JPanel();
+        txtAlertTreinamento = new javax.swing.JTextField();
         tabRelatorio = new javax.swing.JTabbedPane();
         pnl_volumetrica = new javax.swing.JPanel();
         lblPosto = new javax.swing.JLabel();
@@ -1088,6 +1101,25 @@ public class Janela extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(getTituloJanela());
         setIconImage(new ImageIcon(Janela.this.getClass().getResource("/images/icon.png")).getImage());
+        getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        alertaTreinamento.setPreferredSize(new java.awt.Dimension(1451, 20));
+        alertaTreinamento.setLayout(new javax.swing.BoxLayout(alertaTreinamento, javax.swing.BoxLayout.LINE_AXIS));
+
+        txtAlertTreinamento.setEditable(false);
+        txtAlertTreinamento.setBackground(new java.awt.Color(255, 0, 0));
+        txtAlertTreinamento.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        txtAlertTreinamento.setForeground(new java.awt.Color(255, 255, 255));
+        txtAlertTreinamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAlertTreinamento.setText("Modo de Treinamento");
+        alertaTreinamento.add(txtAlertTreinamento);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        getContentPane().add(alertaTreinamento, gridBagConstraints);
 
         tabRelatorio.setDoubleBuffered(true);
         tabRelatorio.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -3151,7 +3183,7 @@ public class Janela extends javax.swing.JFrame {
             jPanel119Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel119Layout.createSequentialGroup()
                 .addComponent(panelLeves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jPanel119);
@@ -3183,7 +3215,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotalLeves, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2860, Short.MAX_VALUE)
         );
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5961,7 +5993,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotalPesados, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 2860, Short.MAX_VALUE)
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5975,7 +6007,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblFolha2)
                     .addComponent(jLabel40))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1104, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
@@ -6077,7 +6109,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("tab_leves");
@@ -6112,7 +6144,7 @@ public class Janela extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(txtPorta))
                     .addComponent(jLabel2))
-                .addContainerGap(1035, Short.MAX_VALUE))
+                .addContainerGap(2654, Short.MAX_VALUE))
         );
         pnl_servidorLayout.setVerticalGroup(
             pnl_servidorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6124,7 +6156,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1205, Short.MAX_VALUE))
         );
 
         tabRelatorio.addTab("Servidor Web", pnl_servidor);
@@ -6233,7 +6265,7 @@ public class Janela extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(btnInDados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1824, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(116, 116, 116))
         );
@@ -6244,7 +6276,7 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(btnInDados)
-                .addContainerGap(769, Short.MAX_VALUE))
+                .addContainerGap(1175, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(95, 95, 95))
@@ -6647,7 +6679,7 @@ public class Janela extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 2541, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         pnl_sumario_volumetricaLayout.setVerticalGroup(
@@ -6781,7 +6813,7 @@ public class Janela extends javax.swing.JFrame {
                                 .addGroup(pnl_sumario_volumetricaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel69)
                                     .addComponent(txtSumVolR6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(212, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_sumario_volumetricaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2)
@@ -6810,7 +6842,7 @@ public class Janela extends javax.swing.JFrame {
             .addGroup(pnl_relatorioLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1096, Short.MAX_VALUE))
+                .addContainerGap(2674, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_relatorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5))
@@ -6821,23 +6853,20 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1208, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabRelatorio.addTab("Sumário OD", pnl_relatorio);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabRelatorio)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabRelatorio)
-        );
-
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 229;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(tabRelatorio, gridBagConstraints);
         tabRelatorio.getAccessibleContext().setAccessibleName("tabna1");
 
         pack();
@@ -7391,6 +7420,7 @@ public class Janela extends javax.swing.JFrame {
 	private InputVerifier intVerifier;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel alertaTreinamento;
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnExpODDate;
     private javax.swing.JButton btnExpVolDate;
@@ -7914,6 +7944,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField tp97;
     private javax.swing.JTextField tp98;
     private javax.swing.JTextField tp99;
+    private javax.swing.JTextField txtAlertTreinamento;
     public javax.swing.JTextArea txtAreaLog;
     private javax.swing.JTextField txtLocal;
     private javax.swing.JTextField txtPesquisador1;
