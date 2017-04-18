@@ -134,9 +134,10 @@ public class Janela extends javax.swing.JFrame {
 		if (!Concentrador.treinamento){
 			this.alertaTreinamento.setVisible(false);
 		} else {
-			Timer timer = new Timer(1000, new Blinker(this.txtAlertTreinamento));
-			timer.setInitialDelay(0);
-			timer.start();
+//			Timer timer = new Timer(1000, new Blinker(this.txtAlertTreinamento));
+//			timer.setInitialDelay(0);
+//			timer.start();
+			this.txtAlertTreinamento.setBackground(Color.red);
 		}
 	}
 	
