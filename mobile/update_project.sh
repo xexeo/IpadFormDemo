@@ -27,3 +27,6 @@ cordova plugin add cordova-sqlite-storage
 
 cordova plugin remove cordova-plugin-battery-status
 cordova plugin add cordova-plugin-battery-status
+
+cordova plugin remove cordova-plugin-cache-clear
+cordova plugin add cordova-plugin-cache-clear
