@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import br.ufrj.coppetec.concentrador.Concentrador;
 import br.ufrj.coppetec.concentrador.Util;
+import java.sql.SQLException;
 
 /**
  *
@@ -383,16 +384,34 @@ public class myDB extends Db {
 	}
 
 	public void initDatabaseTables() throws Exception {
+		boolean newDB;
 		try {
 			openTransaction();
+			newDB = isClean();
 			createVolTable();
 			createODTable();
 			createImportedFilesTable();
+			updateSchema(newDB);
 			commit();
 		} catch (Exception e) {
 			rollback();
 			throw e;
 		}
+	}
+	
+	/**
+	 * Verifica se a tabale odTable já existe no banco
+	 * @return true se o banco não possuía a tabela odTable (banco recém criado)
+	 * @throws Exception 
+	 */
+	private boolean isClean() throws Exception{
+		boolean r = true;
+		this.setStatement();
+		ResultSet result = this.executeQuery("SELECT * FROM SQLITE_MASTER WHERE TYPE='table' AND name='odTable';");
+		if (result.next()){
+			r = false;
+		}
+		return r;
 	}
 
 	private void createVolTable() throws Exception {
@@ -513,12 +532,49 @@ public class myDB extends Db {
 		qry += "duracaoPesq integer, ";
 		qry += "treinamento integer";
 		// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
+		// mudanças no banco devem ser refletidas com método updateSchemaScript()
 		qry += "); ";
 		this.executeStatement(qry);
 		this.sanitize();
 
 	}
+	
+	private void updateSchema(boolean newDB) throws Exception{
+		int schemaVersion = 0;
+		ResultSet schemaResult;
+		this.setStatement();
+		this.executeStatement("CREATE TABLE IF NOT EXISTS versaoSchema (versao integer);");
+		schemaResult = this.executeQuery("SELECT versao FROM versaoSchema;");
+		if (schemaResult.next()){
+			schemaVersion = schemaResult.getInt("versao");
+		}
+		
+		logger.info("Versão do schema: " + schemaVersion);
+		if (schemaVersion != Concentrador.dbVersion){
+			logger.info("Atualizando schema do banco de dados");
+			this.updateSchemaScript(schemaVersion, newDB);
+		}
+		
+	}
 
+	private void updateSchemaScript(int oldVersion, boolean newDB) throws Exception{
+		this.setStatement();
+		
+		if(!newDB){
+			//rodando atualização
+			this.executeStatement("ALTER TABLE odTable ADD COLUMN treinamento integer;");
+		}
+		
+		
+		//atualizando a tabela de versão
+		if(oldVersion == 0){ //a tabela de versão foi recem criada e não tem um registro
+			this.executeStatement("INSERT INTO versaoSchema VALUES (" + Concentrador.dbVersion + ");");
+		} else {
+			this.executeStatement("UPDATE versaoSchema SET versao = " + Concentrador.dbVersion + ";");
+		}
+		logger.info("Versão do schema: " + Concentrador.dbVersion);
+	}
+	
 	public Vector<String> fetchReportODColumns() throws Exception {
 		Vector<String> cols = new Vector<String>();
 		openTransaction();
