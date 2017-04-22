@@ -542,7 +542,7 @@ public class Janela extends javax.swing.JFrame {
         lblPosto = new javax.swing.JLabel();
         lblPosto_dados = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
-        cmbHora = new javax.swing.JComboBox<>();
+        cmbHora = new javax.swing.JComboBox<String>();
         lblLocal = new javax.swing.JLabel();
         txtLocal = new javax.swing.JTextField();
         lblSentido = new javax.swing.JLabel();
@@ -1017,9 +1017,9 @@ public class Janela extends javax.swing.JFrame {
         btnExpVolDate = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        cmbDateExpVol = new javax.swing.JComboBox<>();
+        cmbDateExpVol = new javax.swing.JComboBox<String>();
         jLabel71 = new javax.swing.JLabel();
-        cmbDateExpOD = new javax.swing.JComboBox<>();
+        cmbDateExpOD = new javax.swing.JComboBox<String>();
         jLabel72 = new javax.swing.JLabel();
         btnExpODDate = new javax.swing.JButton();
         pnl_sumario_volumetrica = new javax.swing.JPanel();
@@ -1135,7 +1135,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblHora.setText("Hora Inicial:");
 
-        cmbHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
+        cmbHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22" }));
         cmbHora.setSelectedIndex(-1);
         cmbHora.setToolTipText("");
         cmbHora.addActionListener(new java.awt.event.ActionListener() {
@@ -3216,7 +3216,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotalLeves, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2860, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2914, Short.MAX_VALUE)
         );
         tab_levesLayout.setVerticalGroup(
             tab_levesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5994,7 +5994,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotalPesados, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 2860, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 2914, Short.MAX_VALUE)
         );
         tab_pesadosLayout.setVerticalGroup(
             tab_pesadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6008,7 +6008,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(lblFolha2)
                     .addComponent(jLabel40))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1104, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1365, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Caminhões Pesados", tab_pesados);
@@ -6061,7 +6061,7 @@ public class Janela extends javax.swing.JFrame {
                         .addComponent(rdo_PistaDupla)
                         .addGap(53, 53, 53)
                         .addComponent(lblHora)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_volumetricaLayout.createSequentialGroup()
                         .addComponent(lblPosto_dados)
@@ -6110,7 +6110,7 @@ public class Janela extends javax.swing.JFrame {
                     .addComponent(cmbHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1419, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("tab_leves");
@@ -6157,7 +6157,7 @@ public class Janela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1205, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1435, Short.MAX_VALUE))
         );
 
         tabRelatorio.addTab("Servidor Web", pnl_servidor);
@@ -6182,7 +6182,7 @@ public class Janela extends javax.swing.JFrame {
 
         jLabel35.setText("Exportação de Dados Pesquisa OD");
 
-        cmbDateExpVol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cmbDateExpVol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         cmbDateExpVol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDateExpVolActionPerformed(evt);
@@ -6191,7 +6191,7 @@ public class Janela extends javax.swing.JFrame {
 
         jLabel71.setText("Data:");
 
-        cmbDateExpOD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cmbDateExpOD.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--" }));
         cmbDateExpOD.setToolTipText("");
         cmbDateExpOD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -6266,7 +6266,7 @@ public class Janela extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(btnInDados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1824, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1832, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(116, 116, 116))
         );
@@ -6277,7 +6277,7 @@ public class Janela extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(btnInDados)
-                .addContainerGap(1175, Short.MAX_VALUE))
+                .addContainerGap(1415, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(95, 95, 95))
@@ -6680,7 +6680,7 @@ public class Janela extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnl_sumario_volumetricaLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 2541, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 2555, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         pnl_sumario_volumetricaLayout.setVerticalGroup(
@@ -6843,7 +6843,7 @@ public class Janela extends javax.swing.JFrame {
             .addGroup(pnl_relatorioLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2674, Short.MAX_VALUE))
+                .addContainerGap(2712, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_relatorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5))
@@ -6854,7 +6854,7 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(odStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1208, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1437, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
