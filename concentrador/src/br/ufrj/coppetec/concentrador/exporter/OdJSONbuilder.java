@@ -5,7 +5,9 @@
  */
 package br.ufrj.coppetec.concentrador.exporter;
 
+import br.ufrj.coppetec.concentrador.Util;
 import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -84,6 +86,7 @@ public class OdJSONbuilder implements JSONBuilder {
 				reg.put("paradaObrigatoriaMunicipio2",
 						JSONExporter.getJSONInteger(result.getString("paradaObrigatoriaMunicipio2")));
 				reg.put("idPerguntaExtra", JSONExporter.getJSONInteger(result.getString("idPerguntaExtra")));
+				reg.put("dataExportacao", Util.sdfArq.format(new Date()));
 				// reg.put("duracaoPesq", JSONExporter.getJSONInteger(result.getString("duracaoPesq")));
 
 				json.append("dados", reg);
