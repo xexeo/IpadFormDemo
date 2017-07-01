@@ -24,7 +24,7 @@ controllers.caracterizacao_carga = {
 	inicializaElementos : function() {
 
 		var lista_anos = [];
-		for (var ano = 2016; ano > 1899; ano--) {
+		for (var ano = 2017; ano > 1899; ano--) {
 			lista_anos = lista_anos.concat(ano);
 		}
 		util.inicializaSelectCustomValueAsIndex("ano_carga", lista_anos, "Selecione");
