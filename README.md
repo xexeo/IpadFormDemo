@@ -91,7 +91,7 @@ Uma solicitação do cliente é impedir o uso de outro aplicativo no dispositivo
 
 #### Setup das opções
 + Acesso Guiado = `On`
-+ Ajustes de Código -> Definir Código do Acesso Guiado = `9393`
++ Ajustes de Código -> Definir Código do Acesso Guiado = ~`9393`~ `5833`
 + Limite de Tempo -> `[Som = Nenhum, Falar = Off]`
 + Atalho de Acessibilidade = `Off`
 

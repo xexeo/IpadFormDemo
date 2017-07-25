@@ -114,9 +114,10 @@ public class JSONExporter {
 						dialog.dispose();
 						try {
 							if (mySwingWorker.get() == true) {
-								JOptionPane.showMessageDialog(janela,
-										"Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.",
+								String msgSucesso = "Arquivo " + JSONExporter.this.file.getName() + " exportado com sucesso.";
+								JOptionPane.showMessageDialog(janela, msgSucesso,
 										"Exportação de dados.", JOptionPane.INFORMATION_MESSAGE);
+								logger.info (msgSucesso);
 							}
 						} catch (Exception e) {
 							logger.error("Error exportando dados: ", e);
@@ -176,7 +177,6 @@ public class JSONExporter {
 			database.executeStatement("UPDATE " + this.table.toString() + " SET enviado=1 WHERE enviado=0;");
 			database.commit();
 			tmpFile.delete();
-
 		} catch (JSONException je) {
 			logger.warn("Não existem dados para exportação", je);
 			// probably empty table

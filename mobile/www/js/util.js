@@ -826,5 +826,15 @@ var util = {
 		if (hora< 10) {hora = "0"+hora;}
 		if (min< 10) {min = "0"+min;}
 		return util.formateDateOnly(d) + '  ' + hora + ':' + min;
-	}
+	},
+	
+	geraListaAnos : function(){
+		var lista_anos = [];
+		var ano = new Date().getFullYear();
+		while (ano > 1899){
+			lista_anos = lista_anos.concat(ano);
+			ano--;
+		}
+		return lista_anos;
+	},
 };
