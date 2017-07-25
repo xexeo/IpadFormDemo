@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp" packages="">
+	<Properties>
+		<Property name="baseDir">logs</Property>
+		<Property name="nameFile">pnctcheck</Property>
+		<Property name="charset">UTF-8</Property>
+		<!-- <Property name="patternLine">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property> -->
+		<Property name="patternLine">%msg%n</Property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="RollingFile" fileName="${baseDir}/${nameFile}.log" filePattern="${baseDir}/${nameFile}-%d{yyyy-MM-dd-HH}.log.gz">
+			<PatternLayout pattern="${patternLine}" charset="${charset}" />
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="${patternLine}" charset="${charset}" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="all">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="STDOUT" />
+		</Root>
+	</Loggers>
+</Configuration>
