@@ -676,9 +676,9 @@ var util = {
 	isEmpty : function(valor) {
 		try {
 			emp = (valor == undefined) || (valor == null) || (String(valor).trim().length == 0);
-			if (emp) {
-				app.logger.log("isEmpty is TRUE");
-			}
+//			if (emp) {
+//				app.logger.log("isEmpty is TRUE");
+//			}
 			return emp;
 		} catch(exc) {
 			app.logger.log("[ERRO] Erro no isEmpty. Detalhes:");
