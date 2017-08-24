@@ -4,7 +4,7 @@ var app = {
 
 	versao : '2.4.0',
 	
-	debugMode : false,
+	debugMode : true,
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -430,12 +430,26 @@ var app = {
 	trocaPagina : function(view, controller, changeFunction) {
 		
 		var changeF = (util.isEmpty(changeFunction) || changeFunction != 'old')? newChange : oldChange;
+		var abortOperation = false;
 		
 		if (view == null) {
 			app.logger.log("[ERRO] trocaPagina: view null");
+			abortOperation = true;
+		} 
+		
+		if (controller == null){
+			app.logger.log("[ERRO] trocaPagina: controller null");
+			abortOperation = true;
 		}
 		
-		if (controller != null) {
+		if (abortOperation){
+			myDialogs.alert("Ocorreu um erro interno na aplicação. A entrevista será cancelada.",
+				"Erro interno da aplicação.",
+				function(){
+					app.cancelaRegistro();
+					app.trocaPagina('views/menu.html', controllers.menu);
+				}, 'error');
+		} else {
 			try {
 				app.onChangeHandler.controller = controller.config;
 				$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
@@ -444,22 +458,18 @@ var app = {
 				app.logger.log("[ERRO] trocaPagina: excecao no changeHandler. Detalhes: ")
 				app.logger.log(exc.message)
 			}
-		}
-		else {
-			app.logger.log("[ERRO] trocaPagina: controller null");
-		}
+
+			try {
+				changeF(view);
+			} catch(exc) {
+				app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ");
+				app.logger.log(exc.message);
+			}
 		
-		try {
-			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
-			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
-			changeF(view);
-		} catch(exc) {
-			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ");
-			app.logger.log(exc.message);
-		}
+			app.logger.log(view);
+			app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
 		
-		app.logger.log(view);
-		app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
+		}
 		
 		function oldChange(v){
 			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v);
