@@ -468,7 +468,7 @@ var app = {
 		
 		function newChange(v){
 			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false, transition : 'none'});
-			app.logger.log('newTrocaPagina');
+//			app.logger.log('newTrocaPagina');
 		}
 	},
 
@@ -724,47 +724,66 @@ var app = {
 						}
 					}
 				}
-	
-				// PESO DA CARGA ('ton' -> 'kg')
-				if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
-					var peso = Number(registro.pesoDaCarga);
-					if (registro.unidadePesoDaCarga == 'kg') {
-						peso = peso / 10;
-					} else {
-						peso = peso * 100;
+				
+				//POSSUI CARGA
+				if (registro.possui_carga) {
+					// TIPO DE PRODUTO (CARGA)
+					app.splitAtributo('idProduto');
+					if (util.isEmpty(registro.idProduto) && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (idProduto vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
 					}
-					app.setAtributo('pesoDaCarga', peso);
+
+					// PESO DA CARGA ('ton' -> 'kg')
+					if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
+						var peso = Number(registro.pesoDaCarga);
+						if (registro.unidadePesoDaCarga == 'kg') {
+							peso = peso / 10;
+						} else {
+							peso = peso * 100;
+						}
+						app.setAtributo('pesoDaCarga', peso);
+					}
+					if (util.isEmpty(registro.pesoDaCarga) && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+		
+					// MUNICÍPIO EMBARQUE DA CARGA
+					app.splitAtributo('municipioEmbarqueCarga');
+					if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+		
+					// MUNICÍPIO DESEMBARQUE DA CARGA
+					app.splitAtributo('municipioDesembarqueCarga');
+					if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
 				}
-				if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
+				else {
+					// NAO POSSUI CARGA
+					app.setAtributo('idProduto', 3000); // Produto VAZIO
+					app.setAtributo('pesoDaCarga', null);
+					app.setAtributo('unidadePesoDaCarga', null);
+					app.setAtributo('valorDoFrete', null);
+					app.setAtributo('valorDaCarga', null);
+					app.setAtributo('embarqueCargaNaoSabe', null);
+					app.setAtributo('embarque_uf', null);
+					app.setAtributo('municipioEmbarqueCarga', null);
+					app.setAtributo('idLocalEmbarqueCarga', null);
+					app.setAtributo('desembarqueCargaNaoSabe', null);
+					app.setAtributo('desembarque_uf', null);
+					app.setAtributo('municipioDesembarqueCarga', null);
+					app.setAtributo('idLocalDesembarqueCarga', null);
 				}
-	
-				// TIPO DE PRODUTO (CARGA)
-				app.splitAtributo('idProduto');
-				if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (idProduto vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-	
+		
 				// CARGA ANTERIOR
 				app.splitAtributo('idCargaAnterior');
 				if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
 					app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-	
-				// MUNICÍPIO EMBARQUE DA CARGA
-				app.splitAtributo('municipioEmbarqueCarga');
-				if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-	
-				// MUNICÍPIO DESEMBARQUE DA CARGA
-				app.splitAtributo('municipioDesembarqueCarga');
-				if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
 					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 	
