@@ -209,6 +209,18 @@ var app = {
 			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
 				'Alerta de Bateria', null, 'info');
 		}, false);
+		
+		document.addEventListener('pause', function(){
+			console.log('Ocorrência de evento: PAUSE');
+		}, false);
+		
+		document.addEventListener('resume', function(){
+			console.log('Ocorrência de evento: RESUME');
+		}, false);
+		
+		document.addEventListener('resign', function(){
+			console.log('Ocorrência de evento: RESIGN');
+		}, false);
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
 		if (device.platform == 'iOS' || device.platform == 'Android') {
