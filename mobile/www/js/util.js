@@ -304,6 +304,8 @@ var util = {
 				app.setAtributo(nome_registro_pais, $(this).val());
 				app.setAtributo(proximo_imediato, null);
 				app.setAtributo(nome_registro_municipio, null);
+				util.inicializaSelectCustomValueAsIndex(proximo_imediato + "_" + fluxo, lista_estados, "UF");
+				$("#" + proximo_imediato2 + "_" + fluxo).val("");
 			} else { // País é Brasil
 				$("#" + grupo_proximo_imediato).show();
 				$("#" + grupo_proximo).hide();
