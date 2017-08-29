@@ -747,6 +747,29 @@ var app = {
 					}
 				}
 				
+				// RISCO E ONU
+				if (registro.possuiCargaPerigosa) {
+					var idNumRisco = util.findValueInList(registro.idNumeroDeRisco, lista_numero_risco);
+					if (!util.isEmpty(idNumRisco)) {
+						app.setAtributo('idNumeroDeRisco',idNumRisco);
+					} else {
+						if (registro.cancelado != 1) {
+							app.setAtributo('erro', "ERRO (idNumeroDeRisco não encontrado)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					}
+
+					var idNumOnu = util.findValueInList(registro.idNumeroDaOnu, lista_numero_onu);
+					if (!util.isEmpty(idNumOnu)) {
+						app.setAtributo('idNumeroDaOnu',idNumOnu);
+					} else {
+						if (registro.cancelado != 1) {
+							app.setAtributo('erro', "ERRO (idNumeroDaOnu não encontrado)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					}
+				}
+				
 				//POSSUI CARGA
 				if (registro.possui_carga) {
 					// TIPO DE PRODUTO (CARGA)

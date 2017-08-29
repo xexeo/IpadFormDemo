@@ -509,19 +509,26 @@ var util = {
 
 	validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) {
 		var value = $.trim($('#' + nome_campo).val());
-		value = value.toUpperCase();
-		var encontrou = false;
+		
+		var idItemLista = util.findValueInList(value, lista);
+		if (util.isEmpty(idItemLista)) {
+			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido.");
+			return false;
+		}
+		return true;
+	},
+	
+	findValueInList : function(valorLista, lista) {
+		var idItemLista = null;
+		var value = valorLista.toUpperCase();
 
 		$.each(lista, function(index, item) {
 			if (value == item.numeroid) {
-				encontrou = true;
-				app.setAtributo(idRegistro, item.id);
+				idItemLista = item.id;
+				return false; // funciona como break para o sair do each()
 			}
 		});
-		if (!encontrou) {
-			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido.");
-		}
-		return encontrou
+		return idItemLista;
 	},
 	
 	validaTemPessoasVeiculo : function(nome_campo, campo_aviso) {
