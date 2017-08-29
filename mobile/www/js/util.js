@@ -511,6 +511,7 @@ var util = {
 
 	validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) {
 		var value = $.trim($('#' + nome_campo).val());
+		app.setAtributo(idRegistro,value);
 		
 		var idItemLista = util.findValueInList(value, lista);
 		if (util.isEmpty(idItemLista)) {
@@ -522,15 +523,18 @@ var util = {
 	
 	findValueInList : function(valorLista, lista) {
 		var idItemLista = null;
-		var value = valorLista.toUpperCase();
-
-		$.each(lista, function(index, item) {
-			if (value == item.numeroid) {
-				idItemLista = item.id;
-				return false; // funciona como break para o sair do each()
-			}
-		});
-		return idItemLista;
+		if (!util.isEmpty(valorLista)) {
+			var value = valorLista.toUpperCase();
+			$.each(lista, function(index, item) {
+				if (value == item.numeroid) {
+					idItemLista = item.id;
+					return false; // funciona como break para o sair do each()
+				}
+			});
+			return idItemLista;
+		} else {
+			return null;
+		} 
 	},
 	
 	validaTemPessoasVeiculo : function(nome_campo, campo_aviso) {
