@@ -8,18 +8,49 @@ var logins = {
 	},
 
 	autentica : function(usuario, senha) {
+		var posto = null;
+		var msg = null;
 		if ((logins.user_tester != undefined) && (logins.user_tester.usr != undefined) && (usuario == logins.user_tester.usr)
 				&& (senha == logins.user_tester.pwd)) {
 			logins.user_logado = logins.user_tester;
 			return true;
-		} else if (String(usuario).length == 5) {
-			var regex = new RegExp("[^0-9]+");
-			var posto = String(usuario).substr(0, 3).replace(regex, '');
-			var sentido = String(usuario).substr(3, 2).toUpperCase();
-			if ((posto.length == 3) && (Number(posto) > 0) && ((sentido == 'AB') || (sentido == 'BA'))) {
-				if (sentido == 'BA') {
-					senha = util.reverse(senha);
-				}
+		} else if (String(usuario).length == 3 && logins.verificaPostoSenha(String(usuario), senha)) {
+			if(datas.verificaData()){
+				app.isTreinamento = false;
+				app.logger.log("Sistema em modo de produção.");
+				return true;
+			}else{
+				msg = "Logins de produção não funcionam fora das datas da pesquisa real!";
+				alert(msg ,"Erro!",null,'error');
+				app.logger.log(msg);
+				return false;
+			}
+			
+			//treinamento
+		} else if (String(usuario).length == 4 && String(usuario).substr(3).toUpperCase() == 'T'){
+			if (datas.verificaData()){
+				msg = "Logins de treinamento não funcionam em datas da pesquisa real!";
+				alert(msg ,"Erro!",null,'error');
+				app.logger.log(msg);
+				return false;
+			}
+			posto = String(usuario).substr(0,3);
+			if (logins.verificaPostoSenha(posto, senha)){
+				app.isTreinamento = true;
+				msg = "O sistema funcionará em modo de treinamento!";
+				alert(msg,null,null,'error');
+				app.logger.log(msg);
+				return true;
+			}
+		}
+		msg = "Usuário e/ou Senha informados não estão cadastrados no sistema!";
+		alert(msg);
+		app.logger.log(msg);
+		return false;
+	},
+	
+	verificaPostoSenha : function(posto, senha){
+		if (posto.length == 3 && Number(posto) > 0) {
 				var i = Number(posto) - 1;
 				// for (i = 0; i < logins.users.length; i++) {
 				/* comentar o 'for' se o sequencial do posto for igual ao posicionamento dele na lista. */
@@ -29,11 +60,10 @@ var logins = {
 					return true;
 				}
 				// }
-			}
 		}
 		return false;
 	},
-
+	
 	user_master : { // Usuário exclusivo para configurar o idIpad na instalação, ele não faz login no aplicativo.
 		usr : 'Master', // usuário mestre
 		pwd : "434723" // senha mestra (ver teclado numérico para a string 'idIPad')
@@ -45,7 +75,7 @@ var logins = {
 		pwd : "837837", // senha de teste (ver teclado numérico para a string 'tester')
 		perguntaExtra : true
 	},
-
+	
 	// Postos com pergunta extra na 1ª fase: 211
 	// Postos com pergunta extra na 2ª fase: 020, 184, 185 
 	users : [
@@ -54,7 +84,7 @@ var logins = {
 	{
 		usr : '001',
 		pwd : '1590',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR AC-463/465 (BOM FUTURO) - ENTR BR-317'
@@ -82,7 +112,7 @@ var logins = {
 	}, {
 		usr : '005',
 		pwd : '0950',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR AL-115(A) - ENTR AL-115(B) (PALMEIRA DOS ÍNDIOS)'
@@ -96,7 +126,7 @@ var logins = {
 	}, {
 		usr : '007',
 		pwd : '1810',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BA-120(A)/262(B) (P/ITAJUÍPE) - ENTR BR-415/BA-120(B) (ITABUNA)'
@@ -124,7 +154,7 @@ var logins = {
 	}, {
 		usr : '011',
 		pwd : '0300',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'JAGUARARI - ENTR BA-220 (SENHOR DO BONFIM)'
@@ -152,7 +182,7 @@ var logins = {
 	}, {
 		usr : '015',
 		pwd : '2195',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR ES-245(B) - ENTR ES-440'
@@ -166,21 +196,21 @@ var logins = {
 	}, {
 		usr : '017',
 		pwd : '0070',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-101(B) - ENTR ES-465 (P/DOMINGOS MARTINS)'
 	}, {
 		usr : '018',
 		pwd : '0015',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'KM 15,3 - ENTR BR-484 (P/PONTE SOBRE RIO DOCE)'
 	}, {
 		usr : '019',
 		pwd : '0110',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR GO-116 (P/FORMOSA) - ENTR GO-346 (P/CABEÇEIRAS)'
@@ -191,7 +221,7 @@ var logins = {
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-457(B)/GO-219 - ENTR GO-020(A)',
-		perguntaExtra : true
+		// perguntaExtra : true // Possuiu pergunta extra na 2ª fase
 	}, {
 		usr : '021',
 		pwd : '0112',
@@ -202,7 +232,7 @@ var logins = {
 	}, {
 		usr : '022',
 		pwd : '0340',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR GO-353(A) (LINDA VISTA) - ENTR BR-414(A)/GO-151/244/353(B) (PORANGATU)'
@@ -223,21 +253,21 @@ var logins = {
 	}, {
 		usr : '025',
 		pwd : '0050',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'FIM DA DUPLICAÇÃO - ENTR BR-402/MA-110 (BACABEIRA)'
 	}, {
 		usr : '026',
 		pwd : '0150',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-316(A) (CACHUCHA) - ENTR BR-316(B) (PERITORÓ)'
 	}, {
 		usr : '027',
 		pwd : '0680',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'RIO PINDARÉ - ENTR BR-010(A) (AÇAILÂNDIA)'
@@ -251,7 +281,7 @@ var logins = {
 	}, {
 		usr : '029',
 		pwd : '0370',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MA-026 (DEZESSETE) - ENTR MA-034(A)/127/349 (CAXIAS)'
@@ -265,7 +295,7 @@ var logins = {
 	}, {
 		usr : '031',
 		pwd : '0330',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-238 (P/SETE LAGOAS) - ENTR MG-432 (P/ESMERALDAS)'
@@ -279,7 +309,7 @@ var logins = {
 	}, {
 		usr : '033',
 		pwd : '0570',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-499 (SANTOS DUMONT) - ENTR ANT UNIÃO E INDÚSTRIA (B. TRIUNFO)'
@@ -293,7 +323,7 @@ var logins = {
 	}, {
 		usr : '035',
 		pwd : '1130',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-342(B)/418/MG-217 (RIB STO ANTÔNIO) (TEÓFILO OTONI) - ACESSO ITAMBACURI'
@@ -307,14 +337,14 @@ var logins = {
 	}, {
 		usr : '037',
 		pwd : '1430',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-116(A)/120 (LEOPOLDINA) - ENTR BR-116(B)'
 	}, {
 		usr : '038',
 		pwd : '0850',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-259(B) (CURVELO) - ENTR BR-040(A)'
@@ -335,7 +365,7 @@ var logins = {
 	}, {
 		usr : '041',
 		pwd : '0230',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-451 (ITUTINGA) - ENTR BR-354 (LAVRAS)'
@@ -356,7 +386,7 @@ var logins = {
 	}, {
 		usr : '044',
 		pwd : '0370',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-153 - ENTR BR-154(A)'
@@ -377,7 +407,7 @@ var logins = {
 	}, {
 		usr : '047',
 		pwd : '0750',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-458 (CAREAÇU) - ENTR BR-459 (P/POUSO ALEGRE)'
@@ -398,7 +428,7 @@ var logins = {
 	}, {
 		usr : '050',
 		pwd : '1290',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-158(B)/MS-395 (P/BRASILÂNDIA) - ENTR MS-453/459 (P/ARAPUÁ)'
@@ -426,21 +456,21 @@ var logins = {
 	}, {
 		usr : '054',
 		pwd : '0840',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'JANGADA - ENTR MT-246(B)'
 	}, {
 		usr : '055',
 		pwd : '0510',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-222(B)/PA-332 (DOM ELISEU) - ENTR PA-125/263 (GURUPIZINHO)'
 	}, {
 		usr : '056',
 		pwd : '0335',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PB-018 (P/CONDE) - ENTR PB-034'
@@ -454,21 +484,21 @@ var logins = {
 	}, {
 		usr : '058',
 		pwd : '0510',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PE-063 (P/AMARAJI) - ENTR PE-064/085 (RIBEIRÃO)'
 	}, {
 		usr : '059',
 		pwd : '0460',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PE-460 - ENTR BR-316/428 (P/CABROBÓ)'
 	}, {
 		usr : '060',
 		pwd : '0140',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PE-103 (P/BONITO) - ENTR BR-104/423(A) (CARUARÚ)'
@@ -482,7 +512,7 @@ var logins = {
 	}, {
 		usr : '062',
 		pwd : '0370',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-428(A) (LAGOA GRANDE) - ENTR BR-235/407/423/428(B) (DIV PE/BA) (PETROLINA/JUAZEIRO)'
@@ -496,7 +526,7 @@ var logins = {
 	}, {
 		usr : '064',
 		pwd : '0130',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-404(B)/407(B) - INÍCIO PISTA DUPLA (CAPITÃO CAMPOS)'
@@ -538,7 +568,7 @@ var logins = {
 	}, {
 		usr : '070',
 		pwd : '0480',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'FIM PISTA DUPLA - ENTR PR-431 (P/JACAREZINHO)'
@@ -566,7 +596,7 @@ var logins = {
 	}, {
 		usr : '074',
 		pwd : '2930',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR RJ-162 (P/RIO DOURADO) - ENTR BR-120 (CASIMIRO DE ABREU)'
@@ -587,28 +617,28 @@ var logins = {
 	}, {
 		usr : '077',
 		pwd : '0330',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'SAPUCAIA - ENTR BR-040(A)'
 	}, {
 		usr : '078',
 		pwd : '0167',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO À LAGOA DO BONFIM - ENTR RN-315/002(A) (SÃO JOSÉ DE MIPIBÚ/NÍSIA FLORESTA)'
 	}, {
 		usr : '079',
 		pwd : '0070',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR RN-203 (P/SÃO PEDRO) - ACESSO BOM JESUS'
 	}, {
 		usr : '080',
 		pwd : '0270',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-104(B) (LAJES) - ENTR RN-023 (CAIÇARA DO RIO DO VENTO)'
@@ -622,14 +652,14 @@ var logins = {
 	}, {
 		usr : '082',
 		pwd : '1210',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-429(B) (JI-PARANÁ) - ENTR RO-473 (P/URUPÁ)'
 	}, {
 		usr : '083',
 		pwd : '3275',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR ERS-703 (GUAIBA) - ENTR ERS-709 (P/ BARRA DO RIBEIRO)'
@@ -727,7 +757,7 @@ var logins = {
 	}, {
 		usr : '097',
 		pwd : '1590',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SC-463 (P/JABORÁ) - ENTR BR-283 (P/CONCÓRDIA)'
@@ -755,42 +785,42 @@ var logins = {
 	}, {
 		usr : '101',
 		pwd : '0040',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SE-464 (P/SÃO CRISTOVÃO) - ENTR BR-349(B)/SE-265 (ITAPORANGA D`AJUDA)'
 	}, {
 		usr : '102',
 		pwd : '0060',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SE-160 - ENTR SE-170(A)'
 	}, {
 		usr : '103',
 		pwd : '2410',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-070 - ENTR SP-103 (CAÇAPAVA)'
 	}, {
 		usr : '104',
 		pwd : '2570',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-228 - ENTR SP-057 (P/SIDERÚRGICA)'
 	}, {
 		usr : '105',
 		pwd : '1043',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO GUAIÇARA - ENTR BR-154/267 (LINS)'
 	}, {
 		usr : '106',
 		pwd : '0810',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'DIV MG/SP - ENTR SP-063 (P/BRAGANÇA PAULISTA)'
@@ -804,21 +834,21 @@ var logins = {
 	}, {
 		usr : '108',
 		pwd : '0205',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR TO-342(B) (MIRANORTE) - ENTR TO-348 (BARROLÂNDIA)'
 	}, {
 		usr : '109',
 		pwd : '0300',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR TO-483 (FIGUEIRÓPOLIS) - ENTR TO-296(A)/373 (ALVORADA)'
 	}, {
 		usr : '110',
 		pwd : '0495',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PI-260 (P/BARREIRAS DO PIAUÍ) - ENTR PI-255 (CORRENTE)'
@@ -828,7 +858,8 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'FIM PISTA DUPLA - ENTR GO-156(B)'
+		trecho : 'FIM PISTA DUPLA - ENTR GO-156(B)',
+		perguntaExtra : true
 	}, {
 		usr : '112',
 		pwd : '0025',
@@ -860,14 +891,14 @@ var logins = {
 	}, {
 		usr : '116',
 		pwd : '0810',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PISTA INVERSA (B) - ENTR BR-101'
 	}, {
 		usr : '117',
 		pwd : '0070',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-493(A) (P/MAGÉ) - ENTR RJ-107 (IMBARIÊ)'
@@ -888,7 +919,7 @@ var logins = {
 	}, {
 		usr : '120',
 		pwd : '0060',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-262(B) - ENTR BR-050(B)'
@@ -902,14 +933,14 @@ var logins = {
 	}, {
 		usr : '122',
 		pwd : '0852',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'MATUPÁ - GUARANTÃ DO NORTE'
 	}, {
 		usr : '123',
 		pwd : '0790',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR AL-215(B) - ENTR AL-220(A) (P/BARRA DE SÃO MIGUEL)'
@@ -930,7 +961,7 @@ var logins = {
 	}, {
 		usr : '126',
 		pwd : '1695',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-420(B) (P/LAJE) - ENTR BA-542 (P/GUERÉM)'
@@ -944,7 +975,7 @@ var logins = {
 	}, {
 		usr : '128',
 		pwd : '0334',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'MAIRI - ENTR BR-349'
@@ -965,14 +996,14 @@ var logins = {
 	}, {
 		usr : '131',
 		pwd : '0530',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BA-937 (P/PAJEÚ DO VENTO) - ENTR BR-122(B)/430/BA-569 (CAETITÉ)'
 	}, {
 		usr : '132',
 		pwd : '0245',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BA-131 (P/CAÉM) - ENTR BA-417'
@@ -986,7 +1017,7 @@ var logins = {
 	}, {
 		usr : '134',
 		pwd : '0690',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR CE-373 (CARMELÓPOLIS) - ENTR CE-187/292 (CAMPOS SALES)'
@@ -1049,14 +1080,14 @@ var logins = {
 	}, {
 		usr : '143',
 		pwd : '1990',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BA-290 (TEIXEIRA DE FREITAS) - ENTR BR-418 (P/POSTO DA MATA)'
 	}, {
 		usr : '144',
 		pwd : '0030',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'MORRO GRANDE (ACESSO IV C. ITAPEMIRIM) - ENTR ES-166 (COUTINHO)'
@@ -1070,7 +1101,7 @@ var logins = {
 	}, {
 		usr : '146',
 		pwd : '0125',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR GO-230 - ENTR GO-237'
@@ -1084,10 +1115,11 @@ var logins = {
 	}, {
 		usr : '148',
 		pwd : '0470',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'DIV MG/GO - ENTR GO-010(A)'
+		trecho : 'DIV MG/GO - ENTR GO-010(A)',
+		perguntaExtra : true
 	}, {
 		usr : '149',
 		pwd : '0050',
@@ -1105,14 +1137,14 @@ var logins = {
 	}, {
 		usr : '151',
 		pwd : '0550',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR GO-080(B) (P/SAO FRANCISCO DE GOIÁS) - ENTR GO-431 (P/PIRENOPOLIS)'
 	}, {
 		usr : '152',
 		pwd : '0190',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-153(A)/GO-342(B) - ENTR BR-153(B)/GO-237 (URUAÇÚ)'
@@ -1126,24 +1158,25 @@ var logins = {
 	}, {
 		usr : '154',
 		pwd : '0050',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR GO-040 - ENTR BR-154(A)/483(A)/GO-206(A) (P/CACHOEIRA DOURADA)'
 	}, {
 		usr : '155',
 		pwd : '0570',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR GO-194 (P/PORTELÂNDIA) - INÍCIO PISTA DUPLA'
 	}, {
 		usr : '156',
 		pwd : '0440',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)'
+		trecho : 'ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)',
+		perguntaExtra : true
 	}, {
 		usr : '157',
 		pwd : '0280',
@@ -1154,21 +1187,21 @@ var logins = {
 	}, {
 		usr : '158',
 		pwd : '0860',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MA-259 (P/TUNTUM) - ENTR MA-012/272 (BARRA DO CORDA)'
 	}, {
 		usr : '159',
 		pwd : '0300',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-222(B) (ESTACA ZERO) - ENTR MA-240 (PIO XII)'
 	}, {
 		usr : '160',
 		pwd : '0730',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'BOM JESUS DO TOCANTINS - RIO JACUNDÁ (R MÃE MARIA)'
@@ -1189,14 +1222,14 @@ var logins = {
 	}, {
 		usr : '163',
 		pwd : '0290',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MA-132/270 (COLINAS) - ENTR MA-134 (PEIXE)'
 	}, {
 		usr : '164',
 		pwd : '0030',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-040(B) - ENTR MG-155 (SÃO BRÁS DO SUAÇUÍ)'
@@ -1210,7 +1243,7 @@ var logins = {
 	}, {
 		usr : '166',
 		pwd : '0510',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-275 (P/CARANDAÍ) - ACESSO ALTO DOCE (INÍCIO PISTA DUPLA)'
@@ -1231,14 +1264,14 @@ var logins = {
 	}, {
 		usr : '169',
 		pwd : '0152',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-352(B)/GO-210(B)/330 (CATALÃO) - ENTR GO-402'
 	}, {
 		usr : '170',
 		pwd : '0010',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-050/365/452/455 (UBERLÂNDIA) - ENTR BR-153/464 (PRATA)'
@@ -1259,14 +1292,14 @@ var logins = {
 	}, {
 		usr : '173',
 		pwd : '0110',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO CARLOS CHAGAS - ENTR MG-412'
 	}, {
 		usr : '174',
 		pwd : '0110',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO SÃO JOSÉ DO JACURÍ - ENTR MG-117 (SÃO JOÃO EVANGELISTA)'
@@ -1287,7 +1320,7 @@ var logins = {
 	}, {
 		usr : '177',
 		pwd : '1195',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO ITANHOMI - ENTR BR-458(A) (TURUAÇÚ)'
@@ -1315,28 +1348,28 @@ var logins = {
 	}, {
 		usr : '181',
 		pwd : '0195',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO MORADA NOVA DE MINAS - ACESSO SÃO JOSÉ DO BURITI'
 	}, {
 		usr : '182',
 		pwd : '0330',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-367(B) (GOUVEIA) - ACESSO NOSSA SENHORA DA GLÓRIA'
 	}, {
 		usr : '183',
 		pwd : '0910',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-255 - ENTR BR-262(B) (DIV MG/SP)'
 	}, {
 		usr : '184',
 		pwd : '0250',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-462(B) - ENTR BR-262',
@@ -1359,14 +1392,14 @@ var logins = {
 	}, {
 		usr : '187',
 		pwd : '0030',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-354(B) - ENTR BR-265(A)'
 	}, {
 		usr : '188',
 		pwd : '0190',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-135/338 (BARBACENA) - ACESSO TIRADENTES'
@@ -1387,14 +1420,14 @@ var logins = {
 	}, {
 		usr : '191',
 		pwd : '0590',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-270 (CARMÓPOLIS DE MINAS) - ENTR BR-494(A) (P/OLIVEIRA)'
 	}, {
 		usr : '192',
 		pwd : '0230',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-354(A) (P/BAMBUÍ) - ENTR BR-354(B)'
@@ -1408,7 +1441,7 @@ var logins = {
 	}, {
 		usr : '194',
 		pwd : '0090',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-410 - PRESIDENTE OLEGÁRIO'
@@ -1436,7 +1469,7 @@ var logins = {
 	}, {
 		usr : '198',
 		pwd : '0170',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MG-229 (P/SENHORA DO PORTO) - ENTR MG-232 (P/CARMESIA)'
@@ -1450,7 +1483,7 @@ var logins = {
 	}, {
 		usr : '200',
 		pwd : '0170',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO À GOV. VALADARES - PERIQUITO'
@@ -1471,7 +1504,7 @@ var logins = {
 	}, {
 		usr : '203',
 		pwd : '0270',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO CONCEIÇÃO DO RIO VERDE - ENTR BR-460'
@@ -1506,7 +1539,7 @@ var logins = {
 	}, {
 		usr : '208',
 		pwd : '0090',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MS-141 (IVINHEMA) - VILA AMANDINA'
@@ -1535,7 +1568,7 @@ var logins = {
 	}, {
 		usr : '212',
 		pwd : '0180',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-158(B) (P/TAMBOARA) - ACESSO ALTO PARANÁ/MARISTELA'
@@ -1556,28 +1589,28 @@ var logins = {
 	}, {
 		usr : '215',
 		pwd : '0765',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'FIM VARIANTE II SERRA DE SÃO VICENTE - ACESSO DISTRITO INDUSTRIAL'
 	}, {
 		usr : '216',
 		pwd : '0150',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-010(B) (P/SANTA MARIA DO PARÁ) - ENTR PA-324 (P/SALINÓPOLIS)'
 	}, {
 		usr : '217',
 		pwd : '0270',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PB-177 (SOLEDADE) - ENTR PB-195 (JUAZEIRINHO)'
 	}, {
 		usr : '218',
 		pwd : '0322',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'BARRA DE SANTANA - ENTR PB-196 (P/RIACHO DE SANTO ANTÔNIO)'
@@ -1591,14 +1624,14 @@ var logins = {
 	}, {
 		usr : '220',
 		pwd : '0410',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PE-015 (P/PAULISTA - VIADUTO SOBRE PE-015) - VIADUTO SOBRE AVENIDA CAXANGÁ'
 	}, {
 		usr : '221',
 		pwd : '0530',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'DIV PE/AL - ENTR BR-423(A)'
@@ -1612,35 +1645,35 @@ var logins = {
 	}, {
 		usr : '223',
 		pwd : '0250',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR CE-292(B) - DIV CE/PE'
 	}, {
 		usr : '224',
 		pwd : '0300',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PE-310/312 (CUSTÓDIA) - ENTR BR-426/PE-340 (SÍTIO DOS NUNES)'
 	}, {
 		usr : '225',
 		pwd : '0250',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'RAJADA - ENTR BR-235(A)'
 	}, {
 		usr : '226',
 		pwd : '0115',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PI-394 - ENTR PI-140 (CANTO DO BURITI)'
 	}, {
 		usr : '227',
 		pwd : '0070',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR PI-211 (CAXINGÓ) - ENTR PI-213(A)'
@@ -1668,7 +1701,7 @@ var logins = {
 	}, {
 		usr : '231',
 		pwd : '0210',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-252 (GUAPIARA) - ENTR SP-165/249 (APIAÍ)'
@@ -1682,7 +1715,7 @@ var logins = {
 	}, {
 		usr : '233',
 		pwd : '0080',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO IVAIPORÃ - ENTR BR-487 (P/MANOEL RIBAS)'
@@ -1717,14 +1750,14 @@ var logins = {
 	}, {
 		usr : '238',
 		pwd : '1140',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-331(A) - ENTR SP-331(B)'
 	}, {
 		usr : '239',
 		pwd : '0230',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-369 - ENTR SP-261 (P/ÁGUAS DE SANTA BÁRBARA)'
@@ -1738,7 +1771,7 @@ var logins = {
 	}, {
 		usr : '241',
 		pwd : '0410',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO PARAÍBA DO SUL - ENTR RJ-135 (ANDRADE PINTO)'
@@ -1752,21 +1785,21 @@ var logins = {
 	}, {
 		usr : '243',
 		pwd : '0590',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ITAMONTE - ENTR BR-485 (GARGANTA DO REGISTRO)'
 	}, {
 		usr : '244',
 		pwd : '3350',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR RJ-149 (P/RIO CLARO) - ENTR BR-494(A) (ANGRA DOS REIS)'
 	}, {
 		usr : '245',
 		pwd : '0530',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR RJ-145 (P/BARRA DO PIRAÍ) - ENTR RJ-141 (DORANDIA)'
@@ -1780,7 +1813,7 @@ var logins = {
 	}, {
 		usr : '247',
 		pwd : '0170',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR RJ-198(B) - ENTR RJ-200 (MONTE ALEGRE)'
@@ -1815,42 +1848,42 @@ var logins = {
 	}, {
 		usr : '252',
 		pwd : '0065',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO À JENIPABU - ENTR RN-160(B) (P/EXTREMOZ)'
 	}, {
 		usr : '253',
 		pwd : '0110',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'TAIPÚ - ENTR RN-064 (P/CEARÁ MIRIM)'
 	}, {
 		usr : '254',
 		pwd : '0055',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR CE-261 - DIV CE/RN'
 	}, {
 		usr : '255',
 		pwd : '0210',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-230(A) (SANTA GERTRUDES) - ENTR PB-275(A) (P/SÃO JOSÉ DE ESPINHARA)'
 	}, {
 		usr : '256',
 		pwd : '1375',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO USINA DE SAMUEL - INICIO PISTA DUPLA'
 	}, {
 		usr : '257',
 		pwd : '1510',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'VISTA ALEGRE DO ABUANÃ - VILA EXTREMA'
@@ -1871,7 +1904,7 @@ var logins = {
 	}, {
 		usr : '260',
 		pwd : '1148',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR RO-471 (P/MINISTRO ANDREAZZA) - ENTR RO-479(A) (P/ROLIM DE MOURA)'
@@ -1927,7 +1960,7 @@ var logins = {
 	}, {
 		usr : '268',
 		pwd : '1850',
-		fase : '1',
+		fase : '3',
 		ladoA : 'ENTR BR-290(B)',
 		ladoB : 'ENTR BR-392',
 		trecho : 'ENTR BRS-290(B) (P/ SAO GABRIEL) - ENTR BRS-392 (P/ CACAPAVA DO SUL)'
@@ -1983,7 +2016,7 @@ var logins = {
 	}, {
 		usr : '276',
 		pwd : '0290',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-280(A) - ENTR BR-280(B) (VITORINO)'
@@ -1997,35 +2030,35 @@ var logins = {
 	}, {
 		usr : '278',
 		pwd : '0190',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-183 - ENTR BR-116(A) (P/LORENA)'
 	}, {
 		usr : '279',
 		pwd : '2360',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-062 (P/ROSEIRA) - ENTR BR-383(A)/SP-132 (PINDAMONHANGABA)'
 	}, {
 		usr : '280',
 		pwd : '2470',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-065 (P/IGARATÁ) - ENTR SP-056 (ARUJÁ)'
 	}, {
 		usr : '281',
 		pwd : '2630',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-116(A) (JUQUIÁ) - ENTR SP-139 (REGISTRO)'
 	}, {
 		usr : '282',
 		pwd : '0130',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-373(A) (ITAPETININGA) - ENTR BR-373(B)'
@@ -2039,35 +2072,35 @@ var logins = {
 	}, {
 		usr : '284',
 		pwd : '1010',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-355 - ENTR SP-425'
 	}, {
 		usr : '285',
 		pwd : '0110',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-255 (ARARAQUARA) - ENTR BR-364(B)'
 	}, {
 		usr : '286',
 		pwd : '0783',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO RINÓPOLIS - ENTR SP-294 (PARAPUÃ)'
 	}, {
 		usr : '287',
 		pwd : '0850',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR SP-065 (ATIBAIA) - ENTR SP-023 (MARIPORÃ)'
 	}, {
 		usr : '288',
 		pwd : '0010',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-222/230(A)/PA-150 (MARABÁ) - ENTR PA-405'
@@ -2081,7 +2114,7 @@ var logins = {
 	}, {
 		usr : '290',
 		pwd : '1010',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR MA-012/375 (SÃO RAIMUNDO DAS MANGABEIRAS) - ENTR MA-006(A)'
@@ -2102,7 +2135,7 @@ var logins = {
 	}, {
 		usr : '293',
 		pwd : '0272',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'INDIANÓPOLIS - VALE DO SONHO'
@@ -2130,14 +2163,14 @@ var logins = {
 	}, {
 		usr : '297',
 		pwd : '0434',
-		fase : '4',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ACESSO ITAJÁ (GO) - ENTR MS-431 (P/SÃO JOÃO DO APORÉ)'
 	}, {
 		usr : '298',
 		pwd : '0930',
-		fase : '2',
+		fase : '3',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'FNM (ENTR PISTA INVERSA) - ENTR BR-116(A)/493/RJ-109'
@@ -2158,14 +2191,14 @@ var logins = {
 	}, {
 		usr : '301',
 		pwd : '0150',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'DIV PI/BA - ENTR BR-235/BA-161 (REMANSO)'
 	}, {
 		usr : '302',
 		pwd : '0770',
-		fase : '3',
+		fase : '2',
 		ladoA : '',
 		ladoB : '',
 		trecho : 'ENTR BR-369(A) (BARBOSA FERRAZ) - ENTR BR-158(A)/369(B) (ANEL VIÁRIO CAMPO MOURÃO)'

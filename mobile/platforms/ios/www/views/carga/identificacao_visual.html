@@ -69,6 +69,14 @@
 			</div>
 		</fieldset>
 
+		<!-- Placa estrangeira -->
+		<fieldset class="ui-grid-a escondido" id="grupo_placa_unica_carga">
+			<legend class="ui-block-a">Placa do veículo:</legend>
+			<div class="ui-block-b">
+				<input id="placa_unica_carga" class="input_placa" type="text" name="placa_unica_carga" value="" data-theme="a" />
+			</div>
+		</fieldset>
+
 		<fieldset class="ui-grid-a escondido" id="grupo_placa_carga">
 			<legend class="ui-block-a">Placa do veículo:</legend>
 			<div class="ui-block-b ui-grid-a" id="grupo_placa_dados_carga">
@@ -84,23 +92,28 @@
 					</div>
 				</div>
 			</div>
+			<fieldset class="ui-block-b ui-grid-a escondido" id="grupo_placa_vermelha_carga">
+				<legend class="ui-block-a">Placa vermelha:</legend>
+				<div class="ui-block-b ui-grid-a" id="grupo_placa_vermelha_dados_carga">
+					<fieldset data-role="controlgroup" data-theme="a" data-type="horizontal">
+						<input type="radio" name="placa_vermelha_carga" class="ui-block-a" id="placa_vermelha_carga_sim" value="sim">
+						<label for="placa_vermelha_carga_sim">Sim</label>
+						<input type="radio" name="placa_vermelha_carga" class="ui-block-b" id="placa_vermelha_carga_nao" value="nao">
+						<label for="placa_vermelha_carga_nao">Não</label>
+					</fieldset>
+				</div>
+			</fieldset>
 		</fieldset>
 
-		<fieldset class="ui-grid-a escondido" id="grupo_placa_unica_carga">
-			<legend class="ui-block-a">Placa do veículo:</legend>
-			<div class="ui-block-b">
-				<input id="placa_unica_carga" class="input_placa" type="text" name="placa_unica_carga" value="" data-theme="a" />
-			</div>
-		</fieldset>
 
-		<fieldset class="ui-grid-a escondido" id="grupo_placa_vermelha_carga">
-			<legend class="ui-block-a">Placa vermelha:</legend>
-			<div class="ui-block-b ui-grid-a" id="grupo_placa_vermelha_dados_carga">
-				<fieldset data-role="controlgroup" data-theme="a" class="ui-block-a" data-type="horizontal">
-					<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_sim" value="sim">
-					<label for="placa_vermelha_carga_sim">Sim</label>
-					<input type="radio" name="placa_vermelha_carga" id="placa_vermelha_carga_nao" value="nao">
-					<label for="placa_vermelha_carga_nao">Não</label>
+		<fieldset class="ui-grid-a escondido" id="grupo_qr_code_carga">
+			<legend class="ui-block-a">Possui QR Code:</legend>
+			<div class="ui-block-b ui-grid-a" id="grupo_qr_code_dados_carga">
+				<fieldset data-role="controlgroup" data-theme="a" class="ui-block-a qrCode_group" data-type="horizontal">
+					<input type="radio" name="qr_code_carga" id="qr_code_carga_sim" value="sim">
+					<label for="qr_code_carga_sim">Sim</label>
+					<input type="radio" name="qr_code_carga" id="qr_code_carga_nao" value="nao">
+					<label for="qr_code_carga_nao">Não</label>
 				</fieldset>
 				<fieldset class="ui-block-b ui-grid-b escondido" id="grupo_placa_vermelha_rntrc_carga">
 					<legend class="ui-block-a">RNTRC:</legend>
@@ -110,7 +123,7 @@
 					</div>
 					<div class="ui-block-c escondido" id="grupo_placa_vermelha_rntrc_num_carga">
 						<input id="placa_vermelha_rntrc_num_carga" type="text" pattern="\d*" name="placa_vermelha_rntrc_num_carga" value=""
-							data-theme="a" maxlength="8" mask="9{8}" />
+							data-theme="a" mask="9{9}" />
 					</div>
 				</fieldset>
 			</div>
@@ -148,6 +161,12 @@
 	</section>
 
 	<!-- footer -->
-	<footer data-role="footer" data-position="fixed"> </footer>
+	<footer data-role='footer' data-position='fixed'> 
+		<span class='versao'>Versão: <span id='versao'></span></span> 
+		<span class='data_atual'>Data: <span id='data_atual'></span></span> 
+		<span class='posto'>Posto: <span id='posto'></span></span> 
+		<span class='sentido'>Sentido: <span id='sentido'></span></span> 
+		<span class='ipad'>id-iPad: <span id='ipadID'></span></span> 
+	</footer>
 
 </section>

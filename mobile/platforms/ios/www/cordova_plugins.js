@@ -1,19 +1,19 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-plugin-device.device",
-        "file": "plugins/cordova-plugin-device/www/device.js",
-        "pluginId": "cordova-plugin-device",
-        "clobbers": [
-            "device"
-        ]
-    },
-    {
         "id": "cordova-plugin-dialogs.notification",
         "file": "plugins/cordova-plugin-dialogs/www/notification.js",
         "pluginId": "cordova-plugin-dialogs",
         "merges": [
             "navigator.notification"
+        ]
+    },
+    {
+        "id": "cordova-plugin-device.device",
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
         ]
     },
     {
@@ -212,20 +212,38 @@ module.exports = [
         "clobbers": [
             "SQLitePlugin"
         ]
+    },
+    {
+        "id": "cordova-plugin-battery-status.battery",
+        "file": "plugins/cordova-plugin-battery-status/www/battery.js",
+        "pluginId": "cordova-plugin-battery-status",
+        "clobbers": [
+            "navigator.battery"
+        ]
+    },
+    {
+        "id": "cordova-plugin-cache-clear.CacheClear",
+        "file": "plugins/cordova-plugin-cache-clear/www/CacheClear.js",
+        "pluginId": "cordova-plugin-cache-clear",
+        "clobbers": [
+            "CacheClear"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-device": "1.1.2",
-    "cordova-plugin-dialogs": "1.2.1",
-    "cordova-plugin-file": "4.2.0",
-    "cordova-plugin-splashscreen": "3.2.2",
-    "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-whitelist": "1.2.1",
-    "cordova-sqlite-storage": "1.4.7",
+    "cordova-plugin-dialogs": "1.3.3",
+    "cordova-plugin-device": "1.1.6",
+    "cordova-plugin-compat": "1.1.0",
+    "cordova-plugin-file": "4.3.3",
     "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1",
-    "cordova-plugin-compat": "1.0.0"
+    "cordova-plugin-splashscreen": "4.0.3",
+    "cordova-plugin-statusbar": "2.2.3",
+    "cordova-sqlite-storage": "2.0.4",
+    "cordova-plugin-battery-status": "1.2.4",
+    "cordova-plugin-cache-clear": "1.3.7"
 };
 // BOTTOM OF METADATA
 });

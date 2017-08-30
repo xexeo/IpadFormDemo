@@ -1,0 +1,105 @@
+{
+  "name": "cordova-plugin-battery-status",
+  "version": "1.2.4",
+  "description": "Cordova Battery Plugin",
+  "types": "./types/index.d.ts",
+  "cordova": {
+    "id": "cordova-plugin-battery-status",
+    "platforms": [
+      "android",
+      "amazon-fireos",
+      "ubuntu",
+      "ios",
+      "blackberry10",
+      "wp7",
+      "wp8",
+      "tizen",
+      "firefoxos"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/cordova-plugin-battery-status.git"
+  },
+  "keywords": [
+    "cordova",
+    "battery",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
+    "cordova-ios",
+    "cordova-blackberry10",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-tizen",
+    "cordova-firefoxos"
+  ],
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests"
+  },
+  "author": {
+    "name": "Apache Software Foundation"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/apache/cordova-plugin-battery-status/issues"
+  },
+  "homepage": "https://github.com/apache/cordova-plugin-battery-status#readme",
+  "_id": "cordova-plugin-battery-status@1.2.4",
+  "_shasum": "73a576afc0a61a9dd29aff7765907ecac0c9f1f9",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-battery-status/-/cordova-plugin-battery-status-1.2.4.tgz",
+  "_from": "cordova-plugin-battery-status@latest",
+  "_npmVersion": "3.10.10",
+  "_nodeVersion": "6.10.1",
+  "_npmUser": {
+    "name": "filmaj",
+    "email": "maj.fil@gmail.com"
+  },
+  "dist": {
+    "shasum": "73a576afc0a61a9dd29aff7765907ecac0c9f1f9",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-battery-status/-/cordova-plugin-battery-status-1.2.4.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "bowserj",
+      "email": "bowserj@apache.org"
+    },
+    {
+      "name": "csantanapr",
+      "email": "csantana23@gmail.com"
+    },
+    {
+      "name": "filmaj",
+      "email": "maj.fil@gmail.com"
+    },
+    {
+      "name": "purplecabbage",
+      "email": "purplecabbage@gmail.com"
+    },
+    {
+      "name": "shazron",
+      "email": "shazron@gmail.com"
+    },
+    {
+      "name": "stevegill",
+      "email": "stevengill97@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-battery-status-1.2.4.tgz_1493685627359_0.5040916141588241"
+  },
+  "directories": {}
+}

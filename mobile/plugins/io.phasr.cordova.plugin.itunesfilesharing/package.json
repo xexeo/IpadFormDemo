@@ -16,10 +16,16 @@
     "ecosystem:cordova",
     "cordova-ios"
   ],
-  "author": "Christian Junk",
+  "author": {
+    "name": "Christian Junk"
+  },
   "license": "Apache 2.0 License",
   "bugs": {
     "url": "https://github.com/christianjunk/cordova-plugin-itunesfilesharing/issues"
   },
-  "homepage": "https://github.com/christianjunk/cordova-plugin-itunesfilesharing#readme"
+  "homepage": "https://github.com/christianjunk/cordova-plugin-itunesfilesharing#readme",
+  "readme": "# cordova-plugin-itunesfilesharing\nCordova/PhoneGap plugin for enabling iTunes file sharing.\n",
+  "readmeFilename": "README.md",
+  "_id": "cordova-plugin-itunesfilesharing@0.0.1",
+  "_from": "cordova-plugin-itunesfilesharing@latest"
 }

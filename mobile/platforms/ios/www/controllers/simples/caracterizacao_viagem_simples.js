@@ -186,8 +186,9 @@ controllers.caracterizacao_viagem_simples = {
 						&& (util.validaInputText("frequencia_num_simples", "Frequência da viagem"));
 			}
 
+			validacoes = validacoes && util.validaTemPessoasVeiculo("pessoas_simples", "Pessoas no veículo");
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_simples", "Pessoas no veículo");
-
+			
 			if (Number($("#motivo_viagem_simples").val()) == 6) { // TODO Trabalho. Ajustar se id mudar.
 				validacoes = validacoes
 						&& (util.validaInputNumberRange("pessoas_trabalho_simples", "Pessoas a trabalho", 1, Number($(

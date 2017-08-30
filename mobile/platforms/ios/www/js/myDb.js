@@ -58,7 +58,8 @@ myDb = {
 		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
 		{field : 'idPerguntaExtra', type : 'integer'},
 		{field : 'erro', type : 'text'},
-		{field : 'duracaoPesq', type : 'integer'}
+		{field : 'duracaoPesq', type : 'integer'},
+		{field : 'treinamento', type : 'integer', notNull: true}// Boolean 1->true || false, otherwise;
 	],
 
 	fieldExists : function(str) {
@@ -72,7 +73,7 @@ myDb = {
 		return found;
 	},
 
-	cretateTblDados : function() {
+	cretateTblDados : function(cb) {
 		app.logger.log("criando tabela: tblDados");
 		app.database.transaction(function(tx) {
 			var sql = "CREATE TABLE IF NOT EXISTS tblDados ( ";
@@ -87,62 +88,84 @@ myDb = {
 			app.logger.log('ERRO: ' + e.message);
 		}, function() {
 			app.logger.log("tabela criada: tblDados");
+			if(util.isFunction(cb)){
+				cb();
+			}
 		});
 
 	},
 
 	/**
 	 * Inserts a registro variable into database
-	 * 
-	 * @param Registro
-	 *            reg registro to be inserted into database
-	 * @param Function
-	 *            fail error callback
-	 * @param Function
-	 *            success callback
+	 * @param Registro reg registro to be inserted into database
+	 * @param Function fail error callback
+	 * @param Function success callback
 	 */
 	insertRegistro : function(reg, fail, success) {
-		app.logger.log("inserindo registro: " + reg.id);
-		try {
-			app.database.transaction(function(tx) {
+		if (reg.id != null){
+				app.logger.log("inserindo registro: " + reg.id);
+			try {
+				app.database.transaction(function(tx) {
 
-				var fields = "(";
-				var places = "(";
-				var values = [];
-				$.each(myDb.tabelaOD, function(index, item) {
-					fields += item.field;
-					places += "?";
-					var value = reg[item.field];
-					values.push((value == undefined ? null : value));
-					if (index < myDb.tabelaOD.length - 1) {
-						fields += ", ";
-						places += ", ";
-					}
+					var fields = "(";
+					var places = "(";
+					var values = [];
+					$.each(myDb.tabelaOD, function(index, item) {
+						fields += item.field;
+						places += "?";
+						var value = reg[item.field];
+						values.push((value == undefined ? null : value));
+						if (index < myDb.tabelaOD.length - 1) {
+							fields += ", ";
+							places += ", ";
+						}
+					});
+					fields += ")";
+					places += ");";
+
+					var sql = "INSERT INTO tblDados " + fields + " VALUES " + places;
+
+					tx.executeSql(sql, values, function(tx, res) {
+						app.logger.log('id inserido no banco de dados: ' + res.insertId);
+					});
+				},
+				// transaction fail
+				function(e) {
+					// inseriu = false;
+					app.logger.log('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+					fail(e);
+				},
+				// transaction success
+				function() {
+					// inseriu = true;
+					app.logger.log("registro inserido: " + reg.id);
+					success();
 				});
-				fields += ")";
-				places += ");";
-
-				var sql = "INSERT INTO tblDados " + fields + " VALUES " + places;
-
-				tx.executeSql(sql, values, function(tx, res) {
-					app.logger.log('id inserido no banco de dados: ' + res.insertId);
-				});
-			},
-			// transaction fail
-			function(e) {
-				// inseriu = false;
-				app.logger.log('ERRO ao inserir registro (' + reg.id + '): ' + e.message);
+			} catch (e) {
 				fail(e);
-			},
-			// transaction success
-			function() {
-				// inseriu = true;
-				app.logger.log("registro inserido: " + reg.id);
-				success();
-			});
-		} catch (e) {
-			fail(e);
+			}
+		} else {
+			app.logger.log("Tentativa de inserção de registro sem id");
 		}
+		
+	},
+	
+	sanitize: function(cb){
+		app.database.transaction(function(tx) {
+			var sql = "DELETE from tblDados WHERE id is null;";
+			tx.executeSql(sql);
+		},
+		//fail
+		function(e){
+			app.logger.log('ERRO ao limpar a base de dados: ' + e.message);
+		},
+		//success
+		function(){
+			app.logger.log('Base de dados limpa');
+			if (util.isFunction(cb)){
+				cb();
+			}
+		})
 	},
 
 /*
@@ -155,6 +178,7 @@ ORDER BY diaPesq DESC;
 	selectDuracoesDiaRegistro : function(fail, success) {
 		app.logger.log("(selectDuracoesDiaRegistro) buscando no registro");
 		var linhas = [];
+		var treinamento = (app.isTreinamento)? 1 : 0;
 		try {
 			app.database.transaction(function(tx) {
 
@@ -165,6 +189,8 @@ ORDER BY diaPesq DESC;
 						" MAX(duracaoPesq) as 'maxTempoDia'," +
 						" MIN(duracaoPesq) as 'minTempoDia'" +
 						" FROM tblDados WHERE cancelado = 0" +
+						" AND treinamento = " + treinamento +
+						" AND idPosto = " + app.posto +
 						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
 
 				tx.executeSql(sql, [], function(tx, res) {
@@ -195,12 +221,15 @@ ORDER BY diaPesq DESC;
 	selectUltimaPesquisaValida : function(fail, success) {
 		app.logger.log("(selectUltimaPesquisaValida) buscando no registro");
 		var ultimoRegistro = [];
+		var treinamento = (app.isTreinamento)? 1 : 0;
 		try {
 			app.database.transaction(function(tx) {
 
 				var sql = "SELECT dataIniPesq," +
 						" duracaoPesq" +
 						" FROM tblDados WHERE cancelado = 0" +
+						" AND treinamento = " + treinamento +
+						" AND idPosto = " + app.posto +
 						" ORDER BY dataIniPesq DESC" +
 						" LIMIT 1";
 
@@ -238,6 +267,7 @@ ORDER BY diaPesq DESC;
 	selectRegistrosCancelados : function(fail, success) {
 		app.logger.log("(selectRegistrosCancelados) buscando no registro");
 		var linhas = [];
+		var treinamento = (app.isTreinamento)? 1 : 0;
 		try {
 			app.database.transaction(function(tx) {
 
@@ -246,6 +276,8 @@ ORDER BY diaPesq DESC;
 						" SUM(duracaoPesq) as 'somaDia',"+
 						" COUNT(id) as 'qtdDia'" +
 						" FROM tblDados WHERE cancelado = 1" +
+						" AND treinamento = " + treinamento +
+						" AND idPosto = " + app.posto +
 						" GROUP by DATE(dataIniPesq) ORDER BY diaPesq DESC";
 
 				tx.executeSql(sql, [], function(tx, res) {
@@ -275,6 +307,7 @@ ORDER BY diaPesq DESC;
 
 	exportaDbToJson : function(writer, fail, success) {
 		app.logger.log("exportando Json: ");
+		var treinamento = (app.isTreinamento)? 1 : 0;
 		try {
 			app.database.transaction(function(tx) {
 				var fields = "";
@@ -285,7 +318,7 @@ ORDER BY diaPesq DESC;
 					}
 				});
 
-				var sql = "SELECT " + fields + " FROM tblDados WHERE cancelado = 0;";
+				var sql = "SELECT " + fields + " FROM tblDados WHERE cancelado = 0 AND treinamento = " + treinamento + " ;";
 
 				tx.executeSql(sql, [], function(tx, res) {
 					for (var rowIndex = 0; rowIndex < res.rows.length; rowIndex++) {

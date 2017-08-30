@@ -1,32 +1,64 @@
 {
-    "name": "cordova-plugin-compat",
-    "description": "This repo is for remaining backwards compatible with previous versions of Cordova.",
-    "version": "1.0.0",
-    "homepage": "http://github.com/apache/cordova-plugin-compat#readme",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/apache/cordova-plugin-compat.git"
+  "name": "cordova-plugin-compat",
+  "description": "This repo is for remaining backwards compatible with previous versions of Cordova.",
+  "version": "1.1.0",
+  "homepage": "http://github.com/apache/cordova-plugin-compat#readme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/apache/cordova-plugin-compat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apache/cordova-plugin-compat/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-compat",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "ecosystem:phonegap",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=5.0.0"
+    }
+  ],
+  "author": {
+    "name": "Apache Software Foundation"
+  },
+  "license": "Apache-2.0",
+  "_id": "cordova-plugin-compat@1.1.0",
+  "_shasum": "92bdf169feb61205323dcc96a3ff8348e37e87fc",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-compat/-/cordova-plugin-compat-1.1.0.tgz",
+  "_from": "cordova-plugin-compat@>=1.0.0 <2.0.0",
+  "scripts": {},
+  "_npmVersion": "4.0.0",
+  "_nodeVersion": "6.6.0",
+  "_npmUser": {
+    "name": "stevegill",
+    "email": "stevengill97@gmail.com"
+  },
+  "dist": {
+    "shasum": "92bdf169feb61205323dcc96a3ff8348e37e87fc",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-compat/-/cordova-plugin-compat-1.1.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "macdonst",
+      "email": "simon.macdonald@gmail.com"
     },
-    "bugs": {
-        "url": "https://github.com/apache/cordova-plugin-compat/issues"
-    },
-    "cordova": {
-        "id": "cordova-plugin-compat",
-        "platforms": [
-            "android"
-        ]
-    },
-    "keywords": [
-        "ecosystem:cordova",
-        "ecosystem:phonegap",
-        "cordova-android"
-    ],
-    "engines": [
-        {
-            "name": "cordova",
-            "version": ">=5.0.0"
-        }
-    ],
-    "author": "Apache Software Foundation",
-    "license": "Apache-2.0"
+    {
+      "name": "stevegill",
+      "email": "stevengill97@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-compat-1.1.0.tgz_1478304539989_0.23511901660822332"
+  },
+  "directories": {}
 }

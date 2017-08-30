@@ -304,6 +304,8 @@ var util = {
 				app.setAtributo(nome_registro_pais, $(this).val());
 				app.setAtributo(proximo_imediato, null);
 				app.setAtributo(nome_registro_municipio, null);
+				util.inicializaSelectCustomValueAsIndex(proximo_imediato + "_" + fluxo, lista_estados, "UF");
+				$("#" + proximo_imediato2 + "_" + fluxo).val("");
 			} else { // País é Brasil
 				$("#" + grupo_proximo_imediato).show();
 				$("#" + grupo_proximo).hide();
@@ -359,7 +361,14 @@ var util = {
 		$('#' + nome_campo).keyup(function() {
 			var input = $(this);
 			var max_len = Number(input.attr("maxlength"));
-			if (progride(input.val(), max_len)) {
+			var min_len = input.attr("minlength");
+			
+			if(typeof min_len !== typeof undefined && min_len !== false){
+				min_len=Number(min_len);
+			}else
+				min_len=max_len;
+			
+			if (progride(input.val(),min_len)) {
 				input.val(String(input.val()).trim().substring(0, max_len));
 				input.trigger('change');
 			}
@@ -455,9 +464,19 @@ var util = {
 	validaLenInputText : function(nome_campo, campo_aviso) {
 		var value = $.trim($('#' + nome_campo).val());
 		var len = Number($.trim($('#' + nome_campo).attr("maxlength")));
+		var min_len = $('#' + nome_campo).attr("minlength");
+			
+		if(typeof min_len !== typeof undefined && min_len !== false){
+			min_len=Number(min_len);
+		}else
+			min_len=len;
+			
 		if (len > 0) {
-			if (value.length != len) {
-				util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");
+			if (value.length < min_len || value.length > len) {
+				if(min_len===len)
+					util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");
+				else
+					util.alerta_msg(campo_aviso, "O campo deve ter entre " + min_len + " e "+len+" caracteres.");
 				return false;
 			}
 		}
@@ -492,19 +511,38 @@ var util = {
 
 	validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) {
 		var value = $.trim($('#' + nome_campo).val());
-		value = value.toUpperCase();
-		var encontrou = false;
-
-		$.each(lista, function(index, item) {
-			if (value == item.numeroid) {
-				encontrou = true;
-				app.setAtributo(idRegistro, item.id);
-			}
-		});
-		if (!encontrou) {
+		app.setAtributo(idRegistro,value);
+		
+		var idItemLista = util.findValueInList(value, lista);
+		if (util.isEmpty(idItemLista)) {
 			util.alerta_msg(campo_aviso, "O valor " + value + " informado não é válido.");
+			return false;
 		}
-		return encontrou
+		return true;
+	},
+	
+	findValueInList : function(valorLista, lista) {
+		var idItemLista = null;
+		if (!util.isEmpty(valorLista)) {
+			var value = valorLista.toUpperCase();
+			$.each(lista, function(index, item) {
+				if (value == item.numeroid) {
+					idItemLista = item.id;
+					return false; // funciona como break para o sair do each()
+				}
+			});
+			return idItemLista;
+		} else {
+			return null;
+		} 
+	},
+	
+	validaTemPessoasVeiculo : function(nome_campo, campo_aviso) {
+		if (util.isEmpty($.trim($('#' + nome_campo).val())) || $.trim($('#' + nome_campo).val()) <= 0) {
+			util.alerta_msg(campo_aviso, "O campo deve ser preenchido com um valor positivo maior que zero");
+			return false;
+		}
+		return true;
 	},
 
 	validaLimitePessoas : function(nome_campo, campo_aviso) {
@@ -659,9 +697,9 @@ var util = {
 	isEmpty : function(valor) {
 		try {
 			emp = (valor == undefined) || (valor == null) || (String(valor).trim().length == 0);
-			if (emp) {
-				app.logger.log("isEmpty is TRUE");
-			}
+//			if (emp) {
+//				app.logger.log("isEmpty is TRUE");
+//			}
 			return emp;
 		} catch(exc) {
 			app.logger.log("[ERRO] Erro no isEmpty. Detalhes:");
@@ -800,5 +838,24 @@ var util = {
 		if (mes< 10) {mes = "0"+mes;}
 
 		return dia + '/' +  mes + '/' + ano;
-	}
+	},
+	
+	formatDateTimeToDisplay : function(){
+		var d = new Date();
+		var hora = d.getHours();
+		var min = d.getMinutes();
+		if (hora< 10) {hora = "0"+hora;}
+		if (min< 10) {min = "0"+min;}
+		return util.formateDateOnly(d) + '  ' + hora + ':' + min;
+	},
+	
+	geraListaAnos : function(){
+		var lista_anos = [];
+		var ano = new Date().getFullYear();
+		while (ano > 1899){
+			lista_anos = lista_anos.concat(ano);
+			ano--;
+		}
+		return lista_anos;
+	},
 };

@@ -20,10 +20,13 @@ controllers.caracterizacao_onibus = {
 	// Inicializa os elementos da tela
 	inicializaElementos : function() {
 
-		var lista_anos = [];
-		for (var ano = 2016; ano > 1899; ano--) {
-			lista_anos = lista_anos.concat(ano);
-		}
+//		var lista_anos = [];
+//		for (var ano = 2017; ano > 1899; ano--) {
+//			lista_anos = lista_anos.concat(ano);
+//		}
+
+		var lista_anos = util.geraListaAnos();
+		
 		util.inicializaSelectCustomValueAsIndex("ano_onibus", lista_anos, "Selecione");
 
 		util.inicializaTabelaAuxiliar("propriedade_onibus", "Selecione", lista_propriedade_veiculo, "onibus");

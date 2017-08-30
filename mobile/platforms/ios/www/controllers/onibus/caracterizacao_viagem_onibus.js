@@ -126,6 +126,7 @@ controllers.caracterizacao_viagem_onibus = {
 						&& (util.validaInputText("frequencia_num_onibus", "Frequência da viagem"));
 			}
 
+			validacoes = validacoes && util.validaTemPessoasVeiculo("pessoas_onibus", "Pessoas no veículo");
 			validacoes = validacoes && util.validaLimitePessoas("pessoas_onibus", "Pessoas no veículo");
 
 			return validacoes;

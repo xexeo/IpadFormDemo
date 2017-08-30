@@ -1,16 +1,69 @@
+/* global util, datas, app, ipadID */
+
 controllers.menu = {
 	config : function() {
+		$('#display_posto').html(app.posto);
+		$('#display_idIpad').html(ipadID.id);
+		$('#display_sentido').html(app.sentido);
+		$('#display_data_hora').html(util.formatDateTimeToDisplay());
+		var updater_dataTimeToDisplay = setInterval(function(){
+			$('#display_data_hora').html(util.formatDateTimeToDisplay());
+		},10000);
+		
+		if (app.isTreinamento){
+				$('#banner_supra').html("<br>O sistema está em modo de treinamento").addClass('avisoTreinamento');
+			}else{
+				$('#banner_supra').html("").removeClass('avisoTreinamento');
+		}
+		
         $('#menu_nova_pesquisa').click(function() {
-			// clear registro
-			app.iniciaRegistro();
-			app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
+			clearInterval(updater_dataTimeToDisplay);
+			
+			if (datas.verificaData() && app.isTreinamento) {
+				alert("Login de treinamento não podem ser \nutilizado em dias de produção de pesquisas reais.\nA aplicação será reiniciada",
+				"Controle de acesso", app.restart,	'error');
+			} else if (!datas.verificaData() && !app.isTreinamento){
+				alert("Logins de produção não podem ser \nutilizados fora das datas de produção de pesquisas reais.\nA aplicação será reiniciada",
+				"Controle de acesso", app.restart, 'error');
+			} else {
+				// clear registro
+				app.iniciaRegistro();
+				app.trocaPagina("views/selecionar_tipo.html", controllers.selecionar_tipo);
+			}
 		});
 
         $('#menu_sumario').click(function() {
-			app.buscaDuracoesRegistros();
-			app.buscaUltimaPesquisa();
-			app.buscaRegistrosCancelados();
-			app.trocaPagina("views/sumario.html", controllers.sumario);
+			$.mobile.loading("show");
+			app.buscaDuracoesRegistros(function(){
+				app.buscaUltimaPesquisa(function(){
+					app.buscaRegistrosCancelados(function(){
+						$.mobile.loading("hide");
+						clearInterval(updater_dataTimeToDisplay);
+						app.trocaPagina("views/sumario.html", controllers.sumario);
+					});
+				});
+			});
+			
+		});
+		
+		$("#menu_trocar_sentido").click(function(){
+			var novo_sentido;
+			if (app.sentido == 'AB'){
+				novo_sentido = 'BA'
+			}else{
+				novo_sentido = 'AB'
+			}
+			app.validaOperacoes(function(){
+					app.sentido = novo_sentido;
+					app.trocaPagina("views/menu.html", controllers.menu);
+				}, 
+				"Insira a senha para alterar o sentido para <span style='font-weight: bolder;'>" + novo_sentido + "</span>.",
+				"Alterar Sentido",
+				"Senha incorreta.\nDeseja tentar novamente?",
+				"Senha Incorreta", 
+				"Alterar Sentido",
+				"Voltar"
+			);
 		});
 
 		$('#testaBugOld').click(function(){

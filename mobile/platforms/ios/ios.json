@@ -9,11 +9,11 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
                         {
@@ -39,6 +39,14 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Battery\"><param name=\"ios-package\" value=\"CDVBattery\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CacheClear\"><param name=\"ios-package\" value=\"CacheClear\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -56,13 +64,22 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-device": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
+        },
+        "io.phasr.cordova.plugin.itunesfilesharing": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
         "cordova-plugin-splashscreen": {
@@ -71,35 +88,32 @@
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
-        },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
-        "io.phasr.cordova.plugin.itunesfilesharing": {
+        "cordova-plugin-battery-status": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         },
-        "cordova-plugin-compat": {
+        "cordova-plugin-cache-clear": {
             "PACKAGE_NAME": "br.ufrj.coppetec.contDNIT"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "id": "cordova-plugin-device.device",
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "pluginId": "cordova-plugin-device",
-            "clobbers": [
-                "device"
-            ]
-        },
-        {
             "id": "cordova-plugin-dialogs.notification",
             "file": "plugins/cordova-plugin-dialogs/www/notification.js",
             "pluginId": "cordova-plugin-dialogs",
             "merges": [
                 "navigator.notification"
+            ]
+        },
+        {
+            "id": "cordova-plugin-device.device",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "pluginId": "cordova-plugin-device",
+            "clobbers": [
+                "device"
             ]
         },
         {
@@ -298,17 +312,35 @@
             "clobbers": [
                 "SQLitePlugin"
             ]
+        },
+        {
+            "id": "cordova-plugin-battery-status.battery",
+            "file": "plugins/cordova-plugin-battery-status/www/battery.js",
+            "pluginId": "cordova-plugin-battery-status",
+            "clobbers": [
+                "navigator.battery"
+            ]
+        },
+        {
+            "id": "cordova-plugin-cache-clear.CacheClear",
+            "file": "plugins/cordova-plugin-cache-clear/www/CacheClear.js",
+            "pluginId": "cordova-plugin-cache-clear",
+            "clobbers": [
+                "CacheClear"
+            ]
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-device": "1.1.2",
-        "cordova-plugin-dialogs": "1.2.1",
-        "cordova-plugin-file": "4.2.0",
-        "cordova-plugin-splashscreen": "3.2.2",
-        "cordova-plugin-statusbar": "2.1.3",
         "cordova-plugin-whitelist": "1.2.1",
-        "cordova-sqlite-storage": "1.4.7",
+        "cordova-plugin-dialogs": "1.3.3",
+        "cordova-plugin-device": "1.1.6",
+        "cordova-plugin-compat": "1.1.0",
+        "cordova-plugin-file": "4.3.3",
         "io.phasr.cordova.plugin.itunesfilesharing": "0.0.1",
-        "cordova-plugin-compat": "1.0.0"
+        "cordova-plugin-splashscreen": "4.0.3",
+        "cordova-plugin-statusbar": "2.2.3",
+        "cordova-sqlite-storage": "2.0.4",
+        "cordova-plugin-battery-status": "1.2.4",
+        "cordova-plugin-cache-clear": "1.3.7"
     }
 }

@@ -71,6 +71,8 @@ controllers.sumario = {
 					className : "cell_tempo_medio"}
 			]
 		});
+		
+		myDb.sanitize();
 
 		$('#sumario_retornar_menu').click(function() {
 			app.trocaPagina('views/menu.html', controllers.menu);

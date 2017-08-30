@@ -1,10 +1,18 @@
+/* global util, ipadID */
+
 var app = {
 
-	versao : "2.1.8",
+	versao : '2.4.1',
+	
+	debugMode : true,
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
+		if(app.sentido === null){
+			alert("Selecione o sentido!");
+			return;
+		}
 
 		// configura identificador do ipad, para executar uma única vez(durante a instalação)
 		if (logins.autenticaMaster(usuario, senha)) {
@@ -19,7 +27,7 @@ var app = {
 			app.user_login = usuario;
 			app.senha_login = senha;
 			app.posto = String(usuario).substr(0, 3);
-			app.sentido = String(usuario).substr(3, 2).toUpperCase();
+			//app.sentido = String(usuario).substr(3, 2).toUpperCase();
 			if (isNaN(app.posto)) { // apenas para efeitos ao usuário de testes
 				app.posto = '000';
 			}
@@ -28,11 +36,6 @@ var app = {
 			}
 			// limpa o registro
 			app.limpaRegistro();
-		} else {
-			// TODO: Trocar por um popup "mais elegante"
-			var msg = "Usuário e/ou Senha informados não estão cadastrados no sistema!";
-			alert(msg);
-			app.logger.log(msg);
 		}
 	},
 
@@ -42,6 +45,8 @@ var app = {
 		// realiza logout
 		$("#usuario").val('').textinput("refresh");
 		$("#senha").val('').textinput("refresh");
+		$("#agregador input[type='radio']").prop('checked', false);
+		$("#entrar").prop('disabled', true);
 		$(":mobile-pagecontainer").pagecontainer("change", $("#page_login"));
 		app.logger.log('Logout');
 		app.user_login = null;
@@ -87,23 +92,45 @@ var app = {
 
 	duplicaDb : function() {
 		if (app.filePaths) {
-			app.database.close(function() {
-				app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, function(newName) {
-					alert('Banco de dados ' + newName + ' exportado com sucesso.');
-					app.openDB();
+			app.openDB(function(){
+				app.database.close(function() {
+					app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, false, function(newName) {
+						alert('Banco de dados ' + newName + ' exportado com sucesso.');
+						//app.openDB(); a conexão com o banco de dados permanece fechada
+					});
+				}, function(err) {
+					//falha na cópia do banco
+					//copia banco com problema
+					app.logger.log('Exportando bando de dados corrompido');
+					app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, function(newName) {
+						alert('Banco de dados ' + newName + ' exportado!\n\nEntre em contato com o suporte.',
+							"Banco da Dados Corrompido", null, "info");
+						//apaga banco atual
+						app.removeFile(app.dbName, app.filePaths.dbFolder,
+							function(){ //removeu com sucesso
+								app.logger.log("Banco de dados corrompido removido do sistema de arquivos do app.");
+								//app.openDB(); a conexão com o banco de dados permanece fechada
+							}, function(){//falhou quando removia
+								app.logger.log("Falha removendo banco de dados corrompido");
+								alert('Houve uma falha grava no sistema. \n Continue o processo de exportação, entre em contato com o suporte e NÃO CONTINUE A USAR ESSE IPAD.',
+									"Erro no Banco da Dados", null, "error");
+								//app.openDB(); a conexão com o banco de dados permanece fechada
+						});
+
+					});
+					app.logger.log(JSON.stringify(err));
 				});
-			}, function(err) {
-				app.logger.log(JSON.stringify(err));
+			   // Exporta Log
+			   app.duplicaLog();	
 			});
-			// Exporta Log
-			app.duplicaLog();
+			
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
 		}
 	},
 
 	duplicaLog : function() {
-		app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, function(newName) {
+		app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, false, function(newName) {
 			alert('Arquivo de log ' + newName + ' exportado com sucesso.');
 		});
 	},
@@ -174,6 +201,26 @@ var app = {
 	 */
 	onDeviceReady : function() {
 		app.logger.log('device ready');
+		window.addEventListener('batterycritical',function(status){
+			alert("A bateria atingiu nível crítco! \nCarregue o ipad imediatamente.\nNível de bateria: " + status.level + "%",
+				'Alerta de Bateria', null, 'info');
+		}, false);
+		window.addEventListener('batterylow', function(status){
+			alert("O nível da bateria está baixo. \nCarregue o ipad assim que possível.\nNível de bateria: " + status.level + "%",
+				'Alerta de Bateria', null, 'info');
+		}, false);
+		
+		document.addEventListener('pause', function(){
+			console.log('Ocorrência de evento: PAUSE');
+		}, false);
+		
+		document.addEventListener('resume', function(){
+			console.log('Ocorrência de evento: RESUME');
+		}, false);
+		
+		document.addEventListener('resign', function(){
+			console.log('Ocorrência de evento: RESIGN');
+		}, false);
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
 		if (device.platform == 'iOS' || device.platform == 'Android') {
@@ -184,9 +231,13 @@ var app = {
 				console.log("esperando " + device.platform);
 			}, 3000);
 
+
 			// durante o debug, inicia o sistema de arquivos
-			// navigator.notification.alert('conecte o debugger', app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
-			app.onFileSystemReady();
+			if (app.debugMode){
+				navigator.notification.alert("App em modo debug. \nConecte o debugger", app.onFileSystemReady, 'Alerta de desenvolvimento', 'OK');
+			}else{
+				app.onFileSystemReady();
+			} 
 		}
 
 		// nessa altura do desenvolvimento não faz sentido
@@ -267,9 +318,15 @@ var app = {
 				myLogger.setLogFile(file);
 				file.createWriter(function(fileWriter) {
 					myLogger.setLogWriter(fileWriter);
-					app.openDB(); // if successfully create fileWriter, open database
 					// novo valor para variável criada no extraConfig
 					app.logger = myLogger;
+					app.openDB(function(){// if successfully create fileWriter, open database for testing
+						app.logger.log("Conexão inicial com o banco para verificação");
+						app.database.close(function(){
+							app.logger.log("Conexão com o banco fechada");
+						});
+					}); 
+					
 				},
 				// error creating fileWriter
 				function() {
@@ -281,7 +338,7 @@ var app = {
 
 	},
 
-	openDB : function() {
+	openDB : function(cb) {
 		app.database = sqlitePlugin.openDatabase({
 			name : app.dbName,
 			iosDatabaseLocation : 'default'
@@ -289,34 +346,54 @@ var app = {
 		// sucsess
 		function() {
 			app.logger.log('Conexão com o banco de dados criada com sucesso.');
-			myDb.cretateTblDados();
+			myDb.cretateTblDados(function(){
+				myDb.sanitize(function(){
+					if(util.isFunction(cb)){
+						cb();
+					}
+				});
+			});	
 		},
 		// fail
 		function(err) {
 			app.logger.log('ERRO ao tentar conectar com o banco de dados.');
 			app.logger.log(JSON.stringify(err));
+			alert("O Banco da dados foi corrompido. \n Exporte todos os dados e entre em contato com o suporte.",
+				"Erro no Banco da Dados", null, "error");
 		});
 	},
-
+	
 	extraConfig : function() {
 		// initialize panel
 		$(function() {
 			$("[data-role=panel]").panel().enhanceWithin();
 		});
-		$("#versao").html(this.versao);
-		$("#entrar").click(this.login);
-		// $("#btn_sair").click(this.logout);
+		$('#dataHoraLogin').html(util.formatDateTimeToDisplay());
+		var updater_dataTimeToDisplay = setInterval(function(){
+			$('#dataHoraLogin').html(util.formatDateTimeToDisplay());
+		},10000);
+		
+		$("#versao").html(app.versao);
+		$("#entrar").click(function(){
+			clearInterval(updater_dataTimeToDisplay);
+			app.login();
+		});
+		$("#entrar").prop('disabled', true);
+		$("#agregador input[type='radio']").prop('checked', false).change(function(event, ui){
+			$("#entrar").prop('disabled', false);
+			app.sentido = $(this).val();
+		});
 
 		// valores iniciais (vão ficar assim se estiver usando o browser)
 		app.uuid_device = "browser";
 		
 		ipadID.id = 'browser';
-
+		
 		// botões do menu
 		$("#btn_sair").click(
 				function() {
-					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout",
-							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
+					app.validaOperacoes(app.logout, "Insira a senha para realizar o logout.", "Logout"
+,							"Senha incorreta.\nDeseja tentar novamente?", "Senha Incorreta", "Logout", "Voltar");
 				});
 		
 		/*
@@ -348,6 +425,12 @@ var app = {
 		$.mobile.filterable.prototype.options.filterCallback = function(index, value) {
 			return false
 		};
+		
+		//configurando o spinner
+		$.mobile.loader.prototype.options.text = "Aguarde";
+		$.mobile.loader.prototype.options.textVisible = true;
+		$.mobile.loader.prototype.options.theme = "b";
+		$.mobile.loader.prototype.options.html = "";
 	},
 	/**
 	 * Change pages within app
@@ -359,12 +442,26 @@ var app = {
 	trocaPagina : function(view, controller, changeFunction) {
 		
 		var changeF = (util.isEmpty(changeFunction) || changeFunction != 'old')? newChange : oldChange;
+		var abortOperation = false;
 		
 		if (view == null) {
 			app.logger.log("[ERRO] trocaPagina: view null");
+			abortOperation = true;
+		} 
+		
+		if (controller == null){
+			app.logger.log("[ERRO] trocaPagina: controller null");
+			abortOperation = true;
 		}
 		
-		if (controller != null) {
+		if (abortOperation){
+			myDialogs.alert("Ocorreu um erro interno na aplicação. A entrevista será cancelada.",
+				"Erro interno da aplicação.",
+				function(){
+					app.cancelaRegistro();
+					app.trocaPagina('views/menu.html', controllers.menu);
+				}, 'error');
+		} else {
 			try {
 				app.onChangeHandler.controller = controller.config;
 				$(":mobile-pagecontainer").off("pagecontainershow", app.onChangeHandler.handler).on("pagecontainershow",
@@ -373,22 +470,18 @@ var app = {
 				app.logger.log("[ERRO] trocaPagina: excecao no changeHandler. Detalhes: ")
 				app.logger.log(exc.message)
 			}
-		}
-		else {
-			app.logger.log("[ERRO] trocaPagina: controller null");
-		}
+
+			try {
+				changeF(view);
+			} catch(exc) {
+				app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ");
+				app.logger.log(exc.message);
+			}
 		
-		try {
-			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view);
-			//$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + view, {reload : true, changeHash : false});
-			changeF(view);
-		} catch(exc) {
-			app.logger.log("[ERRO] trocaPagina: excecao ao chamar pagecontainer. Detalhes: ")
-			app.logger.log(exc.message)
-		}
+			app.logger.log(view);
+			app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
 		
-		app.logger.log(view);
-		app.logger.log('número de mudanças de página: ' + ++app.changesCounter);
+		}
 		
 		function oldChange(v){
 			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v);
@@ -397,7 +490,7 @@ var app = {
 		
 		function newChange(v){
 			$(":mobile-pagecontainer").pagecontainer("change", app.baseUrl + v, {reload : true, changeHash : false, transition : 'none'});
-			app.logger.log('newTrocaPagina');
+//			app.logger.log('newTrocaPagina');
 		}
 	},
 
@@ -405,6 +498,20 @@ var app = {
 	onChangeHandler : {
 		handler : function() {
 			try {
+//				$("section[data-role=page]").append(
+//						"<footer data-role='footer' data-position='fixed'> \
+//							<span class='versao'>Versão: <span id='versao'></span></span> \
+//							<span class='data_atual'>Data: <span id='data_atual'></span></span> \
+//							<span class='posto'>Posto: <span id='posto'></span></span> \
+//							<span class='sentido'>Sentido: <span id='sentido'></span></span> \
+//							<span class='ipad'>id-iPad: <span id='ipadID'></span></span> \
+//						</footer>"
+//						);
+//				$("footer[data-role='footer']").toolbar({
+//					defaults : true,
+//					position: "fixed"
+//				});
+				
 				app.onChangeHandler.controller();
 
 				// Botão "Cancelar"
@@ -455,16 +562,19 @@ var app = {
 						});
 					}
 				});
-
+				
+				
 				$(".versao #versao").html(app.versao);
 				$(".data_atual #data_atual").html(util.formateDateOnly(new Date()));
 				$(".ipad #ipadID").html(ipadID.id);
-				$("#posto").html(app.posto);
-				$("#sentido").html(app.sentido);
+				$(".posto #posto").html(app.posto);
+				$(".sentido #sentido").html(app.sentido);
 
 				if (typeof device != 'undefined' && device.platform == "Android") {
 					StatusBar.hide();
 				}
+				//removendo outras páginas do DOM
+				$('div[data-role=page]:hidden').remove();
 			} catch (e) {
 				app.logger.log(e);
 				alert(e.message);
@@ -537,6 +647,14 @@ var app = {
 
 	setCamposDerivados : function() {
 		try {
+			//Treinamento
+			if (app.isTreinamento){
+				app.setAtributo('treinamento', 1);
+			}else{
+				app.setAtributo('treinamento', 0);				
+			}
+			
+			
 			// TIPO VEICULO
 			if (!util.isEmpty(app.getAtributo('tipo'))) {
 				var tipoReal = app.getAtributo('tipo').split("_")[0];
@@ -628,47 +746,89 @@ var app = {
 						}
 					}
 				}
-	
-				// PESO DA CARGA ('ton' -> 'kg')
-				if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
-					var peso = Number(registro.pesoDaCarga);
-					if (registro.unidadePesoDaCarga == 'kg') {
-						peso = peso / 10;
+				
+				// RISCO E ONU
+				if (registro.possuiCargaPerigosa) {
+					var idNumRisco = util.findValueInList(registro.idNumeroDeRisco, lista_numero_risco);
+					if (!util.isEmpty(idNumRisco)) {
+						app.setAtributo('idNumeroDeRisco',idNumRisco);
 					} else {
-						peso = peso * 100;
+						if (registro.cancelado != 1) {
+							app.setAtributo('erro', "ERRO (idNumeroDeRisco não encontrado)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
 					}
-					app.setAtributo('pesoDaCarga', peso);
+
+					var idNumOnu = util.findValueInList(registro.idNumeroDaOnu, lista_numero_onu);
+					if (!util.isEmpty(idNumOnu)) {
+						app.setAtributo('idNumeroDaOnu',idNumOnu);
+					} else {
+						if (registro.cancelado != 1) {
+							app.setAtributo('erro', "ERRO (idNumeroDaOnu não encontrado)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					}
 				}
-				if (util.isEmpty(registro.pesoDaCarga) && registro.possui_carga && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
+				
+				//POSSUI CARGA
+				if (registro.possui_carga) {
+					// TIPO DE PRODUTO (CARGA)
+					app.splitAtributo('idProduto');
+					if (util.isEmpty(registro.idProduto) && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (idProduto vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+
+					// PESO DA CARGA ('ton' -> 'kg')
+					if (!util.isEmpty(registro.pesoDaCarga) && ((typeof registro.pesoDaCarga) != 'number')) {
+						var peso = Number(registro.pesoDaCarga);
+						if (registro.unidadePesoDaCarga == 'kg') {
+							peso = peso / 10;
+						} else {
+							peso = peso * 100;
+						}
+						app.setAtributo('pesoDaCarga', peso);
+					}
+					if (util.isEmpty(registro.pesoDaCarga) && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (pesoDaCarga vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+		
+					// MUNICÍPIO EMBARQUE DA CARGA
+					app.splitAtributo('municipioEmbarqueCarga');
+					if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
+		
+					// MUNICÍPIO DESEMBARQUE DA CARGA
+					app.splitAtributo('municipioDesembarqueCarga');
+					if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
+						app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
+						app.logger.log(registro.erro + " no registro: ", registro.id);
+					}
 				}
-	
-				// TIPO DE PRODUTO (CARGA)
-				app.splitAtributo('idProduto');
-				if (util.isEmpty(registro.idProduto) && registro.possui_carga && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (idProduto vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
+				else {
+					// NAO POSSUI CARGA
+					app.setAtributo('idProduto', 3000); // Produto VAZIO
+					app.setAtributo('pesoDaCarga', null);
+					app.setAtributo('unidadePesoDaCarga', null);
+					app.setAtributo('valorDoFrete', null);
+					app.setAtributo('valorDaCarga', null);
+					app.setAtributo('embarqueCargaNaoSabe', null);
+					app.setAtributo('embarque_uf', null);
+					app.setAtributo('municipioEmbarqueCarga', null);
+					app.setAtributo('idLocalEmbarqueCarga', null);
+					app.setAtributo('desembarqueCargaNaoSabe', null);
+					app.setAtributo('desembarque_uf', null);
+					app.setAtributo('municipioDesembarqueCarga', null);
+					app.setAtributo('idLocalDesembarqueCarga', null);
 				}
-	
+		
 				// CARGA ANTERIOR
 				app.splitAtributo('idCargaAnterior');
 				if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
 					app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-	
-				// MUNICÍPIO EMBARQUE DA CARGA
-				app.splitAtributo('municipioEmbarqueCarga');
-				if (util.isEmpty(registro.municipioEmbarqueCarga) && registro.sabe_embarque && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (municipioEmbarqueCarga vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
-				}
-	
-				// MUNICÍPIO DESEMBARQUE DA CARGA
-				app.splitAtributo('municipioDesembarqueCarga');
-				if (util.isEmpty(registro.municipioDesembarqueCarga) && registro.sabe_desembarque && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
 					app.logger.log(registro.erro + " no registro: ", registro.id);
 				}
 	
@@ -699,6 +859,22 @@ var app = {
 		app.logger.log('Finalizando registro: ' + registro.id);
 		app.setAtributo('cancelado', 0);
 		app.setCamposDerivados();
+		app.setAtributo('finalizado', 1); //para facilitar a recuperação do registro final pelo log
+		$.mobile.loading("show");
+		app.openDB(function(){
+			app.inserirRegistro(function(){
+				$.mobile.loading('hide');
+				app.database.close(function(){
+					app.logger.log("Conexão com o banco fechada");
+					cb();
+				});//fechando a conexão com o banco depois de inserir o registro;
+				
+			});
+		});
+		
+	},
+	
+	inserirRegistro : function(cb){ //função é chamada por finalizaRegistro
 		myDb.insertRegistro(registro,
 		// erro
 		function(error) {
@@ -707,7 +883,7 @@ var app = {
 			confirm("Houve uma falha ao inserir o registro.\nDeseja tentar novamente?",
 			// button ok
 			function() {
-				app.finalizaRegistro(cb);
+				app.inserirRegistro(cb);
 			},
 			// button cancel
 			function() {
@@ -722,111 +898,156 @@ var app = {
 		function() {
 			app.logger.log('Registro finalizado: ' + registro.id);
 			app.limpaRegistro();
+			
 			alert("Entrevista registrada.");
-			if (cb != null) {
+			if (util.isFunction(cb)) {
 				cb();
 			}
 		});
 	},
 	
-	buscaDuracoesRegistros : function() {
-		myDb.selectDuracoesDiaRegistro(
-		// erro
-		function(error) {
-			app.logger.log('Erro ao buscar duracoes: ' + error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao buscar os registros.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.buscaDuracoesRegistros();
+	buscaDuracoesRegistros : function(cb) {
+		app.openDB(function(){
+			myDb.selectDuracoesDiaRegistro(
+			// erro
+			function(error) {
+				app.logger.log('Erro ao buscar duracoes: ' + error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao buscar os registros.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.buscaDuracoesRegistros();
+				},
+				// button cancel
+				function() {
+					app.logger.log("buscaDuracoesRegistros cancelado");
+					app.database.close(function(){
+						app.logger.log('conexão com o banco fechada');
+					});
+				}, "Falha na busca.", // título
+				"Sim", "Não");
 			},
-			// button cancel
+			// ok
 			function() {
-				app.logger.log("buscaDuracoesRegistros cancelado");
-			}, "Falha na busca.", // título
-			"Sim", "Não");
-		},
-		// ok
-		function() {
-			app.logger.log('buscaDuracoesRegistros executado com sucesso');
-		});	
+				app.logger.log('buscaDuracoesRegistros executado com sucesso');
+				app.database.close(function(){
+					app.logger.log('conexão com o banco fechada');
+					if(util.isFunction(cb)){
+						cb();
+					}
+				});
+				
+			});
+		});
+			
 	},
 
-	buscaUltimaPesquisa : function() {
-		myDb.selectUltimaPesquisaValida(
-		// erro
-		function(error) {
-			app.logger.log('Erro ao buscar última pesquisa: ' + error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao buscar a última pesquisa realizada.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.buscaUltimaPesquisa();
+	buscaUltimaPesquisa : function(cb) {
+		app.openDB(function(){
+			myDb.selectUltimaPesquisaValida(
+			// erro
+			function(error) {
+				app.logger.log('Erro ao buscar última pesquisa: ' + error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao buscar a última pesquisa realizada.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.buscaUltimaPesquisa();
+				},
+				// button cancel
+				function() {
+					app.logger.log("buscaUltimaPesquisa cancelado");
+					app.database.close(function(){
+						app.logger.log('conexão com o banco fechada');
+					});
+				}, "Falha na busca.", // título
+				"Sim", "Não");
 			},
-			// button cancel
+			// ok
 			function() {
-				app.logger.log("buscaUltimaPesquisa cancelado");
-			}, "Falha na busca.", // título
-			"Sim", "Não");
-		},
-		// ok
-		function() {
-			app.logger.log('buscaUltimaPesquisa executado com sucesso');
-		});	
+				app.logger.log('buscaUltimaPesquisa executado com sucesso');
+				app.database.close(function(){
+					app.logger.log('Conexão com o banco fechada.');
+					if(util.isFunction(cb)){
+						cb();
+					}
+				});
+			});
+		});
+			
 	},
 
-	buscaRegistrosCancelados : function() {
-		myDb.selectRegistrosCancelados(
-		// erro
-		function(error) {
-			app.logger.log('Erro ao buscar cancelados: ' + error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao buscar os registros cancelados.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.buscaRegistrosCancelados();
+	buscaRegistrosCancelados : function(cb) {
+		app.openDB(function(){
+			myDb.selectRegistrosCancelados(
+			// erro
+			function(error) {
+				app.logger.log('Erro ao buscar cancelados: ' + error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao buscar os registros cancelados.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.buscaRegistrosCancelados();
+				},
+				// button cancel
+				function() {
+					app.logger.log("buscaRegistrosCancelados cancelado");
+					app.database.close(function(){
+						app.logger.log('conexão com o banco fechada');
+					});
+				}, "Falha na busca.", // título
+				"Sim", "Não");
 			},
-			// button cancel
+			// ok
 			function() {
-				app.logger.log("buscaRegistrosCancelados cancelado");
-			}, "Falha na busca.", // título
-			"Sim", "Não");
-		},
-		// ok
-		function() {
-			app.logger.log('buscaRegistrosCancelados executado com sucesso');
-		});	
+				app.logger.log('buscaRegistrosCancelados executado com sucesso');
+				app.database.close(function(){
+					app.logger.log('Conexão com o banco fechada');
+					if(util.isFunction(cb)){
+						cb();
+					}
+				});
+				
+			});	
+		});
+		
 	},
 
 	cancelaRegistro : function(cb) {
 		app.logger.log('Cancelando registro: ' + registro.id);
 		app.setAtributo('cancelado', 1);
 		app.setCamposDerivados();
-		myDb.insertRegistro(registro, function(error) {
-			app.logger.log(error.message);
-			// confirma se tenta outra vez
-			confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?",
-			// button ok
-			function() {
-				app.cancelaRegistro(cb);
-			},
-			// button cancel
-			function() {
-				app.logger.log("Descartando registro: " + registro.id);
+		app.openDB(function(){
+			myDb.insertRegistro(registro, function(error) {
+				app.logger.log(error.message);
+				// confirma se tenta outra vez
+				confirm("Houve uma falha ao registrar o cancelamento.\nDeseja tentar novamente?",
+				// button ok
+				function() {
+					app.cancelaRegistro(cb);
+				},
+				// button cancel
+				function() {
+					app.logger.log("Descartando registro: " + registro.id);
+					if (cb != null) {
+						cb();
+					}
+
+				}, "Falha na gravação.", // título
+				"Sim", "Não (irá descartar o registro)");
+			}, function() {
+				app.logger.log('Registro cancelado: ' + registro.id);
+				app.limpaRegistro();
+				app.database.close(function(){
+					app.logger.log("Conexão com o banco fechada.");
+				});
+				alert("Entrevista cancelada.");
 				if (cb != null) {
 					cb();
 				}
-
-			}, "Falha na gravação.", // título
-			"Sim", "Não (irá descartar o registro)");
-		}, function() {
-			app.logger.log('Registro cancelado: ' + registro.id);
-			app.limpaRegistro();
-			alert("Entrevista cancelada.");
-			if (cb != null) {
-				cb();
-			}
+			});
 		});
+		
 	},
 
 	/**
@@ -878,12 +1099,14 @@ var app = {
 	 *            originDir
 	 * @param String
 	 *            destDir
+	 * @param Boolean
+	 *			  isCorrupted
 	 * @param Function
 	 *            cb success callback function
 	 */
-copyFile : function(fileName, originDirURI, destDirURI, cb) {
+	copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) {
 		var now = new Date();
-		var newName = ipadID.id + "_" + fileName
+		var newName = (isCorrupted)? "CORROMPIDO" + ipadID.id + "_" + fileName : ipadID.id + "_" + fileName;
 		var extension = "";
 		if(newName.lastIndexOf(".txt") > -1) {
 			newName = newName.replace(".txt","");
@@ -955,7 +1178,7 @@ copyFile : function(fileName, originDirURI, destDirURI, cb) {
 			window.location.reload();
 		},1000);
 	},
-
+	
 	baseUrl : null,
 
 	logFileName : "logOD.txt",
@@ -971,6 +1194,8 @@ copyFile : function(fileName, originDirURI, destDirURI, cb) {
 	posto : null,
 
 	sentido : null,
+	
+	isTreinamento : false,
 
 	filePaths : null, // { externalFolder : null, dbFolder : null, }
 	
