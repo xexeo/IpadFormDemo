@@ -211,15 +211,15 @@ var app = {
 		}, false);
 		
 		document.addEventListener('pause', function(){
-			console.log('Ocorrência de evento: PAUSE');
+			console.log("[" + (new Date()) + "]" + 'Ocorrência de evento: PAUSE');
 		}, false);
 		
 		document.addEventListener('resume', function(){
-			console.log('Ocorrência de evento: RESUME');
+			console.log("[" + (new Date()) + "]" + 'Ocorrência de evento: RESUME');
 		}, false);
 		
 		document.addEventListener('resign', function(){
-			console.log('Ocorrência de evento: RESIGN');
+			console.log("[" + (new Date()) + "]" + 'Ocorrência de evento: RESIGN');
 		}, false);
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
