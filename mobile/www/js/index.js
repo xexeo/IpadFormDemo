@@ -822,17 +822,17 @@ var app = {
 					app.setAtributo('desembarque_uf', null);
 					app.setAtributo('municipioDesembarqueCarga', null);
 					app.setAtributo('idLocalDesembarqueCarga', null);
-				}
-		
-				// POSSUI CARGA ANTERIOR
-				if (registro.carga_anterior) {
-					app.splitAtributo('idCargaAnterior');
-					if (util.isEmpty(registro.idCargaAnterior) && registro.carga_anterior && (registro.cancelado != 1)) {
-						app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-						app.logger.log(registro.erro + " no registro: ", registro.id);
+
+					// POSSUI CARGA ANTERIOR
+					if (registro.carga_anterior) {
+						app.splitAtributo('idCargaAnterior');
+						if (util.isEmpty(registro.idCargaAnterior) && registro.carga_anterior && (registro.cancelado != 1)) {
+							app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					} else {
+						app.setAtributo('idCargaAnterior', 3000); // Produto VAZIO
 					}
-				} else {
-					app.setAtributo('idCargaAnterior', 3000); // Produto VAZIO
 				}
 	
 				// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
