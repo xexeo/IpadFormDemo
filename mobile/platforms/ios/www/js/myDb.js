@@ -57,6 +57,7 @@ myDb = {
 		{field : 'paradaObrigatoriaMunicipio1', type : 'integer'},
 		{field : 'paradaObrigatoriaMunicipio2', type : 'integer'},
 		{field : 'idPerguntaExtra', type : 'integer'},
+		{field : 'idPerguntaExtra2', type : 'integer'},
 		{field : 'erro', type : 'text'},
 		{field : 'duracaoPesq', type : 'integer'},
 		{field : 'treinamento', type : 'integer', notNull: true}// Boolean 1->true || false, otherwise;

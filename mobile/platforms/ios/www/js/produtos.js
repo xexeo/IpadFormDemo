@@ -1006,6 +1006,7 @@ var lista_produtos = [
                       {id : '1019', nome : "Metanol /  Hidroximetano / Álcool metílico / Carbinol"},
                       {id : '1020', nome : "Ferro Gusa"},
                       {id : '1021', nome : "Nitrogênio ou Azoto"},
+                      {id : '1022', nome : "Água (Granel Líquido)"},
 //                      {id : '3000', nome : "VAZIO"},
                       {id : '4000', nome : "NÃO SOUBE INFORMAR"},
                       {id : '5000', nome : "OUTROS"}

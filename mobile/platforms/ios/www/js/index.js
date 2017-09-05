@@ -2,7 +2,7 @@
 
 var app = {
 
-	versao : '2.4.1',
+	versao : '2.4.2',
 	
 	debugMode : true,
 
@@ -211,15 +211,15 @@ var app = {
 		}, false);
 		
 		document.addEventListener('pause', function(){
-			console.log('Ocorrência de evento: PAUSE');
+			console.log("[" + (new Date()) + "]" + 'Ocorrência de evento: PAUSE');
 		}, false);
 		
 		document.addEventListener('resume', function(){
-			console.log('Ocorrência de evento: RESUME');
+			console.log("[" + (new Date()) + "]" + 'Ocorrência de evento: RESUME');
 		}, false);
 		
 		document.addEventListener('resign', function(){
-			console.log('Ocorrência de evento: RESIGN');
+			console.log("[" + (new Date()) + "]" + 'Ocorrência de evento: RESIGN');
 		}, false);
 
 		// a plataforma Browser não permite o desenvolvimento das escritas em arquivo
@@ -807,8 +807,7 @@ var app = {
 						app.setAtributo('erro', "ERRO (municipioDesembarqueCarga vazio)");
 						app.logger.log(registro.erro + " no registro: ", registro.id);
 					}
-				}
-				else {
+				} else {
 					// NAO POSSUI CARGA
 					app.setAtributo('idProduto', 3000); // Produto VAZIO
 					app.setAtributo('pesoDaCarga', null);
@@ -823,13 +822,17 @@ var app = {
 					app.setAtributo('desembarque_uf', null);
 					app.setAtributo('municipioDesembarqueCarga', null);
 					app.setAtributo('idLocalDesembarqueCarga', null);
-				}
-		
-				// CARGA ANTERIOR
-				app.splitAtributo('idCargaAnterior');
-				if (util.isEmpty(registro.idCargaAnterioro) && registro.carga_anterior && (registro.cancelado != 1)) {
-					app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
-					app.logger.log(registro.erro + " no registro: ", registro.id);
+
+					// POSSUI CARGA ANTERIOR
+					if (registro.carga_anterior) {
+						app.splitAtributo('idCargaAnterior');
+						if (util.isEmpty(registro.idCargaAnterior) && registro.carga_anterior && (registro.cancelado != 1)) {
+							app.setAtributo('erro', "ERRO (idCargaAnterior vazio)");
+							app.logger.log(registro.erro + " no registro: ", registro.id);
+						}
+					} else {
+						app.setAtributo('idCargaAnterior', 3000); // Produto VAZIO
+					}
 				}
 	
 				// CARGA SUGESTÃO PARADA OBRIGATÓRIA MUNICÍPIOS
@@ -871,7 +874,6 @@ var app = {
 				
 			});
 		});
-		
 	},
 	
 	inserirRegistro : function(cb){ //função é chamada por finalizaRegistro
