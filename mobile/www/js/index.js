@@ -2,7 +2,7 @@
 
 var app = {
 
-	versao : '2.4.2',
+	versao : '2.5.0',
 	
 	debugMode : true,
 	
@@ -350,9 +350,11 @@ var app = {
 			app.logger.log('Conexão com o banco de dados criada com sucesso.');
 			myDb.cretateTblDados(function(){
 				myDb.sanitize(function(){
-					if(util.isFunction(cb)){
-						cb();
-					}
+					myDb.updateSchema(function(){
+						if(util.isFunction(cb)){
+							cb();
+						}	
+					});
 				});
 			});	
 		},

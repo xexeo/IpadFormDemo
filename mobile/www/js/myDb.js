@@ -96,6 +96,55 @@ myDb = {
 
 	},
 
+	createTblSchema : function(cb) {
+		app.logger.log("criando tabela: tblSchema");
+		app.database.transaction(function(tx) {
+			var sql = "CREATE TABLE IF NOT EXISTS tblSchema (versao integer);";
+			tx.executeSql(sql);
+		}, function(e) {
+			app.logger.log('ERRO: ' + e.message);
+		}, function() {
+			app.logger.log("tabela criada: tblSchema");		
+			if(util.isFunction(cb)){
+				cb();
+			}
+		});
+
+	},
+	
+	updateSchema : function(cb){
+		app.logger.log("update schema");
+		myDb.createTblSchema(function(){
+			var versaoAtual = 0;
+			app.database.transaction(function(tx) {
+				tx.executeSql("SELECT versao from tblSchema LIMIT 1;", [], function(tx, res) {
+					if( res.rows.length > 0) {
+						versaoAtual = res.rows.item(0).versao;
+					}
+					
+					if(versaoAtual == 0){
+						tx.executeSql("INSERT INTO tblSchema VALUES(" + app.versaoBD + ");");
+					} else if (versaoAtual != app.versaoBD){
+						tx.executeSql("UPDATE tblSchema SET versao = " + app.versaoBD + ");");
+					}
+				
+					if (versaoAtual < 1 ){
+						tx.executeSql("ALTER TABLE tblDados ADD COLUMN idPerguntaExtra2 integer;");
+					}
+				});
+			
+			}, function(e){
+				app.logger.log('ERRO: ' + e.message);
+			}, function(){
+				app.logger.log("BD schema anterior: " + versaoAtual);
+				app.logger.log("BD schema atual: " + app.versaoBD);
+				if(util.isFunction(cb)){
+					cb();
+				}
+			});
+		});
+	},
+
 	/**
 	 * Inserts a registro variable into database
 	 * @param Registro reg registro to be inserted into database
