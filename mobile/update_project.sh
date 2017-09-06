@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo npm update -g cordova
+#sudo npm update -g cordova
 cordova platform remove android
 cordova platform remove ios
 cordova platform add ios

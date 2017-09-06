@@ -1,0 +1,57 @@
+<section data-role="page" id="pergunta_extra" data-transition="slide" data-theme="b">
+	<!-- header -->
+	<header data-role="header">
+		<a href="#panel_menu" data-icon="gear" class="ui-btn-left">Controles</a>
+		<h1>Pergunta Extra</h1>
+		<button id="btn_cancelar" name="btn_cancelar" data-icon="delete" class="ui-btn-right">Cancelar</button>
+	</header>
+
+	<!--content -->
+	<section role="main" class="ui-content">
+		
+		<!-- Posto 19 e 149 -->
+		<fieldset class="escondido" id="grupo_pergunta_extra_p1">
+			<legend style="line-height:30px">Se a rodovia BR-251 entre Unaí/MG e Montes Claros/MG estivesse pavimentada, você a usaria para a sua rota?</legend>
+			<div>
+				<select name="select_pergunta_extra_p1" id="select_pergunta_extra_p1" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<!-- Posto 149 -->
+		<fieldset class="escondido" id="grupo_pergunta_extra_p2">
+			<legend style="line-height:30px">Se a rodovia BR-457 entre Vianópolis/GO e Cristalina/GO estivesse pavimentada, você a usaria para a sua rota?</legend>
+			<div>
+				<select name="select_pergunta_extra_p2" id="select_pergunta_extra_p2" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<!-- Posto 40 -->
+		<fieldset class="escondido" id="grupo_pergunta_extra_p3">
+			<legend style="line-height:30px">Se a Rodovia BR-146 entre Araxá/MG e Passos/MG estivesse pavimentada, você a usaria para a sua rota?</legend>
+			<div>
+				<select name="select_pergunta_extra_p3" id="select_pergunta_extra_p3" data-theme="a">
+				</select>
+			</div>
+		</fieldset>
+
+		<nav class="ui-grid-a avancar escondido" id="grupo_pergunta_extra_avancar">
+			<div class="ui-block-a">&nbsp;</div>
+			<div class="ui-block-b">
+				<button class="ui-btn ui-btn-a ui-corner-all ui-icon-arrow-r ui-btn-icon-right" id="pergunta_extra_avancar">Finalizar</button>
+			</div>
+		</nav>
+
+	</section>
+
+	<!-- footer -->
+	<footer data-role='footer' data-position='fixed'> 
+		<span class='versao'>Versão: <span id='versao'></span></span> 
+		<span class='data_atual'>Data: <span id='data_atual'></span></span> 
+		<span class='posto'>Posto: <span id='posto'></span></span> 
+		<span class='sentido'>Sentido: <span id='sentido'></span></span> 
+		<span class='ipad'>id-iPad: <span id='ipadID'></span></span> 
+	</footer>
+
+</section>

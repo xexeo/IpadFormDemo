@@ -24,8 +24,27 @@
     "url": "https://github.com/christianjunk/cordova-plugin-itunesfilesharing/issues"
   },
   "homepage": "https://github.com/christianjunk/cordova-plugin-itunesfilesharing#readme",
-  "readme": "# cordova-plugin-itunesfilesharing\nCordova/PhoneGap plugin for enabling iTunes file sharing.\n",
-  "readmeFilename": "README.md",
+  "gitHead": "f2b119b73866b9832bc81a65d905752a9f198cd1",
   "_id": "cordova-plugin-itunesfilesharing@0.0.1",
-  "_from": "cordova-plugin-itunesfilesharing@latest"
+  "scripts": {},
+  "_shasum": "3857d4fa2da83234c8f9a7cdc77d6324d17b8c1b",
+  "_from": "cordova-plugin-itunesfilesharing@latest",
+  "_npmVersion": "2.11.3",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "christianjunk",
+    "email": "christian@christianjunk.de"
+  },
+  "dist": {
+    "shasum": "3857d4fa2da83234c8f9a7cdc77d6324d17b8c1b",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-itunesfilesharing/-/cordova-plugin-itunesfilesharing-0.0.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "christianjunk",
+      "email": "christian@christianjunk.de"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-itunesfilesharing/-/cordova-plugin-itunesfilesharing-0.0.1.tgz"
 }
