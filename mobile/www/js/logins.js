@@ -213,14 +213,15 @@ var logins = {
 		fase : '2',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR GO-116 (P/FORMOSA) - ENTR GO-346 (P/CABEÇEIRAS)'
+		trecho : 'ENTR GO-116 (P/FORMOSA) - ENTR GO-346 (P/CABEÇEIRAS)',
+		perguntaExtra : true // Possui pergunta extra na 4ª fase
 	}, {
 		usr : '020',
 		pwd : '0090',
 		fase : '2',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR BR-457(B)/GO-219 - ENTR GO-020(A)',
+		trecho : 'ENTR BR-457(B)/GO-219 - ENTR GO-020(A)'
 		// perguntaExtra : true // Possuiu pergunta extra na 2ª fase
 	}, {
 		usr : '021',
@@ -361,7 +362,8 @@ var logins = {
 		fase : '4',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR MG-187 (P/IBIÁ) - ENTR BR-146 (P/ARAXÁ)'
+		trecho : 'ENTR MG-187 (P/IBIÁ) - ENTR BR-146 (P/ARAXÁ)',
+		perguntaExtra : true // Possui pergunta extra na 4ª fase
 	}, {
 		usr : '041',
 		pwd : '0230',
@@ -858,8 +860,8 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'FIM PISTA DUPLA - ENTR GO-156(B)',
-		perguntaExtra : true
+		trecho : 'FIM PISTA DUPLA - ENTR GO-156(B)'
+		// perguntaExtra : true // Possuiu pergunta extra na 3ª fase
 	}, {
 		usr : '112',
 		pwd : '0025',
@@ -1118,15 +1120,16 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'DIV MG/GO - ENTR GO-010(A)',
-		perguntaExtra : true
+		trecho : 'DIV MG/GO - ENTR GO-010(A)'
+		// perguntaExtra : true // Possuiu pergunta extra na 3ª fase
 	}, {
 		usr : '149',
 		pwd : '0050',
 		fase : '4',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR GO-010 (P/LUZIÂNIA) - ENTR BR-050(B)/354/457/GO-309 (CRISTALINA)'
+		trecho : 'ENTR GO-010 (P/LUZIÂNIA) - ENTR BR-050(B)/354/457/GO-309 (CRISTALINA)',
+		perguntaExtra : true // Possui pergunta extra na 4ª fase
 	}, {
 		usr : '150',
 		pwd : '0080',
@@ -1175,8 +1178,8 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)',
-		perguntaExtra : true
+		trecho : 'ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)'
+		// perguntaExtra : true // Possuiu pergunta extra na 3ª fase
 	}, {
 		usr : '157',
 		pwd : '0280',
@@ -1372,16 +1375,16 @@ var logins = {
 		fase : '3',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR BR-462(B) - ENTR BR-262',
-		perguntaExtra : true
+		trecho : 'ENTR BR-462(B) - ENTR BR-262'
+		// perguntaExtra : true // Possuiu pergunta extra na 3ª fase
 	}, {
 		usr : '185',
 		pwd : '0930',
 		fase : '4',
 		ladoA : '',
 		ladoB : '',
-		trecho : 'ENTR BR-452 (P/UBERLÂNDIA) - ENTR BR-462 (PERDIZES)',
-		perguntaExtra : true
+		trecho : 'ENTR BR-452 (P/UBERLÂNDIA) - ENTR BR-462 (PERDIZES)'
+		// perguntaExtra : true // Possuiu pergunta extra na 3ª fase
 	}, {
 		usr : '186',
 		pwd : '0070',
