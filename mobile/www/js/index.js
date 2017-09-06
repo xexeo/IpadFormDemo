@@ -5,6 +5,8 @@ var app = {
 	versao : '2.4.1',
 	
 	debugMode : true,
+	
+	versaoBD : 1,
 
 	login : function() {
 		var usuario = $("#usuario").val().trim();
