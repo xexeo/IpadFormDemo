@@ -538,7 +538,7 @@ var util = {
 	},
 	
 	validaTemPessoasVeiculo : function(nome_campo, campo_aviso) {
-		if (util.isEmpty($.trim($('#' + nome_campo).val())) || $.trim($('#' + nome_campo).val()) <= 0) {
+		if (util.isEmpty($.trim($('#' + nome_campo).val())) || !($.trim($('#' + nome_campo).val()) > 0)) {
 			util.alerta_msg(campo_aviso, "O campo deve ser preenchido com um valor positivo maior que zero");
 			return false;
 		}
