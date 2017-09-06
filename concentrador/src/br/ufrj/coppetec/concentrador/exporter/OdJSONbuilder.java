@@ -86,6 +86,7 @@ public class OdJSONbuilder implements JSONBuilder {
 				reg.put("paradaObrigatoriaMunicipio2",
 						JSONExporter.getJSONInteger(result.getString("paradaObrigatoriaMunicipio2")));
 				reg.put("idPerguntaExtra", JSONExporter.getJSONInteger(result.getString("idPerguntaExtra")));
+				reg.put("idPerguntaExtra2", JSONExporter.getJSONInteger(result.getString("idPerguntaExtra2")));
 				reg.put("dataExportacao", Util.sdfArq.format(new Date()));
 				// reg.put("duracaoPesq", JSONExporter.getJSONInteger(result.getString("duracaoPesq")));
 

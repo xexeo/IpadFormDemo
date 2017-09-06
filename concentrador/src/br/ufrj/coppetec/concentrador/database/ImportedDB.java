@@ -127,6 +127,7 @@ public class ImportedDB extends Db {
 				sqlbase += "paradaObrigatoriaMunicipio1, ";
 				sqlbase += "paradaObrigatoriaMunicipio2, ";
 				sqlbase += "idPerguntaExtra, ";
+				sqlbase += "idPerguntaExtra2, ";
 				sqlbase += "duracaoPesq, ";
 				sqlbase += "treinamento";
 				// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
@@ -231,6 +232,7 @@ public class ImportedDB extends Db {
 						sql += rs.getString("paradaObrigatoriaMunicipio1") + ", ";
 						sql += rs.getString("paradaObrigatoriaMunicipio2") + ", ";
 						sql += rs.getString("idPerguntaExtra") + ", ";
+						sql += rs.getString("idPerguntaExtra2") + ", ";
 						sql += rs.getString("duracaoPesq") + ", ";
 						sql += treinamento;
 						/* IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior. */
