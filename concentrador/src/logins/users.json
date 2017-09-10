@@ -1,2122 +1,2423 @@
 {
     "logins": [
-    {
-		"usr" : "001",
-		"pwd" : "1590",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR AC-463/465 (BOM FUTURO) - ENTR BR-317"
-	}, {
-		"usr" : "002",
-		"pwd" : "0808",
-		"fase" : "1",
-		"ladoA" : "LUCAS DO RIO VERDE",
-		"ladoB" : "INÍCIO DA TRAVESSIA URBANA DE SORRISO",
-		"trecho" : "LUCAS DO RIO VERDE – INÍCIO DA TRAVESSIA URBANA DE SORRISO"
-	}, {
-		"usr" : "003",
-		"pwd" : "0630",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-104(A) - ENTR BR-104(B)"
-	}, {
-		"usr" : "004",
-		"pwd" : "0890",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR AL-225(A) - ENTR AL-225(B) (P/PORTO REAL DO COLÉGIO)"
-	}, {
-		"usr" : "005",
-		"pwd" : "0950",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR AL-115(A) - ENTR AL-115(B) (PALMEIRA DOS ÍNDIOS)"
-	}, {
-		"usr" : "006",
-		"pwd" : "0750",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-101(A) - ENTR BR-101(B) (P/ALAGOINHAS)"
-	}, {
-		"usr" : "007",
-		"pwd" : "1810",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-120(A)/262(B) (P/ITAJUÍPE) - ENTR BR-415/BA-120(B) (ITABUNA)"
-	}, {
-		"usr" : "008",
-		"pwd" : "0330",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-324(A) - ENTR BR-324(B)/BA-502/503 (FEIRA DE SANTANA)"
-	}, {
-		"usr" : "009",
-		"pwd" : "0934",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-643 (PLANALTO) - ENTR BA-641"
-	}, {
-		"usr" : "010",
-		"pwd" : "0365",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-242(A) - ENTR BR-330/BA-148 (SEABRA)"
-	}, {
-		"usr" : "011",
-		"pwd" : "0300",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "JAGUARARI - ENTR BA-220 (SENHOR DO BONFIM)"
-	}, {
-		"usr" : "012",
-		"pwd" : "0530",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-187 (P/MARRECOS) - ENTR BR-404/CE-176/187/363 (P/TAUÁ)"
-	}, {
-		"usr" : "013",
-		"pwd" : "0090",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-253 (PACAJÚS) - ENTR BR-122(A)/CE-354 (CHORÓZINHO)"
-	}, {
-		"usr" : "014",
-		"pwd" : "0260",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-226(B)/CE-275(B) (P/PEREIRO) - ENTR BR-404/434 (ICÓ)"
-	}, {
-		"usr" : "015",
-		"pwd" : "2195",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR ES-245(B) - ENTR ES-440"
-	}, {
-		"usr" : "016",
-		"pwd" : "2470",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR ES-375(A) (P/PIÚMA) - ENTR ES-375(B) (ICONHA)"
-	}, {
-		"usr" : "017",
-		"pwd" : "0070",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-101(B) - ENTR ES-465 (P/DOMINGOS MARTINS)"
-	}, {
-		"usr" : "018",
-		"pwd" : "0015",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "KM 15,3 - ENTR BR-484 (P/PONTE SOBRE RIO DOCE)"
-	}, {
-		"usr" : "019",
-		"pwd" : "0110",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-116 (P/FORMOSA) - ENTR GO-346 (P/CABEÇEIRAS)"
-	}, {
-		"usr" : "020",
-		"pwd" : "0090",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-457(B)/GO-219 - ENTR GO-020(A)",
-		"perguntaExtra" : true
-	}, {
-		"usr" : "021",
-		"pwd" : "0112",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-338 (ABADIÂNIA - FIM TRAVESSIA URBANA) - ENTR BR-153(A) (P/ANÁPOLIS)"
-	}, {
-		"usr" : "022",
-		"pwd" : "0340",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-353(A) (LINDA VISTA) - ENTR BR-414(A)/GO-151/244/353(B) (PORANGATU)"
-	}, {
-		"usr" : "023",
-		"pwd" : "0770",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-154/452(A)/483 - ENTR BR-452(B) (DIV GO/MG) (ITUMBIARA)"
-	}, {
-		"usr" : "024",
-		"pwd" : "0510",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-060(B)/158(B)/GO-184(B) (P/ESTREITO) - ENTR GO-050(B)"
-	}, {
-		"usr" : "025",
-		"pwd" : "0050",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM DA DUPLICAÇÃO - ENTR BR-402/MA-110 (BACABEIRA)"
-	}, {
-		"usr" : "026",
-		"pwd" : "0150",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-316(A) (CACHUCHA) - ENTR BR-316(B) (PERITORÓ)"
-	}, {
-		"usr" : "027",
-		"pwd" : "0680",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "RIO PINDARÉ - ENTR BR-010(A) (AÇAILÂNDIA)"
-	}, {
-		"usr" : "028",
-		"pwd" : "0670",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-251(A) (CANACÍ) - ENTR BR-135/251(B)/308/365 (MONTES CLAROS)"
-	}, {
-		"usr" : "029",
-		"pwd" : "0370",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MA-026 (DEZESSETE) - ENTR MA-034(A)/127/349 (CAXIAS)"
-	}, {
-		"usr" : "030",
-		"pwd" : "0130",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-410 (P/PONTO DIAMANTE) - ENTR MG-181 (JOÃO PINHEIRO)"
-	}, {
-		"usr" : "031",
-		"pwd" : "0330",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-238 (P/SETE LAGOAS) - ENTR MG-432 (P/ESMERALDAS)"
-	}, {
-		"usr" : "032",
-		"pwd" : "0040",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-040(A) (ANEL RODOVIÁRIO DE BELO HORIZONTE) - ENTR BR-040(B)"
-	}, {
-		"usr" : "033",
-		"pwd" : "0570",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-499 (SANTOS DUMONT) - ENTR ANT UNIÃO E INDÚSTRIA (B. TRIUNFO)"
-	}, {
-		"usr" : "034",
-		"pwd" : "0250",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-365(B)/452(B) - RIO TIJUCO"
-	}, {
-		"usr" : "035",
-		"pwd" : "1130",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-342(B)/418/MG-217 (RIB STO ANTÔNIO) (TEÓFILO OTONI) - ACESSO ITAMBACURI"
-	}, {
-		"usr" : "036",
-		"pwd" : "1280",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM PISTA DUPLA - DOM CORRÊA"
-	}, {
-		"usr" : "037",
-		"pwd" : "1430",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-116(A)/120 (LEOPOLDINA) - ENTR BR-116(B)"
-	}, {
-		"usr" : "038",
-		"pwd" : "0850",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-259(B) (CURVELO) - ENTR BR-040(A)"
-	}, {
-		"usr" : "039",
-		"pwd" : "0290",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-364(A)/262(A) (P/COMENDADOR GOMES) - ENTR BR-364(B)/262(B) (P/FRUTAL)"
-	}, {
-		"usr" : "040",
-		"pwd" : "0890",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-187 (P/IBIÁ) - ENTR BR-146 (P/ARAXÁ)"
-	}, {
-		"usr" : "041",
-		"pwd" : "0230",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-451 (ITUTINGA) - ENTR BR-354 (LAVRAS)"
-	}, {
-		"usr" : "042",
-		"pwd" : "0215",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO CARMO DO PARANAIBA - ENTR MG-230"
-	}, {
-		"usr" : "043",
-		"pwd" : "0100",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "PRESIDENTE OLEGÁRIO - ENTR BR-146(A)/365 (PATOS DE MINAS)"
-	}, {
-		"usr" : "044",
-		"pwd" : "0370",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-153 - ENTR BR-154(A)"
-	}, {
-		"usr" : "045",
-		"pwd" : "0230",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-425 (CORONEL FABRICIANO) - ENTR MG-320 (P/JAGUARAÇU)"
-	}, {
-		"usr" : "046",
-		"pwd" : "0490",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-262(B) (BETIM) - ENTR MG-155"
-	}, {
-		"usr" : "047",
-		"pwd" : "0750",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-458 (CAREAÇU) - ENTR BR-459 (P/POUSO ALEGRE)"
-	}, {
-		"usr" : "048",
-		"pwd" : "0324",
-		"fase" : "1",
-		"ladoA" : "VILA SÃO PEDRO",
-		"ladoB" : "ACESSO COLÔNIA AGRÍCOLA SEXTA LINHA",
-		"trecho" : "ACESSO COLÂNIA AGRICOLA SEXTA LINHA - FINAL PISTA DUPLA (VILA VARGAS)"
-	}, {
-		"usr" : "049",
-		"pwd" : "0450",
-		"fase" : "1",
-		"ladoA" : "ENTR MS-441(B) (P/BANDEIRANTES)",
-		"ladoB" : "ENTR MS-244 (P/BONFIM)",
-		"trecho" : "ENTR MS-441(B) (P/BANDEIRANTES) - ENTR MS-244 (P/BONFIM)"
-	}, {
-		"usr" : "050",
-		"pwd" : "1290",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-158(B)/MS-395 (P/BRASILÂNDIA) - ENTR MS-453/459 (P/ARAPUÁ)"
-	}, {
-		"usr" : "051",
-		"pwd" : "0880",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM TRAV RIO PARANÁ (PONTE M. JOPPERT) - INCÍO DA PISTA DUPLA"
-	}, {
-		"usr" : "052",
-		"pwd" : "0030",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-070(B)",
-		"ladoB" : "ENTR MT-170 (CARAMÚJO)",
-		"trecho" : "ENTR BR-070(B) - ENTR MT-170 (CARAMÚJO)"
-	}, {
-		"usr" : "053",
-		"pwd" : "0592",
-		"fase" : "1",
-		"ladoA" : "ENTR MT-270(B)",
-		"ladoB" : "ENTR MT-469(A)",
-		"trecho" : "ENTR MT-270(B) - ENTR MT-469(A)"
-	}, {
-		"usr" : "054",
-		"pwd" : "0840",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "JANGADA - ENTR MT-246(B)"
-	}, {
-		"usr" : "055",
-		"pwd" : "0510",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-222(B)/PA-332 (DOM ELISEU) - ENTR PA-125/263 (GURUPIZINHO)"
-	}, {
-		"usr" : "056",
-		"pwd" : "0335",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PB-018 (P/CONDE) - ENTR PB-034"
-	}, {
-		"usr" : "057",
-		"pwd" : "0010",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PB-100 (P/GALANTE) - ENTR BR-104(A)/408(B)/PB-095 (CAMPINA GRANDE)"
-	}, {
-		"usr" : "058",
-		"pwd" : "0510",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-063 (P/AMARAJI) - ENTR PE-064/085 (RIBEIRÃO)"
-	}, {
-		"usr" : "059",
-		"pwd" : "0460",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-460 - ENTR BR-316/428 (P/CABROBÓ)"
-	}, {
-		"usr" : "060",
-		"pwd" : "0140",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-103 (P/BONITO) - ENTR BR-104/423(A) (CARUARÚ)"
-	}, {
-		"usr" : "061",
-		"pwd" : "0420",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-450 (P/VERDEJANTE) - ENTR BR-116/361 (SALGUEIRO)"
-	}, {
-		"usr" : "062",
-		"pwd" : "0370",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-428(A) (LAGOA GRANDE) - ENTR BR-235/407/423/428(B) (DIV PE/BA) (PETROLINA/JUAZEIRO)"
-	}, {
-		"usr" : "063",
-		"pwd" : "0830",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PI-242 - ENTR BR-407(A)/PI-238/245(A) (PICOS)"
-	}, {
-		"usr" : "064",
-		"pwd" : "0130",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-404(B)/407(B) - INÍCIO PISTA DUPLA (CAPITÃO CAMPOS)"
-	}, {
-		"usr" : "065",
-		"pwd" : "0420",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "DEMERVAL LOBÃO - ENTR PI-223 (MONSENHOR GIL)"
-	}, {
-		"usr" : "066",
-		"pwd" : "2710",
-		"fase" : "1",
-		"ladoA" : "DIV SP/PR (CAB NORTE PONTE S/ RIO PARDINHO)",
-		"ladoB" : "INÍCIO VARIANTE DO ALPINO(PISTA DIREITA)",
-		"trecho" : "DIV SP/PR (CAB NORTE PONTE S/ RIO PARDINHO) - INÍCIO VARIANTE DO ALPINO(PISTA DIREITA)"
-	}, {
-		"usr" : "067",
-		"pwd" : "2810",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-427 (CAMPO DO TENENTE)",
-		"ladoB" : "DIV PR/SC (RIO NEGRO/MAFRA)",
-		"trecho" : "ENTR PR-427 (CAMPO DO TENENTE) - DIV PR/SC (RIO NEGRO/MAFRA)"
-	}, {
-		"usr" : "068",
-		"pwd" : "0205",
-		"fase" : "1",
-		"ladoA" : "ACESSO GUARAPUAVA",
-		"ladoB" : "ENTR BR-466 (P/GUARAPUAVA)",
-		"trecho" : "ACESSO GUARAPUAVA - ENTR BR-466 (P/GUARAPUAVA)"
-	}, {
-		"usr" : "069",
-		"pwd" : "0310",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-182 (P/CAPITÃO LEÔNIDAS MARQUES)",
-		"ladoB" : "ENTR BR-163",
-		"trecho" : "ACESSO OESTE CASCAVEL - ENTR BR-163/PR-182 (P/CAPITÃO LEÔNIDAS MARQUES)"
-	}, {
-		"usr" : "070",
-		"pwd" : "0480",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM PISTA DUPLA - ENTR PR-431 (P/JACAREZINHO)"
-	}, {
-		"usr" : "071",
-		"pwd" : "0490",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-281 (P/TIJUCAS DO SUL)",
-		"ladoB" : "DIV PR/SC (ENTR BR-101)",
-		"trecho" : "ENTR PR-281 (P/TIJUCAS DO SUL) - DIV PR/SC (ENTR BR-101)"
-	}, {
-		"usr" : "072",
-		"pwd" : "0095",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-510/511 (P/CONTENDA)",
-		"ladoB" : "ENTR PR-428 (LAPA)",
-		"trecho" : "ENTR PR-510/511 (P/CONTENDA) - ENTR PR-428 (LAPA)"
-	}, {
-		"usr" : "073",
-		"pwd" : "0730",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-393(B) (TREVO MOURA BRASIL) - ENTR BR-492(A) (TREVO P/ AREAL)"
-	}, {
-		"usr" : "074",
-		"pwd" : "2930",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-162 (P/RIO DOURADO) - ENTR BR-120 (CASIMIRO DE ABREU)"
-	}, {
-		"usr" : "075",
-		"pwd" : "2130",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-159 (FLORIANO) - ENTR RJ-161 (RESENDE)"
-	}, {
-		"usr" : "076",
-		"pwd" : "0310",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-356(A)/393(B) - ENTR BR-356(B) (ITAPERUNA)"
-	}, {
-		"usr" : "077",
-		"pwd" : "0330",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "SAPUCAIA - ENTR BR-040(A)"
-	}, {
-		"usr" : "078",
-		"pwd" : "0167",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO À LAGOA DO BONFIM - ENTR RN-315/002(A) (SÃO JOSÉ DE MIPIBÚ/NÍSIA FLORESTA)"
-	}, {
-		"usr" : "079",
-		"pwd" : "0070",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RN-203 (P/SÃO PEDRO) - ACESSO BOM JESUS"
-	}, {
-		"usr" : "080",
-		"pwd" : "0270",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-104(B) (LAJES) - ENTR RN-023 (CAIÇARA DO RIO DO VENTO)"
-	}, {
-		"usr" : "081",
-		"pwd" : "0070",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RN-233 (P/CARAÚBAS) - ENTR RN-031/177(A)"
-	}, {
-		"usr" : "082",
-		"pwd" : "1210",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-429(B) (JI-PARANÁ) - ENTR RO-473 (P/URUPÁ)"
-	}, {
-		"usr" : "083",
-		"pwd" : "3275",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR ERS-703 (GUAIBA) - ENTR ERS-709 (P/ BARRA DO RIBEIRO)"
-	}, {
-		"usr" : "084",
-		"pwd" : "1150",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-472 (P/PALMITINHO)",
-		"ladoB" : "ENTR RS-585/587 (SEBERI)",
-		"trecho" : "ENTR RSC-472 (P/ PALMITINHO) - ENTR ERS-585/587 (SEBERI)"
-	}, {
-		"usr" : "085",
-		"pwd" : "1310",
-		"fase" : "1",
-		"ladoA" : "ENTR RS-348 (VAL DE SERRA)",
-		"ladoB" : "ENTR RS-509 (P/SANTA MARIA)",
-		"trecho" : "ENTR ERS-348 (VAL DE SERRA) - ENTR ERS-509 (P/ SANTA MARIA)"
-	}, {
-		"usr" : "086",
-		"pwd" : "0180",
-		"fase" : "1",
-		"ladoA" : "ACESSO A MINAS DO LEÃO",
-		"ladoB" : "ENTR BR-471 (PANTANO GRANDE)",
-		"trecho" : "ACESSO A MINAS DO LEAO - ENTR BRS-471 (PANTANO GRANDE)"
-	}, {
-		"usr" : "087",
-		"pwd" : "1840",
-		"fase" : "1",
-		"ladoA" : "ENTR RS-705 (P/GERIBA)",
-		"ladoB" : "ENTR BR-290(B)",
-		"trecho" : "ENTR ERS-705 (GERIBA) - ENTR BRS-153(B) (P/ BAGE)"
-	}, {
-		"usr" : "088",
-		"pwd" : "0410",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-293(A)",
-		"ladoB" : "ENTR BR-472(A)",
-		"trecho" : "ENTR BRS-293(A) (P/ QUARAI) - ENTR BRS-472(A) (P/ BARRA DO QUARAI)"
-	}, {
-		"usr" : "089",
-		"pwd" : "0130",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-473 (P/BAGÉ)",
-		"ladoB" : "ENTR RS-630 (P/DOM PEDRITO)",
-		"trecho" : "ENTR RSC-473 (P/ BAGE) - ENTR ERS-630/634 (P/ DOM PEDRITO)"
-	}, {
-		"usr" : "090",
-		"pwd" : "0070",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-471(A) (QUINTA)",
-		"ladoB" : "ACESSO PELOTAS",
-		"trecho" : "ENTR BRS-471(A) (QUINTA) - ACESSO SUL A PELOTAS"
-	}, {
-		"usr" : "091",
-		"pwd" : "0210",
-		"fase" : "1",
-		"ladoA" : "ACESSO LESTE A  ITAQUI",
-		"ladoB" : "ENTR BR-290(A)/293(A) (URUGUAIANA)",
-		"trecho" : "ACESSO LESTE A ITAQUI - ENTR BR-290(A)/293(A) (URUGUAIANA)"
-	}, {
-		"usr" : "092",
-		"pwd" : "3830",
-		"fase" : "1",
-		"ladoA" : "GARUVA",
-		"ladoB" : "ENTR SC-430 (PIRABEIRABA)",
-		"trecho" : "GARUVA - ENTR SC-430 (PIRABEIRABA)"
-	}, {
-		"usr" : "093",
-		"pwd" : "4010",
-		"fase" : "1",
-		"ladoA" : "BALNEÁRIO DE CAMBORIÚ",
-		"ladoB" : "P/PORTO BELO",
-		"trecho" : "BALNEÁRIO DE CAMBORIÚ - P/PORTO BELO"
-	}, {
-		"usr" : "094",
-		"pwd" : "4125",
-		"fase" : "1",
-		"ladoA" : "PONTE SOBRE O RIO DA MADRE",
-		"ladoB" : "PONTE SOBRE O RIO ARAÇATUBA",
-		"trecho" : "PONTE SOBRE O RIO DA MADRE - PONTE SOBRE O RIO ARAÇATUBA"
-	}, {
-		"usr" : "095",
-		"pwd" : "4240",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-285(A) (ARARANGUÁ)",
-		"ladoB" : "ENTR BR-285(B)/SC-285 (SANGA DA TOCA)",
-		"trecho" : "ENTR BR-285(A)/SC-449 (ARARANGUÁ) - ENTR BR-285(B)/SC-285 (P/ERMO)"
-	}, {
-		"usr" : "096",
-		"pwd" : "2910",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SC-352(B) (P/TAIÓ) - SÃO CRISTOVÃO DO SUL"
-	}, {
-		"usr" : "097",
-		"pwd" : "1590",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SC-463 (P/JABORÁ) - ENTR BR-283 (P/CONCÓRDIA)"
-	}, {
-		"usr" : "098",
-		"pwd" : "0020",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SC-114(A) (ÍNDIOS) - ENTR SC-114(B) (P/PAINEL)"
-	}, {
-		"usr" : "099",
-		"pwd" : "0377",
-		"fase" : "1",
-		"ladoA" : "ENTR SC-157(B) (P/MODELO)",
-		"ladoB" : "ENTR BR-158(A) (P/CUNHA PORÃ)",
-		"trecho" : "ENTR SC-157(B) (P/MODELO) - ENTR BR-158(A) (P/CUNHA PORÃ)"
-	}, {
-		"usr" : "100",
-		"pwd" : "0190",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SC-114(B) (P/OTACÍLIO COSTA) - ENTR BR-116"
-	}, {
-		"usr" : "101",
-		"pwd" : "0040",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SE-464 (P/SÃO CRISTOVÃO) - ENTR BR-349(B)/SE-265 (ITAPORANGA D`AJUDA)"
-	}, {
-		"usr" : "102",
-		"pwd" : "0060",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SE-160 - ENTR SE-170(A)"
-	}, {
-		"usr" : "103",
-		"pwd" : "2410",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-070 - ENTR SP-103 (CAÇAPAVA)"
-	}, {
-		"usr" : "104",
-		"pwd" : "2570",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-228 - ENTR SP-057 (P/SIDERÚRGICA)"
-	}, {
-		"usr" : "105",
-		"pwd" : "1043",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO GUAIÇARA - ENTR BR-154/267 (LINS)"
-	}, {
-		"usr" : "106",
-		"pwd" : "0810",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "DIV MG/SP - ENTR SP-063 (P/BRAGANÇA PAULISTA)"
-	}, {
-		"usr" : "107",
-		"pwd" : "0105",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR TO-420 - INICIO PISTA DUPLA ARAGUAINA"
-	}, {
-		"usr" : "108",
-		"pwd" : "0205",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR TO-342(B) (MIRANORTE) - ENTR TO-348 (BARROLÂNDIA)"
-	}, {
-		"usr" : "109",
-		"pwd" : "0300",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR TO-483 (FIGUEIRÓPOLIS) - ENTR TO-296(A)/373 (ALVORADA)"
-	}, {
-		"usr" : "110",
-		"pwd" : "0495",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PI-260 (P/BARREIRAS DO PIAUÍ) - ENTR PI-255 (CORRENTE)"
-	}, {
-		"usr" : "111",
-		"pwd" : "0150",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM PISTA DUPLA - ENTR GO-156(B)"
-	}, {
-		"usr" : "112",
-		"pwd" : "0025",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-508 (P/MATINHOS)",
-		"ladoB" : "ENTR BR-101/PR-408 (P/MORRETES)",
-		"trecho" : "ENTR PR-508 (P/MATINHOS) - ENTR BR-101/PR-408 (P/MORRETES)"
-	}, {
-		"usr" : "113",
-		"pwd" : "0075",
-		"fase" : "1",
-		"ladoA" : "ACESSO SANTA",
-		"ladoB" : "ENTR BR-376(B)/PR-428 (SÃO LUIS PURUNÃ)",
-		"trecho" : "ACESSO SANTA - ENTR BR-376(B)/PR-428 (SÃO LUIS PURUNÃ)"
-	}, {
-		"usr" : "114",
-		"pwd" : "0950",
-		"fase" : "1",
-		"ladoA" : "ENTR MS-375 (ZUZU)",
-		"ladoB" : "ENTR BR-163(A) (NOVA ALVORADA DO SUL)",
-		"trecho" : "ENTR MS-375 (ZUZU) - ENTR BR-163(A) (NOVA ALVORADA)"
-	}, {
-		"usr" : "115",
-		"pwd" : "0440",
-		"fase" : "1",
-		"ladoA" : "ENTR MS-434 (RAIMUNDO)",
-		"ladoB" : "ENTR BR-483/497 (INÍCIO DA PISTA DUPLA)",
-		"trecho" : "ENTR MS-434 (RAIMUNDO) - ENTR BR-483/497 (INÍCIO DA PISTA DUPLA)"
-	}, {
-		"usr" : "116",
-		"pwd" : "0810",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PISTA INVERSA (B) - ENTR BR-101"
-	}, {
-		"usr" : "117",
-		"pwd" : "0070",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-493(A) (P/MAGÉ) - ENTR RJ-107 (IMBARIÊ)"
-	}, {
-		"usr" : "118",
-		"pwd" : "0040",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-101",
-		"ladoB" : "ENTR SC-108(A) (NEUDOR)",
-		"trecho" : "ENTR BR-101 - ENTR SC-108(A) (NEUDOR)"
-	}, {
-		"usr" : "119",
-		"pwd" : "1490",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-280(A)/PR-446",
-		"ladoB" : "ENTR PR-170",
-		"trecho" : "ENTR BR-153(A)/PR-446 - ENTR PR-170"
-	}, {
-		"usr" : "120",
-		"pwd" : "0060",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-262(B) - ENTR BR-050(B)"
-	}, {
-		"usr" : "121",
-		"pwd" : "0834",
-		"fase" : "1",
-		"ladoA" : "ENTR MT-423",
-		"ladoB" : "ITAUBA",
-		"trecho" : "ENTR MT-423 - ITAUBA"
-	}, {
-		"usr" : "122",
-		"pwd" : "0852",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "MATUPÁ - GUARANTÃ DO NORTE"
-	}, {
-		"usr" : "123",
-		"pwd" : "0790",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR AL-215(B) - ENTR AL-220(A) (P/BARRA DE SÃO MIGUEL)"
-	}, {
-		"usr" : "124",
-		"pwd" : "0260",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-270 (P/BUÍQUE) - ENTR BR-110 (CRUZEIRO DO NORDESTE)"
-	}, {
-		"usr" : "125",
-		"pwd" : "0090",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-218 (P/BOM CONSELHO) - ENTR PE-187 (P/PALMEIRINA)"
-	}, {
-		"usr" : "126",
-		"pwd" : "1695",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-420(B) (P/LAJE) - ENTR BA-542 (P/GUERÉM)"
-	}, {
-		"usr" : "127",
-		"pwd" : "0790",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-493 (ITATIM) - ENTR BA-245"
-	}, {
-		"usr" : "128",
-		"pwd" : "0334",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "MAIRI - ENTR BR-349"
-	}, {
-		"usr" : "129",
-		"pwd" : "0270",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "GAVIÃO - ENTR BR-349 (NOVA FÁTIMA)"
-	}, {
-		"usr" : "130",
-		"pwd" : "1010",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "DIV BA/MG - ENTR BR-251(A) (P/SALINAS)"
-	}, {
-		"usr" : "131",
-		"pwd" : "0530",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-937 (P/PAJEÚ DO VENTO) - ENTR BR-122(B)/430/BA-569 (CAETITÉ)"
-	}, {
-		"usr" : "132",
-		"pwd" : "0245",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-131 (P/CAÉM) - ENTR BA-417"
-	}, {
-		"usr" : "133",
-		"pwd" : "0550",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-235 - ENTR BA-220 (EUCLIDES DA CUNHA)"
-	}, {
-		"usr" : "134",
-		"pwd" : "0690",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-373 (CARMELÓPOLIS) - ENTR CE-187/292 (CAMPOS SALES)"
-	}, {
-		"usr" : "135",
-		"pwd" : "0190",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-266 (SUCESSO) - ENTR BR-226/404 (CRATEÚS)"
-	}, {
-		"usr" : "136",
-		"pwd" : "0610",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-060(B) (MINEIROLÂNDIA) - ENTR CE-168 (PEDRA BRANCA)"
-	}, {
-		"usr" : "137",
-		"pwd" : "0050",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-154 (PIRANGI) - ENTR CE-060(A)/265 (QUIXADÁ)"
-	}, {
-		"usr" : "138",
-		"pwd" : "0590",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-456 (P/TARGINOS) - ENTR CE-257 (CANINDÉ)"
-	}, {
-		"usr" : "139",
-		"pwd" : "0070",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-341 (CROATÁ) - ENTR CE-162 (SÃO LUÍS DO CURU)"
-	}, {
-		"usr" : "140",
-		"pwd" : "0160",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-263 (P/JAGUARUANA) - RUSSAS"
-	}, {
-		"usr" : "141",
-		"pwd" : "2130",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-381 (SÃO MATEUS) - ENTR ES-430 (P/JAGUARÉ)"
-	}, {
-		"usr" : "142",
-		"pwd" : "0300",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR ES-137 - ENTR ES-130 (P/NOVA VENÉCIA)"
-	}, {
-		"usr" : "143",
-		"pwd" : "1990",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-290 (TEIXEIRA DE FREITAS) - ENTR BR-418 (P/POSTO DA MATA)"
-	}, {
-		"usr" : "144",
-		"pwd" : "0030",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "MORRO GRANDE (ACESSO IV C. ITAPEMIRIM) - ENTR ES-166 (COUTINHO)"
-	}, {
-		"usr" : "145",
-		"pwd" : "0130",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-422 (RESPLENDOR) - ENTR BR-458 (CONSELHEIRO PENA)"
-	}, {
-		"usr" : "146",
-		"pwd" : "0125",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-230 - ENTR GO-237"
-	}, {
-		"usr" : "147",
-		"pwd" : "0160",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-114 (P/FLORES DE GOIÁS) - SANTA MARIA"
-	}, {
-		"usr" : "148",
-		"pwd" : "0470",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "DIV MG/GO - ENTR GO-010(A)"
-	}, {
-		"usr" : "149",
-		"pwd" : "0050",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-010 (P/LUZIÂNIA) - ENTR BR-050(B)/354/457/GO-309 (CRISTALINA)"
-	}, {
-		"usr" : "150",
-		"pwd" : "0080",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "URUTAÍ - ENTR BR-490/GO-213/307 (IPAMERI)"
-	}, {
-		"usr" : "151",
-		"pwd" : "0550",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-080(B) (P/SAO FRANCISCO DE GOIÁS) - ENTR GO-431 (P/PIRENOPOLIS)"
-	}, {
-		"usr" : "152",
-		"pwd" : "0190",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-153(A)/GO-342(B) - ENTR BR-153(B)/GO-237 (URUAÇÚ)"
-	}, {
-		"usr" : "153",
-		"pwd" : "0750",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-210(B) (P/PANAMÁ) - ENTR BR-154/452(A)/483"
-	}, {
-		"usr" : "154",
-		"pwd" : "0050",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-040 - ENTR BR-154(A)/483(A)/GO-206(A) (P/CACHOEIRA DOURADA)"
-	}, {
-		"usr" : "155",
-		"pwd" : "0570",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-194 (P/PORTELÂNDIA) - INÍCIO PISTA DUPLA"
-	}, {
-		"usr" : "156",
-		"pwd" : "0440",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)"
-	}, {
-		"usr" : "157",
-		"pwd" : "0280",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MA-006(A) (COCALINHO) - ENTR MA-216 (BOM JARDIM)"
-	}, {
-		"usr" : "158",
-		"pwd" : "0860",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MA-259 (P/TUNTUM) - ENTR MA-012/272 (BARRA DO CORDA)"
-	}, {
-		"usr" : "159",
-		"pwd" : "0300",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-222(B) (ESTACA ZERO) - ENTR MA-240 (PIO XII)"
-	}, {
-		"usr" : "160",
-		"pwd" : "0730",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "BOM JESUS DO TOCANTINS - RIO JACUNDÁ (R MÃE MARIA)"
-	}, {
-		"usr" : "161",
-		"pwd" : "0750",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-122/251/365 (MONTES CLAROS) - ENTR BR-451 (BOCAIÚVA)"
-	}, {
-		"usr" : "162",
-		"pwd" : "0240",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-342/MG-404 (SALINAS) - RIO VACARIA"
-	}, {
-		"usr" : "163",
-		"pwd" : "0290",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MA-132/270 (COLINAS) - ENTR MA-134 (PEIXE)"
-	}, {
-		"usr" : "164",
-		"pwd" : "0030",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-040(B) - ENTR MG-155 (SÃO BRÁS DO SUAÇUÍ)"
-	}, {
-		"usr" : "165",
-		"pwd" : "0335",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-434 - ENTR MG-435 (P/CAETÉ)"
-	}, {
-		"usr" : "166",
-		"pwd" : "0510",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-275 (P/CARANDAÍ) - ACESSO ALTO DOCE (INÍCIO PISTA DUPLA)"
-	}, {
-		"usr" : "167",
-		"pwd" : "0130",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-040(B) - ENTR MG-135"
-	}, {
-		"usr" : "168",
-		"pwd" : "0250",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-190 (RIO BAGAGEM) - ACESSO INDIANÓPOLIS"
-	}, {
-		"usr" : "169",
-		"pwd" : "0152",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-352(B)/GO-210(B)/330 (CATALÃO) - ENTR GO-402"
-	}, {
-		"usr" : "170",
-		"pwd" : "0010",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-050/365/452/455 (UBERLÂNDIA) - ENTR BR-153/464 (PRATA)"
-	}, {
-		"usr" : "171",
-		"pwd" : "0310",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-050(B)/455/497 (UBERLÂNDIA) - ENTR BR-452(B)"
-	}, {
-		"usr" : "172",
-		"pwd" : "0230",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-190 (P/NOVA PONTE) - ACESSO SANTA JULIANA"
-	}, {
-		"usr" : "173",
-		"pwd" : "0110",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO CARLOS CHAGAS - ENTR MG-412"
-	}, {
-		"usr" : "174",
-		"pwd" : "0110",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO SÃO JOSÉ DO JACURÍ - ENTR MG-117 (SÃO JOÃO EVANGELISTA)"
-	}, {
-		"usr" : "175",
-		"pwd" : "1310",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "TREVO DE ACESSO SÃO JOÃO DO MANHUAÇU - ENTR MG-265 (P/DIVINO)"
-	}, {
-		"usr" : "176",
-		"pwd" : "0210",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR ES-185(B) (P/IÚNA) - DIV ES/MG"
-	}, {
-		"usr" : "177",
-		"pwd" : "1195",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO ITANHOMI - ENTR BR-458(A) (TURUAÇÚ)"
-	}, {
-		"usr" : "178",
-		"pwd" : "0030",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-116(B) - ENTR MG-126 (BICAS)"
-	}, {
-		"usr" : "179",
-		"pwd" : "1370",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-265/356 (MURIAÉ) - ENTR MG-285 (LARANJAL)"
-	}, {
-		"usr" : "180",
-		"pwd" : "0310",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "PONTE S/ RIO PARÁ - ENTR MG-423(A) (PITANGUI)"
-	}, {
-		"usr" : "181",
-		"pwd" : "0195",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO MORADA NOVA DE MINAS - ACESSO SÃO JOSÉ DO BURITI"
-	}, {
-		"usr" : "182",
-		"pwd" : "0330",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-367(B) (GOUVEIA) - ACESSO NOSSA SENHORA DA GLÓRIA"
-	}, {
-		"usr" : "183",
-		"pwd" : "0910",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-255 - ENTR BR-262(B) (DIV MG/SP)"
-	}, {
-		"usr" : "184",
-		"pwd" : "0250",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-462(B) - ENTR BR-262",
-		"perguntaExtra" : true
-	}, {
-		"usr" : "185",
-		"pwd" : "0930",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-452 (P/UBERLÂNDIA) - ENTR BR-462 (PERDIZES)",
-		"perguntaExtra" : true
-	}, {
-		"usr" : "186",
-		"pwd" : "0070",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-265(B) - CAMPOS GERAIS"
-	}, {
-		"usr" : "187",
-		"pwd" : "0030",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-354(B) - ENTR BR-265(A)"
-	}, {
-		"usr" : "188",
-		"pwd" : "0190",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-135/338 (BARBACENA) - ACESSO TIRADENTES"
-	}, {
-		"usr" : "189",
-		"pwd" : "0670",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-265 (LAVRAS) - ENTR MG-167(A) (P/TRÊS CORAÇÕES)"
-	}, {
-		"usr" : "190",
-		"pwd" : "0350",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO FORMIGA - ENTR MG-164 (CANDEIAS)"
-	}, {
-		"usr" : "191",
-		"pwd" : "0590",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-270 (CARMÓPOLIS DE MINAS) - ENTR BR-494(A) (P/OLIVEIRA)"
-	}, {
-		"usr" : "192",
-		"pwd" : "0230",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-354(A) (P/BAMBUÍ) - ENTR BR-354(B)"
-	}, {
-		"usr" : "193",
-		"pwd" : "0205",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO GUIMARÂNIA - ENTR MG-188"
-	}, {
-		"usr" : "194",
-		"pwd" : "0090",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-410 - PRESIDENTE OLEGÁRIO"
-	}, {
-		"usr" : "195",
-		"pwd" : "0150",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-060 (P/SÃO GONÇALO DO ABAETÉ) - ACESSO GALENA"
-	}, {
-		"usr" : "196",
-		"pwd" : "0410",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-154(B)/461/464 (ITUIUTABA) - ACESSO GURINHATÃ"
-	}, {
-		"usr" : "197",
-		"pwd" : "0830",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-365 (P/MONTE ALEGRE DE MINAS) - ENTR BR-464/497 (P/PRATA)"
-	}, {
-		"usr" : "198",
-		"pwd" : "0170",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-229 (P/SENHORA DO PORTO) - ENTR MG-232 (P/CARMESIA)"
-	}, {
-		"usr" : "199",
-		"pwd" : "0370",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-320 (P/SÃO JOSÉ DO GOIABAL) - ENTR BR-120 (VARGEM LINDA)"
-	}, {
-		"usr" : "200",
-		"pwd" : "0170",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO À GOV. VALADARES - PERIQUITO"
-	}, {
-		"usr" : "201",
-		"pwd" : "0685",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO FLORESTAL - ENTR BR-352 (PARÁ DE MINAS)"
-	}, {
-		"usr" : "202",
-		"pwd" : "0050",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MG-050(B) (P/DIVINOPÓLIS) - ENTR MG-260 (P/CLÁUDIO)"
-	}, {
-		"usr" : "203",
-		"pwd" : "0270",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO CONCEIÇÃO DO RIO VERDE - ENTR BR-460"
-	}, {
-		"usr" : "204",
-		"pwd" : "0023",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO SANTA RITA DAS CALDAS - ENTR MG-179 (POUSO ALEGRE)"
-	}, {
-		"usr" : "205",
-		"pwd" : "0270",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-369 (BOTELHOS) - ENTR BR-267(A) (P/BANDEIRA DO SUL)"
-	}, {
-		"usr" : "206",
-		"pwd" : "0212",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-487(A) - ACESSO NAVIRAÍ I"
-	}, {
-		"usr" : "207",
-		"pwd" : "0612",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-267(A)",
-		"ladoB" : "INÍCIO DUPLICAÇÃO",
-		"trecho" : "ENTR BR-267(A) - INÍCIO DUPLICAÇÃO"
-	}, {
-		"usr" : "208",
-		"pwd" : "0090",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MS-141 (IVINHEMA) - VILA AMANDINA"
-	}, {
-		"usr" : "209",
-		"pwd" : "1390",
-		"fase" : "1",
-		"ladoA" : "ENTR MS-339/446/448 (MIRANDA)",
-		"ladoB" : "ENTR MS-185/243 (GUAICURUS)",
-		"trecho" : "ENTR MS-339/446/448 (MIRANDA) - ENTR MS-185/243 (GUAICURUS)"
-	}, {
-		"usr" : "210",
-		"pwd" : "0058",
-		"fase" : "1",
-		"ladoA" : "BURITIZINHO",
-		"ladoB" : "ENTR MS-223(A) (SILVOLÂNDIA)",
-		"trecho" : "BURITIZINHO - ENTR MS-223(A) (SILVOLÂNDIA)"
-	}, {
-		"usr" : "211",
-		"pwd" : "0390",
-		"fase" : "1",
-		"ladoA" : "ENTR MS-316 (PARAÍSO DAS ÁGUAS)",
-		"ladoB" : "ENTR MS-324(A)",
-		"trecho" : "ENTR MS-316 (PARAÍSO) - ENTR MS-324(A)"
-	}, {
-		"usr" : "212",
-		"pwd" : "0180",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-158(B) (P/TAMBOARA) - ACESSO ALTO PARANÁ/MARISTELA"
-	}, {
-		"usr" : "213",
-		"pwd" : "0050",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-425 (PRESIDENTE PRUDENTE) - ENTR SP-425"
-	}, {
-		"usr" : "214",
-		"pwd" : "0330",
-		"fase" : "1",
-		"ladoA" : "ENTR MT-373",
-		"ladoB" : "ENTR MT-130(A) (PRIMAVERA DO LESTE)",
-		"trecho" : "ENTR MT-373 - ENTR MT-130(A) (PRIMAVERA DO LESTE)"
-	}, {
-		"usr" : "215",
-		"pwd" : "0765",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM VARIANTE II SERRA DE SÃO VICENTE - ACESSO DISTRITO INDUSTRIAL"
-	}, {
-		"usr" : "216",
-		"pwd" : "0150",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-010(B) (P/SANTA MARIA DO PARÁ) - ENTR PA-324 (P/SALINÓPOLIS)"
-	}, {
-		"usr" : "217",
-		"pwd" : "0270",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PB-177 (SOLEDADE) - ENTR PB-195 (JUAZEIRINHO)"
-	}, {
-		"usr" : "218",
-		"pwd" : "0322",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "BARRA DE SANTANA - ENTR PB-196 (P/RIACHO DE SANTO ANTÔNIO)"
-	}, {
-		"usr" : "219",
-		"pwd" : "0280",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-263 (P/ITAPETIM) - ENTR PE-320 (SÃO JOSÉ DO EGITO)"
-	}, {
-		"usr" : "220",
-		"pwd" : "0410",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-015 (P/PAULISTA - VIADUTO SOBRE PE-015) - VIADUTO SOBRE AVENIDA CAXANGÁ"
-	}, {
-		"usr" : "221",
-		"pwd" : "0530",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "DIV PE/AL - ENTR BR-423(A)"
-	}, {
-		"usr" : "222",
-		"pwd" : "0630",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-590 (P/IPUBÍ) - ENTR BR-122 (OURICURÍ)"
-	}, {
-		"usr" : "223",
-		"pwd" : "0250",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-292(B) - DIV CE/PE"
-	}, {
-		"usr" : "224",
-		"pwd" : "0300",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PE-310/312 (CUSTÓDIA) - ENTR BR-426/PE-340 (SÍTIO DOS NUNES)"
-	}, {
-		"usr" : "225",
-		"pwd" : "0250",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "RAJADA - ENTR BR-235(A)"
-	}, {
-		"usr" : "226",
-		"pwd" : "0115",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PI-394 - ENTR PI-140 (CANTO DO BURITI)"
-	}, {
-		"usr" : "227",
-		"pwd" : "0070",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PI-211 (CAXINGÓ) - ENTR PI-213(A)"
-	}, {
-		"usr" : "228",
-		"pwd" : "0190",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO OESTE SOBRAL - ENTR BR-403(B)/CE-183"
-	}, {
-		"usr" : "229",
-		"pwd" : "0330",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MA-034 (SÃO JOÃO DOS PATOS) - ENTR BR-230(B)/MA-364(A) (DOIS IRMÃOS)"
-	}, {
-		"usr" : "230",
-		"pwd" : "0290",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR PI-130 (P/AMARANTE) - ENTR PI-120"
-	}, {
-		"usr" : "231",
-		"pwd" : "0210",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-252 (GUAPIARA) - ENTR SP-165/249 (APIAÍ)"
-	}, {
-		"usr" : "232",
-		"pwd" : "0180",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-549 (P/LUIZIANA)",
-		"ladoB" : "ENTR PR-462 (P/IRETAMA)",
-		"trecho" : "ENTR PR-549 (P/LUIZIANA) - ENTR PR-462 (P/IRETAMA)"
-	}, {
-		"usr" : "233",
-		"pwd" : "0080",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO IVAIPORÃ - ENTR BR-487 (P/MANOEL RIBAS)"
-	}, {
-		"usr" : "234",
-		"pwd" : "0250",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-158(B) (LARANJEIRAS DO SUL)",
-		"ladoB" : "ENTR PR-473",
-		"trecho" : "ENTR BR-158(B) (LARANJEIRAS DO SUL) - ENTR PR-473"
-	}, {
-		"usr" : "235",
-		"pwd" : "0455",
-		"fase" : "1",
-		"ladoA" : "ACESSO ÁGUA MINERAL SANTA CLARA",
-		"ladoB" : "ENTR PR-281(A) (P/CHOPINZINHO)",
-		"trecho" : "ACESSO ÁGUA MINERAL SANTA CLARA - ENTR PR-281(A) (P/CHOPINZINHO)"
-	}, {
-		"usr" : "236",
-		"pwd" : "0500",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-468(B)",
-		"ladoB" : "ENTR PR-180 (GOIO ERÊ)",
-		"trecho" : "ENTR PR-468(B) - ENTR PR-180 (GOIO ERÊ)"
-	}, {
-		"usr" : "237",
-		"pwd" : "1230",
-		"fase" : "1",
-		"ladoA" : "ENTR PR-431(B)",
-		"ladoB" : "ENTR PR-092(A) (P/BARRA DO JACARÉ)",
-		"trecho" : "ENTR PR-431(B) - ENTR PR-092(A) (P/BARRA DO JACARÉ)"
-	}, {
-		"usr" : "238",
-		"pwd" : "1140",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-331(A) - ENTR SP-331(B)"
-	}, {
-		"usr" : "239",
-		"pwd" : "0230",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-369 - ENTR SP-261 (P/ÁGUAS DE SANTA BÁRBARA)"
-	}, {
-		"usr" : "240",
-		"pwd" : "0710",
-		"fase" : "1",
-		"ladoA" : "ACESSO PIRAPÓ",
-		"ladoB" : "ACESSO CAMBIRA",
-		"trecho" : "ACESSO PIRAPÓ - ACESSO CAMBIRA"
-	}, {
-		"usr" : "241",
-		"pwd" : "0410",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO PARAÍBA DO SUL - ENTR RJ-135 (ANDRADE PINTO)"
-	}, {
-		"usr" : "242",
-		"pwd" : "2850",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-196 - ENTR RJ-182"
-	}, {
-		"usr" : "243",
-		"pwd" : "0590",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ITAMONTE - ENTR BR-485 (GARGANTA DO REGISTRO)"
-	}, {
-		"usr" : "244",
-		"pwd" : "3350",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-149 (P/RIO CLARO) - ENTR BR-494(A) (ANGRA DOS REIS)"
-	}, {
-		"usr" : "245",
-		"pwd" : "0530",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-145 (P/BARRA DO PIRAÍ) - ENTR RJ-141 (DORANDIA)"
-	}, {
-		"usr" : "246",
-		"pwd" : "0170",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-494 (ARANTINA) - AIURUOCA"
-	}, {
-		"usr" : "247",
-		"pwd" : "0170",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-198(B) - ENTR RJ-200 (MONTE ALEGRE)"
-	}, {
-		"usr" : "248",
-		"pwd" : "0350",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-202 - ENTR RJ-234 (P/PENEDO)"
-	}, {
-		"usr" : "249",
-		"pwd" : "0150",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-482(B) - ENTR ES-181"
-	}, {
-		"usr" : "250",
-		"pwd" : "0210",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-116/265 (MURIAÉ) - DIV MG/RJ"
-	}, {
-		"usr" : "251",
-		"pwd" : "1530",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RJ-156 (P/VOLTA DO PIÃO) - ENTR BR-492(A)"
-	}, {
-		"usr" : "252",
-		"pwd" : "0065",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO À JENIPABU - ENTR RN-160(B) (P/EXTREMOZ)"
-	}, {
-		"usr" : "253",
-		"pwd" : "0110",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "TAIPÚ - ENTR RN-064 (P/CEARÁ MIRIM)"
-	}, {
-		"usr" : "254",
-		"pwd" : "0055",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR CE-261 - DIV CE/RN"
-	}, {
-		"usr" : "255",
-		"pwd" : "0210",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-230(A) (SANTA GERTRUDES) - ENTR PB-275(A) (P/SÃO JOSÉ DE ESPINHARA)"
-	}, {
-		"usr" : "256",
-		"pwd" : "1375",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO USINA DE SAMUEL - INICIO PISTA DUPLA"
-	}, {
-		"usr" : "257",
-		"pwd" : "1510",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "VISTA ALEGRE DO ABUANÃ - VILA EXTREMA"
-	}, {
-		"usr" : "258",
-		"pwd" : "1300",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-421 (ARIQUEMES) - ENTR RO-459(A) (ALTO PARAISO)"
-	}, {
-		"usr" : "259",
-		"pwd" : "0031",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RO-135 (P/NOVA LONDRINA) - FIM DO TRECHO PAVIMENTADO"
-	}, {
-		"usr" : "260",
-		"pwd" : "1148",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RO-471 (P/MINISTRO ANDREAZZA) - ENTR RO-479(A) (P/ROLIM DE MOURA)"
-	}, {
-		"usr" : "261",
-		"pwd" : "1090",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR RO-391 (POSTO GUAPORÉ) - MARCO RONDON"
-	}, {
-		"usr" : "262",
-		"pwd" : "0132",
-		"fase" : "1",
-		"ladoA" : "PADRONAL",
-		"ladoB" : "RIO 12 DE OUTUBRO",
-		"trecho" : "PADRONAL - RIO 12 DE OUTUBRO"
-	}, {
-		"usr" : "263",
-		"pwd" : "4425",
-		"fase" : "1",
-		"ladoA" : "ENTR ACESSO SUL DE CAPÃO DA CANOA",
-		"ladoB" : "ENTR BR-290(A) (OSÓRIO)",
-		"trecho" : "ENTR ACESSO SUL DE CAPÃO DA CANOA - ENTR BR-290(A) (OSÓRIO)"
-	}, {
-		"usr" : "264",
-		"pwd" : "0330",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-470",
-		"ladoB" : "ENTR BR-470/116(A) (CANOAS)",
-		"trecho" : "ENTR RSC-470 (P/ MONTENEGRO) - ENTR ERS-124 (P/ POLO PETROQUIMICO)"
-	}, {
-		"usr" : "265",
-		"pwd" : "0210",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-153(B)/RS-324 (P/PONTÃO)",
-		"ladoB" : "ENTR BR-377(A)/386 (CARAZINHO)",
-		"trecho" : "ENTR BRS-153(B)/ERS-324 (P/ PONTAO) - ENTR BRS-377(A)/386 (P/ CARAZINHO)"
-	}, {
-		"usr" : "266",
-		"pwd" : "0470",
-		"fase" : "1",
-		"ladoA" : "ENTR RS-168 (P/SÃO PAULO DAS MISSÕES)",
-		"ladoB" : "ENTR BR-472 (FRONT BRASIL/ARGENTINA) (PORTO XAVIER)",
-		"trecho" : "ENTR RS-168 (P/SÃO PAULO DAS MISSÕES) - ENTR BR-472 (FRONT BRASIL/ARGENTINA) (PORTO XAVIER)"
-	}, {
-		"usr" : "267",
-		"pwd" : "0140",
-		"fase" : "1",
-		"ladoA" : "A. BELTRÃO",
-		"ladoB" : "ENTR BR-287 (SANTIAGO)",
-		"trecho" : "ENTR ERS-533 (P/ CAPAO CIPO) - ENTR BRS-287 (CONTORNO DE SANTIAGO)"
-	}, {
-		"usr" : "268",
-		"pwd" : "1850",
-		"fase" : "3",
-		"ladoA" : "ENTR BR-290(B)",
-		"ladoB" : "ENTR BR-392",
-		"trecho" : "ENTR BRS-290(B) (P/ SAO GABRIEL) - ENTR BRS-392 (P/ CACAPAVA DO SUL)"
-	}, {
-		"usr" : "269",
-		"pwd" : "1350",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-290(A) (P/ROSÁRIO DO SUL)",
-		"ladoB" : "ENTR RS-640 (P/CACEQUI)",
-		"trecho" : "ENTR BRS-158(A) (P/ AZEVEDO SODRE) - ENTR ERS-640 (P/ CACEQUI)"
-	}, {
-		"usr" : "270",
-		"pwd" : "0230",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-473 (SARANDI)",
-		"ladoB" : "CURRAL ALTO",
-		"trecho" : "ENTR RSC-473 (VILA SARANDI) - CURRAL ALTO"
-	}, {
-		"usr" : "271",
-		"pwd" : "0310",
-		"fase" : "1",
-		"ladoA" : "ENTR RS-476 (LAJEADO GRANDE)",
-		"ladoB" : "ENTR RS-110 (VÁRZEA DO CEDRO)",
-		"trecho" : "ENTR ERS-476 (LAJEADO GRANDE) - ENTR ERS-110 (VARZEA DO CEDRO)"
-	}, {
-		"usr" : "272",
-		"pwd" : "0015",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-282(B)/470(A)",
-		"ladoB" : "ENTR SC-455 (P/IBICUÍ)",
-		"trecho" : "ENTR BR-282(B)/470(A) - ENTR SC-455 (P/IBICUÍ)"
-	}, {
-		"usr" : "273",
-		"pwd" : "3010",
-		"fase" : "1",
-		"ladoA" : "DIV SC/RS (RIO PELOTAS)",
-		"ladoB" : "ENTR BR-285(A) (P/VACARIA)",
-		"trecho" : "DIVISA SC/RS (RIO PELOTAS) - ENTR BRS-285(A) (P/ VACARIA)"
-	}, {
-		"usr" : "274",
-		"pwd" : "0110",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-486 (BOM RETIRO)",
-		"ladoB" : "ENTR SC-345(B) (P/URUBICI)",
-		"trecho" : "ENTR BR-486 (BOM RETIRO) - ENTR SC-345(B) (P/URUBICI)"
-	}, {
-		"usr" : "275",
-		"pwd" : "0027",
-		"fase" : "1",
-		"ladoA" : "ENTR SC-473 (P/ANCHIETA)",
-		"ladoB" : "SÃO JOSÉ DO CEDRO",
-		"trecho" : "ENTR SC-473 (P/ANCHIETA) - SÃO JOSÉ DO CEDRO"
-	}, {
-		"usr" : "276",
-		"pwd" : "0290",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-280(A) - ENTR BR-280(B) (VITORINO)"
-	}, {
-		"usr" : "277",
-		"pwd" : "0612",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BA-392 (ANTAS) - ENTR BA-220 (CÍCERO DANTAS)"
-	}, {
-		"usr" : "278",
-		"pwd" : "0190",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-183 - ENTR BR-116(A) (P/LORENA)"
-	}, {
-		"usr" : "279",
-		"pwd" : "2360",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-062 (P/ROSEIRA) - ENTR BR-383(A)/SP-132 (PINDAMONHANGABA)"
-	}, {
-		"usr" : "280",
-		"pwd" : "2470",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-065 (P/IGARATÁ) - ENTR SP-056 (ARUJÁ)"
-	}, {
-		"usr" : "281",
-		"pwd" : "2630",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-116(A) (JUQUIÁ) - ENTR SP-139 (REGISTRO)"
-	}, {
-		"usr" : "282",
-		"pwd" : "0130",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-373(A) (ITAPETININGA) - ENTR BR-373(B)"
-	}, {
-		"usr" : "283",
-		"pwd" : "1077",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO GUAIMBÉ - ENTR SP-333(A)"
-	}, {
-		"usr" : "284",
-		"pwd" : "1010",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-355 - ENTR SP-425"
-	}, {
-		"usr" : "285",
-		"pwd" : "0110",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-255 (ARARAQUARA) - ENTR BR-364(B)"
-	}, {
-		"usr" : "286",
-		"pwd" : "0783",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO RINÓPOLIS - ENTR SP-294 (PARAPUÃ)"
-	}, {
-		"usr" : "287",
-		"pwd" : "0850",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR SP-065 (ATIBAIA) - ENTR SP-023 (MARIPORÃ)"
-	}, {
-		"usr" : "288",
-		"pwd" : "0010",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-222/230(A)/PA-150 (MARABÁ) - ENTR PA-405"
-	}, {
-		"usr" : "289",
-		"pwd" : "0390",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-010(A) (PORTO FRANCO) - ENTR BR-010(B)/230(A)/MA-138 (ESTREITO)"
-	}, {
-		"usr" : "290",
-		"pwd" : "1010",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR MA-012/375 (SÃO RAIMUNDO DAS MANGABEIRAS) - ENTR MA-006(A)"
-	}, {
-		"usr" : "291",
-		"pwd" : "0290",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FIM PISTA DUPLA - GURUPÍ - ENTR BR-242(B)/TO-280"
-	}, {
-		"usr" : "292",
-		"pwd" : "0330",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-020(A)/135(B)/BA-020 - ENTR BR-020(B)"
-	}, {
-		"usr" : "293",
-		"pwd" : "0272",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "INDIANÓPOLIS - VALE DO SONHO"
-	}, {
-		"usr" : "294",
-		"pwd" : "0210",
-		"fase" : "4",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR GO-217 (P/MAIRIPOTABA) - ENTR GO-320 (INDIARA)"
-	}, {
-		"usr" : "295",
-		"pwd" : "0370",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-153 (P/TIBAGI/IPIRANGA)",
-		"ladoB" : "ENTR BR-373(A)/487(A) (CAETANO)",
-		"trecho" : "ENTR BR-153 (P/TIBAGI/IPIRANGA) - ENTR BR-373(A)/487(A) (CAETANO)"
-	}, {
-		"usr" : "296",
-		"pwd" : "0390",
-		"fase" : "1",
-		"ladoA" : "RIO ANHANDUÍ",
-		"ladoB" : "ENTR BR-262(A) (CAMPO GRANDE)",
-		"trecho" : "RIO ANHANDUÍ - ENTR BR-262(A) (CAMPO GRANDE)"
-	}, {
-		"usr" : "297",
-		"pwd" : "0434",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ACESSO ITAJÁ (GO) - ENTR MS-431 (P/SÃO JOÃO DO APORÉ)"
-	}, {
-		"usr" : "298",
-		"pwd" : "0930",
-		"fase" : "3",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "FNM (ENTR PISTA INVERSA) - ENTR BR-116(A)/493/RJ-109"
-	}, {
-		"usr" : "299",
-		"pwd" : "0110",
-		"fase" : "1",
-		"ladoA" : "ENTR SC-418 (P/POMERODE)",
-		"ladoB" : "ENTR BR-477(B) (P/TIMBÓ)",
-		"trecho" : "ENTR SC-418 (P/POMERODE) - ENTR BR-477(B) (P/TIMBÓ)"
-	}, {
-		"usr" : "300",
-		"pwd" : "0110",
-		"fase" : "1",
-		"ladoA" : "ENTR BR-116(B)",
-		"ladoB" : "P/TRES BARRAS",
-		"trecho" : "ENTR BR-116(B) - P/TRES BARRAS"
-	}, {
-		"usr" : "301",
-		"pwd" : "0150",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "DIV PI/BA - ENTR BR-235/BA-161 (REMANSO)"
-	}, {
-		"usr" : "302",
-		"pwd" : "0770",
-		"fase" : "2",
-		"ladoA" : "",
-		"ladoB" : "",
-		"trecho" : "ENTR BR-369(A) (BARBOSA FERRAZ) - ENTR BR-158(A)/369(B) (ANEL VIÁRIO CAMPO MOURÃO)"
-	}
+        {
+            "trecho": "ENTR AC-463/465 (BOM FUTURO) - ENTR BR-317",
+            "pwd": "1590",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "001"
+        },
+        {
+            "trecho": "LUCAS DO RIO VERDE – INÍCIO DA TRAVESSIA URBANA DE SORRISO",
+            "pwd": "0808",
+            "ladoA": "LUCAS DO RIO VERDE",
+            "fase": "1",
+            "ladoB": "INÍCIO DA TRAVESSIA URBANA DE SORRISO",
+            "usr": "002"
+        },
+        {
+            "trecho": "ENTR BR-104(A) - ENTR BR-104(B)",
+            "pwd": "0630",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "003"
+        },
+        {
+            "trecho": "ENTR AL-225(A) - ENTR AL-225(B) (P/PORTO REAL DO COLÉGIO)",
+            "pwd": "0890",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "004"
+        },
+        {
+            "trecho": "ENTR AL-115(A) - ENTR AL-115(B) (PALMEIRA DOS ÍNDIOS)",
+            "pwd": "0950",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "005"
+        },
+        {
+            "trecho": "ENTR BR-101(A) - ENTR BR-101(B) (P/ALAGOINHAS)",
+            "pwd": "0750",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "006"
+        },
+        {
+            "trecho": "ENTR BA-120(A)/262(B) (P/ITAJUÍPE) - ENTR BR-415/BA-120(B) (ITABUNA)",
+            "pwd": "1810",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "007"
+        },
+        {
+            "trecho": "ENTR BR-324(A) - ENTR BR-324(B)/BA-502/503 (FEIRA DE SANTANA)",
+            "pwd": "0330",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "008"
+        },
+        {
+            "trecho": "ENTR BA-643 (PLANALTO) - ENTR BA-641",
+            "pwd": "0934",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "009"
+        },
+        {
+            "trecho": "ENTR BR-242(A) - ENTR BR-330/BA-148 (SEABRA)",
+            "pwd": "0365",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "010"
+        },
+        {
+            "trecho": "JAGUARARI - ENTR BA-220 (SENHOR DO BONFIM)",
+            "pwd": "0300",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "011"
+        },
+        {
+            "trecho": "ENTR CE-187 (P/MARRECOS) - ENTR BR-404/CE-176/187/363 (P/TAUÁ)",
+            "pwd": "0530",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "012"
+        },
+        {
+            "trecho": "ENTR CE-253 (PACAJÚS) - ENTR BR-122(A)/CE-354 (CHORÓZINHO)",
+            "pwd": "0090",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "013"
+        },
+        {
+            "trecho": "ENTR BR-226(B)/CE-275(B) (P/PEREIRO) - ENTR BR-404/434 (ICÓ)",
+            "pwd": "0260",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "014"
+        },
+        {
+            "trecho": "ENTR ES-245(B) - ENTR ES-440",
+            "pwd": "2195",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "015"
+        },
+        {
+            "trecho": "ENTR ES-375(A) (P/PIÚMA) - ENTR ES-375(B) (ICONHA)",
+            "pwd": "2470",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "016"
+        },
+        {
+            "trecho": "ENTR BR-101(B) - ENTR ES-465 (P/DOMINGOS MARTINS)",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "017"
+        },
+        {
+            "trecho": "KM 15,3 - ENTR BR-484 (P/PONTE SOBRE RIO DOCE)",
+            "pwd": "0015",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "018"
+        },
+        {
+            "trecho": "ENTR BR-030(A)/GO-116 (P/FORMOSA) - ENTR GO-346 (P/CABEÇEIRAS)",
+            "pwd": "0110",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "019"
+        },
+        {
+            "trecho": "ENTR BR-457(B)/GO-219 - ENTR GO-020(A)",
+            "pwd": "0090",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "020",
+            "perguntaExtra": true
+        },
+        {
+            "trecho": "ENTR GO-338 (ABADIÂNIA - FIM TRAVESSIA URBANA) - ENTR BR-153(A) (P/ANÁPOLIS)",
+            "pwd": "0112",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "021"
+        },
+        {
+            "trecho": "ENTR GO-353(A) (LINDA VISTA) - ENTR BR-414(A)/GO-151/244/353(B) (PORANGATU)",
+            "pwd": "0340",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "022"
+        },
+        {
+            "trecho": "ENTR BR-154/452(A)/483 - ENTR BR-452(B) (DIV GO/MG) (ITUMBIARA)",
+            "pwd": "0770",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "023"
+        },
+        {
+            "trecho": "ENTR BR-060(B)/158(B)/GO-184(B) (P/ESTREITO) - ENTR GO-050(B)",
+            "pwd": "0510",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "024"
+        },
+        {
+            "trecho": "FIM DA DUPLICAÇÃO - ENTR BR-402/MA-110 (BACABEIRA)",
+            "pwd": "0050",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "025"
+        },
+        {
+            "trecho": "ENTR BR-316(A) (CACHUCHA) - ENTR BR-316(B) (PERITORÓ)",
+            "pwd": "0150",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "026"
+        },
+        {
+            "trecho": "RIO PINDARÉ - ENTR BR-010(A) (AÇAILÂNDIA)",
+            "pwd": "0680",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "027"
+        },
+        {
+            "trecho": "ENTR BR-251(A) (CANACÍ) - ENTR BR-135/251(B)/308/365 (MONTES CLAROS)",
+            "pwd": "0670",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "028"
+        },
+        {
+            "trecho": "ENTR MA-026 (DEZESSETE) - ENTR MA-034(A)/127/349 (CAXIAS)",
+            "pwd": "0370",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "029"
+        },
+        {
+            "trecho": "ENTR MG-410 (P/PONTO DIAMANTE) - ENTR MG-181 (JOÃO PINHEIRO)",
+            "pwd": "0130",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "030"
+        },
+        {
+            "trecho": "ENTR MG-238 (P/SETE LAGOAS) - ENTR MG-432 (P/ESMERALDAS)",
+            "pwd": "0330",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "031"
+        },
+        {
+            "trecho": "ENTR BR-356(A) (P/BELO HORIZONTE) - ENTR BR-356(B)",
+            "pwd": "0040",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "032"
+        },
+        {
+            "trecho": "ENTR BR-499 (SANTOS DUMONT) - ENTR ANT UNIÃO E INDÚSTRIA (B. TRIUNFO)",
+            "pwd": "0570",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "033"
+        },
+        {
+            "trecho": "ENTR BR-365(B)/452(B) - RIO TIJUCO",
+            "pwd": "0250",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "034"
+        },
+        {
+            "trecho": "ENTR BR-342(B)/418/MG-217 (RIB STO ANTÔNIO) (TEÓFILO OTONI) - ACESSO ITAMBACURI",
+            "pwd": "1130",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "035"
+        },
+        {
+            "trecho": "FIM PISTA DUPLA - DOM CORRÊA",
+            "pwd": "1280",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "036"
+        },
+        {
+            "trecho": "ENTR BR-116(A)/120 (LEOPOLDINA) - ENTR BR-116(B)",
+            "pwd": "1430",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "037"
+        },
+        {
+            "trecho": "ENTR BR-259(B) (CURVELO) - ENTR BR-040(A)",
+            "pwd": "0850",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "038"
+        },
+        {
+            "trecho": "ENTR BR-364(A)/262(A) (P/COMENDADOR GOMES) - ENTR BR-364(B)/262(B) (P/FRUTAL)",
+            "pwd": "0290",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "039"
+        },
+        {
+            "trecho": "ENTR MG-187 (P/IBIÁ) - ENTR BR-146 (P/ARAXÁ)",
+            "pwd": "0890",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "040"
+        },
+        {
+            "trecho": "ENTR MG-451 (ITUTINGA) - ENTR BR-354 (LAVRAS)",
+            "pwd": "0230",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "041"
+        },
+        {
+            "trecho": "ACESSO CARMO DO PARANAIBA - ENTR MG-230",
+            "pwd": "0215",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "042"
+        },
+        {
+            "trecho": "PRESIDENTE OLEGÁRIO - ENTR BR-146(A)/365 (PATOS DE MINAS)",
+            "pwd": "0100",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "043"
+        },
+        {
+            "trecho": "ENTR BR-153 - ENTR BR-154(A)",
+            "pwd": "0370",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "044"
+        },
+        {
+            "trecho": "ENTR MG-425 (CORONEL FABRICIANO) - ENTR MG-320 (P/JAGUARAÇU)",
+            "pwd": "0230",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "045"
+        },
+        {
+            "trecho": "ENTR BR-262(B) (BETIM) - ENTR MG-155",
+            "pwd": "0490",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "046"
+        },
+        {
+            "trecho": "ENTR MG-458 (CAREAÇU) - ENTR BR-459 (P/POUSO ALEGRE)",
+            "pwd": "0750",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "047"
+        },
+        {
+            "trecho": "ACESSO COLÂNIA AGRICOLA SEXTA LINHA - FINAL PISTA DUPLA (VILA VARGAS)",
+            "pwd": "0324",
+            "ladoA": "VILA SÃO PEDRO",
+            "fase": "1",
+            "ladoB": "ACESSO COLÔNIA AGRÍCOLA SEXTA LINHA",
+            "usr": "048"
+        },
+        {
+            "trecho": "ENTR MS-441(B) (P/BANDEIRANTES) - ENTR MS-244 (P/BONFIM)",
+            "pwd": "0450",
+            "ladoA": "ENTR MS-441(B) (P/BANDEIRANTES)",
+            "fase": "1",
+            "ladoB": "ENTR MS-244 (P/BONFIM)",
+            "usr": "049"
+        },
+        {
+            "trecho": "ENTR BR-158(B)/MS-395 (P/BRASILÂNDIA) - ENTR MS-453/459 (P/ARAPUÁ)",
+            "pwd": "1290",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "050"
+        },
+        {
+            "trecho": "FIM TRAV RIO PARANÁ (PONTE M. JOPPERT) - INCÍO DA PISTA DUPLA",
+            "pwd": "0880",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "051"
+        },
+        {
+            "trecho": "ENTR BR-070(B) - ENTR MT-170 (CARAMÚJO)",
+            "pwd": "0030",
+            "ladoA": "ENTR BR-070(B)",
+            "fase": "1",
+            "ladoB": "ENTR MT-170 (CARAMÚJO)",
+            "usr": "052"
+        },
+        {
+            "trecho": "ENTR MT-270(B) - ENTR MT-469(A)",
+            "pwd": "0592",
+            "ladoA": "ENTR MT-270(B)",
+            "fase": "1",
+            "ladoB": "ENTR MT-469(A)",
+            "usr": "053"
+        },
+        {
+            "trecho": "JANGADA - ENTR MT-246(B)",
+            "pwd": "0840",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "054"
+        },
+        {
+            "trecho": "ENTR BR-222(B)/PA-332 (DOM ELISEU) - ENTR PA-125/263 (GURUPIZINHO)",
+            "pwd": "0510",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "055"
+        },
+        {
+            "trecho": "ENTR PB-018 (P/CONDE) - ENTR PB-034",
+            "pwd": "0335",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "056"
+        },
+        {
+            "trecho": "ENTR PB-100 (P/GALANTE) - ENTR BR-104(A)/408(B)/PB-095 (CAMPINA GRANDE)",
+            "pwd": "0010",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "057"
+        },
+        {
+            "trecho": "ENTR PE-063 (P/AMARAJI) - ENTR PE-064/085 (RIBEIRÃO)",
+            "pwd": "0510",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "058"
+        },
+        {
+            "trecho": "ENTR PE-460 - ENTR BR-316/428 (P/CABROBÓ)",
+            "pwd": "0460",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "059"
+        },
+        {
+            "trecho": "ENTR PE-103 (P/BONITO) - ENTR BR-104/423(A) (CARUARÚ)",
+            "pwd": "0140",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "060"
+        },
+        {
+            "trecho": "ENTR PE-450 (P/VERDEJANTE) - ENTR BR-116/361 (SALGUEIRO)",
+            "pwd": "0420",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "061"
+        },
+        {
+            "trecho": "ENTR BR-428(A) (LAGOA GRANDE) - ENTR BR-235/407/423/428(B) (DIV PE/BA) (PETROLINA/JUAZEIRO)",
+            "pwd": "0370",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "062"
+        },
+        {
+            "trecho": "ENTR BR-407(B)/PI-238/245(B) (PICOS) - ENTR PI-242",
+            "pwd": "0830",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "063"
+        },
+        {
+            "trecho": "ENTR BR-404(B)/407(B) - INÍCIO PISTA DUPLA (CAPITÃO CAMPOS)",
+            "pwd": "0130",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "064"
+        },
+        {
+            "trecho": "DEMERVAL LOBÃO - ENTR PI-223 (MONSENHOR GIL)",
+            "pwd": "0420",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "065"
+        },
+        {
+            "trecho": "DIV SP/PR (CAB NORTE PONTE S/ RIO PARDINHO) - INÍCIO VARIANTE DO ALPINO(PISTA DIREITA)",
+            "pwd": "2710",
+            "ladoA": "DIV SP/PR (CAB NORTE PONTE S/ RIO PARDINHO)",
+            "fase": "1",
+            "ladoB": "INÍCIO VARIANTE DO ALPINO(PISTA DIREITA)",
+            "usr": "066"
+        },
+        {
+            "trecho": "ENTR PR-427 (CAMPO DO TENENTE) - DIV PR/SC (RIO NEGRO/MAFRA)",
+            "pwd": "2810",
+            "ladoA": "ENTR PR-427 (CAMPO DO TENENTE)",
+            "fase": "1",
+            "ladoB": "DIV PR/SC (RIO NEGRO/MAFRA)",
+            "usr": "067"
+        },
+        {
+            "trecho": "ACESSO GUARAPUAVA - ENTR BR-466 (P/GUARAPUAVA)",
+            "pwd": "0205",
+            "ladoA": "ACESSO GUARAPUAVA",
+            "fase": "1",
+            "ladoB": "ENTR BR-466 (P/GUARAPUAVA)",
+            "usr": "068"
+        },
+        {
+            "trecho": "ACESSO OESTE CASCAVEL - ENTR BR-163/PR-182 (P/CAPITÃO LEÔNIDAS MARQUES)",
+            "pwd": "0310",
+            "ladoA": "ENTR PR-182 (P/CAPITÃO LEÔNIDAS MARQUES)",
+            "fase": "1",
+            "ladoB": "ENTR BR-163",
+            "usr": "069"
+        },
+        {
+            "trecho": "FIM PISTA DUPLA - ENTR PR-431 (P/JACAREZINHO)",
+            "pwd": "0480",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "070"
+        },
+        {
+            "trecho": "ENTR PR-281 (P/TIJUCAS DO SUL) - DIV PR/SC (ENTR BR-101)",
+            "pwd": "0490",
+            "ladoA": "ENTR PR-281 (P/TIJUCAS DO SUL)",
+            "fase": "1",
+            "ladoB": "DIV PR/SC (ENTR BR-101)",
+            "usr": "071"
+        },
+        {
+            "trecho": "ENTR PR-510/511 (P/CONTENDA) - ENTR PR-428 (LAPA)",
+            "pwd": "0095",
+            "ladoA": "ENTR PR-510/511 (P/CONTENDA)",
+            "fase": "1",
+            "ladoB": "ENTR PR-428 (LAPA)",
+            "usr": "072"
+        },
+        {
+            "trecho": "ENTR BR-393(B) (TREVO MOURA BRASIL) - ENTR BR-492(A) (TREVO P/ AREAL)",
+            "pwd": "0730",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "073"
+        },
+        {
+            "trecho": "ENTR RJ-162 (P/RIO DOURADO) - ENTR BR-120 (CASIMIRO DE ABREU)",
+            "pwd": "2930",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "074"
+        },
+        {
+            "trecho": "ENTR RJ-159 (FLORIANO) - ENTR RJ-161 (RESENDE)",
+            "pwd": "2130",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "075"
+        },
+        {
+            "trecho": "FIM DA PISTA DUPLA (ITAPERUNA) - ENTR BR-393/484(B)/RJ-186",
+            "pwd": "0310",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "076"
+        },
+        {
+            "trecho": "SAPUCAIA - ENTR BR-040(A)",
+            "pwd": "0330",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "077"
+        },
+        {
+            "trecho": "ACESSO À LAGOA DO BONFIM - ENTR RN-315/002(A) (SÃO JOSÉ DE MIPIBÚ/NÍSIA FLORESTA)",
+            "pwd": "0167",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "078"
+        },
+        {
+            "trecho": "ENTR RN-203 (P/SÃO PEDRO) - ACESSO BOM JESUS",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "079"
+        },
+        {
+            "trecho": "ENTR BR-104(B) (LAJES) - ENTR RN-023 (CAIÇARA DO RIO DO VENTO)",
+            "pwd": "0270",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "080"
+        },
+        {
+            "trecho": "ENTR RN-233 (P/CARAÚBAS) - ENTR RN-031/177(A)",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "081"
+        },
+        {
+            "trecho": "ENTR BR-429(B) (JI-PARANÁ) - ENTR RO-473 (P/URUPÁ)",
+            "pwd": "1210",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "082"
+        },
+        {
+            "trecho": "ENTR ERS-703 (GUAIBA) - ENTR ERS-709 (P/ BARRA DO RIBEIRO)",
+            "pwd": "3275",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "083"
+        },
+        {
+            "trecho": "ENTR RSC-472 (P/ PALMITINHO) - ENTR ERS-585/587 (SEBERI)",
+            "pwd": "1150",
+            "ladoA": "ENTR BR-472 (P/PALMITINHO)",
+            "fase": "1",
+            "ladoB": "ENTR RS-585/587 (SEBERI)",
+            "usr": "084"
+        },
+        {
+            "trecho": "ENTR ERS-348 (VAL DE SERRA) - ENTR ERS-509 (P/ SANTA MARIA)",
+            "pwd": "1310",
+            "ladoA": "ENTR RS-348 (VAL DE SERRA)",
+            "fase": "1",
+            "ladoB": "ENTR RS-509 (P/SANTA MARIA)",
+            "usr": "085"
+        },
+        {
+            "trecho": "ACESSO A MINAS DO LEAO - ENTR BRS-471 (PANTANO GRANDE)",
+            "pwd": "0180",
+            "ladoA": "ACESSO A MINAS DO LEÃO",
+            "fase": "1",
+            "ladoB": "ENTR BR-471 (PANTANO GRANDE)",
+            "usr": "086"
+        },
+        {
+            "trecho": "ENTR ERS-705 (GERIBA) - ENTR BRS-153(B) (P/ BAGE)",
+            "pwd": "1840",
+            "ladoA": "ENTR RS-705 (P/GERIBA)",
+            "fase": "1",
+            "ladoB": "ENTR BR-290(B)",
+            "usr": "087"
+        },
+        {
+            "trecho": "ENTR BRS-293(A) (P/ QUARAI) - ENTR BRS-472(A) (P/ BARRA DO QUARAI)",
+            "pwd": "0410",
+            "ladoA": "ENTR BR-293(A)",
+            "fase": "1",
+            "ladoB": "ENTR BR-472(A)",
+            "usr": "088"
+        },
+        {
+            "trecho": "ENTR RSC-473 (P/ BAGE) - ENTR ERS-630/634 (P/ DOM PEDRITO)",
+            "pwd": "0130",
+            "ladoA": "ENTR BR-473 (P/BAGÉ)",
+            "fase": "1",
+            "ladoB": "ENTR RS-630 (P/DOM PEDRITO)",
+            "usr": "089"
+        },
+        {
+            "trecho": "ENTR BRS-471(A) (QUINTA) - ACESSO SUL A PELOTAS",
+            "pwd": "0070",
+            "ladoA": "ENTR BR-471(A) (QUINTA)",
+            "fase": "1",
+            "ladoB": "ACESSO PELOTAS",
+            "usr": "090"
+        },
+        {
+            "trecho": "ACESSO LESTE A ITAQUI - ENTR BR-290(A)/293(A) (URUGUAIANA)",
+            "pwd": "0210",
+            "ladoA": "ACESSO LESTE A  ITAQUI",
+            "fase": "1",
+            "ladoB": "ENTR BR-290(A)/293(A) (URUGUAIANA)",
+            "usr": "091"
+        },
+        {
+            "trecho": "GARUVA - ENTR SC-430 (PIRABEIRABA)",
+            "pwd": "3830",
+            "ladoA": "GARUVA",
+            "fase": "1",
+            "ladoB": "ENTR SC-430 (PIRABEIRABA)",
+            "usr": "092"
+        },
+        {
+            "trecho": "BALNEÁRIO DE CAMBORIÚ - P/PORTO BELO",
+            "pwd": "4010",
+            "ladoA": "BALNEÁRIO DE CAMBORIÚ",
+            "fase": "1",
+            "ladoB": "P/PORTO BELO",
+            "usr": "093"
+        },
+        {
+            "trecho": "PONTE SOBRE O RIO DA MADRE - PONTE SOBRE O RIO ARAÇATUBA",
+            "pwd": "4125",
+            "ladoA": "PONTE SOBRE O RIO DA MADRE",
+            "fase": "1",
+            "ladoB": "PONTE SOBRE O RIO ARAÇATUBA",
+            "usr": "094"
+        },
+        {
+            "trecho": "ENTR BR-285(A)/SC-449 (ARARANGUÁ) - ENTR BR-285(B)/SC-285 (P/ERMO)",
+            "pwd": "4240",
+            "ladoA": "ENTR BR-285(A) (ARARANGUÁ)",
+            "fase": "1",
+            "ladoB": "ENTR BR-285(B)/SC-285 (SANGA DA TOCA)",
+            "usr": "095"
+        },
+        {
+            "trecho": "ENTR SC-352(B) (P/TAIÓ) - SÃO CRISTOVÃO DO SUL",
+            "pwd": "2910",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "096"
+        },
+        {
+            "trecho": "ENTR SC-463 (P/JABORÁ) - ENTR BR-283 (P/CONCÓRDIA)",
+            "pwd": "1590",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "097"
+        },
+        {
+            "trecho": "ENTR SC-114(A) (ÍNDIOS) - ENTR SC-114(B) (P/PAINEL)",
+            "pwd": "0020",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "098"
+        },
+        {
+            "trecho": "ENTR SC-157(B) (P/MODELO) - ENTR BR-158(A) (P/CUNHA PORÃ)",
+            "pwd": "0377",
+            "ladoA": "ENTR SC-157(B) (P/MODELO)",
+            "fase": "1",
+            "ladoB": "ENTR BR-158(A) (P/CUNHA PORÃ)",
+            "usr": "099"
+        },
+        {
+            "trecho": "ENTR SC-114(B) (P/OTACÍLIO COSTA) - ENTR BR-116",
+            "pwd": "0190",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "100"
+        },
+        {
+            "trecho": "ENTR SE-464 (P/SÃO CRISTOVÃO) - ENTR BR-349(B)/SE-265 (ITAPORANGA D`AJUDA)",
+            "pwd": "0040",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "101"
+        },
+        {
+            "trecho": "ENTR SE-160 - ENTR SE-170(A)",
+            "pwd": "0060",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "102"
+        },
+        {
+            "trecho": "ENTR SP-070 - ENTR SP-103 (CAÇAPAVA)",
+            "pwd": "2410",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "103"
+        },
+        {
+            "trecho": "ENTR SP-228 - ENTR SP-057 (P/SIDERÚRGICA)",
+            "pwd": "2570",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "104"
+        },
+        {
+            "trecho": "ACESSO GUAIÇARA - ENTR BR-154/267 (LINS)",
+            "pwd": "1043",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "105"
+        },
+        {
+            "trecho": "DIV MG/SP - ENTR SP-063 (P/BRAGANÇA PAULISTA)",
+            "pwd": "0810",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "106"
+        },
+        {
+            "trecho": "ENTR TO-420 - INICIO PISTA DUPLA ARAGUAINA",
+            "pwd": "0105",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "107"
+        },
+        {
+            "trecho": "ENTR TO-342(B) (MIRANORTE) - ENTR TO-348 (BARROLÂNDIA)",
+            "pwd": "0205",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "108"
+        },
+        {
+            "trecho": "ENTR TO-483 (FIGUEIRÓPOLIS) - ENTR TO-296(A)/373 (ALVORADA)",
+            "pwd": "0300",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "109"
+        },
+        {
+            "trecho": "ENTR PI-260 (P/BARREIRAS DO PIAUÍ) - ENTR PI-255 (CORRENTE)",
+            "pwd": "0495",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "110"
+        },
+        {
+            "trecho": "FIM PISTA DUPLA - ENTR GO-156(B)",
+            "pwd": "0150",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "111"
+        },
+        {
+            "trecho": "ENTR PR-508 (P/MATINHOS) - ENTR BR-101/PR-408 (P/MORRETES)",
+            "pwd": "0025",
+            "ladoA": "ENTR PR-508 (P/MATINHOS)",
+            "fase": "1",
+            "ladoB": "ENTR BR-101/PR-408 (P/MORRETES)",
+            "usr": "112"
+        },
+        {
+            "trecho": "ACESSO SANTA - ENTR BR-376(B)/PR-428 (SÃO LUIS PURUNÃ)",
+            "pwd": "0075",
+            "ladoA": "ACESSO SANTA",
+            "fase": "1",
+            "ladoB": "ENTR BR-376(B)/PR-428 (SÃO LUIS PURUNÃ)",
+            "usr": "113"
+        },
+        {
+            "trecho": "ENTR MS-375 (ZUZU) - ENTR BR-163(A) (NOVA ALVORADA)",
+            "pwd": "0950",
+            "ladoA": "ENTR MS-375 (ZUZU)",
+            "fase": "1",
+            "ladoB": "ENTR BR-163(A) (NOVA ALVORADA DO SUL)",
+            "usr": "114"
+        },
+        {
+            "trecho": "ENTR MS-434 (RAIMUNDO) - ENTR BR-483/497 (INÍCIO DA PISTA DUPLA)",
+            "pwd": "0440",
+            "ladoA": "ENTR MS-434 (RAIMUNDO)",
+            "fase": "1",
+            "ladoB": "ENTR BR-483/497 (INÍCIO DA PISTA DUPLA)",
+            "usr": "115"
+        },
+        {
+            "trecho": "ENTR SP-148 - ENTR SP-160 (ENTR PISTA INVERSA (A))",
+            "pwd": "0810",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "116"
+        },
+        {
+            "trecho": "ENTR BR-493(A) (P/MAGÉ) - ENTR RJ-107 (IMBARIÊ)",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "117"
+        },
+        {
+            "trecho": "ENTR BR-101 - ENTR SC-108(A) (NEUDOR)",
+            "pwd": "0040",
+            "ladoA": "ENTR BR-101",
+            "fase": "1",
+            "ladoB": "ENTR SC-108(A) (NEUDOR)",
+            "usr": "118"
+        },
+        {
+            "trecho": "ENTR BR-153(A)/PR-446 - ENTR PR-170",
+            "pwd": "1490",
+            "ladoA": "ENTR BR-280(A)/PR-446",
+            "fase": "1",
+            "ladoB": "ENTR PR-170",
+            "usr": "119"
+        },
+        {
+            "trecho": "ENTR BR-262(B) - ENTR BR-050(B)",
+            "pwd": "0060",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "120"
+        },
+        {
+            "trecho": "ENTR MT-423 - ITAUBA",
+            "pwd": "0834",
+            "ladoA": "ENTR MT-423",
+            "fase": "1",
+            "ladoB": "ITAUBA",
+            "usr": "121"
+        },
+        {
+            "trecho": "MATUPÁ - GUARANTÃ DO NORTE",
+            "pwd": "0852",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "122"
+        },
+        {
+            "trecho": "ENTR AL-215(B) - ENTR AL-220(A) (P/BARRA DE SÃO MIGUEL)",
+            "pwd": "0790",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "123"
+        },
+        {
+            "trecho": "ENTR PE-270 (P/BUÍQUE) - ENTR BR-110 (CRUZEIRO DO NORDESTE)",
+            "pwd": "0260",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "124"
+        },
+        {
+            "trecho": "ENTR PE-218 (P/BOM CONSELHO) - ENTR PE-187 (P/PALMEIRINA)",
+            "pwd": "0090",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "125"
+        },
+        {
+            "trecho": "ENTR BR-420(B) (P/LAJE) - ENTR BA-542 (P/GUERÉM)",
+            "pwd": "1695",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "126"
+        },
+        {
+            "trecho": "ENTR BA-493 (ITATIM) - ENTR BA-245",
+            "pwd": "0790",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "127"
+        },
+        {
+            "trecho": "MAIRI - ENTR BR-349",
+            "pwd": "0334",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "128"
+        },
+        {
+            "trecho": "GAVIÃO - ENTR BR-349 (NOVA FÁTIMA)",
+            "pwd": "0270",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "129"
+        },
+        {
+            "trecho": "DIV BA/MG - ENTR BR-251(A) (P/SALINAS)",
+            "pwd": "1010",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "130"
+        },
+        {
+            "trecho": "ENTR BA-937 (P/PAJEÚ DO VENTO) - ENTR BR-122(B)/430/BA-569 (CAETITÉ)",
+            "pwd": "0530",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "131"
+        },
+        {
+            "trecho": "ENTR BA-131 (P/CAÉM) - ENTR BA-417",
+            "pwd": "0245",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "132"
+        },
+        {
+            "trecho": "ENTR BR-235 - ENTR BA-220 (EUCLIDES DA CUNHA)",
+            "pwd": "0550",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "133"
+        },
+        {
+            "trecho": "ENTR CE-373 (CARMELÓPOLIS) - ENTR CE-187/292 (CAMPOS SALES)",
+            "pwd": "0690",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "134"
+        },
+        {
+            "trecho": "ENTR CE-266 (SUCESSO) - ENTR BR-226/404 (CRATEÚS)",
+            "pwd": "0190",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "135"
+        },
+        {
+            "trecho": "ENTR CE-060(B) (MINEIROLÂNDIA) - ENTR CE-168 (PEDRA BRANCA)",
+            "pwd": "0610",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "136"
+        },
+        {
+            "trecho": "ENTR CE-154 (PIRANGI) - ENTR CE-060(A)/265 (QUIXADÁ)",
+            "pwd": "0050",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "137"
+        },
+        {
+            "trecho": "ENTR CE-456 (P/TARGINOS) - ENTR CE-257 (CANINDÉ)",
+            "pwd": "0590",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "138"
+        },
+        {
+            "trecho": "ENTR CE-341 (CROATÁ) - ENTR CE-162 (SÃO LUÍS DO CURU)",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "139"
+        },
+        {
+            "trecho": "ENTR CE-263 (P/JAGUARUANA) - RUSSAS",
+            "pwd": "0160",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "140"
+        },
+        {
+            "trecho": "ENTR BR-381 (SÃO MATEUS) - ENTR ES-430 (P/JAGUARÉ)",
+            "pwd": "2130",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "141"
+        },
+        {
+            "trecho": "ENTR ES-137 - ENTR ES-130 (P/NOVA VENÉCIA)",
+            "pwd": "0300",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "142"
+        },
+        {
+            "trecho": "ENTR BA-290 (TEIXEIRA DE FREITAS) - ENTR BR-418 (P/POSTO DA MATA)",
+            "pwd": "1990",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "143"
+        },
+        {
+            "trecho": "MORRO GRANDE (ACESSO IV C. ITAPEMIRIM) - ENTR ES-166 (COUTINHO)",
+            "pwd": "0030",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "144"
+        },
+        {
+            "trecho": "ENTR MG-422 (RESPLENDOR) - ENTR BR-458 (CONSELHEIRO PENA)",
+            "pwd": "0130",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "145"
+        },
+        {
+            "trecho": "ENTR GO-230 - ENTR GO-237",
+            "pwd": "0125",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "146"
+        },
+        {
+            "trecho": "ENTR GO-114 (P/FLORES DE GOIÁS) - SANTA MARIA",
+            "pwd": "0160",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "147"
+        },
+        {
+            "trecho": "DIV MG/GO - ENTR GO-010(A)",
+            "pwd": "0470",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "148"
+        },
+        {
+            "trecho": "ENTR GO-010 (P/LUZIÂNIA) - ENTR BR-050(B)/354/457/GO-309 (CRISTALINA)",
+            "pwd": "0050",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "149"
+        },
+        {
+            "trecho": "URUTAÍ - ENTR BR-490/GO-213/307 (IPAMERI)",
+            "pwd": "0080",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "150"
+        },
+        {
+            "trecho": "ENTR GO-080(B) (P/SAO FRANCISCO DE GOIÁS) - ENTR GO-431 (P/PIRENOPOLIS)",
+            "pwd": "0550",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "151"
+        },
+        {
+            "trecho": "ENTR BR-153(A)/GO-342(B) - ENTR BR-153(B)/GO-237 (URUAÇÚ)",
+            "pwd": "0190",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "152"
+        },
+        {
+            "trecho": "ENTR GO-210(B) (P/PANAMÁ) - ENTR BR-154/452(A)/483",
+            "pwd": "0750",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "153"
+        },
+        {
+            "trecho": "ENTR GO-040 - ENTR BR-154(A)/483(A)/GO-206(A) (P/CACHOEIRA DOURADA)",
+            "pwd": "0050",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "154"
+        },
+        {
+            "trecho": "ENTR GO-194 (P/PORTELÂNDIA) - INÍCIO PISTA DUPLA",
+            "pwd": "0570",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "155"
+        },
+        {
+            "trecho": "ENTR GO-174(B) - ENTR GO-206 (P/CAÇU)",
+            "pwd": "0440",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "156"
+        },
+        {
+            "trecho": "ENTR MA-006(A) (COCALINHO) - ENTR MA-216 (BOM JARDIM)",
+            "pwd": "0280",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "157"
+        },
+        {
+            "trecho": "ENTR MA-259 (P/TUNTUM) - ENTR MA-012/272 (BARRA DO CORDA)",
+            "pwd": "0860",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "158"
+        },
+        {
+            "trecho": "ENTR BR-222(B) (ESTACA ZERO) - ENTR MA-240 (PIO XII)",
+            "pwd": "0300",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "159"
+        },
+        {
+            "trecho": "BOM JESUS DO TOCANTINS - RIO JACUNDÁ (R MÃE MARIA)",
+            "pwd": "0730",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "160"
+        },
+        {
+            "trecho": "ENTR BR-122/251/365 (MONTES CLAROS) - ENTR BR-451 (BOCAIÚVA)",
+            "pwd": "0750",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "161"
+        },
+        {
+            "trecho": "ENTR BR-342/MG-404 (SALINAS) - RIO VACARIA",
+            "pwd": "0240",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "162"
+        },
+        {
+            "trecho": "ENTR MA-132/270 (COLINAS) - ENTR MA-134 (PEIXE)",
+            "pwd": "0290",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "163"
+        },
+        {
+            "trecho": "ENTR BR-040(B) - ENTR MG-155 (SÃO BRÁS DO SUAÇUÍ)",
+            "pwd": "0030",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "164"
+        },
+        {
+            "trecho": "ENTR MG-434 - ENTR MG-435 (P/CAETÉ)",
+            "pwd": "0335",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "165"
+        },
+        {
+            "trecho": "ENTR MG-275 (P/CARANDAÍ) - ACESSO ALTO DOCE (INÍCIO PISTA DUPLA)",
+            "pwd": "0510",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "166"
+        },
+        {
+            "trecho": "ENTR BR-040(B) - ENTR MG-135",
+            "pwd": "0130",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "167"
+        },
+        {
+            "trecho": "ENTR MG-190 (RIO BAGAGEM) - ACESSO INDIANÓPOLIS",
+            "pwd": "0250",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "168"
+        },
+        {
+            "trecho": "ENTR BR-352(B)/GO-210(B)/330 (CATALÃO) - ENTR GO-402",
+            "pwd": "0152",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "169"
+        },
+        {
+            "trecho": "ENTR BR-050/365/452/455 (UBERLÂNDIA) - ENTR BR-153/464 (PRATA)",
+            "pwd": "0010",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "170"
+        },
+        {
+            "trecho": "ENTR BR-050(B)/455/497 (UBERLÂNDIA) - ENTR BR-452(B)",
+            "pwd": "0310",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "171"
+        },
+        {
+            "trecho": "ENTR MG-190 (P/NOVA PONTE) - ACESSO SANTA JULIANA",
+            "pwd": "0230",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "172"
+        },
+        {
+            "trecho": "ACESSO CARLOS CHAGAS - ENTR MG-412",
+            "pwd": "0110",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "173"
+        },
+        {
+            "trecho": "ENTR BR-451(B)/MG-416 (P/SÃO PEDRO DO SUAÇUÍ) - ENTR MG-117 (SÃO JOÃO EVANGELISTA)",
+            "pwd": "0110",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "174"
+        },
+        {
+            "trecho": "TREVO DE ACESSO SÃO JOÃO DO MANHUAÇU - ENTR MG-265 (P/DIVINO)",
+            "pwd": "1310",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "175"
+        },
+        {
+            "trecho": "ENTR ES-185(B) (P/IÚNA) - DIV ES/MG",
+            "pwd": "0210",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "176"
+        },
+        {
+            "trecho": "ACESSO ITANHOMI - ENTR BR-458(A) (TURUAÇÚ)",
+            "pwd": "1195",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "177"
+        },
+        {
+            "trecho": "ENTR BR-116(B) - ENTR MG-126 (BICAS)",
+            "pwd": "0030",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "178"
+        },
+        {
+            "trecho": "ENTR BR-265/356 (MURIAÉ) - ENTR MG-285 (LARANJAL)",
+            "pwd": "1370",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "179"
+        },
+        {
+            "trecho": "PONTE S/ RIO PARÁ - ENTR MG-423(A) (PITANGUI)",
+            "pwd": "0310",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "180"
+        },
+        {
+            "trecho": "ACESSO MORADA NOVA DE MINAS - ACESSO SÃO JOSÉ DO BURITI",
+            "pwd": "0195",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "181"
+        },
+        {
+            "trecho": "ENTR BR-367(B) (GOUVEIA) - ACESSO NOSSA SENHORA DA GLÓRIA",
+            "pwd": "0330",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "182"
+        },
+        {
+            "trecho": "ENTR MG-255 - ENTR BR-262(B) (DIV MG/SP)",
+            "pwd": "0910",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "183"
+        },
+        {
+            "trecho": "ENTR BR-462(B) - ENTR BR-262",
+            "pwd": "0250",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "184",
+            "perguntaExtra": true
+        },
+        {
+            "trecho": "ENTR BR-452 (P/UBERLÂNDIA) - ENTR BR-462 (PERDIZES)",
+            "pwd": "0930",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "185",
+            "perguntaExtra": true
+        },
+        {
+            "trecho": "ENTR BR-265(B) - CAMPOS GERAIS",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "186"
+        },
+        {
+            "trecho": "ENTR MG-354(B) - ENTR BR-265(A)",
+            "pwd": "0030",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "187"
+        },
+        {
+            "trecho": "ENTR MG-135/338 (BARBACENA) - ACESSO TIRADENTES",
+            "pwd": "0190",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "188"
+        },
+        {
+            "trecho": "ENTR BR-265 (LAVRAS) - ENTR MG-167(A) (P/TRÊS CORAÇÕES)",
+            "pwd": "0670",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "189"
+        },
+        {
+            "trecho": "ACESSO FORMIGA - ENTR MG-164 (CANDEIAS)",
+            "pwd": "0350",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "190"
+        },
+        {
+            "trecho": "ENTR MG-270 (CARMÓPOLIS DE MINAS) - ENTR BR-494(A) (P/OLIVEIRA)",
+            "pwd": "0590",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "191"
+        },
+        {
+            "trecho": "ENTR BR-354(A) (P/BAMBUÍ) - ENTR BR-354(B)",
+            "pwd": "0230",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "192"
+        },
+        {
+            "trecho": "ACESSO GUIMARÂNIA - ENTR MG-188",
+            "pwd": "0205",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "193"
+        },
+        {
+            "trecho": "ENTR MG-410 - PRESIDENTE OLEGÁRIO",
+            "pwd": "0090",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "194"
+        },
+        {
+            "trecho": "ENTR MG-060 (P/SÃO GONÇALO DO ABAETÉ) - ACESSO GALENA",
+            "pwd": "0150",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "195"
+        },
+        {
+            "trecho": "ENTR BR-154(B)/461/464 (ITUIUTABA) - ACESSO GURINHATÃ",
+            "pwd": "0410",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "196"
+        },
+        {
+            "trecho": "ENTR BR-365 (P/MONTE ALEGRE DE MINAS) - ENTR BR-464/497 (P/PRATA)",
+            "pwd": "0830",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "197"
+        },
+        {
+            "trecho": "ENTR MG-229 (P/SENHORA DO PORTO) - ENTR MG-232 (P/CARMESIA)",
+            "pwd": "0170",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "198"
+        },
+        {
+            "trecho": "ENTR MG-320 (P/SÃO JOSÉ DO GOIABAL) - ENTR BR-120 (VARGEM LINDA)",
+            "pwd": "0370",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "199"
+        },
+        {
+            "trecho": "ACESSO À GOV. VALADARES - PERIQUITO",
+            "pwd": "0170",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "200"
+        },
+        {
+            "trecho": "ACESSO FLORESTAL - ENTR BR-352 (PARÁ DE MINAS)",
+            "pwd": "0685",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "201"
+        },
+        {
+            "trecho": "ENTR MG-050(B) (P/DIVINOPÓLIS) - ENTR MG-260 (P/CLÁUDIO)",
+            "pwd": "0050",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "202"
+        },
+        {
+            "trecho": "ACESSO CONCEIÇÃO DO RIO VERDE - ENTR BR-460",
+            "pwd": "0270",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "203"
+        },
+        {
+            "trecho": "ACESSO SANTA RITA DAS CALDAS - ENTR MG-179 (POUSO ALEGRE)",
+            "pwd": "0023",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "204"
+        },
+        {
+            "trecho": "ENTR BR-369 (BOTELHOS) - ENTR BR-267(A) (P/BANDEIRA DO SUL)",
+            "pwd": "0270",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "205"
+        },
+        {
+            "trecho": "ENTR BR-487(A) - ACESSO NAVIRAÍ I",
+            "pwd": "0212",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "206"
+        },
+        {
+            "trecho": "ENTR BR-267(A) - INÍCIO DUPLICAÇÃO",
+            "pwd": "0612",
+            "ladoA": "ENTR BR-267(A)",
+            "fase": "1",
+            "ladoB": "INÍCIO DUPLICAÇÃO",
+            "usr": "207"
+        },
+        {
+            "trecho": "ENTR MS-141 (IVINHEMA) - VILA AMANDINA",
+            "pwd": "0090",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "208"
+        },
+        {
+            "trecho": "ENTR MS-339/446/448 (MIRANDA) - ENTR MS-185/243 (GUAICURUS)",
+            "pwd": "1390",
+            "ladoA": "ENTR MS-339/446/448 (MIRANDA)",
+            "fase": "1",
+            "ladoB": "ENTR MS-185/243 (GUAICURUS)",
+            "usr": "209"
+        },
+        {
+            "trecho": "BURITIZINHO - ENTR MS-223(A) (SILVOLÂNDIA)",
+            "pwd": "0058",
+            "ladoA": "BURITIZINHO",
+            "fase": "1",
+            "ladoB": "ENTR MS-223(A) (SILVOLÂNDIA)",
+            "usr": "210"
+        },
+        {
+            "trecho": "ENTR MS-316 (PARAÍSO) - ENTR MS-324(A)",
+            "pwd": "0390",
+            "ladoA": "ENTR MS-316 (PARAÍSO DAS ÁGUAS)",
+            "fase": "1",
+            "ladoB": "ENTR MS-324(A)",
+            "usr": "211"
+        },
+        {
+            "trecho": "ENTR BR-158(B) (P/TAMBOARA) - ACESSO ALTO PARANÁ/MARISTELA",
+            "pwd": "0180",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "212"
+        },
+        {
+            "trecho": "ENTR SP-425 (PRESIDENTE PRUDENTE) - ENTR SP-425",
+            "pwd": "0050",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "213"
+        },
+        {
+            "trecho": "ENTR MT-373 - ENTR MT-130(A) (PRIMAVERA DO LESTE)",
+            "pwd": "0330",
+            "ladoA": "ENTR MT-373",
+            "fase": "1",
+            "ladoB": "ENTR MT-130(A) (PRIMAVERA DO LESTE)",
+            "usr": "214"
+        },
+        {
+            "trecho": "FIM VARIANTE II SERRA DE SÃO VICENTE - ACESSO DISTRITO INDUSTRIAL",
+            "pwd": "0765",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "215"
+        },
+        {
+            "trecho": "ENTR BR-010(B) (P/SANTA MARIA DO PARÁ) - ENTR PA-324 (P/SALINÓPOLIS)",
+            "pwd": "0150",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "216"
+        },
+        {
+            "trecho": "ENTR PB-177 (SOLEDADE) - ENTR PB-195 (JUAZEIRINHO)",
+            "pwd": "0270",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "217"
+        },
+        {
+            "trecho": "BARRA DE SANTANA - ENTR PB-196 (P/RIACHO DE SANTO ANTÔNIO)",
+            "pwd": "0322",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "218"
+        },
+        {
+            "trecho": "ENTR PE-263 (P/ITAPETIM) - ENTR PE-320 (SÃO JOSÉ DO EGITO)",
+            "pwd": "0280",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "219"
+        },
+        {
+            "trecho": "ENTR PE-015 (P/PAULISTA - VIADUTO SOBRE PE-015) - VIADUTO SOBRE AVENIDA CAXANGÁ",
+            "pwd": "0410",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "220"
+        },
+        {
+            "trecho": "DIV PE/AL - ENTR BR-423(A)",
+            "pwd": "0530",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "221"
+        },
+        {
+            "trecho": "ENTR PE-590 (P/IPUBÍ) - ENTR BR-122 (OURICURÍ)",
+            "pwd": "0630",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "222"
+        },
+        {
+            "trecho": "ENTR CE-292(B) - DIV CE/PE",
+            "pwd": "0250",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "223"
+        },
+        {
+            "trecho": "ENTR PE-310/312 (CUSTÓDIA) - ENTR BR-426/PE-340 (SÍTIO DOS NUNES)",
+            "pwd": "0300",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "224"
+        },
+        {
+            "trecho": "RAJADA - ENTR BR-235(A)",
+            "pwd": "0250",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "225"
+        },
+        {
+            "trecho": "ENTR PI-394 - ENTR PI-140 (CANTO DO BURITI)",
+            "pwd": "0115",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "226"
+        },
+        {
+            "trecho": "ENTR PI-211 (CAXINGÓ) - ENTR PI-213(A)",
+            "pwd": "0070",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "227"
+        },
+        {
+            "trecho": "ACESSO OESTE SOBRAL - ENTR BR-403(B)/CE-183",
+            "pwd": "0190",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "228"
+        },
+        {
+            "trecho": "ENTR MA-034 (SÃO JOÃO DOS PATOS) - ENTR BR-230(B)/MA-364(A) (DOIS IRMÃOS)",
+            "pwd": "0330",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "229"
+        },
+        {
+            "trecho": "ENTR PI-130 (P/AMARANTE) - ENTR PI-120",
+            "pwd": "0290",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "230"
+        },
+        {
+            "trecho": "ENTR SP-252 (GUAPIARA) - ENTR SP-165/249 (APIAÍ)",
+            "pwd": "0210",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "231"
+        },
+        {
+            "trecho": "ENTR PR-549 (P/LUIZIANA) - ENTR PR-462 (P/IRETAMA)",
+            "pwd": "0180",
+            "ladoA": "ENTR PR-549 (P/LUIZIANA)",
+            "fase": "1",
+            "ladoB": "ENTR PR-462 (P/IRETAMA)",
+            "usr": "232"
+        },
+        {
+            "trecho": "ACESSO IVAIPORÃ - ENTR BR-487 (P/MANOEL RIBAS)",
+            "pwd": "0080",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "233"
+        },
+        {
+            "trecho": "ENTR BR-158(B) (LARANJEIRAS DO SUL) - ENTR PR-473",
+            "pwd": "0250",
+            "ladoA": "ENTR BR-158(B) (LARANJEIRAS DO SUL)",
+            "fase": "1",
+            "ladoB": "ENTR PR-473",
+            "usr": "234"
+        },
+        {
+            "trecho": "ACESSO ÁGUA MINERAL SANTA CLARA - ENTR PR-281(A) (P/CHOPINZINHO)",
+            "pwd": "0455",
+            "ladoA": "ACESSO ÁGUA MINERAL SANTA CLARA",
+            "fase": "1",
+            "ladoB": "ENTR PR-281(A) (P/CHOPINZINHO)",
+            "usr": "235"
+        },
+        {
+            "trecho": "ENTR PR-468(B) - ENTR PR-180 (GOIO ERÊ)",
+            "pwd": "0500",
+            "ladoA": "ENTR PR-468(B)",
+            "fase": "1",
+            "ladoB": "ENTR PR-180 (GOIO ERÊ)",
+            "usr": "236"
+        },
+        {
+            "trecho": "ENTR PR-431(B) - ENTR PR-092(A) (P/BARRA DO JACARÉ)",
+            "pwd": "1230",
+            "ladoA": "ENTR PR-431(B)",
+            "fase": "1",
+            "ladoB": "ENTR PR-092(A) (P/BARRA DO JACARÉ)",
+            "usr": "237"
+        },
+        {
+            "trecho": "ENTR SP-331(A) - ENTR SP-331(B)",
+            "pwd": "1140",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "238"
+        },
+        {
+            "trecho": "ENTR BR-369 - ENTR SP-261 (P/ÁGUAS DE SANTA BÁRBARA)",
+            "pwd": "0230",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "239"
+        },
+        {
+            "trecho": "ACESSO PIRAPÓ - ACESSO CAMBIRA",
+            "pwd": "0710",
+            "ladoA": "ACESSO PIRAPÓ",
+            "fase": "1",
+            "ladoB": "ACESSO CAMBIRA",
+            "usr": "240"
+        },
+        {
+            "trecho": "ACESSO PARAÍBA DO SUL - ENTR RJ-135 (ANDRADE PINTO)",
+            "pwd": "0410",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "241"
+        },
+        {
+            "trecho": "ENTR RJ-196 - ENTR RJ-182",
+            "pwd": "2850",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "242"
+        },
+        {
+            "trecho": "ITAMONTE - ENTR BR-485 (GARGANTA DO REGISTRO)",
+            "pwd": "0590",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "243"
+        },
+        {
+            "trecho": "ENTR RJ-149 (P/RIO CLARO) - ENTR BR-494(A) (ANGRA DOS REIS)",
+            "pwd": "3350",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "244"
+        },
+        {
+            "trecho": "ENTR RJ-145 (P/BARRA DO PIRAÍ) - ENTR RJ-141 (DORANDIA)",
+            "pwd": "0530",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "245"
+        },
+        {
+            "trecho": "ENTR BR-494 (ARANTINA) - AIURUOCA",
+            "pwd": "0170",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "246"
+        },
+        {
+            "trecho": "ENTR RJ-198(B) - ENTR RJ-200 (MONTE ALEGRE)",
+            "pwd": "0170",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "247"
+        },
+        {
+            "trecho": "ENTR RJ-202 - ENTR RJ-234 (P/PENEDO)",
+            "pwd": "0350",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "248"
+        },
+        {
+            "trecho": "ENTR BR-482(B) - ENTR ES-181",
+            "pwd": "0150",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "249"
+        },
+        {
+            "trecho": "ENTR BR-116/265 (MURIAÉ) - DIV MG/RJ",
+            "pwd": "0210",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "250"
+        },
+        {
+            "trecho": "ENTR RJ-156 (P/VOLTA DO PIÃO) - ENTR BR-492(A)",
+            "pwd": "1530",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "251"
+        },
+        {
+            "trecho": "ACESSO À JENIPABU - ENTR RN-160(B) (P/EXTREMOZ)",
+            "pwd": "0065",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "252"
+        },
+        {
+            "trecho": "TAIPÚ - ENTR RN-064 (P/CEARÁ MIRIM)",
+            "pwd": "0110",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "253"
+        },
+        {
+            "trecho": "ENTR CE-261 - DIV CE/RN",
+            "pwd": "0055",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "254"
+        },
+        {
+            "trecho": "ENTR BR-230(A) (SANTA GERTRUDES) - ENTR PB-275(A) (P/SÃO JOSÉ DE ESPINHARA)",
+            "pwd": "0210",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "255"
+        },
+        {
+            "trecho": "ACESSO USINA DE SAMUEL - INICIO PISTA DUPLA",
+            "pwd": "1375",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "256"
+        },
+        {
+            "trecho": "VISTA ALEGRE DO ABUANÃ - VILA EXTREMA",
+            "pwd": "1510",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "257"
+        },
+        {
+            "trecho": "ENTR BR-421 (ARIQUEMES) - ENTR RO-459(A) (ALTO PARAISO)",
+            "pwd": "1300",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "258"
+        },
+        {
+            "trecho": "ENTR RO-135 (P/NOVA LONDRINA) - FIM DO TRECHO PAVIMENTADO",
+            "pwd": "0031",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "259"
+        },
+        {
+            "trecho": "ENTR RO-471 (P/MINISTRO ANDREAZZA) - ENTR RO-479(A) (P/ROLIM DE MOURA)",
+            "pwd": "1148",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "260"
+        },
+        {
+            "trecho": "ENTR RO-391 (POSTO GUAPORÉ) - MARCO RONDON",
+            "pwd": "1090",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "261"
+        },
+        {
+            "trecho": "PADRONAL - RIO 12 DE OUTUBRO",
+            "pwd": "0132",
+            "ladoA": "PADRONAL",
+            "fase": "1",
+            "ladoB": "RIO 12 DE OUTUBRO",
+            "usr": "262"
+        },
+        {
+            "trecho": "ENTR ACESSO SUL DE CAPÃO DA CANOA - ENTR BR-290(A) (OSÓRIO)",
+            "pwd": "4425",
+            "ladoA": "ENTR ACESSO SUL DE CAPÃO DA CANOA",
+            "fase": "1",
+            "ladoB": "ENTR BR-290(A) (OSÓRIO)",
+            "usr": "263"
+        },
+        {
+            "trecho": "ENTR RSC-470 (P/ MONTENEGRO) - ENTR ERS-124 (P/ POLO PETROQUIMICO)",
+            "pwd": "0330",
+            "ladoA": "ENTR BR-470",
+            "fase": "1",
+            "ladoB": "ENTR BR-470/116(A) (CANOAS)",
+            "usr": "264"
+        },
+        {
+            "trecho": "ENTR BRS-153(B)/ERS-324 (P/ PONTAO) - ENTR BRS-377(A)/386 (P/ CARAZINHO)",
+            "pwd": "0210",
+            "ladoA": "ENTR BR-153(B)/RS-324 (P/PONTÃO)",
+            "fase": "1",
+            "ladoB": "ENTR BR-377(A)/386 (CARAZINHO)",
+            "usr": "265"
+        },
+        {
+            "trecho": "ENTR RS-168 (P/SÃO PAULO DAS MISSÕES) - ENTR BR-472 (FRONT BRASIL/ARGENTINA) (PORTO XAVIER)",
+            "pwd": "0470",
+            "ladoA": "ENTR RS-168 (P/SÃO PAULO DAS MISSÕES)",
+            "fase": "1",
+            "ladoB": "ENTR BR-472 (FRONT BRASIL/ARGENTINA) (PORTO XAVIER)",
+            "usr": "266"
+        },
+        {
+            "trecho": "ENTR ERS-533 (P/ CAPAO CIPO) - ENTR BRS-287 (CONTORNO DE SANTIAGO)",
+            "pwd": "0140",
+            "ladoA": "A. BELTRÃO",
+            "fase": "1",
+            "ladoB": "ENTR BR-287 (SANTIAGO)",
+            "usr": "267"
+        },
+        {
+            "trecho": "ENTR BRS-290(B) (P/ SAO GABRIEL) - ENTR BRS-392 (P/ CACAPAVA DO SUL)",
+            "pwd": "1850",
+            "ladoA": "ENTR BR-290(B)",
+            "fase": "3",
+            "ladoB": "ENTR BR-392",
+            "usr": "268"
+        },
+        {
+            "trecho": "ENTR BRS-158(A) (P/ AZEVEDO SODRE) - ENTR ERS-640 (P/ CACEQUI)",
+            "pwd": "1350",
+            "ladoA": "ENTR BR-290(A) (P/ROSÁRIO DO SUL)",
+            "fase": "1",
+            "ladoB": "ENTR RS-640 (P/CACEQUI)",
+            "usr": "269"
+        },
+        {
+            "trecho": "ENTR RSC-473 (VILA SARANDI) - CURRAL ALTO",
+            "pwd": "0230",
+            "ladoA": "ENTR BR-473 (SARANDI)",
+            "fase": "1",
+            "ladoB": "CURRAL ALTO",
+            "usr": "270"
+        },
+        {
+            "trecho": "ENTR ERS-476 (LAJEADO GRANDE) - ENTR ERS-110 (VARZEA DO CEDRO)",
+            "pwd": "0310",
+            "ladoA": "ENTR RS-476 (LAJEADO GRANDE)",
+            "fase": "1",
+            "ladoB": "ENTR RS-110 (VÁRZEA DO CEDRO)",
+            "usr": "271"
+        },
+        {
+            "trecho": "ENTR BR-282(B)/470(A) - ENTR SC-455 (P/IBICUÍ)",
+            "pwd": "0015",
+            "ladoA": "ENTR BR-282(B)/470(A)",
+            "fase": "1",
+            "ladoB": "ENTR SC-455 (P/IBICUÍ)",
+            "usr": "272"
+        },
+        {
+            "trecho": "DIVISA SC/RS (RIO PELOTAS) - ENTR BRS-285(A) (P/ VACARIA)",
+            "pwd": "3010",
+            "ladoA": "DIV SC/RS (RIO PELOTAS)",
+            "fase": "1",
+            "ladoB": "ENTR BR-285(A) (P/VACARIA)",
+            "usr": "273"
+        },
+        {
+            "trecho": "ENTR BR-486 (BOM RETIRO) - ENTR SC-345(B) (P/URUBICI)",
+            "pwd": "0110",
+            "ladoA": "ENTR BR-486 (BOM RETIRO)",
+            "fase": "1",
+            "ladoB": "ENTR SC-345(B) (P/URUBICI)",
+            "usr": "274"
+        },
+        {
+            "trecho": "ENTR SC-473 (P/ANCHIETA) - SÃO JOSÉ DO CEDRO",
+            "pwd": "0027",
+            "ladoA": "ENTR SC-473 (P/ANCHIETA)",
+            "fase": "1",
+            "ladoB": "SÃO JOSÉ DO CEDRO",
+            "usr": "275"
+        },
+        {
+            "trecho": "ENTR BR-280(A) - ENTR BR-280(B) (VITORINO)",
+            "pwd": "0290",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "276"
+        },
+        {
+            "trecho": "ENTR BA-392 (ANTAS) - ENTR BA-220 (CÍCERO DANTAS)",
+            "pwd": "0612",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "277"
+        },
+        {
+            "trecho": "ENTR SP-183 - ENTR BR-116(A) (P/LORENA)",
+            "pwd": "0190",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "278"
+        },
+        {
+            "trecho": "ENTR SP-062 (P/ROSEIRA) - ENTR BR-383(A)/SP-132 (PINDAMONHANGABA)",
+            "pwd": "2360",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "279"
+        },
+        {
+            "trecho": "ENTR SP-065 (P/IGARATÁ) - ENTR SP-056 (ARUJÁ)",
+            "pwd": "2470",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "280"
+        },
+        {
+            "trecho": "ENTR BR-116(A) (JUQUIÁ) - ENTR SP-139 (REGISTRO)",
+            "pwd": "2630",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "281"
+        },
+        {
+            "trecho": "ENTR BR-373(A) (ITAPETININGA) - ENTR BR-373(B)",
+            "pwd": "0130",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "282"
+        },
+        {
+            "trecho": "ACESSO GUAIMBÉ - ENTR SP-333(A)",
+            "pwd": "1077",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "283"
+        },
+        {
+            "trecho": "ENTR SP-355 - ENTR SP-425",
+            "pwd": "1010",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "284"
+        },
+        {
+            "trecho": "ENTR SP-255 (ARARAQUARA) - ENTR BR-364(B)",
+            "pwd": "0110",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "285"
+        },
+        {
+            "trecho": "ACESSO RINÓPOLIS - ENTR SP-294 (PARAPUÃ)",
+            "pwd": "0783",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "286"
+        },
+        {
+            "trecho": "ENTR SP-065 (ATIBAIA) - ENTR SP-023 (MARIPORÃ)",
+            "pwd": "0850",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "287"
+        },
+        {
+            "trecho": "ENTR BR-222/230(A)/PA-150 (MARABÁ) - ENTR PA-405",
+            "pwd": "0010",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "288"
+        },
+        {
+            "trecho": "ENTR BR-010(A) (PORTO FRANCO) - ENTR BR-010(B)/230(A)/MA-138 (ESTREITO)",
+            "pwd": "0390",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "289"
+        },
+        {
+            "trecho": "ENTR MA-012/375 (SÃO RAIMUNDO DAS MANGABEIRAS) - ENTR MA-006(A)",
+            "pwd": "1010",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "290"
+        },
+        {
+            "trecho": "FIM PISTA DUPLA - GURUPÍ - ENTR BR-242(B)/TO-280",
+            "pwd": "0290",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "291"
+        },
+        {
+            "trecho": "ENTR BR-020(A)/135(B)/BA-020 - ENTR BR-020(B)",
+            "pwd": "0330",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "292"
+        },
+        {
+            "trecho": "INDIANÓPOLIS - VALE DO SONHO",
+            "pwd": "0272",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "293"
+        },
+        {
+            "trecho": "ENTR GO-217 (P/MAIRIPOTABA) - ENTR GO-320 (INDIARA)",
+            "pwd": "0210",
+            "ladoA": "",
+            "fase": "4",
+            "ladoB": "",
+            "usr": "294"
+        },
+        {
+            "trecho": "ENTR BR-153 (P/TIBAGI/IPIRANGA) - ENTR BR-373(A)/487(A) (CAETANO)",
+            "pwd": "0370",
+            "ladoA": "ENTR BR-153 (P/TIBAGI/IPIRANGA)",
+            "fase": "1",
+            "ladoB": "ENTR BR-373(A)/487(A) (CAETANO)",
+            "usr": "295"
+        },
+        {
+            "trecho": "RIO ANHANDUÍ - ENTR BR-262(A) (CAMPO GRANDE)",
+            "pwd": "0390",
+            "ladoA": "RIO ANHANDUÍ",
+            "fase": "1",
+            "ladoB": "ENTR BR-262(A) (CAMPO GRANDE)",
+            "usr": "296"
+        },
+        {
+            "trecho": "ACESSO ITAJÁ (GO) - ENTR MS-431 (P/SÃO JOÃO DO APORÉ)",
+            "pwd": "0434",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "297"
+        },
+        {
+            "trecho": "FNM (ENTR PISTA INVERSA) - ENTR BR-116(A)/493/RJ-109",
+            "pwd": "0930",
+            "ladoA": "",
+            "fase": "3",
+            "ladoB": "",
+            "usr": "298"
+        },
+        {
+            "trecho": "ENTR SC-418 (P/POMERODE) - ENTR BR-477(B) (P/TIMBÓ)",
+            "pwd": "0110",
+            "ladoA": "ENTR SC-418 (P/POMERODE)",
+            "fase": "1",
+            "ladoB": "ENTR BR-477(B) (P/TIMBÓ)",
+            "usr": "299"
+        },
+        {
+            "trecho": "ENTR BR-116(B) - P/TRES BARRAS",
+            "pwd": "0110",
+            "ladoA": "ENTR BR-116(B)",
+            "fase": "1",
+            "ladoB": "P/TRES BARRAS",
+            "usr": "300"
+        },
+        {
+            "trecho": "DIV PI/BA - ENTR BR-235/BA-161 (REMANSO)",
+            "pwd": "0150",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "301"
+        },
+        {
+            "trecho": "ENTR BR-369(A) (BARBOSA FERRAZ) - ENTR BR-158(A)/369(B) (ANEL VIÁRIO CAMPO MOURÃO)",
+            "pwd": "0770",
+            "ladoA": "",
+            "fase": "2",
+            "ladoB": "",
+            "usr": "302"
+        }
     ]
 }
