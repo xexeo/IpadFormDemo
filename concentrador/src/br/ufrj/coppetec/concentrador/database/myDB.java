@@ -529,9 +529,9 @@ public class myDB extends Db {
 		qry += "paradaObrigatoriaMunicipio1 integer, ";
 		qry += "paradaObrigatoriaMunicipio2 integer, ";
 		qry += "idPerguntaExtra integer,";
-		qry += "idPerguntaExtra2 integer,";
 		qry += "duracaoPesq integer, ";
-		qry += "treinamento integer";
+		qry += "treinamento integer, ";
+		qry += "idPerguntaExtra2 integer";
 		// IMPORTANTE: se adicionar mais campos ao final, não esquecer do separador no campo anterior
 		// mudanças no banco devem ser refletidas com método updateSchemaScript()
 		qry += "); ";
@@ -561,9 +561,14 @@ public class myDB extends Db {
 	private void updateSchemaScript(int oldVersion, boolean newDB) throws Exception{
 		this.setStatement();
 		
-		if(!newDB && oldVersion < 1){
-			//rodando atualização
-			this.executeStatement("ALTER TABLE odTable ADD COLUMN treinamento integer;");
+		if(!newDB){
+			if (oldVersion < 1){
+				//rodando atualização
+				this.executeStatement("ALTER TABLE odTable ADD COLUMN treinamento integer;");
+			}
+			if (oldVersion < 2){
+				this.executeStatement("ALTER TABLE odTable ADD COLUMN idPerguntaExtra2 integer;");
+			}
 		}
 		
 		
@@ -574,9 +579,7 @@ public class myDB extends Db {
 			this.executeStatement("UPDATE versaoSchema SET versao = " + Concentrador.dbVersion + ";");
 		}
 		
-		if(oldVersion < 2){
-			this.executeStatement("ALTER TABLE odTable ADD COLUMN idPerguntaExtra2 integer;");
-		}
+		
 		
 		logger.info("Versão do schema: " + Concentrador.dbVersion);
 	}
