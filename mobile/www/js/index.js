@@ -2,9 +2,9 @@
 
 var app = {
 
-	versao : '2.5.1',
+	versao : '2.6',
 	
-	debugMode : true,
+	debugMode : false,
 	
 	versaoBD : 1,
 

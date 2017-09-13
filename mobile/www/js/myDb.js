@@ -126,11 +126,13 @@ myDb = {
 						tx.executeSql("INSERT INTO tblSchema VALUES(" + app.versaoBD + ");");
 					} else if (versaoAtual != app.versaoBD){
 						tx.executeSql("UPDATE tblSchema SET versao = " + app.versaoBD + ");");
+						
+						if (versaoAtual < 1 ){
+							tx.executeSql("ALTER TABLE tblDados ADD COLUMN idPerguntaExtra2 integer;");
+						}
 					}
 				
-					if (versaoAtual < 1 ){
-						tx.executeSql("ALTER TABLE tblDados ADD COLUMN idPerguntaExtra2 integer;");
-					}
+					
 				});
 			
 			}, function(e){
