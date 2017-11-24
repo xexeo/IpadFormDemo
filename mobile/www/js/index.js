@@ -2,7 +2,7 @@
 
 var app = {
 
-	versao : '2.6',
+	versao : '2.6.1',
 	
 	debugMode : false,
 	
@@ -94,40 +94,49 @@ var app = {
 
 	duplicaDb : function() {
 		if (app.filePaths) {
+			//opens first. And tests the db's integrity
 			app.openDB(function(){
+				//on success, trys to close the db and exports the data
 				app.database.close(function() {
 					app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, false, function(newName) {
 						alert('Banco de dados ' + newName + ' exportado com sucesso.');
-						//app.openDB(); a conexão com o banco de dados permanece fechada
-					});
-				}, function(err) {
-					//falha na cópia do banco
-					//copia banco com problema
-					app.logger.log('Exportando bando de dados corrompido');
-					app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, function(newName) {
-						alert('Banco de dados ' + newName + ' exportado!\n\nEntre em contato com o suporte.',
-							"Banco da Dados Corrompido", null, "info");
-						//apaga banco atual
-						app.removeFile(app.dbName, app.filePaths.dbFolder,
-							function(){ //removeu com sucesso
-								app.logger.log("Banco de dados corrompido removido do sistema de arquivos do app.");
-								//app.openDB(); a conexão com o banco de dados permanece fechada
-							}, function(){//falhou quando removia
-								app.logger.log("Falha removendo banco de dados corrompido");
-								alert('Houve uma falha grava no sistema. \n Continue o processo de exportação, entre em contato com o suporte e NÃO CONTINUE A USAR ESSE IPAD.',
-									"Erro no Banco da Dados", null, "error");
-								//app.openDB(); a conexão com o banco de dados permanece fechada
 						});
-
-					});
-					app.logger.log(JSON.stringify(err));
-				});
-			   // Exporta Log
-			   app.duplicaLog();	
-			});
+					}, function(err){
+						//if app.database.close fails, exports the corrupted database
+						app.exportaDBCorrompido(err);
+					})
+				}, 
+				//if app.openDB fails, exports the corrupted database (this is the errorCalback) 
+				//and inform that this is an export operation
+				app.exportaDBCorrompido, true
+			);		   	
 			
+			// Exports Log file anyway
+			app.duplicaLog();
 		} else {
 			alert('Operação não realizada, o sistema de arquivos não foi definido');
+		}
+	},
+	
+	exportaDBCorrompido : function(err){
+		app.logger.log('Exportando bando de dados corrompido');
+		app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, 
+			function(newName) {
+				alert('Banco de dados ' + newName + ' exportado!\n\nEntre em contato com o suporte.',
+					"Banco da Dados Corrompido", null, "info");
+				//apaga banco atual (corrompido)
+				app.removeFile(app.dbName, app.filePaths.dbFolder,
+					function(){ //removeu com sucesso
+						app.logger.log("Banco de dados corrompido removido do sistema de arquivos do app.");
+					}, function(){//falhou quando removia
+						app.logger.log("Falha removendo banco de dados corrompido");
+						alert('Houve uma falha grava no sistema. \n Continue o processo de exportação, entre em contato com o suporte e NÃO CONTINUE A USAR ESSE IPAD.',
+							"Erro no Banco da Dados", null, "error");
+				});
+
+		});
+		if(err){
+			app.logger.log(JSON.stringify(err));
 		}
 	},
 
@@ -339,8 +348,13 @@ var app = {
 		;
 
 	},
-
-	openDB : function(cb) {
+	/**
+	 * Creates and open database connection
+	 * @param cb - option callback function
+	 * @param errorCB - optional callback function for when an error occurs
+	 * @param isExporting - optional boolean to identify data exporting operations 
+	 */
+	openDB : function(cb, errorCB, isExporting) {
 		app.database = sqlitePlugin.openDatabase({
 			name : app.dbName,
 			iosDatabaseLocation : 'default'
@@ -362,8 +376,13 @@ var app = {
 		function(err) {
 			app.logger.log('ERRO ao tentar conectar com o banco de dados.');
 			app.logger.log(JSON.stringify(err));
-			alert("O Banco da dados foi corrompido. \n Exporte todos os dados e entre em contato com o suporte.",
-				"Erro no Banco da Dados", null, "error");
+			if (!isExporting){
+				alert("O Banco da dados foi corrompido. \n Exporte todos os dados e entre em contato com o suporte.",
+					"Erro no Banco da Dados", null, "error");
+			}
+			if(util.isFunction(errorCB)){
+				errorCB();
+			}
 		});
 	},
 	
