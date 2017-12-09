@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
  */
 public final class Util {
 
+	public static final String TODAS = "Todas";
 	private static Logger logger = LogManager.getLogger(Util.class);
 
 	private static HashMap<String, Integer> inputLimits = new HashMap<String, Integer>();

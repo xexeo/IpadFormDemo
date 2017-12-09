@@ -25,7 +25,7 @@ public class Concentrador {
 	public static myDB database;
 	public static String trecho;
 	public static String posto;
-	public static String version = "3.5.1";
+	public static String version = "3.6";
 	public static int dbVersion = 2;
 	public static Properties configuration;
 	public static boolean treinamento = false;

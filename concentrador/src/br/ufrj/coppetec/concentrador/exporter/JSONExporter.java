@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.ufrj.coppetec.concentrador.Janela;
+import static br.ufrj.coppetec.concentrador.Util.TODAS;
 import br.ufrj.coppetec.concentrador.database.myDB;
 
 /**
@@ -155,11 +156,16 @@ public class JSONExporter {
 			String qry = this.table.sql(posto);
 
 			if (date != null) {
-				if (this.table.text.equals(myDB.TABLE_NAME_OD)) {
-					qry += " AND dataIniPesq like '" + date + "%';";
+				if (date.equals(TODAS)){
+					qry += " AND " + myDB.getConditionByValidDate(this.table.toString()) + ";";
 				} else {
-					qry += " AND data like '" + date + "%';";
+					if (this.table.text.equals(myDB.TABLE_NAME_OD)) {
+						qry += " AND dataIniPesq like '" + date + "%';";
+					} else {
+						qry += " AND data like '" + date + "%';";
+					}
 				}
+				
 			}
 
 			database = myDB.getInstance();

@@ -5,6 +5,7 @@
  */
 package br.ufrj.coppetec.concentrador;
 
+import static br.ufrj.coppetec.concentrador.Util.TODAS;
 import br.ufrj.coppetec.concentrador.database.DBFileImporter;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -214,9 +215,11 @@ public class Janela extends javax.swing.JFrame {
 				date = Util.sdfBrazil.format(Util.sdfSQL.parse(dataBaseDate)).trim();
 				if (includeDatasDB_OD || ArrayUtils.contains(datesToShow, date)) {
 					cmbDateExp.addItem(date);
-					cmbDateExp.setSelectedIndex(defaultIndex);
+					//cmbDateExp.setSelectedIndex(defaultIndex);
 				}
 			}
+			cmbDateExp.addItem(TODAS);
+			cmbDateExp.setSelectedIndex(defaultIndex);
 //			int indexSelect = subListDatesToShow.indexOf(Util.sdfBrazil.format(new Date()));
 //			if (indexSelect < 0) {
 //				indexSelect = (subListDatesToShow.size() > defaultIndex ? Math.max(defaultIndex, 0) : 0);
@@ -247,6 +250,23 @@ public class Janela extends javax.swing.JFrame {
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	private void clearSumVolData(){
+		Class<Janela> janelaClass = Janela.class;
+		Field sumVol;
+		try{
+			for (String volFieldsName : volFieldsNames){
+				sumVol = janelaClass.getDeclaredField("txtSumVol" + volFieldsName);
+				JTextField txtField = (JTextField) sumVol.get(this);
+				txtField.setText("0");
+			}
+		} catch (Exception e){
+			logger.error("Erro ao limpar o sumário da pesquisa volumétrica.", e);
+			JOptionPane.showMessageDialog(Janela.this, "Erro ao ao limpar o sumário da pesquisa volumétrica:\n" + e.getMessage(),
+					"Erro.", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
 
 	private void setSumVolTable(String date) {
 		Map<String, Map<Integer, Integer>> volData;
@@ -266,6 +286,16 @@ public class Janela extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(Janela.this, "Erro ao conectar com o banco de dados:\n" + e.getMessage(),
 					"Erro de conexão com o banco de dados.", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void clearSumVolTable(){
+		int col;
+			for (int i = 0; i < volFieldsNames.length; i++) {
+				col = 1;
+				for (int j = 0; j < 24; j += 2) {
+					tblSumVol.getModel().setValueAt("0", i, col++);
+				}
+			}
 	}
 
 	private void initFieldValues() {
@@ -7010,8 +7040,17 @@ public class Janela extends javax.swing.JFrame {
 	private void cmbDataSumVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDataSumVolActionPerformed
 		try {
 			String dateStr = getSelectedDateFromCombo(cmbDataSumVol);
-			this.setSumVolData(dateStr);
-			this.setSumVolTable(dateStr);
+			if (dateStr != null && dateStr.equals(TODAS)){
+				dateStr = null;
+			}
+			
+			if (dateStr == null && cmbDataSumVol.getSelectedIndex() == 0){ // "--" option selected so clean the data fields
+				this.clearSumVolData();
+				this.clearSumVolTable();
+			}else{
+				this.setSumVolData(dateStr);
+				this.setSumVolTable(dateStr);
+			}
 		} catch (Exception e) {
 			logger.error("Erro na conversão de datas para consulta e construção do sumário da pesquisa volumétrica.", e);
 		}
@@ -7097,6 +7136,9 @@ public class Janela extends javax.swing.JFrame {
 		String dateStr = combo.getSelectedItem().toString();
 		if (dateStr.equals("--")) {
 			return null;
+		}
+		if (dateStr.equals(TODAS)){
+			return TODAS;
 		}
 		return Util.sdfSQL.format(Util.sdfBrazil.parse(dateStr));
 	}
