@@ -13,26 +13,39 @@ import br.ufrj.coppetec.concentrador.database.myDB;
 import java.awt.Color;
 
 /**
- *
- * @author mangeli
+ * Classe principal do sistema, representa o fluxo de inicialização e mantém as informações de identificação do posto 
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 
 public class Concentrador {
 	private static Logger logger = LogManager.getLogger(Concentrador.class);
 
 	// static WebServer wServer;
-	static Janela janela;
-	public static myDB database;
-	public static String trecho;
-	public static String posto;
-	public static String version = "3.6";
-	public static int dbVersion = 2;
-	public static Properties configuration;
-	public static boolean treinamento = false;
+	static Janela janela;							///< Janela da interface com o usuário
+	public static myDB database;					///< Classe de conexão com o banco de dados
+	public static String trecho;					///< Trecho do posto de pesquisa
+	public static String posto;					///< Identificação do posto de pesquisa
+	public static String version = "3.6";			///< Versão do programa
+	public static int dbVersion = 2;				///< Versão do banco de dados
+	public static Properties configuration;		///< Configurações do programa
+	public static boolean treinamento = false;	///< Identificação do modo de treinamento ou pesquisa
 
+	
+	/**
+	 * Método do fluxo principal de execução do sistema.
+	 * Exibe splash screen com a versão atual do sistema, carrega configurações, inicia conexão com o banco de dados, 
+	 * exibe a janela de login e a janela principal da interface do usuário
+	 * 
+	 * @param args o programa é executado sem parâmetros
+	 */
 	public static void main(String[] args) {
 		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-		// System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());
+		
 		logger.info("PNCT Concentrador versão: " + version);
 
 		Splash splash = new Splash();
@@ -55,23 +68,6 @@ public class Concentrador {
 			database = myDB.getInstance();
 			database.initDatabaseTables();
 
-			// Runnable keepAlive = new Runnable() {
-			// public void run() {
-			// try {
-			// while (true) {
-			// database.keepAlive();
-			// logger.info("Keep alive!");
-			// Thread.sleep(1000 * 60);
-			// }
-			// } catch (Exception e) {
-			// logger.error("Erro keep alive BD.", e);
-			// logger.info("Keep alive parou!");
-			// }
-			// }
-			// };
-			// Thread p = new Thread(keepAlive);
-			// p.start();
-
 		} catch (Exception e) {
 			logger.error("Erro ao acessar o BD.", e);
 			JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \n" + e.getMessage());
@@ -81,10 +77,7 @@ public class Concentrador {
 
 		janela = new Janela();
 
-		// inicial o servidorWeb
-		// boolean successServer = Concentrador.startServer();
-		// System.out.println(successServer);
-
+		
 		LoginJanela loginJanela = new LoginJanela(janela, true);
 		loginJanela.setLocationRelativeTo(null);
 		loginJanela.setVisible(true);
@@ -113,35 +106,13 @@ public class Concentrador {
 		}
 	}
 
+	/**
+	 * Retorna o posto de pesquisa sob operação do sistema
+	 * 
+	 * @return Integer posto de pesquisa sob operação do sistema
+	 */
 	public static int getPostoInt() {
 		return Integer.parseInt(Concentrador.posto);
 	}
-	// private static boolean startServer() {
-	// boolean r = true;
-	// try {
-	// wServer = new WebServer(janela.txtAreaLog, janela.txtPorta);
-	// } catch (Exception e) {
-	// r = false;
-	// e.printStackTrace();
-	// } finally {
-	// return r;
-	// }
-	// }
-
-	// private static void createVolTable() throws Exception{
-	// database.setStatement();
-	// String qry = "CREATE TABLE IF NOT EXISTS voltable "
-	// + " (id int, posto int, pista text, data text,"
-	// + " hora int, sentido text, local text, pesquisador text, origemipad int, dados text); ";
-	// database.executeStatement(qry);
-	// }
-
-	// private static void createODTable() throws Exception{
-	// database.setStatement();
-	// String qry = "CREATE TABLE IF NOT EXISTS odTable "
-	// + "(id text primary key, "
-	// + "registro text, estado text); ";
-	// database.executeStatement(qry);
-	// }
-
+	
 }
