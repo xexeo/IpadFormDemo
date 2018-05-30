@@ -86,7 +86,7 @@
 1 \par
 }}Concentrador}
 {\comment Gerado porDoxgyen. }
-{\creatim \yr2018\mo5\dy29\hr14\min3\sec34}
+{\creatim \yr2018\mo5\dy29\hr16\min27\sec28}
 }\pard\plain 
 \sectd\pgnlcrm
 {\footer \s29\widctlpar\tqc\tx4320\tqr\tx8640\qr\adjustright \fs20\cgrid {\chpgn}}
@@ -261,7 +261,8 @@ Lista de Classes\par \pard\plain
 {\b {\b br.ufrj.coppetec.concentrador.Blinker} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Faz um JTextField piscar })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAABU \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
-{\b {\b br.ufrj.coppetec.concentrador.Concentrador} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAACA \\*MERGEFORMAT}{\fldrslt pagenum}}
+{\b {\b br.ufrj.coppetec.concentrador.Concentrador} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe principal do sistema, representa o fluxo de inicializa\'E7\'E3o e mant\'E9m as informa\'E7\'F5es de identifica\'E7\'E3o do posto })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAACA \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 {\b {\b br.ufrj.coppetec.concentrador.database.Db} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAABEC \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
@@ -466,6 +467,9 @@ class {\b Blinker}\par
 Faz um JTextField piscar. }\par}}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 class {\b Concentrador}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe principal do sistema, representa o fluxo de inicializa\'E7\'E3o e mant\'E9m as informa\'E7\'F5es de identifica\'E7\'E3o do posto. }\par}}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 class {\b DocumentSizeFilter}\par
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
@@ -792,6 +796,10 @@ Refer\'EAncia da Classe br.ufrj.coppetec.concentrador.Concentrador\par \pard\pla
 {\xe \v br.ufrj.coppetec.concentrador.Concentrador}
 {\bkmkstart AAAAAAAACA}
 {\bkmkend AAAAAAAACA}
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe principal do sistema, representa o fluxo de inicializa\'E7\'E3o e mant\'E9m as informa\'E7\'F5es de identifica\'E7\'E3o do posto. }}\par
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Membros P\'FAblicos Est\'E1ticos\par
 \pard\plain 
@@ -799,8 +807,18 @@ Membros P\'FAblicos Est\'E1ticos\par
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static void {\b main} (String[] args)\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'E9todo do fluxo principal de execu\'E7\'E3o do sistema. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static int {\b getPostoInt} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Retorna o posto de pesquisa sob opera\'E7\'E3o do sistema. }{
+}\par
+}}
 }
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Atributos Est\'E1ticos P\'FAblicos\par
@@ -809,18 +827,53 @@ Atributos Est\'E1ticos P\'FAblicos\par
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static {\b myDB} {\b database}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe de conex\'E3o com o banco de dados. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static String {\b trecho}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Trecho do posto de pesquisa. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static String {\b posto}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Identifica\'E7\'E3o do posto de pesquisa. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static String {\b version} = "3.6"\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Vers\'E3o do programa. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static int {\b dbVersion} = 2\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Vers\'E3o do banco de dados. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static Properties {\b configuration}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Configura\'E7\'F5es do programa. }{
+}\par
+}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static boolean {\b treinamento} = false\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Identifica\'E7\'E3o do modo de treinamento ou pesquisa. }{
+}\par
+}}
 }
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Atributos Est\'E1ticos do Pacote\par
@@ -829,6 +882,11 @@ Atributos Est\'E1ticos do Pacote\par
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 static {\b Janela} {\b janela}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+{\b Janela} da interface com o usu\'E1rio. }{
+}\par
+}}
 }
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Atributos Privados Est\'E1ticos\par
@@ -844,11 +902,19 @@ Descri\'E7\'E3o detalhada\par
 \pard\plain 
 {
 \pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe principal do sistema, representa o fluxo de inicializa\'E7\'E3o e mant\'E9m as informa\'E7\'F5es de identifica\'E7\'E3o do posto. \par
+}
+
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 \par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
-Autor:\par}\pard\plain \s61\li360\widctlpar\ql\adjustright \fs20\cgrid mangeli \par
+Autor:\par}\pard\plain \s61\li360\widctlpar\ql\adjustright \fs20\cgrid ludes - PESC - COPPE - ufrj \par
+Eduardo Mangeli \par
+Marcelo Areas \par
+Fabr\'EDcio Pereira \par
+Geraldo Xex\'E9o \par
 }}{
-Defini\'E7\'E3o na linha {\b 20} do arquivo {\b Concentrador.java}.}\par
+Defini\'E7\'E3o na linha {\b 25} do arquivo {\b Concentrador.java}.}\par
 }
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
@@ -866,92 +932,86 @@ static void br.ufrj.coppetec.concentrador.Concentrador.main (String []  {\i args
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 33} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'E9todo do fluxo principal de execu\'E7\'E3o do sistema. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Exibe splash screen com a vers\'E3o atual do sistema, carrega configura\'E7\'F5es, inicia conex\'E3o com o banco de dados, exibe a janela de login e a janela principal da interface do usu\'E1rio\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Par\'E2metros:\par}
+\pard\plain \s61\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
+\pard \widctlpar\intbl\adjustright
+{{\i args} \cell }{o programa \'E9 executado sem par\'E2metros \cell }
+{\row }
+}
+}{
+Defini\'E7\'E3o na linha {\b 46} do arquivo {\b Concentrador.java}.}\par
 {
 Referencias {\b br.ufrj.coppetec.concentrador.Concentrador.configuration}, {\b br.ufrj.coppetec.concentrador.Concentrador.database}, {\b br.ufrj.coppetec.concentrador.database.myDB.getInstance()}, {\b br.ufrj.coppetec.concentrador.PropertyLoader.getProperties()}, {\b br.ufrj.coppetec.concentrador.Janela.getTituloJanela()}, {\b br.ufrj.coppetec.concentrador.database.myDB.initDatabaseTables()}, {\b br.ufrj.coppetec.concentrador.Janela.initDatesToShow()}, {\b br.ufrj.coppetec.concentrador.Concentrador.janela}, {\b br.ufrj.coppetec.concentrador.Janela.lblPosto_dados}, {\b br.ufrj.coppetec.concentrador.Janela.lblTrecho_dados}, {\b br.ufrj.coppetec.concentrador.Concentrador.logger}, {\b br.ufrj.coppetec.concentrador.Util.populateInputLimits()}, {\b br.ufrj.coppetec.concentrador.Concentrador.posto}, {\b br.ufrj.coppetec.concentrador.Janela.setAlertaTreinamento()}, {\b br.ufrj.coppetec.concentrador.Splash.setVersionLabet()}, {\b br.ufrj.coppetec.concentrador.Concentrador.trecho} e {\b br.ufrj.coppetec.concentrador.Concentrador.version}.}\par
 {
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid    33                                            \{\par
-   34         StackTraceElement[] trace = Thread.currentThread().getStackTrace();\par
-   35         // System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());\par
-   36         logger.info("PNCT Concentrador vers\'E3o: " + version);\par
-   37 \par
-   38         Splash splash = new Splash();\par
-   39         splash.setLocationRelativeTo(null);\par
-   40         splash.setVersionLabet(version);\par
-   41         splash.setVisible(true);\par
-   42 \par
-   43         // lendo arquivo properties\par
-   44         try \{\par
-   45             PropertyLoader propLoader = new PropertyLoader();\par
-   46             configuration = propLoader.getProperties();\par
-   47             Util.populateInputLimits();\par
-   48         \} catch (IOException ex) \{\par
-   49             logger.catching(ex);\par
-   50             System.exit(1);\par
-   51         \}\par
-   52 \par
-   53         // criando o banco de dados\par
-   54         try \{\par
-   55             database = myDB.getInstance();\par
-   56             database.initDatabaseTables();\par
-   57 \par
-   58             // Runnable keepAlive = new Runnable() \{\par
-   59             // public void run() \{\par
-   60             // try \{\par
-   61             // while (true) \{\par
-   62             // database.keepAlive();\par
-   63             // logger.info("Keep alive!");\par
-   64             // Thread.sleep(1000 * 60);\par
-   65             // \}\par
-   66             // \} catch (Exception e) \{\par
-   67             // logger.error("Erro keep alive BD.", e);\par
-   68             // logger.info("Keep alive parou!");\par
-   69             // \}\par
-   70             // \}\par
-   71             // \};\par
-   72             // Thread p = new Thread(keepAlive);\par
-   73             // p.start();\par
-   74 \par
-   75         \} catch (Exception e) \{\par
-   76             logger.error("Erro ao acessar o BD.", e);\par
-   77             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \\n" + e.getMessage());\par
-   78             e.printStackTrace();\par
-   79             System.exit(1);\par
-   80         \}\par
-   81 \par
-   82         janela = new Janela();\par
-   83 \par
-   84         // inicial o servidorWeb\par
-   85         // boolean successServer = Concentrador.startServer();\par
-   86         // System.out.println(successServer);\par
-   87 \par
-   88         LoginJanela loginJanela = new LoginJanela(janela, true);\par
-   89         loginJanela.setLocationRelativeTo(null);\par
-   90         loginJanela.setVisible(true);\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid    46                                            \{\par
+   47         StackTraceElement[] trace = Thread.currentThread().getStackTrace();\par
+   48         \par
+   49         logger.info("PNCT Concentrador vers\'E3o: " + version);\par
+   50 \par
+   51         Splash splash = new Splash();\par
+   52         splash.setLocationRelativeTo(null);\par
+   53         splash.setVersionLabet(version);\par
+   54         splash.setVisible(true);\par
+   55 \par
+   56         // lendo arquivo properties\par
+   57         try \{\par
+   58             PropertyLoader propLoader = new PropertyLoader();\par
+   59             configuration = propLoader.getProperties();\par
+   60             Util.populateInputLimits();\par
+   61         \} catch (IOException ex) \{\par
+   62             logger.catching(ex);\par
+   63             System.exit(1);\par
+   64         \}\par
+   65 \par
+   66         // criando o banco de dados\par
+   67         try \{\par
+   68             database = myDB.getInstance();\par
+   69             database.initDatabaseTables();\par
+   70 \par
+   71         \} catch (Exception e) \{\par
+   72             logger.error("Erro ao acessar o BD.", e);\par
+   73             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \\n" + e.getMessage());\par
+   74             e.printStackTrace();\par
+   75             System.exit(1);\par
+   76         \}\par
+   77 \par
+   78         janela = new Janela();\par
+   79 \par
+   80         \par
+   81         LoginJanela loginJanela = new LoginJanela(janela, true);\par
+   82         loginJanela.setLocationRelativeTo(null);\par
+   83         loginJanela.setVisible(true);\par
+   84 \par
+   85         // wait\par
+   86         try \{\par
+   87             Thread.sleep(2000);\par
+   88         \} catch (InterruptedException ex) \{\par
+   89             Thread.currentThread().interrupt();\par
+   90         \}\par
    91 \par
-   92         // wait\par
-   93         try \{\par
-   94             Thread.sleep(2000);\par
-   95         \} catch (InterruptedException ex) \{\par
-   96             Thread.currentThread().interrupt();\par
-   97         \}\par
-   98 \par
-   99         splash.setVisible(false);\par
-  100         \par
-  101         janela.setTitle(janela.getTituloJanela());\par
-  102         janela.setAlertaTreinamento();\par
-  103         \par
-  104         try \{\par
-  105             janela.initDatesToShow();\par
-  106             janela.lblPosto_dados.setText(posto);\par
-  107             janela.lblTrecho_dados.setText(trecho);\par
-  108             janela.setVisible(true);\par
-  109         \} catch (ParseException e) \{\par
-  110             logger.error("Erro ao carregar datas v\'E1lidas.", e);\par
-  111             JOptionPane.showMessageDialog(null, "Erro ao carregar datas v\'E1lidas." + e.getMessage());\par
-  112             System.exit(1);\par
-  113         \}\par
-  114     \}\par
+   92         splash.setVisible(false);\par
+   93         \par
+   94         janela.setTitle(janela.getTituloJanela());\par
+   95         janela.setAlertaTreinamento();\par
+   96         \par
+   97         try \{\par
+   98             janela.initDatesToShow();\par
+   99             janela.lblPosto_dados.setText(posto);\par
+  100             janela.lblTrecho_dados.setText(trecho);\par
+  101             janela.setVisible(true);\par
+  102         \} catch (ParseException e) \{\par
+  103             logger.error("Erro ao carregar datas v\'E1lidas.", e);\par
+  104             JOptionPane.showMessageDialog(null, "Erro ao carregar datas v\'E1lidas." + e.getMessage());\par
+  105             System.exit(1);\par
+  106         \}\par
+  107     \}\par
 }
 }
 {\xe \v getPostoInt\:br::ufrj::coppetec::concentrador::Concentrador}
@@ -966,15 +1026,22 @@ static int br.ufrj.coppetec.concentrador.Concentrador.getPostoInt (){\f2 [static
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 116} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Retorna o posto de pesquisa sob opera\'E7\'E3o do sistema. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid Integer posto de pesquisa sob opera\'E7\'E3o do sistema \par
+}}{
+Defini\'E7\'E3o na linha {\b 114} do arquivo {\b Concentrador.java}.}\par
 {
 Referencias {\b br.ufrj.coppetec.concentrador.Concentrador.posto}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.database.ImportedDB.importData()} e {\b br.ufrj.coppetec.concentrador.Janela.relatorioOD()}.}\par
 {
-\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid   116                                     \{\par
-  117         return Integer.parseInt(Concentrador.posto);\par
-  118     \}\par
+\pard\plain \s41\li360\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid   114                                     \{\par
+  115         return Integer.parseInt(Concentrador.posto);\par
+  116     \}\par
 }
 }
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
@@ -993,7 +1060,7 @@ Logger br.ufrj.coppetec.concentrador.Concentrador.logger = LogManager.getLogger(
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 21} do arquivo {\b Concentrador.java}.}\par
+Defini\'E7\'E3o na linha {\b 26} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Concentrador.main()}.}\par
 }
@@ -1009,7 +1076,10 @@ Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Concentrador.main()}.}\par
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 24} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+{\b Janela} da interface com o usu\'E1rio. }}\par
+{
+Defini\'E7\'E3o na linha {\b 29} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Concentrador.main()}.}\par
 }
@@ -1025,7 +1095,10 @@ Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Concentrador.main()}.}\par
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 25} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe de conex\'E3o com o banco de dados. }}\par
+{
+Defini\'E7\'E3o na linha {\b 30} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Janela.askForDataRetrieve()}, {\b br.ufrj.coppetec.concentrador.Janela.btnApagarActionPerformed()}, {\b br.ufrj.coppetec.concentrador.Janela.btnSalvarFormsActionPerformed()}, {\b br.ufrj.coppetec.concentrador.Janela.fillCmbDatesExp()}, {\b br.ufrj.coppetec.concentrador.Janela.fillCmbDatesSumVol()}, {\b br.ufrj.coppetec.concentrador.database.ImportedDB.importData()}, {\b br.ufrj.coppetec.concentrador.Concentrador.main()}, {\b br.ufrj.coppetec.concentrador.Janela.relatorioOD()}, {\b br.ufrj.coppetec.concentrador.Janela.setSumVolData()} e {\b br.ufrj.coppetec.concentrador.Janela.setSumVolTable()}.}\par
 }
@@ -1041,7 +1114,10 @@ String br.ufrj.coppetec.concentrador.Concentrador.trecho{\f2 [static]}}}
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 26} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Trecho do posto de pesquisa. }}\par
+{
+Defini\'E7\'E3o na linha {\b 31} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Concentrador.main()} e {\b br.ufrj.coppetec.concentrador.LoginController.validateLogin()}.}\par
 }
@@ -1057,7 +1133,10 @@ String br.ufrj.coppetec.concentrador.Concentrador.posto{\f2 [static]}}}
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 27} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Identifica\'E7\'E3o do posto de pesquisa. }}\par
+{
+Defini\'E7\'E3o na linha {\b 32} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Janela.btnApagarActionPerformed()}, {\b br.ufrj.coppetec.concentrador.Janela.btnInDadosActionPerformed()}, {\b br.ufrj.coppetec.concentrador.Janela.btnSalvarFormsActionPerformed()}, {\b br.ufrj.coppetec.concentrador.Janela.buildExportName()}, {\b br.ufrj.coppetec.concentrador.Janela.exportData()}, {\b br.ufrj.coppetec.concentrador.Janela.fillCmbDatesExp()}, {\b br.ufrj.coppetec.concentrador.Janela.fillCmbDatesSumVol()}, {\b br.ufrj.coppetec.concentrador.Concentrador.getPostoInt()}, {\b br.ufrj.coppetec.concentrador.database.ImportedDB.importData()}, {\b br.ufrj.coppetec.concentrador.Concentrador.main()}, {\b br.ufrj.coppetec.concentrador.Janela.makePVKey()}, {\b br.ufrj.coppetec.concentrador.Janela.relatorioOD()} e {\b br.ufrj.coppetec.concentrador.LoginController.validateLogin()}.}\par
 }
@@ -1073,7 +1152,10 @@ String br.ufrj.coppetec.concentrador.Concentrador.version = "3.6"{\f2 [static]}}
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 28} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Vers\'E3o do programa. }}\par
+{
+Defini\'E7\'E3o na linha {\b 33} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Janela.getTituloJanela()} e {\b br.ufrj.coppetec.concentrador.Concentrador.main()}.}\par
 }
@@ -1089,7 +1171,10 @@ int br.ufrj.coppetec.concentrador.Concentrador.dbVersion = 2{\f2 [static]}}}
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 29} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Vers\'E3o do banco de dados. }}\par
+{
+Defini\'E7\'E3o na linha {\b 34} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.database.myDB.updateSchema()} e {\b br.ufrj.coppetec.concentrador.database.myDB.updateSchemaScript()}.}\par
 }
@@ -1105,7 +1190,10 @@ Properties br.ufrj.coppetec.concentrador.Concentrador.configuration{\f2 [static]
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 30} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Configura\'E7\'F5es do programa. }}\par
+{
+Defini\'E7\'E3o na linha {\b 35} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Janela.btnInDadosActionPerformed()}, {\b br.ufrj.coppetec.concentrador.Util.getTrainingDatesStr()}, {\b br.ufrj.coppetec.concentrador.Util.getValidDatesStr()}, {\b br.ufrj.coppetec.concentrador.Janela.initFieldValues()}, {\b br.ufrj.coppetec.concentrador.Concentrador.main()}, {\b br.ufrj.coppetec.concentrador.Util.populateInputLimits()}, {\b br.ufrj.coppetec.concentrador.LoginController.validateLogin()} e {\b br.ufrj.coppetec.concentrador.LoginController.verificaUserPwdTreinamento()}.}\par
 }
@@ -1121,7 +1209,10 @@ boolean br.ufrj.coppetec.concentrador.Concentrador.treinamento = false{\f2 [stat
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
-Defini\'E7\'E3o na linha {\b 31} do arquivo {\b Concentrador.java}.}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Identifica\'E7\'E3o do modo de treinamento ou pesquisa. }}\par
+{
+Defini\'E7\'E3o na linha {\b 36} do arquivo {\b Concentrador.java}.}\par
 {
 Referenciado(a) por {\b br.ufrj.coppetec.concentrador.Janela.btnInDadosActionPerformed()}, {\b br.ufrj.coppetec.concentrador.database.myDB.getConditionByValidDate()}, {\b br.ufrj.coppetec.concentrador.Janela.getTituloJanela()}, {\b br.ufrj.coppetec.concentrador.database.ImportedDB.importData()}, {\b br.ufrj.coppetec.concentrador.Janela.initDatesToShow()}, {\b br.ufrj.coppetec.concentrador.Janela.setAlertaTreinamento()} e {\b br.ufrj.coppetec.concentrador.LoginController.validateLogin()}.}\par
 }
@@ -27479,6 +27570,9 @@ Componentes\par
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 class {\b br.ufrj.coppetec.concentrador.Concentrador}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Classe principal do sistema, representa o fluxo de inicializa\'E7\'E3o e mant\'E9m as informa\'E7\'F5es de identifica\'E7\'E3o do posto. }\par}}}
 }
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Pacotes\par
@@ -27515,138 +27609,109 @@ Concentrador.java\par \pard\plain
    13 import java.awt.Color;\par
    14 \par
    15 /**\par
-   16  *\par
-   17  * @author mangeli\par
-   18  */\par
-   19 \par
-   20 public class Concentrador \{\par
-   21     private static Logger logger = LogManager.getLogger(Concentrador.class);\par
-   22 \par
-   23     // static WebServer wServer;\par
-   24     static Janela janela;\par
-   25     public static myDB database;\par
-   26     public static String trecho;\par
-   27     public static String posto;\par
-   28     public static String version = "3.6";\par
-   29     public static int dbVersion = 2;\par
-   30     public static Properties configuration;\par
-   31     public static boolean treinamento = false;\par
-   32 \par
-   33     public static void main(String[] args) \{\par
-   34         StackTraceElement[] trace = Thread.currentThread().getStackTrace();\par
-   35         // System.out.printf("%s.%s()%n", trace[trace.length-1].getClassName(), trace[trace.length-1].getMethodName());\par
-   36         logger.info("PNCT Concentrador vers\'E3o: " + version);\par
+   16  * Classe principal do sistema, representa o fluxo de inicializa\'E7\'E3o e mant\'E9m as informa\'E7\'F5es de identifica\'E7\'E3o do posto \par
+   17  * \par
+   18  * @author ludes - PESC - COPPE - ufrj\par
+   19  * @author Eduardo Mangeli\par
+   20  * @author Marcelo Areas\par
+   21  * @author Fabr\'EDcio Pereira\par
+   22  * @author Geraldo Xex\'E9o\par
+   23  */\par
+   24 \par
+   25 public class Concentrador \{\par
+   26     private static Logger logger = LogManager.getLogger(Concentrador.class);\par
+   27 \par
+   28     // static WebServer wServer;\par
+   29     static Janela janela;                           ///< Janela da interface com o usu\'E1rio\par
+   30     public static myDB database;                    ///< Classe de conex\'E3o com o banco de dados\par
+   31     public static String trecho;                    ///< Trecho do posto de pesquisa\par
+   32     public static String posto;                 ///< Identifica\'E7\'E3o do posto de pesquisa\par
+   33     public static String version = "3.6";           ///< Vers\'E3o do programa\par
+   34     public static int dbVersion = 2;                ///< Vers\'E3o do banco de dados\par
+   35     public static Properties configuration;     ///< Configura\'E7\'F5es do programa\par
+   36     public static boolean treinamento = false;  ///< Identifica\'E7\'E3o do modo de treinamento ou pesquisa\par
    37 \par
-   38         Splash splash = new Splash();\par
-   39         splash.setLocationRelativeTo(null);\par
-   40         splash.setVersionLabet(version);\par
-   41         splash.setVisible(true);\par
-   42 \par
-   43         // lendo arquivo properties\par
-   44         try \{\par
-   45             PropertyLoader propLoader = new PropertyLoader();\par
-   46             configuration = propLoader.getProperties();\par
-   47             Util.populateInputLimits();\par
-   48         \} catch (IOException ex) \{\par
-   49             logger.catching(ex);\par
-   50             System.exit(1);\par
-   51         \}\par
-   52 \par
-   53         // criando o banco de dados\par
-   54         try \{\par
-   55             database = myDB.getInstance();\par
-   56             database.initDatabaseTables();\par
-   57 \par
-   58             // Runnable keepAlive = new Runnable() \{\par
-   59             // public void run() \{\par
-   60             // try \{\par
-   61             // while (true) \{\par
-   62             // database.keepAlive();\par
-   63             // logger.info("Keep alive!");\par
-   64             // Thread.sleep(1000 * 60);\par
-   65             // \}\par
-   66             // \} catch (Exception e) \{\par
-   67             // logger.error("Erro keep alive BD.", e);\par
-   68             // logger.info("Keep alive parou!");\par
-   69             // \}\par
-   70             // \}\par
-   71             // \};\par
-   72             // Thread p = new Thread(keepAlive);\par
-   73             // p.start();\par
-   74 \par
-   75         \} catch (Exception e) \{\par
-   76             logger.error("Erro ao acessar o BD.", e);\par
-   77             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \\n" + e.getMessage());\par
-   78             e.printStackTrace();\par
-   79             System.exit(1);\par
-   80         \}\par
-   81 \par
-   82         janela = new Janela();\par
-   83 \par
-   84         // inicial o servidorWeb\par
-   85         // boolean successServer = Concentrador.startServer();\par
-   86         // System.out.println(successServer);\par
-   87 \par
-   88         LoginJanela loginJanela = new LoginJanela(janela, true);\par
-   89         loginJanela.setLocationRelativeTo(null);\par
-   90         loginJanela.setVisible(true);\par
+   38     \par
+   39     /**\par
+   40      * M\'E9todo do fluxo principal de execu\'E7\'E3o do sistema.\par
+   41      * Exibe splash screen com a vers\'E3o atual do sistema, carrega configura\'E7\'F5es, inicia conex\'E3o com o banco de dados, \par
+   42      * exibe a janela de login e a janela principal da interface do usu\'E1rio\par
+   43      * \par
+   44      * @param args o programa \'E9 executado sem par\'E2metros\par
+   45      */\par
+   46     public static void main(String[] args) \{\par
+   47         StackTraceElement[] trace = Thread.currentThread().getStackTrace();\par
+   48         \par
+   49         logger.info("PNCT Concentrador vers\'E3o: " + version);\par
+   50 \par
+   51         Splash splash = new Splash();\par
+   52         splash.setLocationRelativeTo(null);\par
+   53         splash.setVersionLabet(version);\par
+   54         splash.setVisible(true);\par
+   55 \par
+   56         // lendo arquivo properties\par
+   57         try \{\par
+   58             PropertyLoader propLoader = new PropertyLoader();\par
+   59             configuration = propLoader.getProperties();\par
+   60             Util.populateInputLimits();\par
+   61         \} catch (IOException ex) \{\par
+   62             logger.catching(ex);\par
+   63             System.exit(1);\par
+   64         \}\par
+   65 \par
+   66         // criando o banco de dados\par
+   67         try \{\par
+   68             database = myDB.getInstance();\par
+   69             database.initDatabaseTables();\par
+   70 \par
+   71         \} catch (Exception e) \{\par
+   72             logger.error("Erro ao acessar o BD.", e);\par
+   73             JOptionPane.showMessageDialog(null, "Erro acessando o banco de dados: \\n" + e.getMessage());\par
+   74             e.printStackTrace();\par
+   75             System.exit(1);\par
+   76         \}\par
+   77 \par
+   78         janela = new Janela();\par
+   79 \par
+   80         \par
+   81         LoginJanela loginJanela = new LoginJanela(janela, true);\par
+   82         loginJanela.setLocationRelativeTo(null);\par
+   83         loginJanela.setVisible(true);\par
+   84 \par
+   85         // wait\par
+   86         try \{\par
+   87             Thread.sleep(2000);\par
+   88         \} catch (InterruptedException ex) \{\par
+   89             Thread.currentThread().interrupt();\par
+   90         \}\par
    91 \par
-   92         // wait\par
-   93         try \{\par
-   94             Thread.sleep(2000);\par
-   95         \} catch (InterruptedException ex) \{\par
-   96             Thread.currentThread().interrupt();\par
-   97         \}\par
-   98 \par
-   99         splash.setVisible(false);\par
-  100         \par
-  101         janela.setTitle(janela.getTituloJanela());\par
-  102         janela.setAlertaTreinamento();\par
-  103         \par
-  104         try \{\par
-  105             janela.initDatesToShow();\par
-  106             janela.lblPosto_dados.setText(posto);\par
-  107             janela.lblTrecho_dados.setText(trecho);\par
-  108             janela.setVisible(true);\par
-  109         \} catch (ParseException e) \{\par
-  110             logger.error("Erro ao carregar datas v\'E1lidas.", e);\par
-  111             JOptionPane.showMessageDialog(null, "Erro ao carregar datas v\'E1lidas." + e.getMessage());\par
-  112             System.exit(1);\par
-  113         \}\par
-  114     \}\par
-  115 \par
-  116     public static int getPostoInt() \{\par
-  117         return Integer.parseInt(Concentrador.posto);\par
-  118     \}\par
-  119     // private static boolean startServer() \{\par
-  120     // boolean r = true;\par
-  121     // try \{\par
-  122     // wServer = new WebServer(janela.txtAreaLog, janela.txtPorta);\par
-  123     // \} catch (Exception e) \{\par
-  124     // r = false;\par
-  125     // e.printStackTrace();\par
-  126     // \} finally \{\par
-  127     // return r;\par
-  128     // \}\par
-  129     // \}\par
-  130 \par
-  131     // private static void createVolTable() throws Exception\{\par
-  132     // database.setStatement();\par
-  133     // String qry = "CREATE TABLE IF NOT EXISTS voltable "\par
-  134     // + " (id int, posto int, pista text, data text,"\par
-  135     // + " hora int, sentido text, local text, pesquisador text, origemipad int, dados text); ";\par
-  136     // database.executeStatement(qry);\par
-  137     // \}\par
-  138 \par
-  139     // private static void createODTable() throws Exception\{\par
-  140     // database.setStatement();\par
-  141     // String qry = "CREATE TABLE IF NOT EXISTS odTable "\par
-  142     // + "(id text primary key, "\par
-  143     // + "registro text, estado text); ";\par
-  144     // database.executeStatement(qry);\par
-  145     // \}\par
-  146 \par
-  147 \}\par
+   92         splash.setVisible(false);\par
+   93         \par
+   94         janela.setTitle(janela.getTituloJanela());\par
+   95         janela.setAlertaTreinamento();\par
+   96         \par
+   97         try \{\par
+   98             janela.initDatesToShow();\par
+   99             janela.lblPosto_dados.setText(posto);\par
+  100             janela.lblTrecho_dados.setText(trecho);\par
+  101             janela.setVisible(true);\par
+  102         \} catch (ParseException e) \{\par
+  103             logger.error("Erro ao carregar datas v\'E1lidas.", e);\par
+  104             JOptionPane.showMessageDialog(null, "Erro ao carregar datas v\'E1lidas." + e.getMessage());\par
+  105             System.exit(1);\par
+  106         \}\par
+  107     \}\par
+  108 \par
+  109     /**\par
+  110      * Retorna o posto de pesquisa sob opera\'E7\'E3o do sistema\par
+  111      * \par
+  112      * @return Integer posto de pesquisa sob opera\'E7\'E3o do sistema\par
+  113      */\par
+  114     public static int getPostoInt() \{\par
+  115         return Integer.parseInt(Concentrador.posto);\par
+  116     \}\par
+  117     \par
+  118 \}\par
 }
 \par \pard\plain 
 
