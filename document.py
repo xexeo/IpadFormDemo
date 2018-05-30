@@ -10,6 +10,8 @@ import os
 
 rootdir = "."
 
+NUMERA = True
+
 HEADER = """
 \\documentclass{article}
 \\usepackage[utf8]{inputenc}
@@ -87,10 +89,14 @@ with open('output.latex','w',encoding="utf8") as fout:
                     fout.writelines(FILE_HEADER % trata(completo))
                     print(trata(completo))
                     try:
+                        linha = 0
                         with open(completo, 'r',encoding="utf8") as fin:
                             for lines in fin:
                                 # defende de UTF-8 errados
                                 line=bytes(lines,'utf-8').decode('utf-8','ignore')
+                                linha+=1
+                                if NUMERA:
+                                    line="%4d:" % linha + line
                                 fout.writelines(line)
                     except:
                         print("arquivo de entrada: ",completo)
