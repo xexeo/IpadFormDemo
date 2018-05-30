@@ -6989,18 +6989,31 @@ public class Janela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 	
 	/**
-	 * Na ocorrência do evento de escolha do sentido BA no formulário da tela, verifica se os dados informados são suficientes 
-	 * para identificar o registro da pesquisa volumétrica.
+	 * Método disparado quando o usuário escolhe o sentido BA no formulário.
+	 * Verifica se os dados informados já são suficientes para identificar o registro.
 	 * @param evt evento de clique na opção do sentido BA.
 	 */
 	private void rdo_SentidoBAActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdo_SentidoBAActionPerformed
 		askForDataRetrieve();
 	}// GEN-LAST:event_rdo_SentidoBAActionPerformed
 
+	/**
+	 * Método disparado quando o usuário escolhe o sentido AB no formulário.
+	 * Verifica se os dados informados já são suficientes para identificar o registro.
+	 * @param evt evento de clique na opção do sentido AB.
+	 */
 	private void rdo_SentidoABActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdo_SentidoABActionPerformed
 		askForDataRetrieve();
 	}// GEN-LAST:event_rdo_SentidoABActionPerformed
 
+	/**
+	 * Método disparado quano o usuário clica no botão Apagar.
+	 * Na hipótese de dados de uma pesquisa volumétrica terem sido recuperados do banco de dados, o botão de apagar fica 
+	 * visível para o usuário. Ao clicar nesse botão, o usuário recebe um diálogo de confirmação informando que a operação de 
+	 * de apagar os dados não pode ser revertida. No caso de uma resposta afirmativa, a senha de operação para o posto atual 
+	 * é solicitada. Após as confirmações, o método apaga o registro do banco de dados.
+	 * @param evt evento de clique no botão
+	 */
 	private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnApagarActionPerformed
 		int returnedValue = JOptionPane.showConfirmDialog(Janela.this,
 				"Os dados apagados não poderão ser recuperados.\nVocê deseja continuar?", "Apagar dados.",
@@ -7042,6 +7055,9 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}// GEN-LAST:event_btnApagarActionPerformed
 
+	/**
+	 * Monta e exibe a tabela com os dados do sumário das pesquisas do tipo Origem/Destino já realizadas.
+	 */
 	private synchronized void relatorioOD() {
 		odStatus.setText("Carregando dados ...");
 		Vector<String> cols = null;
@@ -7116,6 +7132,10 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 
+	/**
+	 * Verifica se o painel exibido mudou e recarrega os componentes necessários em caso de mudança.
+	 * @param evt mudança do painel exibido
+	 */
 	private void tabRelatorioStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tabRelatorioStateChanged
 		if (tabRelatorio.getSelectedComponent().equals(pnl_sumario_volumetrica)) {
 			this.fillCmbDatesSumVol();
@@ -7127,6 +7147,10 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}// GEN-LAST:event_tabRelatorioStateChanged
 
+	/**
+	 * Filtra o sumário das pesquisas volumétricas pela data selecionada na respectiva _caixa de seleção_.
+	 * @param evt evento de seleção de uma data
+	 */
 	private void cmbDataSumVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDataSumVolActionPerformed
 		try {
 			String dateStr = getSelectedDateFromCombo(cmbDataSumVol);
@@ -7147,22 +7171,38 @@ public class Janela extends javax.swing.JFrame {
 
 	}// GEN-LAST:event_cmbDataSumVolActionPerformed
 
+	@Deprecated
 	private void cmbDateExpVolActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDateExpVolActionPerformed
 		// TO-DO add your handling code here:
 	}// GEN-LAST:event_cmbDateExpVolActionPerformed
 
+	/**
+	 * Método disparado pelo clique no botão para exportar pesquisas Origem/Destino.
+	 * @param evt evento de clique no botão
+	 */
 	private void btnExpODDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnExpODDateActionPerformed
 		exportData(JSONExporter.DbTable.OD);
 	}// GEN-LAST:event_btnExpODDateActionPerformed
 
+	@Deprecated
 	private void cmbDateExpODActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDateExpODActionPerformed
 		// TO-DO add your handling code here:
 	}// GEN-LAST:event_cmbDateExpODActionPerformed
 
+	/**
+	 * Método disparado quando o usuário escolhe uma data para a pesquisa volumétrica.
+	 * Verifica se os dados informados já são suficientes para identificar o registro.
+	 * @param evt evento de escolha de data na _caixa de seleção_.
+	 */
 	private void cmbDataActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbDataActionPerformed
 		askForDataRetrieve();
 	}// GEN-LAST:event_cmbDataActionPerformed
 
+	/**
+	 * Método disparado pelo botão de importar dados.
+	 * 
+	 * @param evt evento de clique no botão.
+	 */
 	private void btnInDadosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnInDadosActionPerformed
 		FileSystemView filesys = FileSystemView.getFileSystemView();
 		// File[] roots = filesys.getRoots();
@@ -7193,32 +7233,15 @@ public class Janela extends javax.swing.JFrame {
 			logger.error(String.format("Erro ao importar arquivos em %s", inputFolder.getAbsolutePath()), e);
 		}
 
-	}// GEN-LAST:event_btnInDadosActionPerformed
-
-	// private void btnExportAllVolActionPerformed(java.awt.event.ActionEvent evt) {//
-	// GEN-FIRST:event_btnExportAllVolActionPerformed
-	// exporterFileChooser.setSelectedFile(new File("todos_volumetrica.zip"));
-	// int returnVal = exporterFileChooser.showSaveDialog(this);
-	//
-	// if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-	// JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.PV, this);
-	// exporter.export(Integer.parseInt(Concentrador.posto), String.valueOf(cmbDateExpVol.getSelectedItem()));
-	// }
-	//
-	// }// GEN-LAST:event_btnExportAllVolActionPerformed
-	//
-	// private void btnODexportAllActionPerformed(java.awt.event.ActionEvent evt) {//
-	// GEN-FIRST:event_btnODexportAllActionPerformed
-	// exporterFileChooser.setSelectedFile(new File("todos_od.zip"));
-	// int returnVal = exporterFileChooser.showSaveDialog(this);
-	//
-	// if (returnVal == exporterFileChooser.APPROVE_OPTION) {
-	// JSONExporter exporter = new JSONExporter(exporterFileChooser.getSelectedFile(), JSONExporter.DbTable.OD, this);
-	//
-	// exporter.export(Integer.parseInt(Concentrador.posto));
-	// }
-	// }// GEN-LAST:event_btnODexportAllActionPerformed
-
+	}
+	
+	/**
+	 * Conferte a data selecionada numa _caixa de selecao_ do formato de exibição para o formato SQL.
+	 * 
+	 * @param combo _Caixa de seleção_ contendo as datas
+	 * @return data no formato SQL
+	 * @throws ParseException 
+	 */
 	private String getSelectedDateFromCombo(javax.swing.JComboBox<String> combo) throws ParseException {
 		if (combo.getSelectedItem() == null) {
 			return null;
@@ -7233,6 +7256,17 @@ public class Janela extends javax.swing.JFrame {
 		return Util.sdfSQL.format(Util.sdfBrazil.parse(dateStr));
 	}
 
+	/**
+	 * Constrói o nome do arquivo de exportação de dados.
+	 * 
+	 * O nome do arquivo é formado pelo tipo de pesquisa [OD | VOL], concatenado com o número do posto e 
+	 * a data selecionada para exportação.
+	 * 
+	 * @param t Tabela do banco de dados relativa ao tipo de pesquisa [PV | OD]
+	 * @param date data selecionada para exportação
+	 * @return nome do arquivo
+	 * @throws ParseException 
+	 */
 	private String buildExportName(JSONExporter.DbTable t, String date) throws ParseException {
 		String name = "";
 		if (t.toString().equals(JSONExporter.DbTable.OD.toString()))
@@ -7243,6 +7277,15 @@ public class Janela extends javax.swing.JFrame {
 		return name;
 	}
 
+	/**
+	 * Método de exportação dos dados.
+	 * 
+	 * Exibe ao usuário um diálogo para escolha do diretório onde será salvo o arquivo com os dados exportados.
+	 * Com base na data selecionada na tela e no tipo de dados recebido como entrada, monta e salva o arquivo no 
+	 * local escolhido.
+	 * 
+	 * @param t Tabela do banco de dados relativa ao tipo de pesquisa [PV | OD]
+	 */
 	private void exportData(JSONExporter.DbTable t) {
 		try {
 
@@ -7270,6 +7313,10 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 
+	/**
+	 * Método disparado pelo clique no botão para exportar pesquisas volumétricas.
+	 * @param evt evento de clique no botão.
+	 */
 	private void btnExpVolDateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnVolNotSentActionPerformed
 		exportData(JSONExporter.DbTable.PV);
 	}
@@ -7284,6 +7331,14 @@ public class Janela extends javax.swing.JFrame {
 	// }
 	// }// GEN-LAST:event_btnODNotSentActionPerformed
 
+	/**
+	 * Método disparado quando o usuário clique no botão para salvar uma pesquisa volumétrica.
+	 * 
+	 * O método verifica e valida os campos do formulário. Constrói a representação dos dados no formato a ser armazenado no banco 
+	 * de dados, verifica se já existe um registro com os mesmos dados de identificação (posto, data, hora, sentido) e salva o
+	 *  registro no banco.
+	 * @param evt evento de clique no botão.
+	 */
 	private void btnSalvarFormsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSalvarFormsActionPerformed
 		String posto = Concentrador.posto;
 		String pista;
@@ -7439,6 +7494,13 @@ public class Janela extends javax.swing.JFrame {
 		return;
 	}// GEN-LAST:event_btnSalvarFormsActionPerformed
 
+	/**
+	 * Método disparado quando o usuário escolhe um horário na _caixa de seleção_ de horas para o cadastro de 
+	 * pesquisa volumétrica.
+	 * Verifica se os dados informados já são suficientes para identificar o registro. Atualiza o formulário para 
+	 * exibir o horário selecionado.
+	 * @param evt evento de escolha de data na _caixa de seleção_.
+	 */
 	private void cmbHoraActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cmbHoraActionPerformed
 		int hora_inicial;
 		if (cmbHora.getSelectedIndex() != -1) {
@@ -7463,6 +7525,9 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}// GEN-LAST:event_cmbHoraActionPerformed
 
+	/**
+	 * Limpa os campos e restaura o estado inicial do formulário de entrada de dados da pesquisa volumétrica.
+	 */
 	private void clearForm() {
 		btnApagar.setVisible(false);
 		cmbData.setSelectedIndex(0);
@@ -7487,6 +7552,12 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 
+	/**
+	 * Monta a representação de dados no formato JSON a ser utilizada no armazenamento e transmissão de um registro de 
+	 * pesquisa volumétrica.
+	 * @param field
+	 * @return 
+	 */
 	private String buildValues(String field) {
 		String r = "{\"Veiculo\": \"" + field + "\", \"Valores\": \"";
 		JTextField[] inputFields = fieldsMap.get(field);
@@ -7512,9 +7583,11 @@ public class Janela extends javax.swing.JFrame {
 	}
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * Método utilizado apenas durante o desenvolvimento para testes.
+	 * 
+	 * @param args método executado sem parâmetros
 	 */
+	@Deprecated
 	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -7548,10 +7621,11 @@ public class Janela extends javax.swing.JFrame {
 		});
 	}
 
-	private DefaultTableCellRenderer numeros;
-	private ImagemRenderer imagens;
-
-	private InputVerifier intVerifier;
+	private DefaultTableCellRenderer numeros;	///< Formatador da célula para exibição dos números.
+	private ImagemRenderer imagens;				///< Formatador para exibição de imagens.
+	
+	
+	private InputVerifier intVerifier;			///< Verificador do formato de entrada dos valores inteiros.
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel alertaTreinamento;
@@ -8117,32 +8191,53 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotalPesados;
     // End of variables declaration//GEN-END:variables
 
-	private String[] volFieldsNames;
+	private String[] volFieldsNames; ///< Nomes dos campos do formulário da pesquisa volumétrica.
 
-	private String[] volFieldsNamesLeves = { "P1", "P3", "P2", "M", "O1", "O2", "O3", "C1", "C2", "C3", "C4", "C5" };
-	private String[] volFieldsNamesPesados = { "S1", "S2", "S3", "S4", "S5", "S6", "SE1", "SE2", "SE3", "SE4", "SE5", "R1", "R2",
-			"R3", "R4", "R5", "R6" };
+	private String[] volFieldsNamesLeves = { "P1", "P3", "P2", "M", "O1", "O2", 
+											 "O3", "C1", "C2", "C3", "C4", "C5" }; ///< Nomes dos campos para veículos leves.
+	private String[] volFieldsNamesPesados = { "S1", "S2", "S3", "S4", "S5", "S6",
+											   "SE1", "SE2", "SE3", "SE4", "SE5", 
+											   "R1", "R2", "R3", "R4", "R5", "R6" }; ///< Nomes dos campos para veículos pesados.
 
-	private HashMap<String, JTextField[]> fieldsMap;
+	private HashMap<String, JTextField[]> fieldsMap; ///< Mapeamento entre os nomes e conjuntos de campos de entrada de dados.
 
 	private enum fieldTypes {
 		LEVES, PESADOS
-	}
+	} ///< tipos de campos de entradas de dados de veículos [LEVES | PESADOS].
 
-	private HashMap<String, JTextField> txtFree;
+	private HashMap<String, JTextField> txtFree; ///< Mapeamento entre nome e campo de entrada de dados.
 
-	private boolean ctlGetValuesFromDataBase = true;
+	private boolean ctlGetValuesFromDataBase = true; ///< Informa se os dados editados no formulário da pesquisa volumétrica são novos ou oriundos do banco de dados.
 
 }
 
+/**
+ * Classe que representa a formatação de uma célula para a exibição de uma imagem no formulário de entrada de 
+ * dados das pesquisas volumétricas.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
+ */
 @SuppressWarnings("serial")
 class ImagemRenderer extends DefaultTableCellRenderer {
+	
+	/**
+	 * Construtor que determina o espaçamento constuíndo uma borda transparente.
+	 */
 	public ImagemRenderer() {
 		super();
 		setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
 		// setBackground(new Color(178,178,178));
 	}
 
+	/**
+	 * Método que exibe a imagem na célula.
+	 * 
+	 * @param value imagem a ser exibida 
+	 */
 	public void setValue(Object value) {
 		if (value == null) {
 			setText("");
@@ -8153,13 +8248,33 @@ class ImagemRenderer extends DefaultTableCellRenderer {
 	}
 }
 
+/**
+ * Filtro para exibição de diretórios para a importação de arquivos.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
+ */
 class SQLiteFilter extends FileFilter {
 
+	/**
+	 * Verifica se um arquivo ou diretório atende ao critério de exibição.
+	 * 
+	 * @param f arquivo/diretório a ser verificado.
+	 * @return resultado da verificação.
+	 */
 	@Override
 	public boolean accept(File f) {
 		return f.isDirectory(); // || f.getAbsolutePath().endsWith(".db");
 	}
 
+	/**
+	 * Retorna a descrição do filtro.
+	 * 
+	 * @return descrição.
+	 */
 	@Override
 	public String getDescription() {
 		return "Dados pesquisa OD (*.db)";
@@ -8167,13 +8282,33 @@ class SQLiteFilter extends FileFilter {
 
 }
 
+/**
+ * Filtro para exibição de diretórios e arquivos para exportação de arquivos NÃO compactados.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
+ */
 class JsonFilter extends FileFilter {
 
+	/**
+	 * Verifica se um arquivo ou diretório atende ao critério de exibição.
+	 * 
+	 * @param f arquivo/diretório a ser verificado.
+	 * @return resultado da verificação.
+	 */
 	@Override
 	public boolean accept(File f) {
 		return f.isDirectory() || f.getAbsolutePath().endsWith(".json");
 	}
 
+	/**
+	 * Retorna a descrição do filtro.
+	 * 
+	 * @return descrição.
+	 */
 	@Override
 	public String getDescription() {
 		return "Arquivos JSON (*.json)";
@@ -8181,13 +8316,33 @@ class JsonFilter extends FileFilter {
 
 }
 
+/**
+ * Filtro para exibição de diretórios e arquivos para exportação de arquivos compactados.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
+ */
 class ZipFilter extends FileFilter {
-
+	
+	/**
+	 * Verifica se um arquivo ou diretório atende ao critério de exibição.
+	 * 
+	 * @param f arquivo/diretório a ser verificado.
+	 * @return resultado da verificação.
+	 */
 	@Override
 	public boolean accept(File f) {
 		return f.isDirectory() || f.getAbsolutePath().endsWith(".zip");
 	}
 
+	/**
+	 * Retorna a descrição do filtro.
+	 * 
+	 * @return descrição.
+	 */
 	@Override
 	public String getDescription() {
 		return "Arquivos ZIP (*.zip)";
@@ -8195,6 +8350,15 @@ class ZipFilter extends FileFilter {
 
 }
 
+/**
+ * Classe para formatação da célula de exibição do sumário das pesquisas do tipo Origem/Destino.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
+ */
 @SuppressWarnings("serial")
 class RelatorioODRender extends DefaultTableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row,
