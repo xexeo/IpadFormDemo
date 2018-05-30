@@ -37,6 +37,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
+/**
+ * Classe para limitar a quantidade de caracteres.
+ * 
+ * @deprecated solução para limitação do tamanho da entrada de caracteres não mais utilizada
+ */
+@Deprecated
 public class DocumentSizeFilter extends DocumentFilter {
 	int maxCharacters;
 	boolean DEBUG = false;
