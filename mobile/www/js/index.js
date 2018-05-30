@@ -1,5 +1,8 @@
 /* global util, ipadID */
 
+/// @file index.js
+/// @namespace app
+/// Módulo com fluxo principal da aplicação
 var app = {
 
 	versao : '2.6.1',
@@ -8,6 +11,9 @@ var app = {
 	
 	versaoBD : 1,
 
+	/// @function app.login
+	/// Identifica e autoriza o usuário
+	/// @return {void} função sem retorno
 	login : function() {
 		var usuario = $("#usuario").val().trim();
 		var senha = $("#senha").val().trim();
@@ -41,6 +47,9 @@ var app = {
 		}
 	},
 
+	/// @function app.logout
+	/// Termina a utilização do aplicativo e desconecta o usuário
+	/// @return {void} função sem retorno
 	logout : function() {
 		// limpa o registro
 		app.limpaRegistro();
