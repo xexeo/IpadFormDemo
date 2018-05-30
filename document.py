@@ -27,6 +27,7 @@ FILE_HEADER = """
 \\subsection{%s}
 
 \\begin{verbatim}
+
 """
 FILE_FOOTER = """
 \\end{verbatim}
@@ -63,7 +64,8 @@ def doublein(string,lista):
 
 # problemas no Latex do pandoc
 def trata(nome):
-    return nome.replace("_","-")
+    x=nome.replace("_","\\textunderscore ")
+    return x.replace("\\","\\backslash ")
 
 
 
