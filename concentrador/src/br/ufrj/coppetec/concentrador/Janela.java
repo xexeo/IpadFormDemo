@@ -58,20 +58,23 @@ import java.awt.Color;
 import javax.swing.Timer;
 
 /**
- *
- * @author ludes
+ * Tela principal da interface gráfica com o usuário
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 @SuppressWarnings("serial")
 public class Janela extends javax.swing.JFrame {
 
-	/**
-	 * 
-	 */
 	private static Logger logger = LogManager.getLogger(Janela.class);
-	private String[] datesToShow;
+	private String[] datesToShow; ///< Datas a serem exibidas para a entrada das pesquisas
 
 	/**
-	 * Creates new form Janela
+	 * Cria a tela, constrói estruturas de dados para armazenar as informações das pesquisas, 
+	 * prepara validadores para os dados informados.
 	 */
 	public Janela() {
 		// quando estava usando tabelas
@@ -123,6 +126,12 @@ public class Janela extends javax.swing.JFrame {
 
 	}
 	
+	/**
+	 * Retorna o texto para a barra de títulos da janela.
+	 * O título contém a versão atual do sistema e um aviso se o modo de treinamento estiver ativado.
+	 * 
+	 * @return título da tela
+	 */
 	public String getTituloJanela(){
 		String titulo = "Concentrador de dados - versão " + Concentrador.version;
 		if(Concentrador.treinamento){
@@ -131,6 +140,10 @@ public class Janela extends javax.swing.JFrame {
 		return titulo;
 	}
 
+	/**
+	 * Exibe barra de alerta se o sistema estiver rodando em modo de treinamento.
+	 * 
+	 */
 	public void setAlertaTreinamento(){
 		if (!Concentrador.treinamento){
 			this.alertaTreinamento.setVisible(false);
@@ -142,6 +155,15 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 	
+	/**
+	 * Inicializa a estrutura de dados datesToShow, que contém as datas a serem exibidas.
+	 * 
+	 * Carrega as datas da pesquisa a serem exibidas para seleção e entrada de dados. No caso do sistema estar operando no modo 
+	 * de treinamento, as datas caregadas são fictícias. 
+	 * 
+	 * 
+	 * @throws ParseException 
+	 */
 	public void initDatesToShow() throws ParseException {
 		datesToShow = null;
 		if (Concentrador.treinamento) {
@@ -154,6 +176,12 @@ public class Janela extends javax.swing.JFrame {
 		cmbData.setSelectedItem(0);
 	}
 
+	/**
+	 * Recupera do banco de dados as datas das pesquisas realizadas.
+	 * 
+	 * O método recupera do banco de dados as datas das pesquisas Volumétricas e Origem/Destino já realizadas. Usa o método
+	 * __prepareFillComboDates__ para preencher as _caixas de seleção_.
+	 */
 	private void fillCmbDatesExp() {
 		String[] dataBaseDatesVol = null;
 		String[] dataBaseDatesOD = null;
@@ -179,6 +207,12 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 
+	/**
+	 * Recupera as datas das pesquisas volumétricas já realizadas.
+	 * 
+	 * Recupera do banco de dados as datas das pesquisas volumétricas já realizadas. Usa o método __prepareFillComboDates__ 
+	 * para preencher a _caixas de seleção_ no sumário.
+	 */
 	private void fillCmbDatesSumVol() {
 		String[] dataBaseDates = null;
 		try {
@@ -200,7 +234,15 @@ public class Janela extends javax.swing.JFrame {
 	}
 	
 	
-
+	/**
+	 * Preenche datas de pesquisa em _caixas de seleção_.
+	 * 
+	 * @param cmbDateExp _Caixa de seleção_ onde as datas serão exibidas.
+	 * @param dataBaseDates Datas a serem exibidas.
+	 * @param defaultIndex Índice do item selecionado após o preenchimento.
+	 * @param includeDatasDB_OD Flag para incluir todas as datas, mesmo as fora da estrutura de dados __datesToShow__.
+	 * @throws ParseException 
+	 */
 	protected void prepareFillComboDates(JComboBox<String> cmbDateExp, String[] dataBaseDates, int defaultIndex,
 			boolean includeDatasDB_OD) throws ParseException {
 		
@@ -209,29 +251,25 @@ public class Janela extends javax.swing.JFrame {
 		
 		if (dataBaseDates != null) {
 			String date;
-			//List<String> subListDatesToShow = new ArrayList<String>();
 			
 			for (String dataBaseDate : dataBaseDates) {
 				date = Util.sdfBrazil.format(Util.sdfSQL.parse(dataBaseDate)).trim();
 				if (includeDatasDB_OD || ArrayUtils.contains(datesToShow, date)) {
 					cmbDateExp.addItem(date);
-					//cmbDateExp.setSelectedIndex(defaultIndex);
 				}
 			}
 			cmbDateExp.addItem(TODAS);
 			cmbDateExp.setSelectedIndex(defaultIndex);
-//			int indexSelect = subListDatesToShow.indexOf(Util.sdfBrazil.format(new Date()));
-//			if (indexSelect < 0) {
-//				indexSelect = (subListDatesToShow.size() > defaultIndex ? Math.max(defaultIndex, 0) : 0);
-//			}
-//			for (String dateToShow : subListDatesToShow) {
-//				cmbDateExp.addItem(dateToShow);
-//				cmbDateExp.setSelectedIndex(1);
-//			}
-			
 		}
 	}
 
+	/**
+	 * Preenche os totais por dia da pesquisa volumétrica na tela do sumário. 
+	 * 
+	 * Recupera do banco de dados e preenche os totais por dia nos elementos da tela do sumário.
+	 * 
+	 * @param date Data a ser pesquisada 
+	 */
 	private void setSumVolData(String date) {
 		Map<String, Integer> volData;
 		try {
@@ -251,6 +289,9 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 	
+	/**
+	 * Limpa os elementos da tela de sumário da pesquisa volumétrica.
+	 */
 	private void clearSumVolData(){
 		Class<Janela> janelaClass = Janela.class;
 		Field sumVol;
@@ -268,6 +309,13 @@ public class Janela extends javax.swing.JFrame {
 		
 	}
 
+	/**
+	 * Preenche os totais por hora da pesquisa volumétrica na tela do sumário. 
+	 * 
+	 * Recupera do banco de dados e preenche os totais por hora nos elementos da tela do sumário.
+	 * 
+	 * @param date Data a ser pesquisada 
+	 */
 	private void setSumVolTable(String date) {
 		Map<String, Map<Integer, Integer>> volData;
 
@@ -288,6 +336,9 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 	
+	/**
+	 * Limpa os elementos da tabela do sumário da tela da pesquisa volumétrica.
+	 */
 	private void clearSumVolTable(){
 		int col;
 			for (int i = 0; i < volFieldsNames.length; i++) {
@@ -298,35 +349,38 @@ public class Janela extends javax.swing.JFrame {
 			}
 	}
 
+	/**
+	 * Inicializa estruturas de dados para manipulação dos campos das telas.
+	 */
 	private void initFieldValues() {
 
 		// leves
-		JTextField[] p1Fields = { tl0, tl1, tl2, tl3, tl4, tl5, tl6, tl7 };
-		JTextField[] p3Fields = { tl8, tl9, tl10, tl11, tl12, tl13, tl14, tl15 };
-		JTextField[] p2Fields = { tl16, tl17, tl18, tl19, tl20, tl21, tl22, tl23 };
-		JTextField[] mFields = { tl24, tl25, tl26, tl27, tl28, tl29, tl30, tl31 };
-		JTextField[] o1Fields = { tl32, tl33, tl34, tl35, tl36, tl37, tl38, tl39 };
-		JTextField[] o2Fields = { tl40, tl41, tl42, tl43, tl44, tl45, tl46, tl47 };
-		JTextField[] o3Fields = { tl48, tl49, tl50, tl51, tl52, tl53, tl54, tl55 };
-		JTextField[] c1Fields = { tl56, tl57, tl58, tl59, tl60, tl61, tl62, tl63 };
-		JTextField[] c2Fields = { tl64, tl65, tl66, tl67, tl68, tl69, tl70, tl71 };
-		JTextField[] c3Fields = { tl72, tl73, tl74, tl75, tl76, tl77, tl78, tl79 };
-		JTextField[] c4Fields = { tl80, tl81, tl82, tl83, tl84, tl85, tl86, tl87 };
-		JTextField[] c5Fields = { tl88, tl89, tl90, tl91, tl92, tl93, tl94, tl95 };
+		JTextField[] p1Fields = { tl0, tl1, tl2, tl3, tl4, tl5, tl6, tl7 };					
+		JTextField[] p3Fields = { tl8, tl9, tl10, tl11, tl12, tl13, tl14, tl15 };			
+		JTextField[] p2Fields = { tl16, tl17, tl18, tl19, tl20, tl21, tl22, tl23 };			
+		JTextField[] mFields = { tl24, tl25, tl26, tl27, tl28, tl29, tl30, tl31 };			
+		JTextField[] o1Fields = { tl32, tl33, tl34, tl35, tl36, tl37, tl38, tl39 };			
+		JTextField[] o2Fields = { tl40, tl41, tl42, tl43, tl44, tl45, tl46, tl47 };			
+		JTextField[] o3Fields = { tl48, tl49, tl50, tl51, tl52, tl53, tl54, tl55 };			
+		JTextField[] c1Fields = { tl56, tl57, tl58, tl59, tl60, tl61, tl62, tl63 };			
+		JTextField[] c2Fields = { tl64, tl65, tl66, tl67, tl68, tl69, tl70, tl71 };			
+		JTextField[] c3Fields = { tl72, tl73, tl74, tl75, tl76, tl77, tl78, tl79 };			
+		JTextField[] c4Fields = { tl80, tl81, tl82, tl83, tl84, tl85, tl86, tl87 };			
+		JTextField[] c5Fields = { tl88, tl89, tl90, tl91, tl92, tl93, tl94, tl95 };			
 		// pesados
-		JTextField[] s1Fields = { tp0, tp1, tp2, tp3, tp4, tp5, tp6, tp7 };
-		JTextField[] s2Fields = { tp8, tp9, tp10, tp11, tp12, tp13, tp14, tp15 };
-		JTextField[] s3Fields = { tp16, tp17, tp18, tp19, tp20, tp21, tp22, tp23 };
-		JTextField[] s4Fields = { tp24, tp25, tp26, tp27, tp28, tp29, tp30, tp31 };
-		JTextField[] s5Fields = { tp32, tp33, tp34, tp35, tp36, tp37, tp38, tp39 };
-		JTextField[] s6Fields = { tp40, tp41, tp42, tp43, tp44, tp45, tp46, tp47 };
-		JTextField[] se1Fields = { tp48, tp49, tp50, tp51, tp52, tp53, tp54, tp55 };
-		JTextField[] se2Fields = { tp56, tp57, tp58, tp59, tp60, tp61, tp62, tp63 };
-		JTextField[] se3Fields = { tp64, tp65, tp66, tp67, tp68, tp69, tp70, tp71 };
-		JTextField[] se4Fields = { tp72, tp73, tp74, tp75, tp76, tp77, tp78, tp79 };
-		JTextField[] se5Fields = { tp80, tp81, tp82, tp83, tp84, tp85, tp86, tp87 };
-		JTextField[] r1Fields = { tp88, tp89, tp90, tp91, tp92, tp93, tp94, tp95 };
-		JTextField[] r2Fields = { tp96, tp97, tp98, tp99, tp100, tp101, tp102, tp103 };
+		JTextField[] s1Fields = { tp0, tp1, tp2, tp3, tp4, tp5, tp6, tp7 };					
+		JTextField[] s2Fields = { tp8, tp9, tp10, tp11, tp12, tp13, tp14, tp15 };			
+		JTextField[] s3Fields = { tp16, tp17, tp18, tp19, tp20, tp21, tp22, tp23 };			
+		JTextField[] s4Fields = { tp24, tp25, tp26, tp27, tp28, tp29, tp30, tp31 };			
+		JTextField[] s5Fields = { tp32, tp33, tp34, tp35, tp36, tp37, tp38, tp39 };			
+		JTextField[] s6Fields = { tp40, tp41, tp42, tp43, tp44, tp45, tp46, tp47 };			
+		JTextField[] se1Fields = { tp48, tp49, tp50, tp51, tp52, tp53, tp54, tp55 };		
+		JTextField[] se2Fields = { tp56, tp57, tp58, tp59, tp60, tp61, tp62, tp63 };		
+		JTextField[] se3Fields = { tp64, tp65, tp66, tp67, tp68, tp69, tp70, tp71 };		
+		JTextField[] se4Fields = { tp72, tp73, tp74, tp75, tp76, tp77, tp78, tp79 };		
+		JTextField[] se5Fields = { tp80, tp81, tp82, tp83, tp84, tp85, tp86, tp87 };		
+		JTextField[] r1Fields = { tp88, tp89, tp90, tp91, tp92, tp93, tp94, tp95 };			
+		JTextField[] r2Fields = { tp96, tp97, tp98, tp99, tp100, tp101, tp102, tp103 };		
 		JTextField[] r3Fields = { tp104, tp105, tp106, tp107, tp108, tp109, tp110, tp111 };
 		JTextField[] r4Fields = { tp112, tp113, tp114, tp115, tp116, tp117, tp118, tp119 };
 		JTextField[] r5Fields = { tp120, tp121, tp122, tp123, tp124, tp125, tp126, tp127 };
@@ -445,11 +499,26 @@ public class Janela extends javax.swing.JFrame {
 
 	};
 
+	/**
+	 * Verifica se todos os dados que identificam um registro de pesquisa volumétrica foram informados.
+	 * 
+	 * Um registro de pesquisa volumétrica é identificado pelo seguinte conjunto de campos: hora, data, sentido e posto.
+	 * 
+	 * @return __true__ se os dados analisados tiverem sido informados 
+	 */
 	private boolean checkPVKeyDataEnter() {
 		return (cmbHora.getSelectedIndex() != -1 && cmbData.getSelectedIndex() != 0
 				&& (rdo_SentidoAB.isSelected() || rdo_SentidoBA.isSelected()));
 	}
 
+	/**
+	 * Constrói um objeto que identifica de forma unívoca um registro de pesquisa volumétrica.
+	 * 
+	 * O objeto construído contém os dados da pesquisa (hora, data, sentido e posto) sob operação da tela no momento.
+	 * 
+	 * @return Objeto __PVKey__ que representa um identificar unívoco de registro de pesquisa volumétrica.
+	 * @throws ParseException 
+	 */
 	private PVKey makePVKey() throws ParseException {
 		PVKey pvKey = new PVKey();
 		pvKey.data = cmbData.getSelectedItem().toString();
@@ -460,6 +529,13 @@ public class Janela extends javax.swing.JFrame {
 		return pvKey;
 	}
 
+	/**
+	 * Trata recuperação e modificação de pesquisas volumétricas.
+	 *
+	 * Verifica se já existe um registro de pesquisa volumétrica no banco de com os mesmos dados para data, hora, sentido e posto.
+	 * No caso de existir, pergunta ao usuário se deseja recuperar os dados e, no caso de retorno positivo, preenche as 
+	 * informações recuperadas na tela.
+	 */
 	private void askForDataRetrieve() {
 		if (checkPVKeyDataEnter() && ctlGetValuesFromDataBase) {
 			btnApagar.setVisible(false);
@@ -525,6 +601,13 @@ public class Janela extends javax.swing.JFrame {
 		}
 	}
 
+	/**
+	 * Preenche os dados do total de veículos informados na pesquisa volumétrica atual.
+	 * 
+	 * Calcula o total de veículos informados na pesquisa volumétrica atual e preenche a informação no respectivo _campo de texto_.
+	 * 
+	 * @param type tipo de veículo [LEVES | PESADOS]
+	 */
 	private void sumFields(fieldTypes type) {
 		String[] fields = null;
 		JTextField sumField = null;
@@ -553,8 +636,10 @@ public class Janela extends javax.swing.JFrame {
 	}
 
 	/**
-	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of
-	 * this method is always regenerated by the Form Editor.
+	 * Método utilizado pelo construtor para iniciar os componentes da tela
+	 * 
+	 * WARNING: Não modifique esse método. O seu conteúdo é sempre gerado automaticamente pelo gerador de formulários
+	 * da IDE NetBeans.
 	 */
 	@SuppressWarnings({ "deprecation" })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -6902,7 +6987,12 @@ public class Janela extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+	
+	/**
+	 * Na ocorrência do evento de escolha do sentido BA no formulário da tela, verifica se os dados informados são suficientes 
+	 * para identificar o registro da pesquisa volumétrica.
+	 * @param evt evento de clique na opção do sentido BA.
+	 */
 	private void rdo_SentidoBAActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rdo_SentidoBAActionPerformed
 		askForDataRetrieve();
 	}// GEN-LAST:event_rdo_SentidoBAActionPerformed

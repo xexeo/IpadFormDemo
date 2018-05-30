@@ -109,7 +109,7 @@ public class Concentrador {
 	/**
 	 * Retorna o posto de pesquisa sob operação do sistema
 	 * 
-	 * @return Integer posto de pesquisa sob operação do sistema
+	 * @return posto de pesquisa sob operação do sistema
 	 */
 	public static int getPostoInt() {
 		return Integer.parseInt(Concentrador.posto);
