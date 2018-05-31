@@ -1,5 +1,14 @@
 package br.ufrj.coppetec.concentrador.database;
 
+/**
+ * Estrutura que um registro de pesquisa volumétrica. 
+ *
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
+ */
 public class PVregister {
 	public int enviado;
 	public int posto;

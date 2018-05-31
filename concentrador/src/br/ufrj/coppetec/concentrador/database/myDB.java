@@ -16,28 +16,44 @@ import br.ufrj.coppetec.concentrador.Util;
 import java.sql.SQLException;
 
 /**
+ * Classe que representa o banco de dados interno da aplicação.
  *
- * @author mangeli
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class myDB extends Db {
 
-	public static final String TABLE_IMPORTED_FILES = "importedFiles";
-	public static final String TABLE_IMPORTED_FILES_ID = "id";
-	public static final String TABLE_IMPORTED_FILES_PATH = "path";
-	public static final String TABLE_IMPORTED_FILES_DATE = "DATE";
+	public static final String TABLE_IMPORTED_FILES = "importedFiles";	///< Tabela para registro dos arquivos de banco de dados importados
+	public static final String TABLE_IMPORTED_FILES_ID = "id";			///< Campo id da tabela dos arquivos importados
+	public static final String TABLE_IMPORTED_FILES_PATH = "path";		///< Caminho do arquivo impo
+	public static final String TABLE_IMPORTED_FILES_DATE = "DATE";		///< Data da importação
 
-	public static final String TABLE_NAME_OD = "odtable";
-	public static final String TABLE_NAME_VOL = "voltable";
+	public static final String TABLE_NAME_OD = "odtable";				///< Tabela para registro das pesquisas Origem/Destino 
+	public static final String TABLE_NAME_VOL = "voltable";				///< Tabela para registro das pesquisas Volumétricas
 
 	private static Logger logger = LogManager.getLogger(myDB.class);
 
-	private static myDB instance = null;
+	private static myDB instance = null;									///< Referência para um objeto da classe (usada para garantir a existência de apenas um objeto).
 
+	/**
+	 * Construtor privado.
+	 * Constrói um objeto da classe. Utilizado na implementação do padrão de projeto _Singleton_ para garantir 
+	 * que exista apenas um objeto dessa classe.
+	 * @throws Exception 
+	 */
 	private myDB() throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:dados.db");
 
 	}
 
+	/**
+	 * Método que retorna a referência para o objeto único da classe.
+	 * @return				referência para o banco interno da aplicação
+	 * @throws Exception 
+	 */
 	public static myDB getInstance() throws Exception {
 		if (instance == null) {
 			instance = new myDB();
@@ -45,17 +61,33 @@ public class myDB extends Db {
 		return instance;
 	}
 
+	/**
+	 * Constrói a condicional para pesquisa no banco considerando se sistema está operando no modo de _treinamento_.
+	 * A condicional resultante seleciona apenas datas no período adequado (treinamento ou pesquisa real) de acordo com 
+	 * o modo atual de operação do sistema.
+	 * @param tableName			nome da tabela
+	 * @return					condicional resultante
+	 * @throws ParseException 
+	 */
 	public static String getConditionByValidDate(String tableName) throws ParseException {
 		return String.format("%s %s IN %s", (Concentrador.treinamento ? "NOT" : ""),
 				(tableName.equalsIgnoreCase(TABLE_NAME_OD) ? "DATE(dataIniPesq)" : "data"), Util.getValidDatesListInSQL());
 	}
 
+	/**
+	 * Mantém a conexão com o banco aberta.
+	 * @throws Exception 
+	 */
 	public void keepAlive() throws Exception {
 		openTransaction();
 		this.executeQuery("Select 1;");
 		commit();
 	}
 
+	/**
+	 * Elimina do banco de dados registros fora do padrão.
+	 * @throws Exception 
+	 */
 	public void sanitize() throws Exception {
 		try {
 			openTransaction();
@@ -67,6 +99,12 @@ public class myDB extends Db {
 		}
 	}
 
+	/**
+	 * Verifica se já existe um registro de pesquisa volumétrica no banco de dados a chave (posto, data, hora e sentido) informada. 
+	 * @param regKey	objeto com a chave posto, data, hora e sentido
+	 * @return			[ 0 | id ] __zero__ se não existir registro no banco com os mesmo daddos ou o __id__ do registro no banco se ele existir
+	 * @throws Exception 
+	 */
 	public int verifyPV(PVKey regKey) throws Exception {
 		int r = 0;
 		try {
@@ -92,14 +130,32 @@ public class myDB extends Db {
 		return r;
 	}
 
+	/**
+	 * Verifica se já existe um registro de pesquisa volumétrica no banco de dados com a chave (posto, data, hora e sentido) do registro informado. 
+	 * @param reg		registro a ser verificado
+	 * @return			[ 0 | id ] __zero__ se não existir registro no banco com os mesmo daddos ou o __id__ do registro no banco se ele existir
+	 * @throws Exception 
+	 */
 	public int verifyPV(PVregister reg) throws Exception {
 		return verifyPV(new PVKey(reg));
 	}
 
+	/**
+	 * Recupera um registro de pesquisa volumétrica do banco de dados.
+	 * @param key		objeto contendo posto, data, hora e sentido da pesquisa a ser recuperada.
+	 * @return			objeto com os dados do registro a ser recupera. __Caso o registro não exista no banco, o objeto retornado estará _vazio_ __.
+	 * @throws Exception 
+	 */
 	public PVregister getPVRegister(PVKey key) throws Exception {
 		return getPVRegister(verifyPV(key));
 	}
 
+	/**
+	 * Recupera um registro de pesquisa volumétrica do banco de dados.
+	 * @param id        número de identificação interna do registro
+	 * @return			objeto com os dados do registro a ser recupera. __Caso o registro não exista no banco, o objeto retornado estará _vazio_ __.
+	 * @throws Exception 
+	 */
 	public PVregister getPVRegister(int id) throws Exception {
 		PVregister pvR = new PVregister();
 		String qry = "SELECT * FROM voltable WHERE id = " + "'" + id + "'";
@@ -149,6 +205,11 @@ public class myDB extends Db {
 		return pvR;
 	}
 
+	/**
+	 * Apaga do banco de dados um registro da tabela volumétrica
+	 * @param key		objeto contendo posto, data, hora e sentido da pesquisa a ser recuperada.
+	 * @throws Exception 
+	 */
 	public void deletePV(PVKey key) throws Exception {
 		try {
 			openTransaction();
@@ -165,7 +226,18 @@ public class myDB extends Db {
 			throw e;
 		}
 	}
-
+	
+	/**
+	 * Método genérico para recuperar as datas dos registros em uma tabela do banco de dados.
+	 * As datas recuperadas estão compreendidas entre as datas correspondente ao modo (treinamento ou pesquisa real) de operação do sistema.
+	 * @param table				tabela do banco
+	 * @param nameFieldDate		nome do campo no qual as datas são registradas
+	 * @param postoField		nome do campo onde o código do posto é registrado
+	 * @param posto				código do posto
+	 * @param extra_condition	condição adicional para a realização da consulta
+	 * @return					vetor com as datas
+	 * @throws Exception 
+	 */
 	private String[] getDates(String table, String nameFieldDate, String postoField, Integer posto, String extra_condition)
 			throws Exception {
 		String validPeriodCondition = " AND " + getConditionByValidDate(table) + " ";
@@ -194,14 +266,35 @@ public class myDB extends Db {
 		return datesReturn;
 	}
 
+	/**
+	 * Recupera datas registradas das pesquisas Origem/Destino.
+	 * As datas recuperadas estão compreendidas entre as datas correspondente ao modo (treinamento ou pesquisa real) de operação do sistema.
+	 * @param posto     identificação do posto
+	 * @return			vetor com as datas
+	 * @throws Exception 
+	 */
 	public String[] getODDates(Integer posto) throws Exception {
 		return getDates("odTable", "dataIniPesq", "idPosto", posto, " AND cancelado=0");
 	}
 
+	/**
+	 * Recupera datas registradas das pesquisas Volumétricas.
+	 * As datas recuperadas estão compreendidas entre as datas correspondente ao modo (treinamento ou pesquisa real) de operação do sistema.
+	 * @param posto     identificação do posto
+	 * @return			vetor com as datas
+	 * @throws Exception 
+	 */
 	public String[] getVolDates(Integer posto) throws Exception {
 		return getDates("voltable", "data", "posto", posto, "");
 	}
 
+	/**
+	 * Retorna a quantidade total de veículos contados por tipo em uma determinada data da pesquisa Volumétrica.
+	 * @param fieldNames	nomes dos campos cujo total de veículos deve ser recuperado
+	 * @param date			data da pesquisa
+	 * @return				estrutura de dados com o total de veículos por tipo
+	 * @throws Exception 
+	 */
 	public Map<String, Integer> getSumVol(String[] fieldNames, String date) throws Exception {
 		Map<String, Integer> returnData = new HashMap<String, Integer>();
 		try {
@@ -235,6 +328,13 @@ public class myDB extends Db {
 
 	}
 
+	/**
+	 * Retorna a quantidade total de veículos contados por tipo e por hora em uma determinada data da pesquisa Volumétrica.
+	 * @param fieldNames	nomes dos campos cujo total de veículos deve ser recuperado
+	 * @param date			data da pesquisa
+	 * @return				estrutura de dados com o total de veículos por tipo e por hora
+	 * @throws Exception 
+	 */
 	public Map<String, Map<Integer, Integer>> getSumVolPerHour(String[] fieldNames, String date) throws Exception {
 		Map<String, Map<Integer, Integer>> returnData = new HashMap<String, Map<Integer, Integer>>();
 
@@ -271,6 +371,12 @@ public class myDB extends Db {
 		return returnData;
 	}
 
+	/**
+	 * Atualiza um registro existente de pesquisa volumétrica.
+	 * @param reg	todos os dados do registro
+	 * @param id	número de identificação interna do registro a ser atualizado
+	 * @throws Exception 
+	 */
 	public void updatePV(PVregister reg, int id) throws Exception {
 		try {
 			openTransaction();
@@ -322,7 +428,12 @@ public class myDB extends Db {
 			throw e;
 		}
 	}
-
+	/**
+	 * Insere no bando de dados um novo registro de pesquisa volumétrica.
+	 * @param reg	todos os dados do novo registro
+	 * @return		indicador de sucesso: __-1__ se a inserção não ocorreu
+	 * @throws Exception 
+	 */
 	public int inputPV(PVregister reg) throws Exception {
 		int r = -1;
 		try {
@@ -383,6 +494,11 @@ public class myDB extends Db {
 		return r;
 	}
 
+	/**
+	 * Rotina de inicialização do banco de dados.
+	 * Cria as tabelas se for a primeira execução do programa, faz a atualização do esquema do banco se necessário
+	 * @throws Exception 
+	 */
 	public void initDatabaseTables() throws Exception {
 		boolean newDB;
 		try {
@@ -400,7 +516,7 @@ public class myDB extends Db {
 	}
 	
 	/**
-	 * Verifica se a tabale odTable já existe no banco
+	 * Verifica se a tabale odTable já existe no banco.
 	 * @return true se o banco não possuía a tabela odTable (banco recém criado)
 	 * @throws Exception 
 	 */
@@ -414,6 +530,10 @@ public class myDB extends Db {
 		return r;
 	}
 
+	/**
+	 * Cria a tabela para a pesquisa volumétrica.
+	 * @throws Exception 
+	 */
 	private void createVolTable() throws Exception {
 		this.setStatement();
 		String qry = "CREATE TABLE IF NOT EXISTS voltable ";
@@ -461,6 +581,10 @@ public class myDB extends Db {
 
 	}
 
+	/**
+	 * Cria a tabela para registras os arquivos dos bancos importados.
+	 * @throws Exception 
+	 */
 	private void createImportedFilesTable() throws Exception {
 		this.setStatement();
 		String qry = "CREATE TABLE IF NOT EXISTS " + TABLE_IMPORTED_FILES + " (";
@@ -471,6 +595,10 @@ public class myDB extends Db {
 		this.executeStatement(qry);
 	}
 
+	/**
+	 * Cria a tabela para as pesquisa Origem/Destino
+	 * @throws Exception 
+	 */
 	private void createODTable() throws Exception {
 		this.setStatement();
 		String qry = "CREATE TABLE IF NOT EXISTS odTable (";
@@ -540,6 +668,11 @@ public class myDB extends Db {
 
 	}
 	
+	/**
+	 * Atualiza o esquema do banco de dados caso seja necessário.
+	 * @param newDB		true se o banco for recém criado
+	 * @throws Exception 
+	 */
 	private void updateSchema(boolean newDB) throws Exception{
 		int schemaVersion = 0;
 		ResultSet schemaResult;
@@ -557,7 +690,13 @@ public class myDB extends Db {
 		}
 		
 	}
-
+	
+	/**
+	 * Método interno para efetuar as atualizações do esquema do banco
+	 * @param oldVersion	versão do banco interno antes da atualização
+	 * @param newDB			true se o banco é recém criado
+	 * @throws Exception 
+	 */
 	private void updateSchemaScript(int oldVersion, boolean newDB) throws Exception{
 		this.setStatement();
 		
@@ -584,6 +723,12 @@ public class myDB extends Db {
 		logger.info("Versão do schema: " + Concentrador.dbVersion);
 	}
 	
+	/**
+	 * Recupera colunas do relatório de sumário da pesquisa Origem Destino.
+	 * As colunas do sumário são os identificadores dos ipads registrados no banco.
+	 * @return		vetor com o nome das colunas do sumário
+	 * @throws Exception 
+	 */
 	public Vector<String> fetchReportODColumns() throws Exception {
 		Vector<String> cols = new Vector<String>();
 		openTransaction();
@@ -597,6 +742,13 @@ public class myDB extends Db {
 		return cols;
 	}
 
+	/**
+	 * Recupera as linhas do relatório de sumário da pesquisa Origem Destino.
+	 * As linhas do sumário são as datas registrados no banco para o período (treinamento ou pesquisa real) do modo de operação do sistema.
+	 * @param posto identificador do posto de pesquisa
+ 	 * @return		vetor com o nome das linhas do sumário
+	 * @throws Exception 
+	 */
 	public Vector<String> fetchReportODRows(Integer posto) throws Exception {
 		Vector<String> rows = new Vector<String>();
 		openTransaction();
@@ -630,6 +782,12 @@ public class myDB extends Db {
 		return map;
 	}
 
+	/**
+	 * Recupera os dados do sumário das pesquisas Origem/Destino
+	 * @param posto		identificador do posto de pesquisa
+	 * @return			estrutura de dados com os totais de pesquisa por ipad, por dia.
+	 * @throws Exception 
+	 */
 	public Map<String, Map<String, Integer>> fetchReportODData(Integer posto) throws Exception {
 		openTransaction();
 		String validPeriodCondition = " AND " + getConditionByValidDate(TABLE_NAME_OD);
@@ -659,30 +817,4 @@ public class myDB extends Db {
 		return data;
 	}
 
-	// public final static BigInteger MAX_SAFE_INT = BigInteger.valueOf(99999999);
-	//
-	// /**
-	// * Retorna o valor inteiro, limitando ao valor máximo permitido (99999999).
-	// *
-	// * @param valueStr
-	// * - O valor em uma string.
-	// * @return O valor em inteiro.
-	// */
-	// public static Integer getIntValue(String valueStr) {
-	// Integer valueInt = null;
-	// if (valueStr != null) {
-	// BigInteger value = new BigInteger(valueStr);
-	// if (value.compareTo(MAX_SAFE_INT) > 0) {
-	// value = MAX_SAFE_INT;
-	// logger.warn(String.format("Valor inteiro maior que o permitido (%s > %d)", valueStr, MAX_SAFE_INT.intValue()));
-	// }
-	// valueInt = value.intValue();
-	// }
-	// return valueInt;
-	// }
-
-	// public static String getStrFromIntValue(String valueStr) {
-	// Integer valueInt = getIntValue(valueStr);
-	// return (valueInt == null ? null : String.valueOf(valueInt.intValue()));
-	// }
 }
