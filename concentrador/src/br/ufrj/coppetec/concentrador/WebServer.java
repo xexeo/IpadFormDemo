@@ -23,8 +23,14 @@ import org.simpleframework.transport.connect.Connection;
 import org.simpleframework.transport.connect.SocketConnection;
 
 /**
- *
- * @author mangeli
+ * Servidor web interno da aplicação.
+ * @deprecated não implementado em produção devido às retrições de conexão existentes no campo
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class WebServer implements Container {
 

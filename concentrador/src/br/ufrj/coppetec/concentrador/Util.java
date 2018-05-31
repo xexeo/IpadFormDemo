@@ -18,23 +18,40 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- *
- * @author mangeli
+ * Conjunto de métodos utilitários de uso geral.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public final class Util {
 
-	public static final String TODAS = "Todas";
+	public static final String TODAS = "Todas";													///< Variável de controle da representação da opção __TODAS__ nas _caixas de seleção_.
 	private static Logger logger = LogManager.getLogger(Util.class);
 
-	private static HashMap<String, Integer> inputLimits = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> inputLimits = new HashMap<String, Integer>();			///< Estrutura de dados para armazenar os limites, em número de caracteres, dos campos de entrada de dados.
 
-	public static final SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");
-	public static final SimpleDateFormat sdfBrazil = new SimpleDateFormat("dd/MM/yyyy");
-	public static final SimpleDateFormat sdfArq = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+	public static final SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd");			///< Formatador de datas para uso no banco de dados
+	public static final SimpleDateFormat sdfBrazil = new SimpleDateFormat("dd/MM/yyyy");			///< Formatador de datas no formato pt_BR
+	public static final SimpleDateFormat sdfArq = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");	///< Formatador de datas para registro de eventos
 
+	/**
+	 * Construtor privado.
+	 * Evita a criação de objetos da classe e otimiza o uso de memória pelo programa. Os métodos estão disponíveis para uso sem a
+	 * necessidade de criação de objetos da classe devido ao modificador _publi static_.
+	 */
 	private Util() {
 	}
 
+	/**
+	 * Concatena vetores de dados.
+	 * @param <T>	tipo de dado contido nos vetores.
+	 * @param a		vetor de dados
+	 * @param b		vetor de dados
+	 * @return		vetor resultante, com os dados de ambos os vetores de entrada
+	 */
 	public static <T> T[] concatArrays(T[] a, T[] b) {
 		int aLen = a.length;
 		int bLen = b.length;
@@ -46,6 +63,11 @@ public final class Util {
 		return c;
 	}
 
+	/**
+	 * Retorna um vetor com as datas válidas da pesquisa.
+	 * Constrói uma estrutura de dados com as datas do arquivo _properties_ de configuração.
+	 * @return vetor com datas válidas
+	 */
 	public static String[] getValidDatesStr() {
 		String[] r;
 		r = Concentrador.configuration.getProperty("validDays").split(",");
@@ -54,7 +76,12 @@ public final class Util {
 		}
 		return r;
 	}
-
+	
+	/**
+	 * Retorna um vetor com as datas de treinamento.
+	 * Constrói uma estrutura de dados com as datas do arquivo _properties_ de configuração.
+	 * @return vetor com as datas de treinamento
+	 */
 	public static String[] getTrainingDatesStr() {
 		String[] r;
 		r = Concentrador.configuration.getProperty("trainingDays").split(",");
@@ -64,35 +91,41 @@ public final class Util {
 		return r;
 	}
 
+	/**
+	 * Verifica se determinada data é uma data válida de pesquisa.
+	 * @param date data a ser verificada
+	 * @return true se a data for uma data de pesquisa válida.
+	 * @throws java.text.ParseException
+	 */
 	public static boolean isInValidPeriod(Date date) throws ParseException {
 		return getValidDates().contains(lowDateTime(date));
 	}
 
-	// public static boolean isOutValidPeriod(Date date) throws ParseException {
-	// return (getMinValidDate().compareTo(date) > 0) || (getMaxValidDate().compareTo(date) < 0);
-	// }
-	//
-	// public static boolean isBeforeValidPeriod(Date date) throws ParseException {
-	// return getMinValidDate().compareTo(date) > 0;
-	// }
-	//
-	// public static boolean isAfterValidPeriod(Date date) throws ParseException {
-	// return getMaxValidDate().compareTo(date) < 0;
-	// }
-	//
-	// public static boolean isInOrAfterValidPeriod(Date date) throws ParseException {
-	// // return getMinValidDate().compareTo(date) <= 0; /* Se o intervalo não for contínuo, essa linha não é adequada! */
-	// return isInValidPeriod(date) || isAfterValidPeriod(date);
-	// }
-
+	/**
+	 * Retorna uma estrutura de dados __Set__ contendo as datas válidas de pesquisa. 
+	 * @return conjunto com datas válidas de pesquisa.
+	 * @throws java.text.ParseException
+	 */
 	public static Set<Date> getValidDates() throws ParseException {
 		return parseDates(getValidDatesStr());
 	}
 
+	/**
+	 * Retorna uma estrutura de dados __Set__ contendo as datas válidas de pesquisa. 
+	 * @return conjunto com datas de treinamento.
+	 * @throws java.text.ParseException
+	 */
 	public static Set<Date> getTrainingDates() throws ParseException {
 		return parseDates(getTrainingDatesStr());
 	}
 
+	/**
+	 * Converte um vetor de datas no formato _cadeia de caracteres_ para um conjunto de objetos _Date_ .
+	 * Método utilitário de uso interno.
+	 * @param datesStr vetor com datas
+	 * @return conjunto com datas
+	 * @throws java.text.ParseException
+	 */
 	protected static Set<Date> parseDates(String[] datesStr) throws ParseException {
 		Set<Date> dates = new HashSet<Date>(datesStr.length);
 		for (int i = 0; i < datesStr.length; i++) {
@@ -106,14 +139,31 @@ public final class Util {
 		return dates;
 	}
 
+	/**
+	 * Constrói uma lista de datas válidas adequada para uso em consultas ao banco de dados.
+	 * @return lista de datas no formato de uma _cadeia de caracteres_
+	 * @throws java.text.ParseException
+	 */
 	public static String getValidDatesListInSQL() throws ParseException {
 		return getDatesListInSQL(getValidDates());
 	}
 
+	/**
+	 * Constrói uma lista de datas de treinamento adequada para uso em consultas ao banco de dados.
+	 * @return lista de datas no formato de uma _cadeia de caracteres_
+	 * @throws java.text.ParseException
+	 */
 	public static String getTrainingDatesListInSQL() throws ParseException {
 		return getDatesListInSQL(getTrainingDates());
 	}
 
+	/**
+	 * Converte um conjunto de objetos _Date_ para uma _cadeia de caracteres_ contendo as datas.
+	 * Método utilitário de uso interno.
+	 * @param dates conjunto de objetos _Date_
+	 * @return _cadeia de caracteres_ contendo as datas
+	 * @throws java.text.ParseException
+	 */
 	protected static String getDatesListInSQL(Set<Date> dates) throws ParseException {
 		String dateListInSQL = "";
 		for (Date date : dates) {
@@ -123,34 +173,14 @@ public final class Util {
 		return dateListInSQL.replaceFirst(", ", "(");
 	}
 
-	// public static String getMinValidDateSQL() throws ParseException {
-	// return SDF_SQL_DATE_ONLY.format(getMinValidDate());
-	// }
-	//
-	// public static String getMaxValidDateSQL() throws ParseException {
-	// return SDF_SQL_DATE_ONLY.format(getMaxValidDate());
-	// }
-	//
-	// public static Date getMinValidDate() throws ParseException {
-	// Set<Date> sortedValidDates = new TreeSet<Date>(getValidDates());
-	// return sortedValidDates.iterator().next();
-	// }
-	//
-	// public static Date getMaxValidDate() throws ParseException {
-	// Set<Date> sortedValidDates = new TreeSet<Date>(Collections.reverseOrder());
-	// sortedValidDates.addAll(getValidDates());
-	// return highDateTime(sortedValidDates.iterator().next());
-	// }
-
+	
 	/**
-	 * Retorna o valor do horário minimo para a data de referencia passada. <BR>
-	 * <BR>
+	 * Retorna o valor do horário minimo para a data de referencia passada. 
 	 * Por exemplo se a data for "30/01/2017 as 17h:33m:12s e 299ms" a data retornada por este metodo será "30/01/2017 as
 	 * 00h:00m:00s e 000ms".
 	 * 
-	 * @param date
-	 *            de referencia.
-	 * @return {@link Date} que representa o horário minimo para dia informado.
+	 * @param date de referencia.
+	 * @return representa o horário minimo para dia informado.
 	 */
 	public static Date lowDateTime(Date date) {
 		Calendar aux = Calendar.getInstance();
@@ -159,28 +189,10 @@ public final class Util {
 		return aux.getTime();
 	}
 
-	// /**
-	// * Retorna o valor do horário maximo para a data de referencia passada. <BR>
-	// * <BR>
-	// * Por exemplo se a data for "30/01/2017 as 17h:33m:12s e 299ms" a data retornada por este metodo será "30/01/2017 as
-	// * 23h:59m:59s e 999ms".
-	// *
-	// * @param date
-	// * de referencia.
-	// * @return {@link Date} que representa o horário maximo para dia informado.
-	// */
-	// public static Date highDateTime(Date date) {
-	// Calendar aux = Calendar.getInstance();
-	// aux.setTime(date);
-	// toFinalDate(aux); // maximiza os parametros de hour,min,sec,millisec
-	// return aux.getTime();
-	// }
-
+	
 	/**
 	 * Zera todas as referencias de hora, minuto, segundo e milissegundo do {@link Calendar}.
-	 * 
-	 * @param date
-	 *            a ser modificado.
+	 * @param date a ser modificado.
 	 */
 	private static void toOnlyDate(Calendar date) {
 		date.set(Calendar.HOUR_OF_DAY, 0);
@@ -189,34 +201,10 @@ public final class Util {
 		date.set(Calendar.MILLISECOND, 0);
 	}
 
-	// /**
-	// * Maximiza todas as referencias de hora, minuto, segundo e milissegundo do {@link Calendar}.
-	// *
-	// * @param date
-	// * a ser modificado.
-	// */
-	// private static void toFinalDate(Calendar date) {
-	// date.set(Calendar.HOUR_OF_DAY, 23);
-	// date.set(Calendar.MINUTE, 59);
-	// date.set(Calendar.SECOND, 59);
-	// date.set(Calendar.MILLISECOND, 999);
-	// }
-	//
-	// public static Date incrementDay(Date date, int amount) {
-	// return incrementDayOfMonth(date, amount);
-	// }
-	//
-	// public static Date incrementDayOfMonth(Date date, int amount) {
-	// return incrementDate(date, Calendar.DAY_OF_MONTH, amount);
-	// }
-	//
-	// private static Date incrementDate(Date date, int field, int amount) {
-	// Calendar calendar = new GregorianCalendar();
-	// calendar.setTime(date);
-	// calendar.add(field, amount);
-	// return calendar.getTime();
-	// }
-
+	/**
+	 * Preenche a estrutura _inputLimits_ .
+	 * Preenche a estrutura com os dados oriundos do arquivo de configuração.
+	 */
 	public static void populateInputLimits() {
 		inputLimits.put("placaEstrangeira",
 				Integer.parseInt(Concentrador.configuration.getProperty("placaEstrangeira", "20").trim()));
@@ -231,6 +219,12 @@ public final class Util {
 		inputLimits.put("local", Integer.parseInt(Concentrador.configuration.getProperty("local", "20").trim()));
 	}
 
+	/**
+	 * Converte uma _cadeia de caracteres_ contendo um valor lógico booleano [true|false|| 1 | 0] para a representação adequado ao banco de dados.
+	 * @param val booleano a ser convertido
+	 * @return _cadeia de carateres_ com a representação do valor de entrada
+	 * @throws java.lang.Exception
+	 */
 	public static String getSQLiteBoolean(String val) throws Exception {
 		if (inputLimits.isEmpty()) {
 			String msg = "inputLimits variable is not initialized.";
@@ -252,6 +246,13 @@ public final class Util {
 		return r;
 	}
 
+	/**
+	 * Limita o comprimento de um valor numérico inteiro recuperado do banco de dados de acordo com o valor configurado em _inputLimits_.
+	 * @param val		valor a ser limitado
+	 * @param fieldName	nome do campo
+	 * @return			valor com restrição de comprimento
+	 * @throws			java.lang.Exception
+	 */
 	public static String getSQLiteIntLimited(String val, String fieldName) throws Exception {
 		if (inputLimits.isEmpty()) {
 			String msg = "inputLimits variable is not initialized.";
@@ -276,6 +277,13 @@ public final class Util {
 		return r;
 	}
 
+	/**
+	 * Limita o comprimento de um valor numérico de ponto flutuante recuperado do banco de dados de acordo com o valor configurado em _inputLimits_.
+	 * @param val		valor a ser limitado
+	 * @param fieldName	nome do campo
+	 * @return			valor com restrição de comprimento
+	 * @throws			java.lang.Exception
+	 */
 	public static String getSQLiteRealLimited(String val, String fieldName) throws Exception {
 		if (inputLimits.isEmpty()) {
 			String msg = "inputLimits variable is not initialized.";
@@ -307,6 +315,13 @@ public final class Util {
 		return r;
 	}
 
+	/**
+	 * Limita o comprimento de uma _cadeia de caracteres_ recuperada do banco de dados de acordo com o valor configurado em _inputLimits_.
+	 * @param val		_cadeia de caracteres_ a ser limitada
+	 * @param fieldName	nome do campo
+	 * @return			valor com restrição de comprimento
+	 * @throws			java.lang.Exception
+	 */
 	public static String getStringLimited(String val, String fieldName) throws Exception {
 		if (inputLimits.isEmpty()) {
 			String msg = "inputLimits variable is not initialized.";
@@ -328,6 +343,15 @@ public final class Util {
 		return r;
 	}
 
+	/**
+	 * Impõe limite de comprimento a um inteiro representado por uma _cadeia de caracteres_ .
+	 * No caso de um valor de comprimento maior que o limite ter sido informado, o valor retornado é o maior inteiro com o número de 
+	 * caracteres igual ao limite.
+	 * Método utilitário de uso interno.
+	 * @param str		cadeia a ser limitada
+	 * @param maxLength	comprimento máximo
+	 * @return			valor retornado limitado ao comprimento informado
+	 */
 	private static String cutString(String str, int maxLength) {
 		String r;
 		if (str.length() > maxLength) {
@@ -340,6 +364,13 @@ public final class Util {
 		return r;
 	}
 
+	/**
+	 * Retorna o valor do hash de um arquivo
+	 * @param digest		manipulador do algorítmo especificado para o cálculo do hash
+	 * @param file			arquivo
+	 * @return				valor do hash
+	 * @throws IOException 
+	 */
 	public static String getFileChecksum(MessageDigest digest, File file) throws IOException {
 		// Get file input stream for reading the file content
 		FileInputStream fis = new FileInputStream(file);

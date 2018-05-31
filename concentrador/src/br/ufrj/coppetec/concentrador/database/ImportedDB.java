@@ -21,27 +21,48 @@ import br.ufrj.coppetec.concentrador.Janela;
 import br.ufrj.coppetec.concentrador.Util;
 
 /**
+ * Classe que representa um banco de dados importado.
+ * Realiza as operações necessárias para a inclusão dos dados no banco interno da aplicação.
  *
- * @author mangeli
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class ImportedDB extends Db {
 
 	private static Logger logger = LogManager.getLogger(ImportedDB.class);
-	private Janela janela;
-	private int counter;
+	private Janela janela;					///< referência para a tela principal da aplicação
+	private int counter;					///< contador de registros importados
 
+	/**
+	 * Cria e inicia um objeto que representa um banco de dados importado
+	 * @param path		caminho para o arquivo com o banco de dados
+	 * @param janela	referência para a tela principal da aplicação
+	 * @throws Exception 
+	 */
 	public ImportedDB(String path, Janela janela) throws Exception {
 		super("org.sqlite.JDBC", "jdbc:sqlite:" + path);
 		this.janela = janela;
 		counter = 0;
 	}
 
+	/**
+	 * Elimina do banco de dados registros com id nulo.
+	 * @throws Exception 
+	 */
 	public void sanitize() throws Exception {
 		openTransaction();
 		this.executeStatement("DELETE FROM tblDados WHERE id is null or id = 'null';");
 		commit();
 	}
 
+	/**
+	 * Importa os dados para o banco interno da aplicação.
+	 * @return			indicador do número de registros importados.
+	 * @throws Exception 
+	 */
 	public int importData() throws Exception {
 		this.sanitize();
 		this.openTransaction();
@@ -53,6 +74,12 @@ public class ImportedDB extends Db {
 		return counter;
 	}
 
+	/**
+	 * Importa os dados para o banco interno da aplicação.
+	 * @param concentradorDb    referência para o banco interno da aplicação
+	 * @return					indicador do número de registros importados
+	 * @throws Exception 
+	 */
 	public int importData(myDB concentradorDb) throws Exception {
 		Db db = this;
 		this.sanitize();
@@ -325,6 +352,10 @@ public class ImportedDB extends Db {
 		return mySwingWorker.get();
 	}
 
+	/**
+	 * Retorna o número de registros importados
+	 * @return indiciador do número de registros importados
+	 */
 	public int getCounter() {
 		return counter;
 	}

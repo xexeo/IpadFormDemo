@@ -1,15 +1,3 @@
-/**
-*@author ludes - PESC - COPPE - ufrj
-*@author Eduardo Mangeli
-*@author Marcelo Areas
-*@author Fabrício Pereira
-*@author Geraldo Xexéo
-*
-*  Faz um JTextField piscar
-*
-*
-*
-*/
 package br.ufrj.coppetec.concentrador;
 
 import java.awt.Color;
@@ -18,9 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 /**
- *
- *
- *  Faz um JTextField piscar
+ *  Faz um JTextField piscar.
  *
  * @author ludes - PESC - COPPE - ufrj
  * @author Eduardo Mangeli
@@ -37,7 +23,7 @@ public class Blinker implements ActionListener{
 	/**
 	*  Construtor precisa receber um JTextField
 	*
-	* param txtField um JTextField que vai piscar
+	* @param txtField um JTextField que vai piscar
 	*/
 	public Blinker(JTextField txtField){
 		super();
@@ -47,7 +33,7 @@ public class Blinker implements ActionListener{
 
 
 	/**
-	* Executa o piscar trocando o background de normal para laranja
+	* Executa o piscar trocando o background de normal para laranja.
 	*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
