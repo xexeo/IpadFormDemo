@@ -1,16 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufrj.coppetec.concentrador.exporter;
 
 import java.sql.ResultSet;
 
 /**
+ * Interface que generaliza o processo de construir uma representação JSON do resultado de uma consulta 
+ * ao banco de dados
  *
- * @author mangeli
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public interface JSONBuilder {
+	/**
+	 * Constrói uma representação JSON de uma consulta ao banco
+	 * @param result	resultado de uma consulta ao banco de dados interno da aplicação
+	 * @return			representação JSON da consulta
+	 * @throws Exception 
+	 */
 	public String build(ResultSet result) throws Exception;
 }

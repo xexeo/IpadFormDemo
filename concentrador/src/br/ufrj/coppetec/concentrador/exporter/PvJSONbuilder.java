@@ -14,13 +14,24 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 /**
- *
- * @author mangeli
+ * Constrói a representação JSON de um resultado de consulta ao banco com pesquisas Volumétricas.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class PvJSONbuilder implements JSONBuilder {
 
 	private static Logger logger = LogManager.getLogger(PvJSONbuilder.class);
 
+	/**
+	 * Constrói uma representação JSON de uma consulta ao banco
+	 * @param result	resultado de uma consulta ao banco de dados interno da aplicação
+	 * @return			representação JSON da consulta
+	 * @throws Exception 
+	 */
 	@Override
 	public String build(ResultSet result) throws Exception {
 		String s;

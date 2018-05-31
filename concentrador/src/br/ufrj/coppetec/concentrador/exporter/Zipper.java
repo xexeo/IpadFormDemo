@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufrj.coppetec.concentrador.exporter;
 
 import java.io.File;
@@ -13,18 +8,32 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- *
- * @author mangeli
+ * Compacta um arquivo com dados exportados para o formato zip.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class Zipper {
-	private File jsonFile;
-	private File zipFile;
+	private File jsonFile;	///< Arquivo com dados exportados no formato JSON
+	private File zipFile;	///< Arquivo compactado no formato ZIP
 
+	/**
+	 * Constrói e configura um objeto para compactar um arquivo.
+	 * @param f	referência para arquivo com os dados exportados no formato JSON
+	 * @param z referência para arquivo compactado no formato ZIP
+	 */
 	public Zipper(File f, File z) {
 		jsonFile = f;
 		zipFile = z;
 	}
 
+	/**
+	 * Executa a compactação com base nas configurações recebidas pelo construtor do objeto
+	 * @throws Exception 
+	 */
 	public void zipIt() throws Exception {
 		byte[] buffer = new byte[1024];
 		FileOutputStream fos = new FileOutputStream(zipFile);

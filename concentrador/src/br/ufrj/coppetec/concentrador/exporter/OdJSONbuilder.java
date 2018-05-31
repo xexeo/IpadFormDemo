@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufrj.coppetec.concentrador.exporter;
 
 import br.ufrj.coppetec.concentrador.Util;
@@ -16,13 +11,24 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 /**
- *
- * @author mangeli
+ * Constrói a representação JSON de um resultado de consulta ao banco com pesquisas Origem/Destino.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class OdJSONbuilder implements JSONBuilder {
 
 	private static Logger logger = LogManager.getLogger(OdJSONbuilder.class);
 
+	/**
+	 * Constrói uma representação JSON de uma consulta ao banco
+	 * @param result	resultado de uma consulta ao banco de dados interno da aplicação
+	 * @return			representação JSON da consulta
+	 * @throws Exception 
+	 */
 	@Override
 	public String build(ResultSet result) throws Exception {
 		String s;

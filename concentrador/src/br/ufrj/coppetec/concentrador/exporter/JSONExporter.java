@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufrj.coppetec.concentrador.exporter;
 
 import java.awt.BorderLayout;
@@ -31,24 +26,37 @@ import static br.ufrj.coppetec.concentrador.Util.TODAS;
 import br.ufrj.coppetec.concentrador.database.myDB;
 
 /**
- *
- * @author mangeli
+ * Exporta dados presentes no banco interno da aplicação para arquivos contendo a representação JSON das pesquisas.
+ * A representação JSON dos dados atende as especificações necessárias ao envio para o servidor de centralização das pesquisas.
+ * 
+ * @author ludes - PESC - COPPE - ufrj
+ * @author Eduardo Mangeli
+ * @author Marcelo Areas
+ * @author Fabrício Pereira
+ * @author Geraldo Xexéo
  */
 public class JSONExporter {
 
 	private static Logger logger = LogManager.getLogger(JSONExporter.class);
 
-	private File file;
-	private File tmpFile;
-	private DbTable table;
-	private Janela janela;
+	private File file;			///< Arquivo destino
+	private File tmpFile;		///< Arquivo temporário necessário ao processamento intermediário da exportação
+	private DbTable table;		///< Tabela que contém os dados a serem exportados
+	private Janela janela;		///< Referência a tela principal da aplicação
 
+	/**
+	 * Enumeração utilizada para controlar o que será exportado.
+	 * Todas as pesquisas, as não enviadas ou de determinada data
+	 */
 	static public enum WhatToExport {
 		ALL, NOT_SENT, DATE
 	}
 
-	private JSONBuilder jsonBuilder;
+	private JSONBuilder jsonBuilder; ///< Referência para um construtor de representação JSON
 
+	/**
+	 * Enumeração utilizada para controlar a tabela originária dos dados exportados.
+	 */
 	static public enum DbTable {
 		PV("voltable"), OD("odtable");
 		private final String text;
@@ -74,6 +82,12 @@ public class JSONExporter {
 
 	}
 
+	/**
+	 * Constrói e configura um objeto de exportação de dados.
+	 * @param f			referência para o arquivo onde os dados exportados serão armazenados
+	 * @param t			tabela de onde os dados serão exportados
+	 * @param janela	referência para a tela principal do sistema
+	 */
 	public JSONExporter(File f, DbTable t, Janela janela) {
 		this.file = f;
 		this.table = t;
@@ -89,10 +103,19 @@ public class JSONExporter {
 		}
 	}
 
+	/**
+	* Exporta os dados de um posto de pesquisa.
+	 * @param posto identificação do posto de pesquisa
+	*/
 	public void export(Integer posto) {
 		export(posto, null);
 	}
 
+	/**
+	 * Exporta os dados de um posto de pesquisa em determinada data.
+	 * @param posto	identificação do posto de pesquisa
+	 * @param date	data das pesquisas a serem exportadas
+	 */
 	public void export(Integer posto, String date) {
 
 		SwingWorker<Boolean, Void> mySwingWorker = new SwingWorker<Boolean, Void>() {
@@ -144,10 +167,23 @@ public class JSONExporter {
 
 	}
 
+	/**
+	 * Exporta os dados de um posto de pesquisa.
+	 * Método para execução em segunto plano
+	 * @param posto identificação do posto de pesquisa
+	 * @return		true se a exportação ocorreu sem problemas
+	 */
 	private Boolean backgroundExport(Integer posto) {
 		return backgroundExport(posto, null);
 	}
 
+	/**
+	 * Exporta os dados de um posto de pesquisa em determinada data.
+	 * Método para execução em segundo plano
+	 * @param posto identificação do posto de pesquisa
+	 * @param date	data das pesquisas a serem exportadas
+	 * @return		true se a exportação ocorreu sem problemas
+	 */
 	private Boolean backgroundExport(Integer posto, String date) {
 		myDB database = null;
 		ResultSet result;
@@ -203,6 +239,11 @@ public class JSONExporter {
 		return true;
 	}
 
+	/**
+	 * Converte um valor numérico inteiro para sua representação na forma de um objeto
+	 * @param val	valor a ser convertido
+	 * @return		objeto retornado
+	 */
 	static public Object getJSONInteger(String val) {
 		Object r;
 		if (val == null) {
@@ -214,6 +255,11 @@ public class JSONExporter {
 		return r;
 	}
 
+	/**
+	 * Converte um valor numérico real para sua representação na forma de um objeto
+	 * @param val	valor a ser convertido
+	 * @return		objeto retornado
+	 */
 	static public Object getJSONDouble(String val) {
 		Object r;
 		if (val == null) {
@@ -224,6 +270,11 @@ public class JSONExporter {
 		return r;
 	}
 
+	/**
+	 * Converte uma _cadeia de caracteres_ para sua representação adequada para a inclusão em um objeto JSON
+	 * @param val	_cadeia de caracteres_ a ser convertida
+	 * @return		objeto retornado
+	 */
 	static public Object getJSONString(String val) {
 		Object r;
 		if (val == null || val.equals("null")) {
