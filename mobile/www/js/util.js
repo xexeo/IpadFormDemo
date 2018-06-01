@@ -7,7 +7,7 @@ var util = {
 	/// @function util.inicializaSelect
 	/// Inicia uma _caixa de seleção_
 	/// @param {string} nome_campo	identificador do controle HTML
-	/// @param {string[]} lista		lista de velores
+	/// @param {array} lista		lista de valores
 	/// @return {void} função sem retorno
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
@@ -20,7 +20,7 @@ var util = {
 	/// @function util.inicializaSelectCustom
 	/// Inicia uma _caixa de seleção_ com mensagem personalizada
 	/// @param {string} nome_campo	identificador do controle HTML
-	/// @param {string[]} lista		lista de velores
+	/// @param {array} lista		lista de valores
 	/// @param {string} mensagem	mensagem personalizada
 	/// @return {void} função sem retorno
 	inicializaSelectCustom : function(nome_campo, lista, mensagem) {
@@ -34,7 +34,7 @@ var util = {
 	/// @function util.inicializaSelectCustomValueAsIndex
 	/// Inicia uma _caixa de seleção_ com mensagem personalizada e valor de retorno como o próprio item da lista
 	/// @param {string} nome_campo	identificador do controle HTML
-	/// @param {string[]} lista		lista de velores
+	/// @param {array} lista		lista de valores
 	/// @param {string} mensagem	mensagem personalizada
 	/// @return {void} função sem retorno
 	inicializaSelectCustomValueAsIndex : function(nome_campo, lista, mensagem) {
@@ -45,7 +45,13 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
-	
+	/// @function util.inicializaSelectPais
+	/// Inicia uma _caixa de seleção_ de países com mensagem personalizada
+	/// @param {string} nome_registro	identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo		identificador do controle HTML
+	/// @param {bool} inclui_Brasil		se Brasil deve ser uma das opções da lista
+	/// @param {string} mensagem		mensagem personalizada
+	/// @return {void} função sem retorno
 	inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil, mensagem) {
 		var lista = paises.listados();
 		var insert_inicial = "";
@@ -70,6 +76,12 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	/// @function util.inicializaSelectMunicipio
+	/// Inicia uma _caixa de seleção_ contendo os munícipios da Unidade da Federação informada
+	/// @param {string} nome_campo		identificador do controle HTML
+	/// @param {string} uf_sigla		sigla da UF
+	/// @param {string} mensagem		mensagem personalizada
+	/// @return {void} função sem retorno
 	inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) {
 		var lista = lista_municipios[uf_sigla];
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
@@ -79,13 +91,24 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	/// @function util.getIdxArray
+	/// Retorna o índice de um valor em um array
+	/// @param {object} value	valor a ser pesquisado
+	/// @param {array} array	estrutura de dados que será pesquisada
+	/// @return {int} índice retornado
 	getIdxArray : function(value, array) {
 		return $.inArray(value, array) + 1;
 	},
 
+	/// @function util.contains
+	/// Verifica se um valor está contido em um array
+	/// @param {object} value	valor a ser pesquisado
+	/// @param {array} array	estrutura de dados que será pesquisada
+	/// @return {bool} resultado da verificação
 	contains : function(value, array) {
 		return ($.inArray(value, array) >= 0);
 	},
+
 
 	getListaFrequencias : function() {
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];

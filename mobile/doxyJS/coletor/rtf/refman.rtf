@@ -85,7 +85,7 @@
 1 \par
 }}Coletor}
 {\comment Gerado porDoxgyen. }
-{\creatim \yr2018\mo6\dy1\hr14\min17\sec15}
+{\creatim \yr2018\mo6\dy1\hr14\min33\sec53}
 }\pard\plain 
 \sectd\pgnlcrm
 {\footer \s29\widctlpar\tqc\tx4320\tqr\tx8640\qr\adjustright \fs20\cgrid {\chpgn}}
@@ -5216,7 +5216,7 @@ Fun\'E7\'F5es\par
 
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-void {\b inicializaSelect} (string nome_campo, Object\{string[]\})\par
+void {\b inicializaSelect} (string nome_campo, array lista)\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Inicia uma {\i caixa de sele\'E7\'E3o}  }{
@@ -5236,6 +5236,13 @@ void {\b inicializaSelectCustomValueAsIndex} (string nome_campo, Object\{string[
 Inicia uma {\i caixa de sele\'E7\'E3o}  com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista. }{
 }\par
 }}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b inicializaSelectPais} (string nome_campo, Object\{string[]\}, string mensagem)\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Inicia uma {\i caixa de sele\'E7\'E3o}  de pa\'EDses com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista. }{
+}\par
+}}
 }
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
@@ -5253,7 +5260,7 @@ Fun\'E7\'F5es\par
 {\xe \v util\:inicializaSelect}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
 {\b 
-void util::inicializaSelect (string  {\i nome_campo}, Object\{string[]\} )}}
+void util::inicializaSelect (string  {\i nome_campo}, array  {\i lista})}}
 \par
 {\bkmkstart AAAAAAAAIO}
 {\bkmkend AAAAAAAAIO}
@@ -5277,7 +5284,7 @@ Par\'E2metros:\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i \{string[]\}} \cell }{lista lista de velores \cell }
+{{\i lista} \cell }{lista de valores \cell }
 {\row }
 }
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
@@ -5311,7 +5318,7 @@ Par\'E2metros:\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i \{string[]\}} \cell }{lista lista de velores \cell }
+{{\i \{string[]\}} \cell }{lista lista de valores \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
@@ -5337,6 +5344,46 @@ void util::inicializaSelectCustomValueAsIndex (string  {\i nome_campo}, Object\{
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Inicia uma {\i caixa de sele\'E7\'E3o}  com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+{\par
+{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Par\'E2metros:\par}
+\pard\plain \s61\li360\widctlpar\ql\adjustright \fs20\cgrid \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
+\pard \widctlpar\intbl\adjustright
+{{\i nome_campo} \cell }{identificador do controle HTML \cell }
+{\row }
+\trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
+\pard \widctlpar\intbl\adjustright
+{{\i \{string[]\}} \cell }{lista lista de velores \cell }
+{\row }
+\trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
+\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
+\pard \widctlpar\intbl\adjustright
+{{\i mensagem} \cell }{mensagem personalizada \cell }
+{\row }
+}
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+{\xe \v inicializaSelectPais\:util}
+{\xe \v util\:inicializaSelectPais}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void util::inicializaSelectPais (string  {\i nome_campo}, Object\{string[]\} , string  {\i mensagem})}}
+\par
+{\bkmkstart AAAAAAAAIR}
+{\bkmkend AAAAAAAAIR}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Inicia uma {\i caixa de sele\'E7\'E3o}  de pa\'EDses com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista. }}\par
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 {\par
 {\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
@@ -26921,7 +26968,7 @@ Fun\'E7\'F5es\par
 
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-void {\b util::inicializaSelect} (string nome_campo, Object\{string[]\})\par
+void {\b util::inicializaSelect} (string nome_campo, array lista)\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Inicia uma {\i caixa de sele\'E7\'E3o}  }{
@@ -26939,6 +26986,13 @@ void {\b util::inicializaSelectCustomValueAsIndex} (string nome_campo, Object\{s
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Inicia uma {\i caixa de sele\'E7\'E3o}  com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b util::inicializaSelectPais} (string nome_campo, Object\{string[]\}, string mensagem)\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Inicia uma {\i caixa de sele\'E7\'E3o}  de pa\'EDses com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista. }{
 }\par
 }}
 }
@@ -26959,7 +27013,7 @@ util.js\par \pard\plain
     7     /// @function util.inicializaSelect\par
     8     /// Inicia uma _caixa de sele\'E7\'E3o_\par
     9     /// @param \{string\} nome_campo  identificador do controle HTML\par
-   10     /// @param \{string[]\} lista     lista de velores\par
+   10     /// @param \{array\} lista        lista de valores\par
    11     /// @return \{void\} fun\'E7\'E3o sem retorno\par
    12     inicializaSelect : function(nome_campo, lista) \{\par
    13         var insert_inicial = "<option value='-1'>Selecione</option>\\n";\par
@@ -26972,7 +27026,7 @@ util.js\par \pard\plain
    20     /// @function util.inicializaSelectCustom\par
    21     /// Inicia uma _caixa de sele\'E7\'E3o_ com mensagem personalizada\par
    22     /// @param \{string\} nome_campo  identificador do controle HTML\par
-   23     /// @param \{string[]\} lista     lista de velores\par
+   23     /// @param \{string[]\} lista     lista de valores\par
    24     /// @param \{string\} mensagem    mensagem personalizada\par
    25     /// @return \{void\} fun\'E7\'E3o sem retorno\par
    26     inicializaSelectCustom : function(nome_campo, lista, mensagem) \{\par
@@ -26997,841 +27051,846 @@ util.js\par \pard\plain
    45         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
    46     \},\par
    47 \par
-   48     \par
-   49     inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil, mensagem) \{\par
-   50         var lista = paises.listados();\par
-   51         var insert_inicial = "";\par
-   52         if (!inclui_Brasil) \{\par
-   53             if (util.isEmpty(mensagem)) \{\par
-   54                 msgSelecione = "Selecione";\par
-   55             \} else \{\par
-   56                 msgSelecione = mensagem;\par
-   57             \}\par
-   58             insert_inicial = "<option value='-1'>" + msgSelecione + "</option>\\n";\par
-   59         \}\par
-   60         $.each(lista, function(index, item) \{\par
-   61             if (inclui_Brasil || (item != 'Brasil')) \{\par
-   62                 var select_Brasil = "";\par
-   63                 if (item == 'Brasil') \{\par
-   64                     select_Brasil = " selected";\par
-   65                     app.setAtributo(nome_registro, index + 1);\par
-   66                 \}\par
-   67                 insert_inicial += "<option value='" + (index + 1) + "'" + select_Brasil + ">" + item + "</option>\\n";\par
-   68             \}\par
-   69         \});\par
-   70         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
-   71     \},\par
-   72 \par
-   73     inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) \{\par
-   74         var lista = lista_municipios[uf_sigla];\par
-   75         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
-   76         $.each(lista, function(index, item) \{\par
-   77             insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-   78         \});\par
-   79         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
-   80     \},\par
-   81 \par
-   82     getIdxArray : function(value, array) \{\par
-   83         return $.inArray(value, array) + 1;\par
-   84     \},\par
-   85 \par
-   86     contains : function(value, array) \{\par
-   87         return ($.inArray(value, array) >= 0);\par
-   88     \},\par
-   89 \par
-   90     getListaFrequencias : function() \{\par
-   91         var lista_frequencias = [ 'Dia', 'Semana', 'M\'EAs', 'Ano', 'Eventualmente' ];\par
-   92         return lista_frequencias;\par
+   48     /// @function util.inicializaSelectPais\par
+   49     /// Inicia uma _caixa de sele\'E7\'E3o_ de pa\'EDses com mensagem personalizada e valor de retorno como o pr\'F3prio item da lista\par
+   50     /// @param \{string\} nome_campo  identificador do controle HTML\par
+   51     /// @param \{string[]\} lista     lista de velores\par
+   52     /// @param \{string\} mensagem    mensagem personalizada\par
+   53     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+   54     inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil, mensagem) \{\par
+   55         var lista = paises.listados();\par
+   56         var insert_inicial = "";\par
+   57         if (!inclui_Brasil) \{\par
+   58             if (util.isEmpty(mensagem)) \{\par
+   59                 msgSelecione = "Selecione";\par
+   60             \} else \{\par
+   61                 msgSelecione = mensagem;\par
+   62             \}\par
+   63             insert_inicial = "<option value='-1'>" + msgSelecione + "</option>\\n";\par
+   64         \}\par
+   65         $.each(lista, function(index, item) \{\par
+   66             if (inclui_Brasil || (item != 'Brasil')) \{\par
+   67                 var select_Brasil = "";\par
+   68                 if (item == 'Brasil') \{\par
+   69                     select_Brasil = " selected";\par
+   70                     app.setAtributo(nome_registro, index + 1);\par
+   71                 \}\par
+   72                 insert_inicial += "<option value='" + (index + 1) + "'" + select_Brasil + ">" + item + "</option>\\n";\par
+   73             \}\par
+   74         \});\par
+   75         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
+   76     \},\par
+   77 \par
+   78     inicializaSelectMunicipio : function(nome_campo, uf_sigla, mensagem) \{\par
+   79         var lista = lista_municipios[uf_sigla];\par
+   80         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
+   81         $.each(lista, function(index, item) \{\par
+   82             insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+   83         \});\par
+   84         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
+   85     \},\par
+   86 \par
+   87     getIdxArray : function(value, array) \{\par
+   88         return $.inArray(value, array) + 1;\par
+   89     \},\par
+   90 \par
+   91     contains : function(value, array) \{\par
+   92         return ($.inArray(value, array) >= 0);\par
    93     \},\par
    94 \par
-   95     inicializaSelectFrequencia : function(tipo_fluxo) \{\par
-   96         var lista_frequencias = util.getListaFrequencias();\par
-   97         var nome_campo = 'frequencia_sel_' + tipo_fluxo;\par
-   98         util.inicializaSelect(nome_campo, lista_frequencias);\par
-   99         $("#" + nome_campo).change(function() \{\par
-  100             var freq_num = $('#frequencia_num_' + tipo_fluxo);\par
-  101             if ($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias)) \{\par
-  102                 freq_num.val(1);\par
-  103                 app.setAtributo('frequenciaQtd', 1);\par
-  104             \}\par
-  105         \});\par
-  106     \},\par
-  107 \par
-  108     inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) \{\par
-  109         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
-  110         $.each(lista, function(index, item) \{\par
-  111             insert_inicial += "<option value='" + item.id + "'>" + item.numeroid + "</option>\\n";\par
-  112         \});\par
-  113         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
-  114     \},\par
-  115 \par
-  116     inicializaSelectTipoDeCarga : function(nome_campo, mensagem, lista) \{\par
-  117         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
-  118         $.each(lista, function(index, item) \{\par
-  119             insert_inicial += "<option value='" + item.id + "'>" + item.nomeProduto + "</option>\\n";\par
-  120         \});\par
-  121         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
-  122     \},\par
-  123 \par
-  124     inicializaPlacas : function(tipo_fluxo) \{\par
-  125         // $('.input_placa').keyup(function() \{\par
-  126         // var input = $(this);\par
-  127         // input.val(input.val().toUpperCase());\par
-  128         // \});\par
-  129         $('#placa_letras_' + tipo_fluxo).keyup(function() \{\par
-  130             var input = $(this);\par
-  131             var regex = new RegExp("[^a-zA-Z]+");\par
-  132             var value = null;\par
-  133             if (!util.isEmpty(input.val())) \{\par
-  134                 input.val(input.val().replace(regex, ''));\par
-  135                 value = input.val();\par
-  136             \}\par
-  137             if (util.isEmpty(value) || value.length < Number(input.attr("maxlength"))) \{\par
-  138                 $('#grupo_placa_numeros_' + tipo_fluxo).hide();\par
-  139                 $('#placa_numeros_' + tipo_fluxo).val("");\par
-  140                 // app.setAtributo('placa_numeros', null);\par
-  141             \} else \{\par
-  142                 app.setAtributo('placa_letras', input.val());\par
-  143                 $('#grupo_placa_numeros_' + tipo_fluxo).show();\par
-  144                 $('#placa_letras' + tipo_fluxo).trigger('change');\par
-  145                 $('#placa_numeros_' + tipo_fluxo).focus();\par
-  146             \}\par
-  147             // $('#placa_letras_' + tipo_fluxo).change(function() \{\par
-  148             // app.setAtributo('placa_letras', $(this).val());\par
-  149             // \});\par
-  150         \});\par
-  151         $('#placa_numeros_' + tipo_fluxo).keyup(function() \{\par
-  152             var input = $(this);\par
-  153             var regex = new RegExp("[^0-9]+");\par
-  154             input.val(input.val().replace(regex, ''));\par
-  155             var max_len = Number(input.attr("maxlength"));\par
-  156             if (input.val().length >= max_len) \{\par
-  157                 input.val(input.val().substring(0, max_len));\par
-  158                 $('#placa_numeros_' + tipo_fluxo).trigger('change');\par
-  159                 // app.setAtributo('placa_numeros', input.val());\par
-  160             \}\par
-  161         \});\par
-  162         $('#placa_unica_' + tipo_fluxo).attr("maxlength","20");\par
-  163     \},\par
-  164 \par
-  165     inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) \{\par
-  166         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
-  167         $.each(lista_tb_aux, function(index, item) \{\par
-  168             if (nome_fluxo == "simples" && item.simples) \{\par
-  169                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-  170             \}\par
-  171             if (nome_fluxo == "onibus" && item.onibus) \{\par
-  172                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-  173             \}\par
-  174             if (nome_fluxo == "carga" && item.carga) \{\par
-  175                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-  176             \}\par
-  177             if (nome_fluxo == "carga_cinza" && item.carga_cinza) \{\par
-  178                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-  179             \}\par
-  180             if (nome_fluxo == "carga_vermelha" && item.carga_vermelha) \{\par
-  181                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-  182             \}\par
-  183             if (nome_fluxo == "moto" && item.moto) \{\par
-  184                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
-  185             \}\par
-  186         \});\par
-  187         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
-  188     \},\par
-  189 \par
-  190     getIdFromTabelaAuxiliar : function(valor, lista_tb_aux) \{\par
-  191         \par
-  192         if (valor == null ) \{\par
-  193             app.logger.log("[ERRO] getIdFromTabelaAuxiliar: valor null");\par
-  194         \}\par
-  195         if ( lista_tb_aux == null ) \{\par
-  196             app.logger.log("[ERRO] getIdFromTabelaAuxiliar: lista_tb_aux null");\par
-  197         \}\par
-  198         \par
-  199         for ( var item in lista_tb_aux) \{\par
-  200             if (lista_tb_aux[item].nome == valor) \{\par
-  201                 var id = Number(lista_tb_aux[item].id);\par
-  202                 if (!isNaN(id)) \{\par
-  203                     return Number(id);\par
-  204                 \}\par
-  205                 return id;\par
-  206             \}\par
-  207         \}\par
-  208         return null;\par
-  209     \},\par
-  210 \par
-  211     // Fun\'E7\'F5es para o progresso\par
-  212     /**\par
-  213      * \par
-  214      * @param nome_registro\par
-  215      *            nome do atributo da vari\'E1vel global registro\par
-  216      * @param nome_campo\par
-  217      *            id do componente html\par
-  218      * @param grupo_proximo\par
-  219      *            id da div que ir\'E1 sofrer show/hide\par
-  220      */\par
-  221     progressoRadioSimNao : function(nome_registro, nome_campo, grupo_proximo) \{\par
-  222         $('#' + nome_campo + '_sim').click(function() \{\par
-  223             $('#' + grupo_proximo).show();\par
-  224             app.setAtributo(nome_registro, true);\par
-  225         \});\par
-  226         $('#' + nome_campo + '_nao').click(function() \{\par
-  227             $('#' + grupo_proximo).show();\par
-  228             app.setAtributo(nome_registro, false);\par
-  229         \});\par
-  230     \},\par
-  231 \par
-  232     progressoRadioSimNaoAlternado : function(nome_registro, nome_campo, grupo_proximo_sim, grupo_proximo_nao) \{\par
-  233         $('#' + nome_campo + '_sim').click(function() \{\par
-  234             $('#' + grupo_proximo_sim).show();\par
-  235             $('#' + grupo_proximo_nao).hide();\par
-  236             app.setAtributo(nome_registro, true);\par
-  237         \});\par
-  238         $('#' + nome_campo + '_nao').click(function() \{\par
-  239             $('#' + grupo_proximo_sim).hide();\par
-  240             $('#' + grupo_proximo_nao).show();\par
-  241             app.setAtributo(nome_registro, false);\par
+   95     getListaFrequencias : function() \{\par
+   96         var lista_frequencias = [ 'Dia', 'Semana', 'M\'EAs', 'Ano', 'Eventualmente' ];\par
+   97         return lista_frequencias;\par
+   98     \},\par
+   99 \par
+  100     inicializaSelectFrequencia : function(tipo_fluxo) \{\par
+  101         var lista_frequencias = util.getListaFrequencias();\par
+  102         var nome_campo = 'frequencia_sel_' + tipo_fluxo;\par
+  103         util.inicializaSelect(nome_campo, lista_frequencias);\par
+  104         $("#" + nome_campo).change(function() \{\par
+  105             var freq_num = $('#frequencia_num_' + tipo_fluxo);\par
+  106             if ($(this).val() == util.getIdxArray('Eventualmente', lista_frequencias)) \{\par
+  107                 freq_num.val(1);\par
+  108                 app.setAtributo('frequenciaQtd', 1);\par
+  109             \}\par
+  110         \});\par
+  111     \},\par
+  112 \par
+  113     inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) \{\par
+  114         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
+  115         $.each(lista, function(index, item) \{\par
+  116             insert_inicial += "<option value='" + item.id + "'>" + item.numeroid + "</option>\\n";\par
+  117         \});\par
+  118         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
+  119     \},\par
+  120 \par
+  121     inicializaSelectTipoDeCarga : function(nome_campo, mensagem, lista) \{\par
+  122         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
+  123         $.each(lista, function(index, item) \{\par
+  124             insert_inicial += "<option value='" + item.id + "'>" + item.nomeProduto + "</option>\\n";\par
+  125         \});\par
+  126         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
+  127     \},\par
+  128 \par
+  129     inicializaPlacas : function(tipo_fluxo) \{\par
+  130         // $('.input_placa').keyup(function() \{\par
+  131         // var input = $(this);\par
+  132         // input.val(input.val().toUpperCase());\par
+  133         // \});\par
+  134         $('#placa_letras_' + tipo_fluxo).keyup(function() \{\par
+  135             var input = $(this);\par
+  136             var regex = new RegExp("[^a-zA-Z]+");\par
+  137             var value = null;\par
+  138             if (!util.isEmpty(input.val())) \{\par
+  139                 input.val(input.val().replace(regex, ''));\par
+  140                 value = input.val();\par
+  141             \}\par
+  142             if (util.isEmpty(value) || value.length < Number(input.attr("maxlength"))) \{\par
+  143                 $('#grupo_placa_numeros_' + tipo_fluxo).hide();\par
+  144                 $('#placa_numeros_' + tipo_fluxo).val("");\par
+  145                 // app.setAtributo('placa_numeros', null);\par
+  146             \} else \{\par
+  147                 app.setAtributo('placa_letras', input.val());\par
+  148                 $('#grupo_placa_numeros_' + tipo_fluxo).show();\par
+  149                 $('#placa_letras' + tipo_fluxo).trigger('change');\par
+  150                 $('#placa_numeros_' + tipo_fluxo).focus();\par
+  151             \}\par
+  152             // $('#placa_letras_' + tipo_fluxo).change(function() \{\par
+  153             // app.setAtributo('placa_letras', $(this).val());\par
+  154             // \});\par
+  155         \});\par
+  156         $('#placa_numeros_' + tipo_fluxo).keyup(function() \{\par
+  157             var input = $(this);\par
+  158             var regex = new RegExp("[^0-9]+");\par
+  159             input.val(input.val().replace(regex, ''));\par
+  160             var max_len = Number(input.attr("maxlength"));\par
+  161             if (input.val().length >= max_len) \{\par
+  162                 input.val(input.val().substring(0, max_len));\par
+  163                 $('#placa_numeros_' + tipo_fluxo).trigger('change');\par
+  164                 // app.setAtributo('placa_numeros', input.val());\par
+  165             \}\par
+  166         \});\par
+  167         $('#placa_unica_' + tipo_fluxo).attr("maxlength","20");\par
+  168     \},\par
+  169 \par
+  170     inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) \{\par
+  171         var insert_inicial = "<option value='-1'>" + mensagem + "</option>\\n";\par
+  172         $.each(lista_tb_aux, function(index, item) \{\par
+  173             if (nome_fluxo == "simples" && item.simples) \{\par
+  174                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+  175             \}\par
+  176             if (nome_fluxo == "onibus" && item.onibus) \{\par
+  177                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+  178             \}\par
+  179             if (nome_fluxo == "carga" && item.carga) \{\par
+  180                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+  181             \}\par
+  182             if (nome_fluxo == "carga_cinza" && item.carga_cinza) \{\par
+  183                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+  184             \}\par
+  185             if (nome_fluxo == "carga_vermelha" && item.carga_vermelha) \{\par
+  186                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+  187             \}\par
+  188             if (nome_fluxo == "moto" && item.moto) \{\par
+  189                 insert_inicial += "<option value='" + item.id + "'>" + item.nome + "</option>\\n";\par
+  190             \}\par
+  191         \});\par
+  192         $("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);\par
+  193     \},\par
+  194 \par
+  195     getIdFromTabelaAuxiliar : function(valor, lista_tb_aux) \{\par
+  196         \par
+  197         if (valor == null ) \{\par
+  198             app.logger.log("[ERRO] getIdFromTabelaAuxiliar: valor null");\par
+  199         \}\par
+  200         if ( lista_tb_aux == null ) \{\par
+  201             app.logger.log("[ERRO] getIdFromTabelaAuxiliar: lista_tb_aux null");\par
+  202         \}\par
+  203         \par
+  204         for ( var item in lista_tb_aux) \{\par
+  205             if (lista_tb_aux[item].nome == valor) \{\par
+  206                 var id = Number(lista_tb_aux[item].id);\par
+  207                 if (!isNaN(id)) \{\par
+  208                     return Number(id);\par
+  209                 \}\par
+  210                 return id;\par
+  211             \}\par
+  212         \}\par
+  213         return null;\par
+  214     \},\par
+  215 \par
+  216     // Fun\'E7\'F5es para o progresso\par
+  217     /**\par
+  218      * \par
+  219      * @param nome_registro\par
+  220      *            nome do atributo da vari\'E1vel global registro\par
+  221      * @param nome_campo\par
+  222      *            id do componente html\par
+  223      * @param grupo_proximo\par
+  224      *            id da div que ir\'E1 sofrer show/hide\par
+  225      */\par
+  226     progressoRadioSimNao : function(nome_registro, nome_campo, grupo_proximo) \{\par
+  227         $('#' + nome_campo + '_sim').click(function() \{\par
+  228             $('#' + grupo_proximo).show();\par
+  229             app.setAtributo(nome_registro, true);\par
+  230         \});\par
+  231         $('#' + nome_campo + '_nao').click(function() \{\par
+  232             $('#' + grupo_proximo).show();\par
+  233             app.setAtributo(nome_registro, false);\par
+  234         \});\par
+  235     \},\par
+  236 \par
+  237     progressoRadioSimNaoAlternado : function(nome_registro, nome_campo, grupo_proximo_sim, grupo_proximo_nao) \{\par
+  238         $('#' + nome_campo + '_sim').click(function() \{\par
+  239             $('#' + grupo_proximo_sim).show();\par
+  240             $('#' + grupo_proximo_nao).hide();\par
+  241             app.setAtributo(nome_registro, true);\par
   242         \});\par
-  243     \},\par
-  244 \par
-  245     progressoRadioPlacaEstrangeira : function(tipo_fluxo) \{\par
-  246         $('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() \{\par
-  247             $('#grupo_pais_' + tipo_fluxo).show();\par
-  248             $('#grupo_placa_' + tipo_fluxo).hide();\par
-  249             app.setAtributo('placaEstrangeira', true);\par
-  250             app.setAtributo('placa_letras', null);\par
-  251             app.setAtributo('placa_numeros', null);\par
-  252             $('#placa_letras_' + tipo_fluxo).val(null);\par
-  253             $('#placa_numeros_' + tipo_fluxo).val(null);\par
-  254 \par
-  255             if (Number($('#pais_' + tipo_fluxo).val()) == -1) \{\par
-  256                 $("#grupo_placa_unica_" + tipo_fluxo).hide();\par
-  257             \}\par
-  258         \});\par
-  259         $('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() \{\par
-  260             $('#grupo_pais_' + tipo_fluxo).hide();\par
-  261             $('#grupo_placa_unica_' + tipo_fluxo).hide();\par
-  262             if (util.isEmpty(registro.placaEstrangeira) || registro.placaEstrangeira) \{\par
-  263                 $('#grupo_placa_numeros_' + tipo_fluxo).hide();\par
-  264             \}\par
-  265             app.setAtributo('idPaisPlacaEstrangeira', null);\par
-  266             app.setAtributo('placaEstrangeira', false);\par
-  267             app.setAtributo('placa_unica', null);\par
-  268             $('#placa_unica_' + tipo_fluxo).val(null);\par
-  269             util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");\par
-  270             $("#grupo_placa_" + tipo_fluxo).show();\par
-  271         \});\par
-  272     \},\par
-  273 \par
-  274     progressoCheckboxAlternado : function(nome_registro, nome_campo, grupo_proximo_check, grupo_proximo_uncheck) \{\par
-  275         $('#' + nome_campo).click(function() \{\par
-  276             if ($(this).is(':checked')) \{\par
-  277                 $('#' + grupo_proximo_check).show();\par
-  278                 $('#' + grupo_proximo_uncheck).hide();\par
-  279                 app.setAtributo(nome_registro, true);\par
-  280             \} else \{\par
-  281                 $('#' + grupo_proximo_check).hide();\par
-  282                 $('#' + grupo_proximo_uncheck).show();\par
-  283                 app.setAtributo(nome_registro, false);\par
-  284             \}\par
-  285         \});\par
-  286     \},\par
-  287 \par
-  288     /**\par
-  289      * \par
-  290      * @param nome_registro\par
-  291      *            nome do atributo da vari\'E1vel global registro\par
-  292      * @param nome_campo\par
-  293      *            id do componente html\par
-  294      * @param grupo_proximo\par
-  295      *            id da div que ir\'E1 sofrer show/hide\par
-  296      */\par
-  297     progressoSelect : function(nome_registro, nome_campo, grupo_proximo) \{\par
-  298         $('#' + nome_campo).change(function() \{\par
-  299             if (Number($(this).val()) != -1) \{\par
-  300                 app.setAtributo(nome_registro, $(this).val());\par
-  301                 $("#" + grupo_proximo).show();\par
-  302             \} else \{\par
-  303                 $("#" + grupo_proximo).hide();\par
-  304                 app.setAtributo(nome_registro, null);\par
-  305             \}\par
-  306         \});\par
-  307     \},\par
-  308 \par
-  309     progressoSelectPais : function(nome_registro_pais, nome_registro_municipio, nome_campo, proximo_imediato, proximo_imediato2,\par
-  310             grupo_proximo, fluxo) \{\par
-  311         $('#' + nome_campo).change(function() \{\par
-  312             grupo_proximo_imediato = "grupo_" + proximo_imediato + "_" + fluxo;\par
-  313             grupo_proximo_imediato2 = "grupo_" + proximo_imediato2 + "_" + fluxo;\par
-  314             if (Number($(this).val()) == -1) \{\par
-  315                 $("#" + grupo_proximo_imediato).hide();\par
-  316                 $("#" + grupo_proximo_imediato2).hide();\par
-  317                 $("#" + grupo_proximo).hide();\par
-  318                 app.setAtributo(nome_registro_pais, null);\par
-  319                 app.setAtributo(proximo_imediato, null);\par
-  320                 app.setAtributo(nome_registro_municipio, null);\par
-  321             \} else if (Number($(this).val()) != 1) \{ // Pa\'EDs diferente de Brasil\par
-  322                 $("#" + grupo_proximo_imediato).hide();\par
-  323                 $("#" + grupo_proximo_imediato2).hide();\par
-  324                 $("#" + grupo_proximo).show();\par
-  325                 app.setAtributo(nome_registro_pais, $(this).val());\par
-  326                 app.setAtributo(proximo_imediato, null);\par
-  327                 app.setAtributo(nome_registro_municipio, null);\par
-  328                 util.inicializaSelectCustomValueAsIndex(proximo_imediato + "_" + fluxo, lista_estados, "UF");\par
-  329                 $("#" + proximo_imediato2 + "_" + fluxo).val("");\par
-  330             \} else \{ // Pa\'EDs \'E9 Brasil\par
-  331                 $("#" + grupo_proximo_imediato).show();\par
-  332                 $("#" + grupo_proximo).hide();\par
-  333                 app.setAtributo(nome_registro_pais, $(this).val());\par
-  334             \}\par
-  335         \});\par
-  336     \},\par
-  337 \par
-  338     progressoRestartSelect : function(nome_campo, mensagem) \{\par
-  339         $("#" + nome_campo + " option:contains('" + mensagem + "')").prop(\{\par
-  340             selected : true\par
-  341         \});\par
-  342         $("select#" + nome_campo).selectmenu("refresh", true);\par
-  343     \},\par
-  344 \par
-  345     /**\par
-  346      * \par
-  347      * @param nome_registro\par
-  348      *            nome do atributo da vari\'E1vel global registro\par
-  349      * @param nome_campo\par
-  350      *            id do componente html\par
-  351      * @param grupo_proximo\par
-  352      *            id da div que ir\'E1 sofrer show/hide\par
-  353      * @param autocomplete\par
-  354      *            bool para indicar se \'E9 um campo autocomplete\par
-  355      */\par
-  356     progressoInputText : function(nome_registro, nome_campo, grupo_proximo, autocomplete) \{\par
-  357 \par
-  358         if (autocomplete) \{ // autocomplete\par
-  359             $('#' + nome_campo).change(function() \{\par
-  360                 progride($(this).val());\par
-  361                 app.setAtributo(nome_registro, $(this).val());\par
-  362             \});\par
-  363         \} else \{ // textinput comum\par
-  364             $('#' + nome_campo).keyup(function() \{\par
+  243         $('#' + nome_campo + '_nao').click(function() \{\par
+  244             $('#' + grupo_proximo_sim).hide();\par
+  245             $('#' + grupo_proximo_nao).show();\par
+  246             app.setAtributo(nome_registro, false);\par
+  247         \});\par
+  248     \},\par
+  249 \par
+  250     progressoRadioPlacaEstrangeira : function(tipo_fluxo) \{\par
+  251         $('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() \{\par
+  252             $('#grupo_pais_' + tipo_fluxo).show();\par
+  253             $('#grupo_placa_' + tipo_fluxo).hide();\par
+  254             app.setAtributo('placaEstrangeira', true);\par
+  255             app.setAtributo('placa_letras', null);\par
+  256             app.setAtributo('placa_numeros', null);\par
+  257             $('#placa_letras_' + tipo_fluxo).val(null);\par
+  258             $('#placa_numeros_' + tipo_fluxo).val(null);\par
+  259 \par
+  260             if (Number($('#pais_' + tipo_fluxo).val()) == -1) \{\par
+  261                 $("#grupo_placa_unica_" + tipo_fluxo).hide();\par
+  262             \}\par
+  263         \});\par
+  264         $('#placa_estrangeira_' + tipo_fluxo + '_nao').click(function() \{\par
+  265             $('#grupo_pais_' + tipo_fluxo).hide();\par
+  266             $('#grupo_placa_unica_' + tipo_fluxo).hide();\par
+  267             if (util.isEmpty(registro.placaEstrangeira) || registro.placaEstrangeira) \{\par
+  268                 $('#grupo_placa_numeros_' + tipo_fluxo).hide();\par
+  269             \}\par
+  270             app.setAtributo('idPaisPlacaEstrangeira', null);\par
+  271             app.setAtributo('placaEstrangeira', false);\par
+  272             app.setAtributo('placa_unica', null);\par
+  273             $('#placa_unica_' + tipo_fluxo).val(null);\par
+  274             util.progressoRestartSelect("pais_" + tipo_fluxo, "Selecione");\par
+  275             $("#grupo_placa_" + tipo_fluxo).show();\par
+  276         \});\par
+  277     \},\par
+  278 \par
+  279     progressoCheckboxAlternado : function(nome_registro, nome_campo, grupo_proximo_check, grupo_proximo_uncheck) \{\par
+  280         $('#' + nome_campo).click(function() \{\par
+  281             if ($(this).is(':checked')) \{\par
+  282                 $('#' + grupo_proximo_check).show();\par
+  283                 $('#' + grupo_proximo_uncheck).hide();\par
+  284                 app.setAtributo(nome_registro, true);\par
+  285             \} else \{\par
+  286                 $('#' + grupo_proximo_check).hide();\par
+  287                 $('#' + grupo_proximo_uncheck).show();\par
+  288                 app.setAtributo(nome_registro, false);\par
+  289             \}\par
+  290         \});\par
+  291     \},\par
+  292 \par
+  293     /**\par
+  294      * \par
+  295      * @param nome_registro\par
+  296      *            nome do atributo da vari\'E1vel global registro\par
+  297      * @param nome_campo\par
+  298      *            id do componente html\par
+  299      * @param grupo_proximo\par
+  300      *            id da div que ir\'E1 sofrer show/hide\par
+  301      */\par
+  302     progressoSelect : function(nome_registro, nome_campo, grupo_proximo) \{\par
+  303         $('#' + nome_campo).change(function() \{\par
+  304             if (Number($(this).val()) != -1) \{\par
+  305                 app.setAtributo(nome_registro, $(this).val());\par
+  306                 $("#" + grupo_proximo).show();\par
+  307             \} else \{\par
+  308                 $("#" + grupo_proximo).hide();\par
+  309                 app.setAtributo(nome_registro, null);\par
+  310             \}\par
+  311         \});\par
+  312     \},\par
+  313 \par
+  314     progressoSelectPais : function(nome_registro_pais, nome_registro_municipio, nome_campo, proximo_imediato, proximo_imediato2,\par
+  315             grupo_proximo, fluxo) \{\par
+  316         $('#' + nome_campo).change(function() \{\par
+  317             grupo_proximo_imediato = "grupo_" + proximo_imediato + "_" + fluxo;\par
+  318             grupo_proximo_imediato2 = "grupo_" + proximo_imediato2 + "_" + fluxo;\par
+  319             if (Number($(this).val()) == -1) \{\par
+  320                 $("#" + grupo_proximo_imediato).hide();\par
+  321                 $("#" + grupo_proximo_imediato2).hide();\par
+  322                 $("#" + grupo_proximo).hide();\par
+  323                 app.setAtributo(nome_registro_pais, null);\par
+  324                 app.setAtributo(proximo_imediato, null);\par
+  325                 app.setAtributo(nome_registro_municipio, null);\par
+  326             \} else if (Number($(this).val()) != 1) \{ // Pa\'EDs diferente de Brasil\par
+  327                 $("#" + grupo_proximo_imediato).hide();\par
+  328                 $("#" + grupo_proximo_imediato2).hide();\par
+  329                 $("#" + grupo_proximo).show();\par
+  330                 app.setAtributo(nome_registro_pais, $(this).val());\par
+  331                 app.setAtributo(proximo_imediato, null);\par
+  332                 app.setAtributo(nome_registro_municipio, null);\par
+  333                 util.inicializaSelectCustomValueAsIndex(proximo_imediato + "_" + fluxo, lista_estados, "UF");\par
+  334                 $("#" + proximo_imediato2 + "_" + fluxo).val("");\par
+  335             \} else \{ // Pa\'EDs \'E9 Brasil\par
+  336                 $("#" + grupo_proximo_imediato).show();\par
+  337                 $("#" + grupo_proximo).hide();\par
+  338                 app.setAtributo(nome_registro_pais, $(this).val());\par
+  339             \}\par
+  340         \});\par
+  341     \},\par
+  342 \par
+  343     progressoRestartSelect : function(nome_campo, mensagem) \{\par
+  344         $("#" + nome_campo + " option:contains('" + mensagem + "')").prop(\{\par
+  345             selected : true\par
+  346         \});\par
+  347         $("select#" + nome_campo).selectmenu("refresh", true);\par
+  348     \},\par
+  349 \par
+  350     /**\par
+  351      * \par
+  352      * @param nome_registro\par
+  353      *            nome do atributo da vari\'E1vel global registro\par
+  354      * @param nome_campo\par
+  355      *            id do componente html\par
+  356      * @param grupo_proximo\par
+  357      *            id da div que ir\'E1 sofrer show/hide\par
+  358      * @param autocomplete\par
+  359      *            bool para indicar se \'E9 um campo autocomplete\par
+  360      */\par
+  361     progressoInputText : function(nome_registro, nome_campo, grupo_proximo, autocomplete) \{\par
+  362 \par
+  363         if (autocomplete) \{ // autocomplete\par
+  364             $('#' + nome_campo).change(function() \{\par
   365                 progride($(this).val());\par
-  366             \});\par
-  367             $('#' + nome_campo).change(function() \{\par
-  368                 app.setAtributo(nome_registro, $(this).val());\par
-  369             \});\par
-  370         \}\par
-  371 \par
-  372         function progride(value) \{\par
-  373             if (util.isEmpty(value)) \{\par
-  374                 $("#" + grupo_proximo).hide();\par
-  375             \} else \{\par
-  376                 $("#" + grupo_proximo).show();\par
-  377             \}\par
-  378         \}\par
-  379     \},\par
-  380 \par
-  381     progressoInputTextLen : function(nome_registro, nome_campo, grupo_proximo) \{\par
-  382         $('#' + nome_campo).keyup(function() \{\par
-  383             var input = $(this);\par
-  384             var max_len = Number(input.attr("maxlength"));\par
-  385             var min_len = input.attr("minlength");\par
-  386             \par
-  387             if(typeof min_len !== typeof undefined && min_len !== false)\{\par
-  388                 min_len=Number(min_len);\par
-  389             \}else\par
-  390                 min_len=max_len;\par
+  366                 app.setAtributo(nome_registro, $(this).val());\par
+  367             \});\par
+  368         \} else \{ // textinput comum\par
+  369             $('#' + nome_campo).keyup(function() \{\par
+  370                 progride($(this).val());\par
+  371             \});\par
+  372             $('#' + nome_campo).change(function() \{\par
+  373                 app.setAtributo(nome_registro, $(this).val());\par
+  374             \});\par
+  375         \}\par
+  376 \par
+  377         function progride(value) \{\par
+  378             if (util.isEmpty(value)) \{\par
+  379                 $("#" + grupo_proximo).hide();\par
+  380             \} else \{\par
+  381                 $("#" + grupo_proximo).show();\par
+  382             \}\par
+  383         \}\par
+  384     \},\par
+  385 \par
+  386     progressoInputTextLen : function(nome_registro, nome_campo, grupo_proximo) \{\par
+  387         $('#' + nome_campo).keyup(function() \{\par
+  388             var input = $(this);\par
+  389             var max_len = Number(input.attr("maxlength"));\par
+  390             var min_len = input.attr("minlength");\par
   391             \par
-  392             if (progride(input.val(),min_len)) \{\par
-  393                 input.val(String(input.val()).trim().substring(0, max_len));\par
-  394                 input.trigger('change');\par
-  395             \}\par
-  396         \});\par
-  397         $('#' + nome_campo).change(function() \{\par
-  398             app.setAtributo(nome_registro, $(this).val());\par
-  399         \});\par
-  400 \par
-  401         function progride(value, min_len) \{\par
-  402             if (util.isEmpty(value) || (String(value).trim().length < min_len)) \{\par
-  403                 $("#" + grupo_proximo).hide();\par
-  404             \} else \{\par
-  405                 $("#" + grupo_proximo).show();\par
-  406                 return true;\par
-  407             \}\par
-  408             return false;\par
-  409         \}\par
-  410     \},\par
-  411 \par
-  412     progressoInputMoney : function(nome_registro, nome_campo, grupo_proximo, autocomplete) \{\par
-  413         $('#' + nome_campo).keyup(function() \{\par
-  414             progride($(this).maskMoney('unmasked')[0]);\par
-  415         \});\par
-  416         $('#' + nome_campo).change(function() \{\par
-  417             app.setAtributo(nome_registro, $(this).maskMoney('unmasked')[0]);\par
-  418         \});\par
-  419 \par
-  420         function progride(value) \{\par
-  421             if (util.isEmpty(value) || (Number(value) == 0)) \{\par
-  422                 $("#" + grupo_proximo).hide();\par
-  423             \} else \{\par
-  424                 $("#" + grupo_proximo).show();\par
-  425             \}\par
-  426         \}\par
-  427     \},\par
-  428 \par
-  429     progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) \{\par
-  430         util.progressoInputTextLen("placa_numeros", "placa_numeros_" + tipo_fluxo, grupo_proximo);\par
-  431     \},\par
-  432 \par
-  433     // Fun\'E7\'F5es para valida\'E7\'E3o dos componentes\par
-  434     validaSelect : function(nome_campo, campo_aviso) \{\par
-  435         if (Number($('#' + nome_campo).val()) != -1) \{\par
-  436             return true;\par
-  437         \} else \{\par
-  438             if (!util.isEmpty(campo_aviso)) \{\par
-  439                 util.alerta_msg(campo_aviso);\par
-  440             \}\par
-  441             return false;\par
-  442         \}\par
-  443     \},\par
-  444 \par
-  445     validaRadioSimNao : function(nome_campo, campo_aviso) \{\par
-  446         var option = $('input[name=' + nome_campo + ']:checked').val();\par
-  447         if (option != null) \{\par
-  448             return true;\par
-  449         \} else \{\par
-  450             util.alerta_msg(campo_aviso);\par
-  451             return false;\par
-  452         \}\par
-  453     \},\par
-  454 \par
-  455     validaRadioChecked : function(nome_campo, campo_aviso) \{\par
-  456         var option = $('input[name=' + nome_campo + ']').val();\par
-  457         if (option != null) \{\par
-  458             return true;\par
-  459         \} else \{\par
-  460             util.alerta_msg(campo_aviso);\par
-  461             return false;\par
-  462         \}\par
-  463     \},\par
-  464 \par
-  465     validaInputText : function(nome_campo, campo_aviso) \{\par
-  466         var value = $.trim($('#' + nome_campo).val());\par
-  467         var max_len = Number($.trim($('#' + nome_campo).attr("maxlength")))\par
-  468         if (value.length > 0) \{\par
-  469             if ((max_len > 0) && (value.length > max_len)) \{\par
-  470                 if (!util.isEmpty(campo_aviso)) \{\par
-  471                     util.alerta_msg(campo_aviso, "O campo deve ter no m\'E1ximo " + max_len + " caracteres.");\par
-  472                 \}\par
-  473                 return false;\par
-  474             \} else \{\par
-  475                 return true;\par
-  476             \}\par
-  477         \} else \{\par
-  478             util.alerta_msg(campo_aviso);\par
-  479             if (!util.isEmpty(campo_aviso)) \{\par
-  480                 return false;\par
+  392             if(typeof min_len !== typeof undefined && min_len !== false)\{\par
+  393                 min_len=Number(min_len);\par
+  394             \}else\par
+  395                 min_len=max_len;\par
+  396             \par
+  397             if (progride(input.val(),min_len)) \{\par
+  398                 input.val(String(input.val()).trim().substring(0, max_len));\par
+  399                 input.trigger('change');\par
+  400             \}\par
+  401         \});\par
+  402         $('#' + nome_campo).change(function() \{\par
+  403             app.setAtributo(nome_registro, $(this).val());\par
+  404         \});\par
+  405 \par
+  406         function progride(value, min_len) \{\par
+  407             if (util.isEmpty(value) || (String(value).trim().length < min_len)) \{\par
+  408                 $("#" + grupo_proximo).hide();\par
+  409             \} else \{\par
+  410                 $("#" + grupo_proximo).show();\par
+  411                 return true;\par
+  412             \}\par
+  413             return false;\par
+  414         \}\par
+  415     \},\par
+  416 \par
+  417     progressoInputMoney : function(nome_registro, nome_campo, grupo_proximo, autocomplete) \{\par
+  418         $('#' + nome_campo).keyup(function() \{\par
+  419             progride($(this).maskMoney('unmasked')[0]);\par
+  420         \});\par
+  421         $('#' + nome_campo).change(function() \{\par
+  422             app.setAtributo(nome_registro, $(this).maskMoney('unmasked')[0]);\par
+  423         \});\par
+  424 \par
+  425         function progride(value) \{\par
+  426             if (util.isEmpty(value) || (Number(value) == 0)) \{\par
+  427                 $("#" + grupo_proximo).hide();\par
+  428             \} else \{\par
+  429                 $("#" + grupo_proximo).show();\par
+  430             \}\par
+  431         \}\par
+  432     \},\par
+  433 \par
+  434     progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) \{\par
+  435         util.progressoInputTextLen("placa_numeros", "placa_numeros_" + tipo_fluxo, grupo_proximo);\par
+  436     \},\par
+  437 \par
+  438     // Fun\'E7\'F5es para valida\'E7\'E3o dos componentes\par
+  439     validaSelect : function(nome_campo, campo_aviso) \{\par
+  440         if (Number($('#' + nome_campo).val()) != -1) \{\par
+  441             return true;\par
+  442         \} else \{\par
+  443             if (!util.isEmpty(campo_aviso)) \{\par
+  444                 util.alerta_msg(campo_aviso);\par
+  445             \}\par
+  446             return false;\par
+  447         \}\par
+  448     \},\par
+  449 \par
+  450     validaRadioSimNao : function(nome_campo, campo_aviso) \{\par
+  451         var option = $('input[name=' + nome_campo + ']:checked').val();\par
+  452         if (option != null) \{\par
+  453             return true;\par
+  454         \} else \{\par
+  455             util.alerta_msg(campo_aviso);\par
+  456             return false;\par
+  457         \}\par
+  458     \},\par
+  459 \par
+  460     validaRadioChecked : function(nome_campo, campo_aviso) \{\par
+  461         var option = $('input[name=' + nome_campo + ']').val();\par
+  462         if (option != null) \{\par
+  463             return true;\par
+  464         \} else \{\par
+  465             util.alerta_msg(campo_aviso);\par
+  466             return false;\par
+  467         \}\par
+  468     \},\par
+  469 \par
+  470     validaInputText : function(nome_campo, campo_aviso) \{\par
+  471         var value = $.trim($('#' + nome_campo).val());\par
+  472         var max_len = Number($.trim($('#' + nome_campo).attr("maxlength")))\par
+  473         if (value.length > 0) \{\par
+  474             if ((max_len > 0) && (value.length > max_len)) \{\par
+  475                 if (!util.isEmpty(campo_aviso)) \{\par
+  476                     util.alerta_msg(campo_aviso, "O campo deve ter no m\'E1ximo " + max_len + " caracteres.");\par
+  477                 \}\par
+  478                 return false;\par
+  479             \} else \{\par
+  480                 return true;\par
   481             \}\par
-  482         \}\par
-  483     \},\par
-  484 \par
-  485     validaLenInputText : function(nome_campo, campo_aviso) \{\par
-  486         var value = $.trim($('#' + nome_campo).val());\par
-  487         var len = Number($.trim($('#' + nome_campo).attr("maxlength")));\par
-  488         var min_len = $('#' + nome_campo).attr("minlength");\par
-  489             \par
-  490         if(typeof min_len !== typeof undefined && min_len !== false)\{\par
-  491             min_len=Number(min_len);\par
-  492         \}else\par
-  493             min_len=len;\par
+  482         \} else \{\par
+  483             util.alerta_msg(campo_aviso);\par
+  484             if (!util.isEmpty(campo_aviso)) \{\par
+  485                 return false;\par
+  486             \}\par
+  487         \}\par
+  488     \},\par
+  489 \par
+  490     validaLenInputText : function(nome_campo, campo_aviso) \{\par
+  491         var value = $.trim($('#' + nome_campo).val());\par
+  492         var len = Number($.trim($('#' + nome_campo).attr("maxlength")));\par
+  493         var min_len = $('#' + nome_campo).attr("minlength");\par
   494             \par
-  495         if (len > 0) \{\par
-  496             if (value.length < min_len || value.length > len) \{\par
-  497                 if(min_len===len)\par
-  498                     util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");\par
-  499                 else\par
-  500                     util.alerta_msg(campo_aviso, "O campo deve ter entre " + min_len + " e "+len+" caracteres.");\par
-  501                 return false;\par
-  502             \}\par
-  503         \}\par
-  504         return true;\par
-  505     \},\par
-  506 \par
-  507     validaInputNumberRange : function(nome_campo, campo_aviso, min, max) \{\par
-  508         var value = $.trim($('#' + nome_campo).val())\par
-  509         if ((!util.isEmpty(min) && !util.isEmpty(max) && Number(value) >= min && Number(value) <= max)\par
-  510                 || (!util.isEmpty(min) && util.isEmpty(max) && Number(value) >= min)\par
-  511                 || (!util.isEmpty(max) && util.isEmpty(min) && Number(value) <= max)) \{\par
-  512             return true;\par
-  513         \} else if (!util.isEmpty(min) || !util.isEmpty(max)) \{\par
-  514             var msgComplemento;\par
-  515             if (!util.isEmpty(min) && !util.isEmpty(max)) \{\par
-  516                 if (min >= max) \{\par
-  517                     msgComplemento = "O valor do campo n\'E3o deve ser diferente de " + min;\par
-  518                 \} else \{\par
-  519                     msgComplemento = "O valor do campo deve estar entre " + min + " e " + max;\par
-  520                 \}\par
-  521             \} else if (!util.isEmpty(min)) \{\par
-  522                 msgComplemento = "O menor valor poss\'EDvel do campo \'E9 " + min;\par
-  523             \} else if (!util.isEmpty(max)) \{\par
-  524                 msgComplemento = "O maior valor poss\'EDvel do campo \'E9 " + max;\par
-  525             \}\par
-  526             util.alerta_msg(campo_aviso, msgComplemento);\par
-  527             return false;\par
-  528         \} else \{\par
-  529             return validaInputText(nome_campo, campo_aviso);\par
-  530         \}\par
-  531     \},\par
-  532 \par
-  533     validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) \{\par
-  534         var value = $.trim($('#' + nome_campo).val());\par
-  535         app.setAtributo(idRegistro,value);\par
-  536         \par
-  537         var idItemLista = util.findValueInList(value, lista);\par
-  538         if (util.isEmpty(idItemLista)) \{\par
-  539             util.alerta_msg(campo_aviso, "O valor " + value + " informado n\'E3o \'E9 v\'E1lido.");\par
-  540             return false;\par
-  541         \}\par
-  542         return true;\par
-  543     \},\par
-  544     \par
-  545     findValueInList : function(valorLista, lista) \{\par
-  546         var idItemLista = null;\par
-  547         if (!util.isEmpty(valorLista)) \{\par
-  548             var value = valorLista.toUpperCase();\par
-  549             $.each(lista, function(index, item) \{\par
-  550                 if (value == item.numeroid) \{\par
-  551                     idItemLista = item.id;\par
-  552                     return false; // funciona como break para o sair do each()\par
-  553                 \}\par
-  554             \});\par
-  555             return idItemLista;\par
-  556         \} else \{\par
-  557             return null;\par
-  558         \} \par
-  559     \},\par
-  560     \par
-  561     validaTemPessoasVeiculo : function(nome_campo, campo_aviso) \{\par
-  562         if (util.isEmpty($.trim($('#' + nome_campo).val())) || !($.trim($('#' + nome_campo).val()) > 0)) \{\par
-  563             util.alerta_msg(campo_aviso, "O campo deve ser preenchido com um valor positivo maior que zero");\par
-  564             return false;\par
-  565         \}\par
-  566         return true;\par
-  567     \},\par
-  568 \par
-  569     validaLimitePessoas : function(nome_campo, campo_aviso) \{\par
-  570         var limitePessoas = app.getAtributo('limitePessoas');\par
-  571         if (!util.isEmpty(limitePessoas)) \{\par
-  572             if ($.trim($('#' + nome_campo).val()) > Number(limitePessoas)) \{\par
-  573                 util.alerta_msg(campo_aviso, "O limite de pessoas para esse tipo de ve\'EDculo \'E9 " + limitePessoas);\par
-  574                 return false;\par
-  575             \}\par
-  576         \}\par
-  577         return true;\par
-  578     \},\par
-  579 \par
-  580     limitaTamanhoCampo : function(nome_campo, nome_atributo)\{\par
-  581         var limite = app.getAtributo(nome_atributo);\par
-  582         util.limitaTamanhoCampoPorValor(nome_campo,limite);\par
+  495         if(typeof min_len !== typeof undefined && min_len !== false)\{\par
+  496             min_len=Number(min_len);\par
+  497         \}else\par
+  498             min_len=len;\par
+  499             \par
+  500         if (len > 0) \{\par
+  501             if (value.length < min_len || value.length > len) \{\par
+  502                 if(min_len===len)\par
+  503                     util.alerta_msg(campo_aviso, "O campo deve ter exatamente " + len + " caracteres.");\par
+  504                 else\par
+  505                     util.alerta_msg(campo_aviso, "O campo deve ter entre " + min_len + " e "+len+" caracteres.");\par
+  506                 return false;\par
+  507             \}\par
+  508         \}\par
+  509         return true;\par
+  510     \},\par
+  511 \par
+  512     validaInputNumberRange : function(nome_campo, campo_aviso, min, max) \{\par
+  513         var value = $.trim($('#' + nome_campo).val())\par
+  514         if ((!util.isEmpty(min) && !util.isEmpty(max) && Number(value) >= min && Number(value) <= max)\par
+  515                 || (!util.isEmpty(min) && util.isEmpty(max) && Number(value) >= min)\par
+  516                 || (!util.isEmpty(max) && util.isEmpty(min) && Number(value) <= max)) \{\par
+  517             return true;\par
+  518         \} else if (!util.isEmpty(min) || !util.isEmpty(max)) \{\par
+  519             var msgComplemento;\par
+  520             if (!util.isEmpty(min) && !util.isEmpty(max)) \{\par
+  521                 if (min >= max) \{\par
+  522                     msgComplemento = "O valor do campo n\'E3o deve ser diferente de " + min;\par
+  523                 \} else \{\par
+  524                     msgComplemento = "O valor do campo deve estar entre " + min + " e " + max;\par
+  525                 \}\par
+  526             \} else if (!util.isEmpty(min)) \{\par
+  527                 msgComplemento = "O menor valor poss\'EDvel do campo \'E9 " + min;\par
+  528             \} else if (!util.isEmpty(max)) \{\par
+  529                 msgComplemento = "O maior valor poss\'EDvel do campo \'E9 " + max;\par
+  530             \}\par
+  531             util.alerta_msg(campo_aviso, msgComplemento);\par
+  532             return false;\par
+  533         \} else \{\par
+  534             return validaInputText(nome_campo, campo_aviso);\par
+  535         \}\par
+  536     \},\par
+  537 \par
+  538     validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) \{\par
+  539         var value = $.trim($('#' + nome_campo).val());\par
+  540         app.setAtributo(idRegistro,value);\par
+  541         \par
+  542         var idItemLista = util.findValueInList(value, lista);\par
+  543         if (util.isEmpty(idItemLista)) \{\par
+  544             util.alerta_msg(campo_aviso, "O valor " + value + " informado n\'E3o \'E9 v\'E1lido.");\par
+  545             return false;\par
+  546         \}\par
+  547         return true;\par
+  548     \},\par
+  549     \par
+  550     findValueInList : function(valorLista, lista) \{\par
+  551         var idItemLista = null;\par
+  552         if (!util.isEmpty(valorLista)) \{\par
+  553             var value = valorLista.toUpperCase();\par
+  554             $.each(lista, function(index, item) \{\par
+  555                 if (value == item.numeroid) \{\par
+  556                     idItemLista = item.id;\par
+  557                     return false; // funciona como break para o sair do each()\par
+  558                 \}\par
+  559             \});\par
+  560             return idItemLista;\par
+  561         \} else \{\par
+  562             return null;\par
+  563         \} \par
+  564     \},\par
+  565     \par
+  566     validaTemPessoasVeiculo : function(nome_campo, campo_aviso) \{\par
+  567         if (util.isEmpty($.trim($('#' + nome_campo).val())) || !($.trim($('#' + nome_campo).val()) > 0)) \{\par
+  568             util.alerta_msg(campo_aviso, "O campo deve ser preenchido com um valor positivo maior que zero");\par
+  569             return false;\par
+  570         \}\par
+  571         return true;\par
+  572     \},\par
+  573 \par
+  574     validaLimitePessoas : function(nome_campo, campo_aviso) \{\par
+  575         var limitePessoas = app.getAtributo('limitePessoas');\par
+  576         if (!util.isEmpty(limitePessoas)) \{\par
+  577             if ($.trim($('#' + nome_campo).val()) > Number(limitePessoas)) \{\par
+  578                 util.alerta_msg(campo_aviso, "O limite de pessoas para esse tipo de ve\'EDculo \'E9 " + limitePessoas);\par
+  579                 return false;\par
+  580             \}\par
+  581         \}\par
+  582         return true;\par
   583     \},\par
   584 \par
-  585     limitaTamanhoCampoPorValor : function(nome_campo, valor)\{\par
-  586         if (!util.isEmpty(valor)) \{\par
-  587             $('#'+nome_campo).attr("maxlength",String(Number(valor)).length);\par
-  588         \}\par
-  589     \},\par
-  590     \par
-  591     validacaoLimiteMaximoTempoReal: function(nome_campo,campo_aviso, funcao_validar)\{\par
-  592         $("#"+nome_campo).change(function()\{\par
-  593             if(funcao_validar(nome_campo,campo_aviso))\{\par
-  594                 $(this).removeClass("invalido");\par
-  595             \}else\par
-  596                 $(this).addClass("invalido");\par
-  597         \})\par
-  598     \},\par
-  599 \par
-  600     isFilterRunning : false, // controla se o filtro j\'E1 terminou\par
-  601 \par
-  602     autocomplete : function(nome_do_campo, lista, title, txt_content) \{\par
-  603         title = (title == null) ? "Busca" : title;\par
-  604         txt_content = (txt_content == null) ? "Entre com o in\'EDcio da palavra." : txt_content;\par
-  605         var field = $('#' + nome_do_campo);\par
-  606         var overlayInput = $.confirm(\{\par
-  607             title : title,\par
-  608             content : txt_content,\par
-  609             confirmButton : null,\par
-  610             cancelButton : null,\par
-  611             animation : 'none',\par
-  612             closeAnimation : 'none',\par
-  613             animationBounce : 1,\par
-  614             icon : 'fa fa-search',\par
-  615             closeIcon : true,\par
-  616             onClose : function() \{\par
-  617                 util.isFilterRunning = false;\par
-  618             \},\par
-  619 \par
-  620             isCentered : false,\par
-  621         \});\par
-  622         overlayInput.$body.addClass("ui-page-theme-a");\par
-  623 \par
-  624         var extraHtml = '<form class="ui-filterable" > \\\par
-  625                             <input id="filtro" type="text" autofocus data-type="search"> \\\par
-  626                         </form> \\\par
-  627                         <ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro" data-inset="true"></ul>';\par
-  628         overlayInput.$content.append(extraHtml);\par
-  629         var txtInput = overlayInput.$content.find('#filtro');\par
-  630         app.logger.log(txtInput);\par
-  631         txtInput.textinput();\par
-  632         /*\par
-  633          * txtInput.one('load', function()\{ $(this).focus(); alert('tentou focar'); \});\par
-  634          */\par
-  635         overlayInput.$content.find('#filtro_autocomplete').listview();\par
-  636         overlayInput.$b.css('margin-top', '0px');\par
-  637 \par
-  638         $("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) \{\par
-  639             app.logger.log('entrou no filtro'); // TODO ja podemos excluir essa linha?\par
-  640             var ul_list = $(this);\par
-  641             var auto_input = $(data.input);\par
-  642             var auto_value = auto_input.val();\par
-  643             var html = "";\par
-  644             var minLength = 2;// s\'F3 pesquisa quando a entrada for maior\par
-  645             var newText = "";\par
-  646             var waitCicle = false;\par
-  647             ul_list.html("");\par
-  648 \par
-  649             if (auto_value && auto_value.length > minLength) \{\par
-  650                 if (!util.isFilterRunning) \{\par
-  651                     util.isFilterRunning = true;\par
-  652                     doFilter(auto_value);\par
-  653                     util.isFilterRunning = false;\par
-  654                 \} else \{\par
-  655                     newText = auto_value;\par
-  656                     if (!waitCicle) \{\par
-  657                         waitCicle = setInterval(function() \{\par
-  658                             if (!util.isFilterRunning) \{\par
-  659                                 util.isFilterRunning = true;\par
-  660                                 clearInterval(waitCicle);\par
-  661                                 waitCicle = false;\par
-  662                                 doFilter(newText);\par
-  663                                 util.isFilterRunning = false;\par
-  664                             \}\par
-  665                         \}, 300);\par
-  666                     \}\par
-  667                 \}\par
-  668             \}\par
-  669 \par
-  670             function doFilter(inputedTxt) \{\par
-  671 \par
-  672                 ul_list.html("<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>");\par
-  673                 ul_list.listview("refresh");\par
-  674                 var matcher = new RegExp(util.escapeRegex(inputedTxt), "i");\par
-  675                 var res = $.grep(lista, function(value) \{\par
-  676                     value = value.label || value.value || value.nome || value;\par
-  677                     return matcher.test(value) || matcher.test(util.replaceDiacritics(value));\par
-  678                 \});\par
-  679                 app.logger.log(JSON.stringify(res), null, '\\t');\par
-  680                 $.each(res, function(i, val) \{\par
-  681                     if (val.id != null) \{ // municipio\par
-  682                         html += "<li li_id='" + val.id + "' >" + val.nome + "</li>";\par
-  683                     \} else \{\par
-  684                         html += "<li>" + val.nome + "</li>";\par
-  685                     \}\par
-  686                     // overlayInput.setDialogDimension();\par
-  687                 \});\par
-  688                 ul_list.html(html);\par
-  689                 ul_list.children("li").click(function() \{\par
-  690                     var txt;\par
-  691                     if ($(this).attr('li_id') != null) \{ // municipio\par
-  692                         txt = $(this).html() + " | " + $(this).attr('li_id');\par
-  693                     \} else \{\par
-  694                         txt = $(this).html();\par
-  695                     \}\par
-  696                     field.val(txt).trigger('change').scrollLeft(0);\par
-  697                     // overlayInput.$content.find('#filtro').focus();\par
-  698                     overlayInput.close();\par
-  699                 \});\par
-  700                 ul_list.listview("refresh");\par
-  701                 ul_list.trigger("updatelayout");\par
-  702             \}\par
-  703 \par
-  704         \});\par
-  705 \par
-  706     \},\par
-  707 \par
-  708     // Outras fun\'E7\'F5es\par
-  709     alerta_msg : function(campo_aviso, msgComplemento) \{\par
-  710         if (util.isEmpty(msgComplemento)) \{\par
-  711             alert("O campo " + campo_aviso + " n\'E3o foi preenchido.", "Erro no preenchimento!", null, 'error');\par
-  712         \} else \{\par
-  713             alert("O campo " + campo_aviso + " n\'E3o foi preenchido corretamente.<br />" + msgComplemento,\par
-  714                     'Erro no preenchimento!', null, 'error');\par
-  715         \}\par
-  716     \},\par
-  717 \par
-  718     isEmpty : function(valor) \{\par
-  719         try \{\par
-  720             emp = (valor == undefined) || (valor == null) || (String(valor).trim().length == 0);\par
-  721 //          if (emp) \{\par
-  722 //              app.logger.log("isEmpty is TRUE");\par
-  723 //          \}\par
-  724             return emp;\par
-  725         \} catch(exc) \{\par
-  726             app.logger.log("[ERRO] Erro no isEmpty. Detalhes:");\par
-  727             app.logger.log(exc);\par
-  728             return null;\par
-  729         \}\par
-  730     \},\par
-  731 \par
-  732     isFunction : function(functionToCheck) \{\par
-  733         var getType = \{\};\par
-  734         return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';\par
+  585     limitaTamanhoCampo : function(nome_campo, nome_atributo)\{\par
+  586         var limite = app.getAtributo(nome_atributo);\par
+  587         util.limitaTamanhoCampoPorValor(nome_campo,limite);\par
+  588     \},\par
+  589 \par
+  590     limitaTamanhoCampoPorValor : function(nome_campo, valor)\{\par
+  591         if (!util.isEmpty(valor)) \{\par
+  592             $('#'+nome_campo).attr("maxlength",String(Number(valor)).length);\par
+  593         \}\par
+  594     \},\par
+  595     \par
+  596     validacaoLimiteMaximoTempoReal: function(nome_campo,campo_aviso, funcao_validar)\{\par
+  597         $("#"+nome_campo).change(function()\{\par
+  598             if(funcao_validar(nome_campo,campo_aviso))\{\par
+  599                 $(this).removeClass("invalido");\par
+  600             \}else\par
+  601                 $(this).addClass("invalido");\par
+  602         \})\par
+  603     \},\par
+  604 \par
+  605     isFilterRunning : false, // controla se o filtro j\'E1 terminou\par
+  606 \par
+  607     autocomplete : function(nome_do_campo, lista, title, txt_content) \{\par
+  608         title = (title == null) ? "Busca" : title;\par
+  609         txt_content = (txt_content == null) ? "Entre com o in\'EDcio da palavra." : txt_content;\par
+  610         var field = $('#' + nome_do_campo);\par
+  611         var overlayInput = $.confirm(\{\par
+  612             title : title,\par
+  613             content : txt_content,\par
+  614             confirmButton : null,\par
+  615             cancelButton : null,\par
+  616             animation : 'none',\par
+  617             closeAnimation : 'none',\par
+  618             animationBounce : 1,\par
+  619             icon : 'fa fa-search',\par
+  620             closeIcon : true,\par
+  621             onClose : function() \{\par
+  622                 util.isFilterRunning = false;\par
+  623             \},\par
+  624 \par
+  625             isCentered : false,\par
+  626         \});\par
+  627         overlayInput.$body.addClass("ui-page-theme-a");\par
+  628 \par
+  629         var extraHtml = '<form class="ui-filterable" > \\\par
+  630                             <input id="filtro" type="text" autofocus data-type="search"> \\\par
+  631                         </form> \\\par
+  632                         <ul id="filtro_autocomplete" data-role="listview" data-filter="true" data-input="#filtro" data-inset="true"></ul>';\par
+  633         overlayInput.$content.append(extraHtml);\par
+  634         var txtInput = overlayInput.$content.find('#filtro');\par
+  635         app.logger.log(txtInput);\par
+  636         txtInput.textinput();\par
+  637         /*\par
+  638          * txtInput.one('load', function()\{ $(this).focus(); alert('tentou focar'); \});\par
+  639          */\par
+  640         overlayInput.$content.find('#filtro_autocomplete').listview();\par
+  641         overlayInput.$b.css('margin-top', '0px');\par
+  642 \par
+  643         $("#filtro_autocomplete").on("filterablebeforefilter", function(e, data) \{\par
+  644             app.logger.log('entrou no filtro'); // TODO ja podemos excluir essa linha?\par
+  645             var ul_list = $(this);\par
+  646             var auto_input = $(data.input);\par
+  647             var auto_value = auto_input.val();\par
+  648             var html = "";\par
+  649             var minLength = 2;// s\'F3 pesquisa quando a entrada for maior\par
+  650             var newText = "";\par
+  651             var waitCicle = false;\par
+  652             ul_list.html("");\par
+  653 \par
+  654             if (auto_value && auto_value.length > minLength) \{\par
+  655                 if (!util.isFilterRunning) \{\par
+  656                     util.isFilterRunning = true;\par
+  657                     doFilter(auto_value);\par
+  658                     util.isFilterRunning = false;\par
+  659                 \} else \{\par
+  660                     newText = auto_value;\par
+  661                     if (!waitCicle) \{\par
+  662                         waitCicle = setInterval(function() \{\par
+  663                             if (!util.isFilterRunning) \{\par
+  664                                 util.isFilterRunning = true;\par
+  665                                 clearInterval(waitCicle);\par
+  666                                 waitCicle = false;\par
+  667                                 doFilter(newText);\par
+  668                                 util.isFilterRunning = false;\par
+  669                             \}\par
+  670                         \}, 300);\par
+  671                     \}\par
+  672                 \}\par
+  673             \}\par
+  674 \par
+  675             function doFilter(inputedTxt) \{\par
+  676 \par
+  677                 ul_list.html("<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>");\par
+  678                 ul_list.listview("refresh");\par
+  679                 var matcher = new RegExp(util.escapeRegex(inputedTxt), "i");\par
+  680                 var res = $.grep(lista, function(value) \{\par
+  681                     value = value.label || value.value || value.nome || value;\par
+  682                     return matcher.test(value) || matcher.test(util.replaceDiacritics(value));\par
+  683                 \});\par
+  684                 app.logger.log(JSON.stringify(res), null, '\\t');\par
+  685                 $.each(res, function(i, val) \{\par
+  686                     if (val.id != null) \{ // municipio\par
+  687                         html += "<li li_id='" + val.id + "' >" + val.nome + "</li>";\par
+  688                     \} else \{\par
+  689                         html += "<li>" + val.nome + "</li>";\par
+  690                     \}\par
+  691                     // overlayInput.setDialogDimension();\par
+  692                 \});\par
+  693                 ul_list.html(html);\par
+  694                 ul_list.children("li").click(function() \{\par
+  695                     var txt;\par
+  696                     if ($(this).attr('li_id') != null) \{ // municipio\par
+  697                         txt = $(this).html() + " | " + $(this).attr('li_id');\par
+  698                     \} else \{\par
+  699                         txt = $(this).html();\par
+  700                     \}\par
+  701                     field.val(txt).trigger('change').scrollLeft(0);\par
+  702                     // overlayInput.$content.find('#filtro').focus();\par
+  703                     overlayInput.close();\par
+  704                 \});\par
+  705                 ul_list.listview("refresh");\par
+  706                 ul_list.trigger("updatelayout");\par
+  707             \}\par
+  708 \par
+  709         \});\par
+  710 \par
+  711     \},\par
+  712 \par
+  713     // Outras fun\'E7\'F5es\par
+  714     alerta_msg : function(campo_aviso, msgComplemento) \{\par
+  715         if (util.isEmpty(msgComplemento)) \{\par
+  716             alert("O campo " + campo_aviso + " n\'E3o foi preenchido.", "Erro no preenchimento!", null, 'error');\par
+  717         \} else \{\par
+  718             alert("O campo " + campo_aviso + " n\'E3o foi preenchido corretamente.<br />" + msgComplemento,\par
+  719                     'Erro no preenchimento!', null, 'error');\par
+  720         \}\par
+  721     \},\par
+  722 \par
+  723     isEmpty : function(valor) \{\par
+  724         try \{\par
+  725             emp = (valor == undefined) || (valor == null) || (String(valor).trim().length == 0);\par
+  726 //          if (emp) \{\par
+  727 //              app.logger.log("isEmpty is TRUE");\par
+  728 //          \}\par
+  729             return emp;\par
+  730         \} catch(exc) \{\par
+  731             app.logger.log("[ERRO] Erro no isEmpty. Detalhes:");\par
+  732             app.logger.log(exc);\par
+  733             return null;\par
+  734         \}\par
   735     \},\par
   736 \par
-  737     getTimeFormated : function(date, format) \{\par
-  738         return moment(date).format(format);\par
-  739     \},\par
-  740 \par
-  741     getTimeDefaultFormated : function(date) \{\par
-  742         return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:ss");\par
-  743     \},\par
-  744 \par
-  745     getTimeUnixTimestamp : function(date) \{\par
-  746         return util.getTimeFormated(date, "X");\par
-  747     \},\par
-  748 \par
-  749     getTimeToExportFormated : function(date) \{\par
-  750         return util.getTimeFormated(date, "YYYY-MM-DD_HH-mm-ss");\par
-  751     \},\par
-  752 \par
-  753     alphabet : \{\par
-  754         a : /[\\u0061\\u24D0\\uFF41\\u1E9A\\u00E0\\u00E1\\u00E2\\u1EA7\\u1EA5\\u1EAB\\u1EA9\\u00E3\\u0101\\u0103\\u1EB1\\u1EAF\\u1EB5\\u1EB3\\u0227\\u01E1\\u00E4\\u01DF\\u1EA3\\u00E5\\u01FB\\u01CE\\u0201\\u0203\\u1EA1\\u1EAD\\u1EB7\\u1E01\\u0105\\u2C65\\u0250]/ig,\par
-  755         aa : /[\\uA733]/ig,\par
-  756         ae : /[\\u00E6\\u01FD\\u01E3]/ig,\par
-  757         ao : /[\\uA735]/ig,\par
-  758         au : /[\\uA737]/ig,\par
-  759         av : /[\\uA739\\uA73B]/ig,\par
-  760         ay : /[\\uA73D]/ig,\par
-  761         b : /[\\u0062\\u24D1\\uFF42\\u1E03\\u1E05\\u1E07\\u0180\\u0183\\u0253]/ig,\par
-  762         c : /[\\u0063\\u24D2\\uFF43\\u0107\\u0109\\u010B\\u010D\\u00E7\\u1E09\\u0188\\u023C\\uA73F\\u2184]/ig,\par
-  763         d : /[\\u0064\\u24D3\\uFF44\\u1E0B\\u010F\\u1E0D\\u1E11\\u1E13\\u1E0F\\u0111\\u018C\\u0256\\u0257\\uA77A]/ig,\par
-  764         dz : /[\\u01F3\\u01C6]/ig,\par
-  765         e : /[\\u0065\\u24D4\\uFF45\\u00E8\\u00E9\\u00EA\\u1EC1\\u1EBF\\u1EC5\\u1EC3\\u1EBD\\u0113\\u1E15\\u1E17\\u0115\\u0117\\u00EB\\u1EBB\\u011B\\u0205\\u0207\\u1EB9\\u1EC7\\u0229\\u1E1D\\u0119\\u1E19\\u1E1B\\u0247\\u025B\\u01DD]/ig,\par
-  766         f : /[\\u0066\\u24D5\\uFF46\\u1E1F\\u0192\\uA77C]/ig,\par
-  767         g : /[\\u0067\\u24D6\\uFF47\\u01F5\\u011D\\u1E21\\u011F\\u0121\\u01E7\\u0123\\u01E5\\u0260\\uA7A1\\u1D79\\uA77F]/ig,\par
-  768         h : /[\\u0068\\u24D7\\uFF48\\u0125\\u1E23\\u1E27\\u021F\\u1E25\\u1E29\\u1E2B\\u1E96\\u0127\\u2C68\\u2C76\\u0265]/ig,\par
-  769         hv : /[\\u0195]/ig,\par
-  770         i : /[\\u0069\\u24D8\\uFF49\\u00EC\\u00ED\\u00EE\\u0129\\u012B\\u012D\\u00EF\\u1E2F\\u1EC9\\u01D0\\u0209\\u020B\\u1ECB\\u012F\\u1E2D\\u0268\\u0131]/ig,\par
-  771         j : /[\\u006A\\u24D9\\uFF4A\\u0135\\u01F0\\u0249]/ig,\par
-  772         k : /[\\u006B\\u24DA\\uFF4B\\u1E31\\u01E9\\u1E33\\u0137\\u1E35\\u0199\\u2C6A\\uA741\\uA743\\uA745\\uA7A3]/ig,\par
-  773         l : /[\\u006C\\u24DB\\uFF4C\\u0140\\u013A\\u013E\\u1E37\\u1E39\\u013C\\u1E3D\\u1E3B\\u017F\\u0142\\u019A\\u026B\\u2C61\\uA749\\uA781\\uA747]/ig,\par
-  774         lj : /[\\u01C9]/ig,\par
-  775         m : /[\\u006D\\u24DC\\uFF4D\\u1E3F\\u1E41\\u1E43\\u0271\\u026F]/ig,\par
-  776         n : /[\\u006E\\u24DD\\uFF4E\\u01F9\\u0144\\u00F1\\u1E45\\u0148\\u1E47\\u0146\\u1E4B\\u1E49\\u019E\\u0272\\u0149\\uA791\\uA7A5]/ig,\par
-  777         nj : /[\\u01CC]/ig,\par
-  778         o : /[\\u006F\\u24DE\\uFF4F\\u00F2\\u00F3\\u00F4\\u1ED3\\u1ED1\\u1ED7\\u1ED5\\u00F5\\u1E4D\\u022D\\u1E4F\\u014D\\u1E51\\u1E53\\u014F\\u022F\\u0231\\u00F6\\u022B\\u1ECF\\u0151\\u01D2\\u020D\\u020F\\u01A1\\u1EDD\\u1EDB\\u1EE1\\u1EDF\\u1EE3\\u1ECD\\u1ED9\\u01EB\\u01ED\\u00F8\\u01FF\\u0254\\uA74B\\uA74D\\u0275]/ig,\par
-  779         oi : /[\\u01A3]/ig,\par
-  780         ou : /[\\u0223]/ig,\par
-  781         oo : /[\\uA74F]/ig,\par
-  782         p : /[\\u0070\\u24DF\\uFF50\\u1E55\\u1E57\\u01A5\\u1D7D\\uA751\\uA753\\uA755]/ig,\par
-  783         q : /[\\u0071\\u24E0\\uFF51\\u024B\\uA757\\uA759]/ig,\par
-  784         r : /[\\u0072\\u24E1\\uFF52\\u0155\\u1E59\\u0159\\u0211\\u0213\\u1E5B\\u1E5D\\u0157\\u1E5F\\u024D\\u027D\\uA75B\\uA7A7\\uA783]/ig,\par
-  785         s : /[\\u0073\\u24E2\\uFF53\\u015B\\u1E65\\u015D\\u1E61\\u0161\\u1E67\\u1E63\\u1E69\\u0219\\u015F\\u023F\\uA7A9\\uA785\\u1E9B]/ig,\par
-  786         ss : /[\\u00DF\\u1E9E]/ig,\par
-  787         t : /[\\u0074\\u24E3\\uFF54\\u1E6B\\u1E97\\u0165\\u1E6D\\u021B\\u0163\\u1E71\\u1E6F\\u0167\\u01AD\\u0288\\u2C66\\uA787]/ig,\par
-  788         tz : /[\\uA729]/ig,\par
-  789         u : /[\\u0075\\u24E4\\uFF55\\u00F9\\u00FA\\u00FB\\u0169\\u1E79\\u016B\\u1E7B\\u016D\\u00FC\\u01DC\\u01D8\\u01D6\\u01DA\\u1EE7\\u016F\\u0171\\u01D4\\u0215\\u0217\\u01B0\\u1EEB\\u1EE9\\u1EEF\\u1EED\\u1EF1\\u1EE5\\u1E73\\u0173\\u1E77\\u1E75\\u0289]/ig,\par
-  790         v : /[\\u0076\\u24E5\\uFF56\\u1E7D\\u1E7F\\u028B\\uA75F\\u028C]/ig,\par
-  791         vy : /[\\uA761]/ig,\par
-  792         w : /[\\u0077\\u24E6\\uFF57\\u1E81\\u1E83\\u0175\\u1E87\\u1E85\\u1E98\\u1E89\\u2C73]/ig,\par
-  793         x : /[\\u0078\\u24E7\\uFF58\\u1E8B\\u1E8D]/ig,\par
-  794         y : /[\\u0079\\u24E8\\uFF59\\u1EF3\\u00FD\\u0177\\u1EF9\\u0233\\u1E8F\\u00FF\\u1EF7\\u1E99\\u1EF5\\u01B4\\u024F\\u1EFF]/ig,\par
-  795         z : /[\\u007A\\u24E9\\uFF5A\\u017A\\u1E91\\u017C\\u017E\\u1E93\\u1E95\\u01B6\\u0225\\u0240\\u2C6C\\uA763]/ig,\par
-  796         '' : /[\\u0300\\u0301\\u0302\\u0303\\u0308]/ig\par
-  797     \},\par
-  798 \par
-  799     replaceDiacritics : function(str) \{\par
-  800         for ( var letter in util.alphabet) \{\par
-  801             str = str.replace(util.alphabet[letter], letter);\par
-  802         \}\par
-  803         return str;\par
-  804     \},\par
-  805 \par
-  806     escapeRegex : function(value) \{\par
-  807         return value.replace(/[\\-\\[\\]\{\}()*+?.,\\\\\\^$|#\\s]/g, "\\\\$&");\par
-  808     \},\par
-  809 \par
-  810     reverse : function(s) \{\par
-  811         var o = [];\par
-  812         for (var i = 0, len = s.length; i <= len; i++)\par
-  813             o.push(s.charAt(len - i));\par
-  814         return o.join('');\par
-  815     \},\par
-  816 \par
-  817     secToFrase : function (d,extended) \{\par
-  818         var sec_num = parseInt(d, 10);\par
-  819         var hours   = Math.floor(sec_num / 3600);\par
-  820         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);\par
-  821         var seconds = sec_num - (hours * 3600) - (minutes * 60);\par
-  822         var frase = "";\par
-  823         \par
-  824         if(extended == true) \{\par
-  825             if(hours > 0) \{frase = frase + hours + " hora(s), ";\}\par
-  826             if(minutes > 0) \{frase = frase + minutes + " minuto(s) e ";\}\par
-  827             if(seconds > 0) \{frase = frase + seconds + " segundos";\}\par
-  828         \} else \{\par
-  829             if(hours > 0) \{frase = frase + hours + "h";\}\par
-  830             if(minutes > 0) \{frase = frase + minutes + "m";\}\par
-  831             if(seconds > 0) \{frase = frase + seconds + "s";\}\par
-  832         \}\par
-  833             \par
-  834         return frase;\par
-  835     \},\par
-  836 \par
-  837     formatDateSumario : function (fulldate) \{\par
-  838         var d = new Date(fulldate.replace(/-/g, '/'));\par
-  839         return util.formateDateOnly(d);\par
+  737     isFunction : function(functionToCheck) \{\par
+  738         var getType = \{\};\par
+  739         return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';\par
+  740     \},\par
+  741 \par
+  742     getTimeFormated : function(date, format) \{\par
+  743         return moment(date).format(format);\par
+  744     \},\par
+  745 \par
+  746     getTimeDefaultFormated : function(date) \{\par
+  747         return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:ss");\par
+  748     \},\par
+  749 \par
+  750     getTimeUnixTimestamp : function(date) \{\par
+  751         return util.getTimeFormated(date, "X");\par
+  752     \},\par
+  753 \par
+  754     getTimeToExportFormated : function(date) \{\par
+  755         return util.getTimeFormated(date, "YYYY-MM-DD_HH-mm-ss");\par
+  756     \},\par
+  757 \par
+  758     alphabet : \{\par
+  759         a : /[\\u0061\\u24D0\\uFF41\\u1E9A\\u00E0\\u00E1\\u00E2\\u1EA7\\u1EA5\\u1EAB\\u1EA9\\u00E3\\u0101\\u0103\\u1EB1\\u1EAF\\u1EB5\\u1EB3\\u0227\\u01E1\\u00E4\\u01DF\\u1EA3\\u00E5\\u01FB\\u01CE\\u0201\\u0203\\u1EA1\\u1EAD\\u1EB7\\u1E01\\u0105\\u2C65\\u0250]/ig,\par
+  760         aa : /[\\uA733]/ig,\par
+  761         ae : /[\\u00E6\\u01FD\\u01E3]/ig,\par
+  762         ao : /[\\uA735]/ig,\par
+  763         au : /[\\uA737]/ig,\par
+  764         av : /[\\uA739\\uA73B]/ig,\par
+  765         ay : /[\\uA73D]/ig,\par
+  766         b : /[\\u0062\\u24D1\\uFF42\\u1E03\\u1E05\\u1E07\\u0180\\u0183\\u0253]/ig,\par
+  767         c : /[\\u0063\\u24D2\\uFF43\\u0107\\u0109\\u010B\\u010D\\u00E7\\u1E09\\u0188\\u023C\\uA73F\\u2184]/ig,\par
+  768         d : /[\\u0064\\u24D3\\uFF44\\u1E0B\\u010F\\u1E0D\\u1E11\\u1E13\\u1E0F\\u0111\\u018C\\u0256\\u0257\\uA77A]/ig,\par
+  769         dz : /[\\u01F3\\u01C6]/ig,\par
+  770         e : /[\\u0065\\u24D4\\uFF45\\u00E8\\u00E9\\u00EA\\u1EC1\\u1EBF\\u1EC5\\u1EC3\\u1EBD\\u0113\\u1E15\\u1E17\\u0115\\u0117\\u00EB\\u1EBB\\u011B\\u0205\\u0207\\u1EB9\\u1EC7\\u0229\\u1E1D\\u0119\\u1E19\\u1E1B\\u0247\\u025B\\u01DD]/ig,\par
+  771         f : /[\\u0066\\u24D5\\uFF46\\u1E1F\\u0192\\uA77C]/ig,\par
+  772         g : /[\\u0067\\u24D6\\uFF47\\u01F5\\u011D\\u1E21\\u011F\\u0121\\u01E7\\u0123\\u01E5\\u0260\\uA7A1\\u1D79\\uA77F]/ig,\par
+  773         h : /[\\u0068\\u24D7\\uFF48\\u0125\\u1E23\\u1E27\\u021F\\u1E25\\u1E29\\u1E2B\\u1E96\\u0127\\u2C68\\u2C76\\u0265]/ig,\par
+  774         hv : /[\\u0195]/ig,\par
+  775         i : /[\\u0069\\u24D8\\uFF49\\u00EC\\u00ED\\u00EE\\u0129\\u012B\\u012D\\u00EF\\u1E2F\\u1EC9\\u01D0\\u0209\\u020B\\u1ECB\\u012F\\u1E2D\\u0268\\u0131]/ig,\par
+  776         j : /[\\u006A\\u24D9\\uFF4A\\u0135\\u01F0\\u0249]/ig,\par
+  777         k : /[\\u006B\\u24DA\\uFF4B\\u1E31\\u01E9\\u1E33\\u0137\\u1E35\\u0199\\u2C6A\\uA741\\uA743\\uA745\\uA7A3]/ig,\par
+  778         l : /[\\u006C\\u24DB\\uFF4C\\u0140\\u013A\\u013E\\u1E37\\u1E39\\u013C\\u1E3D\\u1E3B\\u017F\\u0142\\u019A\\u026B\\u2C61\\uA749\\uA781\\uA747]/ig,\par
+  779         lj : /[\\u01C9]/ig,\par
+  780         m : /[\\u006D\\u24DC\\uFF4D\\u1E3F\\u1E41\\u1E43\\u0271\\u026F]/ig,\par
+  781         n : /[\\u006E\\u24DD\\uFF4E\\u01F9\\u0144\\u00F1\\u1E45\\u0148\\u1E47\\u0146\\u1E4B\\u1E49\\u019E\\u0272\\u0149\\uA791\\uA7A5]/ig,\par
+  782         nj : /[\\u01CC]/ig,\par
+  783         o : /[\\u006F\\u24DE\\uFF4F\\u00F2\\u00F3\\u00F4\\u1ED3\\u1ED1\\u1ED7\\u1ED5\\u00F5\\u1E4D\\u022D\\u1E4F\\u014D\\u1E51\\u1E53\\u014F\\u022F\\u0231\\u00F6\\u022B\\u1ECF\\u0151\\u01D2\\u020D\\u020F\\u01A1\\u1EDD\\u1EDB\\u1EE1\\u1EDF\\u1EE3\\u1ECD\\u1ED9\\u01EB\\u01ED\\u00F8\\u01FF\\u0254\\uA74B\\uA74D\\u0275]/ig,\par
+  784         oi : /[\\u01A3]/ig,\par
+  785         ou : /[\\u0223]/ig,\par
+  786         oo : /[\\uA74F]/ig,\par
+  787         p : /[\\u0070\\u24DF\\uFF50\\u1E55\\u1E57\\u01A5\\u1D7D\\uA751\\uA753\\uA755]/ig,\par
+  788         q : /[\\u0071\\u24E0\\uFF51\\u024B\\uA757\\uA759]/ig,\par
+  789         r : /[\\u0072\\u24E1\\uFF52\\u0155\\u1E59\\u0159\\u0211\\u0213\\u1E5B\\u1E5D\\u0157\\u1E5F\\u024D\\u027D\\uA75B\\uA7A7\\uA783]/ig,\par
+  790         s : /[\\u0073\\u24E2\\uFF53\\u015B\\u1E65\\u015D\\u1E61\\u0161\\u1E67\\u1E63\\u1E69\\u0219\\u015F\\u023F\\uA7A9\\uA785\\u1E9B]/ig,\par
+  791         ss : /[\\u00DF\\u1E9E]/ig,\par
+  792         t : /[\\u0074\\u24E3\\uFF54\\u1E6B\\u1E97\\u0165\\u1E6D\\u021B\\u0163\\u1E71\\u1E6F\\u0167\\u01AD\\u0288\\u2C66\\uA787]/ig,\par
+  793         tz : /[\\uA729]/ig,\par
+  794         u : /[\\u0075\\u24E4\\uFF55\\u00F9\\u00FA\\u00FB\\u0169\\u1E79\\u016B\\u1E7B\\u016D\\u00FC\\u01DC\\u01D8\\u01D6\\u01DA\\u1EE7\\u016F\\u0171\\u01D4\\u0215\\u0217\\u01B0\\u1EEB\\u1EE9\\u1EEF\\u1EED\\u1EF1\\u1EE5\\u1E73\\u0173\\u1E77\\u1E75\\u0289]/ig,\par
+  795         v : /[\\u0076\\u24E5\\uFF56\\u1E7D\\u1E7F\\u028B\\uA75F\\u028C]/ig,\par
+  796         vy : /[\\uA761]/ig,\par
+  797         w : /[\\u0077\\u24E6\\uFF57\\u1E81\\u1E83\\u0175\\u1E87\\u1E85\\u1E98\\u1E89\\u2C73]/ig,\par
+  798         x : /[\\u0078\\u24E7\\uFF58\\u1E8B\\u1E8D]/ig,\par
+  799         y : /[\\u0079\\u24E8\\uFF59\\u1EF3\\u00FD\\u0177\\u1EF9\\u0233\\u1E8F\\u00FF\\u1EF7\\u1E99\\u1EF5\\u01B4\\u024F\\u1EFF]/ig,\par
+  800         z : /[\\u007A\\u24E9\\uFF5A\\u017A\\u1E91\\u017C\\u017E\\u1E93\\u1E95\\u01B6\\u0225\\u0240\\u2C6C\\uA763]/ig,\par
+  801         '' : /[\\u0300\\u0301\\u0302\\u0303\\u0308]/ig\par
+  802     \},\par
+  803 \par
+  804     replaceDiacritics : function(str) \{\par
+  805         for ( var letter in util.alphabet) \{\par
+  806             str = str.replace(util.alphabet[letter], letter);\par
+  807         \}\par
+  808         return str;\par
+  809     \},\par
+  810 \par
+  811     escapeRegex : function(value) \{\par
+  812         return value.replace(/[\\-\\[\\]\{\}()*+?.,\\\\\\^$|#\\s]/g, "\\\\$&");\par
+  813     \},\par
+  814 \par
+  815     reverse : function(s) \{\par
+  816         var o = [];\par
+  817         for (var i = 0, len = s.length; i <= len; i++)\par
+  818             o.push(s.charAt(len - i));\par
+  819         return o.join('');\par
+  820     \},\par
+  821 \par
+  822     secToFrase : function (d,extended) \{\par
+  823         var sec_num = parseInt(d, 10);\par
+  824         var hours   = Math.floor(sec_num / 3600);\par
+  825         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);\par
+  826         var seconds = sec_num - (hours * 3600) - (minutes * 60);\par
+  827         var frase = "";\par
+  828         \par
+  829         if(extended == true) \{\par
+  830             if(hours > 0) \{frase = frase + hours + " hora(s), ";\}\par
+  831             if(minutes > 0) \{frase = frase + minutes + " minuto(s) e ";\}\par
+  832             if(seconds > 0) \{frase = frase + seconds + " segundos";\}\par
+  833         \} else \{\par
+  834             if(hours > 0) \{frase = frase + hours + "h";\}\par
+  835             if(minutes > 0) \{frase = frase + minutes + "m";\}\par
+  836             if(seconds > 0) \{frase = frase + seconds + "s";\}\par
+  837         \}\par
+  838             \par
+  839         return frase;\par
   840     \},\par
   841 \par
-  842     formatDateAndTimeSumario : function (fulldate) \{\par
+  842     formatDateSumario : function (fulldate) \{\par
   843         var d = new Date(fulldate.replace(/-/g, '/'));\par
-  844         hora = d.getHours();\par
-  845         min = d.getMinutes();\par
-  846         sec = d.getSeconds();\par
-  847         if (hora< 10) \{hora = "0"+hora;\}\par
-  848         if (min< 10) \{min = "0"+min;\}\par
-  849         if (sec< 10) \{sec = "0"+sec;\}\par
-  850 \par
-  851         return util.formateDateOnly(d) + ', \'E0s ' + hora + ':' + min + ':' + sec;\par
-  852     \},\par
-  853 \par
-  854     formateDateOnly : function (d) \{\par
-  855         dia = d.getDate();\par
-  856         mes = d.getMonth() + 1;\par
-  857         ano = d.getFullYear();\par
-  858         if (dia < 10) \{dia = "0"+dia;\}\par
-  859         if (mes< 10) \{mes = "0"+mes;\}\par
-  860 \par
-  861         return dia + '/' +  mes + '/' + ano;\par
-  862     \},\par
-  863     \par
-  864     formatDateTimeToDisplay : function()\{\par
-  865         var d = new Date();\par
-  866         var hora = d.getHours();\par
-  867         var min = d.getMinutes();\par
-  868         if (hora< 10) \{hora = "0"+hora;\}\par
-  869         if (min< 10) \{min = "0"+min;\}\par
-  870         return util.formateDateOnly(d) + '  ' + hora + ':' + min;\par
-  871     \},\par
-  872     \par
-  873     geraListaAnos : function()\{\par
-  874         var lista_anos = [];\par
-  875         var ano = new Date().getFullYear();\par
-  876         while (ano > 1899)\{\par
-  877             lista_anos = lista_anos.concat(ano);\par
-  878             ano--;\par
-  879         \}\par
-  880         return lista_anos;\par
-  881     \},\par
-  882 \};\par
+  844         return util.formateDateOnly(d);\par
+  845     \},\par
+  846 \par
+  847     formatDateAndTimeSumario : function (fulldate) \{\par
+  848         var d = new Date(fulldate.replace(/-/g, '/'));\par
+  849         hora = d.getHours();\par
+  850         min = d.getMinutes();\par
+  851         sec = d.getSeconds();\par
+  852         if (hora< 10) \{hora = "0"+hora;\}\par
+  853         if (min< 10) \{min = "0"+min;\}\par
+  854         if (sec< 10) \{sec = "0"+sec;\}\par
+  855 \par
+  856         return util.formateDateOnly(d) + ', \'E0s ' + hora + ':' + min + ':' + sec;\par
+  857     \},\par
+  858 \par
+  859     formateDateOnly : function (d) \{\par
+  860         dia = d.getDate();\par
+  861         mes = d.getMonth() + 1;\par
+  862         ano = d.getFullYear();\par
+  863         if (dia < 10) \{dia = "0"+dia;\}\par
+  864         if (mes< 10) \{mes = "0"+mes;\}\par
+  865 \par
+  866         return dia + '/' +  mes + '/' + ano;\par
+  867     \},\par
+  868     \par
+  869     formatDateTimeToDisplay : function()\{\par
+  870         var d = new Date();\par
+  871         var hora = d.getHours();\par
+  872         var min = d.getMinutes();\par
+  873         if (hora< 10) \{hora = "0"+hora;\}\par
+  874         if (min< 10) \{min = "0"+min;\}\par
+  875         return util.formateDateOnly(d) + '  ' + hora + ':' + min;\par
+  876     \},\par
+  877     \par
+  878     geraListaAnos : function()\{\par
+  879         var lista_anos = [];\par
+  880         var ano = new Date().getFullYear();\par
+  881         while (ano > 1899)\{\par
+  882             lista_anos = lista_anos.concat(ano);\par
+  883             ano--;\par
+  884         \}\par
+  885         return lista_anos;\par
+  886     \},\par
+  887 \};\par
 }
 
 \pard\plain \sect\sbkpage

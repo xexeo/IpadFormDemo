@@ -5,7 +5,7 @@
 var paises = {
     /// @function paises.listados
 	/// Retorna o conjunto de países listados segundo as regras de negócio da aplicaçao
-	/// @return {string[]} vetor com o nome dos países	
+	/// @return {array} vetor com o nome dos países	
     listados : function(){
         // return paises.america_sul.concat(paises.america_norte_central_caribe,
         //                        paises.africa, paises.asia, paises.europa, paises.oceania);
