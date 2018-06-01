@@ -1,4 +1,10 @@
+/// @file identificacao_visual_carga.js
+/// @namespace controllers.identificacao_visual_carga
+/// Funções da tela identificacao_visual_carga
 controllers.identificacao_visual_carga = {
+	/// @function controllers.identificacao_visual_carga.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.identificacao_visual_carga;
 		me.inicializaElementos();
@@ -6,6 +12,9 @@ controllers.identificacao_visual_carga = {
 		me.buttons();
 	},
 
+	/// @function controllers.identificacao_visual_carga.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#identificacao_visual_carga_avancar").click(function() {
 			var ok = controllers.identificacao_visual_carga.validar_componentes();
@@ -21,7 +30,9 @@ controllers.identificacao_visual_carga = {
 		
 	},
 
-	// Inicializa os elementos da tela
+	/// @function controllers.identificacao_visual_carga.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_carga", false);
 		util.inicializaPlacas("carga");
@@ -38,7 +49,9 @@ controllers.identificacao_visual_carga = {
 		});
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.identificacao_visual_carga.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		$(".img_carroceria").click(function() {
@@ -165,7 +178,9 @@ controllers.identificacao_visual_carga = {
 		util.progressoInputText("idNumeroDaOnu", "carga_perigosa_onu_carga", "grupo_identificacao_visual_carga_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.identificacao_visual_carga.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaRadioChecked("tipo_carroceria_carga", "Tipo de carroceria")

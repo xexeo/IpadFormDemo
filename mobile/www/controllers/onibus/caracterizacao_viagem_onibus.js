@@ -1,4 +1,10 @@
+/// @file caracterizacao_viagem_onibus.js
+/// @namespace controllers.caracterizacao_viagem_onibus
+/// Funções da tela caracterizacao_viagem_onibus
 controllers.caracterizacao_viagem_onibus = {
+	/// @function controllers.caracterizacao_viagem_onibus.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.caracterizacao_viagem_onibus;
 		me.inicializaElementos();
@@ -6,6 +12,9 @@ controllers.caracterizacao_viagem_onibus = {
 		me.buttons();
 	},
 
+	/// @function controllers.caracterizacao_viagem_onibus.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#caracterizacao_viagem_onibus_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_onibus.validar_componentes();
@@ -21,7 +30,9 @@ controllers.caracterizacao_viagem_onibus = {
 		})
 	},
 
-	// Inicializa os elementos da tela
+	/// @function controllers.caracterizacao_viagem_onibus.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 
 		// Verifica se possui Pergunta Extra
@@ -44,7 +55,9 @@ controllers.caracterizacao_viagem_onibus = {
 		util.limitaTamanhoCampoPorValor('frequencia_num_onibus','999');
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.caracterizacao_viagem_onibus.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		// Origem
@@ -98,7 +111,9 @@ controllers.caracterizacao_viagem_onibus = {
 		util.progressoInputText("numeroDePessoasNoVeiculo", "pessoas_onibus", "grupo_caracterizacao_viagem_onibus_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.caracterizacao_viagem_onibus.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaSelect("origem_pais_onibus", "Origem da viagem")

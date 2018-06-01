@@ -1,4 +1,10 @@
+/// @file caracterizacao_viagem2_carga.js
+/// @namespace controllers.caracterizacao_viagem2_carga
+/// Funções da tela caracterizacao_viagem2_carga
 controllers.caracterizacao_viagem2_carga = {
+	/// @function controllers.caracterizacao_viagem2_carga.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.caracterizacao_viagem2_carga;
 		me.inicializaElementos();
@@ -6,6 +12,9 @@ controllers.caracterizacao_viagem2_carga = {
 		me.buttons();
 	},
 
+	/// @function controllers.caracterizacao_viagem2_carga.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#caracterizacao_viagem2_carga_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem2_carga.validar_componentes();
@@ -20,8 +29,9 @@ controllers.caracterizacao_viagem2_carga = {
 			}
 		})
 	},
-
-	// Inicializa os elementos da tela
+	/// @function controllers.caracterizacao_viagem2_carga.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 
 		// Verifica se possui Pergunta Extra
@@ -48,7 +58,9 @@ controllers.caracterizacao_viagem2_carga = {
 		controllers.caracterizacao_viagem2_carga.limitePrecoInputText('valor_nota_carga',17);
 	},
 
+	/// @function controllers.caracterizacao_viagem2_carga.progressoTela
 	// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		util.progressoRadioSimNaoAlternado("possui_carga", "possui_carga", "div_possui_carga_sim", "div_possui_carga_nao");
@@ -212,7 +224,9 @@ controllers.caracterizacao_viagem2_carga = {
 				"grupo_caracterizacao_viagem2_carga_avancar", true);
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.caracterizacao_viagem2_carga.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaRadioSimNao("possui_carga", "Possui carga")) {

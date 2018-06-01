@@ -1,4 +1,10 @@
+/// @file caracterizacao_viagem_carga.js
+/// @namespace controllers.caracterizacao_viagem_carga
+/// Funções da tela caracterizacao_viagem_carga
 controllers.caracterizacao_viagem_carga = {
+	/// @function controllers.caracterizacao_viagem_carga.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.caracterizacao_viagem_carga;
 		me.inicializaElementos();
@@ -6,6 +12,9 @@ controllers.caracterizacao_viagem_carga = {
 		me.buttons();
 	},
 
+	/// @function controllers.caracterizacao_viagem_carga.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#caracterizacao_viagem_carga_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_carga.validar_componentes();
@@ -15,7 +24,9 @@ controllers.caracterizacao_viagem_carga = {
 		})
 	},
 
-	// Inicializa os elementos da tela
+	/// @function controllers.caracterizacao_viagem_carga.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 
 		// INICIO PAÍSES
@@ -35,7 +46,9 @@ controllers.caracterizacao_viagem_carga = {
 		util.limitaTamanhoCampoPorValor('frequencia_num_carga','999');
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.caracterizacao_viagem_carga.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		// Origem
@@ -82,7 +95,9 @@ controllers.caracterizacao_viagem_carga = {
 		util.progressoSelect("idMotivoDeEscolhaDaRota", "motivo_rota_carga", "grupo_caracterizacao_viagem_carga_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.caracterizacao_viagem_carga.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 		if (util.validaSelect("origem_pais_carga", "Origem da viagem")
 				&& util.validaSelect("destino_pais_carga", "Destino da viagem")

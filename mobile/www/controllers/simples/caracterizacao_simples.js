@@ -62,7 +62,7 @@ controllers.caracterizacao_simples = {
 
 	/// @function controllers.caracterizacao_simples.validar_componentes
 	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
-	/// @return {void} função sem retorno
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 		if (util.validaSelect("ano_simples", "Ano do veículo") && util.validaSelect("propriedade_simples", "Propriedade")
 				&& util.validaSelect("combustivel_simples", "Combustível")) {

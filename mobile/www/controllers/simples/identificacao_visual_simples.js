@@ -53,7 +53,7 @@ controllers.identificacao_visual_simples = {
 
 	/// @function controllers.identificacao_visual_simples.validar_componentes
 	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
-	/// @return {void} função sem retorno
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaRadioSimNao("reboque_simples", "Reboque")

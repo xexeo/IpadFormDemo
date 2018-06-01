@@ -73,7 +73,7 @@ controllers.pergunta_extra = {
 
 	/// @function controllers.pergunta_extra.validar_componentes
 	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
-	/// @return {void} função sem retorno
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 		if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '019t')) {
 			return util.validaSelect("select_pergunta_extra_p1", "Pergunta Extra");

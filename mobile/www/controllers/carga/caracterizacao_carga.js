@@ -1,6 +1,11 @@
 /* global util, registro */
-
+/// @file caracterizacao_carga.js
+/// @namespace controllers.caracterizacao_carga
+/// Funções da tela caracterizacao_carga
 controllers.caracterizacao_carga = {
+	/// @function controllers.caracterizacao_carga.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.caracterizacao_carga;
 		me.inicializaElementos();
@@ -11,6 +16,9 @@ controllers.caracterizacao_carga = {
 	// TODO Acertar essa constante após alterar para o id correto
 	idPropriedadePropriaParticularAutônomo : 2,
 
+	/// @function controllers.caracterizacao_carga.buttons
+	/// Controla o comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#caracterizacao_carga_avancar").click(function() {
 			var ok = controllers.caracterizacao_carga.validar_componentes();
@@ -20,7 +28,9 @@ controllers.caracterizacao_carga = {
 		})
 	},
 
-	// Inicializa os elementos da tela
+	/// @function controllers.caracterizacao_carga.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 
 //		var lista_anos = [];
@@ -45,7 +55,9 @@ controllers.caracterizacao_carga = {
 		util.inicializaSelect("agregado_carga", lista_agregado);
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.caracterizacao_carga.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 		var me = controllers.caracterizacao_carga;
 
@@ -78,7 +90,9 @@ controllers.caracterizacao_carga = {
 		util.progressoSelect("idAgregado", "agregado_carga", "grupo_caracterizacao_carga_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.caracterizacao_carga.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 		var me = controllers.caracterizacao_carga;
 

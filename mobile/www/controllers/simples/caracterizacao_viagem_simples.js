@@ -169,7 +169,7 @@ controllers.caracterizacao_viagem_simples = {
 
 	/// @funciton controllers.caracterizacao_viagem_simples.validar_componentes
 	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
-	/// @return {void} função sem retorno
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaSelect("origem_pais_simples", "Origem da viagem")

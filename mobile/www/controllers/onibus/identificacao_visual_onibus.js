@@ -1,4 +1,10 @@
+/// @file identificacao_visual_onibus.
+/// @namespace controllers.identificacao_visual_onibus
+/// Funções da tela identificacao_visual_onibus
 controllers.identificacao_visual_onibus = {
+	/// @function controllers.identificacao_visual_onibus.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.identificacao_visual_onibus;
 		me.inicializaElementos();
@@ -6,6 +12,9 @@ controllers.identificacao_visual_onibus = {
 		me.buttons();
 	},
 
+	/// @function controllers.identificacao_visual_onibus.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#identificacao_visual_onibus_avancar").click(function() {
 			var ok = controllers.identificacao_visual_onibus.validar_componentes();
@@ -15,13 +24,17 @@ controllers.identificacao_visual_onibus = {
 		})
 	},
 
-	// Inicializa os elementos da tela
+	/// @function controllers.identificacao_visual_onibus.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_onibus", false);
 		util.inicializaPlacas("onibus");
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.identificacao_visual_onibus.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		util.progressoRadioPlacaEstrangeira("onibus");
@@ -36,7 +49,9 @@ controllers.identificacao_visual_onibus = {
 		util.progressoInputText("placa_unica", "placa_unica_onibus", "grupo_identificacao_visual_onibus_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.identificacao_visual_onibus.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {bool} true se os valores informados forem válidos
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaRadioSimNao("placa_estrangeira_onibus", "Placa estrangeira")) {
