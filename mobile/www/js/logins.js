@@ -1,5 +1,13 @@
+/// @file logins.js
+/// @namespace logins
+/// Função para controle de acesso
 var logins = {
 
+	/// @function logins.autenticaMaster
+	/// Verifica se o par (usuario, senha) informado corresponde ao usuário Master do sistema
+	/// @param {string} usuario	identificação do usuário
+	/// @param {string} senha	senha
+	/// @return {bool} resultado da verificação
 	autenticaMaster : function(usuario, senha) {
 		if ((usuario == logins.user_master.usr) && (senha == logins.user_master.pwd)) {
 			return true;
@@ -7,6 +15,11 @@ var logins = {
 		return false;
 	},
 
+	/// @function logins.autentica
+	/// Verifica se o par (usuário, senha) informado corresponde a um usuário com permissão de acesso ao sistema no período [treinamento, pequisa real] de operação do sistema.
+	/// @param {string} usuario	identificação do usuário
+	/// @param {string} senha	senha
+	/// @return {bool} resultado da verificação
 	autentica : function(usuario, senha) {
 		var posto = null;
 		var msg = null;
@@ -49,6 +62,11 @@ var logins = {
 		return false;
 	},
 	
+	/// @function logins.verificaPostoSenha
+	/// Verifica se o par (posto, senha) informado está cadastrado no sistema
+	/// @param {string} posto	identificação do posto
+	/// @param {string} senha	senha
+	/// @return {bool} resultado da verificação
 	verificaPostoSenha : function(posto, senha){
 		if (posto.length == 3 && Number(posto) > 0) {
 				var i = Number(posto) - 1;

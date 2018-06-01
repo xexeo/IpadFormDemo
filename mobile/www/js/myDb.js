@@ -1,3 +1,6 @@
+/// @file myDb.js
+/// @namespace myDb
+/// Funções para manipulação do banco de dados
 myDb = {
 
 	camposNaoExportaveisJson : [ 'id', 'uuid', 'login', 'erro', 'duracaoPesq' ],
@@ -63,6 +66,10 @@ myDb = {
 		{field : 'treinamento', type : 'integer', notNull: true}// Boolean 1->true || false, otherwise;
 	],
 
+	/// @function myDb.fieldExists
+	/// Verifica se um campo existe na estrutura da tabela do banco de dados
+	/// @param {string} str identificação do campo
+	/// @return {bool} resultado da verificação
 	fieldExists : function(str) {
 		var found = false;
 		$.each(myDb.tabelaOD, function(index, item) {
@@ -74,6 +81,10 @@ myDb = {
 		return found;
 	},
 
+	/// @function myDb.cretateTbDados
+	/// Cria a tabela para armazenar os dados das pesquisas
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	cretateTblDados : function(cb) {
 		app.logger.log("criando tabela: tblDados");
 		app.database.transaction(function(tx) {
@@ -96,6 +107,10 @@ myDb = {
 
 	},
 
+	/// @function myDb.createTblSchema
+	/// Cria a tabela para armazer a versão do esquema do banco de dados
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	createTblSchema : function(cb) {
 		app.logger.log("criando tabela: tblSchema");
 		app.database.transaction(function(tx) {
@@ -112,6 +127,10 @@ myDb = {
 
 	},
 	
+	/// @function myDb.updateSchema
+	/// Atualiza o esquema do banco de dados
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	updateSchema : function(cb){
 		app.logger.log("update schema");
 		myDb.createTblSchema(function(){
@@ -147,12 +166,13 @@ myDb = {
 		});
 	},
 
-	/**
-	 * Inserts a registro variable into database
-	 * @param Registro reg registro to be inserted into database
-	 * @param Function fail error callback
-	 * @param Function success callback
-	 */
+	
+	/// @function myDb.insertRegistro
+	/// Registra os dados de uma pesquisa no banco de dados
+	/// @param {Registro} reg estrutura de dados com todas as informações de uma pesquisa
+	/// @param {function} fail função _callback_ disparada no caso de falha
+	/// @param {function} success função _callback_ dispara no caso de sucesso
+	/// @return {void} função sem retorno
 	insertRegistro : function(reg, fail, success) {
 		if (reg.id != null){
 				app.logger.log("inserindo registro: " + reg.id);
@@ -202,6 +222,10 @@ myDb = {
 		
 	},
 	
+	/// @function myDb.sanitize
+	/// Executa rotina de verificação do banco
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	sanitize: function(cb){
 		app.database.transaction(function(tx) {
 			var sql = "DELETE from tblDados WHERE id is null;";
@@ -227,6 +251,11 @@ WHERE cancelado = 0
 GROUP by date(dataIniPesq)
 ORDER BY diaPesq DESC;
 */
+	/// @function myDb.selectDuracoesDiaRegistro
+	/// Recupera a duração das pesquisas
+	/// @param {function} fail função _callback_ disparada em caso de falha
+	/// @param {function} success função _callback_ dispara em caso de sucesso
+	/// @return {void} função sem retorno
 	selectDuracoesDiaRegistro : function(fail, success) {
 		app.logger.log("(selectDuracoesDiaRegistro) buscando no registro");
 		var linhas = [];
@@ -270,6 +299,11 @@ ORDER BY diaPesq DESC;
 		}
 	},
 
+	/// @function myDb.selectUltimaPesquisaValida
+	/// Seleciona a última pesquisa válida
+	/// @param {function} fail função _callback_ disparada em caso de falha
+	/// @param {function} success função _callback_ dispara em caso de sucesso
+	/// @return {void} função sem retorno
 	selectUltimaPesquisaValida : function(fail, success) {
 		app.logger.log("(selectUltimaPesquisaValida) buscando no registro");
 		var ultimoRegistro = [];
@@ -316,6 +350,11 @@ WHERE cancelado = 1
 GROUP by date(dataIniPesq)
 ORDER BY diaPesq DESC;
 */
+	/// @function myDb.selectRegistrosCancelados
+	/// Seleciona os registros cancelados
+	/// @param {function} fail função _callback_ disparada em caso de falha
+	/// @param {function} success função _callback_ dispara em caso de sucesso
+	/// @return {void} função sem retorno
 	selectRegistrosCancelados : function(fail, success) {
 		app.logger.log("(selectRegistrosCancelados) buscando no registro");
 		var linhas = [];
@@ -357,6 +396,12 @@ ORDER BY diaPesq DESC;
 		}
 	},
 
+	/// @function myDb.exportaDbToJson
+	/// Exporta os registros do banco de dados no formato JSON
+	/// @param {jsonWriter} writer referência para um objeto que escreve o arquivo json
+	/// @param {function} fail função _callback_ disparada em caso de falha
+	/// @param {function} success função _callback_ dispara em caso de sucesso
+	/// @return {void} função sem retorno
 	exportaDbToJson : function(writer, fail, success) {
 		app.logger.log("exportando Json: ");
 		var treinamento = (app.isTreinamento)? 1 : 0;

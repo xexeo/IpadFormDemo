@@ -1,5 +1,12 @@
+/// @file ipadID.js
+/// @namespace ipadID
+/// Funções para controle da identificação dos ipads
 var ipadID = {
-	
+	/// @function ipadID.storeID
+	/// Grava a identificação do ipad no sistema de arquivos
+	/// @param {string} id	identificação
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	storeID : function(id, cb){
 		window.resolveLocalFileSystemURL(cordova.file.dataDirectory,
 			function(dir){
@@ -40,11 +47,12 @@ var ipadID = {
 	},
 	
 
-	/**
-	 * Read ipadIDFile
-	 * @param Function success callback
-	 * @param Function fail callback
-	 */
+	/// @function ipadID.readId
+	/// Recupera a identificação do ipad
+	/// @param {FileEntry} fileEntry	referência para um arquivo
+	/// @param {function} success função _callback_ disparada em caso de sucesso
+	/// @param {function} fail função _callback_ disparada em caso de falha
+	/// @return {void} função sem retorno
 	readId : function(fileEntry, success, fail){
 		fileEntry.file(function(file){
 			var reader = new FileReader();
@@ -65,7 +73,10 @@ var ipadID = {
 			
 		});
 	},
-	
+	/// @function ipadID.requestID
+	/// Solicita ao usuário a identificação do ipad
+	/// @param {function} success função _callback_
+	/// @return {void} função sem retorno
 	requestID : function(success){
 		navigator.notification.prompt("Entre o ID desse ipad",
 			function(results){
@@ -97,6 +108,10 @@ var ipadID = {
 		);
 	},
 	
+	/// @function ipadID._isValid
+	/// Verifica se o identificador informado é válido
+	/// @param {string} id identificador
+	/// @return {bool} true se o identificador informado for válido
 	_isValid : function (id){
 		return (id.length === 6 
 				&& $.isNumeric(id) 

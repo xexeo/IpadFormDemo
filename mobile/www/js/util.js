@@ -1,6 +1,14 @@
+/// @file util.js
+/// @namespace util
+/// Funções utilitárias de uso geral
 var util = {
 
-	// Funções para o inicializa
+	
+	/// @function util.inicializaSelect
+	/// Inicia uma _caixa de seleção_
+	/// @param {string} nome_campo	identificador do controle HTML
+	/// @param {string[]} lista		lista de velores
+	/// @return {void} função sem retorno
 	inicializaSelect : function(nome_campo, lista) {
 		var insert_inicial = "<option value='-1'>Selecione</option>\n";
 		$.each(lista, function(index, item) {
@@ -8,7 +16,13 @@ var util = {
 		});
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
-
+	
+	/// @function util.inicializaSelectCustom
+	/// Inicia uma _caixa de seleção_ com mensagem personalizada
+	/// @param {string} nome_campo	identificador do controle HTML
+	/// @param {string[]} lista		lista de velores
+	/// @param {string} mensagem	mensagem personalizada
+	/// @return {void} função sem retorno
 	inicializaSelectCustom : function(nome_campo, lista, mensagem) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
@@ -17,6 +31,12 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	/// @function util.inicializaSelectCustomValueAsIndex
+	/// Inicia uma _caixa de seleção_ com mensagem personalizada e valor de retorno como o próprio item da lista
+	/// @param {string} nome_campo	identificador do controle HTML
+	/// @param {string[]} lista		lista de velores
+	/// @param {string} mensagem	mensagem personalizada
+	/// @return {void} função sem retorno
 	inicializaSelectCustomValueAsIndex : function(nome_campo, lista, mensagem) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
@@ -25,6 +45,7 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	
 	inicializaSelectPais : function(nome_registro, nome_campo, inclui_Brasil, mensagem) {
 		var lista = paises.listados();
 		var insert_inicial = "";
