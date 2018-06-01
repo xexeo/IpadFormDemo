@@ -2,7 +2,7 @@
 
 /// @file index.js
 /// @namespace app
-/// Módulo com fluxo principal da aplicação
+/// Módulo com funções de controle e configuração da aplicação
 var app = {
 
 	versao : '2.6.1',
@@ -12,7 +12,7 @@ var app = {
 	versaoBD : 1,
 
 	/// @function app.login
-	/// Identifica e autoriza o usuário
+	/// Identifica e autoriza o usuário utilizando as informações dos campos da tela inicial.
 	/// @return {void} função sem retorno
 	login : function() {
 		var usuario = $("#usuario").val().trim();
@@ -67,6 +67,9 @@ var app = {
 		app.restart(); //problably the only line we need
 	},
 
+	/// @function app.exportaDbTojson
+	/// Exporta o banco de dados para o formato JSON
+	/// @return {void} função sem retorno
 	exportaDbToJson : function() {
 		if (app.filePaths) {
 			resolveLocalFileSystemURL(app.filePaths.externalFolder, function(dir) {
@@ -101,6 +104,9 @@ var app = {
 		}
 	},
 
+	/// @function app.duplicaDb
+	/// Exporta o banco de dados fazendo uma cópia integral do banco para a area de armazenamento acessível ao usuário
+	/// @return {void} função sem retorno
 	duplicaDb : function() {
 		if (app.filePaths) {
 			//opens first. And tests the db's integrity
@@ -127,6 +133,9 @@ var app = {
 		}
 	},
 	
+	/// @function app.exportaDBCorrompido
+	/// Em caso de erro onde o banco de dados seja comprometido, o mesmo é exportado e depois removido do sistema.
+	/// @return {void} função sem retorno.
 	exportaDBCorrompido : function(err){
 		app.logger.log('Exportando bando de dados corrompido');
 		app.copyFile(app.dbName, app.filePaths.dbFolder, app.filePaths.externalFolder, true, 
@@ -148,19 +157,20 @@ var app = {
 			app.logger.log(JSON.stringify(err));
 		}
 	},
-
+	
+	/// @function app.duplicaLog
+	/// Copia o arquivo de log para area de transferência de dados.
+	/// @return {void} função sem retorno.
 	duplicaLog : function() {
 		app.copyFile(app.logFileName, cordova.file.dataDirectory, app.filePaths.externalFolder, false, function(newName) {
 			alert('Arquivo de log ' + newName + ' exportado com sucesso.');
 		});
 	},
 
-	/**
-	 * Validates interview's cancellation
-	 * 
-	 * @param Function
-	 *            cb receives a Boolean representing the success in validation
-	 */
+	/// @function app.validaCancelamento
+	/// Valida o cancelamento de uma entrevista
+	/// @param {function} cb função _callback_, recebe um Boolean que representa o sucesso na validação
+	/// @return {void} função sem retorno.
 	validaCancelamento : function(cb) {
 		prompt("Insira a senha para cancelar a entrevista.", function(result) {
 			// botão prosseguir cancelamento
@@ -180,6 +190,16 @@ var app = {
 		}, "Cancelamento de entrevista", "Cancelar entrevista", "Voltar", "Senha", 'password');
 	},
 
+	/// @function app.validaOpoeracoes
+	/// Exibe um diálogo solicitando a senha para confirmar uma operação.
+	/// @param {function} operacao		operação a ser realizada
+	/// @param {String}	txtPrompt		texto solicitando a senha
+	/// @param {String}	titlePrompt		título da janela de solicitação de senha
+	/// @param {String}	txtConfirm		texto para confirmação
+	/// @param {String} titleConfirm	título da janela de confirmação
+	/// @param {String} btnOKPrompt		texto do botão _OK_ da janela de solicitação de senha
+	/// @param {String} btnCancelPrompt	texto do botão _Cancel_ da janela de solicitação de senha
+	/// @return {void} função sem retorno.
 	validaOperacoes : function(operacao, txtPrompt, titlePrompt, txtConfirm, titleConfirm, btnOKPrompt, btnCancelPrompt) {
 		prompt(txtPrompt, function(result) {
 			if (result == app.senha_login) {
@@ -194,9 +214,11 @@ var app = {
 		}, titlePrompt, btnOKPrompt, btnCancelPrompt, "Senha", 'password');
 	},
 
-	/*
-	 * Application constructor
-	 */
+	
+	/// @function app.intialize
+	/// Construtor da aplicação.
+	/// Constrói, configura e inicia a aplicação.
+	/// @return {void} função sem retorno.
 	initialize : function() {
 		this.bindEvents();
 		this.extraConfig();
@@ -208,17 +230,18 @@ var app = {
 
 	},
 
-	/*
-	 * bind any events that are required on startup to listeners:
-	 */
+
+	/// @function app.bindEvents
+	/// Associa o evento _deviceready_ à função __app.onDeviceReady__
+	/// @return {void} função sem retorno.
 	bindEvents : function() {
 		document.addEventListener('deviceready', app.onDeviceReady);
 		console.log('bindindEvents');
 	},
 
-	/*
-	 * this runs when the device is ready for user interaction:
-	 */
+	/// @function app.onDeviceReady
+	/// Configura os eventos de controle do aparelho e inicia as variáveis de configuração da aplicação.
+	/// @return {void} função sem retorno.
 	onDeviceReady : function() {
 		app.logger.log('device ready');
 		window.addEventListener('batterycritical',function(status){
@@ -295,6 +318,9 @@ var app = {
 
 	},
 
+	/// @function app.onFileSystemReady
+	/// Conecta a aplicação ao sistema de arquivos do aparelho, recupera o arquivo de identificação do iPad e inicia a conexão com o banco de dados.
+	/// @return {void} função sem retorno.
 	onFileSystemReady : function() {
 
 		app.logger.log("folder dos dados: ", cordova.file.dataDirectory);
@@ -357,12 +383,13 @@ var app = {
 		;
 
 	},
-	/**
-	 * Creates and open database connection
-	 * @param cb - option callback function
-	 * @param errorCB - optional callback function for when an error occurs
-	 * @param isExporting - optional boolean to identify data exporting operations 
-	 */
+	
+	/// @function app.openDB
+	/// Cria e abre a conexão com o banco de dados
+	/// @param {function} cb		função _callback_
+	/// @param {function} errorCB	função _callback_ disparada na ocorrência de erros
+	/// @param {bool} isExporting	bool para identificar operções de exportação de dados
+	/// @return {void}				função sem retorno.
 	openDB : function(cb, errorCB, isExporting) {
 		app.database = sqlitePlugin.openDatabase({
 			name : app.dbName,
@@ -395,6 +422,9 @@ var app = {
 		});
 	},
 	
+	/// @function app.extraConfig
+	/// Configurações adicionais da aplicação
+	/// @return {void} função sem retorno
 	extraConfig : function() {
 		// initialize panel
 		$(function() {
@@ -464,13 +494,12 @@ var app = {
 		$.mobile.loader.prototype.options.theme = "b";
 		$.mobile.loader.prototype.options.html = "";
 	},
-	/**
-	 * Change pages within app
-	 * @param view  -> new view
-	 * @param controller  -> controller that will run on view change
-	 * @param String changeFunction -> ['old', 'new'] -- default new
-	 * 
-	 */
+	
+	/// @function app.trocaPagina
+	/// Muda a tela sendo exibida na aplicação
+	/// @param {string} view			arquivo HTML da tela a ser exibida
+	/// @param {string} controller		arquivo JS da tela a ser exibida
+	///	@param {string} changeFunction	['old' | 'new'] -- default 'new'
 	trocaPagina : function(view, controller, changeFunction) {
 		
 		var changeF = (util.isEmpty(changeFunction) || changeFunction != 'old')? newChange : oldChange;
@@ -526,23 +555,12 @@ var app = {
 		}
 	},
 
-	// para apendar coisas aos controllers
+	/// @function app.onChangeHandler
+	/// Permite incrementar os arquivos JS das páginas a serem exibidas com funcionalidades padrão
+	/// @return {void} função sem retorno
 	onChangeHandler : {
 		handler : function() {
 			try {
-//				$("section[data-role=page]").append(
-//						"<footer data-role='footer' data-position='fixed'> \
-//							<span class='versao'>Versão: <span id='versao'></span></span> \
-//							<span class='data_atual'>Data: <span id='data_atual'></span></span> \
-//							<span class='posto'>Posto: <span id='posto'></span></span> \
-//							<span class='sentido'>Sentido: <span id='sentido'></span></span> \
-//							<span class='ipad'>id-iPad: <span id='ipadID'></span></span> \
-//						</footer>"
-//						);
-//				$("footer[data-role='footer']").toolbar({
-//					defaults : true,
-//					position: "fixed"
-//				});
 				
 				app.onChangeHandler.controller();
 
@@ -616,15 +634,26 @@ var app = {
 		controller : null,
 	},
 
+	/// @function app.getAtributo
+	/// Recupera o valor de um atributo da estrutura de dados que armazena as informações da pesquisa sendo realizada.
+	/// @param {string} nome	nome do atributo a ser recuperado
+	/// @return {object}		valor do atributo recuperado
 	getAtributo : function(nome) {
 		return registro[nome];
 	},
 
+	/// @function app.setAtributo
+	/// Ajusta o valor de um atributo da estrutura de dados que armazena as informações da pesquisa sendo realizada.
+	/// @param {string} nome	nome do atributo
+	/// @return {void}	função sem retorno
 	setAtributo : function(nome, valor) {
 		registro[nome] = valor;
 		app.logger.log(JSON.stringify(registro));
 	},
 
+	/// @function app.splitAtributo
+	/// Fragmenta o valor de um atributo para a representação necessária ao registro no banco de dados.
+	/// @return {void} função sem retorno
 	splitAtributo : function(nome) {
 		var valor = registro[nome];
 		if (!util.isEmpty(valor)) {
@@ -642,6 +671,9 @@ var app = {
 		}
 	},
 
+	/// @function app.cancelar
+	/// Cancela a realização da pesquisa atual
+	/// @return {void} função sem retorno
 	cancelar : function() {
 		app.validaCancelamento(function(result) {
 			if (result) {
@@ -652,11 +684,17 @@ var app = {
 		});
 	},
 
+	/// @function app.limpaRegistro
+	/// Limpa a estrutura de dados utilizada para armazenar as informações da pesquisa sendo realizada.
+	/// @return {void} função sem retorno 
 	limpaRegistro : function() {
 		app.logger.log('Limpando registro', true);
 		registro = {};
 	},
 
+	/// @function app.iniciaRegistro
+	/// Inicia a estrutura de dados usada para armazenar as informações da pesquisa sendo realizada.
+	/// @return {void} função sem retorno
 	iniciaRegistro : function() {
 		try {
 			var now = new Date();
@@ -677,6 +715,9 @@ var app = {
 		}
 	},
 
+	/// @function app.setCamposDerivados
+	/// Ajusta e registra os valores de campos do registro para a representação adequada a persistência no banco de dados.
+	/// @return {void} função sem retorno
 	setCamposDerivados : function() {
 		try {
 			//Treinamento
@@ -890,6 +931,10 @@ var app = {
 		app.setAtributo('duracaoPesq', duracao);
 	},
 
+	/// @function app.finalizaRegistro
+	/// Fluxo principal do processo de finalização e gravação do registro de uma entrevista no banco de dados.
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	finalizaRegistro : function(cb) {
 		app.logger.log('Finalizando registro: ' + registro.id);
 		app.setAtributo('cancelado', 0);
@@ -908,6 +953,10 @@ var app = {
 		});
 	},
 	
+	/// @function app.inserirRegistro
+	/// Grava o registro de um entrevista no banco de dados
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	inserirRegistro : function(cb){ //função é chamada por finalizaRegistro
 		myDb.insertRegistro(registro,
 		// erro
@@ -940,6 +989,10 @@ var app = {
 		});
 	},
 	
+	/// @function app.buscaDuracoesRegistros
+	/// Recupera no banco de dados a duração das entrevistas já realizadas.
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	buscaDuracoesRegistros : function(cb) {
 		app.openDB(function(){
 			myDb.selectDuracoesDiaRegistro(
@@ -976,6 +1029,10 @@ var app = {
 			
 	},
 
+	/// @function app.buscaUltimaPesquisa
+	/// Recupera a última pesquisa válida
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	buscaUltimaPesquisa : function(cb) {
 		app.openDB(function(){
 			myDb.selectUltimaPesquisaValida(
@@ -1011,6 +1068,10 @@ var app = {
 			
 	},
 
+	/// @function app.buscaRegistrosCancelados
+	/// Recupera do banco de dados as pesquisas canceladas
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	buscaRegistrosCancelados : function(cb) {
 		app.openDB(function(){
 			myDb.selectRegistrosCancelados(
@@ -1047,6 +1108,10 @@ var app = {
 		
 	},
 
+	/// @function app.cancelaRegistro
+	/// Fluxo do registro do cancelamento da pesquisa atual
+	/// @param {function} cb função _callback_
+	/// @return {void} função sem retorno
 	cancelaRegistro : function(cb) {
 		app.logger.log('Cancelando registro: ' + registro.id);
 		app.setAtributo('cancelado', 1);
@@ -1084,18 +1149,13 @@ var app = {
 		
 	},
 
-	/**
-	 * Remove a file from fs, if it exists
-	 * 
-	 * @param String
-	 *            fileName
-	 * @param String
-	 *            dir -> prefers cordova.file.{dir}
-	 * @param function
-	 *            cbSuccess success callback
-	 * @param function
-	 *            cbFail error callback
-	 */
+	/// @function app.removeFile
+	/// Remove um arquivo do sistema de arquivos, se ele existir
+	/// @param {string} fileName	nome do arquivo
+	/// @param {string} dirURI		URL do diretório (ver cordova.file.{dir})
+	/// @param {function} cbSuccess	função _callback_ chamada em caso de sucesso
+	/// @param {function} cbFail	função _callback_ chamada em caso de falha
+	/// @return {void} função sem retorno
 	removeFile : function(fileName, dirURI, cbSuccess, cbFail) {
 		window.resolveLocalFileSystemURL(dirURI,
 		// success
@@ -1124,20 +1184,14 @@ var app = {
 		});
 	},
 
-	/**
-	 * Copy a file overwriting the destination file, if it exists
-	 * 
-	 * @param String
-	 *            fileName
-	 * @param String
-	 *            originDir
-	 * @param String
-	 *            destDir
-	 * @param Boolean
-	 *			  isCorrupted
-	 * @param Function
-	 *            cb success callback function
-	 */
+	/// @function app.copyFile
+	/// Copia um arquivo sobrescrevendo o destino, se existir
+	/// @param {string} fileName		nome do arquivo
+	/// @param {string} originDirURI	diretório de origem
+	/// @param {string} distDirURI		diretório de destino
+	/// @param {bool} isCorrupted		se o arquivo a ser copiado é um arquivo corrompido
+	/// @param {function} cb			função _callback_
+	/// @return {void} função sem retorno
 	copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) {
 		var now = new Date();
 		var newName = (isCorrupted)? "CORROMPIDO" + ipadID.id + "_" + fileName : ipadID.id + "_" + fileName;
@@ -1206,6 +1260,9 @@ var app = {
 		;
 	},
 
+	/// @function app.restart
+	/// Reinicia a aplicação
+	/// @return {void} função sem retorno
 	restart : function(){
 		window.location.href = app.baseUrl + 'index.html'; //href para a página inicial
 		window.setTimeout(function(){

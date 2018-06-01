@@ -1,3 +1,4 @@
+
 var lista_numero_risco = [
                     {id : '1', numeroid : '20'},
                     {id : '2', numeroid : '22'},
@@ -101,6 +102,7 @@ var lista_numero_risco = [
                     {id : '100', numeroid : '90'},
                     {id : '101', numeroid : '99'}           
 ];
+
 
 var lista_numero_onu = [
                   {id : '1', numeroid : '4'},

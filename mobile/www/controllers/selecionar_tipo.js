@@ -1,4 +1,10 @@
+/// @file selecionar_tipo
+/// @namespace controllers.selecionar_tipo
+/// Funções da tela selecionar_tipo
 controllers.selecionar_tipo = {
+	/// @function controllers.selecionar_tipo.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 
 		$(".switch_classe_veiculo").click(function() {
@@ -10,6 +16,9 @@ controllers.selecionar_tipo = {
 
 	},
 	
+	/// @function controllers.selecionar_tipo.image_click
+	/// Comportamento ao clicar em uma das imagens da tela
+	/// @return {void} função sem retorno
 	image_click : function(){
 		app.imagemPath = $(this).attr('src');
 			app.setAtributo('tipo', $(this).attr('id'));

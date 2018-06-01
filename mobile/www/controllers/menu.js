@@ -1,6 +1,11 @@
 /* global util, datas, app, ipadID */
-
+/// @file menu.js
+/// @namespace controllers.menu
+/// Funções da tela de menu
 controllers.menu = {
+	/// @function controllers.menu.config
+	/// Controla o comportamento da tela de menu
+	/// @return {void} função sem retorno
 	config : function() {
 		$('#display_posto').html(app.posto);
 		$('#display_idIpad').html(ipadID.id);
@@ -79,42 +84,6 @@ controllers.menu = {
 				app.trocaPagina("views/menu.html", controllers.menu);
 			}
 		});
-
-		/*$("#duplica_log").click(function() {
-			if (app.filePaths){
-				app.copyFile(app.logFileName,
-                cordova.file.dataDirectory,
-                app.filePaths.externalFolder,
-                function(newName){
-                    alert('Arquivo de log ' + newName + ' exportado com sucesso.');
-                });
-			} else {
-				alert('Operação não realizada, o sistema de arquivos não foi definido');
-			}
-			
-		});*/
-
-		/*$("#duplica_db").click(function() {
-            if(app.filePaths){
-				app.database.close(function() {
-                app.copyFile(app.dbName, 
-                    app.filePaths.dbFolder,
-                    app.filePaths.externalFolder,
-                    function(newName){
-                        alert('Banco de dados ' + newName + ' exportado com sucesso.');
-                        app.openDB();
-                    });
-				}, function(err) {
-                app.logger.log(JSON.stringify(err));
-				});
-			} else {
-				alert('Operação não realizada, o sistema de arquivos não foi definido');
-			}
-        });
-		
-		$("#menu_logout").click(function () {
-			app.logout();
-		});*/
 
 	},
 };

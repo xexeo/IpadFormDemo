@@ -1,4 +1,10 @@
+/// @file sumario.js
+/// @namespace controllers.sumario
+/// Funções da tela sumario
 controllers.sumario = {
+	/// @function controllers.sumario.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 
 		var dataSet = [];

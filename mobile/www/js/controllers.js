@@ -1,6 +1,10 @@
+/// @file controllers.js
+/// @namespace controllers
+/// Módulo para agregar os arquivos JS de cada tela da aplicação
 var controllers = controllers || {};
 
-//insert controller files
+/// @namespace insert_controllers
+/// Identificação e controle dos arquivos JS de cada tela da aplicação
 var insert_controllers={
     //files to be inserted
     controller_files : ['menu.js', 
@@ -21,7 +25,9 @@ var insert_controllers={
                     ],
     
     controller_files_path : 'controllers/',
-    
+    /// @function insert_controllers.insert
+	/// Cria tags _script_ para incluir os arquivos JS na das páginas na aplicação
+	/// @return {void} função sem retorno
     insert : function(){
             var me = this; 
             $.each(me.controller_files,

@@ -60,7 +60,7 @@ PROJECT_LOGO           = src/images/splash.png
 
 # OUTPUT_DIRECTORY       = C:\Users\Geraldo\Dropbox\Documents\GitHub\ipaddnit\concentrador\doxy\concentrador
 
-OUTPUT_DIRECTORY       = /home/mangeli/Desenvolvimento/ipaddnit/mobile/doxy/coletor
+OUTPUT_DIRECTORY       = /home/mangeli/Desenvolvimento/ipaddnit/mobile/doxyJS/coletor
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -892,7 +892,7 @@ EXCLUDE_SYMLINKS       = NO
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories for example use the pattern */test/*
 
-EXCLUDE_PATTERNS       = 
+EXCLUDE_PATTERNS       = */libs/*
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
@@ -963,7 +963,7 @@ INPUT_FILTER           =
 # need to set EXTENSION_MAPPING for the extension otherwise the files are not
 # properly processed by doxygen.
 
-FILTER_PATTERNS        =*.js=doxy/doxygen.js
+FILTER_PATTERNS        =*.js=doxyJS/doxygen.js
 
 # If the FILTER_SOURCE_FILES tag is set to YES, the input filter (if set using
 # INPUT_FILTER) will also be used to filter the input files that are used for

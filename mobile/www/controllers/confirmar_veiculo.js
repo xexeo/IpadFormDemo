@@ -1,4 +1,10 @@
+/// @file confirmar_veiculo.js
+/// @namespace controllers.confirmar_veiculo
+/// Funções da tela confirmar_veiculo
 controllers.confirmar_veiculo = {
+	/// @function controllers.confirmar_veiculo.config
+	/// Controla o comportamento da tela confirmar_veiculo
+	/// @return {void} função sem retorno
 	config : function() {
 
 		$("#img_confirmar_veiculo").attr('src', app.imagemPath);
