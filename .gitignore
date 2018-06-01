@@ -1,3 +1,5 @@
 *~
 .DS_Store
 mobile/node_modules/
+mobile/ignore/
+output.latex
