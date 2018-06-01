@@ -109,12 +109,18 @@ var util = {
 		return ($.inArray(value, array) >= 0);
 	},
 
-
+	/// @function util.getListaFrequencias
+	/// Retorna a lista de frequências { 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' }
+	/// @return {array} lista de frequências
 	getListaFrequencias : function() {
 		var lista_frequencias = [ 'Dia', 'Semana', 'Mês', 'Ano', 'Eventualmente' ];
 		return lista_frequencias;
 	},
 
+	/// @function util.inicializaSelectFrequencia
+	/// Inicia uma _caixa de seleção_ contendo as frequências de ocorrência de uma viagem
+	/// @param {string} tipo_fluxo		identificador do tipo de fluxo da pesquisa
+	/// @return {void} função sem retorno
 	inicializaSelectFrequencia : function(tipo_fluxo) {
 		var lista_frequencias = util.getListaFrequencias();
 		var nome_campo = 'frequencia_sel_' + tipo_fluxo;
@@ -128,6 +134,12 @@ var util = {
 		});
 	},
 
+	/// @function util.inicializaSelectCargaRiscoOnu
+	/// Inicia uma _caixa de seleção_ com mensagem personalizada para exibição dos números de risco ONU
+	/// @param {string} nome_campo	identificador do controle HTML
+	/// @param {string} mensagem	mensagem personalizada
+	/// @param {array} lista		lista de valores
+	/// @return {void} função sem retorno
 	inicializaSelectCargaRiscoOnu : function(nome_campo, mensagem, lista) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
@@ -136,6 +148,12 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	/// @function util.inicializaSelectTipoDeCarga
+	/// Inicia uma _caixa de seleção_ com mensagem personalizada para exibição dos tipos de carga
+	/// @param {string} nome_campo	identificador do controle HTML
+	/// @param {string} mensagem	mensagem personalizada
+	/// @param {array} lista		lista de valores
+	/// @return {void} função sem retorno
 	inicializaSelectTipoDeCarga : function(nome_campo, mensagem, lista) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista, function(index, item) {
@@ -144,6 +162,10 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	/// @function util.inicializaPlacas
+	/// Inicia o campo para entrada de placas
+	/// @param {string} tipo_fluxo identificador do tipo de fluxo da pesquisa
+	/// @return {void} função sem retorno
 	inicializaPlacas : function(tipo_fluxo) {
 		// $('.input_placa').keyup(function() {
 		// var input = $(this);
@@ -185,6 +207,13 @@ var util = {
 		$('#placa_unica_' + tipo_fluxo).attr("maxlength","20");
 	},
 
+	/// @function util.inicializaTabelaAuxiliar
+	/// Inicia uma tabela auxiliar
+	/// @param {string} nome_campo		identificador do controle HTML
+	/// @param {string} mensagem		mensagem personalizada
+	/// @param {array} lista_tb_aux		lista de valores
+	/// @param {string} nome_fluxo		identificador do tipo de fluxo da pesquisa
+	/// @return {void} função sem retorno
 	inicializaTabelaAuxiliar : function(nome_campo, mensagem, lista_tb_aux, nome_fluxo) {
 		var insert_inicial = "<option value='-1'>" + mensagem + "</option>\n";
 		$.each(lista_tb_aux, function(index, item) {
@@ -210,6 +239,11 @@ var util = {
 		$("#" + nome_campo).html(insert_inicial).selectmenu("refresh", true);
 	},
 
+	/// @function util.getIdFromTabelaAuxiliar
+	/// Recupera o identificador de um valor selecionado na tabela auxiliar
+	/// @param {string} valor		valor selecionado
+	///	@param {array} lista_tb_aux	lista de valores da tabela auxiliar
+	/// @return {int} número de identificação do valor selecionado
 	getIdFromTabelaAuxiliar : function(valor, lista_tb_aux) {
 		
 		if (valor == null ) {
@@ -231,16 +265,12 @@ var util = {
 		return null;
 	},
 
-	// Funções para o progresso
-	/**
-	 * 
-	 * @param nome_registro
-	 *            nome do atributo da variável global registro
-	 * @param nome_campo
-	 *            id do componente html
-	 * @param grupo_proximo
-	 *            id da div que irá sofrer show/hide
-	 */
+	/// @function util.progressoRadioSimNao
+	/// Controla o progresso da pesquisa após a seleção de um _radio button_
+	/// @param {string} nome_registro		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} grupo_proximo		identificador do elemento que irá sofrer a ação show/hide
+	/// @return {void} função sem retorno
 	progressoRadioSimNao : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo + '_sim').click(function() {
 			$('#' + grupo_proximo).show();
@@ -252,6 +282,13 @@ var util = {
 		});
 	},
 
+	/// @function util.progressoRadioSimNaoAlternado
+	/// Controla o progresso da pesquisa após a seleção de um _radio button_
+	/// @param {string} nome_registro		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} grupo_proximo_sim	identificador do elemento que irá sofrer a ação show/hide na escolha da opção SIM
+	/// @param {string} grupo_proximo_não	identificador do elemento que irá sofrer a ação show/hide na escolha da opção NÃO
+	/// @return {void} função sem retorno
 	progressoRadioSimNaoAlternado : function(nome_registro, nome_campo, grupo_proximo_sim, grupo_proximo_nao) {
 		$('#' + nome_campo + '_sim').click(function() {
 			$('#' + grupo_proximo_sim).show();
@@ -265,6 +302,10 @@ var util = {
 		});
 	},
 
+	/// @function util.progressoRadioPlacaEstrangeira
+	/// Controla o progresso da pesquisa após a seleção da opção placa estrangeira
+	/// @param {string} tipo_fluxo	identificador do tipo de fluxo da pesquisa
+	/// @return {void} função sem retorno
 	progressoRadioPlacaEstrangeira : function(tipo_fluxo) {
 		$('#placa_estrangeira_' + tipo_fluxo + '_sim').click(function() {
 			$('#grupo_pais_' + tipo_fluxo).show();
@@ -294,6 +335,13 @@ var util = {
 		});
 	},
 
+	/// @function util.progressoCheckboxAlternado
+	/// Controla o progresso da pesquisa após a seleção de um _check box_
+	/// @param {string} nome_registro			identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo				identificador do controle HTML
+	/// @param {string} grupo_proximo_check		identificador do elemento que irá sofrer a ação show/hide quando ao _check box_ é marcado
+	/// @param {string} grupo_proximo_uncheck	identificador do elemento que irá sofrer a ação show/hide quando ao _check box_ é desmarcado
+	/// @return {void} função sem retorno
 	progressoCheckboxAlternado : function(nome_registro, nome_campo, grupo_proximo_check, grupo_proximo_uncheck) {
 		$('#' + nome_campo).click(function() {
 			if ($(this).is(':checked')) {
@@ -308,15 +356,13 @@ var util = {
 		});
 	},
 
-	/**
-	 * 
-	 * @param nome_registro
-	 *            nome do atributo da variável global registro
-	 * @param nome_campo
-	 *            id do componente html
-	 * @param grupo_proximo
-	 *            id da div que irá sofrer show/hide
-	 */
+	
+	/// @function util.progressoSelect
+	/// Modifica o formulário de entrada de dados após a seleção de um valor em uma _caixa de seleção_
+	/// @param {string} nome_registro		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} grupo_proximo		identificador do elemento que irá sofrer a ação show/hide
+	/// @return {void} função sem retorno
 	progressoSelect : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).change(function() {
 			if (Number($(this).val()) != -1) {
@@ -329,6 +375,9 @@ var util = {
 		});
 	},
 
+	/// @function util.progressoSelectPais
+	/// Modifica o formulário após a seleção de um pais em uma _caixa de seleção_
+	/// @return {void} função sem retorno
 	progressoSelectPais : function(nome_registro_pais, nome_registro_municipio, nome_campo, proximo_imediato, proximo_imediato2,
 			grupo_proximo, fluxo) {
 		$('#' + nome_campo).change(function() {
@@ -358,6 +407,11 @@ var util = {
 		});
 	},
 
+	/// @function util.progressoRestartSelect
+	/// Retorna uma _caixa de seleção_ para condição imediatamente após sua inicialização
+	/// @param {string} nome_campo	identificador do controle HTML
+	/// @param {string} mensagem	conteúdo do item selecionado por padrão
+	/// @return {void} função sem retorno
 	progressoRestartSelect : function(nome_campo, mensagem) {
 		$("#" + nome_campo + " option:contains('" + mensagem + "')").prop({
 			selected : true
@@ -365,17 +419,14 @@ var util = {
 		$("select#" + nome_campo).selectmenu("refresh", true);
 	},
 
-	/**
-	 * 
-	 * @param nome_registro
-	 *            nome do atributo da variável global registro
-	 * @param nome_campo
-	 *            id do componente html
-	 * @param grupo_proximo
-	 *            id da div que irá sofrer show/hide
-	 * @param autocomplete
-	 *            bool para indicar se é um campo autocomplete
-	 */
+	
+	/// @function util.progressoInputText
+	/// Modifica o formulário de entrada de dados após uma digitação de um valor
+	/// @param {string} nome_registro		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} grupo_proximo		identificador do elemento que irá sofrer a ação show/hide
+	/// @param {bool} autocomplete			para indicar se é um campo autocomplete
+	/// @return {void} função sem retorno
 	progressoInputText : function(nome_registro, nome_campo, grupo_proximo, autocomplete) {
 
 		if (autocomplete) { // autocomplete
@@ -401,6 +452,12 @@ var util = {
 		}
 	},
 
+	/// @function util.progressoInputTextLen
+	/// Modifica o formulário de entrada de dados após uma digitação de um valor num campo de comprimento controlado
+	/// @param {string} nome_registro		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} grupo_proximo		identificador do elemento que irá sofrer a ação show/hide
+	/// @return {void} função sem retorno
 	progressoInputTextLen : function(nome_registro, nome_campo, grupo_proximo) {
 		$('#' + nome_campo).keyup(function() {
 			var input = $(this);
@@ -432,6 +489,13 @@ var util = {
 		}
 	},
 
+	/// @function util.progressoInputMoney
+	/// Modifica o formulário de entrada de dados após uma digitação de um valor em notação de moeda
+	/// @param {string} nome_registro		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} grupo_proximo		identificador do elemento que irá sofrer a ação show/hide
+	/// @param {bool} autocomplete			para indicar se é um campo autocomplete
+	/// @return {void} função sem retorno
 	progressoInputMoney : function(nome_registro, nome_campo, grupo_proximo, autocomplete) {
 		$('#' + nome_campo).keyup(function() {
 			progride($(this).maskMoney('unmasked')[0]);
@@ -448,12 +512,21 @@ var util = {
 			}
 		}
 	},
-
+	
+	/// @function util.progressoPlacaNumeros
+	/// Modifica o formulário de entrada de dados após uma digitação dos números de uma placa
+	/// @param {string} tipo_fluxo	identificador do tipo de fluxo da pesquisa
+	/// @param {string} grupo_proximo		identificador do elemento que irá sofrer a ação show/hide
+	/// @return {void} função sem retorno
 	progressoPlacaNumeros : function(tipo_fluxo, grupo_proximo) {
 		util.progressoInputTextLen("placa_numeros", "placa_numeros_" + tipo_fluxo, grupo_proximo);
 	},
 
-	// Funções para validação dos componentes
+	/// @function util.validaSelect
+	/// Valida a seleção de uma _caixa de seleção_
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaSelect : function(nome_campo, campo_aviso) {
 		if (Number($('#' + nome_campo).val()) != -1) {
 			return true;
@@ -464,7 +537,12 @@ var util = {
 			return false;
 		}
 	},
-
+	
+	/// @function util.validaRadioSimNao
+	/// Valida a seleção de um _radio button_
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaRadioSimNao : function(nome_campo, campo_aviso) {
 		var option = $('input[name=' + nome_campo + ']:checked').val();
 		if (option != null) {
@@ -475,6 +553,11 @@ var util = {
 		}
 	},
 
+	/// @function util.validaRadioChecked
+	/// Valida a seleção de um _radio button_
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaRadioChecked : function(nome_campo, campo_aviso) {
 		var option = $('input[name=' + nome_campo + ']').val();
 		if (option != null) {
@@ -485,6 +568,11 @@ var util = {
 		}
 	},
 
+	/// @function util.validaInputText
+	/// Valida o valor entrado em um campo de texto
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaInputText : function(nome_campo, campo_aviso) {
 		var value = $.trim($('#' + nome_campo).val());
 		var max_len = Number($.trim($('#' + nome_campo).attr("maxlength")))
@@ -505,6 +593,11 @@ var util = {
 		}
 	},
 
+	/// @function util.validaLenInputText
+	/// Valida o valor entrado em um campo de texto de comprimento controlado
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaLenInputText : function(nome_campo, campo_aviso) {
 		var value = $.trim($('#' + nome_campo).val());
 		var len = Number($.trim($('#' + nome_campo).attr("maxlength")));
@@ -526,7 +619,14 @@ var util = {
 		}
 		return true;
 	},
-
+	
+	/// @function util.validaInputNumberRange
+	/// Valida se o valor entrado em um campo de texto está compreendido no intervalo informado [min, max]
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @param {number} min					limite inferior do intervalo
+	/// @param {number} max					limite superior do intervalo
+	/// @return {bool} resultado da verificação
 	validaInputNumberRange : function(nome_campo, campo_aviso, min, max) {
 		var value = $.trim($('#' + nome_campo).val())
 		if ((!util.isEmpty(min) && !util.isEmpty(max) && Number(value) >= min && Number(value) <= max)
@@ -552,7 +652,14 @@ var util = {
 			return validaInputText(nome_campo, campo_aviso);
 		}
 	},
-
+	
+	/// @function util.validaValueInList
+	/// Valida se o valor selecionado é um campo está em uma lista de valores
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @param {array} lista				lista de valores
+	/// @param {string} idRegistro			identificador do campo na estrutura de dados de informações da pesquisa
+	/// @return {bool} resultado da verificação
 	validaValueInList : function(nome_campo, campo_aviso, lista, idRegistro) {
 		var value = $.trim($('#' + nome_campo).val());
 		app.setAtributo(idRegistro,value);
@@ -565,6 +672,11 @@ var util = {
 		return true;
 	},
 	
+	/// @function util.findValueInList
+	/// Encontra um valor em uma lista de valores
+	/// @param {object} valorLista	valor a ser pesquisado
+	/// @param {array} lista		lista de valores
+	/// @return {object} índice do valor na lista, _null_ se o valor não for encontrado
 	findValueInList : function(valorLista, lista) {
 		var idItemLista = null;
 		if (!util.isEmpty(valorLista)) {
@@ -580,7 +692,11 @@ var util = {
 			return null;
 		} 
 	},
-	
+	/// @function util.validaTemPessoasVeiculo
+	/// Valida um veículo tem ocupantes
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaTemPessoasVeiculo : function(nome_campo, campo_aviso) {
 		if (util.isEmpty($.trim($('#' + nome_campo).val())) || !($.trim($('#' + nome_campo).val()) > 0)) {
 			util.alerta_msg(campo_aviso, "O campo deve ser preenchido com um valor positivo maior que zero");
@@ -588,7 +704,12 @@ var util = {
 		}
 		return true;
 	},
-
+	
+	/// @function util.validaLimitePessoas
+	/// Verifica se o número de ocupantes de um veículo respeita as regras de negócio da aplicação
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @return {bool} resultado da verificação
 	validaLimitePessoas : function(nome_campo, campo_aviso) {
 		var limitePessoas = app.getAtributo('limitePessoas');
 		if (!util.isEmpty(limitePessoas)) {
@@ -600,17 +721,33 @@ var util = {
 		return true;
 	},
 
+	/// @function util.limitaTamanhoCampo
+	/// Verifica se o número de caracteres de um texto informado está de acordo com as regras de negócio
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} nome_atributo		identificador do campo na estrutura de dados de informações da pesquisa
+	/// @return {void} função sem retorno
 	limitaTamanhoCampo : function(nome_campo, nome_atributo){
 		var limite = app.getAtributo(nome_atributo);
 		util.limitaTamanhoCampoPorValor(nome_campo,limite);
 	},
 
+	/// @function util.limitaTamanhoCampoPorValor
+	/// Verifica se o número de caracteres de um texto informado está de acordo com as regras de negócio
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} valor				cadeia de caracteres com comprimento igual ao máximo permitido
+	/// @return {void} função sem retorno
 	limitaTamanhoCampoPorValor : function(nome_campo, valor){
 		if (!util.isEmpty(valor)) {
 			$('#'+nome_campo).attr("maxlength",String(Number(valor)).length);
 		}
 	},
 	
+	/// @function util.validacaoLimiteMaximoTempoReal
+	/// Associa a validação ao evento _on change_ de um campo de dados
+	/// @param {string} nome_campo			identificador do controle HTML
+	/// @param {string} campo_aviso			mensagem exibida no caso de uma seleção não válida
+	/// @param {function} funcao_validar	referência para a função de validação a ser utilizada
+	/// @return {void} função sem retorno
 	validacaoLimiteMaximoTempoReal: function(nome_campo,campo_aviso, funcao_validar){
 		$("#"+nome_campo).change(function(){
 			if(funcao_validar(nome_campo,campo_aviso)){
@@ -622,6 +759,13 @@ var util = {
 
 	isFilterRunning : false, // controla se o filtro já terminou
 
+	/// @func util.autocomplete
+	/// Exibe um diálogo que busca valores em uma lista automaticamente a partir do termo digitado
+	/// @param {string} nome_do_campo	identificador do controle HTML
+	/// @param {array}	lista			lista de valores
+	/// @param {string}	title			título da janela de busca 
+	/// @param {string} txt_content		texto da janela de busca
+	/// @return {void} função sem retorno
 	autocomplete : function(nome_do_campo, lista, title, txt_content) {
 		title = (title == null) ? "Busca" : title;
 		txt_content = (txt_content == null) ? "Entre com o início da palavra." : txt_content;
@@ -728,7 +872,11 @@ var util = {
 
 	},
 
-	// Outras funções
+	/// @function util.alerta_msg
+	/// Exibe mensagens sobre o preenchimento dos campos
+	/// @param {string} campo_aviso		nome do campo
+	/// @param {string} msgComplemento	complemento da mensagem
+	/// @return {void} função sem retorno
 	alerta_msg : function(campo_aviso, msgComplemento) {
 		if (util.isEmpty(msgComplemento)) {
 			alert("O campo " + campo_aviso + " não foi preenchido.", "Erro no preenchimento!", null, 'error');
@@ -738,6 +886,10 @@ var util = {
 		}
 	},
 
+	/// @func util.isEmpty
+	/// Verifica se um valor é nulo, indefinido ou de comprimento 0
+	/// @param {object} valor	valor a ser testado
+	/// @return {bool} resultado da verificação
 	isEmpty : function(valor) {
 		try {
 			emp = (valor == undefined) || (valor == null) || (String(valor).trim().length == 0);
@@ -752,23 +904,44 @@ var util = {
 		}
 	},
 
+	/// @function util.isFunction
+	/// Verifica se um objeto é uma referência para uma função
+	/// @param {object} functionToCheck	objeto a ser testado
+	/// @return {bool} resutlado da verificação
 	isFunction : function(functionToCheck) {
 		var getType = {};
 		return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 	},
 
+	/// @function util.getTimeFormated
+	/// Retorna uma data formatada
+	/// @param {Date} date		data a ser formatada
+	/// @param {string} format	formato desejado
+	/// @return {string} data formatada
 	getTimeFormated : function(date, format) {
 		return moment(date).format(format);
 	},
 
+	/// @function util.getTimeDefaultFormated
+	/// Retorna uma data formatada no formato "YYYY-MM-DD HH:mm:ss"
+	/// @param {Date} date		data a ser formatada
+	/// @return {string} data formatada
 	getTimeDefaultFormated : function(date) {
 		return util.getTimeFormated(date, "YYYY-MM-DD HH:mm:ss");
 	},
-
+	
+	/// @function util.getTimeUnixTimestamp
+	/// Retorna uma data formatada no formato unix timestamp
+	/// @param {Date} date		data a ser formatada
+	/// @return {string} data formatada
 	getTimeUnixTimestamp : function(date) {
 		return util.getTimeFormated(date, "X");
 	},
 
+	/// @function util.getTimeToExportFormated
+	/// Retorna uma data formatada no formato "YYYY-MM-DD HH:mm:ss"
+	/// @param {Date} date		data a ser formatada
+	/// @return {string} data formatada
 	getTimeToExportFormated : function(date) {
 		return util.getTimeFormated(date, "YYYY-MM-DD_HH-mm-ss");
 	},
@@ -819,6 +992,10 @@ var util = {
 		'' : /[\u0300\u0301\u0302\u0303\u0308]/ig
 	},
 
+	/// @function util.replaceDiacritics
+	/// Remove os caracters especiais de uma _cadeia de caracteres_
+	/// @param {string} str		_cadeia de caracteres_ original
+	/// @return {string} _cadeia de caracteres_ sem caracteres espsciais
 	replaceDiacritics : function(str) {
 		for ( var letter in util.alphabet) {
 			str = str.replace(util.alphabet[letter], letter);
@@ -826,10 +1003,18 @@ var util = {
 		return str;
 	},
 
+	/// @function util.escapeRegex
+	/// Precede caracteres de separação com uma contra barra ('\')
+	/// @param {string} value _cadeia de caracteres_ original
+	/// @return {string} _cadeia de caracteres_ sem caracteres resultante
 	escapeRegex : function(value) {
 		return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 	},
 
+	/// @function util.reverse
+	/// Inverte a ordem dos carecters em uma _cadeia de caracteres_
+	/// @param {string} s	texto de entrada
+	/// @return {string} texto resultante
 	reverse : function(s) {
 		var o = [];
 		for (var i = 0, len = s.length; i <= len; i++)
@@ -837,7 +1022,12 @@ var util = {
 		return o.join('');
 	},
 
-	secToFrase : function (d,extended) {
+	/// @function util.secToFrase
+	/// Transforma um dada quantidade de segundos em sua representação "h:m:s"
+	/// @param {number} d		quantidade de segundos
+	/// @param {bool} extended	controla se o resultado terá as unidades de tempo no formato abreviado (h,m,s) ou por extenso
+	/// @return {string} texto resultante
+	secToFrase : function (d, extended) {
 	    var sec_num = parseInt(d, 10);
 	    var hours   = Math.floor(sec_num / 3600);
 	    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -857,11 +1047,19 @@ var util = {
 	    return frase;
 	},
 
+	/// @function util.formatDateSumario
+	/// Transforma uma data para o formato de exibição na tela de sumário
+	/// @param {string} fulldate		data a ser formatada
+	/// @return {string} texto resultante
 	formatDateSumario : function (fulldate) {
 		var d = new Date(fulldate.replace(/-/g, '/'));
 		return util.formateDateOnly(d);
 	},
-
+	
+	/// @function util.formatDateAndTimeSumario
+	/// Transforma uma data para o formato de exibição na tela de sumário incluindo o horário
+	/// @param {string} fulldate		data a ser formatada
+	/// @return {string} texto resultante
 	formatDateAndTimeSumario : function (fulldate) {
 		var d = new Date(fulldate.replace(/-/g, '/'));
 		hora = d.getHours();
@@ -874,6 +1072,10 @@ var util = {
 		return util.formateDateOnly(d) + ', às ' + hora + ':' + min + ':' + sec;
 	},
 
+	/// @function util.formateDateOnly
+	/// Gera a representação no formato dia/mês/ano de um objeto Date
+	/// @param {Date} d		objeto com a data a ter sua representação extraída
+	/// @return {string} data no formato dia/mês/ano
 	formateDateOnly : function (d) {
 		dia = d.getDate();
 		mes = d.getMonth() + 1;
@@ -884,6 +1086,9 @@ var util = {
 		return dia + '/' +  mes + '/' + ano;
 	},
 	
+	/// @function util.formatDateTimeToDisplay
+	/// Gera uma _cadeia de caracteres_ com a data e a hora atuais
+	/// @return {string} texto resultante
 	formatDateTimeToDisplay : function(){
 		var d = new Date();
 		var hora = d.getHours();
@@ -893,6 +1098,9 @@ var util = {
 		return util.formateDateOnly(d) + '  ' + hora + ':' + min;
 	},
 	
+	/// @function util.geraListaAnos
+	/// Gera um listagem contendo anos. Do ano de 1900 até o atual
+	/// @return {array} lista com anos
 	geraListaAnos : function(){
 		var lista_anos = [];
 		var ano = new Date().getFullYear();
