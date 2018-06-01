@@ -3,3 +3,8 @@
 mobile/node_modules/
 mobile/ignore/
 output.latex
+concentrador/doxy/rtf/~$fmanmod.docx
+concentrador/doxy/rtf/refmanmod.docx
+ignore/
+mobile/doxyJS/coletor/rtf/refmandoc.docx
+mobile/doxyJS/coletor/rtf/~$fmandoc.docx
