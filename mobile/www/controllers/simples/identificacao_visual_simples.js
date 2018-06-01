@@ -1,11 +1,20 @@
+/// @file identificacao_visual_simples.js
+/// @namespace controllers.identificacao_visual_simples
+/// Funções da tela identificacao_visual_simples
 controllers.identificacao_visual_simples = {
+	/// @function controllers.identificacao_visual_simples.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.identificacao_visual_simples;
 		me.inicializaElementos();
 		me.progressoTela();
 		me.buttons();
 	},
-
+	
+	/// @function controllers.identificacao_visual_simples.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#identificacao_visual_simples_avancar").click(function() {
 			var ok = controllers.identificacao_visual_simples.validar_componentes();
@@ -14,14 +23,18 @@ controllers.identificacao_visual_simples = {
 			}
 		})
 	},
-
-	// Inicializa os elementos da tela
+	
+	/// @function controllers.identificacao_visual_simples.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 		util.inicializaSelectPais("idPaisPlacaEstrangeira", "pais_simples", false);
 		util.inicializaPlacas("simples");
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.identificacao_visual_simples.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		util.progressoRadioSimNao("possuiReboque", "reboque_simples", "grupo_placa_estrangeira_simples");
@@ -38,7 +51,9 @@ controllers.identificacao_visual_simples = {
 		util.progressoInputText("placa_unica", "placa_unica_simples", "grupo_identificacao_visual_simples_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.identificacao_visual_simples.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {void} função sem retorno
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaRadioSimNao("reboque_simples", "Reboque")

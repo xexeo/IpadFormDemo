@@ -1,5 +1,5 @@
 /// @file pergunta_extra.js
-/// @namespace controllers.pertunta_extra
+/// @namespace controllers.pergunta_extra
 /// Funções da tela pergunta_extra
 controllers.pergunta_extra = {
 	/// @function controllers.pergunta_extra.config

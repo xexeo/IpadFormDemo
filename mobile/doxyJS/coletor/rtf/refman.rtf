@@ -85,7 +85,7 @@
 1 \par
 }}Coletor}
 {\comment Gerado porDoxgyen. }
-{\creatim \yr2018\mo6\dy1\hr11\min18\sec37}
+{\creatim \yr2018\mo6\dy1\hr11\min51\sec57}
 }\pard\plain 
 \sectd\pgnlcrm
 {\footer \s29\widctlpar\tqc\tx4320\tqr\tx8640\qr\adjustright \fs20\cgrid {\chpgn}}
@@ -123,27 +123,34 @@ Pacotes\par \pard\plain
 {\b {\b app} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 M\'F3dulo com fun\'E7\'F5es de controle e configura\'E7\'E3o da aplica\'E7\'E3o })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAACO \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
-{\b {\b controlers} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+{\b {\b controllers} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAADV \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
-{\b {\b controllers} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAADW \\*MERGEFORMAT}{\fldrslt pagenum}}
-\par
 {\b {\b controllers::confirmar_veiculo} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAADX \\*MERGEFORMAT}{\fldrslt pagenum}}
+Fun\'E7\'F5es da tela {\b confirmar_veiculo} })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAADW \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 {\b {\b controllers::menu} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAADZ \\*MERGEFORMAT}{\fldrslt pagenum}}
+Fun\'E7\'F5es da tela de menu })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAADY \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b controllers::pergunta_extra} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEA \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b controllers::pertunta_extra} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b pergunta_extra} })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEG \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b controllers::selecionar_tipo} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b selecionar_tipo} })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEH \\*MERGEFORMAT}{\fldrslt pagenum}}
+\par
+{\b {\b controllers::sumario} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela sumario })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEK \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 {\b {\b datas} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Datas v\'E1lidas para a pesquisa })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEA \\*MERGEFORMAT}{\fldrslt pagenum}}
+Datas v\'E1lidas para a pesquisa })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEM \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 {\b {\b eventQueue} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Implementa\'E7\'E3o de uma fila de eventos })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEB \\*MERGEFORMAT}{\fldrslt pagenum}}
+Implementa\'E7\'E3o de uma fila de eventos })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEN \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 {\b {\b insert_controllers} ({\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Identifica\'E7\'E3o e controle dos arquivos JS de cada tela da aplica\'E7\'E3o })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEG \\*MERGEFORMAT}{\fldrslt pagenum}}
-\par
-{\b {\b menu} } \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAEI \\*MERGEFORMAT}{\fldrslt pagenum}}
+Identifica\'E7\'E3o e controle dos arquivos JS de cada tela da aplica\'E7\'E3o })} \tab {\field\fldedit {\*\fldinst PAGEREF AAAAAAAAES \\*MERGEFORMAT}{\fldrslt pagenum}}
 \par
 \par}
 \pard\plain \sect\sbkpage
@@ -446,7 +453,7 @@ Fluxo do registro do cancelamento da pesquisa atual. }{
 }\par
 }}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-undefined {\b removeFile} (string fileName, string dirURI, function cbSuccess, function cbFail)\par
+void {\b removeFile} (string fileName, string dirURI, function cbSuccess, function cbFail)\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Remove um arquivo do sistema de arquivos, se ele existir. }{
@@ -1200,7 +1207,7 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 {\xe \v app\:removeFile}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
 {\b 
-undefined app::removeFile (string  {\i fileName}, string  {\i dirURI}, function  {\i cbSuccess}, function  {\i cbFail})}}
+void app::removeFile (string  {\i fileName}, string  {\i dirURI}, function  {\i cbSuccess}, function  {\i cbFail})}}
 \par
 {\bkmkstart AAAAAAAADS}
 {\bkmkend AAAAAAAADS}
@@ -1239,7 +1246,9 @@ Par\'E2metros:\par}
 {{\i cbFail} \cell }{fun\'E7\'E3o {\i callback}  chamada em caso de falha \cell }
 {\row }
 }
-}}
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
 {\xe \v copyFile\:app}
 {\xe \v app\:copyFile}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
@@ -1316,15 +1325,48 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 \pard\plain \sect\sbkpage
 \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
 \pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
-Ref\'EAncia do Namespace controlers\par \pard\plain 
-{\tc\tcl2 \v controlers}
-{\xe \v controlers}
+Ref\'EAncia do Namespace controllers\par \pard\plain 
+{\tc\tcl2 \v controllers}
+{\xe \v controllers}
 {\bkmkstart AAAAAAAADV}
 {\bkmkend AAAAAAAADV}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}\par
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Namespaces\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b confirmar_veiculo}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b confirmar_veiculo}. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b menu}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela de menu. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b pergunta_extra}\par
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b pertunta_extra}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b pergunta_extra}. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b selecionar_tipo}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b selecionar_tipo}. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b sumario}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela sumario. }}}
+}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Descri\'E7\'E3o Detalhada\par
@@ -1338,41 +1380,15 @@ M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. \par
 \pard\plain \sect\sbkpage
 \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
 \pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
-Ref\'EAncia do Namespace controllers\par \pard\plain 
-{\tc\tcl2 \v controllers}
-{\xe \v controllers}
-{\bkmkstart AAAAAAAADW}
-{\bkmkend AAAAAAAADW}
-\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
-Namespaces\par
-\pard\plain 
-
-{
-\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
- {\b confirmar_veiculo}\par
-{
-\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu. }}}
-\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
- {\b menu}\par
-{
-\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu. }}}
-}
-\par \pard\plain 
-
-\pard\plain \sect\sbkpage
-\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
-\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
 Ref\'EAncia do Namespace controllers::confirmar_veiculo\par \pard\plain 
 {\tc\tcl2 \v controllers::confirmar_veiculo}
 {\xe \v controllers::confirmar_veiculo}
-{\bkmkstart AAAAAAAADX}
-{\bkmkend AAAAAAAADX}
+{\bkmkstart AAAAAAAADW}
+{\bkmkend AAAAAAAADW}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu. }}\par
+Fun\'E7\'F5es da tela {\b confirmar_veiculo}. }}\par
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Fun\'E7\'F5es\par
 \pard\plain 
@@ -1392,7 +1408,7 @@ Descri\'E7\'E3o Detalhada\par
 \pard\plain 
 {
 \pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu. \par
+Fun\'E7\'F5es da tela {\b confirmar_veiculo}. \par
 }}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
@@ -1404,8 +1420,8 @@ Fun\'E7\'F5es\par
 {\b 
 void controllers::confirmar_veiculo::config ()}}
 \par
-{\bkmkstart AAAAAAAADY}
-{\bkmkend AAAAAAAADY}
+{\bkmkstart AAAAAAAADX}
+{\bkmkend AAAAAAAADX}
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -1425,12 +1441,25 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 Ref\'EAncia do Namespace controllers::menu\par \pard\plain 
 {\tc\tcl2 \v controllers::menu}
 {\xe \v controllers::menu}
-{\bkmkstart AAAAAAAADZ}
-{\bkmkend AAAAAAAADZ}
+{\bkmkstart AAAAAAAADY}
+{\bkmkend AAAAAAAADY}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Fun\'E7\'F5es da tela de menu. }}\par
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela de menu. }{
+}\par
+}}
+}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Descri\'E7\'E3o Detalhada\par
@@ -1439,6 +1468,343 @@ Descri\'E7\'E3o Detalhada\par
 \pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Fun\'E7\'F5es da tela de menu. \par
 }}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+{\xe \v config\:controllers::menu}
+{\xe \v controllers::menu\:config}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::menu::config ()}}
+\par
+{\bkmkstart AAAAAAAADZ}
+{\bkmkend AAAAAAAADZ}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela de menu. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+Ref\'EAncia do Namespace controllers::pergunta_extra\par \pard\plain 
+{\tc\tcl2 \v controllers::pergunta_extra}
+{\xe \v controllers::pergunta_extra}
+{\bkmkstart AAAAAAAAEA}
+{\bkmkend AAAAAAAAEA}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela {\b pergunta_extra}. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b buttons} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Comportamento dos bot\'F5es. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b inicializaElementos} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Inicializa os elementos da tela. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b progressoTela} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o show e hide dos elementos da tela. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b validar_componentes} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla as valida\'E7\'F5es dos componentes de tela ap\'F3s clicar em AVAN\'C7AR. }{
+}\par
+}}
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+{\xe \v config\:controllers::pergunta_extra}
+{\xe \v controllers::pergunta_extra\:config}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::pergunta_extra::config ()}}
+\par
+{\bkmkstart AAAAAAAAEB}
+{\bkmkend AAAAAAAAEB}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela {\b pergunta_extra}. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7ao sem retorno \par
+}}}
+{\xe \v buttons\:controllers::pergunta_extra}
+{\xe \v controllers::pergunta_extra\:buttons}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::pergunta_extra::buttons ()}}
+\par
+{\bkmkstart AAAAAAAAEC}
+{\bkmkend AAAAAAAAEC}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Comportamento dos bot\'F5es. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+{\xe \v inicializaElementos\:controllers::pergunta_extra}
+{\xe \v controllers::pergunta_extra\:inicializaElementos}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::pergunta_extra::inicializaElementos ()}}
+\par
+{\bkmkstart AAAAAAAAED}
+{\bkmkend AAAAAAAAED}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Inicializa os elementos da tela. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7ao sem retorno \par
+}}}
+{\xe \v progressoTela\:controllers::pergunta_extra}
+{\xe \v controllers::pergunta_extra\:progressoTela}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::pergunta_extra::progressoTela ()}}
+\par
+{\bkmkstart AAAAAAAAEE}
+{\bkmkend AAAAAAAAEE}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o show e hide dos elementos da tela. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+{\xe \v validar_componentes\:controllers::pergunta_extra}
+{\xe \v controllers::pergunta_extra\:validar_componentes}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::pergunta_extra::validar_componentes ()}}
+\par
+{\bkmkstart AAAAAAAAEF}
+{\bkmkend AAAAAAAAEF}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla as valida\'E7\'F5es dos componentes de tela ap\'F3s clicar em AVAN\'C7AR. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+Ref\'EAncia do Namespace controllers::pertunta_extra\par \pard\plain 
+{\tc\tcl2 \v controllers::pertunta_extra}
+{\xe \v controllers::pertunta_extra}
+{\bkmkstart AAAAAAAAEG}
+{\bkmkend AAAAAAAAEG}
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b pergunta_extra}. }}\par
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Descri\'E7\'E3o Detalhada\par
+\pard\plain 
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b pergunta_extra}. \par
+}}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+Ref\'EAncia do Namespace controllers::selecionar_tipo\par \pard\plain 
+{\tc\tcl2 \v controllers::selecionar_tipo}
+{\xe \v controllers::selecionar_tipo}
+{\bkmkstart AAAAAAAAEH}
+{\bkmkend AAAAAAAAEH}
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b selecionar_tipo}. }}\par
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b image_click} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Comportamento ao clicar em uma das imagens da tela. }{
+}\par
+}}
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Descri\'E7\'E3o Detalhada\par
+\pard\plain 
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b selecionar_tipo}. \par
+}}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+{\xe \v config\:controllers::selecionar_tipo}
+{\xe \v controllers::selecionar_tipo\:config}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::selecionar_tipo::config ()}}
+\par
+{\bkmkstart AAAAAAAAEI}
+{\bkmkend AAAAAAAAEI}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+{\xe \v image_click\:controllers::selecionar_tipo}
+{\xe \v controllers::selecionar_tipo\:image_click}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::selecionar_tipo::image_click ()}}
+\par
+{\bkmkstart AAAAAAAAEJ}
+{\bkmkend AAAAAAAAEJ}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Comportamento ao clicar em uma das imagens da tela. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
+\par \pard\plain 
+
+\pard\plain \sect\sbkpage
+\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
+Ref\'EAncia do Namespace controllers::sumario\par \pard\plain 
+{\tc\tcl2 \v controllers::sumario}
+{\xe \v controllers::sumario}
+{\bkmkstart AAAAAAAAEK}
+{\bkmkend AAAAAAAAEK}
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela sumario. }}\par
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela. }{
+}\par
+}}
+}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Descri\'E7\'E3o Detalhada\par
+\pard\plain 
+{
+\pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela sumario. \par
+}}
+{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+{\xe \v config\:controllers::sumario}
+{\xe \v controllers::sumario\:config}
+\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
+{\b 
+void controllers::sumario::config ()}}
+\par
+{\bkmkstart AAAAAAAAEL}
+{\bkmkend AAAAAAAAEL}
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
+\par
+{
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela. }}\par
+{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+\par
+{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
+Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
+}}}
 \par \pard\plain 
 
 \pard\plain \sect\sbkpage
@@ -1447,8 +1813,8 @@ Fun\'E7\'F5es da tela de menu. \par
 Ref\'EAncia do Namespace datas\par \pard\plain 
 {\tc\tcl2 \v datas}
 {\xe \v datas}
-{\bkmkstart AAAAAAAAEA}
-{\bkmkend AAAAAAAAEA}
+{\bkmkstart AAAAAAAAEM}
+{\bkmkend AAAAAAAAEM}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -1469,8 +1835,8 @@ Datas v\'E1lidas para a pesquisa. \par
 Ref\'EAncia do Namespace eventQueue\par \pard\plain 
 {\tc\tcl2 \v eventQueue}
 {\xe \v eventQueue}
-{\bkmkstart AAAAAAAAEB}
-{\bkmkend AAAAAAAAEB}
+{\bkmkstart AAAAAAAAEN}
+{\bkmkend AAAAAAAAEN}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -1527,8 +1893,8 @@ Fun\'E7\'F5es\par
 {\b 
 void eventQueue::initEventQueue ()}}
 \par
-{\bkmkstart AAAAAAAAEC}
-{\bkmkend AAAAAAAAEC}
+{\bkmkstart AAAAAAAAEO}
+{\bkmkend AAAAAAAAEO}
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -1546,8 +1912,8 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 {\b 
 void eventQueue::_monitoraFila ()}}
 \par
-{\bkmkstart AAAAAAAAED}
-{\bkmkend AAAAAAAAED}
+{\bkmkstart AAAAAAAAEP}
+{\bkmkend AAAAAAAAEP}
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -1565,8 +1931,8 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 {\b 
 void eventQueue::appendRow ()}}
 \par
-{\bkmkstart AAAAAAAAEE}
-{\bkmkend AAAAAAAAEE}
+{\bkmkstart AAAAAAAAEQ}
+{\bkmkend AAAAAAAAEQ}
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -1584,8 +1950,8 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 {\b 
 void eventQueue::_consumeQueue ()}}
 \par
-{\bkmkstart AAAAAAAAEF}
-{\bkmkend AAAAAAAAEF}
+{\bkmkstart AAAAAAAAER}
+{\bkmkend AAAAAAAAER}
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -1605,8 +1971,8 @@ Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7
 Ref\'EAncia do Namespace insert_controllers\par \pard\plain 
 {\tc\tcl2 \v insert_controllers}
 {\xe \v insert_controllers}
-{\bkmkstart AAAAAAAAEG}
-{\bkmkend AAAAAAAAEG}
+{\bkmkstart AAAAAAAAES}
+{\bkmkend AAAAAAAAES}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -1642,60 +2008,14 @@ Fun\'E7\'F5es\par
 {\b 
 void insert_controllers::insert ()}}
 \par
-{\bkmkstart AAAAAAAAEH}
-{\bkmkend AAAAAAAAEH}
+{\bkmkstart AAAAAAAAET}
+{\bkmkend AAAAAAAAET}
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Cria tags {\i script}  para incluir os arquivos JS na das p\'E1ginas na aplica\'E7\'E3o. }}\par
-{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-\par
-{{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
-Retorna:\par}\pard\plain \s62\li720\widctlpar\ql\adjustright \fs20\cgrid fun\'E7\'E3o sem retorno \par
-}}}
-\par \pard\plain 
-
-\pard\plain \sect\sbkpage
-\s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
-\pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
-Ref\'EAncia do Namespace menu\par \pard\plain 
-{\tc\tcl2 \v menu}
-{\xe \v menu}
-{\bkmkstart AAAAAAAAEI}
-{\bkmkend AAAAAAAAEI}
-\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
-Fun\'E7\'F5es\par
-\pard\plain 
-
-{
-\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-void {\b config} ()\par
-{
-\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Controla o comportamento da tela de menu. }{
-}\par
-}}
-}
-{\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
-\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
-Fun\'E7\'F5es\par
-\pard\plain 
-{\xe \v config\:menu}
-{\xe \v menu\:config}
-\pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
-{\b 
-void menu::config ()}}
-\par
-{\bkmkstart AAAAAAAAEJ}
-{\bkmkend AAAAAAAAEJ}
-{
-\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
-\par
-{
-{\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Controla o comportamento da tela de menu. }}\par
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 \par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
@@ -2577,9 +2897,12 @@ Namespaces\par
  {\b controllers::confirmar_veiculo}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Fun\'E7\'F5es da tela de menu. }}}
+Fun\'E7\'F5es da tela {\b confirmar_veiculo}. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
  {\b controllers}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}}
 }
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Fun\'E7\'F5es\par
@@ -2604,7 +2927,7 @@ confirmar_veiculo.js\par \pard\plain
 {
 \pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 /// @file confirmar_veiculo.js\par
     2 /// @namespace controllers.confirmar_veiculo\par
-    3 /// Fun\'E7\'F5es da tela de menu\par
+    3 /// Fun\'E7\'F5es da tela confirmar_veiculo\par
     4 controllers.confirmar_veiculo = \{\par
     5     /// @function controllers.confirmar_veiculo.config\par
     6     /// Controla o comportamento da tela confirmar_veiculo\par
@@ -2673,7 +2996,10 @@ Namespaces\par
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Fun\'E7\'F5es da tela de menu. }}}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
- {\b menu}\par
+ {\b controllers}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}}
 }
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
 Fun\'E7\'F5es\par
@@ -2681,7 +3007,7 @@ Fun\'E7\'F5es\par
 
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-void {\b menu::config} ()\par
+void {\b controllers::menu::config} ()\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Controla o comportamento da tela de menu. }{
@@ -2701,7 +3027,7 @@ menu.js\par \pard\plain
     3 /// @namespace controllers.menu\par
     4 /// Fun\'E7\'F5es da tela de menu\par
     5 controllers.menu = \{\par
-    6     /// @function menu.config\par
+    6     /// @function controllers.menu.config\par
     7     /// Controla o comportamento da tela de menu\par
     8     /// @return \{void\} fun\'E7\'E3o sem retorno\par
     9     config : function() \{\par
@@ -3105,6 +3431,65 @@ Refer\'EAncia do Arquivo www/controllers/pergunta_extra.js\par \pard\plain
 {\xe \v www/controllers/pergunta_extra.js}
 {\bkmkstart AAAAAAAABQ}
 {\bkmkend AAAAAAAABQ}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Namespaces\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers::pertunta_extra}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b pergunta_extra}. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers::pergunta_extra}\par
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::pergunta_extra::config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela {\b pergunta_extra}. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::pergunta_extra::buttons} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Comportamento dos bot\'F5es. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::pergunta_extra::inicializaElementos} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Inicializa os elementos da tela. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::pergunta_extra::progressoTela} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o show e hide dos elementos da tela. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::pergunta_extra::validar_componentes} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla as valida\'E7\'F5es dos componentes de tela ap\'F3s clicar em AVAN\'C7AR. }{
+}\par
+}}
+}
 \par \pard\plain 
 \pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
 pergunta_extra.js\par \pard\plain 
@@ -3113,83 +3498,98 @@ pergunta_extra.js\par \pard\plain
 {\bkmkstart AAAAAAAAAJ}
 {\bkmkend AAAAAAAAAJ}
 {
-\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 controllers.pergunta_extra = \{\par
-    2     config : function() \{\par
-    3         var me = controllers.pergunta_extra;\par
-    4         me.inicializaElementos();\par
-    5         me.progressoTela();\par
-    6         me.buttons();\par
-    7     \},\par
-    8 \par
-    9     buttons : function() \{\par
-   10         $("#pergunta_extra_avancar").click(function() \{\par
-   11             var ok = controllers.pergunta_extra.validar_componentes();\par
-   12             if (ok) \{\par
-   13                 app.finalizaRegistro(function() \{\par
-   14                     app.trocaPagina('views/menu.html', controllers.menu);\par
-   15                 \});\par
-   16             \}\par
-   17         \})\par
-   18     \},\par
-   19 \par
-   20     // Inicializa os elementos da tela\par
-   21     inicializaElementos : function() \{\par
-   22 \par
-   23         util.inicializaSelectFrequencia('simples');\par
-   24 \par
-   25         var lista_opcoes = [ 'Sim, trocaria minha rota atual por esta', 'N\'E3o, prefiro usar a rota atual',\par
-   26                 'Minha rota n\'E3o seria afetada', 'N\'E3o sei informar' ];\par
-   27         \par
-   28         if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '149'\par
-   29                                         || logins.user_logado.usr == '019t' || logins.user_logado.usr == '149t')) \{\par
-   30             $("#grupo_pergunta_extra_p1").show();\par
-   31             util.inicializaSelect("select_pergunta_extra_p1", lista_opcoes);\par
-   32             if (logins.user_logado != null && (logins.user_logado.usr == '149' || logins.user_logado.usr == '149t')) \{\par
-   33                 util.inicializaSelect("select_pergunta_extra_p2", lista_opcoes);\par
-   34             \}\par
-   35         \}\par
-   36         else if (logins.user_logado != null && (logins.user_logado.usr == '040' || logins.user_logado.usr == '040t')) \{\par
-   37             $("#grupo_pergunta_extra_p3").show();\par
-   38             util.inicializaSelect("select_pergunta_extra_p3", lista_opcoes);\par
-   39         \}\par
-   40     \},\par
-   41 \par
-   42     // Controla o show e hide dos elementos da tela\par
-   43     progressoTela : function() \{\par
-   44 \par
-   45         if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '019t')) \{\par
-   46             util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p1", "grupo_pergunta_extra_avancar");\par
-   47         \}\par
-   48         else if (logins.user_logado != null && (logins.user_logado.usr == '149' || logins.user_logado.usr == '149t')) \{\par
-   49             util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p1", "grupo_pergunta_extra_p2");\par
-   50             util.progressoSelect("idPerguntaExtra2", "select_pergunta_extra_p2", "grupo_pergunta_extra_avancar");\par
-   51         \}\par
-   52         else if (logins.user_logado != null && (logins.user_logado.usr == '040' || logins.user_logado.usr == '040t')) \{\par
-   53             util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p3", "grupo_pergunta_extra_avancar");\par
-   54         \}\par
-   55         else \{\par
-   56             // N\'E3o deveria entrar aqui. Mostra o bot\'E3o avan\'E7ar para finalizar a pesquisa e n\'E3o ficar travado.\par
-   57             $("#grupo_pergunta_extra_avancar").show();\par
-   58         \}\par
-   59     \},\par
-   60 \par
-   61     // Controla as valida\'E7\'F5es dos componentes de tela ap\'F3s clicar em AVAN\'C7AR\par
-   62     validar_componentes : function(id_avancar) \{\par
-   63         if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '019t')) \{\par
-   64             return util.validaSelect("select_pergunta_extra_p1", "Pergunta Extra");\par
-   65         \}\par
-   66         else if (logins.user_logado != null && (logins.user_logado.usr == '149' || logins.user_logado.usr == '149t')) \{\par
-   67             var ok = util.validaSelect("select_pergunta_extra_p1", "Pergunta Extra 1");\par
-   68             ok = ok && util.validaSelect("select_pergunta_extra_p2", "Pergunta Extra 2");\par
-   69             return ok;\par
-   70         \}\par
-   71         else if (logins.user_logado != null && (logins.user_logado.usr == '040' || logins.user_logado.usr == '040t')) \{\par
-   72             return util.validaSelect("select_pergunta_extra_p3", "Pergunta Extra");\par
-   73         \}\par
-   74         return false;\par
-   75     \}\par
-   76 \par
-   77 \};\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 /// @file pergunta_extra.js\par
+    2 /// @namespace controllers.pertunta_extra\par
+    3 /// Fun\'E7\'F5es da tela pergunta_extra\par
+    4 controllers.pergunta_extra = \{\par
+    5     /// @function controllers.pergunta_extra.config\par
+    6     /// Controla o comportamento da tela pergunta_extra\par
+    7     /// @return \{void\} fun\'E7ao sem retorno\par
+    8     config : function() \{\par
+    9         var me = controllers.pergunta_extra;\par
+   10         me.inicializaElementos();\par
+   11         me.progressoTela();\par
+   12         me.buttons();\par
+   13     \},\par
+   14 \par
+   15     /// @function controllers.pergunta_extra.buttons\par
+   16     /// Comportamento dos bot\'F5es\par
+   17     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+   18     buttons : function() \{\par
+   19         $("#pergunta_extra_avancar").click(function() \{\par
+   20             var ok = controllers.pergunta_extra.validar_componentes();\par
+   21             if (ok) \{\par
+   22                 app.finalizaRegistro(function() \{\par
+   23                     app.trocaPagina('views/menu.html', controllers.menu);\par
+   24                 \});\par
+   25             \}\par
+   26         \})\par
+   27     \},\par
+   28 \par
+   29     /// @function controllers.pergunta_extra.inicializaElementos\par
+   30     /// Inicializa os elementos da tela\par
+   31     /// @return \{void\} fun\'E7ao sem retorno\par
+   32     inicializaElementos : function() \{\par
+   33 \par
+   34         util.inicializaSelectFrequencia('simples');\par
+   35 \par
+   36         var lista_opcoes = [ 'Sim, trocaria minha rota atual por esta', 'N\'E3o, prefiro usar a rota atual',\par
+   37                 'Minha rota n\'E3o seria afetada', 'N\'E3o sei informar' ];\par
+   38         \par
+   39         if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '149'\par
+   40                                         || logins.user_logado.usr == '019t' || logins.user_logado.usr == '149t')) \{\par
+   41             $("#grupo_pergunta_extra_p1").show();\par
+   42             util.inicializaSelect("select_pergunta_extra_p1", lista_opcoes);\par
+   43             if (logins.user_logado != null && (logins.user_logado.usr == '149' || logins.user_logado.usr == '149t')) \{\par
+   44                 util.inicializaSelect("select_pergunta_extra_p2", lista_opcoes);\par
+   45             \}\par
+   46         \}\par
+   47         else if (logins.user_logado != null && (logins.user_logado.usr == '040' || logins.user_logado.usr == '040t')) \{\par
+   48             $("#grupo_pergunta_extra_p3").show();\par
+   49             util.inicializaSelect("select_pergunta_extra_p3", lista_opcoes);\par
+   50         \}\par
+   51     \},\par
+   52 \par
+   53     /// @function controllers.pergunta_extra.progressoTela\par
+   54     /// Controla o show e hide dos elementos da tela\par
+   55     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+   56     progressoTela : function() \{\par
+   57 \par
+   58         if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '019t')) \{\par
+   59             util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p1", "grupo_pergunta_extra_avancar");\par
+   60         \}\par
+   61         else if (logins.user_logado != null && (logins.user_logado.usr == '149' || logins.user_logado.usr == '149t')) \{\par
+   62             util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p1", "grupo_pergunta_extra_p2");\par
+   63             util.progressoSelect("idPerguntaExtra2", "select_pergunta_extra_p2", "grupo_pergunta_extra_avancar");\par
+   64         \}\par
+   65         else if (logins.user_logado != null && (logins.user_logado.usr == '040' || logins.user_logado.usr == '040t')) \{\par
+   66             util.progressoSelect("idPerguntaExtra", "select_pergunta_extra_p3", "grupo_pergunta_extra_avancar");\par
+   67         \}\par
+   68         else \{\par
+   69             // N\'E3o deveria entrar aqui. Mostra o bot\'E3o avan\'E7ar para finalizar a pesquisa e n\'E3o ficar travado.\par
+   70             $("#grupo_pergunta_extra_avancar").show();\par
+   71         \}\par
+   72     \},\par
+   73 \par
+   74     /// @function controllers.pergunta_extra.validar_componentes\par
+   75     /// Controla as valida\'E7\'F5es dos componentes de tela ap\'F3s clicar em AVAN\'C7AR\par
+   76     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+   77     validar_componentes : function(id_avancar) \{\par
+   78         if (logins.user_logado != null && (logins.user_logado.usr == '019' || logins.user_logado.usr == '019t')) \{\par
+   79             return util.validaSelect("select_pergunta_extra_p1", "Pergunta Extra");\par
+   80         \}\par
+   81         else if (logins.user_logado != null && (logins.user_logado.usr == '149' || logins.user_logado.usr == '149t')) \{\par
+   82             var ok = util.validaSelect("select_pergunta_extra_p1", "Pergunta Extra 1");\par
+   83             ok = ok && util.validaSelect("select_pergunta_extra_p2", "Pergunta Extra 2");\par
+   84             return ok;\par
+   85         \}\par
+   86         else if (logins.user_logado != null && (logins.user_logado.usr == '040' || logins.user_logado.usr == '040t')) \{\par
+   87             return util.validaSelect("select_pergunta_extra_p3", "Pergunta Extra");\par
+   88         \}\par
+   89         return false;\par
+   90     \}\par
+   91 \par
+   92 \};\par
 }
 \par \pard\plain 
 
@@ -3201,6 +3601,42 @@ Refer\'EAncia do Arquivo www/controllers/selecionar_tipo.js\par \pard\plain
 {\xe \v www/controllers/selecionar_tipo.js}
 {\bkmkstart AAAAAAAABR}
 {\bkmkend AAAAAAAABR}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Namespaces\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers::selecionar_tipo}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela {\b selecionar_tipo}. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}}
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::selecionar_tipo::config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela. }{
+}\par
+}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::selecionar_tipo::image_click} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Comportamento ao clicar em uma das imagens da tela. }{
+}\par
+}}
+}
 \par \pard\plain 
 \pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
 selecionar_tipo.js\par \pard\plain 
@@ -3209,46 +3645,55 @@ selecionar_tipo.js\par \pard\plain
 {\bkmkstart AAAAAAAAAK}
 {\bkmkend AAAAAAAAAK}
 {
-\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 controllers.selecionar_tipo = \{\par
-    2     config : function() \{\par
-    3 \par
-    4         $(".switch_classe_veiculo").click(function() \{\par
-    5             $('#sel_tipo_veiculo_1').toggle();\par
-    6             $('#sel_tipo_veiculo_2').toggle();\par
-    7         \});\par
-    8 \par
-    9         $(".img_sel_veiculo").on("click", controllers.selecionar_tipo.image_click);\par
-   10 \par
-   11     \},\par
-   12     \par
-   13     image_click : function()\{\par
-   14         app.imagemPath = $(this).attr('src');\par
-   15             app.setAtributo('tipo', $(this).attr('id'));\par
-   16         var limitePessoas = $(this).attr('limitePessoas');\par
-   17         if ((!util.isEmpty(limitePessoas)) && (!isNaN(limitePessoas))) \{\par
-   18             app.setAtributo('limitePessoas', parseInt(limitePessoas));\par
-   19         \} else \{\par
-   20             app.setAtributo('limitePessoas', 999); // m\'E1ximo de pessoas indefinido\par
-   21         \}\par
-   22 \par
-   23         if ($(this).hasClass('v-simples')) \{\par
-   24             app.setAtributo('classeVeiculo', 'simples');\par
-   25         \} else if ($(this).hasClass('v-onibus')) \{\par
-   26             app.setAtributo('classeVeiculo', 'onibus');\par
-   27         \} else if ($(this).hasClass('v-carga')) \{\par
-   28             app.setAtributo('classeVeiculo', 'carga');\par
-   29         \} else if ($(this).hasClass('v-semireboque')) \{\par
-   30             app.setAtributo('classeVeiculo', 'carga');\par
-   31         \} else if ($(this).hasClass('v-combinado')) \{\par
-   32             app.setAtributo('classeVeiculo', 'carga');\par
-   33         \} else if ($(this).hasClass('v-reboque')) \{\par
-   34             app.setAtributo('classeVeiculo', 'carga');\par
-   35         \}\par
-   36         $(".img_sel_veiculo").off("click",controllers.selecionar_tipo.image_click);\par
-   37         app.trocaPagina("views/confirmar_veiculo.html", controllers.confirmar_veiculo);\par
-   38     \},\par
-   39 \par
-   40 \}\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 /// @file selecionar_tipo\par
+    2 /// @namespace controllers.selecionar_tipo\par
+    3 /// Fun\'E7\'F5es da tela selecionar_tipo\par
+    4 controllers.selecionar_tipo = \{\par
+    5     /// @function controllers.selecionar_tipo.config\par
+    6     /// Controla o comportamento da tela\par
+    7     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+    8     config : function() \{\par
+    9 \par
+   10         $(".switch_classe_veiculo").click(function() \{\par
+   11             $('#sel_tipo_veiculo_1').toggle();\par
+   12             $('#sel_tipo_veiculo_2').toggle();\par
+   13         \});\par
+   14 \par
+   15         $(".img_sel_veiculo").on("click", controllers.selecionar_tipo.image_click);\par
+   16 \par
+   17     \},\par
+   18     \par
+   19     /// @function controllers.selecionar_tipo.image_click\par
+   20     /// Comportamento ao clicar em uma das imagens da tela\par
+   21     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+   22     image_click : function()\{\par
+   23         app.imagemPath = $(this).attr('src');\par
+   24             app.setAtributo('tipo', $(this).attr('id'));\par
+   25         var limitePessoas = $(this).attr('limitePessoas');\par
+   26         if ((!util.isEmpty(limitePessoas)) && (!isNaN(limitePessoas))) \{\par
+   27             app.setAtributo('limitePessoas', parseInt(limitePessoas));\par
+   28         \} else \{\par
+   29             app.setAtributo('limitePessoas', 999); // m\'E1ximo de pessoas indefinido\par
+   30         \}\par
+   31 \par
+   32         if ($(this).hasClass('v-simples')) \{\par
+   33             app.setAtributo('classeVeiculo', 'simples');\par
+   34         \} else if ($(this).hasClass('v-onibus')) \{\par
+   35             app.setAtributo('classeVeiculo', 'onibus');\par
+   36         \} else if ($(this).hasClass('v-carga')) \{\par
+   37             app.setAtributo('classeVeiculo', 'carga');\par
+   38         \} else if ($(this).hasClass('v-semireboque')) \{\par
+   39             app.setAtributo('classeVeiculo', 'carga');\par
+   40         \} else if ($(this).hasClass('v-combinado')) \{\par
+   41             app.setAtributo('classeVeiculo', 'carga');\par
+   42         \} else if ($(this).hasClass('v-reboque')) \{\par
+   43             app.setAtributo('classeVeiculo', 'carga');\par
+   44         \}\par
+   45         $(".img_sel_veiculo").off("click",controllers.selecionar_tipo.image_click);\par
+   46         app.trocaPagina("views/confirmar_veiculo.html", controllers.confirmar_veiculo);\par
+   47     \},\par
+   48 \par
+   49 \}\par
 }
 \par \pard\plain 
 
@@ -3652,6 +4097,35 @@ Refer\'EAncia do Arquivo www/controllers/sumario.js\par \pard\plain
 {\xe \v www/controllers/sumario.js}
 {\bkmkstart AAAAAAAABV}
 {\bkmkend AAAAAAAABV}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Namespaces\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers::sumario}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Fun\'E7\'F5es da tela sumario. }}}
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+ {\b controllers}\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}}
+}
+\pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
+Fun\'E7\'F5es\par
+\pard\plain 
+
+{
+\pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
+void {\b controllers::sumario::config} ()\par
+{
+\pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
+Controla o comportamento da tela. }{
+}\par
+}}
+}
 \par \pard\plain 
 \pard\plain \s2\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs28\kerning28\cgrid 
 sumario.js\par \pard\plain 
@@ -3660,87 +4134,93 @@ sumario.js\par \pard\plain
 {\bkmkstart AAAAAAAAAO}
 {\bkmkend AAAAAAAAAO}
 {
-\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 controllers.sumario = \{\par
-    2     config : function() \{\par
-    3 \par
-    4         var dataSet = [];\par
-    5         for (i = 0; i < app.sumario_lista.length; i++) \{\par
-    6             var elem = app.sumario_lista[i];\par
-    7             dataSet.push([util.formatDateSumario(elem.diaPesq),elem.qtdDia,util.secToFrase(elem.somaDia),\par
-    8                 util.secToFrase(Math.round(elem.mediaDia * 100) / 100),\par
-    9                 util.secToFrase(elem.maxTempoDia),util.secToFrase(elem.minTempoDia)]);\par
-   10         \}\par
-   11 \par
-   12         $('#sumario_tabela').DataTable(\{\par
-   13             "data": dataSet,\par
-   14             "paging": false,\par
-   15             "info": false,\par
-   16             "ordering" : false,\par
-   17             "searching" : false,\par
-   18             "columns": [\par
-   19                 \{ \par
-   20                     title: "Dia",\par
-   21                     className : "cell_dia"\},\par
-   22                 \{ \par
-   23                     title: "Quantidade",\par
-   24                     className : "cell_quantidade"\},\par
+\pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 /// @file sumario.js\par
+    2 /// @namespace controllers.sumario\par
+    3 /// Fun\'E7\'F5es da tela sumario\par
+    4 controllers.sumario = \{\par
+    5     /// @function controllers.sumario.config\par
+    6     /// Controla o comportamento da tela\par
+    7     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+    8     config : function() \{\par
+    9 \par
+   10         var dataSet = [];\par
+   11         for (i = 0; i < app.sumario_lista.length; i++) \{\par
+   12             var elem = app.sumario_lista[i];\par
+   13             dataSet.push([util.formatDateSumario(elem.diaPesq),elem.qtdDia,util.secToFrase(elem.somaDia),\par
+   14                 util.secToFrase(Math.round(elem.mediaDia * 100) / 100),\par
+   15                 util.secToFrase(elem.maxTempoDia),util.secToFrase(elem.minTempoDia)]);\par
+   16         \}\par
+   17 \par
+   18         $('#sumario_tabela').DataTable(\{\par
+   19             "data": dataSet,\par
+   20             "paging": false,\par
+   21             "info": false,\par
+   22             "ordering" : false,\par
+   23             "searching" : false,\par
+   24             "columns": [\par
    25                 \{ \par
-   26                     title: "Tempo total",\par
-   27                     className : "cell_tempo_total"\},\par
+   26                     title: "Dia",\par
+   27                     className : "cell_dia"\},\par
    28                 \{ \par
-   29                     title: "Tempo m\'E9dio",\par
-   30                     className : "cell_tempo_medio"\},\par
+   29                     title: "Quantidade",\par
+   30                     className : "cell_quantidade"\},\par
    31                 \{ \par
-   32                     title: "Tempo m\'E1ximo",\par
-   33                     className : "cell_tempo_maximo"\},\par
+   32                     title: "Tempo total",\par
+   33                     className : "cell_tempo_total"\},\par
    34                 \{ \par
-   35                     title: "Tempo m\'EDnimo",\par
-   36                     className : "cell_tempo_minimo"\}\par
-   37             ]\par
-   38         \});\par
-   39         \par
-   40         if(app.ultima_pesquisa.length == 2) \{\par
-   41             $('#sumario_ult_pesq').text(\par
-   42                     "A \'FAltima pesquisa v\'E1lida foi realizada em " + util.formatDateAndTimeSumario(app.ultima_pesquisa[0]) +\par
-   43                     " e durou " + util.secToFrase(app.ultima_pesquisa[1],true));\par
-   44         \}\par
-   45 \par
-   46         var dataCancelados = [];\par
-   47         for (i = 0; i < app.sumario_lista_cancelados.length; i++) \{\par
-   48             var elem = app.sumario_lista_cancelados[i];\par
-   49             dataCancelados.push([util.formatDateSumario(elem.diaPesq),elem.qtdDia,util.secToFrase(elem.somaDia),\par
-   50                 util.secToFrase(Math.round(elem.mediaDia * 100) / 100)]);\par
-   51         \}\par
-   52 \par
-   53         $('#sumario_tab_cancelados').DataTable(\{\par
-   54             "data": dataCancelados,\par
-   55             "paging": false,\par
-   56             "info": false,\par
-   57             "ordering" : false,\par
-   58             "searching" : false,\par
-   59             "columns": [\par
-   60                 \{\par
-   61                     title: "Dia",\par
-   62                     className : "cell_dia"\},\par
-   63                 \{\par
-   64                     title: "Quantidade pesquisas canceladas",\par
-   65                     className : "cell_quantidade"\},\par
+   35                     title: "Tempo m\'E9dio",\par
+   36                     className : "cell_tempo_medio"\},\par
+   37                 \{ \par
+   38                     title: "Tempo m\'E1ximo",\par
+   39                     className : "cell_tempo_maximo"\},\par
+   40                 \{ \par
+   41                     title: "Tempo m\'EDnimo",\par
+   42                     className : "cell_tempo_minimo"\}\par
+   43             ]\par
+   44         \});\par
+   45         \par
+   46         if(app.ultima_pesquisa.length == 2) \{\par
+   47             $('#sumario_ult_pesq').text(\par
+   48                     "A \'FAltima pesquisa v\'E1lida foi realizada em " + util.formatDateAndTimeSumario(app.ultima_pesquisa[0]) +\par
+   49                     " e durou " + util.secToFrase(app.ultima_pesquisa[1],true));\par
+   50         \}\par
+   51 \par
+   52         var dataCancelados = [];\par
+   53         for (i = 0; i < app.sumario_lista_cancelados.length; i++) \{\par
+   54             var elem = app.sumario_lista_cancelados[i];\par
+   55             dataCancelados.push([util.formatDateSumario(elem.diaPesq),elem.qtdDia,util.secToFrase(elem.somaDia),\par
+   56                 util.secToFrase(Math.round(elem.mediaDia * 100) / 100)]);\par
+   57         \}\par
+   58 \par
+   59         $('#sumario_tab_cancelados').DataTable(\{\par
+   60             "data": dataCancelados,\par
+   61             "paging": false,\par
+   62             "info": false,\par
+   63             "ordering" : false,\par
+   64             "searching" : false,\par
+   65             "columns": [\par
    66                 \{\par
-   67                     title: "Tempo total",\par
-   68                     className : "cell_tempo_total"\},\par
+   67                     title: "Dia",\par
+   68                     className : "cell_dia"\},\par
    69                 \{\par
-   70                     title: "Tempo m\'E9dio",\par
-   71                     className : "cell_tempo_medio"\}\par
-   72             ]\par
-   73         \});\par
-   74         \par
-   75         myDb.sanitize();\par
-   76 \par
-   77         $('#sumario_retornar_menu').click(function() \{\par
-   78             app.trocaPagina('views/menu.html', controllers.menu);\par
+   70                     title: "Quantidade pesquisas canceladas",\par
+   71                     className : "cell_quantidade"\},\par
+   72                 \{\par
+   73                     title: "Tempo total",\par
+   74                     className : "cell_tempo_total"\},\par
+   75                 \{\par
+   76                     title: "Tempo m\'E9dio",\par
+   77                     className : "cell_tempo_medio"\}\par
+   78             ]\par
    79         \});\par
-   80     \},\par
-   81 \};\par
+   80         \par
+   81         myDb.sanitize();\par
+   82 \par
+   83         $('#sumario_retornar_menu').click(function() \{\par
+   84             app.trocaPagina('views/menu.html', controllers.menu);\par
+   85         \});\par
+   86     \},\par
+   87 \};\par
 }
 \par \pard\plain 
 
@@ -6099,7 +6579,7 @@ Namespaces\par
 
 {
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
- {\b controlers}\par
+ {\b controllers}\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o. }}}
@@ -6131,7 +6611,7 @@ controllers.js\par \pard\plain
 {\bkmkend AAAAAAAAAR}
 {
 \pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid     1 /// @file controllers.js\par
-    2 /// @namespace controlers\par
+    2 /// @namespace controllers\par
     3 /// M\'F3dulo para agregar os arquivos JS de cada tela da aplica\'E7\'E3o\par
     4 var controllers = controllers || \{\};\par
     5 \par
@@ -6573,7 +7053,7 @@ Fluxo do registro do cancelamento da pesquisa atual. }{
 }\par
 }}
 \pard\plain \s80\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-undefined {\b app::removeFile} (string fileName, string dirURI, function cbSuccess, function cbFail)\par
+void {\b app::removeFile} (string fileName, string dirURI, function cbSuccess, function cbFail)\par
 {
 \pard\plain \s51\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Remove um arquivo do sistema de arquivos, se ele existir. }{
@@ -7759,201 +8239,202 @@ index.js\par \pard\plain
  1155     /// @param \{string\} dirURI      URL do diret\'F3rio (ver cordova.file.\{dir\})\par
  1156     /// @param \{function\} cbSuccess fun\'E7\'E3o _callback_ chamada em caso de sucesso\par
  1157     /// @param \{function\} cbFail    fun\'E7\'E3o _callback_ chamada em caso de falha\par
- 1158     removeFile : function(fileName, dirURI, cbSuccess, cbFail) \{\par
- 1159         window.resolveLocalFileSystemURL(dirURI,\par
- 1160         // success\par
- 1161         function(folder) \{\par
- 1162             app.logger.log('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));\par
- 1163             folder.getFile(fileName, \{\par
- 1164                 create : false\par
- 1165             \}, function(arquivo) \{\par
- 1166                 arquivo.remove(function() \{\par
- 1167                     app.logger.log('Arquivo ' + fileName + ' removido');\par
- 1168                     if (util.isFunction(cbSuccess)) \{\par
- 1169                         cbSuccess();\par
- 1170                     \}\par
- 1171                 \});\par
- 1172             \}, function(err) \{\par
- 1173                 app.logger.log('Arquivo ' + fileName + ' n\'E3o existe no folder ' + JSON.stringify(folder));\par
- 1174                 if (util.isFunction(cbFail)) \{\par
- 1175                     cbFail();\par
- 1176                 \}\par
- 1177 \par
- 1178             \});\par
- 1179         \},\par
- 1180         // fail\par
- 1181         function(err) \{\par
- 1182             app.logger.log('Erro resolvendo o diret\'F3rio ' + dir + JSON.stringify(err));\par
- 1183         \});\par
- 1184     \},\par
- 1185 \par
- 1186     /// @function app.copyFile\par
- 1187     /// Copia um arquivo sobrescrevendo o destino, se existir\par
- 1188     /// @param \{string\} fileName        nome do arquivo\par
- 1189     /// @param \{string\} originDirURI    diret\'F3rio de origem\par
- 1190     /// @param \{string\} distDirURI      diret\'F3rio de destino\par
- 1191     /// @param \{bool\} isCorrupted       se o arquivo a ser copiado \'E9 um arquivo corrompido\par
- 1192     /// @param \{function\} cb            fun\'E7\'E3o _callback_\par
- 1193     /// @return \{void\} fun\'E7\'E3o sem retorno\par
- 1194     copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) \{\par
- 1195         var now = new Date();\par
- 1196         var newName = (isCorrupted)? "CORROMPIDO" + ipadID.id + "_" + fileName : ipadID.id + "_" + fileName;\par
- 1197         var extension = "";\par
- 1198         if(newName.lastIndexOf(".txt") > -1) \{\par
- 1199             newName = newName.replace(".txt","");\par
- 1200             extension = ".txt";\par
- 1201         \}\par
- 1202         else if (newName.lastIndexOf(".db") > -1) \{\par
- 1203             newName = newName.replace(".db","");\par
- 1204             extension = ".db";\par
- 1205         \}\par
- 1206         newName = newName + "_" + util.getTimeToExportFormated(now) + extension;\par
- 1207         // get original dir\par
- 1208         resolveLocalFileSystemURL(originDirURI,\par
- 1209         // success\par
- 1210         function(dir) \{\par
- 1211             // get original file\par
- 1212             dir.getFile(fileName, \{\},\par
- 1213             // success getting original file\par
- 1214             function(file) \{\par
- 1215                 // resolving destination\par
- 1216                 resolveLocalFileSystemURL(destDirURI,\par
- 1217                 // success resolving destination\par
- 1218                 function(destDir) \{\par
- 1219                     app.logger.log('Copiando o arquivo ' + newName + ' do folder ' + dir.nativeURL + ' para o folder '\par
- 1220                             + destDir.nativeURL);\par
- 1221                     //copying new file\par
- 1222                     realCopier(file, newName, destDir);\par
- 1223                     \par
- 1224                     // Deixou de sobrescrever arquivo a partir da Fase 2\par
- 1225                     /*\par
- 1226                     // removing destination file\par
- 1227                     app.removeFile(newName, destDirURI, function() \{\par
- 1228                         realCopier(file, newName, destDir);\par
- 1229                     \},\par
- 1230                     // mesmo se n\'E3o conseguir remover\par
- 1231                     function() \{ \par
- 1232                         realCopier(file, newName, destDir);\par
- 1233                     \});\par
- 1234                     */\par
- 1235                 \}, function(err) \{\par
- 1236                     app.logger.log('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));\par
- 1237                 \});\par
- 1238 \par
- 1239             \}, function(err) \{\par
- 1240                 app.logger.log('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));\par
- 1241             \});\par
- 1242 \par
- 1243         \}, function(err) \{\par
- 1244             app.logger.log('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));\par
- 1245         \});\par
- 1246         // internal function\par
- 1247         function realCopier(f, newName, d) \{\par
- 1248             f.copyTo(d, newName, function() \{\par
- 1249                 // success\par
- 1250                 app.logger.log('Arquivo ' + newName + ' copiado.');\par
- 1251                 if (util.isFunction(cb)) \{\par
- 1252                     cb(newName);\par
- 1253                 \}\par
- 1254             \}, function(err) \{\par
- 1255                 app.logger.log('Erro copiando arquivo ' + newName + ' ' + JSON.stringify(err));\par
- 1256 \par
- 1257             \});\par
- 1258         \}\par
- 1259         ;\par
- 1260     \},\par
- 1261 \par
- 1262     /// @function app.restart\par
- 1263     /// Reinicia a aplica\'E7\'E3o\par
- 1264     /// @return \{void\} fun\'E7\'E3o sem retorno\par
- 1265     restart : function()\{\par
- 1266         window.location.href = app.baseUrl + 'index.html'; //href para a p\'E1gina inicial\par
- 1267         window.setTimeout(function()\{\par
- 1268             window.location.reload();\par
- 1269         \},1000);\par
- 1270     \},\par
- 1271     \par
- 1272     baseUrl : null,\par
- 1273 \par
- 1274     logFileName : "logOD.txt",\par
- 1275 \par
- 1276     dbName : "dadosOD.db",\par
- 1277 \par
- 1278     jsonName : "dadosOD.json",\par
- 1279 \par
- 1280     user_login : null,\par
- 1281 \par
- 1282     senha_login : null,\par
- 1283 \par
- 1284     posto : null,\par
- 1285 \par
- 1286     sentido : null,\par
- 1287     \par
- 1288     isTreinamento : false,\par
- 1289 \par
- 1290     filePaths : null, // \{ externalFolder : null, dbFolder : null, \}\par
- 1291     \par
- 1292     changesCounter : 0,\par
- 1293     \par
- 1294     sumario_lista : [],\par
- 1295     \par
- 1296     sumario_lista_cancelados : [],\par
- 1297     \par
- 1298     ultima_pesquisa : [],\par
- 1299     \par
- 1300     logger : window.console //initial value, changed to use logger.js on file system initialization\par
- 1301     ,\par
- 1302 \par
- 1303 \}; // end of app\par
- 1304 \par
- 1305 // Registro do momento\par
- 1306 var registro;\par
- 1307 \par
- 1308 $(document).ready(function() \{\par
- 1309     \par
- 1310     //captura todos os erros \par
- 1311     window.onerror = function(msg, url, line, col, error) \{\par
- 1312         // Note that col & error are new to the HTML 5 spec and may not be \par
- 1313         // supported in every browser.  It worked for me in Chrome.\par
- 1314         var extra = !col ? '' : '\\ncolumn: ' + col;\par
- 1315         extra += !error ? '' : '\\nerror: ' + error;\par
- 1316         \par
- 1317         var mesageString = "Error: " + msg + "\\nurl: " + url + "\\nline: " + line + extra;\par
- 1318 \par
- 1319         if (app == null)\{\par
- 1320             console.log(mesageString);\par
- 1321         \} else \{\par
- 1322             app.logger.log(mesageString);\par
- 1323         \}\par
- 1324 \par
- 1325         // You can view the information in an alert to see things working like this:\par
- 1326         if (msg.indexOf("TypeError: null is not an object (evaluating 'input.val().replace')")>-1)\{\par
- 1327             //ignores\par
- 1328         \} else if (msg.indexOf("SecurityError: DOM Exception 18")>-1)\{ //app freezes\par
- 1329             \par
- 1330             if (app != null)\{\par
- 1331                 alert("Ocorreu uma condi\'E7\'E3o que impede \\no prosseguimento do programa.\\nO aplicativo ser\'E1 reiniciado",\par
- 1332                     'Erro fatal.',\par
- 1333                     app.restart,\par
- 1334                     'error');\par
- 1335             \} else \{\par
- 1336                 alert("Ocorreu uma condi\'E7\'E3o que impede \\no prosseguimento do programa.\\nO aplicativo ser\'E1 reiniciado");\par
- 1337                 window.location.reload()\par
- 1338             \}\par
- 1339             \par
- 1340         \} else \{\par
- 1341             alert("Ocorreu uma condi\'E7\'E3o inesperada anote \\n a mensagem abaixo\\n" + mesageString);\par
- 1342         \}\par
- 1343         \par
+ 1158     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+ 1159     removeFile : function(fileName, dirURI, cbSuccess, cbFail) \{\par
+ 1160         window.resolveLocalFileSystemURL(dirURI,\par
+ 1161         // success\par
+ 1162         function(folder) \{\par
+ 1163             app.logger.log('Removendo arquivo ' + fileName + ' do folder ' + JSON.stringify(folder));\par
+ 1164             folder.getFile(fileName, \{\par
+ 1165                 create : false\par
+ 1166             \}, function(arquivo) \{\par
+ 1167                 arquivo.remove(function() \{\par
+ 1168                     app.logger.log('Arquivo ' + fileName + ' removido');\par
+ 1169                     if (util.isFunction(cbSuccess)) \{\par
+ 1170                         cbSuccess();\par
+ 1171                     \}\par
+ 1172                 \});\par
+ 1173             \}, function(err) \{\par
+ 1174                 app.logger.log('Arquivo ' + fileName + ' n\'E3o existe no folder ' + JSON.stringify(folder));\par
+ 1175                 if (util.isFunction(cbFail)) \{\par
+ 1176                     cbFail();\par
+ 1177                 \}\par
+ 1178 \par
+ 1179             \});\par
+ 1180         \},\par
+ 1181         // fail\par
+ 1182         function(err) \{\par
+ 1183             app.logger.log('Erro resolvendo o diret\'F3rio ' + dir + JSON.stringify(err));\par
+ 1184         \});\par
+ 1185     \},\par
+ 1186 \par
+ 1187     /// @function app.copyFile\par
+ 1188     /// Copia um arquivo sobrescrevendo o destino, se existir\par
+ 1189     /// @param \{string\} fileName        nome do arquivo\par
+ 1190     /// @param \{string\} originDirURI    diret\'F3rio de origem\par
+ 1191     /// @param \{string\} distDirURI      diret\'F3rio de destino\par
+ 1192     /// @param \{bool\} isCorrupted       se o arquivo a ser copiado \'E9 um arquivo corrompido\par
+ 1193     /// @param \{function\} cb            fun\'E7\'E3o _callback_\par
+ 1194     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+ 1195     copyFile : function(fileName, originDirURI, destDirURI, isCorrupted, cb) \{\par
+ 1196         var now = new Date();\par
+ 1197         var newName = (isCorrupted)? "CORROMPIDO" + ipadID.id + "_" + fileName : ipadID.id + "_" + fileName;\par
+ 1198         var extension = "";\par
+ 1199         if(newName.lastIndexOf(".txt") > -1) \{\par
+ 1200             newName = newName.replace(".txt","");\par
+ 1201             extension = ".txt";\par
+ 1202         \}\par
+ 1203         else if (newName.lastIndexOf(".db") > -1) \{\par
+ 1204             newName = newName.replace(".db","");\par
+ 1205             extension = ".db";\par
+ 1206         \}\par
+ 1207         newName = newName + "_" + util.getTimeToExportFormated(now) + extension;\par
+ 1208         // get original dir\par
+ 1209         resolveLocalFileSystemURL(originDirURI,\par
+ 1210         // success\par
+ 1211         function(dir) \{\par
+ 1212             // get original file\par
+ 1213             dir.getFile(fileName, \{\},\par
+ 1214             // success getting original file\par
+ 1215             function(file) \{\par
+ 1216                 // resolving destination\par
+ 1217                 resolveLocalFileSystemURL(destDirURI,\par
+ 1218                 // success resolving destination\par
+ 1219                 function(destDir) \{\par
+ 1220                     app.logger.log('Copiando o arquivo ' + newName + ' do folder ' + dir.nativeURL + ' para o folder '\par
+ 1221                             + destDir.nativeURL);\par
+ 1222                     //copying new file\par
+ 1223                     realCopier(file, newName, destDir);\par
+ 1224                     \par
+ 1225                     // Deixou de sobrescrever arquivo a partir da Fase 2\par
+ 1226                     /*\par
+ 1227                     // removing destination file\par
+ 1228                     app.removeFile(newName, destDirURI, function() \{\par
+ 1229                         realCopier(file, newName, destDir);\par
+ 1230                     \},\par
+ 1231                     // mesmo se n\'E3o conseguir remover\par
+ 1232                     function() \{ \par
+ 1233                         realCopier(file, newName, destDir);\par
+ 1234                     \});\par
+ 1235                     */\par
+ 1236                 \}, function(err) \{\par
+ 1237                     app.logger.log('Erro acessando o folder de destino ' + destDir + ' ' + JSON.stringify(err));\par
+ 1238                 \});\par
+ 1239 \par
+ 1240             \}, function(err) \{\par
+ 1241                 app.logger.log('Erro acessando arquivo original ' + fileName + ' ' + JSON.stringify(err));\par
+ 1242             \});\par
+ 1243 \par
+ 1244         \}, function(err) \{\par
+ 1245             app.logger.log('Erro acessando o folder original ' + originDirURI + ' ' + JSON.stringify(err));\par
+ 1246         \});\par
+ 1247         // internal function\par
+ 1248         function realCopier(f, newName, d) \{\par
+ 1249             f.copyTo(d, newName, function() \{\par
+ 1250                 // success\par
+ 1251                 app.logger.log('Arquivo ' + newName + ' copiado.');\par
+ 1252                 if (util.isFunction(cb)) \{\par
+ 1253                     cb(newName);\par
+ 1254                 \}\par
+ 1255             \}, function(err) \{\par
+ 1256                 app.logger.log('Erro copiando arquivo ' + newName + ' ' + JSON.stringify(err));\par
+ 1257 \par
+ 1258             \});\par
+ 1259         \}\par
+ 1260         ;\par
+ 1261     \},\par
+ 1262 \par
+ 1263     /// @function app.restart\par
+ 1264     /// Reinicia a aplica\'E7\'E3o\par
+ 1265     /// @return \{void\} fun\'E7\'E3o sem retorno\par
+ 1266     restart : function()\{\par
+ 1267         window.location.href = app.baseUrl + 'index.html'; //href para a p\'E1gina inicial\par
+ 1268         window.setTimeout(function()\{\par
+ 1269             window.location.reload();\par
+ 1270         \},1000);\par
+ 1271     \},\par
+ 1272     \par
+ 1273     baseUrl : null,\par
+ 1274 \par
+ 1275     logFileName : "logOD.txt",\par
+ 1276 \par
+ 1277     dbName : "dadosOD.db",\par
+ 1278 \par
+ 1279     jsonName : "dadosOD.json",\par
+ 1280 \par
+ 1281     user_login : null,\par
+ 1282 \par
+ 1283     senha_login : null,\par
+ 1284 \par
+ 1285     posto : null,\par
+ 1286 \par
+ 1287     sentido : null,\par
+ 1288     \par
+ 1289     isTreinamento : false,\par
+ 1290 \par
+ 1291     filePaths : null, // \{ externalFolder : null, dbFolder : null, \}\par
+ 1292     \par
+ 1293     changesCounter : 0,\par
+ 1294     \par
+ 1295     sumario_lista : [],\par
+ 1296     \par
+ 1297     sumario_lista_cancelados : [],\par
+ 1298     \par
+ 1299     ultima_pesquisa : [],\par
+ 1300     \par
+ 1301     logger : window.console //initial value, changed to use logger.js on file system initialization\par
+ 1302     ,\par
+ 1303 \par
+ 1304 \}; // end of app\par
+ 1305 \par
+ 1306 // Registro do momento\par
+ 1307 var registro;\par
+ 1308 \par
+ 1309 $(document).ready(function() \{\par
+ 1310     \par
+ 1311     //captura todos os erros \par
+ 1312     window.onerror = function(msg, url, line, col, error) \{\par
+ 1313         // Note that col & error are new to the HTML 5 spec and may not be \par
+ 1314         // supported in every browser.  It worked for me in Chrome.\par
+ 1315         var extra = !col ? '' : '\\ncolumn: ' + col;\par
+ 1316         extra += !error ? '' : '\\nerror: ' + error;\par
+ 1317         \par
+ 1318         var mesageString = "Error: " + msg + "\\nurl: " + url + "\\nline: " + line + extra;\par
+ 1319 \par
+ 1320         if (app == null)\{\par
+ 1321             console.log(mesageString);\par
+ 1322         \} else \{\par
+ 1323             app.logger.log(mesageString);\par
+ 1324         \}\par
+ 1325 \par
+ 1326         // You can view the information in an alert to see things working like this:\par
+ 1327         if (msg.indexOf("TypeError: null is not an object (evaluating 'input.val().replace')")>-1)\{\par
+ 1328             //ignores\par
+ 1329         \} else if (msg.indexOf("SecurityError: DOM Exception 18")>-1)\{ //app freezes\par
+ 1330             \par
+ 1331             if (app != null)\{\par
+ 1332                 alert("Ocorreu uma condi\'E7\'E3o que impede \\no prosseguimento do programa.\\nO aplicativo ser\'E1 reiniciado",\par
+ 1333                     'Erro fatal.',\par
+ 1334                     app.restart,\par
+ 1335                     'error');\par
+ 1336             \} else \{\par
+ 1337                 alert("Ocorreu uma condi\'E7\'E3o que impede \\no prosseguimento do programa.\\nO aplicativo ser\'E1 reiniciado");\par
+ 1338                 window.location.reload()\par
+ 1339             \}\par
+ 1340             \par
+ 1341         \} else \{\par
+ 1342             alert("Ocorreu uma condi\'E7\'E3o inesperada anote \\n a mensagem abaixo\\n" + mesageString);\par
+ 1343         \}\par
  1344         \par
- 1345         var suppressErrorAlert = true;\par
- 1346         // If you return true, then error alerts (like in older versions of \par
- 1347         // Internet Explorer) will be suppressed.\par
- 1348         return suppressErrorAlert;\par
- 1349     \};\par
- 1350     insert_controllers.insert();\par
- 1351     app.initialize();\par
- 1352 \});\par
+ 1345         \par
+ 1346         var suppressErrorAlert = true;\par
+ 1347         // If you return true, then error alerts (like in older versions of \par
+ 1348         // Internet Explorer) will be suppressed.\par
+ 1349         return suppressErrorAlert;\par
+ 1350     \};\par
+ 1351     insert_controllers.insert();\par
+ 1352     app.initialize();\par
+ 1353 \});\par
 }
 \par \pard\plain 
 

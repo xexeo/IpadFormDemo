@@ -1,13 +1,20 @@
 /* global util */
-
+/// @file caracterizacao_viagem_simples.js
+/// @namespace controllers.caracterizacao_viagem_simples
+/// Funções da tela caracterizacao_viagem_simples
 controllers.caracterizacao_viagem_simples = {
+	/// @function controllers.caracterizacao_viagem_simples.config
+	/// Controla o comportamento da tela
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.caracterizacao_viagem_simples;
 		me.inicializaElementos();
 		me.progressoTela();
 		me.buttons();
 	},
-
+	/// @function controllers.caracterizacao_viagem_simples.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#caracterizacao_viagem_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_viagem_simples.validar_componentes();
@@ -23,7 +30,9 @@ controllers.caracterizacao_viagem_simples = {
 		})
 	},
 
-	// Inicializa os elementos da tela
+	/// @function controllers.caracterizacao_viagem_simples.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 
 		// Verifica se possui Pergunta Extra
@@ -52,7 +61,9 @@ controllers.caracterizacao_viagem_simples = {
 		util.validacaoLimiteMaximoTempoReal("pessoas_simples","Pessoas no veículo",util.validaLimitePessoas);
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.caracterizacao_viagem_simples.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		// Origem
@@ -156,7 +167,9 @@ controllers.caracterizacao_viagem_simples = {
 		util.progressoSelect("idRendaMedia", "renda_simples", "grupo_caracterizacao_viagem_simples_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @funciton controllers.caracterizacao_viagem_simples.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {void} função sem retorno
 	validar_componentes : function(id_avancar) {
 
 		if (util.validaSelect("origem_pais_simples", "Origem da viagem")

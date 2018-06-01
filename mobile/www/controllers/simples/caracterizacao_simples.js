@@ -1,6 +1,11 @@
 /* global util, registro */
-
+/// @file caracterizacao_simples.js
+/// @namespace controllers.caracterizacao_simples
+/// Funções da tela caracterizacao_simples
 controllers.caracterizacao_simples = {
+	/// @funtion controllers.caracterizacao_simples.config
+	/// Controla o comportamento da tela caracterizacao_simples
+	/// @return {void} função sem retorno
 	config : function() {
 		var me = controllers.caracterizacao_simples;
 		me.inicializaElementos();
@@ -8,6 +13,9 @@ controllers.caracterizacao_simples = {
 		me.buttons();
 	},
 
+	/// @function controllers.caracterizacao_simples.buttons
+	/// Comportamento dos botões
+	/// @return {void} função sem retorno
 	buttons : function() {
 		$("#caracterizacao_simples_avancar").click(function() {
 			var ok = controllers.caracterizacao_simples.validar_componentes();
@@ -16,8 +24,9 @@ controllers.caracterizacao_simples = {
 			}
 		})
 	},
-
-	// Inicializa os elementos da tela
+	/// @function controllers.caracterizacao_simples.inicializaElementos
+	/// Inicializa os elementos da tela
+	/// @return {void} função sem retorno
 	inicializaElementos : function() {
 
 //		var lista_anos = [];
@@ -41,7 +50,9 @@ controllers.caracterizacao_simples = {
 		}
 	},
 
-	// Controla o show e hide dos elementos da tela
+	/// @function controllers.caracterizacao_simples.progressoTela
+	/// Controla o show e hide dos elementos da tela
+	/// @return {void} função sem retorno
 	progressoTela : function() {
 
 		util.progressoSelect("anoDeFabricacao", "ano_simples", "grupo_propriedade_simples");
@@ -49,7 +60,9 @@ controllers.caracterizacao_simples = {
 		util.progressoSelect("idCombustivel", "combustivel_simples", "grupo_caracterizacao_simples_avancar");
 	},
 
-	// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @function controllers.caracterizacao_simples.validar_componentes
+	/// Controla as validações dos componentes de tela após clicar em AVANÇAR
+	/// @return {void} função sem retorno
 	validar_componentes : function(id_avancar) {
 		if (util.validaSelect("ano_simples", "Ano do veículo") && util.validaSelect("propriedade_simples", "Propriedade")
 				&& util.validaSelect("combustivel_simples", "Combustível")) {
